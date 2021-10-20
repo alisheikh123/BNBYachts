@@ -1,0 +1,40 @@
+<div class="modal-content">
+  <div class="modal-header no-border">
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="custom-text-center">
+      <h4 class="bold text-center">Login</h4>
+      <div class="custom-input-field">
+        <label>Email</label>
+        <input type="email" class="custom-input" placeholder="Abc@gmail.com">
+      </div>
+      <div class="custom-input-field pswd-field">
+        <label>Password</label>
+        <div class="p-relative" >
+        <input id="password-field" type="password" class="custom-input" name="password" value="12345" data-toggle="tooltip" data-html="true" title="Choosing a Password:
+        <br/> Your Password Must Include:">
+        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+        </div>
+  </div>
+  <div class="custom-flex-between py-2">
+    <div class="left-content">
+      <label class="custom-checkbox m-0">
+        <input type="checkbox">
+        <p class="small-text">Remember Me</p>
+        <span class="checkmark"></span>
+      </label>
+      </div>
+      <div class="right-content">
+        <a href="javascript:void(0)" (click) = "forgotPassword()" class="underline-blue-link small-text"  data-bs-toggle="modal" data-bs-target="#forget-psd-modal" data-bs-dismiss="modal">Forgot Password?</a>
+      </div>
+  </div>
+  <div class="py-2 pt-4 text-center">
+    <button class="custom-btn blue big-btn"  data-bs-toggle="modal" data-bs-target="#mobile-verify-modal" data-bs-dismiss="modal">Login</button>
+  </div>
+  <div class="text-center py-2">
+    <p class="small-text light">Don't have an Account? <a href="javascript:void(0)" (click)="signup()" class="underline-blue-link">Sign Up</a></p>
+    </div>
+    </div>
+  </div>
+</div>
