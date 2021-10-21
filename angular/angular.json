@@ -1,17 +1,16 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false,
-    "defaultCollection": "@angular-eslint/schematics"
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "BnBYachts": {
+    "AngularAPP": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "",
@@ -21,15 +20,22 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/BnBYachts",
+            "outputPath": "dist/AngularAPP",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
+              {
+                "input": "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "inject": true,
+                "bundleName": "bootstrap-ltr.min"
+              },
               {
                 "input": "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                 "inject": true,
@@ -40,31 +46,7 @@
                 "inject": true,
                 "bundleName": "fontawesome-v4-shims.min"
               },
-              {
-                "input": "node_modules/@swimlane/ngx-datatable/index.css",
-                "inject": true,
-                "bundleName": "ngx-datatable-index"
-              },
-              {
-                "input": "node_modules/@swimlane/ngx-datatable/assets/icons.css",
-                "inject": true,
-                "bundleName": "ngx-datatable-icons"
-              },
-              {
-                "input": "node_modules/@swimlane/ngx-datatable/themes/material.css",
-                "inject": true,
-                "bundleName": "ngx-datatable-material"
-              },
-              {
-                "input": "node_modules/@abp/ng.theme.shared/styles/bootstrap-rtl.min.css",
-                "inject": false,
-                "bundleName": "bootstrap-rtl.min"
-              },
-              {
-                "input": "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "inject": true,
-                "bundleName": "bootstrap-ltr.min"
-              },
+              "src/assets/styles/style-en.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -74,8 +56,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "2.5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -106,10 +88,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "BnBYachts:build:production"
+              "browserTarget": "AngularAPP:build:production"
             },
             "development": {
-              "browserTarget": "BnBYachts:build:development"
+              "browserTarget": "AngularAPP:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -117,7 +99,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BnBYachts:build"
+            "browserTarget": "AngularAPP:build"
           }
         },
         "test": {
@@ -128,19 +110,18 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
-  "defaultProject": "BnBYachts"
+  "defaultProject": "AngularAPP"
 }

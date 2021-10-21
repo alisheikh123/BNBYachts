@@ -1,0 +1,13 @@
+.custom-progress-bar{
+    border-radius: 10px;
+    background:$white-color;
+    border:1px solid $placeholder-color;
+    @include breakpoint(laptop){
+        height: 0.5rem !important;
+    }
+    .progress-bar{
+        background:$brand-secondary-color;
+        border-radius: 10px;
+        
+    }
+}

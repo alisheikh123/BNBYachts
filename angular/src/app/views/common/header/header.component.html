@@ -1,0 +1,141 @@
+<header>
+    <ng-container *ngIf="!isLoggedIn">
+        <div class="header-top-bar">
+            <div class="header-bg-blue bg-blue white-text">
+                <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididun
+                </p>
+            </div>
+            <div class="header-grey-clr grey-clr">
+                <p class="small-text">laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+        <div class="header-wrap">
+            <div class="container">
+                <div class="custom-flex-between">
+                    <div class="left-content">
+                        <div class="logo-wrapper">
+                            <a href="home.html" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <a href="javascript:void(0)" class="underline-link-blk active" data-bs-toggle="modal"
+                            data-bs-target="#become-host-modal"><span>Earn with us</span></a>
+                        <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
+                            data-bs-target="#signup-modal" (click)="signUp()"><span>Sign-up/Sign-in</span></a>
+                        <a href="javascript:void(0)" class="underline-link-blk"><span>Help</span></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn">
+        <div class="header-top-bar">
+            <div class="header-bg-blue bg-blue white-text">
+                <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididun
+                </p>
+            </div>
+            <div class="header-grey-clr grey-clr">
+                <p class="small-text">laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+        <div class="header-wrap">
+            <div class="container">
+                <div class="custom-flex-between">
+                    <div class="left-content">
+                        <div class="logo-wrapper">
+                            <a href="home.html" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="center-content">
+                        <a href="dashboard.html" class="underline-link-blk active">
+                            <span>
+
+                                Dashboard
+                            </span>
+                        </a>
+                        <a href="Service-provider.html" class="underline-link-blk">
+                            <span>
+
+                                Service Provider
+                            </span>
+                        </a>
+                        <a href="javascript:void(0)" class="underline-link-blk">
+                            <span>
+
+                                Inbox
+                            </span>
+                        </a>
+                        <a href="javascript:void(0)" class="underline-link-blk">
+                            <span>
+
+                                Calender
+                            </span>
+                        </a>
+                        <a href="Reservation.html" class="underline-link-blk">
+                            <span>
+
+
+                                Reservation
+                            </span>
+                        </a>
+                        <a href="Listing.html" class="underline-link-blk">
+                            <span>
+
+
+                                Listing
+                            </span>
+                        </a>
+                        <div class="dropdown custom-dropdown borderless-dropdown">
+                            <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button"
+                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+
+
+                                Create
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <p class="header-content small-text">John Cena</p>
+                                </li>
+                                <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
+                                <li><a class="dropdown-item" href="home.html">Log Out</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <a href="marketing.html" class="custom-btn white grey-btn regular">Switch to User</a>
+                        <div class="dropdown custom-dropdown">
+                            <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="../../../../assets/images/user-img.png" alt="">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <p class="header-content small-text">John Cena</p>
+                                </li>
+                                <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
+                                <li><a class="dropdown-item" href="home.html">Log Out</a></li>
+
+                            </ul>
+                        </div>
+                        <button class="custom-btn btn-mobile"><i class="fa fa-bars"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</header>

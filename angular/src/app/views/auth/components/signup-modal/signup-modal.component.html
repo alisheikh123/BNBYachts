@@ -1,0 +1,81 @@
+<div class="modal-header no-border">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="custom-modal-inner">
+      <div class="side-img-left">
+        <img src="../../../../../assets/images/signup-wrap.png" alt="">
+      </div>
+      <div class="modal-content-inner-text">
+        <h4 class="bold">Sign Up</h4>
+        <div class="form-text-inner">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 py-2">
+              <div class="custom-input-field">
+                <label>First Name</label>
+                <input  type="text" class="custom-input" placeholder="Abc">
+              </div>
+              <div class="custom-input-field error-msj">
+                <label>Email</label>
+                <input type="email" class="custom-input" placeholder="Johnlaila@Email.Com">
+                <p class="small-txt-error">Invalid email</p>
+              </div>
+              <!-- custom tool tip -->
+                <div class=" custom-input-field">
+                  <label>Password</label>
+                  <div class="tooltip-wrapper">
+                  <input id="password-field" type="password" class="custom-input" name="password" value="12345" >
+                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                  <div class="tooltip-dialogue"> 
+                    <p class="small-text bold">Choosing a password</p>
+                    <p class="small-text dark-grey">Your password must include</p>
+                    <ul>
+                      <li class="small-text">At Least 8 characters</li>
+                      <li class="small-text">Upper and lower case</li>
+                      <li class="small-text">Numbers</li>
+                      <li class="small-text">Special characters</li>
+                    </ul>
+                  </div>
+                  </div>
+              </div>
+            
+            </div>
+            <div class="col-md-6 col-sm-12 py-2">
+              <div class="custom-input-field">
+                <label>Last Name</label>
+                <input type="text" class="custom-input" placeholder="xyz">
+              </div>
+              <div class="custom-input-field error-msj">
+                <label>Date of Birth </label>
+                <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                    <input class="custom-input" type="text" readonly="">
+                    <p class="small-txt-error">Enter date of birth</p>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+                </div>
+                <div class="custom-input-field pswd-field">
+                  <label>Confirm Password</label>
+                  <div class="p-relative">
+                  <input id="password-field" type="password" class="custom-input" name="password" value="12345">
+                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-cnfrm-pswd"></span>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-12 custom-margin text-right mobile-padding-btns">
+              <label class="custom-checkbox">
+                <input type="checkbox">
+                <p class="small-text">I agree to BnBYacht's <a href="javascript:void(0)" class="underline-blue-link">Payment,Privacy Policy and Nondiscrimination Policy</a></p>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="col-sm-12 py-2 pb-3 text-center">
+              <a href="javascript:void(0)" class="custom-btn blue big-btn"  data-bs-toggle="modal" data-bs-target="#confrm-email" data-bs-dismiss="modal">Agree & Continue </a>
+            </div>
+            <div class="col-sm-12 text-center">
+              <p class="small-text light">Already have an Account? <a href="javascript:void(0)"  (click)="login()" class="underline-blue-link">Log in</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
