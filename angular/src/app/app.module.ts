@@ -7,6 +7,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from './shared/interceptors/http.interceptor';
 import { HeaderComponent } from './views/common/header/header.component';
 import { FooterComponent } from './views/common/footer/footer.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { FooterComponent } from './views/common/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    NgxStripeModule.forRoot(environment.stripeKey)
   ],
   providers: [
     {
