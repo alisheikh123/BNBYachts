@@ -71,16 +71,16 @@ namespace BnBYachts.Admin
                 {
                     options.FileSets.ReplaceEmbeddedByPhysical<AdminDomainSharedModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Admin.Domain.Shared"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}/modules/admin/src/BnBYachts.Admin.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<AdminDomainModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Admin.Domain"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}/modules/admin/src/BnBYachts.Admin.Domain"));
                     options.FileSets.ReplaceEmbeddedByPhysical<AdminApplicationContractsModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Admin.Application.Contracts"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}/modules/admin/src/BnBYachts.Admin.Application.Contracts"));
                     options.FileSets.ReplaceEmbeddedByPhysical<AdminApplicationModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Admin.Application"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}/modules/admin/src/BnBYachts.Admin.Application"));
                 });
             }
         }

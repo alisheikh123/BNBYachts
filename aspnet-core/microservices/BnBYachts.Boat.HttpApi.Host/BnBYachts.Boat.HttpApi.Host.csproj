@@ -34,4 +34,12 @@
     <None Remove="Logs\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\BoatGallery\boat-1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\BoatGallery\boat-1.jpg" />
+  </ItemGroup>
+
 </Project>
