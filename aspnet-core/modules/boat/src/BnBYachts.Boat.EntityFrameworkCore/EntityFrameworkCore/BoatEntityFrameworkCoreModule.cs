@@ -15,15 +15,15 @@ namespace BnBYachts.Boat.EntityFrameworkCore
 {
     [DependsOn(
         typeof(BoatDomainModule),
-        typeof(AbpIdentityEntityFrameworkCoreModule),
-        typeof(AbpIdentityServerEntityFrameworkCoreModule),
-        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-        typeof(AbpSettingManagementEntityFrameworkCoreModule),
+        //typeof(AbpIdentityEntityFrameworkCoreModule),
+        //typeof(AbpIdentityServerEntityFrameworkCoreModule),
+        //typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+        //typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpEntityFrameworkCoreSqlServerModule),
-        typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
-        typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-        typeof(AbpTenantManagementEntityFrameworkCoreModule),
-        typeof(AbpFeatureManagementEntityFrameworkCoreModule)
+        //typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
+        typeof(AbpAuditLoggingEntityFrameworkCoreModule)
+        //typeof(AbpTenantManagementEntityFrameworkCoreModule),
+        //typeof(AbpFeatureManagementEntityFrameworkCoreModule)
         )]
     public class BoatEntityFrameworkCoreModule : AbpModule
     {

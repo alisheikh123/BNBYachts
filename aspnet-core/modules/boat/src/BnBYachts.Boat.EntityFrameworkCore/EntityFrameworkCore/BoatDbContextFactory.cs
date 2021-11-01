@@ -9,10 +9,30 @@ namespace BnBYachts.Boat.EntityFrameworkCore
      * (like Add-Migration and Update-Database commands) */
     public class BoatDbContextFactory : IDesignTimeDbContextFactory<BoatDbContext>
     {
+        //public BoatDbContext CreateDbContext(string[] args)
+        //{
+        //    BoatEfCoreEntityExtensionMappings.Configure();
+
+        //    var configuration = BuildConfiguration();
+
+        //    var builder = new DbContextOptionsBuilder<BoatDbContext>()
+        //        .UseSqlServer(configuration.GetConnectionString("Default"));
+
+        //    return new BoatDbContext(builder.Options);
+        //}
+
+        //private static IConfigurationRoot BuildConfiguration()
+        //{
+        //    var builder = new ConfigurationBuilder()
+        //        .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../BnBYachts.Boat.DbMigrator/"))
+        //        .AddJsonFile("appsettings.json", optional: false);
+
+        //    return builder.Build();
+        //}
+
+
         public BoatDbContext CreateDbContext(string[] args)
         {
-            BoatEfCoreEntityExtensionMappings.Configure();
-
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<BoatDbContext>()
@@ -24,10 +44,11 @@ namespace BnBYachts.Boat.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../BnBYachts.Boat.DbMigrator/"))
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();
         }
     }
 }
+

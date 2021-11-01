@@ -16,8 +16,6 @@ using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
@@ -33,7 +31,7 @@ namespace BnBYachts.Boat
         typeof(BoatHttpApiModule),
         typeof(AbpAutofacModule),
         typeof(AbpCachingStackExchangeRedisModule),
-        typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
+       // typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
@@ -71,16 +69,16 @@ namespace BnBYachts.Boat
                 {
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainSharedModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Domain.Shared"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Domain"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Domain"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationContractsModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application.Contracts"));
+                            $"..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Application.Contracts"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Application"));
                 });
             }
         }
@@ -192,10 +190,10 @@ namespace BnBYachts.Boat
 
             app.UseAbpRequestLocalization();
 
-            if (!env.IsDevelopment())
-            {
-                app.UseErrorPage();
-            }
+            //if (!env.IsDevelopment())
+            //{
+            //    app.UseErrorPage();
+            //}
 
             app.UseCorrelationId();
             app.UseStaticFiles();
@@ -203,10 +201,10 @@ namespace BnBYachts.Boat
             app.UseCors();
             app.UseAuthentication();
 
-            if (MultiTenancyConsts.IsEnabled)
-            {
-                app.UseMultiTenancy();
-            }
+            //if (MultiTenancyConsts.IsEnabled)
+            //{
+            //    app.UseMultiTenancy();
+            //}
 
             app.UseAuthorization();
 
