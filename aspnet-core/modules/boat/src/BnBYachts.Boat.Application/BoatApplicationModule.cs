@@ -11,13 +11,13 @@ namespace BnBYachts.Boat
 {
     [DependsOn(
         typeof(BoatDomainModule),
-        typeof(AbpAccountApplicationModule),
-        typeof(BoatApplicationContractsModule),
-        typeof(AbpIdentityApplicationModule),
-        typeof(AbpPermissionManagementApplicationModule),
-        typeof(AbpTenantManagementApplicationModule),
-        typeof(AbpFeatureManagementApplicationModule),
-        typeof(AbpSettingManagementApplicationModule)
+        //typeof(AbpAccountApplicationModule),
+        typeof(BoatApplicationContractsModule)
+        //typeof(AbpIdentityApplicationModule)
+        //typeof(AbpPermissionManagementApplicationModule),
+        //typeof(AbpTenantManagementApplicationModule),
+        //typeof(AbpFeatureManagementApplicationModule),
+        //typeof(AbpSettingManagementApplicationModule)
         )]
     public class BoatApplicationModule : AbpModule
     {

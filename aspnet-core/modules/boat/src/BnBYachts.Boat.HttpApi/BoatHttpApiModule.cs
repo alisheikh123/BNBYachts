@@ -1,24 +1,22 @@
-﻿using Localization.Resources.AbpUi;
-using BnBYachts.Boat.Localization;
+﻿using BnBYachts.Boat.Localization;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
 namespace BnBYachts.Boat
 {
     [DependsOn(
-        typeof(BoatApplicationContractsModule),
-        typeof(AbpAccountHttpApiModule),
-        typeof(AbpIdentityHttpApiModule),
-        typeof(AbpPermissionManagementHttpApiModule),
-        typeof(AbpTenantManagementHttpApiModule),
-        typeof(AbpFeatureManagementHttpApiModule),
-        typeof(AbpSettingManagementHttpApiModule)
+        typeof(BoatApplicationContractsModule)
+        //typeof(AbpAccountHttpApiModule),
+        //typeof(AbpIdentityHttpApiModule),
+        //typeof(AbpPermissionManagementHttpApiModule),
+        //typeof(AbpTenantManagementHttpApiModule),
+        //typeof(AbpFeatureManagementHttpApiModule),
+        //typeof(AbpSettingManagementHttpApiModule)
         )]
     public class BoatHttpApiModule : AbpModule
     {
@@ -29,14 +27,14 @@ namespace BnBYachts.Boat
 
         private void ConfigureLocalization()
         {
-            Configure<AbpLocalizationOptions>(options =>
-            {
-                options.Resources
-                    .Get<BoatResource>()
-                    .AddBaseTypes(
-                        typeof(AbpUiResource)
-                    );
-            });
+            //Configure<AbpLocalizationOptions>(options =>
+            //{
+            //    options.Resources
+            //        .Get<BoatResource>()
+            //        .AddBaseTypes(
+            //            typeof(AbpUiResource)
+            //        );
+            //});
         }
     }
 }

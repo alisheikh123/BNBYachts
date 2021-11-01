@@ -16,8 +16,6 @@ using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
@@ -33,7 +31,7 @@ namespace BnBYachts.Boat
         typeof(BoatHttpApiModule),
         typeof(AbpAutofacModule),
         typeof(AbpCachingStackExchangeRedisModule),
-        typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
+       // typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
@@ -205,10 +203,10 @@ namespace BnBYachts.Boat
 
             app.UseAbpRequestLocalization();
 
-            if (!env.IsDevelopment())
-            {
-                app.UseErrorPage();
-            }
+            //if (!env.IsDevelopment())
+            //{
+            //    app.UseErrorPage();
+            //}
 
             app.UseCorrelationId();
             app.UseStaticFiles();
@@ -216,10 +214,10 @@ namespace BnBYachts.Boat
             app.UseCors();
             app.UseAuthentication();
 
-            if (MultiTenancyConsts.IsEnabled)
-            {
-                app.UseMultiTenancy();
-            }
+            //if (MultiTenancyConsts.IsEnabled)
+            //{
+            //    app.UseMultiTenancy();
+            //}
 
             app.UseAuthorization();
 

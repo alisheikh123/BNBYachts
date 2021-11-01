@@ -10,13 +10,13 @@ using Volo.Abp.SettingManagement;
 namespace BnBYachts.Boat
 {
     [DependsOn(
-        typeof(BoatApplicationContractsModule),
-        typeof(AbpAccountHttpApiClientModule),
-        typeof(AbpIdentityHttpApiClientModule),
-        typeof(AbpPermissionManagementHttpApiClientModule),
-        typeof(AbpTenantManagementHttpApiClientModule),
-        typeof(AbpFeatureManagementHttpApiClientModule),
-        typeof(AbpSettingManagementHttpApiClientModule)
+        typeof(BoatApplicationContractsModule)
+        //typeof(AbpAccountHttpApiClientModule),
+        //typeof(AbpIdentityHttpApiClientModule),
+        //typeof(AbpPermissionManagementHttpApiClientModule),
+        //typeof(AbpTenantManagementHttpApiClientModule),
+        //typeof(AbpFeatureManagementHttpApiClientModule),
+        //typeof(AbpSettingManagementHttpApiClientModule)
     )]
     public class BoatHttpApiClientModule : AbpModule
     {
@@ -24,10 +24,10 @@ namespace BnBYachts.Boat
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddHttpClientProxies(
-                typeof(BoatApplicationContractsModule).Assembly,
-                RemoteServiceName
-            );
+            //context.Services.AddHttpClientProxies(
+            //    typeof(BoatApplicationContractsModule).Assembly,
+            //    RemoteServiceName
+            //);
         }
     }
 }
