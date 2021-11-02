@@ -2548,3 +2548,481 @@ Autofac.Core.Registration.ComponentNotRegisteredException: The requested service
 2021-11-02 17:01:33.892 +05:00 [INF] Executed action Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc) in 434.2286ms
 2021-11-02 17:01:33.892 +05:00 [INF] Executed endpoint 'Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc)'
 2021-11-02 17:01:33.893 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/abp/api-definition?IncludeTypes=true - - - 200 - application/json;+charset=utf-8 477.1381ms
+2021-11-02 17:14:40.107 +05:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-02 17:14:45.166 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-02 17:14:45.322 +05:00 [INF] Loaded ABP modules:
+2021-11-02 17:14:45.322 +05:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-02 17:14:45.322 +05:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-02 17:14:45.322 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-02 17:14:45.322 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-02 17:14:45.322 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-02 17:14:45.322 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-02 17:14:45.322 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-02 17:14:45.322 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-02 17:14:45.322 +05:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-02 17:14:45.322 +05:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-02 17:14:45.322 +05:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-02 17:14:45.322 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-02 17:14:45.322 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-02 17:14:45.322 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-02 17:14:45.322 +05:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-02 17:14:45.322 +05:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-02 17:14:45.945 +05:00 [INF] Initialized all ABP modules.
+2021-11-02 17:14:45.975 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-02 17:14:45.975 +05:00 [INF] Hosting environment: Development
+2021-11-02 17:14:45.975 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Boat.HttpApi.Host
+2021-11-02 17:14:46.097 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/ - -
+2021-11-02 17:14:46.840 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:14:46.925 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-02 17:14:46.966 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-02 17:14:46.972 +05:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 41.2615ms
+2021-11-02 17:14:46.973 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:14:47.043 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-02 17:14:47.077 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/ - - - 302 - - 980.4197ms
+2021-11-02 17:14:47.201 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 158.6338ms
+2021-11-02 17:14:48.193 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-02 17:14:48.376 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 182.8107ms
+2021-11-02 17:18:12.972 +05:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-02 17:18:17.575 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-02 17:18:17.721 +05:00 [INF] Loaded ABP modules:
+2021-11-02 17:18:17.721 +05:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-02 17:18:17.721 +05:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-02 17:18:17.721 +05:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-02 17:18:17.721 +05:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-02 17:18:17.721 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-02 17:18:17.721 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-02 17:18:17.721 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-02 17:18:17.721 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-02 17:18:17.721 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-02 17:18:17.721 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-02 17:18:17.721 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-02 17:18:17.721 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-02 17:18:17.721 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-02 17:18:17.721 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-02 17:18:17.721 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-02 17:18:17.721 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-02 17:18:17.721 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-02 17:18:17.721 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-02 17:18:17.721 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-02 17:18:17.721 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-02 17:18:17.721 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-02 17:18:17.721 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-02 17:18:17.721 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-02 17:18:17.721 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-02 17:18:17.721 +05:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-02 17:18:17.721 +05:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-02 17:18:17.722 +05:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-02 17:18:17.722 +05:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-02 17:18:17.722 +05:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-02 17:18:17.722 +05:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-02 17:18:17.722 +05:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-02 17:18:17.722 +05:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-02 17:18:17.722 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-02 17:18:17.722 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-02 17:18:17.722 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-02 17:18:17.722 +05:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-02 17:18:17.722 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-02 17:18:17.722 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-02 17:18:17.722 +05:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-02 17:18:17.722 +05:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-02 17:18:18.550 +05:00 [INF] Initialized all ABP modules.
+2021-11-02 17:18:18.595 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-02 17:18:18.595 +05:00 [INF] Hosting environment: Development
+2021-11-02 17:18:18.595 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Boat.HttpApi.Host
+2021-11-02 17:18:18.708 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/ - -
+2021-11-02 17:18:19.679 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:18:19.785 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-02 17:18:20.137 +05:00 [INF] Executing action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) - Validation state: "Valid"
+2021-11-02 17:18:20.147 +05:00 [INF] Executed action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 1.0426ms.
+2021-11-02 17:18:20.156 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-02 17:18:20.166 +05:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 370.7739ms
+2021-11-02 17:18:20.167 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:18:20.248 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-02 17:18:20.277 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/ - - - 302 - - 1568.9001ms
+2021-11-02 17:18:20.427 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 191.3626ms
+2021-11-02 17:18:21.521 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-02 17:18:21.744 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 222.7121ms
+2021-11-02 17:18:39.312 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:18:39.317 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:18:39.322 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:18:39.403 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:18:39.422 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 19.4786ms.
+2021-11-02 17:18:39.423 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 100.609ms
+2021-11-02 17:18:39.423 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:18:39.424 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 111.9808ms
+2021-11-02 17:18:39.502 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:18:39.518 +05:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-11-02 17:18:39.526 +05:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-11-02 17:18:39.528 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 401 - - 26.2220ms
+2021-11-02 17:21:10.084 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=A8FA4960C8081402A5C5DBDAFD1C79D643DCF51BE052C3D75A7357F561410544&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjE4OjQ5IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - -
+2021-11-02 17:21:10.117 +05:00 [INF] Sending file. Request path: '/oauth2-redirect.html'. Physical path: 'N/A'
+2021-11-02 17:21:10.121 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=A8FA4960C8081402A5C5DBDAFD1C79D643DCF51BE052C3D75A7357F561410544&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjE4OjQ5IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - - - 200 2595 text/html 36.8355ms
+2021-11-02 17:21:19.879 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:21:19.885 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:21:19.885 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:21:19.944 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:21:19.949 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 4.5641ms.
+2021-11-02 17:21:19.949 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 64.0051ms
+2021-11-02 17:21:19.949 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:21:19.950 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 70.8397ms
+2021-11-02 17:21:20.030 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:21:20.032 +05:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-11-02 17:21:20.033 +05:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-11-02 17:21:20.034 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 401 - - 3.9109ms
+2021-11-02 17:21:25.320 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-02 17:21:25.324 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 4.4355ms
+2021-11-02 17:21:26.002 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-02 17:21:26.029 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 26.5511ms
+2021-11-02 17:21:33.044 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:21:33.049 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:21:33.049 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:21:33.111 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:21:33.111 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 0.2827ms.
+2021-11-02 17:21:33.112 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 62.5481ms
+2021-11-02 17:21:33.112 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:21:33.112 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 67.9143ms
+2021-11-02 17:21:33.191 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:21:33.192 +05:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-11-02 17:21:33.192 +05:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-11-02 17:21:33.193 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 401 - - 2.4083ms
+2021-11-02 17:21:51.360 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js.map - -
+2021-11-02 17:21:51.363 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js.map - -
+2021-11-02 17:21:51.372 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js.map - - - 404 - - 11.5829ms
+2021-11-02 17:21:51.373 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js.map - - - 404 - - 9.4137ms
+2021-11-02 17:21:51.493 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css.map - -
+2021-11-02 17:21:51.500 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css.map - - - 404 - - 7.2090ms
+2021-11-02 17:22:41.045 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=B12E803C0EC2287F3214BB4511CFD4CF89FBDE43C82FD0C445E11AF05087A251&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjIxOjM5IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - -
+2021-11-02 17:22:41.064 +05:00 [INF] Sending file. Request path: '/oauth2-redirect.html'. Physical path: 'N/A'
+2021-11-02 17:22:41.065 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=B12E803C0EC2287F3214BB4511CFD4CF89FBDE43C82FD0C445E11AF05087A251&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjIxOjM5IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - - - 200 2595 text/html 20.6341ms
+2021-11-02 17:22:56.061 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:22:56.078 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:22:56.079 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:22:56.144 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:22:56.145 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 0.3093ms.
+2021-11-02 17:22:56.145 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 66.1788ms
+2021-11-02 17:22:56.145 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:22:56.145 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 84.0165ms
+2021-11-02 17:22:56.785 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/abp/api-definition?IncludeTypes=true - -
+2021-11-02 17:22:56.795 +05:00 [INF] Executing endpoint 'Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc)'
+2021-11-02 17:22:56.819 +05:00 [INF] Route matched with {area = "abp", action = "Get", controller = "AbpApiDefinition"}. Executing controller action with signature Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel Get(Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto) on controller Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController (Volo.Abp.AspNetCore.Mvc).
+2021-11-02 17:22:57.155 +05:00 [INF] Executing action method Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc) - Validation state: "Valid"
+2021-11-02 17:22:57.164 +05:00 [DBG] ActionApiDescriptionModel.Create: AbpApplicationConfiguration.GetAsync
+2021-11-02 17:22:57.180 +05:00 [DBG] ActionApiDescriptionModel.Create: AbpApiDefinition.GetByModel
+2021-11-02 17:22:57.185 +05:00 [DBG] ActionApiDescriptionModel.Create: Todo.Get
+2021-11-02 17:22:57.186 +05:00 [INF] Executed action method Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 30.9277ms.
+2021-11-02 17:22:57.190 +05:00 [INF] Executing ObjectResult, writing value of type 'Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel'.
+2021-11-02 17:22:57.251 +05:00 [INF] Executed action Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc) in 431.712ms
+2021-11-02 17:22:57.251 +05:00 [INF] Executed endpoint 'Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc)'
+2021-11-02 17:22:57.252 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/abp/api-definition?IncludeTypes=true - - - 200 - application/json;+charset=utf-8 467.2543ms
+2021-11-02 17:24:41.169 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=58DEB97BC7269127066C47811A3CB775C682C27612348DBA40FA859011F3BFB3&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjIyOjQ3IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - -
+2021-11-02 17:24:41.205 +05:00 [INF] Sending file. Request path: '/oauth2-redirect.html'. Physical path: 'N/A'
+2021-11-02 17:24:41.210 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=58DEB97BC7269127066C47811A3CB775C682C27612348DBA40FA859011F3BFB3&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjIyOjQ3IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - - - 200 2595 text/html 40.6719ms
+2021-11-02 17:24:58.911 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-02 17:24:58.915 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 4.6103ms
+2021-11-02 17:24:59.871 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-02 17:24:59.885 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 14.4940ms
+2021-11-02 17:26:08.693 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:27:04.125 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:27:04.131 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:27:04.131 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:27:04.209 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:27:04.210 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 1.165ms.
+2021-11-02 17:27:04.210 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 79.1929ms
+2021-11-02 17:27:04.210 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:27:04.215 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 55521.5889ms
+2021-11-02 17:27:04.346 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:27:04.363 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:27:04.364 +05:00 [INF] Authorization was successful.
+2021-11-02 17:27:04.366 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:27:04.378 +05:00 [INF] Route matched with {action = "Get", controller = "Todo", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.String] Get() on controller BnBYachts.Boat.TodoAppService (BnBYachts.Boat.Application).
+2021-11-02 17:27:04.456 +05:00 [INF] Executing action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) - Validation state: "Valid"
+2021-11-02 17:27:04.459 +05:00 [INF] Executed action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2.2679ms.
+2021-11-02 17:27:04.459 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2021-11-02 17:27:04.460 +05:00 [INF] Executed action BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) in 81.1011ms
+2021-11-02 17:27:04.460 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:27:04.462 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 200 - text/plain;+charset=utf-8 115.7432ms
+2021-11-02 17:27:16.648 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=513C915C7C4CC328C3DC2959D96F0B31EFE8BAD3EFF7DE80E431EF8538CB0F32&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjI0OjUzIEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - -
+2021-11-02 17:27:16.650 +05:00 [INF] Sending file. Request path: '/oauth2-redirect.html'. Physical path: 'N/A'
+2021-11-02 17:27:16.651 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=513C915C7C4CC328C3DC2959D96F0B31EFE8BAD3EFF7DE80E431EF8538CB0F32&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjI0OjUzIEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - - - 200 2595 text/html 2.8146ms
+2021-11-02 17:29:00.272 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:29:00.288 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:29:00.292 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:29:00.292 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:29:00.360 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:29:00.361 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 0.5847ms.
+2021-11-02 17:29:00.361 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 69.1214ms
+2021-11-02 17:29:00.361 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:29:00.362 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 90.2026ms
+2021-11-02 17:29:00.437 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:29:00.440 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:29:00.440 +05:00 [INF] Authorization was successful.
+2021-11-02 17:29:00.484 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:29:00.484 +05:00 [INF] Route matched with {action = "Get", controller = "Todo", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.String] Get() on controller BnBYachts.Boat.TodoAppService (BnBYachts.Boat.Application).
+2021-11-02 17:29:00.549 +05:00 [INF] Executing action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) - Validation state: "Valid"
+2021-11-02 17:29:00.549 +05:00 [INF] Executed action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 0.2139ms.
+2021-11-02 17:29:00.549 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2021-11-02 17:29:00.550 +05:00 [INF] Executed action BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) in 65.5023ms
+2021-11-02 17:29:00.550 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:29:00.551 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 200 - text/plain;+charset=utf-8 113.2587ms
+2021-11-02 17:29:21.873 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:29:21.875 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:29:21.875 +05:00 [INF] Authorization was successful.
+2021-11-02 17:29:21.878 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:29:21.878 +05:00 [INF] Route matched with {action = "Get", controller = "Todo", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.String] Get() on controller BnBYachts.Boat.TodoAppService (BnBYachts.Boat.Application).
+2021-11-02 17:29:21.937 +05:00 [INF] Executing action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) - Validation state: "Valid"
+2021-11-02 17:29:56.458 +05:00 [INF] Executed action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 34521.1089ms.
+2021-11-02 17:29:56.458 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2021-11-02 17:29:56.458 +05:00 [INF] Executed action BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) in 34580.4702ms
+2021-11-02 17:29:56.459 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:29:56.460 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 200 - text/plain;+charset=utf-8 34586.7815ms
+2021-11-02 17:34:32.926 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:34:32.945 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:34:32.945 +05:00 [INF] Authorization was successful.
+2021-11-02 17:34:32.949 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:34:32.949 +05:00 [INF] Route matched with {action = "Get", controller = "Todo", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.String] Get() on controller BnBYachts.Boat.TodoAppService (BnBYachts.Boat.Application).
+2021-11-02 17:34:33.020 +05:00 [INF] Executing action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) - Validation state: "Valid"
+2021-11-02 17:34:45.117 +05:00 [INF] Executed action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 12096.874ms.
+2021-11-02 17:34:45.119 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2021-11-02 17:34:45.119 +05:00 [INF] Executed action BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) in 12170.077ms
+2021-11-02 17:34:45.119 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:34:45.136 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 200 - text/plain;+charset=utf-8 12209.8390ms
+2021-11-02 17:35:11.909 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:35:11.910 +05:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-11-02 17:35:11.910 +05:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-11-02 17:35:11.911 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 401 - - 2.6686ms
+2021-11-02 17:37:48.788 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=9DB50AA3E880D73902414E55C9C3890ECB070951D7B150A641CB49BC40D30B3A&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjM1OjI3IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - -
+2021-11-02 17:37:48.812 +05:00 [INF] Sending file. Request path: '/oauth2-redirect.html'. Physical path: 'N/A'
+2021-11-02 17:37:48.815 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=9DB50AA3E880D73902414E55C9C3890ECB070951D7B150A641CB49BC40D30B3A&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjM1OjI3IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - - - 200 2595 text/html 26.6575ms
+2021-11-02 17:38:35.379 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:38:35.423 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:38:35.423 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:38:35.531 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:38:35.532 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 0.304ms.
+2021-11-02 17:38:35.532 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 108.426ms
+2021-11-02 17:38:35.532 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:38:35.532 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 153.5155ms
+2021-11-02 17:38:35.604 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:38:35.605 +05:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-11-02 17:38:35.605 +05:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-11-02 17:38:35.608 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 401 - - 4.1184ms
+2021-11-02 17:40:03.054 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-02 17:40:03.076 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 21.7578ms
+2021-11-02 17:40:03.132 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css - -
+2021-11-02 17:40:03.133 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/ui/abp.js - -
+2021-11-02 17:40:03.135 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/ui/abp.swagger.js - -
+2021-11-02 17:40:03.151 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js - -
+2021-11-02 17:40:03.151 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-11-02 17:40:03.152 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-11-02 17:40:03.152 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js - -
+2021-11-02 17:40:03.153 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 17.8261ms
+2021-11-02 17:40:03.183 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/ui/abp.js - - - 200 3025 application/javascript 49.3867ms
+2021-11-02 17:40:03.196 +05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-02 17:40:03.196 +05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-02 17:40:03.206 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css - - - 200 143410 text/css 74.1968ms
+2021-11-02 17:40:03.218 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 66.0397ms
+2021-11-02 17:40:03.219 +05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-02 17:40:03.254 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 102.6076ms
+2021-11-02 17:40:03.497 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-02 17:40:03.510 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 13.2798ms
+2021-11-02 17:40:03.542 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/favicon-32x32.png - -
+2021-11-02 17:40:03.544 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-02 17:40:03.545 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/favicon-32x32.png - - - 200 628 image/png 2.1447ms
+2021-11-02 17:44:24.527 +05:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-02 17:44:30.122 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-02 17:44:30.293 +05:00 [INF] Loaded ABP modules:
+2021-11-02 17:44:30.293 +05:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-02 17:44:30.293 +05:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-02 17:44:30.293 +05:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-02 17:44:30.293 +05:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-02 17:44:30.293 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-02 17:44:30.293 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-02 17:44:30.293 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-02 17:44:30.293 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-02 17:44:30.293 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-02 17:44:30.293 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-02 17:44:30.293 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-02 17:44:30.293 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-02 17:44:30.293 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-02 17:44:30.293 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-02 17:44:30.293 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-02 17:44:30.293 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-02 17:44:30.293 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-02 17:44:30.293 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-02 17:44:30.293 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-02 17:44:30.293 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-02 17:44:30.294 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-02 17:44:30.294 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-02 17:44:30.294 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-02 17:44:30.294 +05:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-02 17:44:30.294 +05:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-02 17:44:30.294 +05:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-02 17:44:30.294 +05:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-02 17:44:30.294 +05:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-02 17:44:30.294 +05:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-02 17:44:30.294 +05:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-02 17:44:30.294 +05:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-02 17:44:30.294 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-02 17:44:30.294 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-02 17:44:30.294 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-02 17:44:30.294 +05:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-02 17:44:30.294 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-02 17:44:30.294 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-02 17:44:30.294 +05:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-02 17:44:30.294 +05:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-02 17:44:31.033 +05:00 [INF] Initialized all ABP modules.
+2021-11-02 17:44:31.077 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-02 17:44:31.077 +05:00 [INF] Hosting environment: Development
+2021-11-02 17:44:31.077 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Boat.HttpApi.Host
+2021-11-02 17:44:31.204 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/ - -
+2021-11-02 17:44:32.191 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:44:32.317 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-02 17:44:32.677 +05:00 [INF] Executing action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) - Validation state: "Valid"
+2021-11-02 17:44:32.686 +05:00 [INF] Executed action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 0.6528ms.
+2021-11-02 17:44:32.692 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-02 17:44:32.701 +05:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 376.7238ms
+2021-11-02 17:44:32.702 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:44:32.766 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-02 17:44:32.817 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/ - - - 302 - - 1613.5172ms
+2021-11-02 17:44:32.969 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 204.9973ms
+2021-11-02 17:44:33.806 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/ - -
+2021-11-02 17:44:33.814 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:44:33.815 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-02 17:44:33.896 +05:00 [INF] Executing action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) - Validation state: "Valid"
+2021-11-02 17:44:33.896 +05:00 [INF] Executed action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 0.0352ms.
+2021-11-02 17:44:33.896 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-02 17:44:33.897 +05:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 81.539ms
+2021-11-02 17:44:33.897 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-02 17:44:33.898 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/ - - - 302 - - 92.0482ms
+2021-11-02 17:44:33.901 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger - -
+2021-11-02 17:44:33.905 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger - - - 301 - - 3.2945ms
+2021-11-02 17:44:33.909 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-02 17:44:33.913 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 3.8160ms
+2021-11-02 17:44:33.982 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css - -
+2021-11-02 17:44:33.983 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/ui/abp.js - -
+2021-11-02 17:44:33.983 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/ui/abp.swagger.js - -
+2021-11-02 17:44:33.984 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js - -
+2021-11-02 17:44:33.984 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js - -
+2021-11-02 17:44:34.077 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-11-02 17:44:34.079 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-11-02 17:44:34.080 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/ui/abp.js - - - 200 3025 application/javascript 96.1819ms
+2021-11-02 17:44:34.082 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 98.4272ms
+2021-11-02 17:44:34.095 +05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-02 17:44:34.095 +05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-02 17:44:34.101 +05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-02 17:44:34.115 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css - - - 200 143410 text/css 132.9246ms
+2021-11-02 17:44:34.124 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 140.2689ms
+2021-11-02 17:44:34.153 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 168.9484ms
+2021-11-02 17:44:34.210 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-02 17:44:34.414 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 203.7566ms
+2021-11-02 17:44:34.502 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-02 17:44:34.515 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 13.3425ms
+2021-11-02 17:44:34.547 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/favicon-32x32.png - -
+2021-11-02 17:44:34.548 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-02 17:44:34.549 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/favicon-32x32.png - - - 200 628 image/png 2.6306ms
+2021-11-02 17:51:59.669 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=F89A88BAACDB73DECF0062E4419F462B9DED6D4E5917ECB8A845962C86782E54&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjQ0OjQ4IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - -
+2021-11-02 17:51:59.687 +05:00 [INF] Sending file. Request path: '/oauth2-redirect.html'. Physical path: 'N/A'
+2021-11-02 17:51:59.689 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/oauth2-redirect.html?code=F89A88BAACDB73DECF0062E4419F462B9DED6D4E5917ECB8A845962C86782E54&scope=Boat&state=VHVlIE5vdiAwMiAyMDIxIDE3OjQ0OjQ4IEdNVCswNTAwIChQYWtpc3RhbiBTdGFuZGFyZCBUaW1lKQ%3D%3D - - - 200 2595 text/html 19.7872ms
+2021-11-02 17:52:29.102 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js.map - -
+2021-11-02 17:52:29.145 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js.map - -
+2021-11-02 17:52:29.146 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css.map - -
+2021-11-02 17:52:29.186 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-bundle.js.map - - - 404 - - 83.6122ms
+2021-11-02 17:52:29.201 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui-standalone-preset.js.map - - - 404 - - 56.2604ms
+2021-11-02 17:52:29.215 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/swagger-ui.css.map - - - 404 - - 69.8601ms
+2021-11-02 17:54:09.876 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - -
+2021-11-02 17:54:33.690 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:54:33.697 +05:00 [INF] Executing endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:54:33.700 +05:00 [INF] Route matched with {area = "Abp", action = "SetCsrfCookie", controller = "AbpSwashbuckle"}. Executing controller action with signature Void SetCsrfCookie() on controller Volo.Abp.Swashbuckle.AbpSwashbuckleController (Volo.Abp.Swashbuckle).
+2021-11-02 17:54:33.778 +05:00 [INF] Executing action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) - Validation state: "Valid"
+2021-11-02 17:54:33.788 +05:00 [INF] Executed action method Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle), returned result Microsoft.AspNetCore.Mvc.EmptyResult in 9.9835ms.
+2021-11-02 17:54:33.788 +05:00 [INF] Executed action Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle) in 88.5312ms
+2021-11-02 17:54:33.788 +05:00 [INF] Executed endpoint 'Volo.Abp.Swashbuckle.AbpSwashbuckleController.SetCsrfCookie (Volo.Abp.Swashbuckle)'
+2021-11-02 17:54:33.789 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/abp/Swashbuckle/SetCsrfCookie - - - 204 - - 23913.5518ms
+2021-11-02 17:54:33.886 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/api/app/todo - -
+2021-11-02 17:54:33.903 +05:00 [INF] Successfully validated the token.
+2021-11-02 17:54:33.927 +05:00 [INF] Authorization was successful.
+2021-11-02 17:54:33.930 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:54:33.944 +05:00 [INF] Route matched with {action = "Get", controller = "Todo", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.String] Get() on controller BnBYachts.Boat.TodoAppService (BnBYachts.Boat.Application).
+2021-11-02 17:54:34.004 +05:00 [INF] Executing action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) - Validation state: "Valid"
+2021-11-02 17:54:39.867 +05:00 [INF] Executed action method BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 5862.9624ms.
+2021-11-02 17:54:39.872 +05:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2021-11-02 17:54:39.875 +05:00 [INF] Executed action BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application) in 5930.0958ms
+2021-11-02 17:54:39.875 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.TodoAppService.Get (BnBYachts.Boat.Application)'
+2021-11-02 17:54:39.896 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/api/app/todo - - - 200 - text/plain;+charset=utf-8 6010.9320ms
