@@ -4,15 +4,17 @@ using BnBYachts.Boat.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace BnBYachts.Boat.Migrations
 {
     [DbContext(typeof(BoatDbContext))]
-    partial class BoatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211102115328_changes-db")]
+    partial class changesdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +26,9 @@ namespace BnBYachts.Boat.Migrations
             modelBuilder.Entity("BnBYachts.Boat.BoatCalendar", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BoatId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -47,9 +52,6 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("HostBoatId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
@@ -66,7 +68,7 @@ namespace BnBYachts.Boat.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HostBoatId");
+                    b.HasIndex("BoatId");
 
                     b.ToTable("BoatsCalendar");
                 });
@@ -74,6 +76,9 @@ namespace BnBYachts.Boat.Migrations
             modelBuilder.Entity("BnBYachts.Boat.BoatFeature", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BoatId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -93,9 +98,6 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
-
-                    b.Property<Guid?>("HostBoatId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
@@ -110,7 +112,7 @@ namespace BnBYachts.Boat.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HostBoatId");
+                    b.HasIndex("BoatId");
 
                     b.HasIndex("OfferedFeaturesId");
 
@@ -120,6 +122,9 @@ namespace BnBYachts.Boat.Migrations
             modelBuilder.Entity("BnBYachts.Boat.BoatGallery", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BoatId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -139,9 +144,6 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
-
-                    b.Property<Guid?>("HostBoatId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
@@ -165,7 +167,7 @@ namespace BnBYachts.Boat.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HostBoatId");
+                    b.HasIndex("BoatId");
 
                     b.ToTable("BoatsGallery");
                 });
@@ -234,6 +236,12 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BoatId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BoatRulesId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -252,9 +260,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<Guid?>("HostBoatId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime");
@@ -263,14 +268,11 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<Guid?>("OfferedRuleId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("HostBoatId");
+                    b.HasIndex("BoatId");
 
-                    b.HasIndex("OfferedRuleId");
+                    b.HasIndex("BoatRulesId");
 
                     b.ToTable("BoatsRules");
                 });
@@ -305,9 +307,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsGuestFavourite")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSafetyFeature")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -433,10 +432,7 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDefault")
+                    b.Property<bool>("IsSafetyRule")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -593,29 +589,35 @@ namespace BnBYachts.Boat.Migrations
 
             modelBuilder.Entity("BnBYachts.Boat.BoatCalendar", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.HostBoat", "Boat")
                         .WithMany("BoatCalendars")
-                        .HasForeignKey("HostBoatId");
+                        .HasForeignKey("BoatId");
+
+                    b.Navigation("Boat");
                 });
 
             modelBuilder.Entity("BnBYachts.Boat.BoatFeature", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.HostBoat", "Boat")
                         .WithMany("BoatFeatures")
-                        .HasForeignKey("HostBoatId");
+                        .HasForeignKey("BoatId");
 
                     b.HasOne("BnBYachts.Boat.Feature", "OfferedFeatures")
-                        .WithMany()
+                        .WithMany("BoatFeatures")
                         .HasForeignKey("OfferedFeaturesId");
+
+                    b.Navigation("Boat");
 
                     b.Navigation("OfferedFeatures");
                 });
 
             modelBuilder.Entity("BnBYachts.Boat.BoatGallery", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.HostBoat", "Boat")
                         .WithMany("BoatGalleries")
-                        .HasForeignKey("HostBoatId");
+                        .HasForeignKey("BoatId");
+
+                    b.Navigation("Boat");
                 });
 
             modelBuilder.Entity("BnBYachts.Boat.BoatLocation", b =>
@@ -627,15 +629,17 @@ namespace BnBYachts.Boat.Migrations
 
             modelBuilder.Entity("BnBYachts.Boat.BoatRule", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.HostBoat", "Boat")
                         .WithMany("BoatRules")
-                        .HasForeignKey("HostBoatId");
+                        .HasForeignKey("BoatId");
 
-                    b.HasOne("BnBYachts.Boat.Rule", "OfferedRule")
+                    b.HasOne("BnBYachts.Boat.Rule", "BoatRules")
                         .WithMany()
-                        .HasForeignKey("OfferedRuleId");
+                        .HasForeignKey("BoatRulesId");
 
-                    b.Navigation("OfferedRule");
+                    b.Navigation("Boat");
+
+                    b.Navigation("BoatRules");
                 });
 
             modelBuilder.Entity("BnBYachts.Charter.Charter", b =>
@@ -654,6 +658,11 @@ namespace BnBYachts.Boat.Migrations
                         .HasForeignKey("BoatId");
 
                     b.Navigation("Boat");
+                });
+
+            modelBuilder.Entity("BnBYachts.Boat.Feature", b =>
+                {
+                    b.Navigation("BoatFeatures");
                 });
 
             modelBuilder.Entity("BnBYachts.Boat.HostBoat", b =>

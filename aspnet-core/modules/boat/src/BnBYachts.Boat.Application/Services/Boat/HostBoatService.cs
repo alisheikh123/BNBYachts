@@ -19,10 +19,14 @@ namespace BnBYachts.Services.Boat
     public class HostBoatService : CrudAppService<HostBoat, HostBoatDto, Guid, PagedAndSortedResultRequestDto, HostBoatDto>, IHostBoatService
     {
         private readonly IRepository<HostBoat, Guid> _boatRepository;
-        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatCalendar, Guid> boatCalendarRepository, IRepository<BoatGallery, Guid> boatGalleryRepository)
+        private readonly IRepository<BoatFeature, Guid> _boatelFeatureRepo;
+        private readonly IRepository<BoatRule, Guid> _boatelRulesRepo;
+        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRepo)
            : base(repository)
         {
             _boatRepository = repository;
+            _boatelFeatureRepo = boatelFeatureRepo;
+            _boatelRulesRepo = boatelRulesRepo;
         }
 
         [Route("FilterBoatelBoats")]
@@ -39,7 +43,6 @@ namespace BnBYachts.Services.Boat
                 foreach (var boat in getBoats)
                 {
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
-                    boat.BoatGalleries = boat.BoatGalleries.Where(res => res.IsCoverPic == true).ToList();
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
                     double distance = DistanceMeasurment.GetDistanceInMeters(boat.Latitude, boat.Longitude, parameters.Latitude, parameters.Longitude);
                     if (distance <= 500)
@@ -52,7 +55,7 @@ namespace BnBYachts.Services.Boat
                 {
                     foreach (var boat in filterdBoats.ToArray())
                     {
-                        var findAvailability =  boat.BoatCalendars.FirstOrDefault(res => res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate && res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate && res.IsAvailable);
+                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate && res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate && res.IsAvailable);
                         if (findAvailability == null)
                         {
                             filterdBoats.Remove(boat);
@@ -60,7 +63,7 @@ namespace BnBYachts.Services.Boat
                     }
                 }
                 ///guest Filters
-                    return filterdBoats.WhereIf(parameters.Adults > 0 || parameters.Childrens > 0, res => res.BoatelCapacity > parameters.Adults + parameters.Childrens).ToList();
+                return filterdBoats.WhereIf(parameters.Adults > 0 || parameters.Childrens > 0, res => res.BoatelCapacity > parameters.Adults + parameters.Childrens).ToList();
 
             }
             catch (Exception ex)
@@ -129,14 +132,22 @@ namespace BnBYachts.Services.Boat
             }
         }
 
-        [Route("boat-details")]
+        [Route("boat-details/{boatId}")]
         [HttpGet]
-       public async Task<HostBoat> GetBoatDetailsById(Guid boatId)
+        public async Task<HostBoat> GetBoatDetailsById(Guid boatId)
         {
-            var boat = await _boatRepository.GetAsync(b=>b.Id == boatId).ConfigureAwait(false);
+            var boat = await _boatRepository.GetAsync(b => b.Id == boatId, false).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatFeatures).ConfigureAwait(false);
+            foreach (var feature in boat.BoatFeatures)
+            {
+                await _boatelFeatureRepo.EnsurePropertyLoadedAsync(feature, x => x.OfferedFeatures);
+            }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatRules).ConfigureAwait(false);
+            foreach (var rule in boat.BoatRules)
+            {
+                await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
+            }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatLocations).ConfigureAwait(false);
             return boat;
         }

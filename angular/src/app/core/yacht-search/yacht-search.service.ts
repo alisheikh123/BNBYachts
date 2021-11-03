@@ -6,12 +6,21 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class YachtSearchService {
-  apiUrl: string = environment.API_URL;
+  apiUrl: string = environment.BOAT_API_URL;
+  apiIdentityUrl: string = environment.IDENTITY_API_URL;
 
   constructor(private http: HttpClient) { }
 
   boatelSearch(params: any) {
     return this.http.post(this.apiUrl + '/FilterBoatelBoats',params).pipe(
+      catchError(this.handleError));
+  }
+  boatDetailsById(id:string) {
+    return this.http.get(this.apiUrl + '/boat-details/'+id).pipe(
+      catchError(this.handleError));
+  }
+  hostDetailsById(id:string) {
+    return this.http.get(this.apiIdentityUrl + '/'+id).pipe(
       catchError(this.handleError));
   }
   charterSearch(param: any) {
@@ -26,7 +35,6 @@ export class YachtSearchService {
 
   ///Exception handler
   handleError(error: any) {
-    debugger;
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

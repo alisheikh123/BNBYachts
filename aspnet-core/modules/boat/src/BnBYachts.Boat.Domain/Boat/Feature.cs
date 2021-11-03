@@ -12,5 +12,7 @@ namespace BnBYachts.Boat
         public string Name { get; set; }
         public bool IsDefaultFeature { get; set; }
         public bool IsGuestFavourite { get; set; }
+        public bool IsSafetyFeature { get; set; }
+        public string Icon{ get; set; }
     }
 }

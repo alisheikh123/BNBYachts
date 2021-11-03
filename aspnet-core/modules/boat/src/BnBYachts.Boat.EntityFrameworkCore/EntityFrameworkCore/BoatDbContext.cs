@@ -30,19 +30,19 @@ namespace BnBYachts.Boat.EntityFrameworkCore
          * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
          */
 
-        public DbSet<Test.Test> TestApp{ get; set; }
+        //public DbSet<Test.Test> TestApp{ get; set; }
 
-        //Identity
-        public DbSet<IdentityUser> Users { get; set; }
-        public DbSet<IdentityRole> Roles { get; set; }
-        public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-        public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-        public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-        public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+        ////Identity
+        //public DbSet<IdentityUser> Users { get; set; }
+        //public DbSet<IdentityRole> Roles { get; set; }
+        //public DbSet<IdentityClaimType> ClaimTypes { get; set; }
+        //public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
+        //public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
+        //public DbSet<IdentityLinkUser> LinkUsers { get; set; }
         
-        // Tenant Management
-        public DbSet<Tenant> Tenants { get; set; }
-        public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
+        //// Tenant Management
+        //public DbSet<Tenant> Tenants { get; set; }
+        //public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
         // Yacht DbSets
         public DbSet<HostBoat> Boats { get; set; }
         public DbSet<BoatGallery> BoatsGallery { get; set; }

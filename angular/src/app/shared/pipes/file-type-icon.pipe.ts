@@ -17,6 +17,9 @@ export class FileTypePipe implements PipeTransform {
             if (row.type === ext) {
                 return true;
             }
+            else{
+                return false;
+            }
         });
         if (obj.length > 0) {
             let icon = obj[0].icon;

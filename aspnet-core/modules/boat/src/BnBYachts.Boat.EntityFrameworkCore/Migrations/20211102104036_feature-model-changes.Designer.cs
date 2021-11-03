@@ -4,15 +4,17 @@ using BnBYachts.Boat.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace BnBYachts.Boat.Migrations
 {
     [DbContext(typeof(BoatDbContext))]
-    partial class BoatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211102104036_feature-model-changes")]
+    partial class featuremodelchanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,6 +236,9 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BoatRulesId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -263,14 +268,11 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<Guid?>("OfferedRuleId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("HostBoatId");
+                    b.HasIndex("BoatRulesId");
 
-                    b.HasIndex("OfferedRuleId");
+                    b.HasIndex("HostBoatId");
 
                     b.ToTable("BoatsRules");
                 });
@@ -305,9 +307,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsGuestFavourite")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSafetyFeature")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -433,10 +432,7 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDefault")
+                    b.Property<bool>("IsSafetyRule")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -627,15 +623,15 @@ namespace BnBYachts.Boat.Migrations
 
             modelBuilder.Entity("BnBYachts.Boat.BoatRule", b =>
                 {
+                    b.HasOne("BnBYachts.Boat.Rule", "BoatRules")
+                        .WithMany()
+                        .HasForeignKey("BoatRulesId");
+
                     b.HasOne("BnBYachts.Boat.HostBoat", null)
                         .WithMany("BoatRules")
                         .HasForeignKey("HostBoatId");
 
-                    b.HasOne("BnBYachts.Boat.Rule", "OfferedRule")
-                        .WithMany()
-                        .HasForeignKey("OfferedRuleId");
-
-                    b.Navigation("OfferedRule");
+                    b.Navigation("BoatRules");
                 });
 
             modelBuilder.Entity("BnBYachts.Charter.Charter", b =>

@@ -9,6 +9,6 @@ namespace BnBYachts.Boat
 {
     public class BoatRule : AuditedAggregateRoot<Guid>
     {
-        public Rule BoatRules { get; set; }
+        public Rule OfferedRule { get; set; }
     }
 }

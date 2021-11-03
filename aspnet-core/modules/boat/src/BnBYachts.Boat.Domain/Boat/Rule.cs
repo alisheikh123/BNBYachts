@@ -10,6 +10,7 @@ namespace BnBYachts.Boat
     public class Rule : AuditedAggregateRoot<Guid>
     {
         public string Name { get; set; }
-        public bool IsSafetyRule { get; set; }
+        public string Icon { get; set; }
+        public bool IsDefault { get; set; }
     }
 }

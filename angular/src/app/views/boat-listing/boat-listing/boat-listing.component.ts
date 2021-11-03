@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class BoatListingComponent implements OnInit {
 
-  assetsUrl = environment.API_URL+'/boatgallery/';
+  assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
 
   mapOptions: google.maps.MapOptions = {
     clickableIcons: false,
@@ -23,9 +23,7 @@ export class BoatListingComponent implements OnInit {
     minZoom: 8,
   };
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
-  mapInfoDetails!:any;
-  //lat = 31.4697;
-  //lng = 74.2728;
+  mapInfoDetails!: any;
   zoom = 14;
   center!: google.maps.LatLngLiteral;
   infoContent = '';
@@ -37,7 +35,6 @@ export class BoatListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.boats = this.yachtSearch.searchResult?.boatsResult;
-    debugger;
     this.mapDetails = this.yachtSearch.searchResult?.mapOptions;
     this.filterMarkers();
     navigator.geolocation.getCurrentPosition((position) => {
@@ -51,7 +48,7 @@ export class BoatListingComponent implements OnInit {
   filterMarkers() {
     this.boats.forEach((element: any) => {
       let marker = {
-        boatId:element.id,
+        boatId: element.id,
         position: {
           lat: element.latitude,
           lng: element.longitude
@@ -64,10 +61,8 @@ export class BoatListingComponent implements OnInit {
       this.markers.push(marker);
     });
   }
-  openInfoWindow(marker: MapMarker, data: any){
-    debugger;
-this.mapInfoDetails = this.boats.find(res=>res.id == data?.boatId);
-this.infoWindow.open(marker);
-
+  openInfoWindow(marker: MapMarker, data: any) {
+    this.mapInfoDetails = this.boats.find(res => res.id == data?.boatId);
+    this.infoWindow.open(marker);
   }
 }

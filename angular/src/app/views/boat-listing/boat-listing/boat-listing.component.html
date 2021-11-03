@@ -23,7 +23,6 @@
                                     <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
                                     <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
                                     <li><a class="dropdown-item" href="home.html">Log Out</a></li>
-
                                 </ul>
                             </div>
                             <div class="dropdown custom-dropdown filters-wrap">
@@ -78,15 +77,15 @@
                         <div class="boatel-search-card" *ngFor="let item of boats">
                             <div class="row h-100">
                                 <div class="col-sm-5 pr-0">
-                                    <div class="boatel-search-card-img">
+                                    <div class="boatel-search-card-img" *ngFor ="let gallery of (item?.boatGalleries | filterBy : 'isCoverPic' : true)">
                                         <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
-                                        <img src="{{assetsUrl + item.boatGalleries[0]?.imagePath}}">
+                                        <img src="{{assetsUrl + gallery?.imagePath}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="boatel-search-card-content">
                                     <div class="boatel-search-card-content-title">
-                                        <a href="boatel-search-details.html" class="underline-black-link p-0">{{item.name}}</a>
+                                        <a [routerLink]="['/boat-listing/boat-details',item.id]" class="underline-black-link p-0">{{item.name}}</a>
                                         <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a>
                                     </div>
                                     <p class="grey">{{item.boatelCapacity}} Guests - {{item.totalBedrooms}} Bed Rooms  - {{item.totalWashrooms}} Bathroom</p>
@@ -120,9 +119,9 @@
                                                               <div class="boatel-search-card">
                                                                 <div class="row">
                                                                   <div class="col-sm-5 pr-0">
-                                                                      <div class="boatel-search-card-img">
+                                                                      <div class="boatel-search-card-img" *ngFor ="let gallery of (mapInfoDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
                                                                           <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
-                                                                          <img  src="{{assetsUrl + mapInfoDetails?.boatGalleries[0]?.imagePath}}">
+                                                                          <img  src="{{assetsUrl + gallery?.imagePath}}">
                                                                       </div>
                                                                   </div>
                                                                   <div class="col-sm-7">
