@@ -65,7 +65,7 @@ namespace BnBYachts.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync("BnBYachts");
+            await CreateApiScopeAsync("Boat");
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,7 +80,7 @@ namespace BnBYachts.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync("BnBYachts", commonApiUserClaims);
+            await CreateApiResourceAsync("Boat", commonApiUserClaims);
         }
 
         private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims)
@@ -137,7 +137,8 @@ namespace BnBYachts.IdentityServer
                 "role",
                 "phone",
                 "address",
-                "BnBYachts"
+                "BnBYachts",
+                "Boat"
             };
 
             var configurationSection = _configuration.GetSection("IdentityServer:Clients");
