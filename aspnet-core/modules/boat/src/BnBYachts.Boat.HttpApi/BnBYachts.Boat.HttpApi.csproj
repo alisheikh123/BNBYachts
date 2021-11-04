@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>BnBYachts.Boat</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BnBYachts.Boat.Application.Contracts\BnBYachts.Boat.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+ 
+  </ItemGroup>
+
+</Project>

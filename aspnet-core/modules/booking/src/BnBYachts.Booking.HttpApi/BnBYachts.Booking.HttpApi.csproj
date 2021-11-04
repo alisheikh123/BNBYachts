@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>BnBYachts.Booking</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BnBYachts.Booking.Application.Contracts\BnBYachts.Booking.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="4.4.3" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="4.4.3" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="4.4.3" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="4.4.3" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="4.4.3" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="4.4.3" />
+  </ItemGroup>
+
+</Project>
