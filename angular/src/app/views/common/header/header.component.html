@@ -21,9 +21,16 @@
                     <div class="right-content">
                         <a href="javascript:void(0)" class="underline-link-blk active" data-bs-toggle="modal"
                             data-bs-target="#become-host-modal"><span>Earn with us</span></a>
+                            <!-- <a *ngIf="!isLoggedIn" (click)="login()" href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
+                            data-bs-target="#become-host-modal"><span>Login</span></a> -->
+                   
+      <!-- | abpLocalization -->
+
                         <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="signUp()"><span>Sign-up/Sign-in</span></a>
-                        <a href="javascript:void(0)" class="underline-link-blk"><span>Help</span></a>
+                            data-bs-target="#signup-modal" (click)="login()"><span>Sign-up/Sign-in</span></a>
+                            <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
+                            data-bs-target="#signup-modal" (click)="forgetPassword()" ><span>Forget Password</span></a>
+                        <a href="javascript:void(0)" class="underline-link-blk" (click)="getUser()"><span>Help</span></a>
 
                     </div>
                 </div>
@@ -112,15 +119,14 @@
                     </div>
                     <div class="right-content">
                         <a href="marketing.html" class="custom-btn white grey-btn regular">Switch to User</a>
-                        <div class="dropdown custom-dropdown">
-                            <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown custom-dropdown" ngbDropdown>
+                            <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" >
                                 <img src="../../../../assets/images/user-img.png" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
                                 <li>
-                                    <p class="header-content small-text">John Cena</p>
+                                    <p class="header-content small-text">{{userDetails?.name}}</p>
                                 </li>
                                 <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
@@ -128,7 +134,7 @@
                                 <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
-                                <li><a class="dropdown-item" href="home.html">Log Out</a></li>
+                                <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
                             </ul>
                         </div>

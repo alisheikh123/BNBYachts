@@ -15,6 +15,8 @@ using Volo.Abp.Account.Settings;
 using Volo.Abp;
 using Volo.Abp.Validation;
 using System.Diagnostics;
+using BnBYachts.Services.DTO;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace BnBYachts.Services
 {
@@ -74,6 +76,13 @@ namespace BnBYachts.Services
             RedirectSafely(ReturnUrl, ReturnUrlHash);
         }
 
+
+        public async Task<object> UserInfo(string UserId)
+        {
+
+            var user = await UserManager.FindByIdAsync(UserId);
+            return user;
+        }
         protected virtual async Task CheckLocalLoginAsync()
         {
             if (!await SettingProvider.IsTrueAsync(AccountSettingNames.EnableLocalLogin).ConfigureAwait(false))
@@ -101,6 +110,25 @@ namespace BnBYachts.Services
             }
 
             username = userByEmail.UserName;
+        }
+
+
+        public async Task<string> EmailVerification(ForgotPasswordDto forgotPasswordDto)
+        {
+            var user = await UserManager.FindByEmailAsync(forgotPasswordDto.Email);
+            if (user == null)
+                return "Invalid Request";
+            var token = await UserManager.GeneratePasswordResetTokenAsync(user);
+            var param = new Dictionary<string, string>
+                {
+                    {"token", token },
+                    {"email", forgotPasswordDto.Email }
+                };
+            var callback = QueryHelpers.AddQueryString(forgotPasswordDto.ClientURI, param);
+            //var messages = new Message<>(new string[] { user.Email }, "Reset password token", callback, null);
+            //await _emailSender.SendEmailAsync(messages);
+            string message = "Success";
+            return callback;
         }
     }
 }

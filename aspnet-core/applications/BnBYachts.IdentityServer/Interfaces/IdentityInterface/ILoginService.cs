@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BnBYachts.Services.DTO;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace BnBYachts.Interfaces.IdentityInterface
     public interface ILoginService
     {
         Task Login(string username,string password);
+        Task<object> UserInfo(string UserId);
+
+        Task<string> EmailVerification(ForgotPasswordDto forgotPasswordDto);
         //[HiddenInput]
         //[BindProperty(SupportsGet = true)]
         //public string ReturnUrl { get; set; }

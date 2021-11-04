@@ -27,6 +27,48 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\custom.js" />
+    <None Include="wwwroot\js\select.js" />
+    <None Include="wwwroot\sass\base\_reset.scss" />
+    <None Include="wwwroot\sass\base\_typography.scss" />
+    <None Include="wwwroot\sass\components\_banner.scss" />
+    <None Include="wwwroot\sass\components\_buttons.scss" />
+    <None Include="wwwroot\sass\components\_card.scss" />
+    <None Include="wwwroot\sass\components\_chatbox.scss" />
+    <None Include="wwwroot\sass\components\_counter.scss" />
+    <None Include="wwwroot\sass\components\_custom-checkbox.scss" />
+    <None Include="wwwroot\sass\components\_custom-dropdown.scss" />
+    <None Include="wwwroot\sass\components\_custom-modal.scss" />
+    <None Include="wwwroot\sass\components\_custom-tabs.scss" />
+    <None Include="wwwroot\sass\components\_custom-ul.scss" />
+    <None Include="wwwroot\sass\components\_datepicker.scss" />
+    <None Include="wwwroot\sass\components\_image-uploader.scss" />
+    <None Include="wwwroot\sass\components\_input.scss" />
+    <None Include="wwwroot\sass\components\_pagination.scss" />
+    <None Include="wwwroot\sass\components\_progress-bar.scss" />
+    <None Include="wwwroot\sass\components\_search-wrapper.scss" />
+    <None Include="wwwroot\sass\components\_select.scss" />
+    <None Include="wwwroot\sass\components\_slider.scss" />
+    <None Include="wwwroot\sass\components\_stepper.scss" />
+    <None Include="wwwroot\sass\components\_table.scss" />
+    <None Include="wwwroot\sass\components\_textarea.scss" />
+    <None Include="wwwroot\sass\components\_tooltip.scss" />
+    <None Include="wwwroot\sass\components\_ui-elements.scss" />
+    <None Include="wwwroot\sass\layout\_footer.scss" />
+    <None Include="wwwroot\sass\layout\_header.scss" />
+    <None Include="wwwroot\sass\pages\_chat-page.scss" />
+    <None Include="wwwroot\sass\pages\_error-page.scss" />
+    <None Include="wwwroot\sass\pages\_sign.scss" />
+    <None Include="wwwroot\sass\pages\_user-info.scss" />
+    <None Include="wwwroot\sass\partials\_layout.scss" />
+    <None Include="wwwroot\sass\partials\_mixins.scss" />
+    <None Include="wwwroot\sass\partials\_variables.scss" />
+    <None Include="wwwroot\sass\style-en.css.map" />
+    <None Include="wwwroot\sass\style-en.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Pages\**\*.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -56,6 +98,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\modules\client\src\BnBYachts.Domain.Shared\BnBYachts.Domain.Shared.csproj" />
     <ProjectReference Include="..\..\modules\client\src\BnBYachts.EntityFrameworkCore\BnBYachts.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\sass\vendor\" />
   </ItemGroup>
 
 </Project>

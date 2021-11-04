@@ -204,6 +204,7 @@ namespace BnBYachts.IdentityServer
                     )
                     {
                         ClientName = name,
+                        
                         ProtocolType = "oidc",
                         Description = name,
                         AlwaysIncludeUserClaimsInIdToken = true,

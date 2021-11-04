@@ -34,6 +34,9 @@ using Volo.Abp.VirtualFileSystem;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Identity;
 using BnBYachts.Services.Classes;
+using Microsoft.Extensions.Configuration;
+using BnBYachts.Interfaces.IdentityInterface;
+using BnBYachts.Services;
 
 namespace BnBYachts
 {
@@ -52,6 +55,8 @@ namespace BnBYachts
         {
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             var configuration = context.Services.GetConfiguration();
+            var emailConfig = configuration.GetSection("EmailConfiguration:");
+           
 
             Configure<AbpLocalizationOptions>(options =>
             {
@@ -178,7 +183,11 @@ namespace BnBYachts
             {
                 c.SwaggerDoc("v1", info);
             });
-           context.Services.GetObject<IdentityBuilder>().AddDefaultTokenProviders().AddPasswordlessLoginProvider();
+            context.Services.GetObject<IdentityBuilder>().AddDefaultTokenProviders().AddPasswordlessLoginProvider();
+            context.Services.AddScoped<ILoginService, LoginService>();
+            context.Services.AddSingleton(emailConfig);
+           
+            
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
