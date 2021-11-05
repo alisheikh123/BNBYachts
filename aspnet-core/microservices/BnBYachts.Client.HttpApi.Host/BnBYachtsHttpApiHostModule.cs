@@ -45,6 +45,7 @@ namespace BnBYachts
         {
             var configuration = context.Services.GetConfiguration();
             var hostingEnvironment = context.Services.GetHostingEnvironment();
+          
 
             ConfigureConventionalControllers();
             ConfigureAuthentication(context, configuration);
@@ -161,6 +162,7 @@ namespace BnBYachts
 
         private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
         {
+            //var emailConfig = configuration.GetSection("EmailConfiguration");
             context.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -179,6 +181,7 @@ namespace BnBYachts
                         .AllowCredentials();
                 });
             });
+            //context.Services.AddSingleton(emailConfig);
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
