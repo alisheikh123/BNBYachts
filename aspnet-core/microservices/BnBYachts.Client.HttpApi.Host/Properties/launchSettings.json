@@ -1,10 +1,10 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
+    "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44382",
-      "sslPort": 44382
+      "applicationUrl": "http://localhost:44382",
+      "sslPort": 44343
     }
   },
   "profiles": {
@@ -18,10 +18,10 @@
     "BnBYachts.HttpApi.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:44382",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:44382"
     }
   }
 }

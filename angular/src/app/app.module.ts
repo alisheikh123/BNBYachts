@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgbDateAdapter, NgbDateNativeUTCAdapter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from './shared/interceptors/http.interceptor';
 import { HeaderComponent } from './views/common/header/header.component';
 import { FooterComponent } from './views/common/footer/footer.component';
@@ -45,7 +45,9 @@ import { AuthAppModule } from './views/auth/auth.module';
       useClass: HttpConfigInterceptor,
      
       multi: true
-    }
+    },
+    LoaderService,
+    {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter}
   ],
   bootstrap: [AppComponent]
 })
