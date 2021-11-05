@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BnBYachts.Interfaces.IdentityInterface;
+using BnBYachts.Services.DTO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,16 +15,27 @@ namespace BnBYachts.Controller
     [ApiController]
     public class AuthController : ControllerBase
     {
-            public SignInManager<IdentityUser> SignInManager { get; set; }
+        private readonly ILoginService _ILoginservice;
+        public AuthController(ILoginService ILoginservices)
+        {
+            _ILoginservice = ILoginservices;
+        }
 
+        //[HttpGet]
+        //public async Task<IEnumerable<string>> Get(string username,string password)
+        //{
+        //    await _ILoginservice.Login(username,password);
 
-        // GET: api/<ValuesController>
         [HttpGet]
-            public async Task<IEnumerable<string>> Get()
-            {
-                var response = await SignInManager.PasswordSignInAsync("admin", "1q2w3E*", false, false);
+        //[Authorize]
+        [Route("UserInfo/{userId}")]
+        public async Task<object> UserInfo(string userId)
+        {
+            var userInfo = await _ILoginservice.UserInfo(userId);
 
-                return new string[] { "value1", "value2" };
-            }
+            return userInfo;
+        }
+
+
     }
 }

@@ -6817,7 +6817,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+    background-color: #122ba8 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -6916,6 +6916,7 @@ button.bg-dark:focus {
 
 .rounded {
   border-radius: 0.25rem !important;
+  display:none;
 }
 
 .rounded-top {
@@ -8448,6 +8449,7 @@ button.bg-dark:focus {
 .pl-5,
 .px-5 {
   padding-left: 3rem !important;
+  display:none;
 }
 
 .m-n1 {

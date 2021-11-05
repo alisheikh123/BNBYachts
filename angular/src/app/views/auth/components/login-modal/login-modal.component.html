@@ -1,40 +1,175 @@
-<div class="modal-content">
+<div class="modal-content" >
   <div class="modal-header no-border">
-    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <div class="modal-body">
+    
+    
     <div class="custom-text-center">
       <h4 class="bold text-center">Login</h4>
+      <form [formGroup]="LoginForm" (ngSubmit)="Login()">
+        <!-- {{LoginForm.value | json}} -->
       <div class="custom-input-field">
-        <label>Email</label>
-        <input type="email" class="custom-input" placeholder="Abc@gmail.com">
+        <label for="Email">Email</label>
+        <input type="email" class="custom-input" placeholder="Abc@gmail.com" name="email" formControlName="email">
+        <div class="text text-danger" *ngIf="this.LoginForm.controls.email.touched && this.LoginForm.controls.email.dirty || this.LoginForm.controls.email.invalid">
+          <div  *ngIf="this.LoginForm.controls.email.errors?.required" >
+              * Email is Required !
+          </div>
+      </div>
       </div>
       <div class="custom-input-field pswd-field">
-        <label>Password</label>
+        <label for="Password">Password</label>
         <div class="p-relative" >
-        <input id="password-field" type="password" class="custom-input" name="password" value="12345" data-toggle="tooltip" data-html="true" title="Choosing a Password:
+        <input id="password-field" type="password" class="custom-input"name="password" formControlName="Password" value="1q2w3E*" data-toggle="tooltip" data-html="true" title="Choosing a Password:
         <br/> Your Password Must Include:">
         <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+       
         </div>
+        <div class="text text-danger" *ngIf="this.LoginForm.controls.Password.touched && this.LoginForm.controls.Password.dirty || this.LoginForm.controls.Password.invalid">
+          <div  *ngIf="this.LoginForm.controls.Password.errors?.required" >
+              * Password is Required !
+          </div>
+      </div>
   </div>
   <div class="custom-flex-between py-2">
     <div class="left-content">
       <label class="custom-checkbox m-0">
-        <input type="checkbox">
+        <input type="checkbox" formControlName="isRemember">
         <p class="small-text">Remember Me</p>
         <span class="checkmark"></span>
       </label>
       </div>
+      <div class="center-content" *ngIf="isCredentialsFalse">
+        <label class="custom-checkbox m-0">
+       
+          <p class="small-text text-danger">* You have put Invalid Credentials!</p>
+         
+        </label>
+        </div>
       <div class="right-content">
         <a href="javascript:void(0)" (click) = "forgotPassword()" class="underline-blue-link small-text"  data-bs-toggle="modal" data-bs-target="#forget-psd-modal" data-bs-dismiss="modal">Forgot Password?</a>
       </div>
   </div>
   <div class="py-2 pt-4 text-center">
-    <button class="custom-btn blue big-btn"  data-bs-toggle="modal" data-bs-target="#mobile-verify-modal" data-bs-dismiss="modal">Login</button>
+    <button class="custom-btn blue big-btn"   [disabled]="!LoginForm.valid" data-bs-toggle="modal" data-bs-target="#mobile-verify-modal" data-bs-dismiss="modal">Login</button>
   </div>
   <div class="text-center py-2">
     <p class="small-text light">Don't have an Account? <a href="javascript:void(0)" (click)="signup()" class="underline-blue-link">Sign Up</a></p>
     </div>
+  </form>
     </div>
+ 
+
   </div>
 </div>
+<ng-container *ngIf="isLoggedIn">
+  <div class="header-top-bar">
+      <div class="header-bg-blue bg-blue white-text">
+          <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididun
+          </p>
+      </div>
+      <div class="header-grey-clr grey-clr">
+          <p class="small-text">laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+  </div>
+  <div class="header-wrap">
+      <div class="container">
+          <div class="custom-flex-between">
+              <div class="left-content">
+                  <div class="logo-wrapper">
+                      <a href="home.html" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
+                  </div>
+              </div>
+              <div class="center-content">
+                  <a href="dashboard.html" class="underline-link-blk active">
+                      <span>
+
+                          Dashboard
+                      </span>
+                  </a>
+                  <a href="Service-provider.html" class="underline-link-blk">
+                      <span>
+
+                          Service Provider
+                      </span>
+                  </a>
+                  <a href="javascript:void(0)" class="underline-link-blk">
+                      <span>
+
+                          Inbox
+                      </span>
+                  </a>
+                  <a href="javascript:void(0)" class="underline-link-blk">
+                      <span>
+
+                          Calender
+                      </span>
+                  </a>
+                  <a href="Reservation.html" class="underline-link-blk">
+                      <span>
+
+
+                          Reservation
+                      </span>
+                  </a>
+                  <a href="Listing.html" class="underline-link-blk">
+                      <span>
+
+
+                          Listing
+                      </span>
+                  </a>
+                  <div class="dropdown custom-dropdown borderless-dropdown">
+                      <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+
+
+                          Create
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li>
+                              <p class="header-content small-text">John Cena</p>
+                          </li>
+                          <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
+                          <li><a class="dropdown-item" href="home.html">Log Out</a></li>
+
+                      </ul>
+                  </div>
+              </div>
+              <div class="right-content">
+                  <a href="marketing.html" class="custom-btn white grey-btn regular">Switch to User</a>
+                  <div class="dropdown custom-dropdown">
+                      <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          <img src="../../../../assets/images/user-img.png" alt="">
+                          <i class="fa fa-bars"></i>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li>
+                              <p class="header-content small-text">John Cena</p>
+                          </li>
+                          <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
+                          <li><a class="dropdown-item" href="home.html">Log Out</a></li>
+
+                      </ul>
+                  </div>
+                  <button class="custom-btn btn-mobile"><i class="fa fa-bars"></i></button>
+              </div>
+          </div>
+      </div>
+  </div>
+</ng-container>
