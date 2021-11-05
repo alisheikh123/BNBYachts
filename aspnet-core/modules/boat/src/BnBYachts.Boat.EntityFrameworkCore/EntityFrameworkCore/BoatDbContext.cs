@@ -30,19 +30,37 @@ namespace BnBYachts.Boat.EntityFrameworkCore
          * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
          */
 
-        public DbSet<Test.Test> TestApp{ get; set; }
+        //public DbSet<Test.Test> TestApp{ get; set; }
 
-        //Identity
+        ////Identity
         //public DbSet<IdentityUser> Users { get; set; }
         //public DbSet<IdentityRole> Roles { get; set; }
         //public DbSet<IdentityClaimType> ClaimTypes { get; set; }
         //public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
         //public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
         //public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-
+        
         //// Tenant Management
         //public DbSet<Tenant> Tenants { get; set; }
         //public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
+        // Yacht DbSets
+        public DbSet<HostBoat> Boats { get; set; }
+        public DbSet<BoatGallery> BoatsGallery { get; set; }
+        public DbSet<BoatCalendar> BoatsCalendar { get; set; }
+        public DbSet<BoatFeature> BoatsFeatures { get; set; }
+        public DbSet<BoatLocation> BoatsLocations { get; set; }
+        public DbSet<BoatRule> BoatsRules { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Rule> Rules { get; set; }
+
+        // charter
+
+        public DbSet<Charter.Charter> Charteres { get; set; }
+
+        //Event
+        public DbSet<Events.Event> Events { get; set; }
+
+
 
         #endregion
 

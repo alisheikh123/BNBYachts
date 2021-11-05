@@ -51,8 +51,4 @@
     <ProjectReference Include="..\..\modules\client\src\BnBYachts.EntityFrameworkCore\BnBYachts.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
-
 </Project>

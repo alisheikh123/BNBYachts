@@ -184,6 +184,8 @@ namespace BnBYachts
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
+
+
         }
     }
 }

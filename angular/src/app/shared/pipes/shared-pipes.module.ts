@@ -6,13 +6,15 @@ import { RelativeTimePipe } from './relative-time.pipe';
 import { FilterByPipe } from './filterBy.pipe';
 import { SafeHtmlPipe } from './safe.pipe';
 import { FileTypePipe } from './file-type-icon.pipe';
+import { MySlicePipe } from './my-slice.pipe';
 const pipes = [
   ExcerptPipe,
   GetValueByKeyPipe,
   RelativeTimePipe,
   FilterByPipe,
   SafeHtmlPipe,
-  FileTypePipe
+  FileTypePipe,
+  MySlicePipe
 ];
 
 @NgModule({

@@ -12,4 +12,4 @@ ForgotPasswordComponent
   imports: [],
   providers: [],
 })
-export class HomeModule { }
+export class AuthModule { }
