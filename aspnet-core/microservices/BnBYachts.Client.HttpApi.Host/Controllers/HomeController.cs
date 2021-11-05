@@ -12,15 +12,6 @@ namespace BnBYachts.Controllers
             return Redirect("~/swagger");
         }
 
-        [HttpGet]
-        //[Authorize]
-        [Route("UserInfo/{userId}")]
-        public async Task<object> UserInfo(string userId)
-        {
-            //var userInfo = await _ILoginservice.UserInfo(userId);
-            //var user = await UserManager.FindByIdAsync(userId);
-
-            return Ok("Success");
-        }
+ 
     }
 }

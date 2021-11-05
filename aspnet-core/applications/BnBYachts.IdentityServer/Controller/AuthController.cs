@@ -27,9 +27,14 @@ namespace BnBYachts.Controller
         //    await _ILoginservice.Login(username,password);
 
         [HttpGet]
-            {
+        //[Authorize]
+        [Route("UserInfo/{userId}")]
+        public async Task<object> UserInfo(string userId)
+        {
+            var userInfo = await _ILoginservice.UserInfo(userId);
 
-            }
+            return userInfo;
+        }
 
 
     }

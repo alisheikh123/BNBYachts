@@ -1,3 +1,4 @@
+import { LoaderComponent } from './shared/loader/component/loader/loader.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,11 +13,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AuthModule,LogLevel } from 'angular-auth-oidc-client';
 import { AuthAppModule } from './views/auth/auth.module';
+import { LoaderService } from './shared/loader/services/loader.service';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
