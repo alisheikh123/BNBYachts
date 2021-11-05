@@ -15,15 +15,8 @@ namespace BnBYachts.Boat.EntityFrameworkCore
 {
     [DependsOn(
         typeof(BoatDomainModule),
-        //typeof(AbpIdentityEntityFrameworkCoreModule),
-        //typeof(AbpIdentityServerEntityFrameworkCoreModule),
-        //typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-        //typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpEntityFrameworkCoreSqlServerModule),
-        //typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
         typeof(AbpAuditLoggingEntityFrameworkCoreModule)
-        //typeof(AbpTenantManagementEntityFrameworkCoreModule),
-        //typeof(AbpFeatureManagementEntityFrameworkCoreModule)
         )]
     public class BoatEntityFrameworkCoreModule : AbpModule
     {
@@ -36,15 +29,11 @@ namespace BnBYachts.Boat.EntityFrameworkCore
         {
             context.Services.AddAbpDbContext<BoatDbContext>(options =>
             {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
 
             Configure<AbpDbContextOptions>(options =>
             {
-                /* The main point to change your DBMS.
-                 * See also BoatMigrationsDbContextFactory for EF Core tooling. */
                 options.UseSqlServer();
             });
         }
