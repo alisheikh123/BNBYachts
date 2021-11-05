@@ -12,9 +12,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     private pendingRequests: number = 0;
     constructor(private loader: LoaderService, private router: Router) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // if (this.authService.getJwtToken()) {
-        //     request = this.addToken(request, this.authService.getJwtToken());
-        // }
+        let token = localStorage.getItem('accessToken');
+        if (token) {
+            request = this.addToken(request, token);
+        }
         //if skip loader 
         if (request.headers.has("X-Skip-Loader-Interceptor")) {
             return next.handle(request)

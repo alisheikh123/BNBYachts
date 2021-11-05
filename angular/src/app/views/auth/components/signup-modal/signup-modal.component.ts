@@ -9,7 +9,7 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
 })
 export class SignupModalComponent implements OnInit {
 
-  constructor(private modal : NgbModal,private activeModal: NgbActiveModal) { }
+  constructor(private modal : NgbModal,public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
   }
@@ -17,4 +17,5 @@ export class SignupModalComponent implements OnInit {
     this.activeModal.dismiss();
     let modalRef = this.modal.open(LoginModalComponent,{windowClass:'custom-modal custom-small-modal'});
   }
+  
 }

@@ -1,0 +1,163 @@
+.custom-input-field{
+    @include custom-flex-col;
+    padding: 10px 0;
+    position: relative;
+    @include breakpoint(laptop){
+        padding: 5px 0;
+    }
+    &.error-msj{
+        position: relative;
+        .custom-input{
+            border:1px solid $new-red-clr;
+            &::placeholder{
+                color: $new-red-clr !important;
+            }
+        }
+        .small-txt-error{
+            color: $new-red-clr;
+            font-size: 12px;
+            padding-top: 5px;
+            text-align: left;
+        }
+        .input-group{
+            .input-group-addon{
+                top: 35%;
+                @include breakpoint(laptop){
+                    top: 30%;
+                    right: 10px;
+                }
+            }
+        }
+        .field-icon {
+            top: 35%;
+            @include breakpoint(laptop){
+                top: 30%;
+                right: 10px;
+            }
+        }
+    }
+    &.pswd-field{
+        input{
+            padding-right: 30px;
+        }
+    }
+        span{
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    &.field-bg-white{
+        width: 100%;
+        max-width: 350px;
+        margin: 20px auto 0;
+        @include breakpoint(laptop){
+            margin-top: 10px;
+        }
+       
+        input{
+            background-color: $white-color;
+            color: $new-black-color;
+            &::placeholder{
+                color: $new-black-color; 
+            }
+        
+        }
+    }
+    label{
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        color: $new-black-color;
+        display: block;
+        @include breakpoint(laptop){
+            font-size: 14px;
+            margin-bottom: 0.2rem;
+        }
+    }
+    .custom-input{
+        padding: 7px 15px;
+        border:0.5px solid $placeholder-color;
+        color: $placeholder-color;
+        background-color: transparent;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 300;
+       @include breakpoint(laptop){
+        font-size: 12px;
+        padding: 6px 12px;
+       }
+       &.big-input{
+           padding: 15px;  
+       }
+        &::placeholder{
+            color: $placeholder-color !important;
+            @include breakpoint(laptop){
+                font-size: 12px;
+               }
+        }
+        &:focus{
+            color: $new-black-color;
+            border:0.5px solid $new-black-color;
+            &::placeholder{
+                color:$new-black-color !important;
+            }
+        }
+        
+    }
+    .small-mini-text{
+        font-size: 12px;
+        color: #3e3e3e;
+        padding-top: 5px;
+        @include breakpoint(laptop){
+            font-size: 10px;
+        }
+    }
+    .input-group{
+        &.date{
+            position: relative;
+            input{
+                padding-right: 35px;
+                color: $placeholder-color;
+                &::placeholder{
+                    color: $new-black-color;
+                }
+            }
+            span{
+                @include position-absolute-right;  
+                top: 50%;
+                right: 20px;
+            }
+        }
+    }
+}
+.custom-input-field-new{
+    @include custom-flex-col;
+    position: relative;
+    label{
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        color:rgba($color: $placeholder-color, $alpha: 0.8);
+    }
+    .custom-input{
+        padding: 7px 15px;
+        border:1px solid $new-black-color;
+        color: $new-black-color;
+        background-color: transparent;
+        border-radius: 5px;
+        width: 100%;
+    }
+   
+    
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
