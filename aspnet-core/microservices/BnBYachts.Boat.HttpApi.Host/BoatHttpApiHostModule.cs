@@ -23,6 +23,7 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
+using BnBYachts.EventBusShared;
 
 namespace BnBYachts.Boat
 {
@@ -34,7 +35,8 @@ namespace BnBYachts.Boat
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpSwashbuckleModule)
+        typeof(AbpSwashbuckleModule),
+        typeof(EventBusSharedModule)
     )]
     public class BoatHttpApiHostModule : AbpModule
     {
