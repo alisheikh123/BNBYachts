@@ -10,7 +10,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace BnByachts.Seeder
 {
-    public class BoatSeeder : IHostedService
+    public class BoatSeeder
     {
         private readonly IRepository<HostBoat, Guid> _boatRepository;
         private readonly IRepository<BoatGallery, Guid> _boatGalleryRepository;
@@ -28,26 +28,7 @@ namespace BnByachts.Seeder
             _featureRepository = featureRepository;
 
         }
-        public async Task StartAsync(CancellationToken cancellationToken)
-        {
-            var path = Directory.GetCurrentDirectory();
-            var features = new List<Feature>();
-            using (StreamReader r = new StreamReader(path + "/Features.json"))
-            {
-                string json = r.ReadToEnd();
-                features = JsonConvert.DeserializeObject<List<Feature>>(json);
-            }
-             await _featureRepository.InsertManyAsync(features, true, cancellationToken);
-            //Seed Rules
-            var rule = new List<Rule>();
-            using (StreamReader r = new StreamReader(path + "/Rules.json"))
-            {
-                string json = r.ReadToEnd();
-                rule = JsonConvert.DeserializeObject<List<Rule>>(json);
-            }
-             await _ruleRepository.InsertManyAsync(rule, true, cancellationToken);
 
-        }
         public void SeedLookups(CancellationToken token)
         {
             var path = Directory.GetCurrentDirectory();
