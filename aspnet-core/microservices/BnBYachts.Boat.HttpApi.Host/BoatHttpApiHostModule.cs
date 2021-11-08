@@ -77,7 +77,7 @@ namespace BnBYachts.Boat
                     //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationContractsModule>(
                     //    Path.Combine(hostingEnvironment.ContentRootPath,
                     //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application.Contracts"));
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationModule>(
+                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationMod ule>(
                     //    Path.Combine(hostingEnvironment.ContentRootPath,
                     //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainSharedModule>(

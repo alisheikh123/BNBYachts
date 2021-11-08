@@ -9,14 +9,4 @@
   <ItemGroup>
     <ProjectReference Include="..\BnBYachts.Booking.Application.Contracts\BnBYachts.Booking.Application.Contracts.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="4.4.3" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="4.4.3" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="4.4.3" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="4.4.3" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="4.4.3" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="4.4.3" />
-  </ItemGroup>
-
 </Project>

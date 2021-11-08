@@ -21,12 +21,14 @@ namespace BnBYachts.Services.Boat
         private readonly IRepository<HostBoat, Guid> _boatRepository;
         private readonly IRepository<BoatFeature, Guid> _boatelFeatureRepo;
         private readonly IRepository<BoatRule, Guid> _boatelRulesRepo;
-        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRepo)
+        private readonly IRepository<BoatCalendar, Guid> _boatelCalendarRepo;
+        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo)
            : base(repository)
         {
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
-            _boatelRulesRepo = boatelRulesRepo;
+            _boatelCalendarRepo = boatelCalendarRepo;
+            _boatelRulesRepo = boatelRulesRep;
         }
 
         [Route("FilterBoatelBoats")]
@@ -55,8 +57,8 @@ namespace BnBYachts.Services.Boat
                 {
                     foreach (var boat in filterdBoats.ToArray())
                     {
-                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate && res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate && res.IsAvailable);
-                        if (findAvailability == null)
+                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => (res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate) || ( res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate) || (res.FromDate > parameters.CheckinDate && res.ToDate < parameters.CheckoutDate) || (res.FromDate == parameters.CheckinDate || res.ToDate == parameters.CheckoutDate) && !res.IsAvailable);
+                        if (findAvailability != null)
                         {
                             filterdBoats.Remove(boat);
                         }
@@ -64,7 +66,22 @@ namespace BnBYachts.Services.Boat
                 }
                 ///guest Filters
                 return filterdBoats.WhereIf(parameters.Adults > 0 || parameters.Childrens > 0, res => res.BoatelCapacity > parameters.Adults + parameters.Childrens).ToList();
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+        }
+
+        [Route("BoatCalendarUpdate")]
+        [HttpPost]
+        public async Task<bool> BoatCalendarUpdate(BoatCalendar boatCalendar)
+        {
+            try
+            {
+                await _boatelCalendarRepo.InsertAsync(boatCalendar).ConfigureAwait(false);
+                return true;
             }
             catch (Exception ex)
             {
@@ -137,6 +154,7 @@ namespace BnBYachts.Services.Boat
         public async Task<HostBoat> GetBoatDetailsById(Guid boatId)
         {
             var boat = await _boatRepository.GetAsync(b => b.Id == boatId, false).ConfigureAwait(false);
+            
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatFeatures).ConfigureAwait(false);
             foreach (var feature in boat.BoatFeatures)

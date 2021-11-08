@@ -16,8 +16,6 @@ using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
@@ -33,7 +31,7 @@ namespace BnBYachts.Booking
         typeof(BookingHttpApiModule),
         typeof(AbpAutofacModule),
         typeof(AbpCachingStackExchangeRedisModule),
-        typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
+        //typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
         typeof(BookingApplicationModule),
         typeof(BookingEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
@@ -54,6 +52,7 @@ namespace BnBYachts.Booking
             ConfigureRedis(context, configuration, hostingEnvironment);
             ConfigureCors(context, configuration);
             ConfigureSwaggerServices(context, configuration);
+
         }
 
         private void ConfigureCache(IConfiguration configuration)
@@ -67,21 +66,22 @@ namespace BnBYachts.Booking
 
             if (hostingEnvironment.IsDevelopment())
             {
-                Configure<AbpVirtualFileSystemOptions>(options =>
-                {
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookingDomainSharedModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Booking.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookingDomainModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Booking.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookingApplicationContractsModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Booking.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookingApplicationModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Booking.Application"));
-                });
+                //Configure<AbpVirtualFileSystemOptions>(options =>
+                //{
+                //    options.FileSets.ReplaceEmbeddedByPhysical<BookingDomainSharedModule>(
+                //          Path.Combine(hostingEnvironment.ContentRootPath,
+                //              $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\booking\\src\\BnBYachts.Booking.Domain.Shared"));
+
+                //    options.FileSets.ReplaceEmbeddedByPhysical<BookingDomainModule>(
+                //        Path.Combine(hostingEnvironment.ContentRootPath,
+                //            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\booking\\src\\BnBYachts.Booking.Domain"));
+                //    options.FileSets.ReplaceEmbeddedByPhysical<BookingApplicationContractsModule>(
+                //        Path.Combine(hostingEnvironment.ContentRootPath,
+                //            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\booking\\src\\BnBYachts.Booking.Application.Contracts"));
+                //    options.FileSets.ReplaceEmbeddedByPhysical<BookingApplicationModule>(
+                //        Path.Combine(hostingEnvironment.ContentRootPath,
+                //            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\booking\\src\\BnBYachts.Booking.Application"));
+                //});
             }
         }
 
@@ -114,7 +114,7 @@ namespace BnBYachts.Booking
                 },
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Booking API", Version = "v1"});
+                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Booking API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
                 });
@@ -192,10 +192,10 @@ namespace BnBYachts.Booking
 
             app.UseAbpRequestLocalization();
 
-            if (!env.IsDevelopment())
-            {
-                app.UseErrorPage();
-            }
+            //if (!env.IsDevelopment())
+            //{
+            //    app.UseErrorPage();
+            //}
 
             app.UseCorrelationId();
             app.UseStaticFiles();
@@ -203,10 +203,10 @@ namespace BnBYachts.Booking
             app.UseCors();
             app.UseAuthentication();
 
-            if (MultiTenancyConsts.IsEnabled)
-            {
-                app.UseMultiTenancy();
-            }
+            //if (MultiTenancyConsts.IsEnabled)
+            //{
+            //    app.UseMultiTenancy();
+            //}
 
             app.UseAuthorization();
 
