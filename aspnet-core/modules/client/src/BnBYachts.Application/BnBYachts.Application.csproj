@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BnBYachts.Application.Contracts\BnBYachts.Application.Contracts.csproj" />
     <ProjectReference Include="..\BnBYachts.Domain\BnBYachts.Domain.csproj" />
+    <ProjectReference Include="..\BnBYachts.EntityFrameworkCore\BnBYachts.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

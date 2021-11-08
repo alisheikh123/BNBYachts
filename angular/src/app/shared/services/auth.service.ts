@@ -1,10 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { UserManager, UserManagerSettings, User } from 'oidc-client';
-import { BehaviorSubject } from 'rxjs';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,48 +14,41 @@ export class AuthService {
   constructor(private http:HttpClient,public oidcSecurityService: OidcSecurityService) {
    }
 
-  
-  httpOptions={
-    header:new HttpHeaders({
-      'Content-Type':'appllication/json'
-    })
-  };
-
-
-
   Authenticate(loginDetail:any){
   
     return this.http.post("https://localhost:44311/api/Auth/Logins",loginDetail);
   }
 
   getUserInfo(UserId:object){
-    debugger;
     return this.http.get("https://localhost:44311/api/Auth/UserInfo/"+UserId);
   }
 
 
 
   login() {
-    debugger;
     this.oidcSecurityService.authorize();
-    debugger;
-    const token = this.oidcSecurityService.getAccessToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-      }),
-    };
-    
+    const token = this.oidcSecurityService.getAccessToken();    
   }
 
   logout() {
     this.oidcSecurityService.logoff();
   }
 
-  sendEmail(){
-
-    console.log("Email");
+  sendEmail(Email:any){
+    return this.http.get("https://localhost:44384/forgot/"+Email);
+  }
+  
+  updatePassword(userId:any,Password:any){
+    debugger;
+    let params = new HttpParams()
+    .set('userId',userId)
+    .set('Password',Password);
+    return this.http.get("https://localhost:44384/reset/",{params: params});
   }
 
+  verifyUniqueId(uniqueId:any){
+    debugger;
+    return this.http.get("https://localhost:44384/verifyLink/"+uniqueId,{responseType: 'text'});
+  }
 
 }

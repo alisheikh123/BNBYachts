@@ -10,7 +10,9 @@ namespace BnBYachts.Interface
 {
     public interface IForgetPasswordVerifierAppService: ICrudAppService<ForgetPasswordVerifierDto,Guid, PagedAndSortedResultRequestDto,ForgetPasswordVerifierDto> 
     {
-        Task<string> ForgotPassword(string Email);
+        Task<bool> ForgotPassword(string Email);
+        Task<string> VerifyLink(string uniqueId);
+        Task<bool> ResetPassword(string userId,string Password);
 
     }
 }

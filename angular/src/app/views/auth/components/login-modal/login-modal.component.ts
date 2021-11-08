@@ -37,34 +37,7 @@ export class LoginModalComponent implements OnInit {
     this.isCredentialsFalse=false
     this.submitted=true;
     this.service.login();
-  //   this.service.Authenticate(this.LoginForm.value).subscribe((data:any)=>
-  //   {
-  //     if(data==false)
-  //     {
-        
-  //       this.isCredentialsFalse=true
-        
-  //     }
-  //     else{
-  //       console.log(data);
-  //       localStorage.setItem('token', JSON.stringify(data["token"]));
-  //       localStorage.setItem('expiry', JSON.stringify(data["expiry"]));
-  //       localStorage.setItem('IsSwitchUser', JSON.stringify(data["isSwitch"]));
-  //       localStorage.setItem('Name', JSON.stringify(data["name"]));
-  //       localStorage.setItem('UserID', JSON.stringify(data["userId"]));
-  //       localStorage.setItem('ProfilePicture', JSON.stringify(data["profilePicture"]));
-  //       this.router.navigate(["/home"])
- 
-        
-         
 
-       
-  //     }
-
-
-    
-
-  // })
   }
   forgotPassword(){
     this.activeModal.dismiss();

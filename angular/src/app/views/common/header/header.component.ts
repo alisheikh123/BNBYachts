@@ -1,3 +1,4 @@
+import { ResetPasswordComponent } from './../../auth/components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './../../auth/components/forgot-password/forgot-password.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -76,8 +77,9 @@ this.isLoggedIn = true;
   forgetPassword(){
     let modalRef = this.modal.open(ForgotPasswordComponent,{ windowClass: 'custom-modal custom-small-modal'});
 
-
   }
+
+
   getUser(){
     debugger;
     const token = this.oidcSecurityService.getAccessToken();
