@@ -13,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoaderInterceptorService } from './shared/loader/interceptors/loader-interceptor.service';
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderComponent } from './shared/loader/component/loader/loader.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { LoaderComponent } from './shared/loader/component/loader/loader.compone
     HttpClientModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     {

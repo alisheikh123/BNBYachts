@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   BOAT_API_URL:'https://localhost:44387',
+  BOOKING_API_URL:'https://localhost:44337',
   IDENTITY_API_URL:'https://localhost:44387',
   stripeKey:"pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f"
 };

@@ -11,13 +11,13 @@ namespace BnBYachts.Booking
 {
     [DependsOn(
         typeof(BookingDomainModule),
-        typeof(AbpAccountApplicationModule),
-        typeof(BookingApplicationContractsModule),
-        typeof(AbpIdentityApplicationModule),
-        typeof(AbpPermissionManagementApplicationModule),
-        typeof(AbpTenantManagementApplicationModule),
-        typeof(AbpFeatureManagementApplicationModule),
-        typeof(AbpSettingManagementApplicationModule)
+        //typeof(AbpAccountApplicationModule),
+        typeof(BookingApplicationContractsModule)
+        //typeof(AbpIdentityApplicationModule),
+        //typeof(AbpPermissionManagementApplicationModule),
+        //typeof(AbpTenantManagementApplicationModule),
+        //typeof(AbpFeatureManagementApplicationModule),
+        //typeof(AbpSettingManagementApplicationModule)
         )]
     public class BookingApplicationModule : AbpModule
     {

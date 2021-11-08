@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -47,6 +49,14 @@ namespace BnBYachts.Boat.EntityFrameworkCore
                  * See also BoatMigrationsDbContextFactory for EF Core tooling. */
                 options.UseSqlServer();
             });
+
+            //Configure<AbpEntityOptions>(options =>
+            //{
+            //    options.Entity<HostBoat>(boatOptions =>
+            //    {
+            //        boatOptions.DefaultWithDetailsFunc = query => query.Include(o => o.BoatGalleries);
+            //    });
+            //});
         }
     }
 }

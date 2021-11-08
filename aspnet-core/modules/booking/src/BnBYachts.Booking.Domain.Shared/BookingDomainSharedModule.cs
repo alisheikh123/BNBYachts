@@ -16,14 +16,14 @@ using Volo.Abp.VirtualFileSystem;
 namespace BnBYachts.Booking
 {
     [DependsOn(
-        typeof(AbpAuditLoggingDomainSharedModule),
-        typeof(AbpBackgroundJobsDomainSharedModule),
-        typeof(AbpFeatureManagementDomainSharedModule),
-        typeof(AbpIdentityDomainSharedModule),
-        typeof(AbpIdentityServerDomainSharedModule),
-        typeof(AbpPermissionManagementDomainSharedModule),
-        typeof(AbpSettingManagementDomainSharedModule),
-        typeof(AbpTenantManagementDomainSharedModule)
+        typeof(AbpAuditLoggingDomainSharedModule)
+        //typeof(AbpBackgroundJobsDomainSharedModule),
+        //typeof(AbpFeatureManagementDomainSharedModule),
+        //typeof(AbpIdentityDomainSharedModule),
+        //typeof(AbpIdentityServerDomainSharedModule),
+        //typeof(AbpPermissionManagementDomainSharedModule),
+        //typeof(AbpSettingManagementDomainSharedModule),
+        //typeof(AbpTenantManagementDomainSharedModule)
         )]
     public class BookingDomainSharedModule : AbpModule
     {

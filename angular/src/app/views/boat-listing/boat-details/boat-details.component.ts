@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Guid } from 'guid-typescript';
+import { ToastrService } from 'ngx-toastr';
+import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { environment } from 'src/environments/environment';
@@ -11,18 +14,20 @@ import { environment } from 'src/environments/environment';
 })
 export class BoatDetailsComponent implements OnInit {
 
-  constructor(private yachtSearchService: YachtSearchService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute,) { }
+  constructor(private toastr: ToastrService, private yachtSearchService: YachtSearchService, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute,) { }
   boatId: string = '';
   boatDetails: any;
   assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
+  guidId!: Guid;
   boatFilterDetails = {
     checkinDate: '',
     checkoutDate: '',
     adults: 0,
     childrens: 0
   };
-  boatHost :any;
-  showMore : boolean  = false;
+  boatHost: any;
+  showMore: boolean = false;
+  isSubmitted: boolean = false;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.boatId = res['id'];
@@ -40,7 +45,7 @@ export class BoatDetailsComponent implements OnInit {
       var Days = Time / (1000 * 3600 * 24);
       return Days < 0 ? 0 : Days + 1;
     }
-    else{
+    else {
       return 0;
     }
   }
@@ -48,12 +53,12 @@ export class BoatDetailsComponent implements OnInit {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
       //this.getHostDetails(this.boatDetails?.creatorId);
-     //console.log(this.boatDetails);
+      //console.log(this.boatDetails);
     })
   }
 
-  getHostDetails(userId:string){
-    this.yachtSearchService.hostDetailsById(userId).subscribe(res=>{
+  getHostDetails(userId: string) {
+    this.yachtSearchService.hostDetailsById(userId).subscribe(res => {
       this.boatHost = res;
     })
   }
@@ -70,6 +75,50 @@ export class BoatDetailsComponent implements OnInit {
 
   ruleFilter(isHealthSafetyRule: boolean) {
     return this.boatDetails.boatRules.filter((res: any) => res.offeredFeatures.isGuestFavourite == isHealthSafetyRule);
+  }
+
+  reserveBoat() {
+    this.isSubmitted = true;
+
+    if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
+      let userId = Guid.create();
+      let bookingModel = {
+        id: Guid.create()?.toString(),
+        creationTime: "2021-11-04T15:25:23.927Z",
+        creatorId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        lastModificationTime: "2021-11-04T15:25:23.927Z",
+        lastModifierId: userId.toString(),
+        checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
+        checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
+        bookingStatus: 0,
+        paymentStatus: 0,
+        noOfAdults: this.boatFilterDetails.adults,
+        noOfChildrens: this.boatFilterDetails.childrens,
+        boatId: this.boatId,
+        bankingDetailsId: Guid.create().toString(),
+        userId: userId.toString(),
+        reviews: null
+      };
+      this.bookingService.boatelBooking(bookingModel).subscribe(res => {
+        if (res) {
+          let boatCalendar = {
+            creationTime: new Date(),
+            creatorId: userId.toString(),
+            lastModificationTime: new Date(),
+            lastModifierId: userId.toString(),
+            isAvailable: false,
+            toDate: this.boatFilterDetails.checkoutDate,
+            fromDate: this.boatFilterDetails.checkinDate,
+            hostBoatId: this.boatId
+          }
+          this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
+            if (res) {
+              this.toastr.success('Boat calendar updated successfull.', 'Success!',);
+            }
+          });
+        }
+      })
+    }
   }
 
 }

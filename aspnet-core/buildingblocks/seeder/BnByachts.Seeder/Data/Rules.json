@@ -1,0 +1,32 @@
+[
+  {
+    "Id": "E792C792-10B3-E92D-6DDD-39FFD1E06152",
+    "Name": "Additional rules",
+    "CreationTime": "2021-10-27 12:42:45.5499294",
+    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+  },
+  {
+    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06111",
+    "Name": "Kids allowed under 12",
+    "CreationTime": "2021-10-27 12:42:45.5499294",
+    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+  },
+  {
+    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06152",
+    "Name": "Events allowed",
+    "CreationTime": "2021-10-27 12:42:45.5499294",
+    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+  },
+  {
+    "Id": "E792C792-10B3-E92D-6DDD-39FFD3E06152",
+    "Name": "Smoking allowed",
+    "CreationTime": "2021-10-27 12:42:45.5499294",
+    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+  },
+  {
+    "Id": "E792C792-10B3-E92D-6DDD-39FFE2E06152",
+    "Name": "Pets allowed",
+    "CreationTime": "2021-10-27 12:42:45.5499294",
+    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+  }
+]:
