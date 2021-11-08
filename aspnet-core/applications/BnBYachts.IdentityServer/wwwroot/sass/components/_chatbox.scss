@@ -1,0 +1,43 @@
+.user-providers-list{
+    .image-with-text{
+        position: relative;
+        display: block;
+        padding: 5px;
+        margin: 5px 0;
+        @include custom-transition;
+        &::before{
+            content: '';
+            position: absolute;
+            background-color: $brand-color;
+            width: 2px;
+            height: 0;
+            left: 0;
+            top: 0;
+        }
+        &:hover{
+            @include custom-transition;
+            background-color: rgba($color: $grey-clr, $alpha: 0.2);
+            p{
+                color: $brand-color;
+            }
+          
+        }
+        &.active{
+            background-color: rgba($color: $grey-clr, $alpha: 0.2);
+            @include custom-transition;
+            &::before{
+                height: 100%;
+            }
+        }
+        &:nth-child(odd){
+            .image-with-text-inner {
+                .user-details{
+                    p{
+                        margin-left: auto !important;
+                    }
+                }
+            }
+        }
+    }
+  
+}

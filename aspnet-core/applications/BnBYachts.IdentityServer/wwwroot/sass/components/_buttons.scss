@@ -1,0 +1,599 @@
+.custom-btn{
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    border:1px solid transparent;
+    border-radius: 30px;
+    min-width: 150px;
+   @include custom-transition;
+    text-align: center;
+    display: inline-block;
+    @include breakpoint(laptop){
+        padding: 8px 14px;
+        min-width: 130px;
+        font-size: 14px;
+    }
+    @include breakpoint(sm){
+        padding: 4px 20px;
+       font-size: 14px; 
+       min-width: auto;
+    }
+    @include breakpoint(xs){
+        min-width: auto;
+        font-size: 12px;
+    }
+    &.blue{
+        background-color: $brand-color;
+        color: $white-color;
+        transition: .1s ease !important;
+        &:hover{
+            background-color: $brand-dark-clr;
+            transition: .1s ease !important;
+        }
+        &:active{
+            transform: scale(0.96) !important;
+           @include custom-transition;
+
+        }
+    }
+    &.grey{
+   
+        background-color:transparent;
+       @include custom-transition;
+        color: $new-black-color;
+        border:1px solid $new-black-color;
+        &:hover{
+            background-color:  rgba($color: $placeholder-color, $alpha: 0.5);
+            color: $new-black-color;
+            border:1px solid transparent;
+        }
+        &.big-btn{
+            padding: 12px 20px;
+            @include breakpoint(sm){
+                padding: 6px 20px;
+                min-width: auto;
+            }
+        }
+    }
+    &.blck-btn{
+        border-radius: 5px;
+        color: $new-black-color;
+        background-color: transparent;
+        border:1px solid $black-color;
+        font-size: 14px;
+        font-weight:400;
+        padding: 5px 8px;
+        min-width: auto;
+        @include breakpoint(xs){
+            font-size: 12px;
+            padding: 3px 8px;
+        }
+        &.active{
+            background-color: $new-black-color;
+            color: $white-color;
+        }
+        &:hover{
+            background-color: $new-black-color;
+            color: $white-color;
+        }
+    }
+    &.red{
+        background-color: $red-color;
+        color: $white-color;
+        &:hover{
+            background-color: $new-grey-clr;
+           @include custom-transition;
+        }
+    }
+    &.white{
+        background-color: $white-color;
+        color: $new-black-color;
+        @include custom-shadow;
+       @include custom-transition;
+        &:hover{
+            @include custom-shadow-increased;
+           @include custom-transition;
+        }
+    }
+    &.white-blue{
+        background-color: $white-color;
+        color: $brand-color;
+        @include custom-shadow;
+       @include custom-transition;
+        &:hover{
+            @include custom-shadow-increased;
+           @include custom-transition;
+        }
+        &:active{
+            transform: scale(0.96) !important;
+           @include custom-transition;
+
+        }
+    }
+    &.big-btn{
+        min-width: 200px;
+    }
+    &.grey-btn{
+        color: $grey-light-color;
+        border:1px solid $grey-light-color;
+        box-shadow: none;
+        border-radius: 5px;
+        @include breakpoint(xs){
+            min-width: 113px;
+        }
+    }
+    &.no-before-content{
+        min-width: auto;
+        padding: 5px 10px;
+        &::before{
+            content: none;
+        }
+    }
+    &.small-round{
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border-radius: 50%;
+        min-width: auto;
+        @include custom-flex;
+        @include breakpoint(laptop){
+            width: 32px;
+            height: 32px;
+        }    
+        @include breakpoint(sm){
+            width: 28px;
+            height: 28px;  
+        }
+        svg{
+            @include breakpoint(laptop){
+                max-width: 20px;
+            }
+            @include breakpoint(sm){
+                max-width: 15px;
+            }
+        }
+        &:hover{
+            
+            svg{
+              path{
+                fill: $new-black-color !important;
+                &:nth-child(1){
+                    fill:none !important; 
+                  }
+              }
+              
+             
+            }
+          }
+    }
+    &.grey-clr{
+        color: $grey-new-color;
+        svg{
+            @include breakpoint(sm){
+                max-width: 15px;
+            }
+        }
+        &:hover{
+            background-color: $grey-new-color;
+            color: $white-color;
+            svg{
+               
+              path{
+                fill: $grey-new-color;
+              }
+              :nth-child(1){
+                fill:none;
+              }
+            }
+
+          }
+    }
+}
+.underline-link-blk{
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 16px;
+    color: $new-black-color;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 10px;
+    padding-left: 0 !important;
+    display: inline-block;
+   @include custom-transition;
+    @include breakpoint(laptop){
+        font-size: 14px;
+    }
+    @include breakpoint(md){
+        font-size: 14px;
+    }
+    @include breakpoint(sm){
+        font-size: 14px;
+    }
+    @include breakpoint(xs){
+        font-size: 12px;
+    }
+   
+    &::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom:-2px;
+        width: 0;
+        height: 2px;
+        background: $brand-color;
+       @include custom-transition;
+        border-radius: 5px;
+    }
+    &:hover{
+        color: $brand-color;
+       @include custom-transition;
+        &::before{
+            width: 50px;
+           @include custom-transition;
+        }
+        
+    }
+    &.active{
+        color: $brand-color;
+        &::before{
+          width: 50px;
+        }
+        
+    }
+    
+}
+.social-media-links{
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    background: $footer-social-link;
+    border:1px solid  transparent;
+
+    @include custom-flex;
+    @include custom-transition;
+    i{
+        font-size: 14px;
+        color: $white-color;
+        @include custom-transition;
+    }
+    &:hover{
+        background: $brand-color;
+        @include custom-transition;
+        i{
+            color:  $white-color;
+            @include custom-transition;
+        }
+    }
+}
+.big-img-link{
+    display: block;
+    img{
+        height: 280px;
+        width: 100%;
+        border-radius: 16px;
+        @include breakpoint(laptop){
+            height: 220px;
+        }
+        @include breakpoint(md){
+            height: 150px;
+        }
+        @include breakpoint(sm){
+            height: 150px;
+        }
+    }
+   h5{
+       color: $new-black-color;
+      padding: 10px 0;
+       position: relative;
+       display: inline-block;
+       font-size: 16px;
+       @include breakpoint(laptop){
+        font-size: 18px;  
+       }
+      
+       @include breakpoint(sm){
+        font-size: 16px; 
+        padding-bottom: 0; 
+       }
+       @include breakpoint(sm){
+        font-size: 14px; 
+        padding-bottom: 0; 
+       }
+   }
+   .underline-link-blk{
+       content: none;
+   }
+   &:hover{
+       span{
+        color: $brand-color;
+        &::before{
+            content: none;
+        }  
+            
+       }
+   }
+}
+.underline-blue-link{
+    text-transform: capitalize;
+    text-align: center;
+    color: $brand-color;
+    font-weight: 500;
+    position: relative;
+    padding: 0;
+    display: inline-block;
+   @include custom-transition;
+    &::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom:0;
+        width: 100%;
+        height: 1px;
+        background: $brand-color;
+       @include custom-transition;
+        border-radius: 5px;
+    }
+    &:hover{
+        color: $new-black-color;
+       @include custom-transition;
+        &::before{
+            background-color: $new-black-color;
+           @include custom-transition;
+        }
+    }
+    &.active{
+        color: $brand-color;
+        &::before{
+          width: 100%;
+        }
+    }
+        &.no-underline{
+            &::before{
+                content: none;
+            }
+        }
+}
+.fav-btn{
+    i{
+        font-size: 20px;
+        color: $placeholder-color;
+        @include breakpoint(laptop){
+            font-size: 16px;
+        }
+        &.fa-heart{
+            color: #ff386c;
+        }
+    }
+}
+.underline-white-link{
+    text-transform: capitalize;
+    text-align: center;
+    color: $white-color;
+    font-weight: 500;
+    position: relative;
+    padding: 0;
+    display: inline-block;
+   @include custom-transition;
+    &::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom:0;
+        width: 0;
+        height: 1px;
+        background: $white-color;
+       @include custom-transition;
+        border-radius: 5px;
+    }
+    &:hover{
+        color: $white-color;
+       @include custom-transition;
+        &::before{
+           @include custom-transition;
+            width: 100%;
+        }
+    }
+    i{
+        margin-left: 10px;
+    }
+  
+}
+.underline-black-link{
+    text-transform: capitalize;
+    text-align: center;
+    color: $black-color;
+    font-weight: 500;
+    position: relative;
+    padding: 0;
+    display: inline-block;
+   @include custom-transition;
+  
+    &:hover{
+        color: $brand-color;
+       @include custom-transition;
+      
+    }
+    i{
+        margin-left: 10px;
+    }
+  
+}
+.back-btn-circle{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: $brand-color;
+    border:1px solid $brand-color;
+    @include custom-flex;
+    margin-right: 10px;
+    @include breakpoint(laptop){
+        width: 20px;
+        height: 20px;
+    }
+    
+}
+#dashboard_black_24dp,#dns_black_24dp,#calendar_today_black_24dp_1_{
+    path{
+        &:nth-child(1){
+            fill: none !important;
+        }
+    }
+}
+.btn-mobile{
+    border: 1px solid $new-black-color;
+    border-radius: 5px;
+    max-width: 70px;
+    width: 100%;
+    min-width: auto;
+    display: none;
+    @include breakpoint(md){
+        display: block;
+        padding: 8px 12px;
+    }
+    @include breakpoint(sm){
+        display: block;
+        min-width: auto;
+        max-width: 32px;
+    }
+    &.active{
+        z-index: 10;
+        color: $white-color;
+        border: 1px solid transparent;
+        position: fixed;
+        right: 0;
+        top: 0;
+        
+        i{
+            &::before{
+                content: "\f00d";
+            }
+        }
+    }
+}
+.custom-card-link{
+    height: 100%;
+    &:hover{
+        .custom-smart-card{
+            transform: translateY(-10px);
+            @include custom-transition;
+            @include breakpoint(sm){
+                transform: none;  
+            }
+        }
+    }
+    &.no-link{
+        &:hover{
+            .custom-smart-card{
+                    transform: none;  
+            
+            }
+        }  
+    }
+}
+
+.round-btn{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: $new-grey-clr-secondary;
+    min-width: auto;
+    padding: 0;
+    border:1px solid transparent;
+    @include custom-flex;
+    i{
+        color: $grey-clr;
+    }
+    &:hover{
+        cursor: pointer;
+        background-color: transparent;
+        color: $new-black-color;
+        border:1px solid $new-black-color;
+        i{
+            color: $new-black-color;
+        }
+    }
+    &.black-btn-round{
+        background-color: $new-grey-clr;
+        i{
+            color: $white-color;
+        }
+        &:hover{
+           border: 1px solid transparent;
+        }
+    }
+}
+
+.custom-icon-btn-blue{
+    color: $brand-color;
+    @include custom-transition;
+    @include custom-flex;
+    position: relative;
+    span{
+        width: 30px;
+        height: 30px;
+        border:1px solid $brand-color;
+        color: $brand-color;
+        display: inline-block;
+        border-radius: 50%;
+        font-size: 20px;
+        margin-right: 10px;
+        @include custom-flex;
+        @include custom-transition;
+        @include breakpoint(laptop){
+            width: 24px;
+            height: 24px;
+            i{
+                font-size: 16px;
+            }
+            
+        }
+        @include breakpoint(sm){
+            width: 20px;
+            height: 20px;
+            i{
+                font-size: 12px;
+            }
+            
+        }
+    }
+    &:hover{
+        span{
+            background-color: $brand-color;
+            @include custom-transition;
+            i{
+                color: $white-color;
+                @include custom-transition;
+            }
+        }
+    }
+}
+.outline-blue-clr{
+    border:1px solid $brand-color;
+    color: $brand-color;
+    &:hover{
+        background-color: $brand-color;
+        color: $white-color;
+        border:1px solid transparent;
+    }
+}
+
+.search-btn{
+    margin: 0 10px;
+    @include breakpoint(sm){
+        margin: 10px auto;
+        min-width: auto !important;
+        padding: 6px 30px !important;
+    }
+}
+
+.custom-blue-btn{
+    color: $brand-color;
+    font-size: 14px;
+    i{
+        font-size: 12px;
+        margin-right: 5px;
+    }
+    &:hover{
+        color: $new-black-color;
+    }
+}

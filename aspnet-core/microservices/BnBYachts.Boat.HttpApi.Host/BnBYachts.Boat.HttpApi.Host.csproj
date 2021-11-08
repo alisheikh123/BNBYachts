@@ -24,6 +24,7 @@
     <ProjectReference Include="..\..\modules\boat\src\BnBYachts.Boat.Application\BnBYachts.Boat.Application.csproj" />
     <ProjectReference Include="..\..\modules\boat\src\BnBYachts.Boat.EntityFrameworkCore\BnBYachts.Boat.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\boat\src\BnBYachts.Boat.HttpApi\BnBYachts.Boat.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

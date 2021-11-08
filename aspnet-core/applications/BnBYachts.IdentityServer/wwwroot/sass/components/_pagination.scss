@@ -1,0 +1,48 @@
+// custom-pagination
+.custom-pagination{
+  @include breakpoint(xs){
+    flex-direction: column;
+  }
+    .page-item{
+      margin: 0 5px;
+     
+      &.active{
+        background-color: $brand-color;
+        border-radius: 5px;
+        .page-link{
+          color: $white-color;
+          &:focus{
+            color: $white-color;  
+          }
+        }
+      }
+      .page-link{
+        color: $brand-color;
+        background-color: rgba($brand-color , 0.1);
+        border: none;
+       border-radius: 4px;
+       width: 32px;
+       height: 32px;
+       padding: 5px;
+       font-size: 14px;
+       @include custom-flex;
+       @include breakpoint(laptop){
+         width: 26px;
+         height: 26px;
+         font-size: 12px;
+       }
+      }
+      .page-link:focus {
+        z-index: 3;
+        color:  $brand-color;
+        background-color: rgba($brand-color , 0.1);
+        outline: 0;
+        box-shadow: none;
+    }
+    }
+    nav{
+      @include breakpoint(xs){
+        margin-bottom: 10px;
+      }
+    }
+  }

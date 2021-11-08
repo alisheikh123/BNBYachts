@@ -14,8 +14,6 @@ using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
@@ -29,8 +27,12 @@ using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
+using BnBYachts.Services.Classes;
+using BnBYachts.Interfaces.IdentityInterface;
+using BnBYachts.Services;
 
 namespace BnBYachts
 {
@@ -49,6 +51,8 @@ namespace BnBYachts
         {
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             var configuration = context.Services.GetConfiguration();
+            var emailConfig = configuration.GetSection("EmailConfiguration:");
+           
 
             Configure<AbpLocalizationOptions>(options =>
             {
@@ -148,6 +152,38 @@ namespace BnBYachts
                         .AllowCredentials();
                 });
             });
+            var contact = new OpenApiContact()
+            {
+                Name = "FirstName LastName",
+                Email = "user@example.com",
+                Url = new Uri("http://www.example.com")
+            };
+
+            var license = new OpenApiLicense()
+            {
+                Name = "My License",
+                Url = new Uri("http://www.example.com")
+            };
+
+            var info = new OpenApiInfo()
+            {
+                Version = "v1",
+                Title = "Swagger Demo API",
+                Description = "Swagger Demo API Description",
+                TermsOfService = new Uri("http://www.example.com"),
+                Contact = contact,
+                License = license
+            };
+
+            context.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", info);
+            });
+            context.Services.GetObject<IdentityBuilder>().AddDefaultTokenProviders().AddPasswordlessLoginProvider();
+            context.Services.AddScoped<ILoginService, LoginService>();
+            context.Services.AddSingleton(emailConfig);
+           
+            
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -166,7 +202,7 @@ namespace BnBYachts
             {
                 app.UseErrorPage();
             }
-
+          
             app.UseCorrelationId();
             app.UseStaticFiles();
             app.UseRouting();
@@ -183,9 +219,13 @@ namespace BnBYachts
             app.UseAuthorization();
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                "Swagger Demo API v1");
+            });
             app.UseConfiguredEndpoints();
-
-
         }
     }
 }

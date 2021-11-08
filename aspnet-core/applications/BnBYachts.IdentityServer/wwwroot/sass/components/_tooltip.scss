@@ -1,0 +1,103 @@
+.tooltip-wrapper{
+    position: relative;
+    width: 100%;
+    &:hover{
+      .tooltip-dialogue{
+        visibility: visible;
+      }
+    }
+     .tooltip-dialogue{
+        visibility: hidden;
+        position: absolute;
+        left: -340px;
+        top: -20px;
+        background-color: $white-color;
+        z-index: 100;
+        padding: 15px 30px;
+        box-shadow:0px 3px 10px #9e8b8b79;
+        min-height: 220px;
+        max-width: 310px;
+        width: 100%;
+        transition: all 0.3s;
+        border-radius: 8px;
+        @include breakpoint(laptop){
+          max-width: 200px;
+          left: -230px;
+          padding: 15px;
+        }
+        @include breakpoint(lg){
+          left: 0;
+          top: 50px;
+        
+         
+        }
+        &::after{
+          content: '';
+          height: 20px;
+          width: 20px;
+          position: absolute;
+          background-color: $white-color;
+          transform: rotate(45deg);
+          right: -10px;
+          top: 30px;
+          @include  breakpoint(lg){
+            right: unset;
+            top: -10px;
+            left: 10px;
+          }
+        }
+        ul{
+          li{
+            position: relative;
+            color: $grey-new-color;
+            font-size: 14px;
+            margin-top: 10px;
+            padding-left: 20px;
+            @include breakpoint(laptop){
+              font-size: 12px;
+              padding-left: 10px;
+            }
+            &::before{
+              content: '';
+              height: 5px;
+              width: 5px;
+              background-color: $grey-new-color;
+              border-radius: 50%;
+              position: absolute;
+              transform: translateY(50%);
+              left: 0;
+              top:5px;
+            }
+          }
+        }
+      }
+      &.right-align-wrap{
+        width: auto;
+        .tooltip-dialogue{
+          left: unset;
+          right: -260px;
+          min-width: 240px;
+          top:-30px;
+          min-height: auto;
+          background-color: #F6F6F6;
+          &::after{
+            right: unset;
+            left: -10px;
+            background-color: #F6F6F6;
+          }
+        }
+      }
+  }
+  
+  .tooltip-sideby{
+    position: relative;
+    @include custom-flex;
+    align-items: flex-start;
+    .custom-input-field{
+      width: calc(100% - 30px);
+    }
+    .tooltip-wrapper{
+      margin-top: 40px;
+      margin-left: 10px;
+    }
+  }
