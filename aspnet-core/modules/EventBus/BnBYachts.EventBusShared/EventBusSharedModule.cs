@@ -26,17 +26,11 @@ namespace BnBYachts.EventBusShared
             //    options.Connections.Default.Port = 15672;
             //});
 
-            Configure<AbpRabbitMqEventBusOptions>(options =>
-            {
-                //App1ToApp2Text
-                //options.ClientName = "client2";
-                //options.ExchangeName = "c2";
-                options.ClientName = "umerisCool";
-                options.ExchangeName = "uMessages";
-
-
-
-            });
+                Configure<AbpRabbitMqEventBusOptions>(options =>
+                {
+                    options.ClientName = "SimulatorApp";
+                    options.ExchangeName = "TestMessage";
+                });
         }
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {

@@ -12,7 +12,10 @@ namespace BnByachts.Simulator.Handler
     {
         public async Task HandleEventAsync(AppHeartbeatContract eventData)
         {
+            Console.WriteLine("************************ INCOMING MESSAGE ****************************");
             Console.WriteLine(eventData.Message);
+            Console.WriteLine("**********************************************************************");
+            Console.WriteLine();
             await Task.CompletedTask;
         }
     }
