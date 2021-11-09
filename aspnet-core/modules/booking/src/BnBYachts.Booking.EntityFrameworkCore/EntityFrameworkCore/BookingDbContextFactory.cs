@@ -24,8 +24,8 @@ namespace BnBYachts.Booking.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../BnBYachts.Booking.DbMigrator/"))
-                .AddJsonFile("appsettings.json", optional: false);
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();
         }

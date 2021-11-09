@@ -399,6 +399,9 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int>("PerDayCharges")
                         .HasColumnType("int");
 
+                    b.Property<int>("TaxFee")
+                        .HasColumnType("int");
+
                     b.Property<int>("TotalBedrooms")
                         .HasColumnType("int");
 

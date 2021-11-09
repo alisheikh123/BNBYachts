@@ -1,24 +1,14 @@
-﻿using Localization.Resources.AbpUi;
-using BnBYachts.Booking.Localization;
-using Volo.Abp.Account;
-using Volo.Abp.FeatureManagement;
-using Volo.Abp.Identity;
-using Volo.Abp.Localization;
-using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement.HttpApi;
-using Volo.Abp.SettingManagement;
-using Volo.Abp.TenantManagement;
-
+﻿using Volo.Abp.Modularity;
 namespace BnBYachts.Booking
 {
     [DependsOn(
-        typeof(BookingApplicationContractsModule),
-        typeof(AbpAccountHttpApiModule),
-        typeof(AbpIdentityHttpApiModule),
-        typeof(AbpPermissionManagementHttpApiModule),
-        typeof(AbpTenantManagementHttpApiModule),
-        typeof(AbpFeatureManagementHttpApiModule),
-        typeof(AbpSettingManagementHttpApiModule)
+        typeof(BookingApplicationContractsModule)
+        //typeof(AbpAccountHttpApiModule),
+        //typeof(AbpIdentityHttpApiModule),
+        //typeof(AbpPermissionManagementHttpApiModule),
+        //typeof(AbpTenantManagementHttpApiModule),
+        //typeof(AbpFeatureManagementHttpApiModule),
+        //typeof(AbpSettingManagementHttpApiModule)
         )]
     public class BookingHttpApiModule : AbpModule
     {
@@ -29,14 +19,14 @@ namespace BnBYachts.Booking
 
         private void ConfigureLocalization()
         {
-            Configure<AbpLocalizationOptions>(options =>
-            {
-                options.Resources
-                    .Get<BookingResource>()
-                    .AddBaseTypes(
-                        typeof(AbpUiResource)
-                    );
-            });
+            //Configure<AbpLocalizationOptions>(options =>
+            //{
+            //    options.Resources
+            //        .Get<BookingResource>()
+            //        .AddBaseTypes(
+            //            typeof(AbpUiResource)
+            //        );
+            //});
         }
     }
 }

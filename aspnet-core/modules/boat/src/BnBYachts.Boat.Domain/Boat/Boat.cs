@@ -25,6 +25,7 @@ namespace BnBYachts.Boat
         public DateTime CheckoutTime { get; set; }
         public int PerDayCharges { get; set; }
         public bool IsActive { get; set; }
+        public int TaxFee { get; set; }
         public BoatTypes BoatType { get; set; }
         public List<BoatGallery> BoatGalleries { get; set; }
         public List<BoatCalendar> BoatCalendars { get; set; }

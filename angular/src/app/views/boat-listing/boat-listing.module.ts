@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
@@ -23,6 +24,6 @@ import { BoatListingComponent } from './boat-listing/boat-listing.component';
     CommonModule,
     SharedPipesModule
   ],
-  providers: [YachtSearchService]
+  providers: [YachtSearchService,BookingService]
 })
 export class BoatListingModule { }

@@ -108,6 +108,7 @@
                                                                         #d="ngbDatepicker">
                                                                 </div>
                                                             </div>
+
                                                             <div class="col-2">|</div>
                                                             <div class="col-5">
                                                                 <div class="d-flex flex-column">
@@ -121,6 +122,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <small class="text-danger"
+                                                            *ngIf="(boatFilterDetails?.checkinDate == '' || boatFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
+                                                            {{!boatFilterDetails.checkinDate ? 'check-in':'check-out'}}
+                                                            date</small>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="row custom-border m-0">
@@ -143,6 +148,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                         <small class="text-danger"
+                                                            *ngIf="(boatFilterDetails.adults == 0 && boatFilterDetails.childrens == 0) && isSubmitted">Enter
+                                                            guests deteils.</small>
                                                     </div>
                                                 </div>
 
@@ -155,7 +163,7 @@
                                                                         <label>Adults</label>
                                                                         <div class="custom-flex-start">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults -1;">-</span>
+                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults - 1;">-</span>
                                                                             <input type="text"
                                                                                 [(ngModel)]="boatFilterDetails.adults" />
                                                                             <span class="plus" style="cursor: pointer;"
@@ -195,7 +203,7 @@
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
                                                         <p>Tax</p>
-                                                        <p>$20.00</p>
+                                                        <p>${{boatDetails?.taxFee}}.00</p>
 
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
@@ -206,11 +214,10 @@
                                                     <div class="total-amount-wrap-inner bottom">
                                                         <p class="medium">Total(USD)</p>
                                                         <p class="medium">$ {{boatDetails?.perDayCharges *
-                                                            calculateDays() + 40}}.00</p>
+                                                            calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue" data-bs-toggle="modal"
-                                                        data-bs-target="#no-charter">Reserve Now</button>
+                                                    <button class="custom-btn blue"  (click)="reserveBoat()">Reserve Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -521,7 +528,7 @@
                         <div class="rating-wrap-inner">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h2 class="big-text-with-small">4.2<span>(9)Reviews</span></h2>
+                                    <h2 class="big-text-with-small">5.0<span>(0)Reviews</span></h2>
                                     <p class="grey py-2">
                                         <span class="fa fa-star stars-clr"></span>
                                         <span class="fa fa-star stars-clr"></span>

@@ -9,10 +9,12 @@ import { HttpConfigInterceptor } from './shared/interceptors/http.interceptor';
 import { HeaderComponent } from './views/common/header/header.component';
 import { FooterComponent } from './views/common/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import { AuthModule } from './views/auth/auth.module';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { AuthModule,LogLevel } from 'angular-auth-oidc-client';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
+import { NgxStripeModule } from 'ngx-stripe';
 import { AuthAppModule } from './views/auth/auth.module';
+import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { LoaderService } from './shared/loader/services/loader.service';
 
 @NgModule({
@@ -26,6 +28,12 @@ import { LoaderService } from './shared/loader/services/loader.service';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
+    NgxStripeModule.forRoot(environment.stripeKey),
+    ReactiveFormsModule,
+    FormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     AuthAppModule,
     AuthModule.forRoot({
       config: {
