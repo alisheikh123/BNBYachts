@@ -23,6 +23,7 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
+using BnBYachts.EventBusShared;
 
 namespace BnBYachts.Boat
 {
@@ -34,7 +35,8 @@ namespace BnBYachts.Boat
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpSwashbuckleModule)
+        typeof(AbpSwashbuckleModule),
+        typeof(EventBusSharedModule)
     )]
     public class BoatHttpApiHostModule : AbpModule
     {
@@ -66,15 +68,28 @@ namespace BnBYachts.Boat
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
+                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainSharedModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Domain.Shared"));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Domain"));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationContractsModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application.Contracts"));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainSharedModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Domain.Shared"));
+                       Path.Combine(hostingEnvironment.ContentRootPath,
+                           $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Domain.Shared"));
+
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
                             $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Domain"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationContractsModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Application.Contracts"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Application.Contracts"));
                     options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
                             $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Application"));

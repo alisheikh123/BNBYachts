@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="col-6">
                                    @* <abp-column>*@
-                                        <a href="@Url.Page("./ForgotPassword", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="underline-blue-link small-text" data-bs-toggle="modal" data-bs-target="#forget-psd-modal" data-bs-dismiss="modal">@L["ForgotPassword?"]</a>
+                                        @*<a href="@Url.Page("./ForgotPassword", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="underline-blue-link small-text" data-bs-toggle="modal" data-bs-target="#forget-psd-modal" data-bs-dismiss="modal">@L["ForgotPassword?"]</a>*@
                                    @* </abp-column>*@
                                 </div>
                                 </abp-row>
@@ -177,6 +177,7 @@
         <div class="alert alert-warning">
             <strong>@L["InvalidLoginRequest"]</strong>
             @L["ThereAreNoLoginSchemesConfiguredForThisClient"]
+            try to <a href="http://localhost:4200/">Login</a> Here
             @*<p class="small-text light">Try to do Login? <a href="@Url.Page("./Login", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="underline-blue-link" data-bs-toggle="modal" data-bs-target="#signup-modal" data-bs-dismiss="modal">@L["Login"]</a></p>*@
 
         </div>

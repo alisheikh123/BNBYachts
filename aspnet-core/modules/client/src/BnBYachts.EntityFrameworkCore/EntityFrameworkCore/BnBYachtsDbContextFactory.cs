@@ -24,7 +24,7 @@ namespace BnBYachts.EntityFrameworkCore
         private static IConfigurationRoot BuildConfiguration()
         {
             var builder = new ConfigurationBuilder()
-                 .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../BnBYachts.DbMigrator/"))
                  .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();

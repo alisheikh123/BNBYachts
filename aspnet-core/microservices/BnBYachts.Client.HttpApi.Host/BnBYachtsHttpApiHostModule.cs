@@ -26,6 +26,9 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.BlobStoring.FileSystem;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.AspNetCore.ExceptionHandling;
 
 namespace BnBYachts
 {
@@ -39,6 +42,7 @@ namespace BnBYachts
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule)
     )]
+    [DependsOn(typeof(AbpBlobStoringFileSystemModule))]
     public class BnBYachtsHttpApiHostModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
@@ -84,6 +88,11 @@ namespace BnBYachts
                         Path.Combine(hostingEnvironment.ContentRootPath,
                             $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\client\\src\\BnBYachts.Application"));
                 });
+                context.Services.Configure<AbpExceptionHandlingOptions>(options =>
+                {
+                    options.SendExceptionsDetailsToClients = true;
+                });
+
             }
         }
 
@@ -162,7 +171,6 @@ namespace BnBYachts
 
         private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
         {
-            //var emailConfig = configuration.GetSection("EmailConfiguration");
             context.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -181,7 +189,6 @@ namespace BnBYachts
                         .AllowCredentials();
                 });
             });
-            //context.Services.AddSingleton(emailConfig);
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)

@@ -2,6 +2,7 @@
 using BnBYachts.Services.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,6 @@ namespace BnBYachts.Controller
         //{
         //    await _ILoginservice.Login(username,password);
 
-        //    return new string[] { "value1", "value2" };
-        //}
-
         [HttpGet]
         //[Authorize]
         [Route("UserInfo/{userId}")]
@@ -36,20 +34,6 @@ namespace BnBYachts.Controller
             var userInfo = await _ILoginservice.UserInfo(userId);
 
             return userInfo;
-        }
-      
-
-
-        [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            var response = await _ILoginservice.EmailVerification(forgotPasswordDto);
-
-
-            return Ok(response);
         }
 
 

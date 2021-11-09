@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using BnBYachts.Data.Model;
-using BnBYachts.Dto;
-using Volo.Abp.AutoMapper;
 
 namespace BnBYachts
 {
@@ -9,9 +6,9 @@ namespace BnBYachts
     {
         public BnBYachtsApplicationAutoMapperProfile()
         {
-            //CreateMap<AppUser, AppUserDto>().Ignore(x => x.ExtraProperties);
-
-            CreateMap<ForgetPasswordVerifier, ForgetPasswordVerifierDto>();
+            /* You can configure your AutoMapper mapping configuration here.
+             * Alternatively, you can split your mapping configurations
+             * into multiple profile classes for a better organization. */
         }
     }
 }

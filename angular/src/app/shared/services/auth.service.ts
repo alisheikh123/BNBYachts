@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   sendEmail(Email:any){
-    return this.http.get("https://localhost:44384/forgot/"+Email);
+    return this.http.get("https://localhost:44347/forgot/"+Email);
   }
   
   updatePassword(userId:any,Password:any){
@@ -43,12 +43,12 @@ export class AuthService {
     let params = new HttpParams()
     .set('userId',userId)
     .set('Password',Password);
-    return this.http.get("https://localhost:44384/reset/",{params: params});
+    return this.http.get("https://localhost:44347/reset/",{params: params});
   }
 
   verifyUniqueId(uniqueId:any){
     debugger;
-    return this.http.get("https://localhost:44384/verifyLink/"+uniqueId,{responseType: 'text'});
+    return this.http.get("https://localhost:44347/verifyLink/"+uniqueId,{responseType: 'text'});
   }
 
 }

@@ -1,0 +1,18 @@
+<div class="modal-content">
+    <div class="modal-header no-border">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+            (click)="activeModal.dismiss()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="custom-text-center">
+            <div class="img-wrapper">
+                <img src="../../../../../assets/images/no-charter.png" alt="">
+            </div>
+            <h4 class="bold">No Boatel Available</h4>
+            <p class="py-2">There is no boatel available in selected dates for this boat.</p>
+            <div class="bottom-btn pt-2">
+                <button (click)="activeModal.dismiss()" class="custom-btn blue big-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

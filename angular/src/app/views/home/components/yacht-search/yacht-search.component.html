@@ -2,11 +2,10 @@
     <div class="container">
         <div class="card-wrapper">
             <div class="custom-tabs-wrapper">
-                <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist"
-                    aria-orientation="vertical">
+                <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <button class="underline-link-blk small-text active" id="v-pills-home-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                        aria-selected="true">
+                        (click)="currentTab == 'boatel'" data-bs-target="#v-pills-home" type="button" role="tab"
+                        aria-controls="v-pills-home" aria-selected="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18.331" height="18.295"
                             viewBox="0 0 18.331 18.295">
                             <path id="Path_20748" data-name="Path 20748"
@@ -17,8 +16,8 @@
                         Boatel
                     </button>
                     <button class="underline-link-blk small-text" id="v-pills-profile-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
-                        aria-selected="false">
+                        (click)="currentTab == 'charter'" data-bs-target="#v-pills-profile" type="button" role="tab"
+                        aria-controls="v-pills-profile" aria-selected="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="34.924" height="19.342"
                             viewBox="0 0 34.924 19.342">
                             <g id="Group_6810" data-name="Group 6810" transform="translate(1149.4 303.439)">
@@ -48,8 +47,8 @@
                         Charter
                     </button>
                     <button class="underline-link-blk small-text" id="v-pills-settings-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings"
-                        aria-selected="false">
+                        (click)="currentTab == 'event'" data-bs-target="#v-pills-settings" type="button" role="tab"
+                        aria-controls="v-pills-settings" aria-selected="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18.888" height="17.723"
                             viewBox="0 0 18.888 17.723">
                             <g id="Group_6813" data-name="Group 6813" transform="translate(509.082 2241.805)">
@@ -93,26 +92,113 @@
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                         aria-labelledby="v-pills-home-tab">
-                        <div class="text-center check-img">
-                            <img src="../../assets/images/character-boat-img.png" class="mb-4" alt="">
+                        <div class="row">
+                            <div class="col-md-4 py-2">
+                                <div class="">
+                                    <div class="search-wrapper custom-input-field"><input type="text" ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event)" [(ngModel)]="boatelSearchParam.location"
+                                            class="custom-input" placeholder="Search Location"><i class="fa fa-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 py-2">
+                                <div class="row custom-border m-0">
+                                    <div class="col-5">
+                                        <div class="d-flex flex-column pl-2">
+                                            <small>Check-in</small>
+                                            <input style="border:none;cursor:pointer;font-size:12px"
+                                                placeholder="Add date" name="dp"
+                                                [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
+                                                ngbDatepicker #d="ngbDatepicker">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">|</div>
+                                    <div class="col-5">
+                                        <div class="d-flex flex-column">
+                                            <small>Check-out</small>
+                                            <input style="border:none;cursor:pointer;font-size:12px"
+                                                placeholder="Add date" name="dp2"
+                                                [(ngModel)]="boatelSearchParam.checkoutDate" (click)="d2.toggle()"
+                                                ngbDatepicker #d2="ngbDatepicker">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 py-2">
+                                <div class="row custom-border m-0">
+                                    <div class="col-12" [ngbPopover]="popContent" placement="bottom"
+                                        autoClose="outside">
+                                        <div class="row m-0">
+                                            <div class="col-12">
+                                                <small>Guests</small>
+                                            </div>
+                                        </div>
+                                        <div class="row m-0">
+                                            <small style="border:none;cursor:pointer;font-size:12px" class="col-6">{{boatelSearchParam.adults}} Adults</small>
+                                            <small style="border:none;cursor:pointer;font-size:12px" class="col-6">{{boatelSearchParam.childrens}} Children</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <small class="col-12 text-danger">
+                                Please add some search criteria.
+                            </small> -->
                         </div>
-                        <div class="custom-flex"><a href="javascript:void(0)"
-                                class="custom-btn blue big-btn">Search</a></div>
+                        <ng-template #popContent>
+                            <div class="row p-2">
+                                <div class="col-12">
+                                    <div class="counter-input-wrapper">
+                                        <div class="number">
+                                            <div class="custom-flex-start">
+                                                <label>Adults</label>
+                                                <div class="custom-flex-start">
+                                                    <span class="minus" style="cursor: pointer;"
+                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults -1;">-</span>
+                                                    <input type="text" [(ngModel)]="boatelSearchParam.adults" />
+                                                    <span class="plus" style="cursor: pointer;"
+                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults+1;">+</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="counter-input-wrapper">
+                                        <div class="number">
+                                            <div class="custom-flex-start">
+                                                <label>Children</label>
+                                                <div class="custom-flex-start">
+                                                    <span class="minus" style="cursor: pointer;"
+                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens -1;">-</span>
+                                                    <input type="text" [(ngModel)]="boatelSearchParam.childrens" />
+                                                    <span class="plus" style="cursor: pointer;"
+                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens+1;">+</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                        <div class="custom-flex"><button href="#" (click)="botelSearch()"
+                                class="custom-btn blue big-btn">Search</button></div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab">
                         <div class="text-center check-img">
                             <img src="../../assets/images/character-boat-img.png" class="mb-4" alt="">
                         </div>
-                        <div class="custom-flex"><a href="javascript:void(0)"
-                                class="custom-btn blue big-btn">Search</a></div>
+                        <div class="custom-flex"><button (click)="charterSearch()"
+                                class="custom-btn blue big-btn">Search</button></div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
                         aria-labelledby="v-pills-settings-tab">
                         <div class="text-center check-img">
                             <img src="../../assets/images/character-boat-img.png" class="mb-4" alt="">
                         </div>
-                        <div class="custom-flex"><a href="javascript:void(0)"
+                        <div class="custom-flex"><a href="#" (click)="eventSearch()"
                                 class="custom-btn blue big-btn">Search</a></div>
                     </div>
                 </div>

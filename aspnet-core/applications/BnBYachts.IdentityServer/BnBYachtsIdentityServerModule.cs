@@ -7,15 +7,10 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using BnBYachts.EntityFrameworkCore;
-using BnBYachts.Localization;
-using BnBYachts.MultiTenancy;
 using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
@@ -29,14 +24,16 @@ using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Identity;
 using BnBYachts.Services.Classes;
-using Microsoft.Extensions.Configuration;
 using BnBYachts.Interfaces.IdentityInterface;
 using BnBYachts.Services;
+using BnBYachts.Core;
+using BnBYachts.Core.Localization;
+using BnBYachts.Core.EntityFrameworkCore;
+using BnBYachts.Core.MultiTenancy;
 
 namespace BnBYachts
 {
@@ -46,7 +43,7 @@ namespace BnBYachts
         typeof(AbpAccountWebIdentityServerModule),
         typeof(AbpAccountApplicationModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-        typeof(BnBYachtsEntityFrameworkCoreModule),
+        typeof(CoreEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule)
         )]
     public class BnBYachtsIdentityServerModule : AbpModule
@@ -61,7 +58,7 @@ namespace BnBYachts
             Configure<AbpLocalizationOptions>(options =>
             {
                 options.Resources
-                    .Get<BnBYachtsResource>()
+                    .Get<CoreResource>()
                     .AddBaseTypes(
                         typeof(AbpUiResource)
                     );
@@ -106,8 +103,8 @@ namespace BnBYachts
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
-                    options.FileSets.ReplaceEmbeddedByPhysical<BnBYachtsDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\client\\src\\BnBYachts.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BnBYachtsDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\client\\src\\BnBYachts.Domain"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain.Shared"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain"));
                 });
             }
 

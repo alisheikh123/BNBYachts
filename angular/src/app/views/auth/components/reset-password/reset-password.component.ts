@@ -7,8 +7,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  templateUrl: './reset-password.component.html'
+  
 })
 export class ResetPasswordComponent implements OnInit {
   IsPasswordChanged: boolean=false;
@@ -18,6 +18,8 @@ export class ResetPasswordComponent implements OnInit {
   validPassword: any;
   submitted: boolean = false;
   token: string;
+  show:any;
+  confirmshow:any;
   @ViewChild('resetModal', { static: true }) templateRef: any;
   @ViewChild('passwordChangedModal', { static: true }) passwordChangedRef: any;
   @ViewChild('InvalidUserModal', { static: true }) InvalidUserRef: any;
@@ -29,7 +31,6 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
-      debugger;
       this.token = res['id'].toString();
     });
     
@@ -101,4 +102,11 @@ export class ResetPasswordComponent implements OnInit {
     debugger;
     this.oidcSecurityService.authorize();
   }
+
+  password() {
+    this.show = !this.show;
+}
+confirmpassword() {
+    this.confirmshow = !this.confirmshow;
+}
 }

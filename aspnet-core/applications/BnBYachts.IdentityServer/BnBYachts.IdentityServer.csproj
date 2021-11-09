@@ -96,13 +96,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\client\src\BnBYachts.Domain.Shared\BnBYachts.Domain.Shared.csproj" />
-    <ProjectReference Include="..\..\modules\client\src\BnBYachts.EntityFrameworkCore\BnBYachts.EntityFrameworkCore.csproj" />
+    <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\sass\vendor\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\fonts\" />
-    <Folder Include="wwwroot\sass\vendor\" />
+    <ProjectReference Include="..\..\modules\core\src\BnBYachts.Core.Domain.Shared\BnBYachts.Core.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\modules\core\src\BnBYachts.Core.EntityFrameworkCore\BnBYachts.Core.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>
