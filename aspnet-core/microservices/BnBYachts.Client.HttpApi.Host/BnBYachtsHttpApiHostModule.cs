@@ -49,6 +49,7 @@ namespace BnBYachts
         {
             var configuration = context.Services.GetConfiguration();
             var hostingEnvironment = context.Services.GetHostingEnvironment();
+          
 
             ConfigureConventionalControllers();
             ConfigureAuthentication(context, configuration);

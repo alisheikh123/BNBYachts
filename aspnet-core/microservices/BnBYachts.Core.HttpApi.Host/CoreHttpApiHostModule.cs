@@ -73,16 +73,16 @@ namespace BnBYachts.Core
                 {
                     options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainSharedModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Core.Domain.Shared"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Core.Domain"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain"));
                     options.FileSets.ReplaceEmbeddedByPhysical<CoreApplicationContractsModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Core.Application.Contracts"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Application.Contracts"));
                     options.FileSets.ReplaceEmbeddedByPhysical<CoreApplicationModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}BnBYachts.Core.Application"));
+                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Application"));
                 });
             }
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BnBYachts.Core.Data.Model.ForgetPassword;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -50,8 +51,12 @@ namespace BnBYachts.Core.EntityFrameworkCore
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+
+        // Forget Password
+        public DbSet<ForgetPasswordVerifier> ForgetPasswordVerifier { get; set; }
+
         #endregion
-        
+
         public CoreDbContext(DbContextOptions<CoreDbContext> options)
             : base(options)
         {

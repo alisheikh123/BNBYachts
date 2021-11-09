@@ -1,3 +1,5 @@
+import { AuthService } from './../../core/auth/auth.service';
+import { AuthRoutingModule } from './auth-routing.module';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 import { CommonModule } from '@angular/common';
@@ -8,6 +10,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -16,15 +19,17 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthRoutingModule
   ],
   declarations: [
       LoginModalComponent,
       SignupModalComponent,
-      ForgotPasswordComponent
+      ForgotPasswordComponent,
+      ResetPasswordComponent
   ],
   providers: [
-  
+  AuthService
 
   ],
   

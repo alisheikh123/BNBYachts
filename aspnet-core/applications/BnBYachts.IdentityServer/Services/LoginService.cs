@@ -115,6 +115,7 @@ namespace BnBYachts.Services
 
         public async Task<string> EmailVerification(ForgotPasswordDto forgotPasswordDto)
         {
+            Guid obj = Guid.NewGuid();
             var user = await UserManager.FindByEmailAsync(forgotPasswordDto.Email);
             if (user == null)
                 return "Invalid Request";

@@ -9,17 +9,35 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
+  isEmailSending:boolean;
+  isInvalidUser:boolean;
   ForgetForm:FormGroup;
   constructor(public activeModal:NgbActiveModal,private fb:FormBuilder,private service:AuthService) { }
 
   ngOnInit(): void {
+    this.isInvalidUser=false;
     this.ForgetForm = this.fb.group({
-      email:[null, Validators.required]
+      email:[null,Validators.compose([Validators.required, Validators.email])]
     })
   }
 
  submit(){
+    let email=this.ForgetForm.controls["email"].value;
+    let emailValid=this.ForgetForm.controls["email"].valid;
+    this.service.sendEmail(email).subscribe(res=>{
+      debugger;
+      if(res==true)
+      {
+        this.isInvalidUser=false;
+        this.isEmailSending=true;
+        
 
-  console.log();
+      }
+      else
+      {
+          this.isInvalidUser=true;
+          this.isEmailSending=false;
+      }
+      })
  }
 }
