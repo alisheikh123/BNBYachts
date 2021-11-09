@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using BnBYachts.EventBusShared.Contracts;
 using Microsoft.Extensions.Hosting;
@@ -21,7 +22,7 @@ namespace BnBYachts.EventBusShared.HostedServices
                 try
                 {
                     await _distributedEventBus.PublishAsync(
-                             new AppHeartbeatContract{ Message = "cool"}
+                        new AppHeartbeatContract{ Message = "cool"}
                           );
                 }
                 catch (System.Exception e)

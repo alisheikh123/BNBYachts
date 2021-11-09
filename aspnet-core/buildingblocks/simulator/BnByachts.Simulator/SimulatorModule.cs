@@ -15,8 +15,8 @@ namespace BnByachts.Simulator
        {
            Configure<AbpRabbitMqEventBusOptions>(options =>
            {
-               options.ClientName = "umerisCool";
-               options.ExchangeName = "uMessages";
+               options.ClientName = "SimulatorApp";
+               options.ExchangeName = "TestMessage";
            });
        }
    }
