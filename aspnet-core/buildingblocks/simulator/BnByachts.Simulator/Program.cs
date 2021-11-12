@@ -2,7 +2,6 @@
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
-using Volo.Abp.DependencyInjection;
 
 namespace BnByachts.Simulator
 {
@@ -30,6 +29,7 @@ namespace BnByachts.Simulator
             }
             Console.WriteLine("heartbeat");
             Console.WriteLine("Ctrl + C to Quit");
+            
             QuitEvent.WaitOne();
         }
     }
