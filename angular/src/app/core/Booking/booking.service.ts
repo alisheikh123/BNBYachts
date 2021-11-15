@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class BookingService {
 
   bookingApiUrl: string = environment.BOOKING_API_URL;
+  boatApiUrl:string = environment.BOAT_API_URL;
   constructor(private http:HttpClient) { }
 
   boatelBooking(model:any){
@@ -16,7 +17,7 @@ export class BookingService {
   }
 
   
-  ///Exception handler
+  
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -28,4 +29,25 @@ export class BookingService {
     }
     return throwError(errorMessage);
   }
+
+
+  /* Ali */
+  bookingDetail(userId:any){
+      return this.http.get(this.bookingApiUrl+'/boatelbookingdetail/'+userId).pipe(catchError(this.handleError));
+  }
+  upcomingbookingDetail(userId:any,upcoming:any){
+      return this.http.get(this.bookingApiUrl+'/upcomingboatelbookingdetail/'+userId,upcoming).pipe(catchError(this.handleError));
+  
+  }
+  pastbookingDetail(userId:any,past:any){
+      return this.http.get(this.bookingApiUrl+'/pastboatelbookingdetail/'+userId,past).pipe(catchError(this.handleError));
+  }
+  getBoatInfo(boatId:any){
+    return this.http.get(this.boatApiUrl+'/filtered-boat-details/'+boatId).pipe(catchError(this.handleError));
+  }
+  getBookingBoatDetail(BookingId:any){
+    return this.http.get(this.bookingApiUrl+'/boatelbooking/'+BookingId).pipe(catchError(this.handleError));
+  }
+
+   /* Ali */
 }

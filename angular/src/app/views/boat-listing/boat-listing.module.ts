@@ -9,11 +9,15 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
 import { BoatListingRoutingModule } from './boat-listing-routing.module';
 import { BoatListingComponent } from './boat-listing/boat-listing.component';
+import { AllReservationsComponent } from './all-reservations/all-reservations.component';
+import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
 
 @NgModule({
   declarations: [
     BoatListingComponent,
-    BoatDetailsComponent
+    BoatDetailsComponent,
+    AllReservationsComponent,
+    ReservationDetailComponent
   ],
   imports: [
     BoatListingRoutingModule,

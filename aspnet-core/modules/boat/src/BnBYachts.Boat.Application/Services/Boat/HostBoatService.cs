@@ -20,15 +20,17 @@ namespace BnBYachts.Services.Boat
     {
         private readonly IRepository<HostBoat, Guid> _boatRepository;
         private readonly IRepository<BoatFeature, Guid> _boatelFeatureRepo;
+        private readonly IRepository<BoatGallery, Guid> _boatelGalleryRepo;
         private readonly IRepository<BoatRule, Guid> _boatelRulesRepo;
         private readonly IRepository<BoatCalendar, Guid> _boatelCalendarRepo;
-        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo)
+        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo, IRepository<BoatGallery, Guid> boatelGalleryRepo)
            : base(repository)
         {
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
             _boatelRulesRepo = boatelRulesRep;
+            _boatelGalleryRepo = boatelGalleryRepo;
         }
 
         [Route("FilterBoatelBoats")]
@@ -167,6 +169,15 @@ namespace BnBYachts.Services.Boat
                 await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
             }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatLocations).ConfigureAwait(false);
+            return boat;
+        }
+        [Route("filtered-boat-details/{boatId}")]
+        [HttpGet]
+        public async Task<HostBoat> GetFilteredBoatDetailsById(Guid boatId)
+        {
+            var boat = await _boatRepository.GetAsync(b => b.Id == boatId, false).ConfigureAwait(false);
+            await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
+            
             return boat;
         }
     }

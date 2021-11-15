@@ -39,7 +39,7 @@ export class AuthService {
   }
   
   updatePassword(userId:any,Password:any){
-    debugger;
+   
     let params = new HttpParams()
     .set('userId',userId)
     .set('Password',Password);
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   verifyUniqueId(uniqueId:any){
-    debugger;
+
     return this.http.get("https://localhost:44347/verifyLink/"+uniqueId,{responseType: 'text'});
   }
 

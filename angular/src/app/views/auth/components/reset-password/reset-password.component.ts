@@ -35,7 +35,7 @@ export class ResetPasswordComponent implements OnInit {
     });
     
     this.service.verifyUniqueId(this.token).subscribe((res:any) => {
-      debugger;
+    
        this.userId = res;
        if(this.userId==null)
        {
@@ -83,10 +83,10 @@ export class ResetPasswordComponent implements OnInit {
   updated() {
     this.validPassword = this.resetForm.controls['password'].value
     this.service.updatePassword(this.userId,this.validPassword).subscribe((res:any)=>{
-      debugger;
+    
       if(res==true)
       {
-        debugger;
+       
         this.modal.dismissAll();
         this.passwordChangeModal();
    
@@ -99,7 +99,7 @@ export class ResetPasswordComponent implements OnInit {
 
 
   login(){
-    debugger;
+  
     this.oidcSecurityService.authorize();
   }
 

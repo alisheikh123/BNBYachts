@@ -21,13 +21,10 @@
                     <div class="right-content">
                         <a href="javascript:void(0)" class="underline-link-blk active" data-bs-toggle="modal"
                             data-bs-target="#become-host-modal"><span>Earn with us</span></a>
-                            <!-- <a *ngIf="!isLoggedIn" (click)="login()" href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#become-host-modal"><span>Login</span></a> -->
-                   
-      <!-- | abpLocalization -->
+  
 
                         <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="login()"><span>Sign-up/Sign-in</span></a>
+                            data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
                             <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
                             data-bs-target="#signup-modal" (click)="forgetPassword()" ><span>Forget Password</span></a>
                         <a href="javascript:void(0)" class="underline-link-blk" (click)="getUser()"><span>Help</span></a>
@@ -80,7 +77,7 @@
                                 Calender
                             </span>
                         </a>
-                        <a href="Reservation.html" class="underline-link-blk">
+                        <a [routerLink]="['/boat-listing/all-reservations']" class="underline-link-blk">
                             <span>
                                 Reservation
                             </span>

@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   constructor(private modal: NgbModal,private oidcSecurityService : OidcSecurityService,private authService:AuthService) { }
 
   ngOnInit(): void {
-    debugger;
     this.oidcSecurityService
     .checkAuth()
     .subscribe((res:any) => { 
@@ -41,7 +40,7 @@ export class HeaderComponent implements OnInit {
           this.getUserDetails(userId);
         }
   });
-  debugger;
+  
 
 }
 getUserDetails(userId:any){
@@ -52,7 +51,7 @@ if(res==null)
 }
 else{
 this.userDetails = res;
-debugger;
+
 this.isLoggedIn = true;
 }
 })
@@ -62,7 +61,7 @@ this.isLoggedIn = true;
   }
 
   login(){
-    debugger;
+  
     this.oidcSecurityService.authorize();
   }
  
@@ -81,7 +80,6 @@ this.isLoggedIn = true;
 
 
   getUser(){
-    debugger;
     const token = this.oidcSecurityService.getAccessToken();
     let user = this.oidcSecurityService.getUserData();
   }
