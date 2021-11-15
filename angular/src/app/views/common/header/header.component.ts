@@ -1,6 +1,5 @@
 import { ResetPasswordComponent } from './../../auth/components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './../../auth/components/forgot-password/forgot-password.component';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../../auth/components/login-modal/login-modal.component';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 
 @Component({
@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   constructor(private modal: NgbModal,private oidcSecurityService : OidcSecurityService,private authService:AuthService) { }
 
   ngOnInit(): void {
-    debugger;
     this.oidcSecurityService
     .checkAuth()
     .subscribe((res:any) => { 
@@ -41,8 +40,6 @@ export class HeaderComponent implements OnInit {
           this.getUserDetails(userId);
         }
   });
-  debugger;
-
 }
 getUserDetails(userId:any){
 this.authService.getUserInfo(userId).subscribe(res=>{
@@ -52,7 +49,6 @@ if(res==null)
 }
 else{
 this.userDetails = res;
-debugger;
 this.isLoggedIn = true;
 }
 })
@@ -62,7 +58,6 @@ this.isLoggedIn = true;
   }
 
   login(){
-    debugger;
     this.oidcSecurityService.authorize();
   }
  
@@ -81,7 +76,6 @@ this.isLoggedIn = true;
 
 
   getUser(){
-    debugger;
     const token = this.oidcSecurityService.getAccessToken();
     let user = this.oidcSecurityService.getUserData();
   }

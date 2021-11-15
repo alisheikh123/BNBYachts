@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -25,7 +25,6 @@ export class ForgotPasswordComponent implements OnInit {
     let email=this.ForgetForm.controls["email"].value;
     let emailValid=this.ForgetForm.controls["email"].valid;
     this.service.sendEmail(email).subscribe(res=>{
-      debugger;
       if(res==true)
       {
         this.isInvalidUser=false;

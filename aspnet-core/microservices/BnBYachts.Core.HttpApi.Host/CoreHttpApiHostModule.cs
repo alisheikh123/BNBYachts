@@ -38,8 +38,8 @@ namespace BnBYachts.Core
         typeof(CoreApplicationModule),
         typeof(CoreEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpSwashbuckleModule),
-        typeof(EventBusSharedModule)
+        typeof(AbpSwashbuckleModule)
+        //typeof(EventBusSharedModule)
     )]
     public class CoreHttpApiHostModule : AbpModule
     {

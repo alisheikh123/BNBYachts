@@ -3,7 +3,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from "@angular/c
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
-import { LoaderService } from "../services/loader.service";
+import { LoaderService } from "../loader/services/loader.service";
 
 @Injectable({
     providedIn: "root"
@@ -60,10 +60,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     }
     private onStart(): void {
         this.pendingRequests++;
-        this.loader.display(true);
+        this.loader.isLoading.next(true);
     }
     private onEnd(): void {
-        this.loader.display(false);
+        this.loader.isLoading.next(false);
     }
     private catchError(error: Response | any) {
         let errMsg: string = "";

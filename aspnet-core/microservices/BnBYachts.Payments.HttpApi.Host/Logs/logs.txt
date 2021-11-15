@@ -1,0 +1,425 @@
+2021-11-09 20:02:10.065 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-09 20:02:20.992 +05:00 [INF] User profile is available. Using 'C:\Users\Techverx\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-09 20:02:21.166 +05:00 [INF] Loaded ABP modules:
+2021-11-09 20:02:21.166 +05:00 [INF] - BnBYachts.Payments.PaymentsHttpApiHostModule
+2021-11-09 20:02:21.166 +05:00 [INF]   - BnBYachts.Payments.PaymentsHttpApiModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - BnBYachts.Payments.PaymentsApplicationContractsModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - BnBYachts.Payments.PaymentsDomainSharedModule
+2021-11-09 20:02:21.166 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-09 20:02:21.166 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-09 20:02:21.166 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-09 20:02:21.166 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-09 20:02:21.166 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-09 20:02:21.166 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-09 20:02:21.166 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-09 20:02:21.166 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-09 20:02:21.166 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-09 20:02:21.166 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2021-11-09 20:02:21.166 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2021-11-09 20:02:21.166 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2021-11-09 20:02:21.166 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-09 20:02:21.166 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-09 20:02:21.166 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-09 20:02:21.166 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-09 20:02:21.166 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-09 20:02:21.166 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2021-11-09 20:02:21.166 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-09 20:02:21.166 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-09 20:02:21.166 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2021-11-09 20:02:21.166 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2021-11-09 20:02:21.166 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2021-11-09 20:02:21.166 +05:00 [INF]   - BnBYachts.Payments.PaymentsApplicationModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - BnBYachts.Payments.PaymentsDomainModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-09 20:02:21.166 +05:00 [INF]   - BnBYachts.Payments.EntityFrameworkCore.PaymentsEntityFrameworkCoreModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-09 20:02:21.166 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-09 20:02:21.166 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-09 20:02:21.167 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-09 20:02:21.167 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-09 20:04:13.182 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-09 20:04:17.862 +05:00 [INF] User profile is available. Using 'C:\Users\Techverx\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-09 20:04:18.024 +05:00 [INF] Loaded ABP modules:
+2021-11-09 20:04:18.024 +05:00 [INF] - BnBYachts.Payments.PaymentsHttpApiHostModule
+2021-11-09 20:04:18.024 +05:00 [INF]   - BnBYachts.Payments.PaymentsHttpApiModule
+2021-11-09 20:04:18.024 +05:00 [INF]     - BnBYachts.Payments.PaymentsApplicationContractsModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - BnBYachts.Payments.PaymentsDomainSharedModule
+2021-11-09 20:04:18.024 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-09 20:04:18.024 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-09 20:04:18.024 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-09 20:04:18.024 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-09 20:04:18.024 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-09 20:04:18.024 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-09 20:04:18.024 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-09 20:04:18.024 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-09 20:04:18.024 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-09 20:04:18.024 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-09 20:04:18.024 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-09 20:04:18.024 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2021-11-09 20:04:18.024 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2021-11-09 20:04:18.024 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2021-11-09 20:04:18.024 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2021-11-09 20:04:18.024 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-09 20:04:18.024 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-09 20:04:18.024 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-09 20:04:18.024 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-09 20:04:18.024 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-09 20:04:18.024 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2021-11-09 20:04:18.024 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-09 20:04:18.024 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-09 20:04:18.024 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2021-11-09 20:04:18.024 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2021-11-09 20:04:18.024 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2021-11-09 20:04:18.024 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2021-11-09 20:04:18.024 +05:00 [INF]   - BnBYachts.Payments.PaymentsApplicationModule
+2021-11-09 20:04:18.024 +05:00 [INF]     - BnBYachts.Payments.PaymentsDomainModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-09 20:04:18.024 +05:00 [INF]   - BnBYachts.Payments.EntityFrameworkCore.PaymentsEntityFrameworkCoreModule
+2021-11-09 20:04:18.024 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-09 20:04:18.024 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-09 20:04:18.025 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-09 20:04:18.025 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-09 20:04:18.025 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-09 20:04:19.174 +05:00 [INF] Initialized all ABP modules.
+2021-11-09 20:04:19.224 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-09 20:04:19.225 +05:00 [INF] Hosting environment: Development
+2021-11-09 20:04:19.225 +05:00 [INF] Content root path: E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host
+2021-11-09 20:04:19.338 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/ - -
+2021-11-09 20:04:20.532 +05:00 [INF] Executing endpoint 'BnBYachts.Payments.Controllers.HomeController.Index (BnBYachts.Payments.HttpApi.Host)'
+2021-11-09 20:04:20.607 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Payments.Controllers.HomeController (BnBYachts.Payments.HttpApi.Host).
+2021-11-09 20:04:20.838 +05:00 [INF] Executing action method BnBYachts.Payments.Controllers.HomeController.Index (BnBYachts.Payments.HttpApi.Host) - Validation state: "Valid"
+2021-11-09 20:04:20.844 +05:00 [INF] Executed action method BnBYachts.Payments.Controllers.HomeController.Index (BnBYachts.Payments.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 0.5561ms.
+2021-11-09 20:04:20.850 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-09 20:04:20.856 +05:00 [INF] Executed action BnBYachts.Payments.Controllers.HomeController.Index (BnBYachts.Payments.HttpApi.Host) in 243.6263ms
+2021-11-09 20:04:20.857 +05:00 [INF] Executed endpoint 'BnBYachts.Payments.Controllers.HomeController.Index (BnBYachts.Payments.HttpApi.Host)'
+2021-11-09 20:04:20.903 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger - -
+2021-11-09 20:04:20.925 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/index.html - -
+2021-11-09 20:04:20.931 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/ - - - 302 - - 1593.1719ms
+2021-11-09 20:04:20.931 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger - - - 301 - - 27.2043ms
+2021-11-09 20:04:21.048 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/index.html - - - 200 - text/html;charset=utf-8 122.3689ms
+2021-11-09 20:04:21.095 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/swagger-ui.css - -
+2021-11-09 20:04:21.109 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/swagger-ui-standalone-preset.js - -
+2021-11-09 20:04:21.116 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/ui/abp.js - -
+2021-11-09 20:04:21.119 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/ui/abp.swagger.js - -
+2021-11-09 20:04:21.130 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-11-09 20:04:21.133 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-11-09 20:04:21.140 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/swagger-ui-bundle.js - -
+2021-11-09 20:04:21.140 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 22.8831ms
+2021-11-09 20:04:21.141 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/ui/abp.js - - - 200 3025 application/javascript 24.7717ms
+2021-11-09 20:04:21.180 +05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-09 20:04:21.182 +05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-09 20:04:21.193 +05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-09 20:04:21.199 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/swagger-ui.css - - - 200 143410 text/css 103.9173ms
+2021-11-09 20:04:21.212 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 102.8662ms
+2021-11-09 20:04:21.226 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 85.9632ms
+2021-11-09 20:04:21.847 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/v1/swagger.json - -
+2021-11-09 20:04:21.967 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44366/swagger/favicon-32x32.png - -
+2021-11-09 20:04:21.973 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-09 20:04:21.976 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/favicon-32x32.png - - - 200 628 image/png 8.7845ms
+2021-11-09 20:04:22.221 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44366/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 374.3439ms
+2021-11-10 18:20:53.333 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:20:54.596 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:22:17.229 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:22:18.140 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:23:01.832 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:23:02.840 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:23:53.291 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:23:55.054 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:25:09.071 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:25:10.728 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:25:48.464 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:25:50.189 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:36:22.657 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:36:23.551 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:40:37.807 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:40:40.345 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32
+2021-11-10 18:50:25.195 +05:00 [INF] Starting BnBYachts.Payments.HttpApi.Host.
+2021-11-10 18:50:26.101 +05:00 [FTL] Host terminated unexpectedly!
+System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: '"' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 13 | BytePositionInLine: 2.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenUntilAfterAllCommentsAreSkipped(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextToken(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ConsumeNextTokenOrRollback(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedBytes)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+--- End of stack trace from previous location ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.HandleException(ExceptionDispatchInfo info)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load()
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.BuildAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at BnBYachts.Payments.Program.Main(String[] args) in E:\Projects\BNBYacht\BnBYachts\aspnet-core\microservices\BnBYachts.Payments.HttpApi.Host\Program.cs:line 32

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -14,7 +15,10 @@ import { environment } from 'src/environments/environment';
 })
 export class BoatDetailsComponent implements OnInit {
 
-  constructor(private toastr: ToastrService, private yachtSearchService: YachtSearchService, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute,) { }
+  constructor(config: NgbRatingConfig,private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute) { 
+    config.max = 5;
+    config.readonly = true;
+  }
   boatId: string = '';
   boatDetails: any;
   assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
@@ -33,8 +37,8 @@ export class BoatDetailsComponent implements OnInit {
       this.boatId = res['id'];
     });
     this.getBoatDetailsById();
-    if (this.yachtParamService.searchResult?.mapOptions) {
-      this.boatFilterDetails = this.yachtParamService.searchResult?.mapOptions;
+    if (this.yachtParamService.getFilters()) {
+      this.boatFilterDetails = this.yachtParamService.getFilters();
     }
   }
   calculateDays() {
@@ -79,7 +83,6 @@ export class BoatDetailsComponent implements OnInit {
 
   reserveBoat() {
     this.isSubmitted = true;
-
     if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
       let userId = Guid.create();
       let bookingModel = {
@@ -113,7 +116,9 @@ export class BoatDetailsComponent implements OnInit {
           }
           this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
             if (res) {
-              this.toastr.success('Boat calendar updated successfull.', 'Success!',);
+              this.yachtParamService.setFilters(this.boatFilterDetails);
+              this.router.navigate(['/boat-listing/booking-payment', this.boatId], { relativeTo: this.activatedRoute });
+              this.toastr.success('Boat reserved successfully.','Success');
             }
           });
         }
