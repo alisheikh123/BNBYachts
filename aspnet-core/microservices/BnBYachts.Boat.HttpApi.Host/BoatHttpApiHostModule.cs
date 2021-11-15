@@ -35,8 +35,8 @@ namespace BnBYachts.Boat
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpSwashbuckleModule),
-        typeof(EventBusSharedModule)
+        typeof(AbpSwashbuckleModule)
+        //typeof(EventBusSharedModule)
     )]
     public class BoatHttpApiHostModule : AbpModule
     {

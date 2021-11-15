@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { environment } from 'src/environments/environment';
 
@@ -31,11 +32,15 @@ export class BoatListingComponent implements OnInit {
   mapDetails: any;
   markers: any[] = [];
 
-  constructor(private yachtSearch: YachtSearchDataService) { }
+  constructor(private yachtSearch: YachtSearchDataService,config: NgbRatingConfig) {
+    config.max = 5;
+    config.readonly = true;
+  }
 
   ngOnInit(): void {
-    this.boats = this.yachtSearch.searchResult?.boatsResult;
-    this.mapDetails = this.yachtSearch.searchResult?.mapOptions;
+      this.boats = this.yachtSearch.getBoats();
+      this.mapDetails = this.yachtSearch.getFilters();
+
     this.filterMarkers();
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {

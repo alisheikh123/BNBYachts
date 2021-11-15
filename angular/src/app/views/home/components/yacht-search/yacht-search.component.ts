@@ -33,7 +33,8 @@ export class YachtSearchComponent implements OnInit {
     this.isSubmitted = true;
     this.yachtService.boatelSearch(this.boatelSearchParam).subscribe((res: any) => {
       if (res?.length > 0) {
-        this.yachtSearchResults.searchResult = { boatsResult: res, mapOptions: this.boatelSearchParam }; //res;
+        this.yachtSearchResults.setBoats(res);
+        this.yachtSearchResults.setFilters(this.boatelSearchParam);
         this.router.navigate(["/boat-listing"]);
       }
       else {

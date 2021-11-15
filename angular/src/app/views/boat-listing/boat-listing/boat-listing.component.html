@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-sm-4 py-2">
                         <p class="small-text">{{boats?.length}} boatel available, {{mapDetails?.checkinDate | date:'MMM d'}} - {{mapDetails?.checkoutDate | date:'MMM d'}}, {{mapDetails?.adults + mapDetails?.childrens}} guests</p>
-                        <h5 class="bold head-text">Boatel in Port Qasim</h5>
+                        <h5 class="bold head-text">Boatel in {{this.mapDetails?.location}}</h5>
                         <div class="custom-filters">
                             <div class="dropdown custom-dropdown filters-wrap">
                                 <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -94,13 +94,7 @@
                                             
                                     </div>
                                     <div class="custom-flex-between">
-                                        <p class="grey">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </p>
+                                      <ngb-rating [rate]="0"></ngb-rating>
                                         <p class="bold-span-text"><span>$ {{item.perDayCharges}}</span>/ Night</p>
                                     </div>
                                    

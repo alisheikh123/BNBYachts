@@ -105,6 +105,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "eventBus", "eventBus", "{CE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.EventBusShared", "modules\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj", "{90B1A5D0-B6CC-472D-A44C-C301793985CA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "payments", "payments", "{3277D416-8383-4F16-8435-B718B6F05ABC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4190C907-2435-4A88-98AF-2C16458D8B26}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.Application", "C:\Users\Techverx\Downloads\py\aspnet-core\src\BnBYachts.Payments.Application\BnBYachts.Payments.Application.csproj", "{F3805ABC-D92C-4B0D-AC90-AD542EEC8CCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.Application.Contracts", "C:\Users\Techverx\Downloads\py\aspnet-core\src\BnBYachts.Payments.Application.Contracts\BnBYachts.Payments.Application.Contracts.csproj", "{A3849F46-B20C-4E3F-ACD7-A2D7367A592A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.Domain", "C:\Users\Techverx\Downloads\py\aspnet-core\src\BnBYachts.Payments.Domain\BnBYachts.Payments.Domain.csproj", "{1F4217E8-3078-405A-A41F-458F8EFD526A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.Domain.Shared", "C:\Users\Techverx\Downloads\py\aspnet-core\src\BnBYachts.Payments.Domain.Shared\BnBYachts.Payments.Domain.Shared.csproj", "{8FCC1F95-09DE-4378-9541-AEF3B641FF20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.EntityFrameworkCore", "C:\Users\Techverx\Downloads\py\aspnet-core\src\BnBYachts.Payments.EntityFrameworkCore\BnBYachts.Payments.EntityFrameworkCore.csproj", "{C2D01FA7-5019-4D41-ABB8-44B1427541BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.HttpApi", "C:\Users\Techverx\Downloads\py\aspnet-core\src\BnBYachts.Payments.HttpApi\BnBYachts.Payments.HttpApi.csproj", "{9815B6BB-9158-4F89-A784-7DF465D97B80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.HttpApi.Client", "C:\Users\Techverx\Downloads\py\aspnet-core\src\BnBYachts.Payments.HttpApi.Client\BnBYachts.Payments.HttpApi.Client.csproj", "{7ECA070F-6855-4E28-BD50-56479EDD08F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.HttpApi.Host", "C:\Users\Techverx\Downloads\py\aspnet-core\BnBYachts.Payments.HttpApi.Host\BnBYachts.Payments.HttpApi.Host.csproj", "{46D680C9-F59B-4DC5-8CA8-0592ECD6630D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -247,6 +267,38 @@ Global
 		{90B1A5D0-B6CC-472D-A44C-C301793985CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90B1A5D0-B6CC-472D-A44C-C301793985CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90B1A5D0-B6CC-472D-A44C-C301793985CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3805ABC-D92C-4B0D-AC90-AD542EEC8CCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3805ABC-D92C-4B0D-AC90-AD542EEC8CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3805ABC-D92C-4B0D-AC90-AD542EEC8CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3805ABC-D92C-4B0D-AC90-AD542EEC8CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3849F46-B20C-4E3F-ACD7-A2D7367A592A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3849F46-B20C-4E3F-ACD7-A2D7367A592A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3849F46-B20C-4E3F-ACD7-A2D7367A592A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3849F46-B20C-4E3F-ACD7-A2D7367A592A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F4217E8-3078-405A-A41F-458F8EFD526A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F4217E8-3078-405A-A41F-458F8EFD526A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F4217E8-3078-405A-A41F-458F8EFD526A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F4217E8-3078-405A-A41F-458F8EFD526A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FCC1F95-09DE-4378-9541-AEF3B641FF20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FCC1F95-09DE-4378-9541-AEF3B641FF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FCC1F95-09DE-4378-9541-AEF3B641FF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCC1F95-09DE-4378-9541-AEF3B641FF20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2D01FA7-5019-4D41-ABB8-44B1427541BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2D01FA7-5019-4D41-ABB8-44B1427541BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2D01FA7-5019-4D41-ABB8-44B1427541BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2D01FA7-5019-4D41-ABB8-44B1427541BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9815B6BB-9158-4F89-A784-7DF465D97B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9815B6BB-9158-4F89-A784-7DF465D97B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9815B6BB-9158-4F89-A784-7DF465D97B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9815B6BB-9158-4F89-A784-7DF465D97B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ECA070F-6855-4E28-BD50-56479EDD08F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ECA070F-6855-4E28-BD50-56479EDD08F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ECA070F-6855-4E28-BD50-56479EDD08F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ECA070F-6855-4E28-BD50-56479EDD08F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D680C9-F59B-4DC5-8CA8-0592ECD6630D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D680C9-F59B-4DC5-8CA8-0592ECD6630D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D680C9-F59B-4DC5-8CA8-0592ECD6630D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D680C9-F59B-4DC5-8CA8-0592ECD6630D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -298,6 +350,16 @@ Global
 		{5B43B67C-D3DE-4E14-B785-576B1D612EAF} = {3F5FB678-3F71-4534-9D1F-47AFD67F9A33}
 		{CED93A79-2ABD-476D-9785-4F32C35C7D1A} = {3F5FB678-3F71-4534-9D1F-47AFD67F9A33}
 		{90B1A5D0-B6CC-472D-A44C-C301793985CA} = {CED93A79-2ABD-476D-9785-4F32C35C7D1A}
+		{3277D416-8383-4F16-8435-B718B6F05ABC} = {3F5FB678-3F71-4534-9D1F-47AFD67F9A33}
+		{4190C907-2435-4A88-98AF-2C16458D8B26} = {3277D416-8383-4F16-8435-B718B6F05ABC}
+		{F3805ABC-D92C-4B0D-AC90-AD542EEC8CCB} = {4190C907-2435-4A88-98AF-2C16458D8B26}
+		{A3849F46-B20C-4E3F-ACD7-A2D7367A592A} = {4190C907-2435-4A88-98AF-2C16458D8B26}
+		{1F4217E8-3078-405A-A41F-458F8EFD526A} = {4190C907-2435-4A88-98AF-2C16458D8B26}
+		{8FCC1F95-09DE-4378-9541-AEF3B641FF20} = {4190C907-2435-4A88-98AF-2C16458D8B26}
+		{C2D01FA7-5019-4D41-ABB8-44B1427541BA} = {4190C907-2435-4A88-98AF-2C16458D8B26}
+		{9815B6BB-9158-4F89-A784-7DF465D97B80} = {4190C907-2435-4A88-98AF-2C16458D8B26}
+		{7ECA070F-6855-4E28-BD50-56479EDD08F2} = {4190C907-2435-4A88-98AF-2C16458D8B26}
+		{46D680C9-F59B-4DC5-8CA8-0592ECD6630D} = {10399C2F-1B2E-4141-97C9-9212B90B78E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

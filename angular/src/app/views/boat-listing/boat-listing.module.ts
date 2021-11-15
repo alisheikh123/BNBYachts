@@ -9,11 +9,15 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
 import { BoatListingRoutingModule } from './boat-listing-routing.module';
 import { BoatListingComponent } from './boat-listing/boat-listing.component';
+import { BoatBookingPaymentComponent } from './boat-booking-payment/boat-booking-payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     BoatListingComponent,
-    BoatDetailsComponent
+    BoatDetailsComponent,
+    BoatBookingPaymentComponent
   ],
   imports: [
     BoatListingRoutingModule,
@@ -22,7 +26,8 @@ import { BoatListingComponent } from './boat-listing/boat-listing.component';
     FormsModule,
     GoogleMapsModule, 
     CommonModule,
-    SharedPipesModule
+    SharedPipesModule,
+    NgxStripeModule.forRoot(environment.stripeKey)
   ],
   providers: [YachtSearchService,BookingService]
 })
