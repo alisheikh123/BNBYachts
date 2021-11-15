@@ -65,7 +65,7 @@ namespace BnBYachts.Core.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync("Core");
+            await CreateApiScopeAsync(new[] { "Core,Payments,Booking,Boat" });
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,15 +80,14 @@ namespace BnBYachts.Core.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync("Core", commonApiUserClaims);
+            await CreateApiResourceAsync(new[] { "Core,Payments,Booking,Boat" }, commonApiUserClaims);
         }
 
-        private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims)
+        private async Task<ApiResource> CreateApiResourceAsync(string[] item, IEnumerable<string> claims)
         {
-            var apiResource = await _apiResourceRepository.FindByNameAsync(name);
-            if (apiResource == null)
+            foreach (var name in item)
             {
-                apiResource = await _apiResourceRepository.InsertAsync(
+                var apiResource = await _apiResourceRepository.FindByNameAsync(name) ?? await _apiResourceRepository.InsertAsync(
                     new ApiResource(
                         _guidGenerator.Create(),
                         name,
@@ -96,35 +95,42 @@ namespace BnBYachts.Core.IdentityServer
                     ),
                     autoSave: true
                 );
-            }
 
-            foreach (var claim in claims)
-            {
-                if (apiResource.FindClaim(claim) == null)
+                foreach (var claim in claims)
                 {
-                    apiResource.AddUserClaim(claim);
+                    if (apiResource.FindClaim(claim) == null)
+                    {
+                        apiResource.AddUserClaim(claim);
+                    }
                 }
+
+                await _apiResourceRepository.UpdateAsync(apiResource);
             }
 
-            return await _apiResourceRepository.UpdateAsync(apiResource);
+            return null;
         }
 
-        private async Task<ApiScope> CreateApiScopeAsync(string name)
+        private async Task<ApiScope> CreateApiScopeAsync(string[] name)
         {
-            var apiScope = await _apiScopeRepository.GetByNameAsync(name);
-            if (apiScope == null)
+
+
+            foreach (var item in name)
             {
-                apiScope = await _apiScopeRepository.InsertAsync(
+                if(await _apiScopeRepository.GetByNameAsync(item) != null)
+                {
+                    continue;
+                }
+
+                await _apiScopeRepository.InsertAsync(
                     new ApiScope(
                         _guidGenerator.Create(),
-                        name,
-                        name + " API"
+                        item,
+                        item + " API"
                     ),
                     autoSave: true
                 );
             }
-
-            return apiScope;
+            return null;
         }
 
         private async Task CreateClientsAsync()
@@ -137,7 +143,11 @@ namespace BnBYachts.Core.IdentityServer
                 "role",
                 "phone",
                 "address",
-                "Core"
+                "Core",
+                "Payments",
+                "Booking",
+                "Boat"
+
             };
 
             var configurationSection = _configuration.GetSection("IdentityServer:Clients");
@@ -160,10 +170,10 @@ namespace BnBYachts.Core.IdentityServer
                     corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
                 );
             }
-            
-            
-            
-            // Swagger Client
+
+
+
+            // Swagger Core Client
             var swaggerClientId = configurationSection["Core_Swagger:ClientId"];
             if (!swaggerClientId.IsNullOrWhiteSpace())
             {
@@ -179,6 +189,60 @@ namespace BnBYachts.Core.IdentityServer
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
                 );
             }
+
+
+            // Swagger Boat Client
+
+            var swaggerBoatClientId = configurationSection["Boat_Swagger:ClientId"];
+            if (!swaggerBoatClientId.IsNullOrWhiteSpace())
+            {
+                var swaggerRootUrl = configurationSection["Boat_Swagger:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: swaggerBoatClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["Boat_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            // Swagger Booking Client
+
+            var swaggerBookingClientId = configurationSection["Booking_Swagger:ClientId"];
+            if (!swaggerBookingClientId.IsNullOrWhiteSpace())
+            {
+                var swaggerRootUrl = configurationSection["Booking_Swagger:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: swaggerBookingClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["Booking_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }
+            // Swagger Payment Client
+
+            var swaggerPaymentsClientId = configurationSection["Payments_Swagger:ClientId"];
+            if (!swaggerPaymentsClientId.IsNullOrWhiteSpace())
+            {
+                var swaggerRootUrl = configurationSection["Payments_Swagger:RootUrl"].TrimEnd('/');
+                await CreateClientAsync(
+                    name: swaggerPaymentsClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["Payments_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }
+
         }
 
         private async Task<Client> CreateClientAsync(
