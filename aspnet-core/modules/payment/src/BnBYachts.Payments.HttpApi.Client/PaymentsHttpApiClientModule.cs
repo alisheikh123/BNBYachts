@@ -10,13 +10,8 @@ using Volo.Abp.SettingManagement;
 namespace BnBYachts.Payments
 {
     [DependsOn(
-        typeof(PaymentsApplicationContractsModule),
-        typeof(AbpAccountHttpApiClientModule),
-        typeof(AbpIdentityHttpApiClientModule),
-        typeof(AbpPermissionManagementHttpApiClientModule),
-        typeof(AbpTenantManagementHttpApiClientModule),
-        typeof(AbpFeatureManagementHttpApiClientModule),
-        typeof(AbpSettingManagementHttpApiClientModule)
+        typeof(PaymentsApplicationContractsModule)
+
     )]
     public class PaymentsHttpApiClientModule : AbpModule
     {
@@ -24,10 +19,7 @@ namespace BnBYachts.Payments
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddHttpClientProxies(
-                typeof(PaymentsApplicationContractsModule).Assembly,
-                RemoteServiceName
-            );
+            
         }
     }
 }
