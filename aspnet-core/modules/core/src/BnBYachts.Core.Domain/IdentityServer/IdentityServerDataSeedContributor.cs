@@ -65,7 +65,7 @@ namespace BnBYachts.Core.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync(new[] { "Core,Payments,Booking,Boat" });
+            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat" });
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,21 +80,22 @@ namespace BnBYachts.Core.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync(new[] { "Core,Payments,Booking,Boat" }, commonApiUserClaims);
+            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat" }, commonApiUserClaims);
         }
 
         private async Task<ApiResource> CreateApiResourceAsync(string[] item, IEnumerable<string> claims)
         {
             foreach (var name in item)
             {
-                var apiResource = await _apiResourceRepository.FindByNameAsync(name) ?? await _apiResourceRepository.InsertAsync(
-                    new ApiResource(
-                        _guidGenerator.Create(),
-                        name,
-                        name + " API"
-                    ),
-                    autoSave: true
-                );
+                var apiResource = await _apiResourceRepository.FindByNameAsync(name) ??
+                                  await _apiResourceRepository.InsertAsync(
+                                      new ApiResource(
+                                          _guidGenerator.Create(),
+                                          name,
+                                          name + " API"
+                                      ),
+                                      autoSave: true
+                                  );
 
                 foreach (var claim in claims)
                 {
@@ -112,11 +113,9 @@ namespace BnBYachts.Core.IdentityServer
 
         private async Task<ApiScope> CreateApiScopeAsync(string[] name)
         {
-
-
             foreach (var item in name)
             {
-                if(await _apiScopeRepository.GetByNameAsync(item) != null)
+                if (await _apiScopeRepository.GetByNameAsync(item) != null)
                 {
                     continue;
                 }
@@ -130,6 +129,7 @@ namespace BnBYachts.Core.IdentityServer
                     autoSave: true
                 );
             }
+
             return null;
         }
 
@@ -146,7 +146,8 @@ namespace BnBYachts.Core.IdentityServer
                 "Core",
                 "Payments",
                 "Booking",
-                "Boat"
+                "Boat",
+                "BnBYachts"
 
             };
 
@@ -154,16 +155,16 @@ namespace BnBYachts.Core.IdentityServer
 
 
             //Console Test / Angular Client
-            var consoleAndAngularClientId = configurationSection["Core_App:ClientId"];
+            var consoleAndAngularClientId = configurationSection["BnBYachts_App:ClientId"];
             if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
             {
-                var webClientRootUrl = configurationSection["Core_App:RootUrl"]?.TrimEnd('/');
+                var webClientRootUrl = configurationSection["BnBYachts_App:RootUrl"]?.TrimEnd('/');
 
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,
                     scopes: commonScopes,
                     grantTypes: new[] { "password", "client_credentials", "authorization_code" },
-                    secret: (configurationSection["Core_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    secret: (configurationSection["BnBYachts_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     requireClientSecret: false,
                     redirectUri: webClientRootUrl,
                     postLogoutRedirectUri: webClientRootUrl,
