@@ -1,11 +1,11 @@
 import { HomeComponent } from './../../../home/components/main-home/home.component';
-import { AuthService } from './../../../../shared/services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router} from "@angular/router"
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { SignupModalComponent } from '../signup-modal/signup-modal.component';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 
 @Component({

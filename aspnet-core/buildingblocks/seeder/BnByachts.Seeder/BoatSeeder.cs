@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
 
 namespace BnByachts.Seeder
 {
-    public class BoatSeeder
+    public class BoatSeederService : ITransientDependency
     {
         private readonly IRepository<HostBoat, Guid> _boatRepository;
         private readonly IRepository<BoatGallery, Guid> _boatGalleryRepository;
@@ -18,7 +19,7 @@ namespace BnByachts.Seeder
         private readonly IRepository<BoatRule, Guid> _boatRuleRepository;
         private readonly IRepository<Rule, Guid> _ruleRepository;
         private readonly IRepository<Feature, Guid> _featureRepository;
-        public BoatSeeder(IRepository<Feature, Guid> featureRepository, IRepository<Rule, Guid> ruleRepository, IRepository<HostBoat, Guid> repository, IRepository<BoatGallery, Guid> boatGalleries, IRepository<BoatFeature, Guid> boatFeatureRepository, IRepository<BoatRule, Guid> boatRuleRepository)
+        public BoatSeederService(IRepository<Feature, Guid> featureRepository, IRepository<Rule, Guid> ruleRepository, IRepository<HostBoat, Guid> repository, IRepository<BoatGallery, Guid> boatGalleries, IRepository<BoatFeature, Guid> boatFeatureRepository, IRepository<BoatRule, Guid> boatRuleRepository)
         {
             _boatRepository = repository;
             _boatGalleryRepository = boatGalleries;
@@ -29,61 +30,69 @@ namespace BnByachts.Seeder
 
         }
 
-        public void SeedLookups(CancellationToken token)
+
+
+        public async Task MigrateAsync()
         {
-            var path = Directory.GetCurrentDirectory();
-            var features = new List<Feature>();
-            using (StreamReader r = new StreamReader(path + "/Features.json"))
-            {
-                string json = r.ReadToEnd();
-                features = JsonConvert.DeserializeObject<List<Feature>>(json);
-            }
-             _featureRepository.InsertManyAsync(features, true, token);
-            //Seed Rules
-            var rule = new List<Rule>();
-            using (StreamReader r = new StreamReader(path + "/Rules.json"))
-            {
-                string json = r.ReadToEnd();
-                rule = JsonConvert.DeserializeObject<List<Rule>>(json);
-            }
-             _ruleRepository.InsertManyAsync(rule, true, token);
+            await SeedLookups().ConfigureAwait(false);
+            await SeedBoats().ConfigureAwait(false);
         }
 
-        public  void SeedBoats(CancellationToken token)
+        public async Task SeedLookups(CancellationToken token=default)
         {
             var path = Directory.GetCurrentDirectory();
-            var boats = new List<HostBoat>();
-            using (StreamReader r = new StreamReader(path + "/boats.json"))
+            List<Feature> features;
+            using (var r = new StreamReader(path + "/Features.json"))
             {
-                string json = r.ReadToEnd();
+                var json = await r.ReadToEndAsync();
+                features = JsonConvert.DeserializeObject<List<Feature>>(json);
+            }
+            await _featureRepository.InsertManyAsync(features, true, token);
+            //Seed Rules
+            List<Rule> rule;
+            using (var r = new StreamReader(path + "/Rules.json"))
+            {
+                var json = await r.ReadToEndAsync();
+                rule = JsonConvert.DeserializeObject<List<Rule>>(json);
+            }
+            await _ruleRepository.InsertManyAsync(rule, true, token);
+        }
+
+        public async Task SeedBoats(CancellationToken token=default)
+        {
+            var path = Directory.GetCurrentDirectory();
+            List<HostBoat> boats;
+            using (var r = new StreamReader(path + "/boats.json"))
+            {
+                var json = await r.ReadToEndAsync();
                 boats = JsonConvert.DeserializeObject<List<HostBoat>>(json);
             }
-             _boatRepository.InsertManyAsync(boats, true, token);
+            await _boatRepository.InsertManyAsync(boats, true, token);
             //Seed Gallery
-            var boatsGallery = new List<BoatGallery>();
-            using (StreamReader r = new StreamReader(path + "/BoatsGallery.json"))
+            List<BoatGallery> boatsGallery;
+            using (var r = new StreamReader(path + "/BoatsGallery.json"))
             {
-                string json = r.ReadToEnd();
+                var json = await r.ReadToEndAsync();
                 boatsGallery = JsonConvert.DeserializeObject<List<BoatGallery>>(json);
             }
-             _boatGalleryRepository.InsertManyAsync(boatsGallery, true, token);
+            await _boatGalleryRepository.InsertManyAsync(boatsGallery, true, token);
 
             //Seed Boats Features
-            var boatsFeature = new List<BoatFeature>();
-            using (StreamReader r = new StreamReader(path + "/BoatFeatures.json"))
+            List<BoatFeature> boatsFeature;
+            using (var r = new StreamReader(path + "/BoatFeatures.json"))
             {
-                string json = r.ReadToEnd();
+                var json = await r.ReadToEndAsync();
                 boatsFeature = JsonConvert.DeserializeObject<List<BoatFeature>>(json);
             }
-             _boatFeatureRepository.InsertManyAsync(boatsFeature, true, token);
+            await _boatFeatureRepository.InsertManyAsync(boatsFeature, true, token);
             //Seed Boat Rules
-            var boatsRules = new List<BoatRule>();
-            using (StreamReader r = new StreamReader(path + "/BoatRule.json"))
+            List<BoatRule> boatsRules;
+            using (var r = new StreamReader(path + "/BoatRule.json"))
             {
-                string json = r.ReadToEnd();
+                var json = await r.ReadToEndAsync();
                 boatsRules = JsonConvert.DeserializeObject<List<BoatRule>>(json);
             }
-             _boatRuleRepository.InsertManyAsync(boatsRules, true, token);
+            await _boatRuleRepository.InsertManyAsync(boatsRules, true, token);
         }
 
     }

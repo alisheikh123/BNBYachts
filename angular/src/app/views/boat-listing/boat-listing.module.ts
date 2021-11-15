@@ -11,13 +11,17 @@ import { BoatListingRoutingModule } from './boat-listing-routing.module';
 import { BoatListingComponent } from './boat-listing/boat-listing.component';
 import { AllReservationsComponent } from './all-reservations/all-reservations.component';
 import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
+import { BoatBookingPaymentComponent } from './boat-booking-payment/boat-booking-payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     BoatListingComponent,
     BoatDetailsComponent,
     AllReservationsComponent,
-    ReservationDetailComponent
+    ReservationDetailComponent,
+    BoatBookingPaymentComponent
   ],
   imports: [
     BoatListingRoutingModule,
@@ -26,7 +30,8 @@ import { ReservationDetailComponent } from './reservation-detail/reservation-det
     FormsModule,
     GoogleMapsModule, 
     CommonModule,
-    SharedPipesModule
+    SharedPipesModule,
+    NgxStripeModule.forRoot(environment.stripeKey)
   ],
   providers: [YachtSearchService,BookingService]
 })

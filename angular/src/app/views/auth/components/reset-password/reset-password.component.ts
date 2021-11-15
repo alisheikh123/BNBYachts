@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -87,6 +87,8 @@ export class ResetPasswordComponent implements OnInit {
       if(res==true)
       {
        
+      if(res==true)
+      {
         this.modal.dismissAll();
         this.passwordChangeModal();
    

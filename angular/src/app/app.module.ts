@@ -29,7 +29,6 @@ import { LoaderService } from './shared/loader/services/loader.service';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    NgxStripeModule.forRoot(environment.stripeKey),
     ReactiveFormsModule,
     FormsModule,
     ToastrModule.forRoot(),
@@ -48,7 +47,7 @@ import { LoaderService } from './shared/loader/services/loader.service';
         logLevel: LogLevel.Debug,
       },
     }),
-    
+    NgxStripeModule.forRoot(environment.stripeKey)
   ],
   providers: [
     // OAuthService,

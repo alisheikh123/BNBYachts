@@ -28,6 +28,24 @@ $footer-social-link:#c5c5c5;
 $black-secondary-color: #434343; 
 $modal-close-btn:rgba(60,64,67,0.08);
 $grey-clr-rgb:60,64,67;
+$background : #fff !default;
+$success:       #4CAF50 !default;
+$warning:       #FFC107 !default;
+$info:           #263db5 !default;
+$body-color: #212529 !default;
+$gray-400: #ced4da !default;
+// stylelint-disable
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
 // fonts
 $font-primary-en: 'gilroy-Regular';
 $font-semibold:'gilroy-semibold';
@@ -38,6 +56,29 @@ $font-exBold:'gilroy-extrabold';
 
 // Transition
 $common-trans: .3s ease;
+///toasts
+// Toasts
+$toast-max-width: 350px !default;
+$toast-padding-x: .75rem !default;
+$toast-padding-y: .25rem !default;
+$toast-font-size: .875rem !default;
+$toast-background-color: rgba($white,
+.85) !default;
+$toast-border-width: 1px !default;
+$toast-border-color: rgba(0,
+0,
+0,
+.1) !default;
+$toast-border-radius: .25rem !default;
+$toast-box-shadow: 0 .25rem .75rem rgba($black,
+.1) !default;
+$toast-header-color: $gray-600 !default;
+$toast-header-background-color: rgba($white,
+.85) !default;
+$toast-header-border-color: rgba(0,
+0,
+0,
+.05) !default;
 
 
 

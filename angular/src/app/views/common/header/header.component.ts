@@ -1,6 +1,5 @@
 import { ResetPasswordComponent } from './../../auth/components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './../../auth/components/forgot-password/forgot-password.component';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../../auth/components/login-modal/login-modal.component';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 
 @Component({
@@ -39,8 +39,7 @@ export class HeaderComponent implements OnInit {
         if(userId != null){
           this.getUserDetails(userId);
         }
-  });
-  
+  }); 
 
 }
 getUserDetails(userId:any){
@@ -51,7 +50,6 @@ if(res==null)
 }
 else{
 this.userDetails = res;
-
 this.isLoggedIn = true;
 }
 })
@@ -60,8 +58,7 @@ this.isLoggedIn = true;
     let modalRef = this.modal.open(SignupModalComponent,{ windowClass: 'custom-modal custom-large-modal'});
   }
 
-  login(){
-  
+  login(){  
     this.oidcSecurityService.authorize();
   }
  

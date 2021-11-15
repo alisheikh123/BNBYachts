@@ -39,8 +39,8 @@ namespace BnBYachts.Services.Boat
         {
             try
             {
-                parameters.Latitude = 31.5204;
-                parameters.Longitude = 74.3587;
+                //parameters.Latitude = 31.5204;
+                //parameters.Longitude = 74.3587;
                 var getBoats = await _boatRepository.GetListAsync(res => res.IsBoatelServicesOffered == true);
 
                 var filterdBoats = new List<HostBoat>();

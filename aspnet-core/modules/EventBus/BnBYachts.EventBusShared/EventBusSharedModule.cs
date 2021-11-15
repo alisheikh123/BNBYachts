@@ -1,51 +1,78 @@
-﻿using BnBYachts.EventBusShared.HostedServices;
+﻿using System;
+using BnBYachts.EventBusShared.Consumers;
+using BnBYachts.EventBusShared.Contracts;
+using BnBYachts.EventBusShared.HostedServices;
+using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Domain.Entities.Events.Distributed;
-using Volo.Abp.EventBus;
-using Volo.Abp.EventBus.RabbitMq;
 using Volo.Abp.Modularity;
-using Volo.Abp.RabbitMQ;
+using Volo.Abp;
 
 namespace BnBYachts.EventBusShared
 {
-    [DependsOn(
-        typeof(AbpEventBusRabbitMqModule)
-    )]
+    public class RabbitMqConfigurations
+    {
+        public string Host { get; set; }
+        public string VirtualHost { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+    //[DependsOn(
+    //    typeof(AbpEventBusRabbitMqModule)
+    //)]
     public class EventBusSharedModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             //...
             context.Services.AddHostedService<HeartbeatHostedService>();
+            var configuration = context.Services.GetConfiguration();
+            var configurations = new RabbitMqConfigurations
+            {
+                Host = configuration["RabbitMq:Host"],
+                VirtualHost = configuration["RabbitMq:VirtualHost"],
+                UserName = configuration["RabbitMq:UserName"],
+                Password = configuration["RabbitMq:Password"]
+            };
 
-            //Configure<AbpRabbitMqOptions>(options =>
-            //{
-            //    options.Connections.Default.UserName = "guest";
-            //    options.Connections.Default.Password = "guest";
-            //    options.Connections.Default.HostName = "rabbitmq://localhost";
-            //    options.Connections.Default.Port = 15672;
-            //});
-
-                Configure<AbpRabbitMqEventBusOptions>(options =>
-                {
-                    options.ClientName = "SimulatorApp";
-                    options.ExchangeName = "TestMessage";
+            context.Services.AddMassTransit(mt =>
+            {
+                mt.AddConsumer<HeartbeatConsumer>().Endpoint(e => {
+                    e.Name = EventBusQueue.HeartBeat;
                 });
+
+                mt.AddBus(bs => Bus.Factory.CreateUsingRabbitMq(sbc =>
+                {
+
+                    var queueHost = configurations.Host;
+                    sbc.Host(new Uri(queueHost), "/", h =>
+                    {
+                        h.Username(configurations.UserName);
+                        h.Password(configurations.Password);
+                    });
+                    sbc.ClearMessageDeserializers();
+                    sbc.UseRawJsonSerializer();
+                    sbc.UseInMemoryOutbox();
+                    RegisterEndpointMap(queueHost);
+                    sbc.ConfigureEndpoints(bs);
+                }));
+            });
+
+           
         }
+
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
-            PreConfigure<AbpEventBusOptions>(options =>
-            {
-                options.EnabledErrorHandle = true;
-                options.DeadLetterName = EventBusQueue.DeadQueue;
-                options.UseRetryStrategy(retryStrategyOptions =>
-                {
-                    retryStrategyOptions.IntervalMillisecond = 0;
-                    retryStrategyOptions.MaxRetryAttempts = 1;
-                });
-            });
+
+        }
+
+        public static void RegisterEndpointMap(string queueHost)
+        {
+            EndpointConvention.Map<IHeartbeatContract>(new Uri($"{queueHost}/{EventBusQueue.HeartBeat}"));
+
         }
     }
+
+
 
 
 }
