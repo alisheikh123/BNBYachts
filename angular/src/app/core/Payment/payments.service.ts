@@ -11,8 +11,8 @@ export class PaymentsService {
   paymentsApiUrl: string = environment.PAYMENTS_API_URL;
   constructor(private http: HttpClient) { }
 
-  getUserPaymentMethods(userId: string) {
-    return this.http.get(this.paymentsApiUrl + '/get-customers-cards/' + userId).pipe(
+  getUserPaymentMethods() {
+    return this.http.get(this.paymentsApiUrl + '/get-customers-cards').pipe(
       catchError(this.handleError));
   }
 

@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'boat-listing',
     loadChildren: () => import('./views/boat-listing/boat-listing.module').then(m => m.BoatListingModule)
+  },
+  {
+    path: 'my-bookings',
+    loadChildren: () => import('./views/host/host.module').then(m => m.HostModule)
   }
 ];
 
