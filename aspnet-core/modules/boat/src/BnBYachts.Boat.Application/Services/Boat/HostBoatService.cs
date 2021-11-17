@@ -135,12 +135,6 @@ namespace BnBYachts.Services.Boat
         {
             
 
-            _hostBoatManager.Insert(new HostBoatRequestable
-            {
-                Name = "my Boat",
-            });
-            //HostBoat boat = new HostBoat();
-            //boat.Name = "my Boat";
             //boat.Length = 200;
             //boat.TotalBedrooms = 2;
             //boat.TotalWashrooms = 3;
