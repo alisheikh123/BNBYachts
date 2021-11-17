@@ -11,16 +11,16 @@ namespace BnBYachts.Booking.Services
 {
     public class HostBookingService : ApplicationService
     {
-        private readonly IRepository<BoatelBooking, Guid> _boatelBookingRepository;
+        private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
 
-        public HostBookingService(IRepository<BoatelBooking, Guid> boatelBookingRepository)
+        public HostBookingService(IRepository<BoatelBookingEntity, int> boatelBookingRepository)
         {
             _boatelBookingRepository = boatelBookingRepository;
         }
 
         [HttpGet]
         [Route("get-my-reservations")]
-        public async Task<List<BoatelBooking>> GetHostBookings()
+        public async Task<List<BoatelBookingEntity>> GetHostBookings()
         {
             var boatelBookings = await _boatelBookingRepository.GetListAsync(res=>res.HostId == CurrentUser.Id.ToString()).ConfigureAwait(false);
             return boatelBookings;

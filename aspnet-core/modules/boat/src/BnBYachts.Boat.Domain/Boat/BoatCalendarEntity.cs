@@ -12,6 +12,6 @@ namespace BnBYachts.Boat
         public bool IsAvailable { get; set; }
         public DateTime ToDate { get; set; }
         public DateTime FromDate { get; set; }
-        public virtual int? HostBoatId { get; set; }
+        public virtual int? BoatId { get; set; }
     }
 }

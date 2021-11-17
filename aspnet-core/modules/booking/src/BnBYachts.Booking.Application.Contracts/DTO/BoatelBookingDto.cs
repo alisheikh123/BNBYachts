@@ -5,7 +5,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace BnBYachts.Booking.DTO
 {
-    public class BoatelBookingDto : AuditedEntityDto<Guid>
+    public class BoatelBookingDto : AuditedEntityDto<int>
     {
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }

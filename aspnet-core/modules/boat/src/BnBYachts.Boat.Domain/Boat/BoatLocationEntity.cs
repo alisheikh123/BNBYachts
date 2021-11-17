@@ -15,5 +15,6 @@ namespace BnBYachts.Boat
         public string NextLocState { get; set; }
         public int NextLocZip { get; set; }
         public string NextLocCountry { get; set; }
+        public virtual int? BoatId { get; set; }
     }
 }

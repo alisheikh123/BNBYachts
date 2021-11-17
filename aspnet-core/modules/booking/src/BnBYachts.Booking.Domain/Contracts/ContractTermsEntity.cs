@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Booking.Contracts
 {
-    public class ContractTerms : AuditedAggregateRoot<Guid>
+    public class ContractTermsEntity : AuditedAggregateRoot<int>
     {
         public string Name { get; set; }
         public string AttachmentPath { get; set; }

@@ -14,9 +14,9 @@ namespace BnBYachts.Payments.PaymentServices
 {
     public class StripeAccountService : ApplicationService
     {
-        private readonly IRepository<UserCardInfo, Guid> _userCardRepository;
-        private readonly IRepository<PaymentDetails, Guid> _userPaymentDetailsRepository;
-        public StripeAccountService(IRepository<UserCardInfo, Guid> userCardRepository, IRepository<PaymentDetails, Guid> userPaymentDetailsRepository)
+        private readonly IRepository<UserCardInfoEntity, int> _userCardRepository;
+        private readonly IRepository<PaymentDetailsEntity, int> _userPaymentDetailsRepository;
+        public StripeAccountService(IRepository<UserCardInfoEntity, int> userCardRepository, IRepository<PaymentDetailsEntity, int> userPaymentDetailsRepository)
         {
             StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";
             _userCardRepository = userCardRepository;

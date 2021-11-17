@@ -12,10 +12,10 @@ using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Booking.Services
 {
-    public class BoatBookingService : CrudAppService<BoatelBooking, BoatelBookingDto, Guid, PagedAndSortedResultRequestDto, BoatelBookingDto>, IBoatBookingService
+    public class BoatBookingService : CrudAppService<BoatelBookingEntity, BoatelBookingDto, int, PagedAndSortedResultRequestDto, BoatelBookingDto>, IBoatBookingService
     {
-        private readonly IRepository<BoatelBooking, Guid> _boatelBookingRepository;
-        public BoatBookingService(IRepository<BoatelBooking, Guid> repository)
+        private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
+        public BoatBookingService(IRepository<BoatelBookingEntity, int> repository)
           : base(repository)
         {
             _boatelBookingRepository = repository;
@@ -23,7 +23,7 @@ namespace BnBYachts.Booking.Services
 
         [HttpPost]
         [Route("boatelbooking")]
-        public async Task<bool> BoatelBooking(BoatelBooking data)
+        public async Task<bool> BoatelBooking(BoatelBookingEntity data)
         {
             data.LastModifierId = data.CreatorId = CurrentUser.Id;
             data.UserId = CurrentUser.Id.ToString();

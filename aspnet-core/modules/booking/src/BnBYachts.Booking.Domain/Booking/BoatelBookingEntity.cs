@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Booking
 {
-   public class BoatelBooking : AuditedAggregateRoot<Guid>
+   public class BoatelBookingEntity : AuditedAggregateRoot<int>
     {
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }
@@ -18,7 +18,7 @@ namespace BnBYachts.Booking
         public string BoatId { get; set; }
         public string BankingDetailsId { get; set; }
         public string UserId { get; set; }
-        public Review Reviews { get; set; }
+        public ReviewEntity Reviews { get; set; }
         public string HostId { get; set; }
     }
 }

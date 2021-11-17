@@ -14,5 +14,6 @@ namespace BnBYachts.Boat
         public bool IsGuestFavourite { get; set; }
         public bool IsSafetyFeature { get; set; }
         public string Icon{ get; set; }
+        public virtual int  BoatId { get; set; }
     }
 }

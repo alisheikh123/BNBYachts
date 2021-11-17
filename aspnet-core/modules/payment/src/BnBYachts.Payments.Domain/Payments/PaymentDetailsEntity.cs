@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Payments.Payments
 {
-    public class PaymentDetails : AuditedAggregateRoot<Guid>
+    public class PaymentDetailsEntity : AuditedAggregateRoot<int>
     {
         public string PaymentId { get; set; }
         public string BookingId { get; set; }

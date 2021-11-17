@@ -38,8 +38,8 @@ namespace BnBYachts.Payments.EntityFrameworkCore
          */
         
         //Identity
-        public DbSet<UserCardInfo> UserCardInfo { get; set; }
-        public DbSet<PaymentDetails> PaymentDetails { get; set; }
+        public DbSet<UserCardInfoEntity> UserCardInfo { get; set; }
+        public DbSet<PaymentDetailsEntity> PaymentDetails { get; set; }
         #endregion
         
         public PaymentsDbContext(DbContextOptions<PaymentsDbContext> options)

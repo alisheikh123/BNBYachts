@@ -13,9 +13,9 @@ namespace BnBYachts.Boat.Manager
 {
     public class HostBoatManager : DomainService, IHostBoatManager
     {
-        private readonly IRepository<HostBoat, Guid> _boatRepository;
+        private readonly IRepository<BoatEntity, int> _boatRepository;
 
-        public HostBoatManager(IRepository<HostBoat, Guid> boatRepository)
+        public HostBoatManager(IRepository<BoatEntity, int> boatRepository)
         {
             _boatRepository = boatRepository;
 
@@ -23,7 +23,7 @@ namespace BnBYachts.Boat.Manager
         }
         public async Task<HostBoatRequestable> Insert(HostBoatRequestable input)
         {
-            var boat = new HostBoat
+            var boat = new BoatEntity
             {
                 Name = "my Boat",
                 Length = 200,
