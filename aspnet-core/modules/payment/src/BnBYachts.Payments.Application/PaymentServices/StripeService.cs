@@ -15,10 +15,12 @@ namespace BnBYachts.Payments.PaymentServices
     public class StripeAccountService : ApplicationService
     {
         private readonly IRepository<UserCardInfo, Guid> _userCardRepository;
-        public StripeAccountService(IRepository<UserCardInfo, Guid> userCardRepository)
+        private readonly IRepository<PaymentDetails, Guid> _userPaymentDetailsRepository;
+        public StripeAccountService(IRepository<UserCardInfo, Guid> userCardRepository, IRepository<PaymentDetails, Guid> userPaymentDetailsRepository)
         {
             StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";
             _userCardRepository = userCardRepository;
+            _userPaymentDetailsRepository = userPaymentDetailsRepository;
         }
 
 
@@ -120,6 +122,30 @@ namespace BnBYachts.Payments.PaymentServices
             }
         }
 
+        [HttpGet]
+        [Route("refund/{bookingId}/{refundAmount}")]
+        public async Task<bool> RefundPayment(string bookingId, long refundAmount)
+        {
+
+            var paymentDetails = await _userPaymentDetailsRepository.FindAsync(res => res.BookingId == bookingId).ConfigureAwait(false);
+
+            var options = new RefundCreateOptions
+            {
+                PaymentIntent = paymentDetails.PaymentId,
+                Amount = refundAmount * 100,
+                Reason = "requested_by_customer",
+            };
+            var service = new RefundService();
+            var response = service.Create(options);
+            if (response.Status == "succeeded")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
         //public void CreateAccount(Account account)
