@@ -325,7 +325,7 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("Features");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.HostBoat", b =>
+            modelBuilder.Entity("BnBYachts.Boat.BoatEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -592,14 +592,14 @@ namespace BnBYachts.Boat.Migrations
 
             modelBuilder.Entity("BnBYachts.Boat.BoatCalendar", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.BoatEntity", null)
                         .WithMany("BoatCalendars")
                         .HasForeignKey("HostBoatId");
                 });
 
             modelBuilder.Entity("BnBYachts.Boat.BoatFeature", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.BoatEntity", null)
                         .WithMany("BoatFeatures")
                         .HasForeignKey("HostBoatId");
 
@@ -612,14 +612,14 @@ namespace BnBYachts.Boat.Migrations
 
             modelBuilder.Entity("BnBYachts.Boat.BoatGallery", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.BoatEntity", null)
                         .WithMany("BoatGalleries")
                         .HasForeignKey("HostBoatId");
                 });
 
             modelBuilder.Entity("BnBYachts.Boat.BoatLocation", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.BoatEntity", null)
                         .WithMany("BoatLocations")
                         .HasForeignKey("HostBoatId");
                 });
@@ -630,7 +630,7 @@ namespace BnBYachts.Boat.Migrations
                         .WithMany()
                         .HasForeignKey("BoatRulesId");
 
-                    b.HasOne("BnBYachts.Boat.HostBoat", null)
+                    b.HasOne("BnBYachts.Boat.BoatEntity", null)
                         .WithMany("BoatRules")
                         .HasForeignKey("HostBoatId");
 
@@ -639,7 +639,7 @@ namespace BnBYachts.Boat.Migrations
 
             modelBuilder.Entity("BnBYachts.Charter.Charter", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", "Boat")
+                    b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()
                         .HasForeignKey("BoatId");
 
@@ -648,14 +648,14 @@ namespace BnBYachts.Boat.Migrations
 
             modelBuilder.Entity("BnBYachts.Events.Event", b =>
                 {
-                    b.HasOne("BnBYachts.Boat.HostBoat", "Boat")
+                    b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()
                         .HasForeignKey("BoatId");
 
                     b.Navigation("Boat");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.HostBoat", b =>
+            modelBuilder.Entity("BnBYachts.Boat.BoatEntity", b =>
                 {
                     b.Navigation("BoatCalendars");
 
