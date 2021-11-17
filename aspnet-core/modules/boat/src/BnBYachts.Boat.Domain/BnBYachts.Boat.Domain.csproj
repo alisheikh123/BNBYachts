@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\buildingblocks\SharedModule\BnByachts.SharedModule\BnByachts.SharedModule.csproj" />
     <ProjectReference Include="..\BnBYachts.Boat.Domain.Shared\BnBYachts.Boat.Domain.Shared.csproj" />
   </ItemGroup>
 

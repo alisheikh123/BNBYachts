@@ -36,9 +36,9 @@ namespace BnBYachts.EventBusShared
 
             context.Services.AddMassTransit(mt =>
             {
-                mt.AddConsumer<HeartbeatConsumer>().Endpoint(e => {
-                    e.Name = EventBusQueue.HeartBeat;
-                });
+                //mt.AddConsumer<HeartbeatConsumer>().Endpoint(e => {
+                //    e.Name = EventBusQueue.HeartBeat;
+                //});
 
                 mt.AddBus(bs => Bus.Factory.CreateUsingRabbitMq(sbc =>
                 {
@@ -67,7 +67,9 @@ namespace BnBYachts.EventBusShared
 
         public static void RegisterEndpointMap(string queueHost)
         {
-            EndpointConvention.Map<IHeartbeatContract>(new Uri($"{queueHost}/{EventBusQueue.HeartBeat}"));
+           // EndpointConvention.Map<IHeartbeatContract>(new Uri($"{queueHost}/{EventBusQueue.HeartBeat}"));
+            EndpointConvention.Map<IHeartbeatContract>(new Uri($"{queueHost}/{EventBusQueue.QSeeder}"));
+            EndpointConvention.Map<IHeartbeatContract>(new Uri($"{queueHost}/{EventBusQueue.QEmailNotification}"));
 
         }
     }

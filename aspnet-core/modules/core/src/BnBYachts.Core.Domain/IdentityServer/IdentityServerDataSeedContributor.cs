@@ -159,7 +159,6 @@ namespace BnBYachts.Core.IdentityServer
             if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
             {
                 var webClientRootUrl = configurationSection["BnBYachts_App:RootUrl"]?.TrimEnd('/');
-
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,
                     scopes: commonScopes,
