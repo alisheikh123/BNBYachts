@@ -10,25 +10,33 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BnByachts.SharedModule;
+using BnByachts.SharedModule.Manager.Boat.Requestable;
+using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Services.Boat
 {
-    public class HostBoatService : CrudAppService<HostBoat, HostBoatDto, Guid, PagedAndSortedResultRequestDto, HostBoatDto>, IHostBoatService
+    [Authorize]
+    public class HostBoatService :CrudAppService<HostBoat, HostBoatDto, Guid, PagedAndSortedResultRequestDto, HostBoatDto>, IHostBoatService
     {
         private readonly IRepository<HostBoat, Guid> _boatRepository;
         private readonly IRepository<BoatFeature, Guid> _boatelFeatureRepo;
         private readonly IRepository<BoatRule, Guid> _boatelRulesRepo;
         private readonly IRepository<BoatCalendar, Guid> _boatelCalendarRepo;
-        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo)
+        private readonly IHostBoatManager _hostBoatManager;
+        public HostBoatService(IRepository<HostBoat, Guid> repository, 
+            IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid>
+                boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo, IHostBoatManager hostBoatManager)
            : base(repository)
         {
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
             _boatelRulesRepo = boatelRulesRep;
+            _hostBoatManager = hostBoatManager;
         }
 
         [Route("FilterBoatelBoats")]
@@ -122,31 +130,37 @@ namespace BnBYachts.Services.Boat
         [Route("boatSave")]
         public async void InsertBoat(CancellationToken cancellationToken)
         {
-            HostBoat boat = new HostBoat();
-            boat.Name = "my Boat";
-            boat.Length = 200;
-            boat.TotalBedrooms = 2;
-            boat.TotalWashrooms = 3;
-            boat.IsBoatelServicesOffered = true;
-            boat.BoatelAvailabilityDays = 20;
-            boat.CheckinTime = new DateTime();
-            boat.CheckoutTime = new DateTime().AddDays(3);
-            //     Latitude Longitude
-            boat.Latitude = 32.073978;
-            boat.Longitude = 72.686073;
-            boat.PerDayCharges = 200;
-            boat.IsActive = true;
-            boat.BoatType = BoatTypes.PowerBoat;
-            boat.CreationTime = new DateTime();
-            try
-            {
-                await _boatRepository.InsertAsync(boat, true, cancellationToken);
-            }
-            catch (Exception ex)
-            {
+            
 
-                throw;
-            }
+            _hostBoatManager.Insert(new HostBoatRequestable
+            {
+                Name = "my Boat",
+            });
+            //HostBoat boat = new HostBoat();
+            //boat.Name = "my Boat";
+            //boat.Length = 200;
+            //boat.TotalBedrooms = 2;
+            //boat.TotalWashrooms = 3;
+            //boat.IsBoatelServicesOffered = true;
+            //boat.BoatelAvailabilityDays = 20;
+            //boat.CheckinTime = new DateTime();
+            //boat.CheckoutTime = new DateTime().AddDays(3);
+            ////     Latitude Longitude
+            //boat.Latitude = 32.073978;
+            //boat.Longitude = 72.686073;
+            //boat.PerDayCharges = 200;
+            //boat.IsActive = true;
+            //boat.BoatType = BoatTypes.PowerBoat;
+            //boat.CreationTime = new DateTime();
+            //try
+            //{
+            //    await _boatRepository.InsertAsync(boat, true, cancellationToken);
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw;
+            //}
         }
 
         [Route("boat-details/{boatId}")]
@@ -167,6 +181,7 @@ namespace BnBYachts.Services.Boat
                 await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
             }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatLocations).ConfigureAwait(false);
+            
             return boat;
         }
     }

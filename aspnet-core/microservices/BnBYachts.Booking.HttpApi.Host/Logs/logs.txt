@@ -25264,3 +25264,99 @@ Error Number:208,State:1,Class:16
 2021-11-15 14:37:07.166 +05:00 [INF] Executing endpoint 'BnBYachts.Booking.Controllers.HomeController.Index (BnBYachts.Booking.HttpApi.Host)'
 2021-11-15 14:37:07.449 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Booking.Controllers.HomeController (BnBYachts.Booking.HttpApi.Host).
 2021-11-15 14:37:08.152 +05:00 [INF] Executing action method BnBYachts.Booking.Controllers.HomeController.Index (BnBYachts.Booking.HttpApi.Host) - Validation state: "Valid"
+2021-11-17 17:10:00.643 +05:00 [INF] Starting BnBYachts.Booking.HttpApi.Host.
+2021-11-17 17:10:16.668 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-17 17:10:17.589 +05:00 [INF] Creating key {383dc3bd-4a6c-47d6-bd2f-96abb5df4c17} with creation date 2021-11-17 12:10:17Z, activation date 2021-11-18 14:33:30Z, and expiration date 2022-02-15 12:10:16Z.
+2021-11-17 17:10:17.701 +05:00 [INF] Writing data to file 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys\key-383dc3bd-4a6c-47d6-bd2f-96abb5df4c17.xml'.
+2021-11-17 17:10:17.754 +05:00 [INF] Loaded ABP modules:
+2021-11-17 17:10:17.754 +05:00 [INF] - BnBYachts.Booking.BookingHttpApiHostModule
+2021-11-17 17:10:17.754 +05:00 [INF]   - BnBYachts.Booking.BookingHttpApiModule
+2021-11-17 17:10:17.754 +05:00 [INF]     - BnBYachts.Booking.BookingApplicationContractsModule
+2021-11-17 17:10:17.754 +05:00 [INF]       - BnBYachts.Booking.BookingDomainSharedModule
+2021-11-17 17:10:17.754 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-17 17:10:17.754 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-17 17:10:17.754 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-17 17:10:17.754 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-17 17:10:17.754 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-17 17:10:17.754 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-17 17:10:17.754 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-17 17:10:17.754 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-17 17:10:17.754 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-17 17:10:17.755 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-17 17:10:17.755 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-17 17:10:17.755 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-17 17:10:17.755 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-17 17:10:17.755 +05:00 [INF]   - BnBYachts.Booking.BookingApplicationModule
+2021-11-17 17:10:17.755 +05:00 [INF]     - BnBYachts.Booking.BookingDomainModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-17 17:10:17.755 +05:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-17 17:10:17.755 +05:00 [INF]   - BnBYachts.Booking.EntityFrameworkCore.BookingEntityFrameworkCoreModule
+2021-11-17 17:10:17.755 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-17 17:10:17.755 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-17 17:10:17.755 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-17 17:10:17.755 +05:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-17 17:10:17.755 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-17 17:10:17.755 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-17 17:10:17.755 +05:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-17 17:10:17.755 +05:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-17 17:10:21.256 +05:00 [INF] Initialized all ABP modules.
+2021-11-17 17:10:21.311 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-17 17:10:21.311 +05:00 [INF] Hosting environment: Development
+2021-11-17 17:10:21.311 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Booking.HttpApi.Host
+2021-11-17 17:10:21.649 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/ - -
+2021-11-17 17:10:25.183 +05:00 [INF] Executing endpoint 'BnBYachts.Booking.Controllers.HomeController.Index (BnBYachts.Booking.HttpApi.Host)'
+2021-11-17 17:10:25.309 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Booking.Controllers.HomeController (BnBYachts.Booking.HttpApi.Host).
+2021-11-17 17:10:25.381 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-17 17:10:25.400 +05:00 [INF] Executed action BnBYachts.Booking.Controllers.HomeController.Index (BnBYachts.Booking.HttpApi.Host) in 73.7459ms
+2021-11-17 17:10:25.401 +05:00 [INF] Executed endpoint 'BnBYachts.Booking.Controllers.HomeController.Index (BnBYachts.Booking.HttpApi.Host)'
+2021-11-17 17:10:25.486 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger - -
+2021-11-17 17:10:25.560 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/index.html - -
+2021-11-17 17:10:25.599 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/ - - - 302 - - 3953.0208ms
+2021-11-17 17:10:25.599 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger - - - 301 - - 128.6516ms
+2021-11-17 17:10:25.780 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/index.html - - - 200 - text/html;charset=utf-8 220.3603ms
+2021-11-17 17:10:25.955 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/swagger-ui.css - -
+2021-11-17 17:10:25.956 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/ui/abp.js - -
+2021-11-17 17:10:25.959 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/ui/abp.swagger.js - -
+2021-11-17 17:10:26.014 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-11-17 17:10:26.014 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-11-17 17:10:26.044 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 85.5955ms
+2021-11-17 17:10:26.044 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/ui/abp.js - - - 200 3025 application/javascript 88.6140ms
+2021-11-17 17:10:26.045 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/swagger-ui-bundle.js - -
+2021-11-17 17:10:26.045 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/swagger-ui-standalone-preset.js - -
+2021-11-17 17:10:26.072 +05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-17 17:10:26.072 +05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-17 17:10:26.102 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/swagger-ui.css - - - 200 143410 text/css 146.2437ms
+2021-11-17 17:10:26.109 +05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-17 17:10:26.132 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 86.9662ms
+2021-11-17 17:10:26.179 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 134.1954ms
+2021-11-17 17:10:28.930 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/v1/swagger.json - -
+2021-11-17 17:10:29.260 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 330.7931ms
+2021-11-17 17:10:29.359 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/favicon-32x32.png - -
+2021-11-17 17:10:29.362 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-17 17:10:29.365 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/favicon-32x32.png - - - 200 628 image/png 6.1560ms

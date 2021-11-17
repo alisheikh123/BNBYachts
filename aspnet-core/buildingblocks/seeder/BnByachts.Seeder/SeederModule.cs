@@ -1,4 +1,5 @@
-﻿using Volo.Abp.BackgroundJobs;
+﻿using BnBYachts.EventBusShared;
+using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;
 
 namespace BnByachts.Seeder
@@ -6,7 +7,7 @@ namespace BnByachts.Seeder
 
     [DependsOn(
         //typeof(AbpAutofacModule),
-        //typeof(CoreEntityFrameworkCoreModule),
+        typeof(EventBusSharedModule)
         //typeof(CoreApplicationContractsModule)
     )]
     public class SeederModule : AbpModule

@@ -5,6 +5,18 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
 		<PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
@@ -18,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\modules\boat\src\BnBYachts.Boat.Domain\BnBYachts.Boat.Domain.csproj" />
+    <ProjectReference Include="..\..\..\modules\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
   </ItemGroup>
 
 </Project>
