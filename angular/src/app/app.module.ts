@@ -36,12 +36,12 @@ import { LoaderService } from './shared/loader/services/loader.service';
     AuthAppModule,
     AuthModule.forRoot({
       config: {
-        authority: 'https://localhost:44311',
-        redirectUrl: 'http://localhost:4200',
-        postLogoutRedirectUri: 'http://localhost:4200',
-        clientId: 'BnBYachts_App',
-        scope: 'openid Core',
-        responseType: 'code',
+        authority: environment.Identity.authority,
+        redirectUrl: environment.Identity.redirectUrl,
+        postLogoutRedirectUri: environment.Identity.postLogoutRedirectUri,
+        clientId: environment.Identity.clientId,
+        scope: environment.Identity.scope,
+        responseType: environment.Identity.responseType,
         silentRenew: true,
         useRefreshToken: true,
         logLevel: LogLevel.Debug,

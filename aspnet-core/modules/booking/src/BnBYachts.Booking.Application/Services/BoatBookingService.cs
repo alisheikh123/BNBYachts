@@ -25,6 +25,8 @@ namespace BnBYachts.Booking.Services
         [Route("boatelbooking")]
         public async Task<bool> BoatelBooking(BoatelBooking data)
         {
+            data.LastModifierId = data.CreatorId = CurrentUser.Id;
+            data.UserId = CurrentUser.Id.ToString();
             await _boatelBookingRepository.InsertAsync(data);
             return true;
         }

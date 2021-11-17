@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +6,6 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'AngularAPP';
-
-  
+  title = 'BnB Yacht';
+  public loggedInUserRole: any = null;
 }

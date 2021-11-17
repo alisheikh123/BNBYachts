@@ -1,8 +1,11 @@
 ﻿using BnBYachts.Boat;
 using BnBYachts.Boat.Enum;
+using BnBYachts.Boat.ViewModel;
+using BnBYachts.Boats.Charter;
 using BnBYachts.Helpers;
 using BnBYachts.Interfaces.Boat;
 using BnBYachts.ViewModel.Boat;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,17 +29,16 @@ namespace BnBYachts.Services.Boat
         private readonly IRepository<BoatFeature, Guid> _boatelFeatureRepo;
         private readonly IRepository<BoatRule, Guid> _boatelRulesRepo;
         private readonly IRepository<BoatCalendar, Guid> _boatelCalendarRepo;
-        private readonly IHostBoatManager _hostBoatManager;
-        public HostBoatService(IRepository<HostBoat, Guid> repository, 
-            IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid>
-                boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo, IHostBoatManager hostBoatManager)
+        //Charters
+        private readonly IRepository<Charter, Guid> _charterRepository;
+        public HostBoatService(IRepository<Charter, Guid> charterRepository, IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo)
            : base(repository)
         {
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
             _boatelRulesRepo = boatelRulesRep;
-            _hostBoatManager = hostBoatManager;
+            _charterRepository = charterRepository;
         }
 
         [Route("FilterBoatelBoats")]
@@ -88,6 +90,7 @@ namespace BnBYachts.Services.Boat
         {
             try
             {
+                boatCalendar.LastModifierId = boatCalendar.CreatorId = CurrentUser.Id;
                 await _boatelCalendarRepo.InsertAsync(boatCalendar).ConfigureAwait(false);
                 return true;
             }
@@ -100,7 +103,7 @@ namespace BnBYachts.Services.Boat
 
         [Route("FilterChartersBoats")]
         [HttpPost]
-        public async Task<List<HostBoat>> GetChartersByFilters(SearchFilters parameters)
+        public async Task<List<HostBoat>> GetChartersByFilters(CharterFilters param)
         {
             try
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BnBYachts.Payments.Payments;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -15,13 +16,11 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace BnBYachts.Payments.EntityFrameworkCore
 {
-    [ReplaceDbContext(typeof(IIdentityDbContext))]
-    [ReplaceDbContext(typeof(ITenantManagementDbContext))]
+    //[ReplaceDbContext(typeof(IIdentityDbContext))]
+    //[ReplaceDbContext(typeof(ITenantManagementDbContext))]
     [ConnectionStringName("Default")]
     public class PaymentsDbContext : 
-        AbpDbContext<PaymentsDbContext>,
-        IIdentityDbContext,
-        ITenantManagementDbContext
+        AbpDbContext<PaymentsDbContext>
     {
         /* Add DbSet properties for your Aggregate Roots / Entities here. */
         
@@ -39,17 +38,8 @@ namespace BnBYachts.Payments.EntityFrameworkCore
          */
         
         //Identity
-        public DbSet<IdentityUser> Users { get; set; }
-        public DbSet<IdentityRole> Roles { get; set; }
-        public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-        public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-        public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-        public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-        
-        // Tenant Management
-        public DbSet<Tenant> Tenants { get; set; }
-        public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-
+        public DbSet<UserCardInfo> UserCardInfo { get; set; }
+        public DbSet<PaymentDetails> PaymentDetails { get; set; }
         #endregion
         
         public PaymentsDbContext(DbContextOptions<PaymentsDbContext> options)
@@ -61,17 +51,6 @@ namespace BnBYachts.Payments.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            /* Include modules to your migration db context */
-
-            builder.ConfigurePermissionManagement();
-            builder.ConfigureSettingManagement();
-            builder.ConfigureBackgroundJobs();
-            builder.ConfigureAuditLogging();
-            builder.ConfigureIdentity();
-            builder.ConfigureIdentityServer();
-            builder.ConfigureFeatureManagement();
-            builder.ConfigureTenantManagement();
 
             /* Configure your own tables/entities inside here */
 

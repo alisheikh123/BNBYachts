@@ -48,7 +48,7 @@ namespace BnBYachts.Core.Services
                 await _Repository.InsertAsync(forgetPasswordVerifier);
 
                 var fromAddress = new MailAddress("ali.raza@techverx.com", "BNBYechet");
-                var toAddress = new MailAddress("Alisheikh14125@gmail.com", "Ali");
+                var toAddress = new MailAddress(Email, "Ali");
                 const string fromPassword = "Alisheikh@123";
                 const string subject = "Email to Reset the Password of BNBYechets!";
                 string body = "if You 've lost your password or wish to reset it use the link  below  to get started  " + urlLink;
