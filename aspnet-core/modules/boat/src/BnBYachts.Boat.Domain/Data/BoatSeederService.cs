@@ -12,13 +12,13 @@ namespace BnBYachts.Boat.Data
 {
     class BoatSeederService
     {
-            private readonly IRepository<HostBoat, Guid> _boatRepository;
-            private readonly IRepository<BoatGallery, Guid> _boatGalleryRepository;
-            private readonly IRepository<BoatFeature, Guid> _boatFeatureRepository;
-            private readonly IRepository<BoatRule, Guid> _boatRuleRepository;
-            private readonly IRepository<Rule, Guid> _ruleRepository;
-            private readonly IRepository<Feature, Guid> _featureRepository;
-            public BoatSeederService(IRepository<Feature, Guid> featureRepository, IRepository<Rule, Guid> ruleRepository, IRepository<HostBoat, Guid> repository, IRepository<BoatGallery, Guid> boatGalleries, IRepository<BoatFeature, Guid> boatFeatureRepository, IRepository<BoatRule, Guid> boatRuleRepository)
+            private readonly IRepository<BoatEntity, int> _boatRepository;
+            private readonly IRepository<BoatGalleryEntity, int> _boatGalleryRepository;
+            private readonly IRepository<BoatFeatureEntity, int> _boatFeatureRepository;
+            private readonly IRepository<BoatRuleEntity, int> _boatRuleRepository;
+            private readonly IRepository<RuleEntity, int> _ruleRepository;
+            private readonly IRepository<FeatureEntity, int> _featureRepository;
+            public BoatSeederService(IRepository<FeatureEntity, int> featureRepository, IRepository<RuleEntity, int> ruleRepository, IRepository<BoatEntity, int> repository, IRepository<BoatGalleryEntity, int> boatGalleries, IRepository<BoatFeatureEntity, int> boatFeatureRepository, IRepository<BoatRuleEntity, int> boatRuleRepository)
             {
                 _boatRepository = repository;
                 _boatGalleryRepository = boatGalleries;
@@ -31,19 +31,19 @@ namespace BnBYachts.Boat.Data
             public void SeedLookups(CancellationToken token)
             {
                 var path = Directory.GetCurrentDirectory();
-                var features = new List<Feature>();
+                var features = new List<FeatureEntity>();
                 using (StreamReader r = new StreamReader(path + "/Features.json"))
                 {
                     string json = r.ReadToEnd();
-                    features = JsonConvert.DeserializeObject<List<Feature>>(json);
+                    features = JsonConvert.DeserializeObject<List<FeatureEntity>>(json);
                 }
                 _featureRepository.InsertManyAsync(features, true, token);
                 //Seed Rules
-                var rule = new List<Rule>();
+                var rule = new List<RuleEntity>();
                 using (StreamReader r = new StreamReader(path + "/Rules.json"))
                 {
                     string json = r.ReadToEnd();
-                    rule = JsonConvert.DeserializeObject<List<Rule>>(json);
+                    rule = JsonConvert.DeserializeObject<List<RuleEntity>>(json);
                 }
                 _ruleRepository.InsertManyAsync(rule, true, token);
             }
@@ -51,36 +51,36 @@ namespace BnBYachts.Boat.Data
             public void SeedBoats(CancellationToken token)
             {
                 var path = Directory.GetCurrentDirectory();
-                var boats = new List<HostBoat>();
+                var boats = new List<BoatEntity>();
                 using (StreamReader r = new StreamReader(path + "/boats.json"))
                 {
                     string json = r.ReadToEnd();
-                    boats = JsonConvert.DeserializeObject<List<HostBoat>>(json);
+                    boats = JsonConvert.DeserializeObject<List<BoatEntity>>(json);
                 }
                 _boatRepository.InsertManyAsync(boats, true, token);
                 //Seed Gallery
-                var boatsGallery = new List<BoatGallery>();
+                var boatsGallery = new List<BoatGalleryEntity>();
                 using (StreamReader r = new StreamReader(path + "/BoatsGallery.json"))
                 {
                     string json = r.ReadToEnd();
-                    boatsGallery = JsonConvert.DeserializeObject<List<BoatGallery>>(json);
+                    boatsGallery = JsonConvert.DeserializeObject<List<BoatGalleryEntity>>(json);
                 }
                 _boatGalleryRepository.InsertManyAsync(boatsGallery, true, token);
 
                 //Seed Boats Features
-                var boatsFeature = new List<BoatFeature>();
+                var boatsFeature = new List<BoatFeatureEntity>();
                 using (StreamReader r = new StreamReader(path + "/BoatFeatures.json"))
                 {
                     string json = r.ReadToEnd();
-                    boatsFeature = JsonConvert.DeserializeObject<List<BoatFeature>>(json);
+                    boatsFeature = JsonConvert.DeserializeObject<List<BoatFeatureEntity>>(json);
                 }
                 _boatFeatureRepository.InsertManyAsync(boatsFeature, true, token);
                 //Seed Boat Rules
-                var boatsRules = new List<BoatRule>();
+                var boatsRules = new List<BoatRuleEntity>();
                 using (StreamReader r = new StreamReader(path + "/BoatRule.json"))
                 {
                     string json = r.ReadToEnd();
-                    boatsRules = JsonConvert.DeserializeObject<List<BoatRule>>(json);
+                    boatsRules = JsonConvert.DeserializeObject<List<BoatRuleEntity>>(json);
                 }
                 _boatRuleRepository.InsertManyAsync(boatsRules, true, token);
             }

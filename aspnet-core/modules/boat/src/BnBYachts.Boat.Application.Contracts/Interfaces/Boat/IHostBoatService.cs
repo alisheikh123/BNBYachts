@@ -7,7 +7,7 @@ using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Interfaces.Boat
 {
-    public interface IHostBoatService : ICrudAppService<HostBoatDto, Guid, PagedAndSortedResultRequestDto, HostBoatDto>
+    public interface IHostBoatService : ICrudAppService<BoatDto, int, PagedAndSortedResultRequestDto, BoatDto>
     {
 
     }

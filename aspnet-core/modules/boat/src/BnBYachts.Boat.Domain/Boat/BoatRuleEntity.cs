@@ -7,8 +7,8 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Boat
 {
-   public class BoatFeature : AuditedAggregateRoot<Guid>
+    public class BoatRuleEntity : AuditedAggregateRoot<int>
     {
-        public Feature OfferedFeatures { get; set; }
+        public RuleEntity OfferedRule { get; set; }
     }
 }

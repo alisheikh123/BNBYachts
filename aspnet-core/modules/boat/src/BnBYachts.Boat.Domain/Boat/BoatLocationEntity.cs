@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Boat
 {
-    public class BoatLocation : AuditedAggregateRoot<Guid>
+    public class BoatLocationEntity : AuditedAggregateRoot<int>
     {
         public string CurrentLat { get; set; }
         public string CurrentLong { get; set; }

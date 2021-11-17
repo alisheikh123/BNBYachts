@@ -9,10 +9,10 @@ using Volo.Abp.Domain.Entities.Auditing;
 namespace BnBYachts.Boats.Charter
 {
 
-    public class Charter : AuditedAggregateRoot<Guid>
+    public class CharterEntity : AuditedAggregateRoot<int>
     {
 
-        public HostBoat Boat { get; set; }
+        public BoatEntity Boat { get; set; }
         public bool IsRoundTrip { get; set; }
         public int GuestCapacity { get; set; }
         public string Description { get; set; }

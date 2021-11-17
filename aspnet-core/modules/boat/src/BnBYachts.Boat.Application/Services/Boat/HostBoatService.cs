@@ -19,15 +19,15 @@ using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Services.Boat
 {
-    public class HostBoatService : CrudAppService<HostBoat, HostBoatDto, Guid, PagedAndSortedResultRequestDto, HostBoatDto>, IHostBoatService
+    public class HostBoatService : CrudAppService<BoatEntity, BoatDto, int, PagedAndSortedResultRequestDto, BoatDto>, IHostBoatService
     {
-        private readonly IRepository<HostBoat, Guid> _boatRepository;
-        private readonly IRepository<BoatFeature, Guid> _boatelFeatureRepo;
-        private readonly IRepository<BoatRule, Guid> _boatelRulesRepo;
-        private readonly IRepository<BoatCalendar, Guid> _boatelCalendarRepo;
+        private readonly IRepository<BoatEntity, int> _boatRepository;
+        private readonly IRepository<BoatFeatureEntity, int> _boatelFeatureRepo;
+        private readonly IRepository<BoatRuleEntity, int> _boatelRulesRepo;
+        private readonly IRepository<BoatCalendarEntity, int> _boatelCalendarRepo;
         //Charters
-        private readonly IRepository<Charter, Guid> _charterRepository;
-        public HostBoatService(IRepository<Charter, Guid> charterRepository, IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo)
+        private readonly IRepository<CharterEntity, int> _charterRepository;
+        public HostBoatService(IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep, IRepository<BoatCalendarEntity, int> boatelCalendarRepo)
            : base(repository)
         {
             _boatRepository = repository;
@@ -39,7 +39,7 @@ namespace BnBYachts.Services.Boat
 
         [Route("FilterBoatelBoats")]
         [HttpPost]
-        public async Task<List<HostBoat>> GetBoatelsByFilters(SearchFilters parameters)
+        public async Task<List<BoatEntity>> GetBoatelsByFilters(SearchFilters parameters)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace BnBYachts.Services.Boat
                 //parameters.Longitude = 74.3587;
                 var getBoats = await _boatRepository.GetListAsync(res => res.IsBoatelServicesOffered == true);
 
-                var filterdBoats = new List<HostBoat>();
+                var filterdBoats = new List<BoatEntity>();
                 foreach (var boat in getBoats)
                 {
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
@@ -82,7 +82,7 @@ namespace BnBYachts.Services.Boat
 
         [Route("BoatCalendarUpdate")]
         [HttpPost]
-        public async Task<bool> BoatCalendarUpdate(BoatCalendar boatCalendar)
+        public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace BnBYachts.Services.Boat
 
         [Route("FilterChartersBoats")]
         [HttpPost]
-        public async Task<List<HostBoat>> GetChartersByFilters(CharterFilters param)
+        public async Task<List<BoatEntity>> GetChartersByFilters(CharterFilters param)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace BnBYachts.Services.Boat
         }
         [Route("FilterEventsBoats")]
         [HttpPost]
-        public async Task<List<HostBoat>> GetEventsByFilters(SearchFilters parameters)
+        public async Task<List<BoatEntity>> GetEventsByFilters(SearchFilters parameters)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace BnBYachts.Services.Boat
         [Route("boatSave")]
         public async void InsertBoat(CancellationToken cancellationToken)
         {
-            HostBoat boat = new HostBoat();
+            BoatEntity boat = new BoatEntity();
             boat.Name = "my Boat";
             boat.Length = 200;
             boat.TotalBedrooms = 2;
@@ -158,7 +158,7 @@ namespace BnBYachts.Services.Boat
 
         [Route("boat-details/{boatId}")]
         [HttpGet]
-        public async Task<HostBoat> GetBoatDetailsById(Guid boatId)
+        public async Task<BoatEntity> GetBoatDetailsById(int boatId)
         {
             var boat = await _boatRepository.GetAsync(b => b.Id == boatId, false).ConfigureAwait(false);
             

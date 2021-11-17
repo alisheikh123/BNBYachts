@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Boat
 {
-   public class BoatGallery : AuditedAggregateRoot<Guid>
+   public class BoatGalleryEntity : AuditedAggregateRoot<int>
     {
         public string Title { get; set; }
         public bool IsCoverPic { get; set; }
