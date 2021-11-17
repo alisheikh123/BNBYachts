@@ -83,14 +83,14 @@ export class BoatDetailsComponent implements OnInit {
 
   reserveBoat() {
     this.isSubmitted = true;
+    let userId = Guid.create().toString();
     if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
-      let userId = Guid.create();
       let bookingModel = {
         id: Guid.create()?.toString(),
-        creationTime: "2021-11-04T15:25:23.927Z",
-        creatorId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        lastModificationTime: "2021-11-04T15:25:23.927Z",
-        lastModifierId: userId.toString(),
+        creationTime: new Date(),
+        creatorId: userId,
+        lastModificationTime: new Date(),
+        lastModifierId: userId,
         checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
         checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
         bookingStatus: 0,
@@ -98,17 +98,18 @@ export class BoatDetailsComponent implements OnInit {
         noOfAdults: this.boatFilterDetails.adults,
         noOfChildrens: this.boatFilterDetails.childrens,
         boatId: this.boatId,
+        hostId:this.boatDetails.creatorId,
         bankingDetailsId: Guid.create().toString(),
-        userId: userId.toString(),
+        userId: userId,
         reviews: null
-      };
+      }
       this.bookingService.boatelBooking(bookingModel).subscribe(res => {
         if (res) {
           let boatCalendar = {
             creationTime: new Date(),
-            creatorId: userId.toString(),
+            creatorId: userId,
             lastModificationTime: new Date(),
-            lastModifierId: userId.toString(),
+            lastModifierId: userId,
             isAvailable: false,
             toDate: this.boatFilterDetails.checkoutDate,
             fromDate: this.boatFilterDetails.checkinDate,

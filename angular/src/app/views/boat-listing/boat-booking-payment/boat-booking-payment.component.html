@@ -88,7 +88,7 @@
                             </div> -->
                             <div class="py-3">
                                 <label class="custom-checkbox">
-                                    <input type="checkbox" checked="checked">
+                                    <input type="checkbox" checked="checked" [(ngModel)]="isSaveNewPayment">
                                     <p class="small-text">Save this card for future transactions.</p>
                                     <span class="checkmark"></span>
                                 </label>
@@ -239,7 +239,7 @@
         <div class="custom-center-card">
             <div class="custom-center-card-img">
              <div class="">
-                 <img src="./images/loader-error.png" alt="">
+                 <img src="../../../../assets/images/loader-error.png" alt="">
                </div>
             </div>
             <div class="custom-center-card-message py-sm-3 px-sm-5">
@@ -247,7 +247,7 @@
                 <p class="grey ">Payment could not process successfully
                  Button 'Try Again'</p>
             </div>
-            <div><a href="payment.html" class="custom-btn red big-btn mt-3">Try Again</a></div>
+            <div><button (click)="retryPayment()" class="custom-btn red big-btn mt-3">Try Again</button></div>
         </div>
     </div>
     </div>

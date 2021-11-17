@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { YachtTypes } from 'src/app/shared/enums/yacht-search.constant';
 import { NoFoundModalComponent } from '../no-found-modal/no-found-modal.component';
 
 @Component({
@@ -20,7 +21,8 @@ export class YachtSearchComponent implements OnInit {
     adults: 0,
     childrens: 0
   };
-  currentTab = 'boatel';
+  currentTab = 1;
+  YachtTypes = YachtTypes;
   isSubmitted = false;
 
   constructor(private yachtService: YachtSearchService, private router: Router, private yachtSearchResults: YachtSearchDataService, private modal: NgbModal) { }
@@ -31,18 +33,20 @@ export class YachtSearchComponent implements OnInit {
 
   botelSearch() {
     this.isSubmitted = true;
-    this.yachtService.boatelSearch(this.boatelSearchParam).subscribe((res: any) => {
-      if (res?.length > 0) {
-        this.yachtSearchResults.setBoats(res);
-        this.yachtSearchResults.setFilters(this.boatelSearchParam);
-        this.router.navigate(["/boat-listing"]);
-      }
-      else {
-        let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal modal-dialog-centered'});
-      }
-
-      //console.log(res);
-    });
+    if(this.boatelSearchParam.location != ''){
+      this.yachtService.boatelSearch(this.boatelSearchParam).subscribe((res: any) => {
+        if (res?.length > 0) {
+          this.yachtSearchResults.setBoats(res);
+          this.yachtSearchResults.setFilters(this.boatelSearchParam);
+          this.router.navigate(["/boat-listing"]);
+        }
+        else {
+          let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal modal-dialog-centered'});
+        }
+  
+        //console.log(res);
+      });
+    }
   }
 
   charterSearch() {
