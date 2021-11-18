@@ -51,6 +51,8 @@ namespace BnBYachts.Boat
            // ConfigureRedis(context, configuration, hostingEnvironment);
             ConfigureCors(context, configuration);
             ConfigureSwaggerServices(context, configuration);
+
+            context.Services.AddSameSiteCookiePolicy();
         }
 
         private void ConfigureCache(IConfiguration configuration)
@@ -202,10 +204,12 @@ namespace BnBYachts.Boat
 
             app.UseAbpRequestLocalization();
 
-            //if (!env.IsDevelopment())
-            //{
-            //    app.UseErrorPage();
-            //}
+            if (!env.IsDevelopment())
+            {
+              //  app.UseErrorPage();
+            }
+
+            app.UseCookiePolicy();
 
             app.UseCorrelationId();
             app.UseStaticFiles();
