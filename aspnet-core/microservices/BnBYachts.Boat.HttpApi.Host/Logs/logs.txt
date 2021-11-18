@@ -32223,3 +32223,851 @@ Error Number:208,State:1,Class:16
 2021-11-17 17:10:40.101 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
 2021-11-17 17:10:40.104 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/favicon-32x32.png - - - 200 628 image/png 2.9609ms
 2021-11-17 17:10:40.226 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 319.1166ms
+2021-11-17 20:12:11.950 +05:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-17 20:12:16.319 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-17 20:12:26.242 +05:00 [INF] Loaded ABP modules:
+2021-11-17 20:12:26.242 +05:00 [DBG] Create send transport: "rabbitmq://localhost/q-heartbeat"
+2021-11-17 20:12:26.242 +05:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-17 20:12:26.242 +05:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-17 20:12:26.243 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-17 20:12:26.243 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-17 20:12:26.243 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-17 20:12:26.243 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-17 20:12:26.243 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-17 20:12:26.243 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-17 20:12:26.243 +05:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-17 20:12:26.243 +05:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-17 20:12:26.243 +05:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-17 20:12:26.243 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-17 20:12:26.243 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-17 20:12:26.243 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-17 20:12:26.243 +05:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-17 20:12:26.243 +05:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-17 20:12:26.243 +05:00 [INF]   - BnBYachts.EventBusShared.EventBusSharedModule
+2021-11-17 20:12:26.318 +05:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-17 20:12:26.517 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 1359)
+2021-11-17 20:12:26.557 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2021-11-17 20:12:26.597 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2021-11-17 20:12:26.971 +05:00 [DBG] SEND "rabbitmq://localhost/q-heartbeat" "83800000-6a91-f8b4-cdbb-08d9a9dcaa61" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2021-11-17 20:12:27.081 +05:00 [INF] Initialized all ABP modules.
+2021-11-17 20:12:27.116 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-17 20:12:27.116 +05:00 [INF] Hosting environment: Development
+2021-11-17 20:12:27.116 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Boat.HttpApi.Host
+2021-11-17 20:12:27.191 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/ - -
+2021-11-17 20:12:27.834 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-17 20:12:27.929 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-17 20:12:28.113 +05:00 [INF] Executing action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) - Validation state: "Valid"
+2021-11-17 20:12:28.118 +05:00 [INF] Executed action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 0.4056ms.
+2021-11-17 20:12:28.126 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-17 20:12:28.136 +05:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 198.4803ms
+2021-11-17 20:12:28.136 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-17 20:12:28.172 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-17 20:12:28.187 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/ - - - 302 - - 998.9730ms
+2021-11-17 20:12:28.276 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 104.1401ms
+2021-11-17 20:12:29.185 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-17 20:12:29.403 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 217.8322ms
+2021-11-17 20:13:01.905 +05:00 [DBG] SEND "rabbitmq://localhost/q-heartbeat" "83800000-6a91-f8b4-1ae4-08d9a9dcbf66" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2021-11-17 20:16:34.321 +05:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-17 20:16:38.063 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-11-17 20:16:42.728 +05:00 [DBG] Create send transport: "rabbitmq://localhost/q-heartbeat"
+2021-11-17 20:16:42.728 +05:00 [INF] Loaded ABP modules:
+2021-11-17 20:16:42.729 +05:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-17 20:16:42.729 +05:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-17 20:16:42.729 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-17 20:16:42.729 +05:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-17 20:16:42.729 +05:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-17 20:16:42.729 +05:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-17 20:16:42.729 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-17 20:16:42.729 +05:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-17 20:16:42.729 +05:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-17 20:16:42.729 +05:00 [INF]   - BnBYachts.EventBusShared.EventBusSharedModule
+2021-11-17 20:16:42.785 +05:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-17 20:16:43.034 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 11562)
+2021-11-17 20:16:43.082 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2021-11-17 20:16:43.124 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2021-11-17 20:16:43.418 +05:00 [DBG] SEND "rabbitmq://localhost/q-heartbeat" "83800000-6a91-f8b4-cc38-08d9a9dd4348" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2021-11-17 20:16:43.507 +05:00 [INF] Initialized all ABP modules.
+2021-11-17 20:16:43.538 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-17 20:16:43.538 +05:00 [INF] Hosting environment: Development
+2021-11-17 20:16:43.538 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Boat.HttpApi.Host
+2021-11-17 20:16:43.592 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/ - -
+2021-11-17 20:16:44.127 +05:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-17 20:16:44.183 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-17 20:16:44.346 +05:00 [INF] Executing action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) - Validation state: "Valid"
+2021-11-17 20:16:44.351 +05:00 [INF] Executed action method BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 0.3222ms.
+2021-11-17 20:16:44.357 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-17 20:16:44.362 +05:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 175.133ms
+2021-11-17 20:16:44.362 +05:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-17 20:16:44.395 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/index.html - -
+2021-11-17 20:16:44.411 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/ - - - 302 - - 820.7735ms
+2021-11-17 20:16:44.505 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/index.html - - - 200 - text/html;charset=utf-8 109.5688ms
+2021-11-17 20:16:45.207 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - -
+2021-11-17 20:16:45.384 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44387/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 177.2331ms
+2021-11-17 20:17:12.710 +05:00 [DBG] SEND "rabbitmq://localhost/q-heartbeat" "83800000-6a91-f8b4-2e37-08d9a9dd54e7" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2021-11-17 20:17:42.721 +05:00 [DBG] SEND "rabbitmq://localhost/q-heartbeat" "83800000-6a91-f8b4-1ef7-08d9a9dd66c9" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2021-11-17 20:18:12.744 +05:00 [DBG] SEND "rabbitmq://localhost/q-heartbeat" "83800000-6a91-f8b4-dfb7-08d9a9dd78ac" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2021-11-17 20:18:42.776 +05:00 [DBG] SEND "rabbitmq://localhost/q-heartbeat" "83800000-6a91-f8b4-cff5-08d9a9dd8a90" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2021-11-18 05:24:37.768 +00:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-18 05:24:54.307 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2021-11-18 05:24:54.310 +00:00 [INF] User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-18 05:24:54.795 +00:00 [INF] Creating key {3821d40b-c834-4553-b95b-5ba116965eec} with creation date 2021-11-18 05:24:54Z, activation date 2021-11-18 05:24:54Z, and expiration date 2022-02-16 05:24:54Z.
+2021-11-18 05:24:54.813 +00:00 [WRN] No XML encryptor configured. Key {3821d40b-c834-4553-b95b-5ba116965eec} may be persisted to storage in unencrypted form.
+2021-11-18 05:24:54.825 +00:00 [INF] Writing data to file '/root/.aspnet/DataProtection-Keys/key-3821d40b-c834-4553-b95b-5ba116965eec.xml'.
+2021-11-18 05:24:54.976 +00:00 [DBG] Create send transport: "rabbitmq://localhost/q-heartbeat"
+2021-11-18 05:24:54.976 +00:00 [INF] Loaded ABP modules:
+2021-11-18 05:24:55.000 +00:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-18 05:24:55.000 +00:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-18 05:24:55.000 +00:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-18 05:24:55.000 +00:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-18 05:24:55.000 +00:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-18 05:24:55.000 +00:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-18 05:24:55.000 +00:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-18 05:24:55.000 +00:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-18 05:24:55.000 +00:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-18 05:24:55.000 +00:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-18 05:24:55.000 +00:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-18 05:24:55.000 +00:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-18 05:24:55.000 +00:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-18 05:24:55.000 +00:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-18 05:24:55.000 +00:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-18 05:24:55.000 +00:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-18 05:24:55.000 +00:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-18 05:24:55.000 +00:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-18 05:24:55.000 +00:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-18 05:24:55.000 +00:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-18 05:24:55.000 +00:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-18 05:24:55.001 +00:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-18 05:24:55.001 +00:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-18 05:24:55.001 +00:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-18 05:24:55.001 +00:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-18 05:24:55.001 +00:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-18 05:24:55.001 +00:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-18 05:24:55.002 +00:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-18 05:24:55.002 +00:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-18 05:24:55.002 +00:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-18 05:24:55.002 +00:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-18 05:24:55.002 +00:00 [INF]   - BnBYachts.EventBusShared.EventBusSharedModule
+2021-11-18 05:24:55.226 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:26:26.868 +00:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-18 05:26:33.608 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2021-11-18 05:26:33.613 +00:00 [INF] User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-18 05:26:34.302 +00:00 [INF] Loaded ABP modules:
+2021-11-18 05:26:34.302 +00:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-18 05:26:34.302 +00:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-18 05:26:34.302 +00:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-18 05:26:34.302 +00:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-18 05:26:34.302 +00:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-18 05:26:34.302 +00:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-18 05:26:34.302 +00:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-18 05:26:34.302 +00:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-18 05:26:34.302 +00:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-18 05:26:34.302 +00:00 [INF]   - BnBYachts.EventBusShared.EventBusSharedModule
+2021-11-18 05:26:34.331 +00:00 [DBG] Create send transport: "rabbitmq://localhost/q-heartbeat"
+2021-11-18 05:26:34.495 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:26:34.978 +00:00 [DBG] Retrying "00:00:04.5310000": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:26:35.901 +00:00 [INF] Initialized all ABP modules.
+2021-11-18 05:26:36.459 +00:00 [INF] Now listening on: https://[::]:443
+2021-11-18 05:26:36.460 +00:00 [INF] Now listening on: http://[::]:80
+2021-11-18 05:26:36.461 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-18 05:26:36.461 +00:00 [INF] Hosting environment: Development
+2021-11-18 05:26:36.465 +00:00 [INF] Content root path: /app
+2021-11-18 05:26:39.514 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:26:39.609 +00:00 [DBG] Retrying "00:00:07.4240000": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:26:39.681 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/ - -
+2021-11-18 05:26:40.824 +00:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-18 05:26:40.933 +00:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-18 05:26:41.027 +00:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-18 05:26:41.044 +00:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 96.9082ms
+2021-11-18 05:26:41.046 +00:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-18 05:26:41.097 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/ - - - 302 0 - 1413.8940ms
+2021-11-18 05:26:41.127 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger - -
+2021-11-18 05:26:41.137 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger - - - 301 0 - 11.0760ms
+2021-11-18 05:26:41.155 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/index.html - -
+2021-11-18 05:26:41.410 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/index.html - - - 200 - text/html;charset=utf-8 254.8553ms
+2021-11-18 05:26:41.468 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/swagger-ui.css - -
+2021-11-18 05:26:41.482 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/ui/abp.js - -
+2021-11-18 05:26:41.593 +00:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-11-18 05:26:41.635 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/ui/abp.swagger.js - -
+2021-11-18 05:26:41.734 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/swagger-ui-bundle.js - -
+2021-11-18 05:26:41.747 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/swagger-ui-standalone-preset.js - -
+2021-11-18 05:26:42.060 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/ui/abp.js - - - 200 3025 application/javascript 578.0920ms
+2021-11-18 05:26:42.107 +00:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-11-18 05:26:42.215 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-18 05:26:42.215 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 579.6772ms
+2021-11-18 05:26:42.270 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/swagger-ui.css - - - 200 143410 text/css 800.9280ms
+2021-11-18 05:26:42.370 +00:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-18 05:26:42.372 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 624.4446ms
+2021-11-18 05:26:42.551 +00:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-18 05:26:42.552 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 817.7920ms
+2021-11-18 05:26:43.646 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/v1/swagger.json - -
+2021-11-18 05:26:43.763 +00:00 [INF] Request starting HTTP/2 GET https://localhost:55000/swagger/favicon-32x32.png - -
+2021-11-18 05:26:43.795 +00:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-18 05:26:43.798 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/favicon-32x32.png - - - 200 628 image/png 34.6194ms
+2021-11-18 05:26:43.959 +00:00 [INF] Request finished HTTP/2 GET https://localhost:55000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 313.4045ms
+2021-11-18 05:26:47.028 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:26:47.040 +00:00 [DBG] Retrying "00:00:12.2720000": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:26:59.315 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:26:59.344 +00:00 [DBG] Retrying "00:00:28.9200000": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:27:28.266 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:27:28.283 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:27:58.286 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:27:58.304 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:28:28.300 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:28:28.312 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:28:58.312 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:28:58.366 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:29:28.368 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:29:28.378 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:29:58.382 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:29:58.409 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:30:28.411 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:30:28.470 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:30:58.469 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:30:58.506 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:31:28.509 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:31:28.536 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:31:58.541 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:31:58.572 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:32:28.574 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:32:28.583 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)
+2021-11-18 05:32:58.587 +00:00 [DBG] Connecting: guest@localhost:5672/
+2021-11-18 05:32:58.626 +00:00 [DBG] Retrying "00:00:30": Broker unreachable: guest@localhost:5672/
+MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> System.AggregateException: One or more errors occurred. (Connection failed)
+ ---> RabbitMQ.Client.Exceptions.ConnectFailureException: Connection failed
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at RabbitMQ.Client.TcpClientAdapter.ConnectAsync(String host, Int32 port)
+   at RabbitMQ.Client.Impl.TaskExtensions.TimeoutAfter(Task task, Int32 millisecondsTimeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectOrFail(ITcpClient socket, AmqpTcpEndpoint endpoint, Int32 timeout)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingAddressFamily(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout, AddressFamily family)
+   at RabbitMQ.Client.Impl.SocketFrameHandler.ConnectUsingIPv4(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 timeout)
+   at RabbitMQ.Client.Impl.SocketFrameHandler..ctor(AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.Framing.Impl.IProtocolExtensions.CreateFrameHandler(IProtocol protocol, AmqpTcpEndpoint endpoint, Func`2 socketFactory, Int32 connectionTimeout, Int32 readTimeout, Int32 writeTimeout)
+   at RabbitMQ.Client.ConnectionFactory.CreateFrameHandler(AmqpTcpEndpoint endpoint)
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.EndpointResolverExtensions.SelectOne[T](IEndpointResolver resolver, Func`2 selector)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.<>c__DisplayClass9_0.<<CreateConnection>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Policies.PipeRetryExtensions.Retry[T](IRetryPolicy retryPolicy, Func`1 retryMethod, CancellationToken cancellationToken)

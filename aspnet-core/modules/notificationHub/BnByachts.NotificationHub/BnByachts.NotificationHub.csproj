@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<Folder Include="Consumers\" />
+	<Folder Include="Queue\" />
+	<Folder Include="Templates\" />
+	<Folder Include="Services\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp" Version="4.4.3" />
+	</ItemGroup>
+
+</Project>

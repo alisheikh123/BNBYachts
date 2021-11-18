@@ -1,5 +1,4 @@
 ﻿using BnBYachts.Boat;
-using BnBYachts.Boat.Enum;
 using BnBYachts.Boat.ViewModel;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Helpers;
@@ -10,12 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using BnByachts.SharedModule;
-using BnByachts.SharedModule.Manager.Boat.Requestable;
-using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;

@@ -45,17 +45,27 @@ namespace BnBYachts.Core
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            var configuration = context.Services.GetConfiguration();
-            var hostingEnvironment = context.Services.GetHostingEnvironment();
+            try
+            {
+                Console.WriteLine("2");
+                var configuration = context.Services.GetConfiguration();
+                var hostingEnvironment = context.Services.GetHostingEnvironment();
 
-            ConfigureConventionalControllers();
-            ConfigureAuthentication(context, configuration);
-            ConfigureLocalization();
-            ConfigureCache(configuration);
-            ConfigureVirtualFileSystem(context);
-            ConfigureRedis(context, configuration, hostingEnvironment);
-            ConfigureCors(context, configuration);
-            ConfigureSwaggerServices(context, configuration);
+                ConfigureConventionalControllers();
+                ConfigureAuthentication(context, configuration);
+                ConfigureLocalization();
+                ConfigureCache(configuration);
+                ConfigureVirtualFileSystem(context);
+                //  ConfigureRedis(context, configuration, hostingEnvironment);
+                ConfigureCors(context, configuration);
+                ConfigureSwaggerServices(context, configuration);
+                Console.WriteLine("3");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
         }
 
         private void ConfigureCache(IConfiguration configuration)
@@ -71,18 +81,18 @@ namespace BnBYachts.Core
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
-                    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainSharedModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<CoreApplicationContractsModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<CoreApplicationModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Application"));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainSharedModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain.Shared"));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain"));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<CoreApplicationContractsModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Application.Contracts"));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<CoreApplicationModule>(
+                    //    Path.Combine(hostingEnvironment.ContentRootPath,
+                    //        $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Application"));
                 });
             }
         }

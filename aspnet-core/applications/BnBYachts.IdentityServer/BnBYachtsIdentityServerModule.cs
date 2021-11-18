@@ -101,11 +101,11 @@ namespace BnBYachts
 
             if (hostingEnvironment.IsDevelopment())
             {
-                Configure<AbpVirtualFileSystemOptions>(options =>
-                {
-                    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain"));
-                });
+                //Configure<AbpVirtualFileSystemOptions>(options =>
+                //{
+                //    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain.Shared"));
+                //    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain"));
+                //});
             }
 
             Configure<AppUrlOptions>(options =>
@@ -129,10 +129,10 @@ namespace BnBYachts
 
             if (!hostingEnvironment.IsDevelopment())
             {
-                var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-                context.Services
-                    .AddDataProtection()
-                    .PersistKeysToStackExchangeRedis(redis, "BnBYachts-Protection-Keys");
+                //var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+                //context.Services
+                //    .AddDataProtection()
+                //    .PersistKeysToStackExchangeRedis(redis, "BnBYachts-Protection-Keys");
             }
 
             context.Services.AddCors(options =>
