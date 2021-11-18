@@ -15,8 +15,7 @@ namespace BnBYachts.Booking
         public PaymentStatus PaymentStatus { get; set; }
         public int NoOfAdults { get; set; }
         public int NoOfChildrens { get; set; }
-        public string BoatId { get; set; }
-        public string BankingDetailsId { get; set; }
+        public int BoatId { get; set; }
         public string UserId { get; set; }
         public ReviewEntity Reviews { get; set; }
         public string HostId { get; set; }

@@ -10,7 +10,7 @@ namespace BnBYachts.Payments.Payments
     public class PaymentDetailsEntity : AuditedAggregateRoot<int>
     {
         public string PaymentId { get; set; }
-        public string BookingId { get; set; }
+        public int BookingId { get; set; }
         public decimal  Amount { get; set; }
         public string CustomerId { get; set; }
     }
