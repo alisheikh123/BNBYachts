@@ -3,21 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
-  BOAT_API_URL: 'https://localhost:44387',
-  BOOKING_API_URL: 'https://localhost:44337',
-  CORE_API_URL: 'https://localhost:44347',
-  IDENTITY_API_URL: 'https://localhost:44311',
-  PAYMENTS_API_URL: 'https://localhost:44366',
-  stripeKey: "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f",
-  Identity: {
-    authority: "https://localhost:44311",
-    redirectUrl: "http://localhost:4200",
-    postLogoutRedirectUri: "http://localhost:4200",
-    clientId: "BnBYachts_App",
-    scope: "openid Core Booking Boat Payments",
-    responseType: 'code'
-  }
+    production: true,
+    BOAT_API_URL: 'http://44.197.69.129:21021',
+    BOOKING_API_URL: 'http://44.197.69.129:21022',
+    CORE_API_URL: 'http://44.197.69.129:21024',
+    IDENTITY_API_URL: 'http://44.197.69.129:21025',
+    PAYMENTS_API_URL: 'http://44.197.69.129:21023',
+    stripeKey: "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f",
+    Identity: {
+      authority: "http://44.197.69.129:21025",
+      redirectUrl: "http://44.197.69.129:8080",
+      postLogoutRedirectUri: "http://44.197.69.129:8080",
+      clientId: "BnBYachts_App",
+      scope: "openid Core Booking Boat Payments",
+      responseType: 'code'
+    }  
 };
 
 /*
