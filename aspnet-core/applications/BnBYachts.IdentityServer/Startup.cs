@@ -19,6 +19,7 @@ namespace BnBYachts
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Strict });
             app.InitializeApplication();
         }
     }

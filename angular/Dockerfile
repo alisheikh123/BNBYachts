@@ -1,4 +1,4 @@
-FROM node:16.13.0 as Builder
+FROM node:14.17.1 as Builder
 LABEL MAINTAINER umar.draz@techverx.com
 
 WORKDIR /app/
