@@ -1,13 +1,10 @@
 using System;
-using System.IO;
 using System.Linq;
 using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
@@ -20,26 +17,90 @@ using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.VirtualFileSystem;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Identity;
 using BnBYachts.Services.Classes;
 using BnBYachts.Interfaces.IdentityInterface;
 using BnBYachts.Services;
-using BnBYachts.Core;
 using BnBYachts.Core.Localization;
 using BnBYachts.Core.EntityFrameworkCore;
 using BnBYachts.Core.MultiTenancy;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace BnBYachts
 {
+
+    public static class SameSiteCookiesServiceCollectionExtensions
+    {
+        public static IServiceCollection AddSameSiteCookiePolicy(this IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+                options.OnAppendCookie = cookieContext =>
+                    CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+                options.OnDeleteCookie = cookieContext =>
+                    CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+            });
+
+            return services;
+        }
+
+        private static void CheckSameSite(HttpContext httpContext, CookieOptions options)
+        {
+            if (options.SameSite == SameSiteMode.None)
+            {
+                var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
+                if (!httpContext.Request.IsHttps || DisallowsSameSiteNone(userAgent))
+                {
+                    // For .NET Core < 3.1 set SameSite = (SameSiteMode)(-1)
+                    options.SameSite = SameSiteMode.Unspecified;
+                }
+            }
+        }
+
+        private static bool DisallowsSameSiteNone(string userAgent)
+        {
+            // Cover all iOS based browsers here. This includes:
+            // - Safari on iOS 12 for iPhone, iPod Touch, iPad
+            // - WkWebview on iOS 12 for iPhone, iPod Touch, iPad
+            // - Chrome on iOS 12 for iPhone, iPod Touch, iPad
+            // All of which are broken by SameSite=None, because they use the iOS networking stack
+            if (userAgent.Contains("CPU iPhone OS 12") || userAgent.Contains("iPad; CPU OS 12"))
+            {
+                return true;
+            }
+
+            // Cover Mac OS X based browsers that use the Mac OS networking stack. This includes:
+            // - Safari on Mac OS X.
+            // This does not include:
+            // - Chrome on Mac OS X
+            // Because they do not use the Mac OS networking stack.
+            if (userAgent.Contains("Macintosh; Intel Mac OS X 10_14") &&
+                userAgent.Contains("Version/") && userAgent.Contains("Safari"))
+            {
+                return true;
+            }
+
+            // Cover Chrome 50-69, because some versions are broken by SameSite=None,
+            // and none in this range require it.
+            // Note: this covers some pre-Chromium Edge versions,
+            // but pre-Chromium Edge does not require SameSite=None.
+            if (userAgent.Contains("Chrome/5") || userAgent.Contains("Chrome/6"))
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
     [DependsOn(
         typeof(AbpAutofacModule),
-        typeof(AbpCachingStackExchangeRedisModule),
         typeof(AbpAccountWebIdentityServerModule),
         typeof(AbpAccountApplicationModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
@@ -129,10 +190,6 @@ namespace BnBYachts
 
             if (!hostingEnvironment.IsDevelopment())
             {
-                //var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-                //context.Services
-                //    .AddDataProtection()
-                //    .PersistKeysToStackExchangeRedis(redis, "BnBYachts-Protection-Keys");
             }
 
             context.Services.AddCors(options =>
@@ -183,8 +240,15 @@ namespace BnBYachts
             context.Services.GetObject<IdentityBuilder>().AddDefaultTokenProviders().AddPasswordlessLoginProvider();
             context.Services.AddScoped<ILoginService, LoginService>();
             context.Services.AddSingleton(emailConfig);
-           
-            
+            context.Services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                options.RequireHeaderSymmetry = false;
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
+            context.Services.AddSameSiteCookiePolicy();
+
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -203,7 +267,8 @@ namespace BnBYachts
             {
                 app.UseErrorPage();
             }
-          
+            app.UseCookiePolicy();
+            app.UseForwardedHeaders();
             app.UseCorrelationId();
             app.UseStaticFiles();
             app.UseRouting();
@@ -220,13 +285,19 @@ namespace BnBYachts
             app.UseAuthorization();
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
+
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json",
                 "Swagger Demo API v1");
             });
+
+
             app.UseConfiguredEndpoints();
         }
+
+       
     }
 }
