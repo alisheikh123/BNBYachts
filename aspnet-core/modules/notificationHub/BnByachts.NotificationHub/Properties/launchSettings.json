@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BnByachts.NotificationHub": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

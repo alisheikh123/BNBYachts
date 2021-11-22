@@ -4,6 +4,7 @@ using BnByachts.NotificationHub.Consumers;
 using MassTransit;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Emailing;
 using Volo.Abp.Modularity;
 
 namespace BnByachts.NotificationHub
@@ -11,7 +12,8 @@ namespace BnByachts.NotificationHub
     [DependsOn(
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
-        typeof(AbpAutofacModule)
+        typeof(AbpAutofacModule),
+        typeof(AbpEmailingModule)
     )]
     public class NotificationHubModule: AbpModule
     {

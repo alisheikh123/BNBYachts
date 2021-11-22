@@ -16,12 +16,21 @@ namespace BnByachts.NotificationHub.Services
 
         public async Task SendEmail(IEmailContract input)
         {
-            await _emailSender.SendAsync(new MailMessage
+            try
             {
-                Body = input.Body.ToString(),
-                Subject = input.Subject,
-                To = { input.To }
-            }).ConfigureAwait(false);
+
+                await _emailSender.SendAsync(
+                    "u.draz@gems.techverx.com",     // target email address
+                    "Email subject",         // subject
+                    "This is email body..."  // email body
+                    ,false
+                );
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
         }
     }
 }
