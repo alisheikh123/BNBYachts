@@ -1,18 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-	<Folder Include="Consumers\" />
-	<Folder Include="Queue\" />
-	<Folder Include="Templates\" />
-	<Folder Include="Services\" />
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp" Version="4.4.3" />
+		<PackageReference Include="Volo.Abp.Autofac" Version="4.4.3" />
+		<PackageReference Include="Volo.Abp.AutoMapper" Version="4.4.4" />
+		<PackageReference Include="Volo.Abp.Emailing" Version="4.4.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
 	</ItemGroup>
 
 </Project>
