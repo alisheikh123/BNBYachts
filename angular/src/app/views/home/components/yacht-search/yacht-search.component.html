@@ -228,8 +228,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4 py-2">
-                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent" placement="bottom"
-                                        autoClose="outside">
+                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" 
+                                    [ngbPopover]="popContent" placement="bottom"
+                                    [autoClose]="'outside'" #popOver="ngbPopover" triggers="manual"
+                                    (click)="openPopover()">
                                                 <label>Guests</label>
                                         <div class="custom-flex w-100">
                                             <p class="counter-text-total">{{boatelSearchParam.adults}} Adults</p>
@@ -282,7 +284,7 @@
                                 </div>
                                 <div class="col-12 pt-2">
                                   <div class="custom-flex-end">
-                                    <button class="custom-btn blue small-btn" >Done</button>
+                                    <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
                                   </div>
                                 </div>
                             </div>
