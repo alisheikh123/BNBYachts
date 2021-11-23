@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./boat-booking-payment.component.scss']
 })
 export class BoatBookingPaymentComponent implements OnInit {
-  boatId: string = '';
+  boatId: number;
   boatDetails: any;
   assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   boatFilterDetails = {
@@ -64,7 +64,7 @@ export class BoatBookingPaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
-      this.boatId = res['id'];
+      this.boatId = Number(res['id']);
     });
     this.boatFilterDetails = this.yachtParamService.getFilters();
     this.loadBoatDetails();
