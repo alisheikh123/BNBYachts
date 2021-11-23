@@ -17,7 +17,7 @@
     @include breakpoint(laptop){
         min-height: 480px;
     }
-    
+
     @include breakpoint(lg){
         min-height: 500px;
     }
@@ -26,19 +26,21 @@
     }
     @include breakpoint(sm){
         min-height: 400px;
+        padding: 20px 0;
     }
     @include breakpoint(mobile){
         min-height: 350px;
     }
     @include breakpoint(xs){
         min-height: 300px;
+
     }
     &.layer-bg{
         &::before{
             @include bg-layer-black;
          }
     }
-   
+
 }
 .banner-image{
     position: relative;
@@ -60,10 +62,10 @@
             }
             p{
                 z-index: 2;
-                position: relative; 
+                position: relative;
             }
-            
+
         }
-      
+
     }
 }
