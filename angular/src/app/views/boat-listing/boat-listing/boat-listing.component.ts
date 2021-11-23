@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class BoatListingComponent implements OnInit {
 
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
-  assetsUrl = environment.S3BUCKET_URL + '/boatgallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
 
   mapOptions: google.maps.MapOptions = {
     clickableIcons: false,

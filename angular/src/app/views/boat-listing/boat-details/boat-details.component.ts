@@ -22,7 +22,7 @@ export class BoatDetailsComponent implements OnInit {
   boatId: number;
   boatDetails: any;
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
-  assetsUrl = environment.S3BUCKET_URL + '/boatgallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   guidId!: Guid;
   boatFilterDetails = {
     checkinDate: '',
