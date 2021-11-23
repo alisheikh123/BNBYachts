@@ -50,7 +50,7 @@
                 <div class="custom-flex-between">
                     <div class="left-content">
                         <div class="logo-wrapper">
-                            <a href="home.html" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
+                            <a [routerLink]="['']" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="center-content">
@@ -104,6 +104,7 @@
                         </div>
                     </div>
                     <div class="right-content">
+                        <a [routerLink]="['/my-bookings']" class="custom-btn white grey-btn regular">Host Bookings</a>
                         <a href="marketing.html" class="custom-btn white grey-btn regular">Earn With Us</a>
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" >

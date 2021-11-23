@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Booking.DTO;
+using BnBYachts.Booking.Shared.BoatBooking.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,22 +13,19 @@ using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Booking.Services
 {
-    public class BoatBookingService : CrudAppService<BoatelBooking, BoatelBookingDto, Guid, PagedAndSortedResultRequestDto, BoatelBookingDto>, IBoatBookingService
+    public class BoatBookingService : ApplicationService
     {
-        private readonly IRepository<BoatelBooking, Guid> _boatelBookingRepository;
-        public BoatBookingService(IRepository<BoatelBooking, Guid> repository)
-          : base(repository)
+        private readonly IHostBoatBookingManager _hostBoatBookingManager;
+        public BoatBookingService(IHostBoatBookingManager hostBoatBookingManager)
         {
-            _boatelBookingRepository = repository;
+            _hostBoatBookingManager = hostBoatBookingManager;
         }
 
         [HttpPost]
         [Route("boatelbooking")]
-        public async Task<bool> BoatelBooking(BoatelBooking data)
+        public async Task<bool> BoatelBooking(BoatelBookingEntity data)
         {
-            data.LastModifierId = data.CreatorId = CurrentUser.Id;
-            data.UserId = CurrentUser.Id.ToString();
-            await _boatelBookingRepository.InsertAsync(data);
+            await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id,CurrentUser.Name);
             return true;
         }
 
