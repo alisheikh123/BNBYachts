@@ -138,7 +138,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                         <small class="text-danger"
+                                                        <small class="text-danger"
                                                             *ngIf="(boatFilterDetails.adults == 0 && boatFilterDetails.childrens == 0) && isSubmitted">Enter
                                                             guests deteils.</small>
                                                     </div>
@@ -153,11 +153,11 @@
                                                                         <label class="m-0 max-width-50">Adults</label>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults - 1;">-</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults - 1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.adults" />
+                                                                                [(ngModel)]="popOverFilterData.adults" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults + 1;">+</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+</span>
                                                                         </div>
                                                                     </div>
 
@@ -175,11 +175,11 @@
                                                                       </div>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens -1;">-</span>
+                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.childrens" />
+                                                                                [(ngModel)]="popOverFilterData.childrens" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens +1;">+</span>
+                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens +1;">+</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -187,7 +187,7 @@
                                                         </div>
                                                         <div class="col-12 pt-2">
                                                           <div class="custom-flex-end">
-                                                            <button class="custom-btn blue small-btn" >Done</button>
+                                                            <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
                                                           </div>
                                                         </div>
                                                     </div>
@@ -215,7 +215,8 @@
                                                             calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue"  (click)="reserveBoat()">Reserve Now</button>
+                                                    <button class="custom-btn blue" (click)="reserveBoat()">Reserve
+                                                        Now</button>
                                                 </div>
                                             </div>
                                         </div>

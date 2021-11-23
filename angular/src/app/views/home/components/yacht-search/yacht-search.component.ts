@@ -28,7 +28,8 @@ export class YachtSearchComponent implements OnInit {
   currentTab = 1;
   YachtTypes = YachtTypes;
   isSubmitted = false;
-  @ViewChild('popOver') public popover: NgbPopover;  
+  @ViewChild('popOver') public popover: NgbPopover; 
+
 
   constructor(private yachtService: YachtSearchService, private router: Router, private yachtSearchResults: YachtSearchDataService, private modal: NgbModal) { }
 
@@ -38,7 +39,7 @@ export class YachtSearchComponent implements OnInit {
 
   botelSearch() {
     this.isSubmitted = true;
-    if(this.boatelSearchParam.location != ''){
+    if (this.boatelSearchParam.location != '') {
       this.yachtService.boatelSearch(this.boatelSearchParam).subscribe((res: any) => {
         if (res?.length > 0) {
           this.yachtSearchResults.setBoats(res);
@@ -46,9 +47,8 @@ export class YachtSearchComponent implements OnInit {
           this.router.navigate(["/boat-listing"]);
         }
         else {
-          let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal modal-dialog-centered'});
+          let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true });
         }
-  
         //console.log(res);
       });
     }
@@ -82,5 +82,4 @@ export class YachtSearchComponent implements OnInit {
     this.boatelSearchParam.childrens = this.popOverFilterData.childrens;
     this.popover.close();
   }
-
 }

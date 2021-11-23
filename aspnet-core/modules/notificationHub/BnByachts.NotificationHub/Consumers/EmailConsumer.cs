@@ -14,7 +14,7 @@ namespace BnByachts.NotificationHub.Consumers
         }
         public async Task Consume(ConsumeContext<IEmailContract> context)
         {
-            await _mailer.SendEmail(context.Message).ConfigureAwait(false);
+            await _mailer.SendEmailAsync(context.Message.To,context.Message.Subject, context.Message.Body.ToString(),false);
         }
     }
 }
