@@ -1,6 +1,6 @@
 ﻿using BnBYachts.Booking.Booking;
 using BnBYachts.Booking.DTO;
-using BnBYachts.Booking.Emailing;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,6 +22,7 @@ using Volo.Abp.TextTemplating;
 
 namespace BnBYachts.Booking.Services
 {
+    [Authorize]
     public class BoatBookingService : CrudAppService<BoatelBooking, BoatelBookingDto, Guid, PagedAndSortedResultRequestDto, BoatelBookingDto>, IBoatBookingService
     {
         private readonly IRepository<BoatelBooking, Guid> _boatelBookingRepository;
@@ -45,10 +46,11 @@ namespace BnBYachts.Booking.Services
             return true;
         }
         [HttpGet]
-        [Route("boatelbookingdetail/{userId}")]
-        public async Task<dynamic> BoatelBookingDetail(string userId)
+        [Route("boatelbookingdetail")]
+        public async Task<dynamic> BoatelBookingDetail()
         {
-            var Booking = _boatelBookingRepository.Where(x => x.UserId == userId && x.CheckinDate == DateTime.Today).ToList();
+             
+            var Booking = _boatelBookingRepository.Where(x => x.UserId == CurrentUser.Id.ToString() && x.CheckinDate == DateTime.Today).ToList();
             return Booking;
         }
         [HttpGet]

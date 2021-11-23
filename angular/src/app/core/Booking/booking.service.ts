@@ -31,8 +31,8 @@ export class BookingService {
 
 
   /* Ali */
-  bookingDetail(userId:any){
-      return this.http.get(this.bookingApiUrl+'/boatelbookingdetail/'+userId).pipe(catchError(this.handleError));
+  bookingDetail(){
+      return this.http.get(this.bookingApiUrl+'/boatelbookingdetail').pipe(catchError(this.handleError));
   }
   upcomingbookingDetail(userId:any,upcoming:any){
       return this.http.get(this.bookingApiUrl+'/upcomingboatelbookingdetail/'+userId,upcoming).pipe(catchError(this.handleError));

@@ -28,8 +28,8 @@ export class AllReservationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId ="567dfaff-d4eb-9d77-16f3-542ad546c346";
-    this.service.bookingDetail(this.userId).subscribe((res:any)=>{
+    
+    this.service.bookingDetail().subscribe((res:any)=>{
       this.booking =res;
       console.log(this.booking);
       if(this.booking.length==0)
