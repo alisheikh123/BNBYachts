@@ -4,8 +4,6 @@ using BnBYachts.Payments.Shared.Transferable;
 using Stripe;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -25,31 +23,24 @@ namespace BnBYachts.Payments.Managers
 
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId)
         {
-            try
+            var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
+            var options = new PaymentMethodListOptions
             {
-                var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
-                var options = new PaymentMethodListOptions
-                {
-                    Customer = user.CustomerId,
-                    Type = "card",
-                };
-                var service = new PaymentMethodService();
-                StripeList<PaymentMethod> paymentMethods = service.List(
-                    options
-                  );
+                Customer = user.CustomerId,
+                Type = "card",
+            };
+            var service = new PaymentMethodService();
+            StripeList<PaymentMethod> paymentMethods = service.List(
+                options
+              );
 
-                var userPaymentMethods = new List<UserPaymentMethodTransferable>();
-                foreach (var item in paymentMethods)
-                {
-                    userPaymentMethods.Add(UserPaymentMethodTransferableFactory.Contruct(item.Id, item.BillingDetails.Name, item.Card.Last4, false, item.Card.Brand));
-                }
-                return userPaymentMethods;
-            }
-            catch (Exception ex)
+            var userPaymentMethods = new List<UserPaymentMethodTransferable>();
+            foreach (var item in paymentMethods)
             {
-
-                throw;
+                userPaymentMethods.Add(UserPaymentMethodTransferableFactory.Contruct(item.Id, item.BillingDetails.Name, item.Card.Last4, false, item.Card.Brand));
             }
+            return userPaymentMethods;
+
         }
 
         public async Task<bool> Pay(BookingPaymentRequestable data)
@@ -58,7 +49,6 @@ namespace BnBYachts.Payments.Managers
 
             if (data.IsSaveNewPaymentMethod)
             {
-                //Card Creation
                 var cardOptions = new PaymentMethodCreateOptions
                 {
                     Type = "card",
@@ -67,19 +57,20 @@ namespace BnBYachts.Payments.Managers
                         Token = data.Token
                     }
                 };
+
                 var paymentMethodService = new PaymentMethodService();
-                var cardResponse = paymentMethodService.Create(cardOptions);
+                var cardResponse = await paymentMethodService.CreateAsync(cardOptions).ConfigureAwait(false);
                 data.PaymentId = cardResponse.Id;
-                //Card Attachment
+
                 var attachOptions = new PaymentMethodAttachOptions
                 {
                     Customer = user.CustomerId,
                 };
                 var attachService = new PaymentMethodService();
-                attachService.Attach(
+                await attachService.AttachAsync(
                   data.PaymentId,
                   attachOptions
-                );
+                ).ConfigureAwait(false);
             }
 
             var options = new PaymentIntentCreateOptions
