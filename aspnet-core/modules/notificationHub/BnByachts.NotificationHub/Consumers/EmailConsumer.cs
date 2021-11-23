@@ -14,7 +14,7 @@ namespace BnByachts.NotificationHub.Consumers
         }
         public async Task Consume(ConsumeContext<IEmailContract> context)
         {
-            await _mailer.SendEmailAsync("umar.draz@techverx.com", context.Message.Subject, context.Message.Body.ToString(),false);
+            await _mailer.SendEmailAsync(context.Message.To,context.Message.Subject, context.Message.Body.ToString(),false);
         }
     }
 }

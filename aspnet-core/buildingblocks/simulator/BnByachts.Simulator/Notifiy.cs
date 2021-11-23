@@ -25,7 +25,7 @@ namespace BnByachts.Simulator
             _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
 
-                To = "umardraz651@gmail.com",
+                To = "umar.draz@techverx.com",
                 Subject = "test",
                 Body = new StringBuilder().Append("test")
             });
