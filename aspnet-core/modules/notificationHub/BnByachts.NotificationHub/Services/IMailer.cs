@@ -4,8 +4,8 @@ using Volo.Abp.DependencyInjection;
 
 namespace BnByachts.NotificationHub.Services
 {
-   public interface IMailer:ITransientDependency
-   {
-       Task SendEmail(IEmailContract input);
-   }
+    public interface IMailer : ITransientDependency
+    {
+        Task SendEmailAsync(string email, string subject, string body, bool IsBodyHtml);
+    }
 }

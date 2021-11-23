@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'BnB Yacht';
   public loggedInUserRole: any = null;
+
+  onActivate(event:any) {
+    window.scroll(0,0);
+}
+
 }

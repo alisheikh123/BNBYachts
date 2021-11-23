@@ -130,7 +130,9 @@
                                                     <div class="col-md-6">
                                                         <div class="row custom-border m-0">
                                                             <div class="col-12" [ngbPopover]="popContent"
-                                                                placement="bottom" autoClose="outside">
+                                                                placement="bottom" [autoClose]="'outside'"
+                                                                #popOver="ngbPopover" triggers="manual"
+                                                                (click)="openPopover()">
                                                                 <div class="row m-0">
                                                                     <div class="col-12">
                                                                         <small style="font-size: 12px;">Guests</small>
@@ -148,7 +150,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                         <small class="text-danger"
+                                                        <small class="text-danger"
                                                             *ngIf="(boatFilterDetails.adults == 0 && boatFilterDetails.childrens == 0) && isSubmitted">Enter
                                                             guests deteils.</small>
                                                     </div>
@@ -163,11 +165,11 @@
                                                                         <label>Adults</label>
                                                                         <div class="custom-flex-start">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults - 1;">-</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults - 1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.adults" />
+                                                                                [(ngModel)]="popOverFilterData.adults" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults + 1;">+</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+</span>
                                                                         </div>
                                                                     </div>
 
@@ -181,15 +183,19 @@
                                                                         <label>Children</label>
                                                                         <div class="custom-flex-start">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens -1;">-</span>
+                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.childrens" />
+                                                                                [(ngModel)]="popOverFilterData.childrens" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens +1;">+</span>
+                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens +1;">+</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-12" style="text-align: end;">
+                                                            <button class="btn btn-sm custom-btn filterBtn blue"
+                                                                (click)="updateGuests()">Done</button>
                                                         </div>
 
                                                     </div>
@@ -217,7 +223,8 @@
                                                             calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue"  (click)="reserveBoat()">Reserve Now</button>
+                                                    <button class="custom-btn blue" (click)="reserveBoat()">Reserve
+                                                        Now</button>
                                                 </div>
                                             </div>
                                         </div>

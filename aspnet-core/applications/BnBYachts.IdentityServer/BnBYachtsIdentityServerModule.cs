@@ -113,6 +113,7 @@ namespace BnBYachts
         {
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             var configuration = context.Services.GetConfiguration();
+
             var emailConfig = configuration.GetSection("EmailConfiguration:");
            
 

@@ -21,16 +21,15 @@ namespace BnBYachts.Booking.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BnBYachts.Booking.BoatelBooking", b =>
+            modelBuilder.Entity("BnBYachts.Booking.BoatelBookingEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BankingDetailsId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BoatId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BoatId")
+                        .HasColumnType("int");
 
                     b.Property<int>("BookingStatus")
                         .HasColumnType("int");
@@ -79,10 +78,13 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ReviewsId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("ReviewsId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -92,67 +94,12 @@ namespace BnBYachts.Booking.Migrations
                     b.ToTable("BoatelBookings");
                 });
 
-            modelBuilder.Entity("BnBYachts.Booking.Booking.BookingCancelled", b =>
+            modelBuilder.Entity("BnBYachts.Booking.Booking.EventBookingEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("BookingId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BookingType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RefundAmount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TotalAmount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isNotificationSent")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BookingCancelleds");
-                });
-
-            modelBuilder.Entity("BnBYachts.Booking.Booking.EventBooking", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BankingDetailsId")
                         .HasColumnType("nvarchar(max)");
@@ -195,8 +142,8 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ReviewsId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("ReviewsId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -208,10 +155,12 @@ namespace BnBYachts.Booking.Migrations
                     b.ToTable("EventBookings");
                 });
 
-            modelBuilder.Entity("BnBYachts.Booking.CharterBooking", b =>
+            modelBuilder.Entity("BnBYachts.Booking.CharterBookingEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BankingDetailsId")
                         .HasColumnType("nvarchar(max)");
@@ -257,8 +206,8 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ReviewsId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("ReviewsId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -270,10 +219,12 @@ namespace BnBYachts.Booking.Migrations
                     b.ToTable("CharterBookings");
                 });
 
-            modelBuilder.Entity("BnBYachts.Booking.Review", b =>
+            modelBuilder.Entity("BnBYachts.Booking.ReviewEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -318,27 +269,27 @@ namespace BnBYachts.Booking.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("BnBYachts.Booking.BoatelBooking", b =>
+            modelBuilder.Entity("BnBYachts.Booking.BoatelBookingEntity", b =>
                 {
-                    b.HasOne("BnBYachts.Booking.Review", "Reviews")
+                    b.HasOne("BnBYachts.Booking.ReviewEntity", "Reviews")
                         .WithMany()
                         .HasForeignKey("ReviewsId");
 
                     b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("BnBYachts.Booking.Booking.EventBooking", b =>
+            modelBuilder.Entity("BnBYachts.Booking.Booking.EventBookingEntity", b =>
                 {
-                    b.HasOne("BnBYachts.Booking.Review", "Reviews")
+                    b.HasOne("BnBYachts.Booking.ReviewEntity", "Reviews")
                         .WithMany()
                         .HasForeignKey("ReviewsId");
 
                     b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("BnBYachts.Booking.CharterBooking", b =>
+            modelBuilder.Entity("BnBYachts.Booking.CharterBookingEntity", b =>
                 {
-                    b.HasOne("BnBYachts.Booking.Review", "Reviews")
+                    b.HasOne("BnBYachts.Booking.ReviewEntity", "Reviews")
                         .WithMany()
                         .HasForeignKey("ReviewsId");
 
