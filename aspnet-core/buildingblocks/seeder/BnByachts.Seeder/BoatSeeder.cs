@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
 
@@ -113,6 +114,5 @@ namespace BnByachts.Seeder
             //}
             //await _boatRuleRepository.InsertManyAsync(boatsRules, true, token);
         }
-
     }
 }

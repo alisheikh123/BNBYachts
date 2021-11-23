@@ -8,6 +8,6 @@ namespace BnBYachts.Booking.Shared.BoatBooking.Interface
 {
     public interface IHostBoatBookingManager
     {
-       Task<bool> BoatelBooking(BoatelBookingEntity data, Guid? userId);
+       Task<bool> BoatelBooking(BoatelBookingEntity data, Guid? userId,string userName);
     }
 }

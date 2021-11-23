@@ -17,10 +17,11 @@ namespace BnBYachts.Booking.Managers
             _boatelBookingRepository = repository;
         }
 
-        public async Task<bool> BoatelBooking(BoatelBookingEntity data,Guid? userId)
+        public async Task<bool> BoatelBooking(BoatelBookingEntity data,Guid? userId,string userName)
         {
             data.LastModifierId = data.CreatorId = userId;
             data.UserId = userId.ToString();
+            data.UserName = userName;
             var response = await _boatelBookingRepository.InsertAsync(data).ConfigureAwait(false);
             if (response.Id > 0)
             {

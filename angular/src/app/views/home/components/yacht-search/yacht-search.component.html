@@ -12,7 +12,7 @@
                                 transform="translate(626.265 990.076)" fill="#122ba8" stroke="#122ba8"
                                 stroke-width="0.2" />
                         </svg>
-                        Boatel {{currentTab}}
+                        Boatel
                     </button>
                     <button class="underline-link-blk small-text"
                         [ngClass]="{'active': currentTab == YachtTypes.charter}" (click)="currentTab = 2" type="button">
@@ -128,7 +128,8 @@
                             <div class="col-md-4 py-2">
                                 <div class="row custom-border m-0">
                                     <div class="col-12" [ngbPopover]="popContent" placement="bottom"
-                                        autoClose="outside">
+                                        [autoClose]="'outside'" #popOver="ngbPopover" triggers="manual"
+                                        (click)="openPopover()">
                                         <div class="row m-0">
                                             <div class="col-12">
                                                 <small>Guests</small>
@@ -157,10 +158,10 @@
                                                 <label>Adults</label>
                                                 <div class="custom-flex-start">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults -1;">-</span>
-                                                    <input type="text" [(ngModel)]="boatelSearchParam.adults" />
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults -1;">-</span>
+                                                    <input type="text" [(ngModel)]="popOverFilterData.adults" />
                                                     <span class="plus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults+1;">+</span>
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults+1;">+</span>
                                                 </div>
                                             </div>
 
@@ -174,16 +175,19 @@
                                                 <label>Children</label>
                                                 <div class="custom-flex-start">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens -1;">-</span>
-                                                    <input type="text" [(ngModel)]="boatelSearchParam.childrens" />
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                    <input type="text" [(ngModel)]="popOverFilterData.childrens" />
                                                     <span class="plus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens+1;">+</span>
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens+1;">+</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-12" style="text-align: end;">
+                                    <button class="btn btn-sm custom-btn filterBtn blue"
+                                        (click)="updateGuests()">Done</button>
+                                </div>
                             </div>
                         </ng-template>
                         <div class="custom-flex"><button href="#" (click)="botelSearch()"

@@ -25,7 +25,7 @@ namespace BnBYachts.Booking.Services
         [Route("boatelbooking")]
         public async Task<bool> BoatelBooking(BoatelBookingEntity data)
         {
-            await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id);
+            await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id,CurrentUser.Name);
             return true;
         }
 

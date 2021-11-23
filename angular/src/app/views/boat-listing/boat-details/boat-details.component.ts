@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -29,9 +29,15 @@ export class BoatDetailsComponent implements OnInit {
     adults: 0,
     childrens: 0
   };
+  popOverFilterData = {
+    adults: 0,
+    childrens: 0
+  }
   boatHost: any;
   showMore: boolean = false;
   isSubmitted: boolean = false;
+  @ViewChild('popOver') public popover: NgbPopover;
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.boatId = Number(res['id']);
@@ -117,5 +123,14 @@ export class BoatDetailsComponent implements OnInit {
       })
     }
   }
-
+  openPopover() {
+    this.popOverFilterData.adults = this.boatFilterDetails.adults;
+    this.popOverFilterData.childrens = this.boatFilterDetails.childrens;
+    this.popover.open();
+  }
+  updateGuests() {
+    this.boatFilterDetails.adults = this.popOverFilterData.adults;
+    this.boatFilterDetails.childrens = this.popOverFilterData.childrens;
+    this.popover.close();
+  }
 }

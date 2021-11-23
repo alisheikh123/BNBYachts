@@ -22,8 +22,17 @@ namespace BnBYachts.Booking.Services
         [Route("get-my-reservations")]
         public async Task<List<BoatelBookingEntity>> GetHostBookings()
         {
-            var boatelBookings = await _boatelBookingRepository.GetListAsync(res=>res.HostId == CurrentUser.Id.ToString()).ConfigureAwait(false);
+            var boatelBookings = await _boatelBookingRepository.GetListAsync(res=>res.HostId == CurrentUser.Id.ToString() && res.BookingStatus == BookingStatus.Pending).ConfigureAwait(false);
             return boatelBookings;
+        }
+
+        [HttpGet]
+        [Route("update-reservations-status/{bookingId}/{isAccpeted}")]
+        public async Task<bool> UpdateReservationStatus(int bookingId,bool isAccpeted)
+        {
+            var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
+            booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.CancelApproved;
+            return true;
         }
     }
 }

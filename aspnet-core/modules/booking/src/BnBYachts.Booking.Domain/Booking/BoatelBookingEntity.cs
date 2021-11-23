@@ -19,5 +19,6 @@ namespace BnBYachts.Booking
         public string UserId { get; set; }
         public ReviewEntity Reviews { get; set; }
         public string HostId { get; set; }
+        public string UserName { get; set; }
     }
 }
