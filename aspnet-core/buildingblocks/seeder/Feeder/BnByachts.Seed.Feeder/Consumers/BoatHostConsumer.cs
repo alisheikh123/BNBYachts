@@ -2,6 +2,8 @@
 using BnBYachts.EventBusShared.Contracts;
 using BnByachts.SharedModule;
 using MassTransit;
+using BnBYachts.Boat.Shared.Boat.Interface;
+using BnBYachts.Boat.Shared.Boat.Requestable;
 
 namespace BnByachts.SeedObservable.Consumers
 {
