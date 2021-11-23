@@ -126,8 +126,9 @@
                                                     <div class="col-md-6">
                                                         <div class="">
                                                             <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent"
-                                                                placement="bottom" autoClose="outside">
-
+                                                                placement="bottom" autoClose="outside" triggers="manual"
+                                                                #popOver="ngbPopover"
+                                                                (click)="openPopover()">
                                                                         <label>Guests</label>
 
                                                                 <div class="custom-flex w-100">
