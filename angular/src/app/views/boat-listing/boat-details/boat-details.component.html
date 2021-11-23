@@ -94,27 +94,23 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 py-2">
-                                                <div class="row pb-2">
+                                                <div class="row pb-2 m-0">
                                                     <div class="col-md-6">
-                                                        <div class="row custom-border m-0">
-                                                            <div class="col-5">
-                                                                <div class="d-flex flex-column pl-2">
-                                                                    <small style="font-size: 12px;">Check-in</small>
+                                                        <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                                                            <div class="">
+                                                                <div class="">
+                                                                    <label>Check-in</label>
                                                                     <input
-                                                                        style="border:none;cursor:pointer;font-size:12px"
                                                                         placeholder="Add date" name="dp"
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-2">|</div>
-                                                            <div class="col-5">
-                                                                <div class="d-flex flex-column">
-                                                                    <small style="font-size: 12px;">Check-out</small>
+                                                            <div class="border-left-1">
+                                                                <div class="">
+                                                                    <label>Check-out</label>
                                                                     <input
-                                                                        style="border:none;cursor:pointer;font-size:12px"
                                                                         placeholder="Add date" name="dp2"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
                                                                         (click)="d2.toggle()" ngbDatepicker
@@ -128,23 +124,17 @@
                                                             date</small>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <div class="row custom-border m-0">
-                                                            <div class="col-12" [ngbPopover]="popContent"
+                                                        <div class="">
+                                                            <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent"
                                                                 placement="bottom" autoClose="outside">
-                                                                <div class="row m-0">
-                                                                    <div class="col-12">
-                                                                        <small style="font-size: 12px;">Guests</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row m-0">
-                                                                    <small
-                                                                        style="border:none;cursor:pointer;font-size:12px"
-                                                                        class="col-6">{{boatFilterDetails?.adults}}
-                                                                        Adults</small>
-                                                                    <small
-                                                                        style="border:none;cursor:pointer;font-size:12px"
-                                                                        class="col-6">{{boatFilterDetails?.childrens}}
-                                                                        Children</small>
+
+                                                                        <label>Guests</label>
+
+                                                                <div class="custom-flex w-100">
+                                                                    <p class="counter-text-total">{{boatFilterDetails?.adults}}
+                                                                        Adults</p>
+                                                                    <p class="counter-text-total">{{boatFilterDetails?.childrens}}
+                                                                        Children</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -158,10 +148,10 @@
                                                     <div class="row p-2">
                                                         <div class="col-12">
                                                             <div class="counter-input-wrapper">
-                                                                <div class="number">
-                                                                    <div class="custom-flex-start">
-                                                                        <label>Adults</label>
-                                                                        <div class="custom-flex-start">
+                                                                <div class="number border-0 p-0 w-100">
+                                                                    <div class="custom-flex-start w-100">
+                                                                        <label class="m-0 max-width-50">Adults</label>
+                                                                        <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
                                                                                 (click)="boatFilterDetails.adults = boatFilterDetails.adults - 1;">-</span>
                                                                             <input type="text"
@@ -176,10 +166,14 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="counter-input-wrapper">
-                                                                <div class="number">
-                                                                    <div class="custom-flex-start">
-                                                                        <label>Children</label>
-                                                                        <div class="custom-flex-start">
+                                                                <div class="number border-0 p-0 w-100">
+                                                                    <div class="custom-flex-start w-100">
+
+                                                                      <div class="max-width-50">
+                                                                        <label class="m-0">Children</label>
+                                                                        <label class="grey small-txt m-0 extra-small-text">Ages 0-13</label>
+                                                                      </div>
+                                                                        <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
                                                                                 (click)="boatFilterDetails.childrens = boatFilterDetails.childrens -1;">-</span>
                                                                             <input type="text"
@@ -191,10 +185,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        <div class="col-12 pt-2">
+                                                          <div class="custom-flex-end">
+                                                            <button class="custom-btn blue small-btn" >Done</button>
+                                                          </div>
+                                                        </div>
                                                     </div>
                                                 </ng-template>
-                                                <div class="total-amount-wrap">
+                                                <div class="total-amount-wrap custom-padding-top">
                                                     <div class="total-amount-wrap-inner">
                                                         <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} Nights
                                                         </p>
@@ -270,28 +268,28 @@
                                                <div class="total-amount-wrap-inner">
                                                    <p>$ 450  x 2 Nights</p>
                                                    <p>$900.00</p>
-          
+
                                                </div>
                                                <div class="total-amount-wrap-inner">
                                                   <p>Tax</p>
                                                   <p>$20.00</p>
-          
+
                                               </div>
                                               <div class="total-amount-wrap-inner">
                                                   <p>Service Fee</p>
                                                   <p>$20.00</p>
-          
+
                                               </div>
                                               <div class="total-amount-wrap-inner bottom">
                                                   <p class="medium">Total(USD)</p>
                                                   <p class="medium">$940.00</p>
-          
+
                                               </div>
                                               <button class="custom-btn blue" data-bs-toggle="modal" data-bs-target="#no-charter" >Reserve Now</button>
                                            </div>
                                        </div>
                                 </div>
-                              
+
                               </div>
                             </div> -->
                                 <!-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
@@ -340,28 +338,28 @@
                                                <div class="total-amount-wrap-inner">
                                                    <p>$ 450  x 2 Nights</p>
                                                    <p>$900.00</p>
-          
+
                                                </div>
                                                <div class="total-amount-wrap-inner">
                                                   <p>Tax</p>
                                                   <p>$20.00</p>
-          
+
                                               </div>
                                               <div class="total-amount-wrap-inner">
                                                   <p>Service Fee</p>
                                                   <p>$20.00</p>
-          
+
                                               </div>
                                               <div class="total-amount-wrap-inner bottom">
                                                   <p class="medium">Total(USD)</p>
                                                   <p class="medium">$940.00</p>
-          
+
                                               </div>
                                               <button class="custom-btn blue" data-bs-toggle="modal" data-bs-target="#no-charter" >Reserve Now</button>
                                            </div>
                                        </div>
                                 </div>
-                              
+
                               </div>
                             </div> -->
                             </div>

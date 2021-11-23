@@ -89,58 +89,49 @@
                     <div class="tab-pane fade" [ngClass]="{'show active': currentTab == YachtTypes.boatel}"
                         *ngIf="currentTab == YachtTypes.boatel" id="v-pills-home" role="tabpanel"
                         aria-labelledby="v-pills-home-tab">
-                        <div class="row">
+                        <div class="row m-0 custom-padding-top">
                             <div class="col-md-4 py-2">
                                 <div class="">
-                                    <div class="search-wrapper custom-input-field"><input type="text"
+                                    <div class="select custom-select select-search custom-input-label-inside">
+                                      <label>Location</label>
+                                      <input type="text"
                                             ngx-google-places-autocomplete
                                             (onAddressChange)="handleAddressChange($event)"
                                             [(ngModel)]="boatelSearchParam.location" class="custom-input"
-                                            placeholder="Search Location"><i class="fa fa-search"></i>
+                                            placeholder="Search Location"><i class="fa fa-search font-awesom-icon"></i>
                                     </div>
                                     <small class="text-danger"
                                         *ngIf="isSubmitted && boatelSearchParam.location == ''">Enter location.</small>
                                 </div>
                             </div>
                             <div class="col-md-4 py-2">
-                                <div class="row custom-border m-0">
-                                    <div class="col-5">
-                                        <div class="d-flex flex-column pl-2">
-                                            <small>Check-in</small>
-                                            <input style="border:none;cursor:pointer;font-size:12px"
-                                                placeholder="Add date" name="dp"
-                                                [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
-                                                ngbDatepicker #d="ngbDatepicker">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">|</div>
-                                    <div class="col-5">
-                                        <div class="d-flex flex-column">
-                                            <small>Check-out</small>
-                                            <input style="border:none;cursor:pointer;font-size:12px"
-                                                placeholder="Add date" name="dp2"
-                                                [(ngModel)]="boatelSearchParam.checkoutDate" (click)="d2.toggle()"
-                                                ngbDatepicker #d2="ngbDatepicker">
-                                        </div>
-                                    </div>
-                                </div>
+                              <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                                <div class="">
+                                  <label>Check-in</label>
+                                  <input
+                                      placeholder="Add date" name="dp"
+                                      [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
+                                      ngbDatepicker #d="ngbDatepicker">
+                              </div>
+                              <div class="border-left-1">
+                                <label>Check-out</label>
+                                <input
+                                    placeholder="Add date" name="dp2"
+                                    [(ngModel)]="boatelSearchParam.checkoutDate" (click)="d2.toggle()"
+                                    ngbDatepicker #d2="ngbDatepicker">
+                            </div>
+                              </div>
+
                             </div>
                             <div class="col-md-4 py-2">
-                                <div class="row custom-border m-0">
-                                    <div class="col-12" [ngbPopover]="popContent" placement="bottom"
+                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent" placement="bottom"
                                         autoClose="outside">
-                                        <div class="row m-0">
-                                            <div class="col-12">
-                                                <small>Guests</small>
-                                            </div>
+                                        <label>Guests</label>
+                                        <div class="custom-flex w-100">
+                                            <p class="counter-text-total">{{boatelSearchParam.adults}} Adults</p>
+                                            <p class="counter-text-total">{{boatelSearchParam.childrens}} Children</p>
                                         </div>
-                                        <div class="row m-0">
-                                            <small style="border:none;cursor:pointer;font-size:12px"
-                                                class="col-6">{{boatelSearchParam.adults}} Adults</small>
-                                            <small style="border:none;cursor:pointer;font-size:12px"
-                                                class="col-6">{{boatelSearchParam.childrens}} Children</small>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -152,10 +143,10 @@
                             <div class="row p-2">
                                 <div class="col-12">
                                     <div class="counter-input-wrapper">
-                                        <div class="number">
-                                            <div class="custom-flex-start">
-                                                <label>Adults</label>
-                                                <div class="custom-flex-start">
+                                        <div class="number border-0 p-0 w-100">
+                                            <div class="custom-flex-start w-100">
+                                                <label class="m-0 max-width-50">Adults</label>
+                                                <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
                                                         (click)="boatelSearchParam.adults = boatelSearchParam.adults -1;">-</span>
                                                     <input type="text" [(ngModel)]="boatelSearchParam.adults" />
@@ -169,10 +160,14 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="counter-input-wrapper">
-                                        <div class="number">
-                                            <div class="custom-flex-start">
-                                                <label>Children</label>
-                                                <div class="custom-flex-start">
+                                        <div class="number border-0 p-0">
+                                            <div class="custom-flex-start w-100">
+                                              <div class="max-width-50">
+                                                <label class="m-0">Children</label>
+                                                <label class="grey small-txt m-0 extra-small-text">Ages 0-13</label>
+                                              </div>
+
+                                                <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
                                                         (click)="boatelSearchParam.childrens = boatelSearchParam.childrens -1;">-</span>
                                                     <input type="text" [(ngModel)]="boatelSearchParam.childrens" />
@@ -183,43 +178,48 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-12 pt-2">
+                                  <div class="custom-flex-end">
+                                    <button class="custom-btn blue small-btn" >Done</button>
+                                  </div>
+                                </div>
                             </div>
                         </ng-template>
-                        <div class="custom-flex"><button href="#" (click)="botelSearch()"
+                        <div class="custom-flex custom-padding-top"><button href="#" (click)="botelSearch()"
                                 class="custom-btn blue big-btn">Search</button></div>
                     </div>
                     <div class="tab-pane fade" [ngClass]="{'show active': currentTab == YachtTypes.charter}"
                         *ngIf="currentTab == YachtTypes.charter">
-                        <div class="row">
+                        <div class="row m-0 custom-padding-top">
                             <div class="col-md-4 py-2">
                                 <div class="">
-                                    <div class="search-wrapper custom-input-field"><input type="text"
+                                    <div class="select custom-select select-search custom-input-label-inside">
+                                      <label>Location</label>
+                                      <input type="text"
                                             ngx-google-places-autocomplete
                                             (onAddressChange)="handleAddressChange($event)"
                                             [(ngModel)]="boatelSearchParam.location" class="custom-input"
-                                            placeholder="Search Location"><i class="fa fa-search"></i>
+                                            placeholder="Search Location"><i class="fa fa-search font-awesom-icon"></i>
                                     </div>
                                     <small class="text-danger"
                                         *ngIf="isSubmitted && boatelSearchParam.location == ''">Enter location.</small>
                                 </div>
                             </div>
                             <div class="col-md-4 py-2">
-                                <div class="row custom-border m-0">
-                                    <div class="col-5">
-                                        <div class="d-flex flex-column pl-2">
-                                            <small>Check-in</small>
-                                            <input style="border:none;cursor:pointer;font-size:12px"
+                                <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                                    <div class="">
+                                        <div class="">
+                                            <label>Check-in</label>
+                                            <input
                                                 placeholder="Add date" name="dp"
                                                 [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
                                                 ngbDatepicker #d="ngbDatepicker">
                                         </div>
                                     </div>
-                                    <div class="col-2">|</div>
-                                    <div class="col-5">
-                                        <div class="d-flex flex-column">
-                                            <small>Check-out</small>
-                                            <input style="border:none;cursor:pointer;font-size:12px"
+                                    <div class="border-left-1">
+                                        <div class="">
+                                            <label>Check-out</label>
+                                            <input
                                                 placeholder="Add date" name="dp2"
                                                 [(ngModel)]="boatelSearchParam.checkoutDate" (click)="d2.toggle()"
                                                 ngbDatepicker #d2="ngbDatepicker">
@@ -228,22 +228,14 @@
                                 </div>
                             </div>
                             <div class="col-md-4 py-2">
-                                <div class="row custom-border m-0">
-                                    <div class="col-12" [ngbPopover]="popContent" placement="bottom"
+                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent" placement="bottom"
                                         autoClose="outside">
-                                        <div class="row m-0">
-                                            <div class="col-12">
-                                                <small>Guests</small>
-                                            </div>
-                                        </div>
-                                        <div class="row m-0">
-                                            <small style="border:none;cursor:pointer;font-size:12px"
-                                                class="col-6">{{boatelSearchParam.adults}} Adults</small>
-                                            <small style="border:none;cursor:pointer;font-size:12px"
-                                                class="col-6">{{boatelSearchParam.childrens}} Children</small>
+                                                <label>Guests</label>
+                                        <div class="custom-flex w-100">
+                                            <p class="counter-text-total">{{boatelSearchParam.adults}} Adults</p>
+                                            <p class="counter-text-total">{{boatelSearchParam.childrens}} Children</p>
                                         </div>
                                     </div>
-                                </div>
                             </div>
 
                             <!-- <small class="col-12 text-danger">
@@ -251,13 +243,13 @@
                             </small> -->
                         </div>
                         <ng-template #popContent>
-                            <div class="row p-2">
+                            <div class="row p-2 m-0">
                                 <div class="col-12">
                                     <div class="counter-input-wrapper">
-                                        <div class="number">
-                                            <div class="custom-flex-start">
-                                                <label>Adults</label>
-                                                <div class="custom-flex-start">
+                                        <div class="number border-0 p-0 w-100">
+                                            <div class="custom-flex-start w-100">
+                                                <label class="m-0 max-width-50">Adults</label>
+                                                <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
                                                         (click)="boatelSearchParam.adults = boatelSearchParam.adults -1;">-</span>
                                                     <input type="text" [(ngModel)]="boatelSearchParam.adults" />
@@ -271,10 +263,13 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="counter-input-wrapper">
-                                        <div class="number">
-                                            <div class="custom-flex-start">
-                                                <label>Children</label>
-                                                <div class="custom-flex-start">
+                                        <div class="number border-0 p-0 w-100">
+                                            <div class="custom-flex-start w-100">
+                                              <div class="max-width-50">
+                                                <label class="m-0">Children</label>
+                                                <label class="grey small-txt m-0 extra-small-text">Ages 0-13</label>
+                                              </div>
+                                                <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
                                                         (click)="boatelSearchParam.childrens = boatelSearchParam.childrens -1;">-</span>
                                                     <input type="text" [(ngModel)]="boatelSearchParam.childrens" />
@@ -285,44 +280,49 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-12 pt-2">
+                                  <div class="custom-flex-end">
+                                    <button class="custom-btn blue small-btn" >Done</button>
+                                  </div>
+                                </div>
                             </div>
                         </ng-template>
-                        <div class="custom-flex"><button (click)="charterSearch()"
+                        <div class="custom-flex custom-padding-top"><button (click)="charterSearch()"
                                 class="custom-btn blue big-btn">Search</button></div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
                         [ngClass]="{'show active': currentTab == YachtTypes.event}"
                         *ngIf="currentTab == YachtTypes.event" aria-labelledby="v-pills-settings-tab">
-                        <div class="row">
+                        <div class="row m-0 custom-padding-top">
                             <div class="col-md-4 py-2">
                                 <div class="">
-                                    <div class="search-wrapper custom-input-field"><input type="text"
+                                    <div class="select custom-select select-search custom-input-label-inside">
+                                      <label>Location</label>
+                                      <input type="text"
                                             ngx-google-places-autocomplete
                                             (onAddressChange)="handleAddressChange($event)"
                                             [(ngModel)]="boatelSearchParam.location" class="custom-input"
-                                            placeholder="Search Location"><i class="fa fa-search"></i>
+                                            placeholder="Search Location"><i class="fa fa-search fa fa-search font-awesom-icon"></i>
                                     </div>
                                     <small class="text-danger"
                                         *ngIf="isSubmitted && boatelSearchParam.location == ''">Enter location.</small>
                                 </div>
                             </div>
                             <div class="col-md-4 py-2">
-                                <div class="row custom-border m-0">
-                                    <div class="col-5">
-                                        <div class="d-flex flex-column pl-2">
-                                            <small>Check-in</small>
-                                            <input style="border:none;cursor:pointer;font-size:12px"
+                                <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                                    <div class="">
+                                        <div class="">
+                                            <label>Check-in</label>
+                                            <input
                                                 placeholder="Add date" name="dp"
                                                 [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
                                                 ngbDatepicker #d="ngbDatepicker">
                                         </div>
                                     </div>
-                                    <div class="col-2">|</div>
-                                    <div class="col-5">
-                                        <div class="d-flex flex-column">
-                                            <small>Check-out</small>
-                                            <input style="border:none;cursor:pointer;font-size:12px"
+                                    <div class=" border-left-1">
+                                        <div class="">
+                                            <label>Check-out</label>
+                                            <input
                                                 placeholder="Add date" name="dp2"
                                                 [(ngModel)]="boatelSearchParam.checkoutDate" (click)="d2.toggle()"
                                                 ngbDatepicker #d2="ngbDatepicker">
@@ -331,19 +331,17 @@
                                 </div>
                             </div>
                             <div class="col-md-4 py-2">
-                                <div class="row custom-border m-0">
-                                    <div class="col-12" [ngbPopover]="popContent" placement="bottom"
+                                <div class="">
+                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent" placement="bottom"
                                         autoClose="outside">
-                                        <div class="row m-0">
-                                            <div class="col-12">
-                                                <small>Guests</small>
+                                        <div class="">
+                                            <div class="">
+                                                <label>Guests</label>
                                             </div>
                                         </div>
-                                        <div class="row m-0">
-                                            <small style="border:none;cursor:pointer;font-size:12px"
-                                                class="col-6">{{boatelSearchParam.adults}} Adults</small>
-                                            <small style="border:none;cursor:pointer;font-size:12px"
-                                                class="col-6">{{boatelSearchParam.childrens}} Children</small>
+                                        <div class="custom-flex w-100">
+                                            <p class="counter-text-total">{{boatelSearchParam.adults}} Adults</p>
+                                            <p class="counter-text-total">{{boatelSearchParam.childrens}} Children</p>
                                         </div>
                                     </div>
                                 </div>
@@ -357,10 +355,10 @@
                             <div class="row p-2">
                                 <div class="col-12">
                                     <div class="counter-input-wrapper">
-                                        <div class="number">
-                                            <div class="custom-flex-start">
-                                                <label>Adults</label>
-                                                <div class="custom-flex-start">
+                                        <div class="number border-0 p-0 w-100">
+                                            <div class="custom-flex-start w-100">
+                                                <label class="m-0 max-width-50">Adults</label>
+                                                <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
                                                         (click)="boatelSearchParam.adults = boatelSearchParam.adults -1;">-</span>
                                                     <input type="text" [(ngModel)]="boatelSearchParam.adults" />
@@ -374,9 +372,12 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="counter-input-wrapper">
-                                        <div class="number">
-                                            <div class="custom-flex-start">
-                                                <label>Children</label>
+                                        <div class="number border-0 p-0 w-100">
+                                            <div class="custom-flex-start w-100">
+                                              <div class="max-width-50">
+                                                <label class="m-0">Children</label>
+                                                <label class="grey small-txt m-0 extra-small-text">Ages 0-13</label>
+                                              </div>
                                                 <div class="custom-flex-start">
                                                     <span class="minus" style="cursor: pointer;"
                                                         (click)="boatelSearchParam.childrens = boatelSearchParam.childrens -1;">-</span>
@@ -388,10 +389,14 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-12 pt-2">
+                                  <div class="custom-flex-end">
+                                    <button class="custom-btn blue small-btn" >Done</button>
+                                  </div>
+                                </div>
                             </div>
                         </ng-template>
-                        <div class="custom-flex"><a href="#" (click)="eventSearch()"
+                        <div class="custom-flex custom-padding-top"><a href="#" (click)="eventSearch()"
                                 class="custom-btn blue big-btn">Search</a></div>
                     </div>
                 </div>

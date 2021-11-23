@@ -18,7 +18,7 @@
     @include breakpoint(xs){
         flex-direction: column;
     }
-   
+
     .social-icons-ul{
         @include breakpoint(xs){
             padding:10px 0;
@@ -75,7 +75,7 @@
         }
         &:hover{
             cursor: pointer;
-            
+
         }
     }
 }
@@ -94,7 +94,7 @@
         @include custom-flex;
         margin-right: 10px;
         .input-type-attachemement{
-          
+
             label{
               margin: 0;
             }
@@ -102,9 +102,9 @@
         .custom-btn{
             margin-right: 10px;
         }
-        
+
     }
-    
+
 }
 .image-wrapper-boat{
     img{
@@ -133,4 +133,82 @@
         }
     }
 
+}
+
+
+.custom-input-label-inside{
+  @include custom-flex-start;
+  flex-direction: column;
+  align-items: flex-start !important;
+  border:1px solid $placeholder-color !important;
+  padding: 5px 22px!important;
+  margin: 0 !important;
+  height: auto;
+  background:transparent !important ;
+  border-radius: 48px !important;
+  position: relative;
+
+
+  label{
+    display: block;
+    margin: 0;
+  }
+  input{
+    border:none !important;
+    width: 100%;
+    padding:0 !important;
+    font-size: 16px;
+    color: $placeholder-color !important;
+    &::placeholder{
+      color: $placeholder-color !important;
+    }
+  }
+  .font-awesom-icon{
+    position: absolute;
+    right: 20px;
+    bottom: 14px;
+    font-size: 14px;
+    color:$placeholder-color !important;
+    height: auto;
+    width: auto;
+    top: unset;
+  }
+  .counter-text-total{
+    border:none !important;
+    width: 100%;
+    font-size: 16px;
+    padding:0 !important;
+    color: $placeholder-color !important;
+  }
+}
+.border-left-1{
+  border-left:1px solid $placeholder-color !important;
+  padding-left: 10px !important;
+  .dropdown-menu{
+    @include breakpoint(xs){
+      left: -120px !important;
+    }
+
+  }
+}
+
+.extra-small-text{
+  font-size: 10px;
+  @include breakpoint(sm){
+    font-size: 8px;
+  }
+  &.grey{
+    color: $placeholder-color !important;
+  }
+}
+.max-width-50{
+  max-width: 50%;
+  width: 100%;
+}
+
+.custom-padding-top{
+  padding-top: 50px;
+  @include breakpoint(sm){
+    padding-top: 25px;
+  }
 }
