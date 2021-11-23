@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using BnBYachts.EventBusShared.Queue;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
@@ -25,9 +26,10 @@ namespace BnByachts.Simulator
             application.Initialize();
             using (var serviceScope = application.ServiceProvider.CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<QueueListener>()?.Start();
+                Console.WriteLine("init");
+                 serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
             }
-            Console.WriteLine("heartbeat");
+            Console.WriteLine("Simulator Active");
             Console.WriteLine("Ctrl + C to Quit");
             
             QuitEvent.WaitOne();

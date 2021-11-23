@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using BnByachts.SeedObservable.Queue;
+using BnBYachts.EventBusShared.Queue;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
@@ -20,17 +20,14 @@ namespace BnByachts.SeedObservable
             using var application = AbpApplicationFactory.Create<SeederObservableModule>(options =>
             {
                 options.UseAutofac();
-                
-
             });
             application.Initialize();
             using (var serviceScope = application.ServiceProvider.CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<QueueListener>()?.Start();
+                serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
             }
             Console.WriteLine("Seeder Queue activate");
             Console.WriteLine("Ctrl + C to Quit");
-
             QuitEvent.WaitOne();
         }
     }

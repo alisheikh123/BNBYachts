@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace BnBYachts.Core.Controllers
@@ -7,6 +8,7 @@ namespace BnBYachts.Core.Controllers
     {
         public ActionResult Index()
         {
+            Console.WriteLine("home");
             return Redirect("~/swagger");
         }
     }

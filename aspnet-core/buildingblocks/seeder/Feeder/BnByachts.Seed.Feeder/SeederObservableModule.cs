@@ -31,6 +31,7 @@ namespace BnByachts.SeedObservable
             {
                 options.AddMaps<SeederObservableModule>();
             });
+
             context.Services.AddMassTransit(mt =>
             {
                 mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>

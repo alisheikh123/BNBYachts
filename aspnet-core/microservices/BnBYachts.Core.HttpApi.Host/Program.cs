@@ -28,12 +28,20 @@ namespace BnBYachts.Core
 
             try
             {
+                Console.WriteLine("in");
                 Log.Information("Starting BnBYachts.Core.HttpApi.Host.");
                 CreateHostBuilder(args).Build().Run();
+                Console.WriteLine("end");
                 return 0;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
+
                 Log.Fatal(ex, "Host terminated unexpectedly!");
                 return 1;
             }

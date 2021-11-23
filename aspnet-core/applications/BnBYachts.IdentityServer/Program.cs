@@ -34,6 +34,12 @@ namespace BnBYachts
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine(ex.InnerException.InnerException);
+                }
+
                 Log.Fatal(ex, "BnBYachts.IdentityServer terminated unexpectedly!");
                 return 1;
             }
