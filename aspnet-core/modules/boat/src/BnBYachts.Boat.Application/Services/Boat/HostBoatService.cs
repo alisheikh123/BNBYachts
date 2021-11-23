@@ -1,13 +1,14 @@
 ﻿using BnBYachts.Boat;
-using BnBYachts.Boat.Enum;
+using BnBYachts.Boat.ViewModel;
+using BnBYachts.Boats.Charter;
 using BnBYachts.Helpers;
 using BnBYachts.Interfaces.Boat;
 using BnBYachts.ViewModel.Boat;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -16,21 +17,23 @@ using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Services.Boat
 {
-    public class HostBoatService : CrudAppService<HostBoat, HostBoatDto, Guid, PagedAndSortedResultRequestDto, HostBoatDto>, IHostBoatService
+    [Authorize]
+    public class HostBoatService :CrudAppService<HostBoat, HostBoatDto, Guid, PagedAndSortedResultRequestDto, HostBoatDto>, IHostBoatService
     {
         private readonly IRepository<HostBoat, Guid> _boatRepository;
         private readonly IRepository<BoatFeature, Guid> _boatelFeatureRepo;
-        private readonly IRepository<BoatGallery, Guid> _boatelGalleryRepo;
         private readonly IRepository<BoatRule, Guid> _boatelRulesRepo;
         private readonly IRepository<BoatCalendar, Guid> _boatelCalendarRepo;
-        public HostBoatService(IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo, IRepository<BoatGallery, Guid> boatelGalleryRepo)
+        //Charters
+        private readonly IRepository<Charter, Guid> _charterRepository;
+        public HostBoatService(IRepository<Charter, Guid> charterRepository, IRepository<HostBoat, Guid> repository, IRepository<BoatFeature, Guid> boatelFeatureRepo, IRepository<BoatRule, Guid> boatelRulesRep, IRepository<BoatCalendar, Guid> boatelCalendarRepo)
            : base(repository)
         {
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
             _boatelRulesRepo = boatelRulesRep;
-            _boatelGalleryRepo = boatelGalleryRepo;
+            _charterRepository = charterRepository;
         }
 
         [Route("FilterBoatelBoats")]
@@ -82,6 +85,7 @@ namespace BnBYachts.Services.Boat
         {
             try
             {
+                boatCalendar.LastModifierId = boatCalendar.CreatorId = CurrentUser.Id;
                 await _boatelCalendarRepo.InsertAsync(boatCalendar).ConfigureAwait(false);
                 return true;
             }
@@ -94,7 +98,7 @@ namespace BnBYachts.Services.Boat
 
         [Route("FilterChartersBoats")]
         [HttpPost]
-        public async Task<List<HostBoat>> GetChartersByFilters(SearchFilters parameters)
+        public async Task<List<HostBoat>> GetChartersByFilters(CharterFilters param)
         {
             try
             {
@@ -124,31 +128,31 @@ namespace BnBYachts.Services.Boat
         [Route("boatSave")]
         public async void InsertBoat(CancellationToken cancellationToken)
         {
-            HostBoat boat = new HostBoat();
-            boat.Name = "my Boat";
-            boat.Length = 200;
-            boat.TotalBedrooms = 2;
-            boat.TotalWashrooms = 3;
-            boat.IsBoatelServicesOffered = true;
-            boat.BoatelAvailabilityDays = 20;
-            boat.CheckinTime = new DateTime();
-            boat.CheckoutTime = new DateTime().AddDays(3);
-            //     Latitude Longitude
-            boat.Latitude = 32.073978;
-            boat.Longitude = 72.686073;
-            boat.PerDayCharges = 200;
-            boat.IsActive = true;
-            boat.BoatType = BoatTypes.PowerBoat;
-            boat.CreationTime = new DateTime();
-            try
-            {
-                await _boatRepository.InsertAsync(boat, true, cancellationToken);
-            }
-            catch (Exception ex)
-            {
+            
 
-                throw;
-            }
+            //boat.Length = 200;
+            //boat.TotalBedrooms = 2;
+            //boat.TotalWashrooms = 3;
+            //boat.IsBoatelServicesOffered = true;
+            //boat.BoatelAvailabilityDays = 20;
+            //boat.CheckinTime = new DateTime();
+            //boat.CheckoutTime = new DateTime().AddDays(3);
+            ////     Latitude Longitude
+            //boat.Latitude = 32.073978;
+            //boat.Longitude = 72.686073;
+            //boat.PerDayCharges = 200;
+            //boat.IsActive = true;
+            //boat.BoatType = BoatTypes.PowerBoat;
+            //boat.CreationTime = new DateTime();
+            //try
+            //{
+            //    await _boatRepository.InsertAsync(boat, true, cancellationToken);
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw;
+            //}
         }
 
         [Route("boat-details/{boatId}")]
@@ -169,14 +173,6 @@ namespace BnBYachts.Services.Boat
                 await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
             }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatLocations).ConfigureAwait(false);
-            return boat;
-        }
-        [Route("filtered-boat-details/{boatId}")]
-        [HttpGet]
-        public async Task<HostBoat> GetFilteredBoatDetailsById(Guid boatId)
-        {
-            var boat = await _boatRepository.GetAsync(b => b.Id == boatId, false).ConfigureAwait(false);
-            await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
             
             return boat;
         }

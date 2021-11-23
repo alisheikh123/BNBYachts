@@ -18,7 +18,7 @@ namespace BnBYachts.Boat.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BnBYachts.Boat.BoatCalendar", b =>
@@ -47,7 +47,7 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("HostBoatId")
+                    b.Property<Guid>("HostBoatId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsAvailable")
@@ -458,7 +458,7 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("Rules");
                 });
 
-            modelBuilder.Entity("BnBYachts.Charter.Charter", b =>
+            modelBuilder.Entity("BnBYachts.Boats.Charter.Charter", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -486,6 +486,12 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<string>("DepartingFrom")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("DepartingLatitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("DepartingLongitude")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("DepartureFromDate")
                         .HasColumnType("datetime2");
 
@@ -497,6 +503,12 @@ namespace BnBYachts.Boat.Migrations
 
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("DestinationLatitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("DestinationLongitude")
+                        .HasColumnType("float");
 
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
@@ -598,7 +610,9 @@ namespace BnBYachts.Boat.Migrations
                 {
                     b.HasOne("BnBYachts.Boat.HostBoat", null)
                         .WithMany("BoatCalendars")
-                        .HasForeignKey("HostBoatId");
+                        .HasForeignKey("HostBoatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BnBYachts.Boat.BoatFeature", b =>
@@ -641,7 +655,7 @@ namespace BnBYachts.Boat.Migrations
                     b.Navigation("OfferedRule");
                 });
 
-            modelBuilder.Entity("BnBYachts.Charter.Charter", b =>
+            modelBuilder.Entity("BnBYachts.Boats.Charter.Charter", b =>
                 {
                     b.HasOne("BnBYachts.Boat.HostBoat", "Boat")
                         .WithMany()

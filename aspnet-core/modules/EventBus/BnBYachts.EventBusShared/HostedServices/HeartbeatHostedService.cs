@@ -21,20 +21,11 @@ namespace BnBYachts.EventBusShared.HostedServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                try
-                {
-                    await Task.Delay(30000, stoppingToken);
-
                     _eventBusDispatcher.Send<IHeartbeatContract>(new HeartbeatContract
                     {
                         Message = "ping ..."
                     });
-                }
-                catch (System.Exception e)
-                {
-
-                    throw;
-                }
+                    await Task.Delay(90000, stoppingToken);
             }
         }
     }

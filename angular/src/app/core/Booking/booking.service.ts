@@ -14,6 +14,9 @@ export class BookingService {
     return this.http.post(this.bookingApiUrl + '/boatelbooking',model).pipe(
       catchError(this.handleError));
   }
+
+  
+  ///Exception handler
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

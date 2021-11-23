@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +28,21 @@ namespace BnBYachts.Core.DbMigrator
                 .WriteTo.Async(c => c.Console())
                 .CreateLogger();
 
-            await CreateHostBuilder(args).RunConsoleAsync();
+            try
+            {
+                await CreateHostBuilder(args).RunConsoleAsync();
+            }
+            catch (System.Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                if (e.InnerException != null)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                }
+
+                throw e;
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BnBYachts.Boats.Charter;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
@@ -55,7 +56,7 @@ namespace BnBYachts.Boat.EntityFrameworkCore
 
         // charter
 
-        public DbSet<Charter.Charter> Charteres { get; set; }
+        public DbSet<Charter> Charteres { get; set; }
 
         //Event
         public DbSet<Events.Event> Events { get; set; }

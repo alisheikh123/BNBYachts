@@ -127,6 +127,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.HttpApi.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Payments.HttpApi.Host", "microservices\BnBYachts.Payments.HttpApi.Host\BnBYachts.Payments.HttpApi.Host.csproj", "{61EF243B-5F9D-4CF6-8D46-9ACE03D79556}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "observable", "observable", "{3F20B686-62DC-43F1-B600-A53E96A5E0AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnByachts.SeedObservable", "buildingblocks\seeder\Feeder\BnByachts.Seed.Feeder\BnByachts.SeedObservable.csproj", "{CAA254C7-5D21-4AAF-BE16-737ACF13845B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BnByachts.NotificationHub", "modules\notificationHub\BnByachts.NotificationHub\BnByachts.NotificationHub.csproj", "{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -305,6 +311,14 @@ Global
 		{61EF243B-5F9D-4CF6-8D46-9ACE03D79556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61EF243B-5F9D-4CF6-8D46-9ACE03D79556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61EF243B-5F9D-4CF6-8D46-9ACE03D79556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA254C7-5D21-4AAF-BE16-737ACF13845B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA254C7-5D21-4AAF-BE16-737ACF13845B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA254C7-5D21-4AAF-BE16-737ACF13845B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA254C7-5D21-4AAF-BE16-737ACF13845B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -367,6 +381,9 @@ Global
 		{2DC80977-7088-447B-A323-5552ED230A5D} = {4190C907-2435-4A88-98AF-2C16458D8B26}
 		{F18640F6-0DFF-48DB-B90C-16F64A738439} = {4190C907-2435-4A88-98AF-2C16458D8B26}
 		{61EF243B-5F9D-4CF6-8D46-9ACE03D79556} = {10399C2F-1B2E-4141-97C9-9212B90B78E6}
+		{3F20B686-62DC-43F1-B600-A53E96A5E0AF} = {4F58C216-B903-489A-997E-281015BFD573}
+		{CAA254C7-5D21-4AAF-BE16-737ACF13845B} = {3F20B686-62DC-43F1-B600-A53E96A5E0AF}
+		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1} = {5B43B67C-D3DE-4E14-B785-576B1D612EAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
