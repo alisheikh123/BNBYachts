@@ -1,0 +1,182 @@
+<div class="main-wrapper">
+    <div class="reservation-page section-padding charter-cancelation" *ngFor="let b of bookingCancelDetail">
+        <div class="container">
+
+            <div class="row col-md-12">
+                <div class="col-md-6">
+                    <div class="btn-back">
+                        <a (click)="goBack()" style="border: 1px solid #122ba8;">
+                            <i class="fas fa-chevron-left" style="color:#122ba8"></i>
+                        </a>
+                        <h2 class="bold pb-3">Boatel Cancellation</h2>
+                    </div>
+                    <label class="medium">Why do you want to cancel?</label>
+                    <div class="custom-input-field">
+                       
+                        <textarea class="custom-input" id="exampleFormControlTextarea1" rows="4"
+                            [(ngModel)]="Reason" required></textarea>
+                    </div>
+                    <div class="price-detail py-4">
+                        <h5 class="bold pt-3 pb-1">Refund Details</h5>
+                        <div class="custom-flex-between">
+                            <p>{{b?.boatDetail.perDayCharges}} x {{ b.TotalDays}} Night</p>
+                            <p class=" text-right py-1">{{b?.boatDetail.perDayCharges * b.TotalDays }}.00 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p>Service Fee</p>
+                            <p class=" text-right py-1">20 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p>Processing Fee</p>
+                            <p class=" text-right py-1">20 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p>Tax Fee</p>
+                            <p class=" text-right py-1">{{b?.boatDetail.taxFee}}.00 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p>Total(USD)</p>
+                            <p class=" text-right py-1">{{(b?.boatDetail.perDayCharges * b.TotalDays) + 20 + 20 +
+                                b?.boatDetail.taxFee}}.00 $</p>
+                        </div>
+                        <div class="border-top my-3"></div>
+                        <div class="custom-flex-between">
+                            <p class="medium">Deducted Amount(USD)</p>
+                            <p class="text-right py-1">{{b?.deductedAmount}}.00 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p class="medium">Refundable Amount(USD)</p>
+                            <p class="text-right py-1">{{b?.totalreservationFee}}.00 $</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="price-detail pb-4">
+                        <h5 class="bold py-2">Reservation Details</h5>
+                        <div class="custom-flex-start">
+                            <p class="medium">Boat Name:</p>
+                            <p class="grey text-right py-1">{{b.boatDetail.name}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">Check In Date:</p>
+                            <p class="grey text-right py-1">{{b.checkinDate | date}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">Check Out Date:</p>
+                            <p class="grey text-right py-1">{{b.checkoutDate | date}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">No of Guest:</p>
+                            <p class="grey text-right py-1">{{b.noOfAdults + b.noOfChildrens}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">Location :</p>
+                            <p class="grey text-right py-1">{{b?.boatDetail.location}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">Check In Time:</p>
+                            <p class="grey text-right py-1">{{b?.boatDetail.checkinTime | date:'h:mm a' }}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">Check Out Time:</p>
+                            <p class="grey text-right py-1">{{b?.boatDetail.checkoutTime | date:'h:mm a'}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">Bedroom:</p>
+                            <p class="grey text-right py-1">{{b?.boatDetail.totalBedrooms}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">Bathroom:</p>
+                            <p class="grey text-right py-1">{{b?.boatDetail.totalWashrooms}}</p>
+                        </div>
+                        <div class="custom-margin">
+                            <h5 class="bold mb-1">Cancellation Policy</h5>
+                            <p class="small-text">Short description about the host Lorem ipsum dolor sit amet,
+                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                aliqua. Ut enim ad minim veniam, quis nostrud. <a href="disclaimer.html"
+                                    class="custom-btn underline-blue-link no-before-content p-0">Read more</a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12 custom-margin text-center mobile-padding-btns">
+                <div class="center-content">
+                    <a class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">I changed my
+                        mind</a>&nbsp;&nbsp;
+                    <a class="custom-btn btn-big  blue" (click)="openModal(template,b)">Confirm Cancellation</a>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!--Cancelation Policy Modal -->
+    <ng-template #template>
+
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">Cancellation Policy</h4>
+                    <div class="py-2">
+                        <p class="small-text text-left">Short description about the host Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna.Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                        <ul class="custom-ul">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit
+                                    eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed
+                                    nulla. Nullam volutpat vitae</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit
+                                    eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed
+                                    nulla. Nullam volutpat vitae</p>
+                            </li>
+
+                        </ul>
+                        <p><strong>Are you sure you want cancel the booking ?</strong></p>
+                    </div>
+                    <div class="py-4 text-center">
+                        <a (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
+                            data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#cancellation-confirmed">Cancel</a>&nbsp;
+                        <a class="custom-btn blue big-btn" (click)="confirmCancel()">Confirm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #bookingcancelled>
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">Booking Cancelled Confirm</h4>
+
+                    <div class="text-center">
+                        <img src="assets/images/password-updated.png" alt="">
+                    </div>
+                    <div class="bottom-btn text-center">
+                        <button class="custom-btn blue big-btn mt-3" (click)="goBack()">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </ng-template>
+
+</div>

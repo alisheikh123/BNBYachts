@@ -17,8 +17,8 @@
           <div class="col-sm-8 py-2">
             <div>
             <h5 class="bold pb-1">Description</h5>
-            <p class="small-text medium-container text-left grey">{{b?.boatDetail.description}}</p>
-            <a href="javascript:(void)" class="custom-btn underline-blue-link no-before-content p-0">more.</a>
+            <p class="small-text medium-container text-left grey">{{b?.boatDetail.description }}</p>
+            <a class="custom-btn underline-blue-link no-before-content p-0">more.</a>
           </div>
           <div class="">
             <div class="character-info-wrapper  custom-flex">
@@ -77,9 +77,11 @@
                 
                           <div class="price-detail py-4">
                             <h5 class="bold pt-3 pb-1">Price Details</h5>
-                            <div class="custom-flex-between"><p class="medium">{{b?.boatDetail.perDayCharges}}  x  {{ b.TotalDays}} Night</p><p class="medium text-right py-1">{{b?.boatDetail.perDayCharges * b.TotalDays }}$</p></div>
-                            <div class="custom-flex-between"><p class="medium">Service Fee</p><p class="medium text-right py-1">100$</p></div>
-                            <div class="custom-flex-between"><p class="medium">Total(USD)</p><p class="medium text-right py-1">1000$</p></div>
+                            <div class="custom-flex-between"><p class="medium">{{b?.boatDetail.perDayCharges}}  x  {{ b.TotalDays}} Night</p><p class="medium text-right py-1">{{b?.boatDetail.perDayCharges * b.TotalDays }}.00 $</p></div>
+                            <div class="custom-flex-between"><p class="medium">Service Fee</p><p class="medium text-right py-1">20.00 $</p></div>
+                            <div class="custom-flex-between"><p class="medium">Processing Fee</p><p class="medium text-right py-1">20.00 $</p></div>
+                            <div class="custom-flex-between"><p class="medium">Tax</p><p class="medium text-right py-1">{{b?.boatDetail.taxFee}}.00 $</p></div>
+                            <div class="custom-flex-between"><p class="medium">Total(USD)</p><p class="medium text-right py-1">{{(b?.boatDetail.perDayCharges * b.TotalDays) + 20 + 20 + b?.boatDetail.taxFee}}.00 $</p></div>
                           </div>
                         </div>
                        </div>
@@ -90,13 +92,14 @@
                         </div>
                         </div>
                       </div>
-                      <div class="col-sm-12 custom-margin text-center mobile-padding-btns">
-                     <div class="center-content">
-                      <a href="charter-cancelation.html" class="custom-btn btn-big outline-blue-clr me-sm-3">Cancel Reservation</a>&nbsp;&nbsp;
-                       <a href="javascript:(0)" class="custom-btn btn-big blue">Modify Reservation</a>
+
+                      <div class="col-sm-12 custom-margin text-center mobile-padding-btns" >
+                     <div class="center-content" >
+                      <a [routerLink]="['/boat-listing/reservation-cancellation',b.id]" class="custom-btn btn-big outline-blue-clr me-sm-3">Cancel Reservation</a>&nbsp;&nbsp;
+                       <a [routerLink]="['/boat-listing/modify-reservation',b.boatId,b.id]" class="custom-btn btn-big blue">Modify Reservation</a>
                     </div>
 
-                        </div>
+                      </div>
          </div>
                      
          </div>

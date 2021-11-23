@@ -84,8 +84,7 @@ export class ResetPasswordComponent implements OnInit {
     this.validPassword = this.resetForm.controls['password'].value
     this.service.updatePassword(this.userId,this.validPassword).subscribe((res:any)=>{
     
-      if(res==true)
-      {
+    
        
       if(res==true)
       {

@@ -40,7 +40,7 @@ import { LoaderService } from './shared/loader/services/loader.service';
         redirectUrl: 'http://localhost:4200',
         postLogoutRedirectUri: 'http://localhost:4200',
         clientId: 'BnBYachts_App',
-        scope: 'openid BnBYachts',
+        scope: 'openid Core',
         responseType: 'code',
         silentRenew: true,
         useRefreshToken: true,

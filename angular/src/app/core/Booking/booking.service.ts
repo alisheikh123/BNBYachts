@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -14,9 +14,6 @@ export class BookingService {
     return this.http.post(this.bookingApiUrl + '/boatelbooking',model).pipe(
       catchError(this.handleError));
   }
-
-  
-  
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -47,6 +44,15 @@ export class BookingService {
   getBookingBoatDetail(BookingId:any){
     return this.http.get(this.bookingApiUrl+'/boatelbooking/'+BookingId).pipe(catchError(this.handleError));
   }
-
+saveCancellation(model:any){
+  console.log(model);
+     const data = JSON.stringify(model);
+    const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<boolean>(this.bookingApiUrl + '/bookingcancel', data, {
+      headers: headerOptions
+}).pipe(
+      catchError(this.handleError));
+  }
+  
    /* Ali */
 }

@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="center-content">
-                        <a href="dashboard.html" class="underline-link-blk active">
+                        <!-- <a href="dashboard.html" class="underline-link-blk active">
                             <span>
 
                                 Dashboard
@@ -86,7 +86,7 @@
                             <span>
                                 Listing
                             </span>
-                        </a>
+                        </a> -->
                         <div class="dropdown custom-dropdown borderless-dropdown">
                             <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button"
                                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Create
@@ -95,7 +95,7 @@
                                 <li>
                                     <p class="header-content small-text">John Cena</p>
                                 </li>
-                                <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/boat-listing/all-reservations']">My Bookings</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="right-content">
-                        <a href="marketing.html" class="custom-btn white grey-btn regular">Switch to User</a>
+                        <a href="marketing.html" class="custom-btn white grey-btn regular">Earn With Us</a>
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" >
                                 <img src="../../../../assets/images/user-img.png" alt="">

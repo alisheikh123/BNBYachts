@@ -1,3 +1,5 @@
+import { ModifyReservationComponent } from './modify-reservation/modify-reservation.component';
+import { ReservationCancellationComponent } from './reservation-cancellation/reservation-cancellation.component';
 import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,6 +23,12 @@ const routes: Routes = [
   },
   {
     path: "booking-payment/:id", component: BoatBookingPaymentComponent
+  },
+  {
+    path: "reservation-cancellation/:id", component: ReservationCancellationComponent
+  },
+  {
+    path: "modify-reservation/:id/:userId", component: ModifyReservationComponent
   }
 ];
 

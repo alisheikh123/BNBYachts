@@ -14,6 +14,8 @@ import { ReservationDetailComponent } from './reservation-detail/reservation-det
 import { BoatBookingPaymentComponent } from './boat-booking-payment/boat-booking-payment.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from 'src/environments/environment';
+import { ReservationCancellationComponent } from './reservation-cancellation/reservation-cancellation.component';
+import { ModifyReservationComponent } from './modify-reservation/modify-reservation.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { environment } from 'src/environments/environment';
     BoatDetailsComponent,
     AllReservationsComponent,
     ReservationDetailComponent,
-    BoatBookingPaymentComponent
+    BoatBookingPaymentComponent,
+    ReservationCancellationComponent,
+    ModifyReservationComponent
   ],
   imports: [
     BoatListingRoutingModule,

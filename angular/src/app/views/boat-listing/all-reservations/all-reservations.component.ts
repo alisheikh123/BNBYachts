@@ -7,6 +7,7 @@ import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-all-reservations',
   templateUrl: './all-reservations.component.html',
+   styleUrls: ['./all-reservations.component.scss'],
   providers: [NgbRatingConfig]
 })
 export class AllReservationsComponent implements OnInit {

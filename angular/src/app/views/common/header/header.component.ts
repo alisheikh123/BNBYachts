@@ -39,8 +39,7 @@ export class HeaderComponent implements OnInit {
         if(userId != null){
           this.getUserDetails(userId);
         }
-  }); 
-
+  });
 }
 getUserDetails(userId:any){
 this.authService.getUserInfo(userId).subscribe(res=>{
@@ -58,7 +57,7 @@ this.isLoggedIn = true;
     let modalRef = this.modal.open(SignupModalComponent,{ windowClass: 'custom-modal custom-large-modal'});
   }
 
-  login(){  
+  login(){
     this.oidcSecurityService.authorize();
   }
  
