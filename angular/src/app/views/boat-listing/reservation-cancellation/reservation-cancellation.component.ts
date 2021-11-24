@@ -48,6 +48,8 @@ export class ReservationCancellationComponent implements OnInit {
 
     this.service.getBookingBoatDetail(this.bkCancel).subscribe((res: any) => {
       this.bookingCancelDetail = res;
+     
+
 
       res.forEach((elem: any) => {
 
@@ -89,32 +91,45 @@ export class ReservationCancellationComponent implements OnInit {
           elem.remaingDays = this.remainingDays;
           elem.TotalDays = this.totalDays;
 
-
-
-          if (this.remaingHours > 72) {
-
+          if(elem.bookingStatus==0)
+          {
+            
             // Refund 100%
             elem.deductedAmount = 0;
             elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee);
             elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
-
-
           }
-          if (this.remaingHours == 72 || (this.remaingHours < 72 && this.remaingHours >= 24)) {
+          else{
 
-            // deducted 50%
-            elem.deductedAmount = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
-            elem.totalreservationFee = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
-            elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+            debugger;
+            if (this.remaingHours > 72) {
+
+              // Refund 100%
+              elem.deductedAmount = 0;
+              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee);
+              elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+  
+  
+            }
+            if (this.remaingHours == 72 || (this.remaingHours < 72 && this.remaingHours >= 24)) {
+  
+              // deducted 50%
+              elem.deductedAmount = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
+              elem.totalreservationFee = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
+              elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+            }
+            if (this.remaingHours < 24) {
+  
+              // Deducted 1 Night Fee
+              elem.deductedAmount = (elem.boatDetail.perDayCharges * 1);
+              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee) - (elem.boatDetail.perDayCharges * this.remainingDays);
+              elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+  
+            }
+            
           }
-          if (this.remaingHours < 24) {
 
-            // Deducted 1 Night Fee
-            elem.deductedAmount = (elem.boatDetail.perDayCharges * this.remainingDays);
-            elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee) - (elem.boatDetail.perDayCharges * this.remainingDays);
-            elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
-
-          }
+     
 
 
         });
