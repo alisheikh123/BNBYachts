@@ -20,9 +20,14 @@ namespace BnBYachts.Core.Managers
         }
         public async Task<UserDetailsTransferable> GetUserDetails(Guid? userId)
         {
-                var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
-                var data = UserFactory.Contruct(user.Id.ToString(), user.Name, user.GetProperty<string>(UserConstants.ImagePath).ToString(), user.Roles);
-                return data;
+            var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
+            string profileImage = null;
+            if (user.GetProperty<string>(UserConstants.ImagePath) != null)
+            {
+                profileImage = user.GetProperty<string>(UserConstants.ImagePath).ToString();
+            }
+            var data = UserFactory.Contruct(user.Id.ToString(), user.Name, profileImage, user.Roles);
+            return data;
         }
     }
 }

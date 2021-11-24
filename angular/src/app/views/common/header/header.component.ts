@@ -9,7 +9,7 @@ import { SignupModalComponent } from '../../auth/components/signup-modal/signup-
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { AppComponent } from 'src/app/app.component';
-import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
 import { textChangeRangeIsUnchanged } from 'typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   userDetails: any;
   canSwitchAccount: boolean = false;
   USER_ROLE = UserRoles;
+  USER_DEFAULTS = UserDefaults;
   assetsUrl = environment.CORE_API_URL + '/user-profiles/';
   constructor(public router: Router, public app: AppComponent, private toastr: ToastrService, private modal: NgbModal, private oidcSecurityService: OidcSecurityService, private authService: AuthService) { }
 
