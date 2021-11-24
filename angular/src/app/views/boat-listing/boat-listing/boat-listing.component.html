@@ -111,7 +111,7 @@
                                 </map-marker>
                                                             <map-info-window>
                                                               <div class="boatel-search-card">
-                                                                <div class="row">
+                                                                <div class="row m-0">
                                                                   <div class="col-sm-5 pr-0">
                                                                       <div class="boatel-search-card-img" *ngFor ="let gallery of (mapInfoDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
                                                                           <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
@@ -122,7 +122,7 @@
                                                                       <div class="boatel-search-card-content">
                                                                       <div class="boatel-search-card-content-title">
                                                                           <a href="boatel-search-details.html" class="underline-black-link p-0">{{mapInfoDetails?.name}}</a>
-                                                                          <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a>
+                                                                          <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
                                                                       </div>
                                                                       <p class="grey">{{mapInfoDetails?.boatelCapacity}} Guests - {{mapInfoDetails?.totalBedrooms}} Bed Rooms  - {{mapInfoDetails?.totalWashrooms}} Bathroom</p>
                                                                       <div class="boatel-search-card-content-title">
@@ -130,16 +130,13 @@
                                                                               
                                                                       </div>
                                                                       <div class="custom-flex-between">
-                                                                          <p class="grey">
-                                                                              <span class="fa fa-star"></span>
-                                                                              <span class="fa fa-star"></span>
-                                                                              <span class="fa fa-star"></span>
-                                                                              <span class="fa fa-star"></span>
-                                                                              <span class="fa fa-star"></span>
-                                                                          </p>
-                                                                          <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p>
+                                                                        <ngb-rating [rate]="0"></ngb-rating>
+                                                                          <!-- <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p> -->
                                                                       </div>
-                                                                     
+                                                                      <div class="pt-2 boatel-search-card-content-title">
+                                                                        <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p>
+                                                                        <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a>
+                                                                    </div>
                                                                       </div>
                                                                   </div>
                                                               </div>   
@@ -153,118 +150,6 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="footer-top-wrap">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-12 py-2">
-                <p class="underline-txt">Top Cities </p>
-              </div>
-              <div class="col">
-                <ul class="footer-links">
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                </ul>
-              </div>
-              <div class="col">
-                <ul class="footer-links">
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                </ul>
-              </div>
-              <div class="col">
-                <ul class="footer-links">
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                </ul>
-              </div>
-              <div class="col">
-                <ul class="footer-links">
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                </ul>
-              </div>
-              <div class="col">
-                <ul class="footer-links">
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                  <li><a href="javascript:void(0)" class="underline-link-blk">dolore magna</a></li>
-                </ul>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="footer-bottom-wrap">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-5 py-2">
-                    <div class="tagline-wrap">
-                      <h5 class="bold">Tagline that<br> define the compnay</h5>
-                    </div>
-                </div>
-                <div class="col-sm-7 py-2">
-                  <div class="row">
-                    <div class="col">
-                      <ul class="footer-links">
-                        <li><a href="javascript:void(0)" class="underline-link-blk">Become a host</a></li>
-                        <li><a href="Service-provider.html" class="underline-link-blk">Become a Service Provider</a></li>
-                        <li><a href="javascript:void(0)" class="underline-link-blk">Become a Captain</a></li>
-                      </ul>
-                    </div>
-                    <div class="col">
-                      <ul class="footer-links">
-                        <li><a href="javascript:void(0)" class="underline-link-blk">About Us</a></li>
-                        <li><a href="javascript:void(0)" class="underline-link-blk">Privacy Policy</a></li>
-                        <li><a href="javascript:void(0)" class="underline-link-blk">Help</a></li>
-                      </ul>
-                    </div>
-                    <div class="col">
-                      <ul class="footer-links">
-                        <li><a href="javascript:void(0)" class="underline-link-blk">Contact Us</a></li>
-                        <li><a href="javascript:void(0)" class="underline-link-blk">Terms & Conditions</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 py-2">
-                  <div class="copy-right-wrap custom-flex-between">
-                    <p>c 2021 copyright</p>
-                    <ul class="social-icons-ul custom-flex-start">
-                      <li><a href="javascript:void(0)" class="social-media-links"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                      <li><a href="javascript:void(0)" class="social-media-links"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
-                      <li><a href="javascript:void(0)" class="social-media-links"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                      <li><a href="javascript:void(0)" class="social-media-links"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     <!--Custom Search bar Modal -->
     <div class="modal fade custom-modal custom-large-modal" id="filters-modal" tabindex="-1"
         aria-labelledby="signup-modalLabel" aria-hidden="true">
