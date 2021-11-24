@@ -8,7 +8,7 @@ namespace BnBYachts.Booking.DTO
 {
     public class BookingCancellationDto 
     {
-        public Guid BookingId { get; set; }
+        public int BookingId { get; set; }
         public int BookingType { get; set; }
         public string Reason { get; set; }
         public string UserId { get; set; }

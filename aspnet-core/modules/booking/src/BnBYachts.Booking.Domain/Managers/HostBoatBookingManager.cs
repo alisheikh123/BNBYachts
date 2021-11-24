@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Booking.Booking;
+using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Shared.BoatBooking.Interface;
 using System;
 using System.Collections.Generic;
@@ -52,11 +53,12 @@ namespace BnBYachts.Booking.Managers
             return booking;
         }
 
-        public async Task<bool> IsBookingCancel(BookingCancelEntity data, string userId)
+        public async Task<bool> IsBookingCancel(BookingCancellationDto data, string userId)
         {
             if (data != null)
             {
-                var BookingDetail = await _boatelBookingRepository.GetAsync(data.Id);
+                BookingCancelEntity model = new BookingCancelEntity();
+                var BookingDetail = await _boatelBookingRepository.GetAsync(data.BookingId);
                 string from = "ali.raza@techverx.com";
                 string to = "alisheikh14125@gmail.com";
                 var admin = new MailAddress(from, "BNBYechet");
@@ -84,10 +86,16 @@ namespace BnBYachts.Booking.Managers
                     smtp.Send(message);
                 }
 
+                model.BookingId = data.BookingId.ToString();
+                BookingDetail.BookingStatus = data.BookingStatus;
+                model.BookingType = data.BookingType;
+                model.isNotificationSent = data.isNotificationSent;
+                model.Reason = data.Reason;
+                model.UserId = data.UserId;
+                model.RefundAmount = data.RefundAmount;
+                model.TotalAmount = data.TotalAmount;
                 BookingDetail.BookingStatus = BookingStatus.Cancel;
-                data.isNotificationSent = true;
-                data.UserId = userId;
-                await _boatelCanceRepository.InsertAsync(data);
+                await _boatelCanceRepository.InsertAsync(model);
                 return true;
             }
             return false;
@@ -108,6 +116,8 @@ namespace BnBYachts.Booking.Managers
             var upcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate > DateTime.Today).ConfigureAwait(false);
             return upcomingBookings;
         }
+
+       
     }
 }
 

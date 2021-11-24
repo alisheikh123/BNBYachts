@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Booking.Booking;
+using BnBYachts.Booking.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace BnBYachts.Booking.Shared.BoatBooking.Interface
         Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId);
 
         Task<ICollection<BoatelBookingEntity>> BoatelBooking(int bookingId);
-        Task<bool> IsBookingCancel(BookingCancelEntity data, string userId);
+        Task<bool> IsBookingCancel(BookingCancellationDto data, string userId);
 
     }
 }

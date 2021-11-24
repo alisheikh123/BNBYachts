@@ -164,6 +164,7 @@ export class ReservationCancellationComponent implements OnInit {
   }
   confirmCancel() {
     let bookingCancellationModel = {
+
       BookingId: this.bookingId,
       BookingType: this.bookingType,
       Reason: this.ReasonValue,
@@ -172,11 +173,14 @@ export class ReservationCancellationComponent implements OnInit {
       RefundAmount: this.refundAmount.toString(),
       TotalAmount: this.totalAmount.toString(),
       BookingStatus: 3
-
     };
 
+  
+
     this.service.saveCancellation(bookingCancellationModel).subscribe((res: any) => {
+      console.log(res);
       if (res == true) {
+        debugger;
         this.modal.dismissAll();
         this.modal.open(this.cancelledRef);
       }
