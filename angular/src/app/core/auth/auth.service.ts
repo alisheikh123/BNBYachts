@@ -17,7 +17,7 @@ export class AuthService {
   // }
 
   getUserInfo() {
-    return this.http.get(this.apiCoreURl + "/getuserdetails");
+    return this.http.get(this.apiCoreURl + "/GetLoggedInUserDetails");
   }
 
   login() {

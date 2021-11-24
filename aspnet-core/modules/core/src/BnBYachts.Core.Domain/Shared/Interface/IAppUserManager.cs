@@ -6,6 +6,6 @@ namespace BnBYachts.Core.Shared.Interface
 {
     public interface IAppUserManager
     {
-        Task<UserDetailsTransferable> GetUserDetails(Guid? userId);
+        Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId);
     }
 }

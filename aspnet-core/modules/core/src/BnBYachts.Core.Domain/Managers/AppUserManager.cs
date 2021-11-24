@@ -18,7 +18,7 @@ namespace BnBYachts.Core.Managers
         {
             _repository = repository;
         }
-        public async Task<UserDetailsTransferable> GetUserDetails(Guid? userId)
+        public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
             string profileImage = null;

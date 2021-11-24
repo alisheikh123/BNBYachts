@@ -2,6 +2,7 @@
 using BnBYachts.Core.Shared.Transferable;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
@@ -17,10 +18,18 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
-        [Route("GetUserDetails")]
-        public async Task<UserDetailsTransferable> GetUserDetails()
+        [Route("GetLoggedInUserDetails")]
+        public async Task<UserDetailsTransferable> GetLoggedInUserDetails()
         {
-            return await _appUserManager.GetUserDetails(CurrentUser.Id);
+            return await _appUserManager.GetLoggedInUserDetails(CurrentUser.Id);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetLoggedInUserDetails/{userId}")]
+        public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId)
+        {
+            return await _appUserManager.GetLoggedInUserDetails(userId);
         }
     }
 
