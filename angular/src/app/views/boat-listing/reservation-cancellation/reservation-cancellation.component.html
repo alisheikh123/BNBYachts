@@ -36,7 +36,7 @@
                         </div>
                         <div class="custom-flex-between">
                             <p>Total(USD)</p>
-                            <p class=" text-right py-1">{{(b?.boatDetail.perDayCharges * b.TotalDays) + 20 + 20 +
+                            <p class=" text-right py-1">{{(b?.boatDetail.perDayCharges * b.TotalDays) + 20 +
                                 b?.boatDetail.taxFee}}.00 $</p>
                         </div>
                         <div class="border-top my-3"></div>
@@ -157,6 +157,28 @@
         </div>
     </ng-template>
 
+     <!--Booking Detail Not Available-->
+    <ng-template #bookingstatus>
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">Invalid Booking Detail </h4>
+
+                    <div class="text-center">
+                        <img src="assets/images/cross-icon.png" style="height: 100px;width:100px" alt="">
+                    </div>
+                    <div class="bottom-btn text-center">
+                        <button class="custom-btn blue big-btn mt-3" (click)="goBack()">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </ng-template>
     <ng-template #bookingcancelled>
         <div class="modal-content">
             <div class="modal-header no-border">

@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class BookingService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
   boatApiUrl:string = environment.BOAT_API_URL;
+  paymentApiUrl:string = environment.PAYMENTS_API_URL;
   constructor(private http:HttpClient) { }
 
   boatelBooking(model:any){
@@ -55,6 +56,11 @@ saveCancellation(model:any){
       headers: headerOptions
 }).pipe(
       catchError(this.handleError));
+  }
+
+  getRefundable(bookingId:number,refundAmount:number)
+  {
+    return this.http.get(this.paymentApiUrl+'/refund/'+bookingId+'/'+refundAmount).pipe(catchError(this.handleError));
   }
   
    /* Ali */

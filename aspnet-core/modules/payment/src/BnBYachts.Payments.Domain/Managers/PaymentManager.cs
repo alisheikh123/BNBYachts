@@ -120,23 +120,30 @@ namespace BnBYachts.Payments.Managers
         {
 
             var paymentDetails = await _userPaymentDetailsRepository.FindAsync(res => res.BookingId == bookingId).ConfigureAwait(false);
-
-            var options = new RefundCreateOptions
-            {
-                PaymentIntent = paymentDetails.PaymentId,
-                Amount = refundAmount * 100,
-                Reason = "requested_by_customer",
-            };
-            var service = new RefundService();
-            var response = service.Create(options);
-            if (response.Status == "succeeded")
-            {
-                return true;
-            }
-            else
+            if (paymentDetails == null)
             {
                 return false;
             }
+            else {
+                var options = new RefundCreateOptions
+                {
+                    PaymentIntent = paymentDetails.PaymentId,
+                    Amount = refundAmount * 100,
+                    Reason = "requested_by_customer",
+                };
+                var service = new RefundService();
+                var response = service.Create(options);
+                if (response.Status == "succeeded")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+          
         }
     }
 }

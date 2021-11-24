@@ -39,6 +39,7 @@ export class ReservationCancellationComponent implements OnInit {
   bookingStatus: any;
   constructor(private service: BookingService, private fb: FormBuilder, private modal: NgbModal, public activatedRoute: ActivatedRoute, private route: Router, private modalService: NgbModal) { }
   @ViewChild('template') templateRef: TemplateRef<any>;
+  @ViewChild('bookingstatus') bookingtemplate: TemplateRef<any>;
   @ViewChild('bookingcancelled') cancelledRef: TemplateRef<any>;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -48,6 +49,7 @@ export class ReservationCancellationComponent implements OnInit {
 
     this.service.getBookingBoatDetail(this.bkCancel).subscribe((res: any) => {
       this.bookingCancelDetail = res;
+      console.log(res);
      
 
 
@@ -96,8 +98,19 @@ export class ReservationCancellationComponent implements OnInit {
             
             // Refund 100%
             elem.deductedAmount = 0;
-            elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee);
+            elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays)  + 20 + (elem.boatDetail.taxFee);
             elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+
+            this.service.getRefundable(elem.id,elem.totalreservationFee).subscribe((res: any) => {
+              if(res==true)
+              {
+                  console.log(true);
+              }
+              else
+              {
+                this.modal.open(this.bookingtemplate);
+              }
+            });
           }
           else{
 
@@ -106,24 +119,55 @@ export class ReservationCancellationComponent implements OnInit {
 
               // Refund 100%
               elem.deductedAmount = 0;
-              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee);
+              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays)  + 20 + (elem.boatDetail.taxFee);
               elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+
+              this.service.getRefundable(elem.id,elem.totalreservationFee).subscribe((res: any) => {
+                if(res==true)
+                {
+                    console.log(true);
+                }
+                else{
+                  console.log(false);
+                }
+              });
   
   
             }
             if (this.remaingHours == 72 || (this.remaingHours < 72 && this.remaingHours >= 24)) {
   
               // deducted 50%
-              elem.deductedAmount = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
-              elem.totalreservationFee = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
+              elem.deductedAmount = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
+              elem.totalreservationFee = ((elem.boatDetail.perDayCharges * elem.TotalDays)  + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
               elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+
+
+              this.service.getRefundable(elem.id,elem.totalreservationFee).subscribe((res: any) => {
+                if(res==true)
+                {
+                    console.log(true);
+                }
+                else{
+                  console.log(false);
+                }
+              });
             }
             if (this.remaingHours < 24) {
   
               // Deducted 1 Night Fee
               elem.deductedAmount = (elem.boatDetail.perDayCharges * 1);
-              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + 20 + (elem.boatDetail.taxFee) - (elem.boatDetail.perDayCharges * this.remainingDays);
+              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + (elem.boatDetail.taxFee) - (elem.boatDetail.perDayCharges * this.remainingDays);
               elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
+
+              this.service.getRefundable(elem.id,elem.totalreservationFee).subscribe((res: any) => {
+              if(res==true)
+              {
+                  console.log(true);
+              }
+              else{
+                console.log(false);
+              }
+            });
   
             }
             
