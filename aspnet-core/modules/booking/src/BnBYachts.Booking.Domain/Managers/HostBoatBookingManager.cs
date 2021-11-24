@@ -1,7 +1,10 @@
-﻿using BnBYachts.Booking.Shared.BoatBooking.Interface;
+﻿using BnBYachts.Booking.Booking;
+using BnBYachts.Booking.Shared.BoatBooking.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
@@ -12,12 +15,14 @@ namespace BnBYachts.Booking.Managers
     public class HostBoatBookingManager : DomainService, IHostBoatBookingManager
     {
         private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
-        public HostBoatBookingManager(IRepository<BoatelBookingEntity, int> repository)
+        private readonly IRepository<BookingCancelEntity, int> _boatelCanceRepository;
+        public HostBoatBookingManager(IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel)
         {
             _boatelBookingRepository = repository;
+            _boatelCanceRepository = repositorycancel;
         }
 
-        public async Task<bool> BoatelBooking(BoatelBookingEntity data,Guid? userId,string userName)
+        public async Task<bool> BoatelBooking(BoatelBookingEntity data, Guid? userId, string userName)
         {
             data.LastModifierId = data.CreatorId = userId;
             data.UserId = userId.ToString();
@@ -32,5 +37,77 @@ namespace BnBYachts.Booking.Managers
                 return false;
             }
         }
+
+
+
+        public async Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail(string userId)
+        {
+            var Booking = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate == DateTime.Today).ConfigureAwait(false);
+            return Booking;
+        }
+
+        public async Task<ICollection<BoatelBookingEntity>> BoatelBooking(int bookingId)
+        {
+            var booking = await _boatelBookingRepository.GetListAsync(x => x.Id == bookingId).ConfigureAwait(false);
+            return booking;
+        }
+
+        public async Task<bool> IsBookingCancel(BookingCancelEntity data, string userId)
+        {
+            if (data != null)
+            {
+                var BookingDetail = await _boatelBookingRepository.GetAsync(data.Id);
+                string from = "ali.raza@techverx.com";
+                string to = "alisheikh14125@gmail.com";
+                var admin = new MailAddress(from, "BNBYechet");
+                var toAddress = new MailAddress(to, "Ali");
+                const string adminPass = "Alisheikh@123";
+                const string subject = "Your Booking is Cancelled!";
+                string body =
+                    "Your Booking is Cancelled From BNByachts";
+
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(admin.Address, adminPass)
+                };
+                using (var message = new MailMessage(admin, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                }
+
+                BookingDetail.BookingStatus = BookingStatus.Cancel;
+                data.isNotificationSent = true;
+                data.UserId = userId;
+                await _boatelCanceRepository.InsertAsync(data);
+                return true;
+            }
+            return false;
+        }
+
+
+
+        public async Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId)
+        {
+            var pastBooking = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate < DateTime.Today).ConfigureAwait(false);
+            return pastBooking;
+        }
+
+
+
+        public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId)
+        {
+            var upcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate > DateTime.Today).ConfigureAwait(false);
+            return upcomingBookings;
+        }
     }
 }
+

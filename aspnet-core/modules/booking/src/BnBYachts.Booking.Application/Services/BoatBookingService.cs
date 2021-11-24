@@ -5,20 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Mail;
 using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.Emailing;
-using Volo.Abp.Emailing.Templates;
-using Volo.Abp.Identity;
-using Volo.Abp.TextTemplating;
 
 namespace BnBYachts.Booking.Services
 {
@@ -34,90 +26,50 @@ namespace BnBYachts.Booking.Services
         [Route("boatelbooking")]
         public async Task<bool> BoatelBooking(BoatelBookingEntity data)
         {
-            await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id,CurrentUser.Name);
+            await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
             return true;
         }
         [HttpGet]
         [Route("boatelbookingdetail")]
-        public async Task<dynamic> BoatelBookingDetail()
+        public async Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail()
         {
-             
-            var Booking = _boatelBookingRepository.Where(x => x.UserId == CurrentUser.Id.ToString() && x.CheckinDate == DateTime.Today).ToList();
+
+            var Booking = await _hostBoatBookingManager.BoatelBookingDetail(CurrentUser.Id.ToString());
             return Booking;
         }
         [HttpGet]
-        [Route("upcomingboatelbookingdetail/{userId}")]
-        public async Task<dynamic> UpcomingBoatelBookingDetail(string userId, string upcoming)
+        [Route("upcomingboatelbookingdetail")]
+        public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail()
         {
-            var upcomingBooking = _boatelBookingRepository.Where(x => x.UserId == userId && x.CheckinDate > DateTime.Today).ToList();
-            return upcomingBooking;
+            var bookings = await _hostBoatBookingManager.UpcomingBoatelBookingDetail(CurrentUser.Id.ToString()).ConfigureAwait(false);
+            return bookings;
         }
         [HttpGet]
-        [Route("pastboatelbookingdetail/{userId}")]
-        public async Task<dynamic> PastBoatelBookingDetail(string userId, string past)
+        [Route("pastboatelbookingdetail")]
+        public async Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail()
         {
-            var pastBooking = _boatelBookingRepository.Where(x => x.UserId == userId && x.CheckinDate < DateTime.Today).ToList();
+
+            var pastBooking = await _hostBoatBookingManager.PastBoatelBookingDetail(CurrentUser.Id.ToString()).ConfigureAwait(false);
             return pastBooking;
         }
 
         [HttpGet]
         [Route("boatelbooking/{bookingId}")]
-        public async Task<dynamic> BoatelBooking(Guid bookingId)
+        public async Task<ICollection<BoatelBookingEntity>> BoatelBooking(int bookingId)
         {
-            var Booking = _boatelBookingRepository.Where(x => x.Id == bookingId).ToList();
+            var Booking = await _hostBoatBookingManager.BoatelBooking(bookingId).ConfigureAwait(false);
             return Booking;
         }
 
         [HttpPost]
         [Route("bookingcancel")]
-        public async Task<bool> BookingCancel(BookingCancellationDto data)
+        public async Task<bool> BookingCancel(BookingCancelEntity data)
         {
+            var isBookingCancel = await _hostBoatBookingManager.IsBookingCancel(data, CurrentUser.Id.ToString());
+            return isBookingCancel;
 
-            if (data != null)
-            {
-                BookingCancelled model = new BookingCancelled();
-                var BookingDetail = await _boatelBookingRepository.GetAsync(data.BookingId);
-                string from = "ali.raza@techverx.com";
-                string to = "alisheikh14125@gmail.com";
-                var admin = new MailAddress(from, "BNBYechet");
-                var toAddress = new MailAddress(to, "Ali");
-                const string adminPass = "Alisheikh@123";
-                const string subject = "Your Booking is Cancelled!";
-                string body =
-                    "Your Booking is Cancelled From BNByachts";
-
-                var smtp = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(admin.Address, adminPass)
-                };
-                using (var message = new MailMessage(admin, toAddress)
-                {
-                    Subject = subject,
-                    Body = body
-                })
-                {
-                    smtp.Send(message);
-                }
-
-                model.BookingId = data.BookingId.ToString();
-                BookingDetail.BookingStatus = data.BookingStatus;
-                model.BookingType = data.BookingType;
-                model.isNotificationSent = data.isNotificationSent;
-                model.Reason = data.Reason;
-                model.UserId = data.UserId;
-                model.RefundAmount = data.RefundAmount;
-                model.TotalAmount = data.TotalAmount;
-                await _bookingCancelRepository.InsertAsync(model);
-                return true;
-            }
-            return false;
         }
-     
+
 
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AllReservationsComponent implements OnInit {
   boatbookingDetail:any;
   currentMonth:any;
   isRecordNotFound:boolean;
+  assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   constructor( private fb: FormBuilder,private service: BookingService,config: NgbRatingConfig) { 
     /* Rating Configuration*/
     config.max = 5;
@@ -41,6 +43,7 @@ export class AllReservationsComponent implements OnInit {
         res.forEach((elem:any) => {
           this.service.getBoatInfo(elem.boatId).subscribe((boatdetail:any)=>{
               elem.boatDetail = boatdetail;
+              console.log(boatdetail);
               
           });
         });
@@ -57,10 +60,10 @@ export class AllReservationsComponent implements OnInit {
       onlySelf: true
     })
   }
-  upcomingReservation(upcoming?:any){
-    this.userId ="567dfaff-d4eb-9d77-16f3-542ad546c346";
+  upcomingReservation(){
    
-      this.service.upcomingbookingDetail(this.userId,upcoming).subscribe((res:any)=>{
+   
+      this.service.upcomingbookingDetail().subscribe((res:any)=>{
         this.booking = res;
         if(this.booking.length==0)
         {
@@ -78,10 +81,10 @@ export class AllReservationsComponent implements OnInit {
     
 
   }
-  pastReservation(past?:any){
-    this.userId ="567dfaff-d4eb-9d77-16f3-542ad546c346";
+  pastReservation(){
+    
    
-      this.service.pastbookingDetail(this.userId,past).subscribe((res:any)=>{
+      this.service.pastbookingDetail().subscribe((res:any)=>{
         this.booking = res;
         if(this.booking.length==0)
         {

@@ -34,15 +34,15 @@ export class BookingService {
   bookingDetail(){
       return this.http.get(this.bookingApiUrl+'/boatelbookingdetail').pipe(catchError(this.handleError));
   }
-  upcomingbookingDetail(userId:any,upcoming:any){
-      return this.http.get(this.bookingApiUrl+'/upcomingboatelbookingdetail/'+userId,upcoming).pipe(catchError(this.handleError));
+  upcomingbookingDetail(){
+      return this.http.get(this.bookingApiUrl+'/upcomingboatelbookingdetail').pipe(catchError(this.handleError));
   
   }
-  pastbookingDetail(userId:any,past:any){
-      return this.http.get(this.bookingApiUrl+'/pastboatelbookingdetail/'+userId,past).pipe(catchError(this.handleError));
+  pastbookingDetail(){
+      return this.http.get(this.bookingApiUrl+'/pastboatelbookingdetail').pipe(catchError(this.handleError));
   }
   getBoatInfo(boatId:any){
-    return this.http.get(this.boatApiUrl+'/filtered-boat-details/'+boatId).pipe(catchError(this.handleError));
+    return this.http.get(this.boatApiUrl+'/boat-details/'+boatId).pipe(catchError(this.handleError));
   }
   getBookingBoatDetail(BookingId:any){
     return this.http.get(this.bookingApiUrl+'/boatelbooking/'+BookingId).pipe(catchError(this.handleError));

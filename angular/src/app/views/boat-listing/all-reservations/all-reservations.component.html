@@ -11,8 +11,8 @@
       <div>
         <div class="row bookedservice-filter">
             <div class="col-12">
-              <button class="btn btn-filter btn-sm" (click)="upcomingReservation('Upcoming')" >Upcoming</button>&nbsp;&nbsp;
-              <button class="btn btn-filter btn-sm" (click)="pastReservation('Past')">Past</button>
+              <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
+              <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button>
               <div class="col-10"></div>
             </div>
           </div>
@@ -29,7 +29,9 @@
           <div class="image-with-text custom-flex-between align-items-start">
             <div class="image-with-text-inner">
               <div *ngFor="let imgs of item?.boatDetail.boatGalleries | filterBy : 'isCoverPic':true">
-              <img src={{imgs.imagePath}} alt="">
+          
+              <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top"
+              alt="...">
             </div>
               <div class="user-details">
                 <p class="medium">{{item?.boatDetail.name}}<span class="small-text regular grey"> </span></p>
