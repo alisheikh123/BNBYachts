@@ -506,21 +506,21 @@
                         <div class="row align-items-center">
                             <div class="col-md-6 py-2 text-center-mobile">
                                 <h5 class="bold">Hosted By</h5>
-                                <p class="medium py-2">Name Host {{boatHost?.name}}</p>
+                                <p class="medium py-2">Name Host: {{boatHost?.name}}</p>
                                 <div class="address-details">
-                                    <p>Join Date: 20 - Jan - 2020 {{boatHost?.creationTime}}</p>
-                                    <p><i class="fa fa-check"></i> Identity Verified: Varified </p>
-                                    <p><i class="fa fa-star"></i> Response Rate: 85%</p>
-                                    <p>Response Time: 10 min</p>
+                                    <p>Join Date: {{boatHost?.creationTime | date:'dd-MMM-YYYY'}}</p>
+                                    <p><i class="fa fa-check"></i> Identity Verified: Verified </p>
+                                    <p><i class="fa fa-star"></i> Response Rate: 0%</p>
+                                    <p>Response Time: 0 min</p>
                                 </div>
                             </div>
                             <div class="col-md-6 py-2 text-center">
                                 <div class="image-wrapper-host">
-                                    <img src="../../../../assets/images/user.png" alt="">
+                                    <img src="{{assetsCoreUrl + (boatHost?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 </div>
                             </div>
                             <div class="col-sm-12 pt-2 text-center">
-                                <a href="javascript:void(0)" class="custom-btn blue big-btn">Contact Host</a>
+                                <a href="#" class="custom-btn blue big-btn">Contact Host</a>
                             </div>
                         </div>
                     </div>

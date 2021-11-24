@@ -21,13 +21,14 @@
                     <div class="right-content">
                         <a href="javascript:void(0)" class="underline-link-blk active" data-bs-toggle="modal"
                             data-bs-target="#become-host-modal"><span>Earn with us</span></a>
-  
+
 
                         <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
                             data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
-                            <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="forgetPassword()" ><span>Forget Password</span></a>
-                        <a href="javascript:void(0)" class="underline-link-blk" (click)="getUser()"><span>Help</span></a>
+                        <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
+                            data-bs-target="#signup-modal" (click)="forgetPassword()"><span>Forget Password</span></a>
+                        <a href="javascript:void(0)" class="underline-link-blk"
+                            (click)="getUser()"><span>Help</span></a>
 
                     </div>
                 </div>
@@ -50,77 +51,70 @@
                 <div class="custom-flex-between">
                     <div class="left-content">
                         <div class="logo-wrapper">
-                            <a [routerLink]="['']" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
+                            <a [routerLink]="['']" class="logo-btn"><img src="../../../../assets/images/logo.png"
+                                    alt=""></a>
                         </div>
                     </div>
                     <div class="center-content">
-                        <!-- <a href="dashboard.html" class="underline-link-blk active">
-                            <span>
+                        <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
+                            <a href="#" class="underline-link-blk active">
+                                <span>
 
-                                Dashboard
-                            </span>
-                        </a>
-                        <a href="Service-provider.html" class="underline-link-blk">
-                            <span>
+                                    Dashboard
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
 
-                                Service Provider
-                            </span>
-                        </a>
-                        <a href="javascript:void(0)" class="underline-link-blk">
-                            <span>
+                                    Service Provider
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
 
-                                Inbox
-                            </span>
-                        </a>
-                        <a href="javascript:void(0)" class="underline-link-blk">
-                            <span>
-                                Calender
-                            </span>
-                        </a>
-                        <a [routerLink]="['/boat-listing/all-reservations']" class="underline-link-blk">
-                            <span>
-                                Reservation
-                            </span>
-                        </a>
-                        <a href="Listing.html" class="underline-link-blk">
-                            <span>
-                                Listing
-                            </span>
-                        </a> -->
-                        <div class="dropdown custom-dropdown borderless-dropdown">
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li>
-                                    <p class="header-content small-text">John Cena</p>
-                                </li>
-                                <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
-                                <li><a class="dropdown-item" href="home.html">Log Out</a></li>
-
-                            </ul>
-                        </div>
+                                    Inbox
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
+                                    Calender
+                                </span>
+                            </a>
+                            <a [routerLink]="['/my-bookings']" class="underline-link-blk">
+                                <span>
+                                    Reservation
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
+                                    Listing
+                                </span>
+                            </a>
+                        </ng-container>
                     </div>
                     <div class="right-content">
-                        <a [routerLink]="['/my-bookings']" class="custom-btn white grey-btn regular">Host Bookings</a>
-                        <a href="marketing.html" class="custom-btn white grey-btn regular">Earn With Us</a>
+                        <!-- <a [routerLink]="['/my-bookings']" class="custom-btn white grey-btn regular">Host Bookings</a> -->
+                        <a href="marketing.html" class="custom-btn white grey-btn regular"
+                            *ngIf="userDetails?.roles?.length == 1">Earn With Us</a>
+                        <a (click)="switchRole()" class="custom-btn white grey-btn regular"
+                            *ngIf="userDetails?.roles?.length > 1">Switch to {{app.loggedInUserRole == USER_ROLE.host ?
+                            'User' :'Host'}}</a>
                         <div class="dropdown custom-dropdown" ngbDropdown>
-                            <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" >
-                                <img src="../../../../assets/images/user-img.png" alt="">
+                            <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
+                                id="dropdownMenuButton1">
+                                <img src="{{assetsUrl + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
                             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
                                 <li>
                                     <p class="header-content small-text">{{userDetails?.name}}</p>
                                 </li>
-                                <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
+                                <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
+                                <li><a class="dropdown-item" href="#">Messages</a></li>
+                                <li><a class="dropdown-item" href="#">Notification</a></li>
+                                <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
+                                <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" href="#">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
                             </ul>

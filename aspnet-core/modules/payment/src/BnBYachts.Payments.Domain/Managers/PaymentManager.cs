@@ -1,9 +1,12 @@
-﻿using BnBYachts.Payments.Payments;
+﻿using BnBYachts.Payments.Enum;
+using BnBYachts.Payments.Payments;
 using BnBYachts.Payments.Shared.Interface;
 using BnBYachts.Payments.Shared.Transferable;
+using Microsoft.Extensions.Configuration;
 using Stripe;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -16,7 +19,11 @@ namespace BnBYachts.Payments.Managers
         private readonly IRepository<PaymentDetailsEntity, int> _userPaymentDetailsRepository;
         public PaymentManager(IRepository<UserCardInfoEntity, int> userCardRepository, IRepository<PaymentDetailsEntity, int> userPaymentDetailsRepository)
         {
-            StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";
+            var configurationBuilder = new ConfigurationBuilder()
+                         .SetBasePath(Directory.GetCurrentDirectory())
+                         .AddJsonFile("appsettings.json", optional: false).Build();
+
+            StripeConfiguration.ApiKey = configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             _userCardRepository = userCardRepository;
             _userPaymentDetailsRepository = userPaymentDetailsRepository;
         }
@@ -27,7 +34,7 @@ namespace BnBYachts.Payments.Managers
             var options = new PaymentMethodListOptions
             {
                 Customer = user.CustomerId,
-                Type = "card",
+                Type = PaymentConstants.Card,
             };
             var service = new PaymentMethodService();
             StripeList<PaymentMethod> paymentMethods = service.List(
@@ -40,7 +47,6 @@ namespace BnBYachts.Payments.Managers
                 userPaymentMethods.Add(UserPaymentMethodTransferableFactory.Contruct(item.Id, item.BillingDetails.Name, item.Card.Last4, false, item.Card.Brand));
             }
             return userPaymentMethods;
-
         }
 
         public async Task<bool> Pay(BookingPaymentRequestable data)
@@ -51,7 +57,7 @@ namespace BnBYachts.Payments.Managers
             {
                 var cardOptions = new PaymentMethodCreateOptions
                 {
-                    Type = "card",
+                    Type = PaymentConstants.Card,
                     Card = new PaymentMethodCardOptions
                     {
                         Token = data.Token
@@ -76,22 +82,21 @@ namespace BnBYachts.Payments.Managers
             var options = new PaymentIntentCreateOptions
             {
                 Amount = data.Amount * 100,
-                Currency = "usd",
+                Currency = PaymentConstants.Currency,
                 PaymentMethodTypes = new List<string>
                     {
-                        "card"
+                        PaymentConstants.Card
                     },
                 Customer = user.CustomerId,
                 PaymentMethod = data.PaymentId,
                 Description = data.Description,
-                Confirm = true,
-                ReceiptEmail = "hanan.afzal@techverx.com"
+                Confirm = true
             };
             var service = new PaymentIntentService();
             try
             {
                 var response = service.Create(options);
-                if (response.Status == "succeeded")
+                if (response.Status == PaymentConstants.StatusSucceed)
                 {
                     return true;
                 }
@@ -116,11 +121,11 @@ namespace BnBYachts.Payments.Managers
             {
                 PaymentIntent = paymentDetails.PaymentId,
                 Amount = refundAmount * 100,
-                Reason = "requested_by_customer",
+                Reason = PaymentConstants.RefundReason,
             };
             var service = new RefundService();
             var response = service.Create(options);
-            if (response.Status == "succeeded")
+            if (response.Status == PaymentConstants.StatusSucceed)
             {
                 return true;
             }

@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class YachtSearchService {
   apiUrl: string = environment.BOAT_API_URL;
-  apiIdentityUrl: string = environment.IDENTITY_API_URL;
+  apiCoreURL: string = environment.CORE_API_URL;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +25,8 @@ export class YachtSearchService {
       catchError(this.handleError));
   }
   hostDetailsById(id:string) {
-    return this.http.get(this.apiIdentityUrl + '/'+id).pipe(
+    debugger;
+    return this.http.get(this.apiCoreURL + '/GetUserDetailsById/'+id).pipe(
       catchError(this.handleError));
   }
   charterSearch(param: any) {
