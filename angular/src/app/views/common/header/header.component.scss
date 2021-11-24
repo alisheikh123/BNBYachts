@@ -2,3 +2,12 @@
     &:hover{
     cursor:pointer;}
 }
+.custom-card{
+    &:hover{
+        cursor:pointer;
+    }
+}
+
+.active{
+    border:1px solid #122BA8;
+}
