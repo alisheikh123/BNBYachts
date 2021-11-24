@@ -16,8 +16,8 @@ export class AuthService {
   //   return this.http.post(this.apiCoreURl + "/api/Auth/Logins", loginDetail);
   // }
 
-  getUserInfo(userId: object) {
-    return this.http.get(this.apiIdentityURl + "/api/Auth/UserInfo/" + userId);
+  getUserInfo() {
+    return this.http.get(this.apiCoreURl + "/getuserdetails");
   }
 
   login() {

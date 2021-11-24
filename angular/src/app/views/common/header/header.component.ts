@@ -13,6 +13,7 @@ import { UserRoles } from 'src/app/shared/enums/user-roles';
 import { textChangeRangeIsUnchanged } from 'typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
   userDetails: any;
   canSwitchAccount: boolean = false;
   USER_ROLE = UserRoles;
+  assetsUrl = environment.CORE_API_URL + '/user-profiles/';
   constructor(public router: Router, public app: AppComponent, private toastr: ToastrService, private modal: NgbModal, private oidcSecurityService: OidcSecurityService, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -44,12 +46,12 @@ export class HeaderComponent implements OnInit {
         }
         const userId = localStorage.getItem('userId');
         if (userId != null) {
-          this.getUserDetails(userId);
+          this.getUserDetails();
         }
       });
   }
-  getUserDetails(userId: any) {
-    this.authService.getUserInfo(userId).subscribe((res: any) => {
+  getUserDetails() {
+    this.authService.getUserInfo().subscribe((res: any) => {
       if (res == null) {
         console.log("Error");
       }
