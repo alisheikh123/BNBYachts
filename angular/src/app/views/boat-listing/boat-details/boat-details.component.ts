@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { UserDefaults } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -23,6 +24,8 @@ export class BoatDetailsComponent implements OnInit {
   boatDetails: any;
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
+  assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
+
   guidId!: Guid;
   boatFilterDetails = {
     checkinDate: '',
@@ -37,6 +40,7 @@ export class BoatDetailsComponent implements OnInit {
   boatHost: any;
   showMore: boolean = false;
   isSubmitted: boolean = false;
+  USER_DEFAULTS = UserDefaults;
   @ViewChild('popOver') public popover: NgbPopover;
 
   ngOnInit(): void {
@@ -63,8 +67,7 @@ export class BoatDetailsComponent implements OnInit {
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
-      //this.getHostDetails(this.boatDetails?.creatorId);
-      //console.log(this.boatDetails);
+      this.getHostDetails(this.boatDetails?.creatorId);
     })
   }
 

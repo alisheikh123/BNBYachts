@@ -26,7 +26,7 @@ namespace BnBYachts.Core.Managers
             {
                 profileImage = user.GetProperty<string>(UserConstants.ImagePath).ToString();
             }
-            var data = UserFactory.Contruct(user.Id.ToString(), user.Name, profileImage, user.Roles);
+            var data = UserFactory.Contruct(user.Id.ToString(), user.Name, profileImage, user.Roles,user.CreationTime);
             return data;
         }
     }
