@@ -45,7 +45,6 @@ getUserDetails(userId:any){
 this.authService.getUserInfo(userId).subscribe(res=>{
 if(res==null)
 {
-  console.log("Error");
 }
 else{
 this.userDetails = res;

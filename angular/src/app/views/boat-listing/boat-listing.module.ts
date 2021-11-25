@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
@@ -32,11 +32,11 @@ import { ModifyReservationComponent } from './modify-reservation/modify-reservat
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    GoogleMapsModule, 
+    GoogleMapsModule,
     CommonModule,
     SharedPipesModule,
     NgxStripeModule.forRoot(environment.stripeKey)
   ],
-  providers: [YachtSearchService,BookingService]
+  providers: [YachtSearchService, BookingService]
 })
 export class BoatListingModule { }

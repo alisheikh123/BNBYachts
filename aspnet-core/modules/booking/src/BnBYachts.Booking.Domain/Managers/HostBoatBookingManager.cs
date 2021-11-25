@@ -38,6 +38,32 @@ namespace BnBYachts.Booking.Managers
                 return false;
             }
         }
+        public async Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName)
+        {
+         
+            var booking = await _boatelBookingRepository.GetAsync(data.Id);
+            if (booking != null)
+            {
+                booking.CheckinDate = data.CheckinDate;
+                booking.CheckoutDate = data.CheckoutDate;
+                booking.NoOfAdults = data.NoOfAdults;
+                booking.NoOfChildrens = data.NoOfChildrens;
+                booking.BoatId = data.BoatId;
+                booking.BookingStatus = data.BookingStatus;
+                booking.PaymentStatus = data.PaymentStatus;
+                booking.LastModificationTime = DateTime.Now;
+                booking.LastModifierId = userId;
+                booking.UserName = userName;
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+          
+        }
 
 
 

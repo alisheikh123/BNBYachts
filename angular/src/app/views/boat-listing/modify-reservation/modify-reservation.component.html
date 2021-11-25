@@ -1,15 +1,15 @@
-<div class="main-wrapper">
+<div class="main-wrapper" *ngFor="let b of bookingModifyDetail">
     <div class="image-gallery-bannner section-padding">
         <div class="container">
             <div class="image-gallery-head-content white-text">
-                <h3 class="bold mb-2">{{boatDetails?.name}}</h3>
-                <p>{{boatDetails?.location}}</p>
+                <h3 class="bold mb-2">{{b.boatDetail?.name}}</h3>
+                <p>{{b.boatDetail?.location}}</p>
             </div>
             <div class="image-gallery-collage">
-                <div class="row" *ngIf="boatDetails?.boatGalleries?.length > 0">
+                <div class="row" *ngIf="b.boatDetail?.boatGalleries?.length > 0">
                     <div class="col-md-6 py-2">
                         <div class="gallery-img-large custom-image-prev"
-                            *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                            *ngFor="let item of (b.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : true)">
                             <img src="{{assetsUrl + item?.imagePath}}" alt="">
                         </div>
                     </div>
@@ -17,7 +17,7 @@
                         <div class="gallery-images-small-wrapper">
                             <div class="row">
                                 <div class="col-sm-6 py-2"
-                                    *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : false)">
+                                    *ngFor="let item of (b.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : false)">
                                     <div class="gallery-images-small custom-image-prev">
                                         <img src="{{assetsUrl + item?.imagePath}}" alt="">
                                     </div>
@@ -31,7 +31,7 @@
                             class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div> -->
         </div>
     </div>
-   
+
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -60,26 +60,27 @@
                                                 <div class="tabs-inner-details-inner">
                                                     <div class="custom-flex-start py-1">
                                                         <p class="medium min-width-text">Location:</p>
-                                                        <p>{{boatDetails?.location}}</p>
+                                                        <p>{{b.boatDetail?.location}}</p>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex">
                                                             <p class="medium min-width-text">Bedrooms:</p>
                                                             <p class="min-width-text-small">
-                                                                {{boatDetails?.totalBedrooms}}</p>
+                                                                {{b.boatDetail?.totalBedrooms}}</p>
                                                         </div>
                                                         <div class="custom-flex">
                                                             <p class="medium min-width-text-small">Bathrooms:</p>
-                                                            <p>{{boatDetails?.totalWashrooms}}</p>
+                                                            <p>{{b.boatDetail?.totalWashrooms}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1">
                                                         <p class="medium min-width-text">Check In time:</p>
-                                                        <p>{{boatDetails?.checkinTime | date :'hh:mm a'}}</p>
+                                                        <p>{{b.boatDetail?.checkinTime | date :'hh:mm a'}}</p>
+                                                      
                                                     </div>
                                                     <div class="custom-flex-start py-1">
                                                         <p class="medium min-width-text">Check Out time:</p>
-                                                        <p>{{boatDetails?.checkoutTime | date:'hh:mm a'}}</p>
+                                                        <p>{{b.boatDetail?.checkoutTime | date:'hh:mm a'}}</p>
                                                     </div>
                                                 </div>
                                                 <h6 class="bold mt-3">Approval policy</h6>
@@ -107,6 +108,7 @@
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
+
                                                                 </div>
                                                             </div>
 
@@ -118,15 +120,17 @@
                                                                         style="border:none;cursor:pointer;font-size:12px"
                                                                         placeholder="Add date" name="dp2"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
+                                                                        (ngModelChange)="changecheckoutDate($event)"
                                                                         (click)="d2.toggle()" ngbDatepicker
                                                                         #d2="ngbDatepicker">
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <small class="text-danger"
+                                                        <!-- <small class="text-danger"
                                                             *ngIf="(boatFilterDetails?.checkinDate == '' || boatFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
                                                             {{!boatFilterDetails.checkinDate ? 'check-in':'check-out'}}
-                                                            date</small>
+                                                            date</small> -->
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="row custom-border m-0">
@@ -140,16 +144,16 @@
                                                                 <div class="row m-0">
                                                                     <small
                                                                         style="border:none;cursor:pointer;font-size:12px"
-                                                                        class="col-6">{{boatFilterDetails?.adults}}
+                                                                        class="col-6">{{boatFilterDetails.adults}}
                                                                         Adults</small>
                                                                     <small
                                                                         style="border:none;cursor:pointer;font-size:12px"
-                                                                        class="col-6">{{boatFilterDetails?.childrens}}
+                                                                        class="col-6">{{boatFilterDetails.childrens}}
                                                                         Children</small>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                         <small class="text-danger"
+                                                        <small class="text-danger"
                                                             *ngIf="(boatFilterDetails.adults == 0 && boatFilterDetails.childrens == 0) && isSubmitted">Enter
                                                             guests deteils.</small>
                                                     </div>
@@ -182,11 +186,11 @@
                                                                         <label>Children</label>
                                                                         <div class="custom-flex-start">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens -1;">-</span>
+                                                                                (click)="this.boatFilterDetails.childrens = this.boatFilterDetails.childrens -1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.childrens" />
+                                                                                [(ngModel)]="this.boatFilterDetails.childrens" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens +1;">+</span>
+                                                                                (click)="this.boatFilterDetails.childrens = this.boatFilterDetails.childrens +1;">+</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -197,14 +201,15 @@
                                                 </ng-template>
                                                 <div class="total-amount-wrap">
                                                     <div class="total-amount-wrap-inner">
-                                                        <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} Nights
+                                                        <p>$ {{b?.boatDetail.perDayCharges}} x {{calculateDays()}}
+                                                            Nights
                                                         </p>
-                                                        <p>${{boatDetails?.perDayCharges * calculateDays()}}.00</p>
+                                                        <p>${{b?.boatDetail.perDayCharges * calculateDays()}}.00</p>
 
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
                                                         <p>Tax</p>
-                                                        <p>${{boatDetails?.taxFee}}.00</p>
+                                                        <p>${{b?.boatDetail.taxFee}}.00</p>
 
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
@@ -212,19 +217,27 @@
                                                         <p>$20.00</p>
 
                                                     </div>
-                                                    <div class="total-amount-wrap-inner bottom">
-                                                        <p class="medium">Total(USD)</p>
-                                                        <p class="medium">$ {{boatDetails?.perDayCharges *
-                                                            calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
+                                                    <div class="total-amount-wrap-inner">
+                                                        <p>Deducted Amount</p>
+                                                        <p>{{this.perdayFee || 0.00}}$</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue"  (click)="reserveBoat()">Reserve Now</button>
+                                                    <div class="total-amount-wrap-inner bottom">
+                                                        <p class="medium">Total(USD)</p>
+                                                        <p class="medium">$ {{b?.boatDetail.perDayCharges *
+                                                            calculateDays()+(this.perdayFee || 0) +
+                                                            b?.boatDetail.taxFee+ 20}}.00</p>
+
+                                                    </div>
+                                                    <button class="custom-btn blue" (click)="reserveBoat()">Modify
+                                                        Reservation</button>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
+
                                 <!-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                 <div class="tabs-inner-details">
                                     <div class="row align-items-end">
@@ -372,15 +385,15 @@
                 </div>
                 <div class="section-padding">
                     <h5 class="bold">About the boat</h5>
-                    <p class="max-width-content py-2">{{boatDetails?.description}}</p>
+                    <p class="max-width-content py-2">{{b.boatDetail?.description}}</p>
                 </div>
                 <div class="section-padding">
                     <div class="what-offers">
-                        <div class="row" *ngIf="boatDetails?.boatFeatures">
+                        <div class="row" *ngIf="b.boatDetail?.boatFeatures">
                             <div class="col-md-6">
                                 <h5 class="bold">What this Boat offers</h5>
                                 <div class="custom-flex-start">
-                                    <div class="offerings" style="width: 100%;">
+                                    <!-- <div class="offerings" style="width: 100%;">
                                         <div class="row">
                                             <div class="col-6"
                                                 *ngFor="let item of (showMore ? featureFilter(false,false):(featureFilter(false,false)) | slice:0:4)">
@@ -389,7 +402,10 @@
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
+
+
+
                                     <!-- <div class="offerings">
                                         <p *ngFor="let item of featureFilter(false,false) | mySlice:3:6"><i
                                                 class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
@@ -399,7 +415,7 @@
                                 <button (click)="showMore = !showMore;" class="custom-btn outline-blue-clr my-2">Show
                                     {{showMore ? 'less' :'all'}}</button>
                             </div>
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <h5 class="bold">Favourites</h5>
                                 <div class="custom-flex-start">
                                     <div class="offerings">
@@ -413,7 +429,7 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -424,7 +440,7 @@
                                 <h5 class="bold">Boat Rules</h5>
                                 <div class="custom-flex-start">
                                     <div class="offerings">
-                                        <p *ngFor="let item of boatDetails?.boatRules"><i
+                                        <p *ngFor="let item of b.boatDetail?.boatRules"><i
                                                 class="fa {{item?.offeredRule?.icon}}"></i>{{item?.offeredRule?.name}}
                                         </p>
                                     </div>
@@ -432,14 +448,14 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-6" *ngIf="boatDetails?.boatFeatures">
+                            <div class="col-md-6" *ngIf="b.boatDetail?.boatFeatures">
                                 <h5 class="bold">Health & Safety</h5>
                                 <div class="custom-flex-start">
-                                    <div class="offerings">
+                                    <!-- <div class="offerings">
                                         <p *ngFor="let item of featureFilter(false,true)"><i
                                                 class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
                                         </p>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </div>
@@ -467,9 +483,9 @@
                                     <div class="col-md-6 py-2">
                                         <div class="custom-card-img-bottom-text-wrap">
                                             <div class="custom-card-img-bottom-text-wrap-inner"
-                                                *ngIf="boatDetails?.boatGalleries?.length > 0">
+                                                *ngIf="b.boatDetail?.boatGalleries?.length > 0">
                                                 <div class="card"
-                                                    *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                    *ngFor="let item of (b.boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
                                                     <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                         alt="...">
                                                     <div class="card-body bg-white">
@@ -485,7 +501,7 @@
                                         <div class="custom-card-img-bottom-text-wrap">
                                             <div class="custom-card-img-bottom-text-wrap-inner">
                                                 <div class="card"
-                                                    *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                    *ngFor="let item of (b.boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
                                                     <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                         alt="...">
                                                     <div class="card-body bg-white">
@@ -502,7 +518,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="host-details section-padding">
+                <!-- <div class="host-details section-padding">
                     <div class="host-details-wrap">
                         <div class="row align-items-center">
                             <div class="col-md-6 py-2 text-center-mobile">
@@ -731,9 +747,9 @@
                             </div>
                         </div>
                     </div> -->
-                </div>
             </div>
         </div>
-
     </div>
+
 </div>
+<!-- </div> -->

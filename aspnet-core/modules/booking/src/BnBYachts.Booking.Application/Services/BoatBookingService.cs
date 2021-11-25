@@ -29,6 +29,13 @@ namespace BnBYachts.Booking.Services
             await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
             return true;
         }
+        [HttpPost]
+        [Route("modifyboatelbooking")]
+        public async Task<bool> ModifyBoatelBooking(BoatelBookingDto data)
+        {
+            await _hostBoatBookingManager.ModifyBoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
+            return true;
+        }
         [HttpGet]
         [Route("boatelbookingdetail")]
         public async Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail()

@@ -11,6 +11,7 @@ namespace BnBYachts.Booking.Shared.BoatBooking.Interface
     public interface IHostBoatBookingManager
     {
         Task<bool> BoatelBooking(BoatelBookingEntity data, Guid? userId, string userName);
+        Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName);
         Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId);
         Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail(string userId);
         Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId);

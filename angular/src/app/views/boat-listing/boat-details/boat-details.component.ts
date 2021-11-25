@@ -62,8 +62,7 @@ export class BoatDetailsComponent implements OnInit {
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
-      //this.getHostDetails(this.boatDetails?.creatorId);
-      //console.log(this.boatDetails);
+
     })
   }
 
