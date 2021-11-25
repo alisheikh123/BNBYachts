@@ -1,4 +1,5 @@
 ﻿
+using System;
 using BnBYachts.EventBusShared;
 using BnByachts.NotificationHub.Configuration;
 using BnByachts.NotificationHub.Consumers;
@@ -6,7 +7,6 @@ using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Emailing;
 using Volo.Abp.Modularity;
 
 namespace BnByachts.NotificationHub
@@ -14,8 +14,7 @@ namespace BnByachts.NotificationHub
     [DependsOn(
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
-        typeof(AbpAutofacModule),
-        typeof(AbpEmailingModule)
+        typeof(AbpAutofacModule)
     )]
     public class NotificationHubModule : AbpModule
     {
@@ -28,7 +27,12 @@ namespace BnByachts.NotificationHub
                 {
                     e.Name = EventBusQueue.QEmailNotification;
                 });
+
+                mt.AddConsumer<HeartbeatConsumer>().Endpoint(e => {
+                    e.Name = EventBusQueue.HeartBeat;
+                });
             });
+            Console.WriteLine("Queue Lissiner add ");
         }
     }
 }

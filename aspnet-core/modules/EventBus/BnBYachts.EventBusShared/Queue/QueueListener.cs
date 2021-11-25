@@ -18,7 +18,8 @@ namespace BnBYachts.EventBusShared.Queue
         {
             Logger.LogInformation($"Starting EventBus Listener");
             Console.WriteLine("Starting EventBus Listener");
-            await _busControl.StartAsync(cancellationToken).ConfigureAwait(false);
+             _busControl.Start();
+             await Task.CompletedTask;
         }
 
         public async Task Stop(CancellationToken cancellationToken = default)

@@ -22,7 +22,7 @@ namespace BnByachts.Simulator
         {
             Console.WriteLine("email sending");
 
-            _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+          _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
 
                 To = "umar.draz@techverx.com",
