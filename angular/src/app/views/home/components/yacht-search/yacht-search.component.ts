@@ -28,7 +28,7 @@ export class YachtSearchComponent implements OnInit {
   currentTab = 1;
   YachtTypes = YachtTypes;
   isSubmitted = false;
-  @ViewChild('popOver') public popover: NgbPopover;
+  @ViewChild('popOver') public popover: NgbPopover; 
 
 
   constructor(private yachtService: YachtSearchService, private router: Router, private yachtSearchResults: YachtSearchDataService, private modal: NgbModal) { }
@@ -70,6 +70,7 @@ export class YachtSearchComponent implements OnInit {
     this.boatelSearchParam.latitude = address.geometry.location.lat();
     this.boatelSearchParam.longitude = address.geometry.location.lng();
   }
+
   openPopover() {
     this.popOverFilterData.adults = this.boatelSearchParam.adults;
     this.popOverFilterData.childrens = this.boatelSearchParam.childrens;

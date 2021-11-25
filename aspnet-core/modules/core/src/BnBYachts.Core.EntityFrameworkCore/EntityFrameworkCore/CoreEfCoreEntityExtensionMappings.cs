@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BnBYachts.Core.IdentityServer;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
@@ -16,6 +17,9 @@ namespace BnBYachts.Core.EntityFrameworkCore
 
             OneTimeRunner.Run(() =>
             {
+                ObjectExtensionManager.Instance
+                .MapEfCoreProperty<IdentityUser, string>
+                    (nameof(AppUser.ImagePath));
                 /* You can configure extra properties for the
                  * entities defined in the modules used by your application.
                  *

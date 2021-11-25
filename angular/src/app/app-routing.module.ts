@@ -2,6 +2,7 @@ import { AuthAppModule } from './views/auth/auth.module';
 import { ResetPasswordComponent } from './views/auth/components/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TryHostingComponent } from './views/common/try-hosting/try-hosting.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
   {
     path: 'my-bookings',
     loadChildren: () => import('./views/host/host.module').then(m => m.HostModule)
+  },
+  {
+    path: "try-hosting", component: TryHostingComponent
   }
 ];
 
