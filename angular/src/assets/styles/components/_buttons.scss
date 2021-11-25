@@ -15,7 +15,7 @@
     }
     @include breakpoint(sm){
         padding: 4px 20px;
-       font-size: 14px; 
+       font-size: 14px;
        min-width: auto;
     }
     @include breakpoint(xs){
@@ -37,7 +37,7 @@
         }
     }
     &.grey{
-   
+
         background-color:transparent;
        @include custom-transition;
         color: $new-black-color;
@@ -139,10 +139,10 @@
         @include breakpoint(laptop){
             width: 32px;
             height: 32px;
-        }    
+        }
         @include breakpoint(sm){
             width: 28px;
-            height: 28px;  
+            height: 28px;
         }
         svg{
             @include breakpoint(laptop){
@@ -153,16 +153,16 @@
             }
         }
         &:hover{
-            
+
             svg{
               path{
                 fill: $new-black-color !important;
                 &:nth-child(1){
-                    fill:none !important; 
+                    fill:none !important;
                   }
               }
-              
-             
+
+
             }
           }
     }
@@ -177,7 +177,7 @@
             background-color: $grey-new-color;
             color: $white-color;
             svg{
-               
+
               path{
                 fill: $grey-new-color;
               }
@@ -187,6 +187,11 @@
             }
 
           }
+    }
+    &.small-btn{
+      padding: 5px 25px;
+      font-size: 14px;
+      min-width: auto;
     }
 }
 .underline-link-blk{
@@ -212,7 +217,7 @@
     @include breakpoint(xs){
         font-size: 12px;
     }
-   
+
     &::before{
         content: '';
         position: absolute;
@@ -231,16 +236,16 @@
             width: 50px;
            @include custom-transition;
         }
-        
+
     }
     &.active{
         color: $brand-color;
         &::before{
           width: 50px;
         }
-        
+
     }
-    
+
 }
 .social-media-links{
     width: 24px;
@@ -288,16 +293,16 @@
        display: inline-block;
        font-size: 16px;
        @include breakpoint(laptop){
-        font-size: 18px;  
+        font-size: 18px;
        }
-      
+
        @include breakpoint(sm){
-        font-size: 16px; 
-        padding-bottom: 0; 
+        font-size: 16px;
+        padding-bottom: 0;
        }
        @include breakpoint(sm){
-        font-size: 14px; 
-        padding-bottom: 0; 
+        font-size: 14px;
+        padding-bottom: 0;
        }
    }
    .underline-link-blk{
@@ -308,8 +313,8 @@
         color: $brand-color;
         &::before{
             content: none;
-        }  
-            
+        }
+
        }
    }
 }
@@ -396,7 +401,7 @@
     i{
         margin-left: 10px;
     }
-  
+
 }
 .underline-black-link{
     text-transform: capitalize;
@@ -407,16 +412,16 @@
     padding: 0;
     display: inline-block;
    @include custom-transition;
-  
+
     &:hover{
         color: $brand-color;
        @include custom-transition;
-      
+
     }
     i{
         margin-left: 10px;
     }
-  
+
 }
 .back-btn-circle{
     width: 34px;
@@ -430,7 +435,7 @@
         width: 20px;
         height: 20px;
     }
-    
+
 }
 #dashboard_black_24dp,#dns_black_24dp,#calendar_today_black_24dp_1_{
     path{
@@ -462,7 +467,7 @@
         position: fixed;
         right: 0;
         top: 0;
-        
+
         i{
             &::before{
                 content: "\f00d";
@@ -477,17 +482,17 @@
             transform: translateY(-10px);
             @include custom-transition;
             @include breakpoint(sm){
-                transform: none;  
+                transform: none;
             }
         }
     }
     &.no-link{
         &:hover{
             .custom-smart-card{
-                    transform: none;  
-            
+                    transform: none;
+
             }
-        }  
+        }
     }
 }
 
@@ -545,7 +550,7 @@
             i{
                 font-size: 16px;
             }
-            
+
         }
         @include breakpoint(sm){
             width: 20px;
@@ -553,7 +558,7 @@
             i{
                 font-size: 12px;
             }
-            
+
         }
     }
     &:hover{

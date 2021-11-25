@@ -38,4 +38,8 @@
     <None Remove="Logs\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\user-profiles\" />
+  </ItemGroup>
+
 </Project>

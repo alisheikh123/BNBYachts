@@ -18,7 +18,8 @@ export class BoatelBookingsComponent implements OnInit {
     config.readonly = true;
   };
   boatelBookings: any;
-  assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
+  //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
 
   ngOnInit(): void {
     this.reservationService.getBoatelBookingRequests().subscribe(res => {
