@@ -7,6 +7,7 @@ using Volo.Abp.Modularity;
 using BnBYachts.Boat;
 using Microsoft.Extensions.DependencyInjection;
 using BnBYachts.Boat.EntityFrameworkCore;
+using BnByachts.SeedObservable.Consumers;
 
 namespace BnByachts.SeedObservable
 {
@@ -31,17 +32,21 @@ namespace BnByachts.SeedObservable
                 options.AddMaps<SeederObservableModule>();
             });
 
-            //context.Services.AddMassTransit(mt =>
-            //{
-            //    mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
-            //    {
-            //        e.Name = EventBusQueue.QSeeder;
-            //    });
-            //});
+            context.Services.AddMassTransit(mt =>
+            {
+                mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QSeeder;
+                });
+
+                mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QSeeder;
+                });
+
+            });
 
         }
-
-        
     }
 }
 
