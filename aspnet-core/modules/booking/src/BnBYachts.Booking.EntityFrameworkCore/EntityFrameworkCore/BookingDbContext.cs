@@ -16,10 +16,11 @@ namespace BnBYachts.Booking.EntityFrameworkCore
         /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
         #region Entities from the modules
-        public DbSet<BoatelBooking> BoatelBookings { get; set; }
-        public DbSet<CharterBooking> CharterBookings { get; set; }
-        public DbSet<EventBooking> EventBookings { get; set; }
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<BoatelBookingEntity> BoatelBookings { get; set; }
+        public DbSet<CharterBookingEntity> CharterBookings { get; set; }
+        public DbSet<EventBookingEntity> EventBookings { get; set; }
+        public DbSet<ReviewEntity> Reviews { get; set; }
+        public DbSet<BookingCancelEntity> BookingCancel { get; set; }
         #endregion
 
         public BookingDbContext(DbContextOptions<BookingDbContext> options)

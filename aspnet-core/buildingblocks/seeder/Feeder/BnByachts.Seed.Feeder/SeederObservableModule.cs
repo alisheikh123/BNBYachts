@@ -1,6 +1,5 @@
 ﻿
 using BnBYachts.EventBusShared;
-using BnByachts.SeedObservable.Consumers;
 using MassTransit;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
@@ -32,17 +31,15 @@ namespace BnByachts.SeedObservable
                 options.AddMaps<SeederObservableModule>();
             });
 
-            context.Services.AddMassTransit(mt =>
-            {
-                mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
-                {
-                    e.Name = EventBusQueue.QSeeder;
-                });
-            });
+            //context.Services.AddMassTransit(mt =>
+            //{
+            //    mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
+            //    {
+            //        e.Name = EventBusQueue.QSeeder;
+            //    });
+            //});
 
         }
-
-        
     }
 }
 

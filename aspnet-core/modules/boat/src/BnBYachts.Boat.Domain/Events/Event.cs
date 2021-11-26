@@ -11,7 +11,7 @@ namespace BnBYachts.Events
 {
     public class Event : AuditedAggregateRoot<Guid>
     {
-        public HostBoat Boat { get; set; }
+        public BoatEntity Boat { get; set; }
         public string LocationLat { get; set; }
         public string LocationLong { get; set; }
         public string Title { get; set; }

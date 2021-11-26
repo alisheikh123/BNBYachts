@@ -19,15 +19,14 @@
                         </div>
                     </div>
                     <div class="right-content">
-                        <a href="javascript:void(0)" class="underline-link-blk active" data-bs-toggle="modal"
-                            data-bs-target="#become-host-modal"><span>Earn with us</span></a>
-  
+                        <a (click)="earn()" class="underline-link-blk active"><span>Earn with us</span></a>
+
 
                         <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
                             data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
-                            <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="forgetPassword()" ><span>Forget Password</span></a>
-                        <a href="javascript:void(0)" class="underline-link-blk" (click)="getUser()"><span>Help</span></a>
+                       
+                        <a href="javascript:void(0)" class="underline-link-blk"
+                            (click)="getUser()"><span>Help</span></a>
 
                     </div>
                 </div>
@@ -50,76 +49,70 @@
                 <div class="custom-flex-between">
                     <div class="left-content">
                         <div class="logo-wrapper">
-                            <a href="home.html" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
+                            <a [routerLink]="['']" class="logo-btn"><img src="../../../../assets/images/logo.png"
+                                    alt=""></a>
                         </div>
                     </div>
                     <div class="center-content">
-                        <!-- <a href="dashboard.html" class="underline-link-blk active">
-                            <span>
+                        <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
+                            <a href="#" class="underline-link-blk active">
+                                <span>
 
-                                Dashboard
-                            </span>
-                        </a>
-                        <a href="Service-provider.html" class="underline-link-blk">
-                            <span>
+                                    Dashboard
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
 
-                                Service Provider
-                            </span>
-                        </a>
-                        <a href="javascript:void(0)" class="underline-link-blk">
-                            <span>
+                                    Service Provider
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
 
-                                Inbox
-                            </span>
-                        </a>
-                        <a href="javascript:void(0)" class="underline-link-blk">
-                            <span>
-                                Calender
-                            </span>
-                        </a>
-                        <a [routerLink]="['/boat-listing/all-reservations']" class="underline-link-blk">
-                            <span>
-                                Reservation
-                            </span>
-                        </a>
-                        <a href="Listing.html" class="underline-link-blk">
-                            <span>
-                                Listing
-                            </span>
-                        </a> -->
-                        <div class="dropdown custom-dropdown borderless-dropdown">
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li>
-                                    <p class="header-content small-text">John Cena</p>
-                                </li>
-                                <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
-                                <li><a class="dropdown-item" href="home.html">Log Out</a></li>
-
-                            </ul>
-                        </div>
+                                    Inbox
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
+                                    Calender
+                                </span>
+                            </a>
+                            <a [routerLink]="['/my-bookings']" class="underline-link-blk">
+                                <span>
+                                    Reservation
+                                </span>
+                            </a>
+                            <a href="#" class="underline-link-blk">
+                                <span>
+                                    Listing
+                                </span>
+                            </a>
+                        </ng-container>
                     </div>
                     <div class="right-content">
-                        <a href="marketing.html" class="custom-btn white grey-btn regular">Earn With Us</a>
+                        <!-- <a [routerLink]="['/my-bookings']" class="custom-btn white grey-btn regular">Host Bookings</a> -->
+                        <a (click)="earn()" class="custom-btn white grey-btn regular"
+                            *ngIf="userDetails?.roles?.length == 1">Earn With Us</a>
+                        <a (click)="switchRole()" class="custom-btn white grey-btn regular"
+                            *ngIf="userDetails?.roles?.length > 1">Switch to {{app.loggedInUserRole == USER_ROLE.host ?
+                            'User' :'Host'}}</a>
                         <div class="dropdown custom-dropdown" ngbDropdown>
-                            <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" >
-                                <img src="../../../../assets/images/user-img.png" alt="">
+                            <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
+                                id="dropdownMenuButton1">
+                                <img src="{{assetsUrl + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
                             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
                                 <li>
                                     <p class="header-content small-text">{{userDetails?.name}}</p>
                                 </li>
-                                <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
+                                <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
+                                <li><a class="dropdown-item" href="#">Messages</a></li>
+                                <li><a class="dropdown-item" href="#">Notification</a></li>
+                                <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
+                                <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" href="#">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
                             </ul>
@@ -131,3 +124,33 @@
         </div>
     </ng-container>
 </header>
+<ng-template #earnwithus>
+     <div class="modal-content">
+        
+        <div class="modal-body">
+          <div class="custom-text-center">
+            <h4 class="medium text-left mb-3">Earn With Us</h4>
+          <a [ngClass]="{'active': selectedOption.byHost}" (click)="selectedOption.byServiceProvider = false;selectedOption.byHost = !selectedOption.byHost;" class="custom-card custom-flex-between card-right-img">
+              <div class="card-right-img-inside">
+                <h6 class="medium p-0 text-start">Become a Host</h6>
+                <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                </div>
+              <img src="../../../../assets/images/host-img-small.png" alt="">
+    
+              </a>
+              <a [ngClass]="{'active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider" class="custom-card custom-flex-between card-right-img mt-3">
+                <div class="card-right-img-inside">
+                  <h6 class="medium p-0 text-start">Service Provider</h6>
+                  <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                  </div>
+                <img src="../../../../assets/images/service-provider.png" alt="">
+      
+                </a>
+                <div class="custom-margin mb-0">
+                  <button class="custom-btn blue big-btn" (click)="continueToEarn()">Continue</button>
+                </div>
+          </div>
+        </div>
+       
+      </div>
+</ng-template>

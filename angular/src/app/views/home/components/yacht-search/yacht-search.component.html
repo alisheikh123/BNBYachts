@@ -12,7 +12,7 @@
                                 transform="translate(626.265 990.076)" fill="#122ba8" stroke="#122ba8"
                                 stroke-width="0.2" />
                         </svg>
-                        Boatel {{currentTab}}
+                        Boatel
                     </button>
                     <button class="underline-link-blk small-text"
                         [ngClass]="{'active': currentTab == YachtTypes.charter}" (click)="currentTab = 2" type="button">
@@ -148,10 +148,10 @@
                                                 <label class="m-0 max-width-50">Adults</label>
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults -1;">-</span>
-                                                    <input type="text" [(ngModel)]="boatelSearchParam.adults" />
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults -1;">-</span>
+                                                    <input type="text" [(ngModel)]="popOverFilterData.adults" />
                                                     <span class="plus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults+1;">+</span>
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults+1;">+</span>
                                                 </div>
                                             </div>
 
@@ -169,10 +169,10 @@
 
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens -1;">-</span>
-                                                    <input type="text" [(ngModel)]="boatelSearchParam.childrens" />
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                    <input type="text" [(ngModel)]="popOverFilterData.childrens" />
                                                     <span class="plus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens+1;">+</span>
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens+1;">+</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="col-12 pt-2">
                                   <div class="custom-flex-end">
-                                    <button class="custom-btn blue small-btn" >Done</button>
+                                    <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
                                   </div>
                                 </div>
                             </div>
@@ -229,7 +229,8 @@
                             </div>
                             <div class="col-lg-4 col-md-6  py-2">
                                     <div class="custom-flex select custom-select select-search custom-input-label-inside w-100" [ngbPopover]="popContent" placement="bottom"
-                                        autoClose="outside">
+                                        autoClose="outside" #popOver="ngbPopover" triggers="manual"
+                                        (click)="openPopover()">
                                                 <label>Guests</label>
                                         <div class="custom-flex w-100">
                                             <p class="counter-text-total">{{boatelSearchParam.adults}} Adults</p>
@@ -251,10 +252,10 @@
                                                 <label class="m-0 max-width-50">Adults</label>
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults -1;">-</span>
-                                                    <input type="text" [(ngModel)]="boatelSearchParam.adults" />
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults -1;">-</span>
+                                                    <input type="text" [(ngModel)]="popOverFilterData.adults" />
                                                     <span class="plus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.adults = boatelSearchParam.adults+1;">+</span>
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults+1;">+</span>
                                                 </div>
                                             </div>
 
@@ -271,10 +272,10 @@
                                               </div>
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens -1;">-</span>
-                                                    <input type="text" [(ngModel)]="boatelSearchParam.childrens" />
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                    <input type="text" [(ngModel)]="popOverFilterData.childrens" />
                                                     <span class="plus" style="cursor: pointer;"
-                                                        (click)="boatelSearchParam.childrens = boatelSearchParam.childrens+1;">+</span>
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens+1;">+</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,7 +283,7 @@
                                 </div>
                                 <div class="col-12 pt-2">
                                   <div class="custom-flex-end">
-                                    <button class="custom-btn blue small-btn" >Done</button>
+                                    <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
                                   </div>
                                 </div>
                             </div>
@@ -333,6 +334,8 @@
                             <div class="col-lg-4 col-md-6  py-2">
                                 <div class="">
                                     <div class="custom-flex select custom-select select-search custom-input-label-inside w-100" [ngbPopover]="popContent" placement="bottom"
+                                    triggers="manual"
+                                        (click)="openPopover()"
                                         autoClose="outside">
                                         <div class="">
                                             <div class="">

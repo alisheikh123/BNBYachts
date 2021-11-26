@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'BnB Yacht';
   public loggedInUserRole: any = null;
+
+  onActivate(event:any) {
+    window.scroll(0,0);
+}
+
 }

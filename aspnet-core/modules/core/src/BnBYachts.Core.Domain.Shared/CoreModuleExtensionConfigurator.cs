@@ -37,6 +37,15 @@ namespace BnBYachts.Core
 
         private static void ConfigureExtraProperties()
         {
+            ObjectExtensionManager.Instance.Modules().ConfigureIdentity(identity =>
+            {
+                identity.ConfigureUser(user =>
+                {
+                    user.AddOrUpdateProperty<string>(
+                        "ImagePath"
+                    );
+                });
+            });
             /* You can configure extra properties for the
              * entities defined in the modules used by your application.
              *

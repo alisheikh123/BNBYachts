@@ -45,18 +45,18 @@ namespace BnBYachts.Boat.EntityFrameworkCore
         //public DbSet<Tenant> Tenants { get; set; }
         //public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
         // Yacht DbSets
-        public DbSet<HostBoat> Boats { get; set; }
-        public DbSet<BoatGallery> BoatsGallery { get; set; }
-        public DbSet<BoatCalendar> BoatsCalendar { get; set; }
-        public DbSet<BoatFeature> BoatsFeatures { get; set; }
-        public DbSet<BoatLocation> BoatsLocations { get; set; }
-        public DbSet<BoatRule> BoatsRules { get; set; }
-        public DbSet<Feature> Features { get; set; }
-        public DbSet<Rule> Rules { get; set; }
+        public DbSet<BoatEntity> Boats { get; set; }
+        public DbSet<BoatGalleryEntity> BoatsGallery { get; set; }
+        public DbSet<BoatCalendarEntity> BoatsCalendar { get; set; }
+        public DbSet<BoatFeatureEntity> BoatsFeatures { get; set; }
+        public DbSet<BoatLocationEntity> BoatsLocations { get; set; }
+        public DbSet<BoatRuleEntity> BoatsRules { get; set; }
+        public DbSet<FeatureEntity> Features { get; set; }
+        public DbSet<RuleEntity> Rules { get; set; }
 
         // charter
 
-        public DbSet<Charter> Charteres { get; set; }
+        public DbSet<CharterEntity> Charteres { get; set; }
 
         //Event
         public DbSet<Events.Event> Events { get; set; }

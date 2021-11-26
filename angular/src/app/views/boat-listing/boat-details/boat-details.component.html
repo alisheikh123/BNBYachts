@@ -27,8 +27,8 @@
                     </div>
                 </div>
             </div>
-            <div class="gallery-link-wrapper"><a href="#" class="underline-white-link">Gallery <span><i
-                            class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+            <!-- <div class="gallery-link-wrapper"><a href="#" class="underline-white-link">Gallery <span><i
+                            class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div> -->
         </div>
     </div>
     <div class="container">
@@ -126,8 +126,9 @@
                                                     <div class="col-md-6 py-2">
                                                         <div class="">
                                                             <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent"
-                                                                placement="bottom" autoClose="outside">
-
+                                                                placement="bottom" autoClose="outside" triggers="manual"
+                                                                #popOver="ngbPopover"
+                                                                (click)="openPopover()">
                                                                         <label>Guests</label>
 
                                                                 <div class="custom-flex w-100">
@@ -138,7 +139,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                         <small class="text-danger"
+                                                        <small class="text-danger"
                                                             *ngIf="(boatFilterDetails.adults == 0 && boatFilterDetails.childrens == 0) && isSubmitted">Enter
                                                             guests deteils.</small>
                                                     </div>
@@ -153,11 +154,11 @@
                                                                         <label class="m-0 max-width-50">Adults</label>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults - 1;">-</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults - 1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.adults" />
+                                                                                [(ngModel)]="popOverFilterData.adults" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults + 1;">+</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+</span>
                                                                         </div>
                                                                     </div>
 
@@ -175,11 +176,11 @@
                                                                       </div>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens -1;">-</span>
+                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.childrens" />
+                                                                                [(ngModel)]="popOverFilterData.childrens" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.childrens = boatFilterDetails.childrens +1;">+</span>
+                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens +1;">+</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -187,7 +188,7 @@
                                                         </div>
                                                         <div class="col-12 pt-2">
                                                           <div class="custom-flex-end">
-                                                            <button class="custom-btn blue small-btn" >Done</button>
+                                                            <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
                                                           </div>
                                                         </div>
                                                     </div>
@@ -215,7 +216,8 @@
                                                             calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue"  (click)="reserveBoat()">Reserve Now</button>
+                                                    <button class="custom-btn blue" (click)="reserveBoat()">Reserve
+                                                        Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -504,21 +506,21 @@
                         <div class="row align-items-center">
                             <div class="col-md-6 py-2 text-center-mobile">
                                 <h5 class="bold">Hosted By</h5>
-                                <p class="medium py-2">Name Host {{boatHost?.name}}</p>
+                                <p class="medium py-2">Name Host: {{boatHost?.name}}</p>
                                 <div class="address-details">
-                                    <p>Join Date: 20 - Jan - 2020 {{boatHost?.creationTime}}</p>
-                                    <p><i class="fa fa-check"></i> Identity Verified: Varified </p>
-                                    <p><i class="fa fa-star"></i> Response Rate: 85%</p>
-                                    <p>Response Time: 10 min</p>
+                                    <p>Join Date: {{boatHost?.creationTime | date:'dd-MMM-YYYY'}}</p>
+                                    <p><i class="fa fa-check"></i> Identity Verified: Verified </p>
+                                    <p><i class="fa fa-star"></i> Response Rate: 0%</p>
+                                    <p>Response Time: 0 min</p>
                                 </div>
                             </div>
                             <div class="col-md-6 py-2 text-center">
                                 <div class="image-wrapper-host">
-                                    <img src="../../../../assets/images/user.png" alt="">
+                                    <img src="{{assetsCoreUrl + (boatHost?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 </div>
                             </div>
                             <div class="col-sm-12 pt-2 text-center">
-                                <a href="javascript:void(0)" class="custom-btn blue big-btn">Contact Host</a>
+                                <a href="#" class="custom-btn blue big-btn">Contact Host</a>
                             </div>
                         </div>
                     </div>

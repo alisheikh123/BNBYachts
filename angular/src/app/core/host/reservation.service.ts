@@ -15,6 +15,10 @@ export class ReservationService {
     return this.http.get(this.bookingApiUrl + '/get-my-reservations').pipe(
       catchError(this.handleError));
   }
+  changeStatus(bookingId:number,status:boolean){
+    return this.http.get(this.bookingApiUrl + '/update-reservations-status/'+bookingId+'/'+status).pipe(
+      catchError(this.handleError));
+  }
     ///Exception handler
     handleError(error: any) {
       let errorMessage = '';
