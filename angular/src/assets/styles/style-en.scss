@@ -13,7 +13,7 @@
 @import '~ngx-toastr/toastr.css';
 
 *{
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 html{
   height: 100%;
@@ -62,7 +62,7 @@ h2{
   @include breakpoint(xs){
     font-size: 22px;
   }
- 
+
 
 }
 h3{
@@ -158,14 +158,14 @@ min-height: calc(100vh - 136px);
     min-height: calc(100vh - 120px);
   }
   }
-  
+
   &.center-content{
     background:#F1F1F1;
-  
+
   }
   &.center-content-vertically{
     min-height: calc(100vh - 113px);
- 
+
   }
 }
 
@@ -178,7 +178,7 @@ a{
   @include breakpoint(laptop){
     font-size: 14px;
   }
- 
+
 }
 button{
   &:focus{
@@ -230,7 +230,7 @@ button{
     @include breakpoint(xs){
       margin-bottom: 0.2rem !important;
     }
-    
+
   }
 }
 .custom-flex-end{
@@ -322,7 +322,7 @@ button{
   text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
   &.center-container{
     margin: 0 auto;
@@ -372,7 +372,7 @@ button{
 @include breakpoint(sm){
   height: 250px;
   padding: 15px;
-  
+
 }
   &.bg-image-big{
     height: 600px;
@@ -448,7 +448,7 @@ button{
   h2{
     padding-bottom: 15px;
   }
- 
+
 }
 
 .bottom-center-btn{
@@ -483,7 +483,7 @@ button{
       }
     }
   }
-  
+
 }
 .exlusive-offer{
   .bg-image-wrap{
@@ -558,7 +558,7 @@ button{
       text-align: center;
     }
   }
-  
+
 }
 
 .upload-image-wrapper{
@@ -582,7 +582,7 @@ button{
     &::before{
       @include bg-layer-black;
       @include black-graient;
-      
+
 
     }
     @include breakpoint(laptop){
@@ -659,7 +659,7 @@ button{
       &::before{
           font-family: "Material Icons";
           content: "\e5cd";
-          color: $new-black-color !important;              
+          color: $new-black-color !important;
          }
 
       &:hover{
@@ -667,7 +667,7 @@ button{
           background-color: $modal-close-btn;
       }
     }
-    
+
   }
   .grey{
     padding: 5px 0;
@@ -718,7 +718,7 @@ button{
         @include breakpoint(laptop){
           margin-bottom: 5px;
         }
-          
+
       }
   }
 
@@ -815,7 +815,7 @@ button{
   .gallery-link-wrapper{
     @include custom-flex-end;
     margin-top: 10px;
-    
+
   }
   .custom-image-prev{
     overflow: hidden;
@@ -829,7 +829,7 @@ button{
         @include custom-transition;
       }
     }
-  
+
   }
 }
 
@@ -859,6 +859,9 @@ button{
 .total-amount-wrap{
   max-width: 400px;
   margin: 0 auto;
+  @include breakpoint(sm){
+    max-width: 100%;
+  }
   .total-amount-wrap-inner{
     @include custom-flex-between;
     padding: 5px 0;
@@ -866,7 +869,7 @@ button{
       padding: 10px 0;
       border-top: 1px solid $placeholder-color;
     }
-    
+
   }
   .custom-btn{
     display: block;
@@ -891,7 +894,7 @@ button{
     i{
       margin-right: 10px;
       color: $black-secondary-color;
-      
+
     }
   }
   .grey{
@@ -968,7 +971,7 @@ button{
         width: 100px;
         height: 100px;
       }
-     
+
     }
   }
 }
@@ -989,7 +992,7 @@ button{
     }
 
   }
-  
+
 }
 
 .stars-clr{
@@ -1018,7 +1021,7 @@ button{
       &.fa-star-o{
         color: $grey-new-color;
       }
-      
+
     }
     .grey-clr{
       color: $grey-new-color !important;
@@ -1101,27 +1104,27 @@ button{
 .persons-rating{
   .image-with-text{
     padding: 10px 0;
-    
+
   }
-  
+
 }
 
 .line-clamp-1{
   display: -webkit-box;
   -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .line-clamp-2{
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .line-clamp-3{
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .border-bottom{
@@ -1265,7 +1268,7 @@ img{
     padding:10px 15px;
   }
   @include breakpoint(xs){
-    padding:10px 15px; 
+    padding:10px 15px;
   }
   h2{
     @include breakpoint(laptop){
@@ -1337,7 +1340,7 @@ img{
                     svg{
                       fill:$brand-color;
                       path{
-                        fill:$brand-color; 
+                        fill:$brand-color;
                       }
                     }
                 }
@@ -1404,7 +1407,7 @@ img{
         border:none !important;
         &.bg-white{
           h6{
-            color: $black-color; 
+            color: $black-color;
           }
           p{
             color: $black-color;
@@ -1418,7 +1421,7 @@ img{
         }
       }
     }
-    
+
   }
 }
 .custom-margin{
@@ -1438,7 +1441,7 @@ img{
   .description-fotmat{
     min-width: 135px;
   }
-  
+
   .character-info-wrapper{
     width: 100%;
     .character-info{
@@ -1480,7 +1483,7 @@ img{
     span{
       color: $green-clr;
     }
-    
+
     }
     .right-content{
       // @include breakpoint(xs){
@@ -1523,10 +1526,10 @@ img{
         width: 100%;
         height: 100%;
         border-radius: 13px;
-        
+
       }
     }
-    
+
     .fav-btn{
       position: absolute;
       bottom: 3px;
@@ -1535,13 +1538,13 @@ img{
     span{
       color: $green-clr;
     }
-    
+
     }
     .right-content{
       .custom-btn{
         margin-right: 20px;
         transition: 0.5s ease;
-        
+
         }
       }
   }
@@ -1552,14 +1555,14 @@ img{
     border-radius: 13px;
     border: 1px solid $grey-border-clr;
     @include breakpoint(sm){
-  
+
       margin: 10px 0 !important;
 
     }
     @include breakpoint(xs){
-      
+
       margin: 5px 0 !important;
-     
+
     }
   }
 
@@ -1630,7 +1633,7 @@ img{
     @include breakpoint(sm){
       flex-direction: column;
     }
- 
+
   }
 }
 
@@ -1705,7 +1708,7 @@ img{
           min-width: 100px;
         }
       }
-      
+
     }
   }
 }
@@ -1757,7 +1760,7 @@ img{
       @include breakpoint(xs){
         max-width: 100%;
       }
-    } 
+    }
   }
 }
 .custom-margin-bottom-mobile{
@@ -1797,7 +1800,7 @@ img{
     &.custom-flex{
       @include breakpoint(sm){
         padding: 0 10px 10px!important;
-      } 
+      }
     }
   }
 }
@@ -1908,8 +1911,8 @@ label{
   &:hover{
    .no-img-inner{
     display:none;
- 
-   } 
+
+   }
    .upload-btn{
     display:flex;
   }
@@ -1930,7 +1933,7 @@ label{
         margin-top: 15px;
       }
     }
-   
+
   }
   .card{
 
@@ -1951,6 +1954,9 @@ label{
 .container{
   @include breakpoint(laptop){
       max-width: 1000px;
+  }
+  @include breakpoint(extra-small-laptop){
+    max-width: 960px;
   }
   @include breakpoint(md){
     max-width: 720px;
@@ -2072,4 +2078,14 @@ label{
 
 .toast-body {
   padding: $toast-padding-x; // apply to both vertical and horizontal
+}
+.check-in-out-wrap{
+  @include breakpoint(extra-small-laptop){
+    max-width: 470px;
+    margin: 0 auto !important;
+  }
+  @include breakpoint(md){
+    max-width: 470px;
+    margin: 0 auto !important;
+  }
 }

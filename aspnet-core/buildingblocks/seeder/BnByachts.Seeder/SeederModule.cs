@@ -6,9 +6,7 @@ namespace BnByachts.Seeder
 {
 
     [DependsOn(
-        //typeof(AbpAutofacModule),
         typeof(EventBusSharedModule)
-        //typeof(CoreApplicationContractsModule)
     )]
     public class SeederModule : AbpModule
     {
