@@ -20,7 +20,7 @@ export class YachtSearchService {
     return this.http.post(this.apiUrl + '/BoatCalendarUpdate',params).pipe(
       catchError(this.handleError));
   }
-  boatDetailsById(id:number) {
+  boatDetailsById(id:any) {
     return this.http.get(this.apiUrl + '/boat-details/'+id).pipe(
       catchError(this.handleError));
   }
