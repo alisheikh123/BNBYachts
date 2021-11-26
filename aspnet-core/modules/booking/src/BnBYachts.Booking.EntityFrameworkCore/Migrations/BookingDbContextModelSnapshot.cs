@@ -101,8 +101,8 @@ namespace BnBYachts.Booking.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BookingId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
 
                     b.Property<int>("BookingType")
                         .HasColumnType("int");

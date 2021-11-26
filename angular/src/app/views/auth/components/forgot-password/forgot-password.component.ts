@@ -23,7 +23,6 @@ export class ForgotPasswordComponent implements OnInit {
 
  submit(){
     let email=this.ForgetForm.controls["email"].value;
-    let emailValid=this.ForgetForm.controls["email"].valid;
     this.service.sendEmail(email).subscribe(res=>{
      
       if(res==true)

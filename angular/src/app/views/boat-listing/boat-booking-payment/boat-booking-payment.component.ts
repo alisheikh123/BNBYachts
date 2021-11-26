@@ -59,8 +59,6 @@ export class BoatBookingPaymentComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'en'
   };
-
-
   constructor(public app: AppComponent, private stripeService: StripeService, private activatedRoute: ActivatedRoute, private boatService: YachtSearchService, private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService) { }
 
   ngOnInit(): void {

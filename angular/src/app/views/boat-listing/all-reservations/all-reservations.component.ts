@@ -33,7 +33,6 @@ export class AllReservationsComponent implements OnInit {
 
     this.service.bookingDetail().subscribe((res: any) => {
       this.booking = res;
-
       if (this.booking.length == 0) {
         this.isRecordNotFound = true;
       }

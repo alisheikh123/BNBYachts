@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
 export class ModifyReservationComponent implements OnInit {
 
 
-  boatId: string = '';
+  boatId:number;
   boatDetails: any;
   bookingId: any;
   currentCookingId: any;
@@ -133,9 +133,9 @@ export class ModifyReservationComponent implements OnInit {
       let userId = Guid.create();
       let bookingModel = {
         id: this.currentCookingId,
-        creationTime: "2021-11-04T15:25:23.927Z",
-        creatorId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        lastModificationTime: "2021-11-04T15:25:23.927Z",
+        creationTime: "",
+        creatorId: "",
+        lastModificationTime: "",
         lastModifierId: userId.toString(),
         checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
         checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",

@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html'
-  
+
 })
 export class ResetPasswordComponent implements OnInit {
   IsPasswordChanged: boolean=false;
@@ -23,19 +23,15 @@ export class ResetPasswordComponent implements OnInit {
   @ViewChild('resetModal', { static: true }) templateRef: any;
   @ViewChild('passwordChangedModal', { static: true }) passwordChangedRef: any;
   @ViewChild('InvalidUserModal', { static: true }) InvalidUserRef: any;
-
-
-
-
   constructor(private modal: NgbModal,private oidcSecurityService : OidcSecurityService, private fb: FormBuilder, private service: AuthService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.token = res['id'].toString();
     });
-    
+
     this.service.verifyUniqueId(this.token).subscribe((res:any) => {
-    
+
        this.userId = res;
        if(this.userId==null)
        {
@@ -44,8 +40,8 @@ export class ResetPasswordComponent implements OnInit {
        else{
         this.openModal();
        }
-       
-      
+
+
     });
     this.resetForm = this.fb.group({
       password:[null, Validators.required],
@@ -83,24 +79,19 @@ export class ResetPasswordComponent implements OnInit {
   updated() {
     this.validPassword = this.resetForm.controls['password'].value
     this.service.updatePassword(this.userId,this.validPassword).subscribe((res:any)=>{
-    
-    
-       
       if(res==true)
       {
         this.modal.dismissAll();
         this.passwordChangeModal();
-   
+
       }
 
     });
 
 
   }
-
-
   login(){
-  
+
     this.oidcSecurityService.authorize();
   }
 

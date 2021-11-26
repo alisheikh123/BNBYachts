@@ -11,8 +11,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace BnBYachts.Booking.Migrations
 {
     [DbContext(typeof(BookingDbContext))]
-    [Migration("20211124120449_completebookingtables")]
-    partial class completebookingtables
+    [Migration("20211126103109_Initial-IgnoreChanges")]
+    partial class InitialIgnoreChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,8 +103,8 @@ namespace BnBYachts.Booking.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BookingId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
 
                     b.Property<int>("BookingType")
                         .HasColumnType("int");

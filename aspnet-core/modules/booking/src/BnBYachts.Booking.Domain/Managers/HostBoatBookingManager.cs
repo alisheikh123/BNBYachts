@@ -48,12 +48,10 @@ namespace BnBYachts.Booking.Managers
                 booking.CheckoutDate = data.CheckoutDate;
                 booking.NoOfAdults = data.NoOfAdults;
                 booking.NoOfChildrens = data.NoOfChildrens;
-                booking.BoatId = data.BoatId;
                 booking.BookingStatus = data.BookingStatus;
                 booking.PaymentStatus = data.PaymentStatus;
                 booking.LastModificationTime = DateTime.Now;
                 booking.LastModifierId = userId;
-                booking.UserName = userName;
 
                 return true;
             }
@@ -112,7 +110,7 @@ namespace BnBYachts.Booking.Managers
                     smtp.Send(message);
                 }
 
-                model.BookingId = data.BookingId.ToString();
+                model.BookingId = data.BookingId;
                 BookingDetail.BookingStatus = data.BookingStatus;
                 model.BookingType = data.BookingType;
                 model.isNotificationSent = data.isNotificationSent;
