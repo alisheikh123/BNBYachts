@@ -110,6 +110,7 @@
                                   <label>Check-in</label>
                                   <input
                                       placeholder="Add date" name="dp"
+                                      container="body"
                                       [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
                                       ngbDatepicker #d="ngbDatepicker">
                               </div>
@@ -117,6 +118,7 @@
                                 <label>Check-out</label>
                                 <input
                                     placeholder="Add date" name="dp2"
+                                    container="body"
                                     [(ngModel)]="boatelSearchParam.checkoutDate" (click)="d2.toggle()"
                                     ngbDatepicker #d2="ngbDatepicker">
                             </div>

@@ -102,6 +102,7 @@
                                                                     <label>Check-in</label>
                                                                     <input
                                                                         placeholder="Add date" name="dp"
+                                                                        container="body"
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
@@ -112,6 +113,7 @@
                                                                     <label>Check-out</label>
                                                                     <input
                                                                         placeholder="Add date" name="dp2"
+                                                                        container="body"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
                                                                         (click)="d2.toggle()" ngbDatepicker
                                                                         #d2="ngbDatepicker">
