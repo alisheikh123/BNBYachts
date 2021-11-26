@@ -9,6 +9,7 @@ using Volo.Abp.Domain.Services;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boats.Charter;
+using BnBYachts.Boat.Shared.Boat.Transferable;
 
 namespace BnBYachts.Boat.Manager
 {
@@ -20,16 +21,19 @@ namespace BnBYachts.Boat.Manager
         private readonly IRepository<BoatCalendarEntity, int> _boatelCalendarRepo;
         //Charters
         private readonly IRepository<CharterEntity, int> _charterRepository;
+        //Lookups
+        private readonly IRepository<RuleEntity, int> _rulesRepo;
+        private readonly IRepository<FeatureEntity, int> _featuresRepo;
 
-        public HostBoatManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep, IRepository<BoatCalendarEntity, int> boatelCalendarRepo)
+        public HostBoatManager(IRepository<RuleEntity, int> rulesRepo, IRepository<FeatureEntity, int> featuresRepo, IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep, IRepository<BoatCalendarEntity, int> boatelCalendarRepo)
         {
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
             _boatelRulesRepo = boatelRulesRep;
             _charterRepository = charterRepository;
-
-
+            _rulesRepo = rulesRepo;
+            _featuresRepo = featuresRepo;
         }
         public async Task<HostBoatRequestable> Insert(HostBoatRequestable input)
         {
@@ -127,6 +131,22 @@ namespace BnBYachts.Boat.Manager
 
             return boat;
         }
+        #region Host Onboarding
+
+        public async Task<HostLookupTransferable> GetHostOnBoardingLookup(Guid? userId)
+        {
+            var rules = await _rulesRepo.GetListAsync(r => r.IsDefault == true || r.CreatorId == userId).ConfigureAwait(false);
+            var features = await _featuresRepo.GetListAsync(r => r.IsDefaultFeature == true || r.CreatorId == userId).ConfigureAwait(false);
+            var data = HostLookupFactory.Contruct(rules, features);
+            return data;
+        }
+
+        #endregion
+
+
+
+
+
         ///helpers
         public static double GetDistanceInMeters(double sLat, double sLong, double dLat, double dLong)
         {

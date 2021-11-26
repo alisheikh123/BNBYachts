@@ -1,0 +1,23 @@
+.main-select-btn{
+    width: 640px;
+    height: 70px;
+    border: 1px solid #ccc;
+    text-align: start;
+    color:black;
+    &:hover{
+background-color: transparent;
+    }
+}
+.custom-select-btn{
+padding: 10px;
+border:none;
+    border-bottom: 1px solid #ccc;
+    &:hover{
+        border-left: 4px solid #13278B;
+    cursor:pointer;}
+}
+.dropdown-toggle::after {
+    display:none;
+}
+    
+    

@@ -1,0 +1,506 @@
+<div class="main-wrapper">
+    <div class="your-boat banner-image white-text">
+        <div class="bg-image-wrap no-hover noborder-radius image-before"
+            style="background-image: url('../../../../assets/images/charter-bg.png');">
+            <div class="custom-flex-start h-100">
+                <div class="container">
+                    <h3 class="bold">Host On Boarding</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-padding host-on-board-steps">
+
+        <div class="container">
+            <div class="charter-info-tabs space-between-tabs">
+                <div class="custom-tabs-wrapper">
+                    <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist"
+                        aria-orientation="vertical">
+                        <button class="underline-link-blk small-text" type="button"
+                            (click)="currentTab = ONBOARDING_TABS.BoatType"
+                            [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatType}"><span
+                                class="active">1</span>Boat Type</button>
+                        <button class="underline-link-blk small-text" type="button"
+                            (click)="currentTab = ONBOARDING_TABS.BoatFeatures"
+                            [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatFeatures}"><span
+                                [ngClass]="{'active': currentTab > ONBOARDING_TABS.BoatFeatures}">2</span>Boat Features
+                            & Description</button>
+                        <button class="underline-link-blk small-text" type="button"
+                            (click)="currentTab = ONBOARDING_TABS.Rules"
+                            [ngClass]="{'active': currentTab == ONBOARDING_TABS.Rules}"><span
+                                [ngClass]="{'active': currentTab > ONBOARDING_TABS.Rules}">3</span>Rules & Safety
+                            Options</button>
+                        <button class="underline-link-blk small-text" type="button"
+                            (click)="currentTab = ONBOARDING_TABS.Pictures"
+                            [ngClass]="{'active': currentTab == ONBOARDING_TABS.Pictures}"><span
+                                [ngClass]="{'active': currentTab > ONBOARDING_TABS.Pictures}">4</span>Pictures</button>
+                        <button class="underline-link-blk small-text" type="button"
+                            (click)="currentTab = ONBOARDING_TABS.BoatelServices"
+                            [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatelServices}"><span
+                                [ngClass]="{'active': currentTab > ONBOARDING_TABS.BoatelServices}">5</span>Boatel
+                            Services</button>
+                        <button class="underline-link-blk small-text" type="button"
+                            (click)="currentTab = ONBOARDING_TABS.LocalRentalLaws"
+                            [ngClass]="{'active': currentTab == ONBOARDING_TABS.LocalRentalLaws}"><span
+                                [ngClass]="{'active': currentTab > ONBOARDING_TABS.LocalRentalLaws}">6</span>Local
+                            Rental Laws</button>
+
+
+                    </div>
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <form [formGroup]="hostOnBoardingForm">
+                            <div class="tab-pane" [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatType}"
+                                *ngIf="currentTab == ONBOARDING_TABS.BoatType">
+                                <div class="row">
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-select-field">
+                                            <label>Boat Listing</label>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown"
+                                                        placement="bottom">
+                                                        <button class="main-select-btn btn btn-outline-primary mr-2"
+                                                            id="dropdownManual" ngbDropdownAnchor
+                                                            (focus)="myDrop.open()">
+                                                            <div class="d-flex justify-content-between"
+                                                                style="align-items: center;">
+                                                                <span
+                                                                    *ngIf="hostOnBoardingForm.controls.boatType.value == null">Select
+                                                                    your boat type</span>
+                                                                <span class="bold"
+                                                                    *ngIf="hostOnBoardingForm.controls.boatType.value != null">{{(boatTypesOptions
+                                                                    | filterBy :
+                                                                    'id':hostOnBoardingForm.controls.boatType.value)[0]?.name}}</span>
+                                                                <img width="50px" height="50px" class="text-right"
+                                                                    src="../../../../assets/images/card-1.png" />
+                                                            </div>
+                                                        </button>
+                                                        <div ngbDropdownMenu aria-labelledby="dropdownManual"
+                                                            style="width: 640px;">
+                                                            <button (click)="choosBoatType(item.id)"
+                                                                class="custom-select-btn" ngbDropdownItem
+                                                                *ngFor="let item of boatTypesOptions;">
+                                                                <div class="d-flex justify-content-between"
+                                                                    style="align-items: center;">
+                                                                    <span class="bold">{{item.name}}</span>
+                                                                    <img width="50px" height="50px" class="text-right"
+                                                                        src="../../../../assets/images/card-1.png" />
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 py-2">
+                                        <div class="custom-flex-end">
+                                            <button class="custom-btn outline-blue-clr me-4"
+                                                (click)="currentTab = currentTab-1;">Later</button>
+                                            <button class="custom-btn blue" id="save-bt"
+                                                (click)="currentTab = currentTab+1;">Continue</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatFeatures}"
+                                *ngIf="currentTab == ONBOARDING_TABS.BoatFeatures">
+                                <div class="row">
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field">
+                                            <label>Title</label>
+                                            <input class="custom-input" formControlName="name"
+                                                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field">
+                                            <label>About the boat</label>
+                                            <input class="custom-input" formControlName="description"
+                                                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field">
+                                            <label>Current Location of Boat</label>
+                                            <input class="custom-input" formControlName="location"
+                                                ngx-google-places-autocomplete
+                                                (onAddressChange)="handleAddressChange($event)"
+                                                placeholder="Bali Island">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field">
+                                            <label>Boat Length</label>
+                                            <input type="number" class="custom-input" formControlName="length"
+                                                placeholder="50 ft">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field ">
+                                            <label>Let guests know what your boat offers</label>
+                                            <div class="custom-card">
+                                                <div class="row w-100">
+                                                    <div class="col-sm-6 my-2"
+                                                        *ngFor="let item of ((boatLookups.features | filterBy : 'isSafetyFeature' : false) | filterBy : 'isGuestFavourite' : false )">
+                                                        <label class="custom-checkbox">
+                                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                            <p class="small-text">{{item?.name}}</p>
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field ">
+                                            <label>Guests Favorites</label>
+                                            <div class="custom-card">
+                                                <div class="row w-100">
+                                                    <div class="col-sm-6 my-2"
+                                                        *ngFor="let item of ((boatLookups.features | filterBy : 'isSafetyFeature' : false) | filterBy : 'isGuestFavourite' : true )">
+                                                        <label class="custom-checkbox">
+                                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                            <p class="small-text">{{item?.name}}</p>
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-12 py-2">
+                                                        <button class="custom-blue-btn"
+                                                            (click)="addNewOptions(FEATURES_TYPES.GuestFavoriteFeature)"><i
+                                                                class="fa fa-plus"></i>Add
+                                                            more</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="counter-input-wrapper">
+                                            <label>Bedrooms</label>
+                                            <div class="number">
+                                                <div class="custom-flex-start">
+                                                    <label>Bedrooms</label>
+                                                    <div class="custom-flex-start">
+                                                        <span class="minus" (click)="removeCapacity(true)">-</span>
+                                                        <input type="text" formControlName="totalBedrooms" />
+                                                        <span class="plus" (click)="addCapacity(true)">+</span>
+                                                    </div>
+                                                </div>
+                                                <div class="custom-flex-start ms-3">
+                                                    <label>Bathrooms</label>
+                                                    <div class="custom-flex-start">
+                                                        <span class="minus" (click)="removeCapacity(false)">-</span>
+                                                        <input type="text" formControlName="totalWashrooms" />
+                                                        <span class="plus" (click)="addCapacity(false)">+</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 py-2">
+                                        <div class="custom-flex-end">
+                                            <button class="custom-btn outline-blue-clr me-4"
+                                                (click)="currentTab=currentTab-1;">Later</button>
+                                            <button class="custom-btn blue" id="save-btn"
+                                                (click)="currentTab=currentTab+1;">Continue</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" [ngClass]="{'active': currentTab == ONBOARDING_TABS.Rules}"
+                                *ngIf="currentTab == ONBOARDING_TABS.Rules">
+                                <div class="row">
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field ">
+                                            <label>Let guests know what your boat offers</label>
+                                            <div class="custom-card">
+                                                <div class="row w-100">
+                                                    <div class="col-sm-6 my-2" *ngFor="let item of (boatLookups.rules)">
+                                                        <label class="custom-checkbox">
+                                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                            <p class="small-text">{{item?.name}}</p>
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-12 py-2">
+                                                        <button class="custom-blue-btn"
+                                                            (click)="addNewOptions(FEATURES_TYPES.OtherRules)"><i
+                                                                class="fa fa-plus"></i>Add
+                                                            more</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field ">
+                                            <label>Guests Favorites</label>
+                                            <div class="custom-card">
+                                                <div class="row w-100">
+                                                    <div class="col-sm-6 my-2"
+                                                        *ngFor="let item of ((boatLookups.features | filterBy : 'isSafetyFeature' : true) | filterBy : 'isGuestFavourite' : false )">
+                                                        <label class="custom-checkbox">
+                                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                            <p class="small-text">{{item?.name}}</p>
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-12 py-2">
+                                                        <button class="custom-blue-btn"
+                                                            (click)="addNewOptions(FEATURES_TYPES.SafetyFeatures)"><i
+                                                                class="fa fa-plus"></i>Add
+                                                            more</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 py-2">
+                                        <div class="custom-flex-end">
+                                            <button class="custom-btn outline-blue-clr me-4"
+                                                (click)="currentTab=currentTab-1;">Later</button>
+                                            <button class="custom-btn blue" id="save-btn"
+                                                (click)="currentTab=currentTab+1;">Continue</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" [ngClass]="{'active': currentTab == ONBOARDING_TABS.Pictures}"
+                                *ngIf="currentTab == ONBOARDING_TABS.Pictures">
+                                <div class="row py-2">
+                                    <div class="image-gallery-bannner bg-none blck-color">
+                                        <div class="image-gallery-head-content custom-flex-between">
+                                            <div class="">
+                                                <p class="medium">Add atleat 5 photos</p>
+                                                <p class="small-text light grey">Drag to reorder</p>
+                                            </div>
+                                            <button class="custom-btn grey">Add More</button>
+                                        </div>
+                                        <div class="image-gallery-collage">
+                                            <div class="row">
+                                                <div class="col-md-6 py-2">
+                                                    <div class="gallery-img-large custom-image-prev">
+                                                        <img src="../../../../assets/images/banner-bg-1.png" alt="">
+                                                    </div>
+                                             
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="gallery-images-small-wrapper">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 py-2">
+                                                                <div class="gallery-images-small custom-image-prev">
+                                                                    <img src="../../../../assets/images/big-boat.png" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 py-2">
+                                                                <div class="no-img-wrapper">
+                                                                    <div class="no-img-inner">
+                                                                        <img src="../../../../assets/images/no-img.png" alt="">
+                                                                    </div>
+                                                                    <div class="upload-btn">
+
+                                                                        <div class="avatar-edit">
+                                                                            <input type="file" id="imageUpload"
+                                                                            (change)="onFileChoose($event)"
+                                                                                accept=".png, .jpg, .jpeg">
+                                                                            <label for="imageUpload"
+                                                                                class="custom-btn grey small-text"><span
+                                                                                    class="material-icons upload_file">
+                                                                                    upload_file
+                                                                                </span>
+                                                                                Upload Imagee</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 py-2">
+                                                                <div class="no-img-wrapper">
+                                                                    <div class="no-img-inner">
+                                                                        <img src="../../../../assets/" alt="">
+                                                                    </div>
+                                                                    <div class="upload-btn">
+
+                                                                        <div class="avatar-edit">
+                                                                            <input type="file" id="imageUpload"
+                                                                                accept=".png, .jpg, .jpeg">
+                                                                            <label for="imageUpload"
+                                                                                class="custom-btn grey small-text"><span
+                                                                                    class="material-icons upload_file">
+                                                                                    upload_file
+                                                                                </span>
+                                                                                Upload Image</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 py-2">
+                                                                <div class="no-img-wrapper">
+                                                                    <div class="no-img-inner">
+                                                                        <img src="./images/no-img.png" alt="">
+                                                                    </div>
+                                                                    <div class="upload-btn">
+
+                                                                        <div class="avatar-edit">
+                                                                            <input type="file" id="imageUpload"
+                                                                                accept=".png, .jpg, .jpeg">
+                                                                            <label for="imageUpload"
+                                                                                class="custom-btn grey small-text"><span
+                                                                                    class="material-icons upload_file">
+                                                                                    upload_file
+                                                                                </span>
+                                                                                Upload Image</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 py-4">
+                                                    <div class="custom-flex-end">
+                                                        <button class="custom-btn outline-blue-clr me-4"
+                                                            (click)="currentTab=currentTab-1;">Later</button>
+                                                        <button class="custom-btn blue" id="save-btn"
+                                                            (click)="currentTab=currentTab+1;">Continue</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatelServices}"
+                                *ngIf="currentTab == ONBOARDING_TABS.BoatelServices">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="custom-checkbox my-2">
+                                            <input type="checkbox" formControlName="isBoatelServicesOffered">
+                                            <p class="small-text">Don't want to offer Boatel Services </p>
+                                            <span class="checkmark top-0"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field">
+                                            <label>Availabilty</label>
+                                            <input type="number" class="custom-input"
+                                                formControlName="boatelAvailabilityDays"
+                                                placeholder="Book in next 60 Days">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="counter-input-wrapper">
+                                            <label>Boatel Capacity</label>
+                                            <div class="number">
+                                                <div class="custom-flex-start">
+                                                    <label>Guests</label>
+                                                    <div class="custom-flex-start">
+                                                        <span class="minus" (click)="removeGuests()">-</span>
+                                                        <input type="text" formControlName="boatelCapacity" />
+                                                        <span class="plus" (click)="addGuests()">+</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-select-field">
+                                            <label>Check-in Time</label>
+                                            <select name="select" id="select" formControlName="checkinTime">
+                                                <option value="" selected>09 am</option>
+                                                <option value="1">Option 1</option>
+                                                <option value="2">Option 2</option>
+                                                <option value="3">Option 3</option>
+                                                ...
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-select-field">
+                                            <label>Check-Out Time</label>
+                                            <select name="select" id="select" formControlName="checkoutTime">
+                                                <option value="" selected>12 am</option>
+                                                <option value="1">Option 1</option>
+                                                <option value="2">Option 2</option>
+                                                <option value="3">Option 3</option>
+                                                ...
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field">
+                                            <label>Per day boatel fee charges</label>
+                                            <input type="number" class="custom-input" placeholder="$20000"
+                                                formControlName="perDayCharges">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 py-2">
+                                        <div class="custom-flex-end">
+                                            <button class="custom-btn outline-blue-clr me-4"
+                                                (click)="currentTab=currentTab-1;">Later</button>
+                                            <button class="custom-btn blue" id="save-btn"
+                                                (click)="currentTab=currentTab+1;">Continue</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" [ngClass]="{'active': currentTab == ONBOARDING_TABS.LocalRentalLaws}"
+                                *ngIf="currentTab == ONBOARDING_TABS.LocalRentalLaws">
+                                <div class="charter-rules-wrap">
+                                    <h5 class="bold">Local Rental Laws</h5>
+                                    <p class="small-text grey py-2">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                        elit.
+                                        Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus
+                                        consequat ultrices nec sed nulla. Nullam volutpat vitae lectus sed pretium.
+                                        Integer
+                                        rutrum libero eget risus aliquam, ut imperdiet velit scelerisque. Donec commodo
+                                        mi
+                                        odio, sed accumsan justo aliquam quis. In tincidunt sollicitudin felis, et
+                                        faucibus
+                                        mauris posuere non. Quisque elementum sit amet enim viverra iaculis. Fusce nec
+                                        urna
+                                        non elit posuere commodo at quis lorem. Duis ac quam tincidunt, aliquam turpis
+                                        vel,
+                                        laoreet purus. Aliquam at ante sit amet sem bibendum scelerisque sit amet a
+                                        lacus.
+                                        Praesent non posuere nisi. Orci varius natoque penatibus et magnis dis
+                                        parturient
+                                        montes, nascetur ridiculus mus. Ut suscipit sollicitudin velit, sed porttitor
+                                        turpis
+                                        efficitur eu. Cras augue turpis, tempor in imperdiet in, venenatis sodales
+                                        turpis.
+                                        Curabitur lobortis maximus scelerisque. Nam non justo luctus, scelerisque dolor
+                                        pulvinar, aliquam mauris.</p>
+                                    <label class="custom-checkbox my-2">
+                                        <input type="checkbox">
+                                        <p class="small-text">I Agree to the terms and conditions </p>
+                                        <span class="checkmark top-0"></span>
+                                    </label>
+                                    <div class="custom-flex-end py-5">
+                                        <button class="custom-btn grey" (click)="submit()">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

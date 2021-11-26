@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boat.Shared.Boat.Requestable;
+using BnBYachts.Boat.Shared.Boat.Transferable;
 
 namespace BnBYachts.Services.Boat
 {
@@ -87,5 +88,16 @@ namespace BnBYachts.Services.Boat
             var boat = await _hostBoatManager.GetBoatDetailsById(boatId);
             return boat;
         }
+
+        #region Host On Boarding
+        [Route("GetHostOnBoardingLookup")]
+        [HttpGet]
+        public async Task<HostLookupTransferable> GetHostOnBoardingLookup()
+        {
+            var data = await _hostBoatManager.GetHostOnBoardingLookup(CurrentUser.Id);
+            return data;
+        }
+        #endregion
+
     }
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
-import { YachtTypes } from 'src/app/shared/enums/yacht-search.constant';
+import { ServiceTypes } from 'src/app/shared/enums/yacht-search.constant';
 import { NoFoundModalComponent } from '../no-found-modal/no-found-modal.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class YachtSearchComponent implements OnInit {
     childrens: 0
   }
   currentTab = 1;
-  YachtTypes = YachtTypes;
+  YachtTypes = ServiceTypes;
   isSubmitted = false;
   @ViewChild('popOver') public popover: NgbPopover; 
 
