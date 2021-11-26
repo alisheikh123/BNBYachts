@@ -1,5 +1,9 @@
+import { ModifyReservationComponent } from './modify-reservation/modify-reservation.component';
+import { ReservationCancellationComponent } from './reservation-cancellation/reservation-cancellation.component';
+import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllReservationsComponent } from './all-reservations/all-reservations.component';
 import { BoatBookingPaymentComponent } from './boat-booking-payment/boat-booking-payment.component';
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
 import { BoatListingComponent } from './boat-listing/boat-listing.component';
@@ -12,7 +16,19 @@ const routes: Routes = [
     path: "boat-details/:id", component: BoatDetailsComponent
   },
   {
+    path: "all-reservations", component: AllReservationsComponent
+  },
+  {
+    path: "reservation-detail/:id", component: ReservationDetailComponent
+  },
+  {
     path: "booking-payment/:id", component: BoatBookingPaymentComponent
+  },
+  {
+    path: "reservation-cancellation/:id", component: ReservationCancellationComponent
+  },
+  {
+    path: "modify-reservation/:id/:userId", component: ModifyReservationComponent
   }
 ];
 

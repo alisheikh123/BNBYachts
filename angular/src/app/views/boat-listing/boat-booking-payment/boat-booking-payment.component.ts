@@ -59,9 +59,7 @@ export class BoatBookingPaymentComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'en'
   };
-
-
-  constructor(public app: AppComponent,private stripeService: StripeService, private activatedRoute: ActivatedRoute, private boatService: YachtSearchService, private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService) { }
+  constructor(public app: AppComponent, private stripeService: StripeService, private activatedRoute: ActivatedRoute, private boatService: YachtSearchService, private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -97,38 +95,36 @@ export class BoatBookingPaymentComponent implements OnInit {
     }
   }
 
- createToken() {
+  createToken() {
     return new Promise(resolve => {
-    const data: CreateTokenCardData = {
-      name: this.stripeModel.name
-    };
-    this.stripeService
-      .createToken(this.card.element, data)
-      .subscribe((result) => {
-        if (result.token) {
-          // Use the token
-          resolve(result.token.id);
-           //console.log(result.token.id);
+      const data: CreateTokenCardData = {
+        name: this.stripeModel.name
+      };
+      this.stripeService
+        .createToken(this.card.element, data)
+        .subscribe((result) => {
+          if (result.token) {
+            // Use the token
+            resolve(result.token.id);
 
-        } else if (result.error) {
-          this.cardErrors = result.error.message?.toString() || "";
-          // Error creating the token
-          //return null;
-          //console.log(result.error.message);
-        }
-      });
+
+          } else if (result.error) {
+            this.cardErrors = result.error.message?.toString() || "";
+
+          }
+        });
     });
   }
 
   async confirmBooking() {
     var amount = this.calculateDays() * this.boatDetails.perDayCharges;
-    var token = (this.addCardDetails ?  await this.createToken() : null);
+    var token = (this.addCardDetails ? await this.createToken() : null);
     let model = {
       paymentId: this.paymentMethodId,
       amount: amount + this.boatDetails.taxFee + 20,
-      IsSaveNewPaymentMethod:this.isSaveNewPayment,
-      token:token,
-      description:this.boatDetails.name +' Booking Charges from ' + this.boatFilterDetails.checkinDate+ " to "+ this.boatFilterDetails.checkoutDate
+      IsSaveNewPaymentMethod: this.isSaveNewPayment,
+      token: token,
+      description: this.boatDetails.name + ' Booking Charges from ' + this.boatFilterDetails.checkinDate + " to " + this.boatFilterDetails.checkoutDate
     };
     this.paymentService.pay(model).subscribe(res => {
       if (res) {
@@ -141,7 +137,7 @@ export class BoatBookingPaymentComponent implements OnInit {
       }
     })
   }
-  retryPayment(){
+  retryPayment() {
     this.isBookingConfirmed = false;
     this.isPaymentFailed = false;
   }
