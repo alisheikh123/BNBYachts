@@ -27,7 +27,7 @@ services:
     ports:
       - "21021:80"
     volumes:
-      # - ./tmp-build/BNB/BNBBoat-Webhost/logs:/app/Logs
+      - ./tmp-build/BNB/BNBBoat-Webhost/logs:/app/Logs
       - ./tmp-build/BNB/BNBBoat-Webhost/.aspnet/https:/root/.aspnet/https:ro
       - ./tmp-build/BNB/BNBBoat-Webhost/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     # links:
@@ -61,7 +61,7 @@ services:
     ports:
       - "21022:80"
     volumes:
-      # - ./tmp-build/BNB/BNBBooking-Host/logs:/app/Logs
+      - ./tmp-build/BNB/BNBBooking-Host/logs:/app/Logs
       - ./tmp-build/BNB/BNBBooking-Host/.aspnet/https:/root/.aspnet/https:ro
       - ./tmp-build/BNB/BNBBooking-Host/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     # links:
