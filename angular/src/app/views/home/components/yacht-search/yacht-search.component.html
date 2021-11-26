@@ -90,9 +90,9 @@
                         *ngIf="currentTab == YachtTypes.boatel" id="v-pills-home" role="tabpanel"
                         aria-labelledby="v-pills-home-tab">
                         <div class="row m-0 custom-padding-top">
-                            <div class="col-md-4 py-2">
+                            <div class="col-lg-4 col-md-6  py-2">
                                 <div class="">
-                                    <div class="select custom-select select-search custom-input-label-inside">
+                                    <div class="select custom-select select-search custom-input-label-inside w-100">
                                       <label>Location</label>
                                       <input type="text"
                                             ngx-google-places-autocomplete
@@ -104,16 +104,16 @@
                                         *ngIf="isSubmitted && boatelSearchParam.location == ''">Enter location.</small>
                                 </div>
                             </div>
-                            <div class="col-md-4 py-2">
-                              <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
-                                <div class="">
+                            <div class="col-lg-4 col-md-6  py-2">
+                              <div class="custom-flex select custom-select select-search custom-input-label-inside w-100 flex-row">
+                                <div class="w-50">
                                   <label>Check-in</label>
                                   <input
                                       placeholder="Add date" name="dp"
                                       [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
                                       ngbDatepicker #d="ngbDatepicker">
                               </div>
-                              <div class="border-left-1">
+                              <div class="border-left-1 w-50">
                                 <label>Check-out</label>
                                 <input
                                     placeholder="Add date" name="dp2"
@@ -123,8 +123,8 @@
                               </div>
 
                             </div>
-                            <div class="col-md-4 py-2">
-                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent" placement="bottom"
+                            <div class="col-lg-4 col-md-6  py-2">
+                                    <div class="custom-flex select custom-select select-search custom-input-label-inside w-100" [ngbPopover]="popContent" placement="bottom"
                                         autoClose="outside">
                                         <label>Guests</label>
                                         <div class="custom-flex w-100">
@@ -191,9 +191,9 @@
                     <div class="tab-pane fade" [ngClass]="{'show active': currentTab == YachtTypes.charter}"
                         *ngIf="currentTab == YachtTypes.charter">
                         <div class="row m-0 custom-padding-top">
-                            <div class="col-md-4 py-2">
+                            <div class="col-lg-4 col-md-6  py-2">
                                 <div class="">
-                                    <div class="select custom-select select-search custom-input-label-inside">
+                                    <div class="select custom-select select-search custom-input-label-inside w-100">
                                       <label>Location</label>
                                       <input type="text"
                                             ngx-google-places-autocomplete
@@ -205,10 +205,10 @@
                                         *ngIf="isSubmitted && boatelSearchParam.location == ''">Enter location.</small>
                                 </div>
                             </div>
-                            <div class="col-md-4 py-2">
-                                <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                            <div class="col-lg-4 col-md-6  py-2">
+                                <div class="custom-flex select custom-select select-search custom-input-label-inside w-100 flex-row">
                                     <div class="">
-                                        <div class="">
+                                        <div class="w-50">
                                             <label>Check-in</label>
                                             <input
                                                 placeholder="Add date" name="dp"
@@ -216,7 +216,7 @@
                                                 ngbDatepicker #d="ngbDatepicker">
                                         </div>
                                     </div>
-                                    <div class="border-left-1">
+                                    <div class="border-left-1 w-50">
                                         <div class="">
                                             <label>Check-out</label>
                                             <input
@@ -227,8 +227,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 py-2">
-                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent" placement="bottom"
+                            <div class="col-lg-4 col-md-6  py-2">
+                                    <div class="custom-flex select custom-select select-search custom-input-label-inside w-100" [ngbPopover]="popContent" placement="bottom"
                                         autoClose="outside">
                                                 <label>Guests</label>
                                         <div class="custom-flex w-100">
@@ -294,9 +294,9 @@
                         [ngClass]="{'show active': currentTab == YachtTypes.event}"
                         *ngIf="currentTab == YachtTypes.event" aria-labelledby="v-pills-settings-tab">
                         <div class="row m-0 custom-padding-top">
-                            <div class="col-md-4 py-2">
+                            <div class="col-lg-4 col-md-6  py-2">
                                 <div class="">
-                                    <div class="select custom-select select-search custom-input-label-inside">
+                                    <div class="select custom-select select-search custom-input-label-inside w-100">
                                       <label>Location</label>
                                       <input type="text"
                                             ngx-google-places-autocomplete
@@ -308,10 +308,10 @@
                                         *ngIf="isSubmitted && boatelSearchParam.location == ''">Enter location.</small>
                                 </div>
                             </div>
-                            <div class="col-md-4 py-2">
-                                <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                            <div class="col-lg-4 col-md-6  py-2">
+                                <div class="custom-flex select custom-select select-search custom-input-label-inside w-100 flex-row">
                                     <div class="">
-                                        <div class="">
+                                        <div class="w-50">
                                             <label>Check-in</label>
                                             <input
                                                 placeholder="Add date" name="dp"
@@ -319,7 +319,7 @@
                                                 ngbDatepicker #d="ngbDatepicker">
                                         </div>
                                     </div>
-                                    <div class=" border-left-1">
+                                    <div class=" border-left-1 w-50">
                                         <div class="">
                                             <label>Check-out</label>
                                             <input
@@ -330,9 +330,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 py-2">
+                            <div class="col-lg-4 col-md-6  py-2">
                                 <div class="">
-                                    <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent" placement="bottom"
+                                    <div class="custom-flex select custom-select select-search custom-input-label-inside w-100" [ngbPopover]="popContent" placement="bottom"
                                         autoClose="outside">
                                         <div class="">
                                             <div class="">
