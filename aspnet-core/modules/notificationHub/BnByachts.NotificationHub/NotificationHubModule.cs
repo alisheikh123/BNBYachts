@@ -27,10 +27,6 @@ namespace BnByachts.NotificationHub
                 {
                     e.Name = EventBusQueue.QEmailNotification;
                 });
-
-                mt.AddConsumer<HeartbeatConsumer>().Endpoint(e => {
-                    e.Name = EventBusQueue.HeartBeat;
-                });
             });
             Console.WriteLine("Queue Lissiner add ");
         }
