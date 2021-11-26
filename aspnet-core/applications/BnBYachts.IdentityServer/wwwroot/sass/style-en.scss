@@ -864,6 +864,8 @@ button{
 .total-amount-wrap{
   max-width: 400px;
   margin: 0 auto;
+
+
   .total-amount-wrap-inner{
     @include custom-flex-between;
     padding: 5px 0;
@@ -877,6 +879,11 @@ button{
     display: block;
     width: 100%;
      margin: 10px 0;
+  }
+  &.custom-padding-top{
+    @include breakpoint(md){
+      padding-top: 10px !important;
+    }
   }
 }
 .max-width-content{
