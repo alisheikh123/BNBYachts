@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import Swal from 'sweetalert2';
 
@@ -11,18 +12,18 @@ export class ConfirmEmailComponent implements OnInit {
 @Input() public username: any;
   constructor(
     public authService: AuthService,
+    public toaster: ToastrService
   ) { }
 
   ngOnInit(): void {
   }
   resendLink(){
-    debugger
     this.authService.resendEmail(this.username).subscribe((response: any) => {
       if ((response == true)) {
-        Swal.fire('Success','Email sent successfuly' , 'success');
+        this.toaster.success('Email sent successfuly');
       }
       else {
-        Swal.fire('Error','An error has been occured' , 'error');
+        this.toaster.error('Error occured while sending email');
       }
     });;
   }

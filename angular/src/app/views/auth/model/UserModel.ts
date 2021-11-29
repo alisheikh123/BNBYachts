@@ -1,13 +1,13 @@
 export class UserModel {
-  FirstName?: string;
-  LastName?: string;
-  Email?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   id?: number;
-  UserName?: string;
+  userName?: string;
   guid?: any;
-  PlainPassword?: string;
+  plainPassword?: string;
   fullname?: string;
-  EmailAddress?: string;
+  emailAddress?: string;
   pic?: string;
   roles?: number[];
   occupation?: string;
@@ -15,12 +15,12 @@ export class UserModel {
   phone?: string;
 
   setUser(user: any) {
-    this.FirstName = user.username || '';
-    this.LastName = user.username || '';
-    this.UserName = user.username || '';
-    this.PlainPassword = user.password || '';
+    this.firstName = user.username || '';
+    this.lastName = user.username || '';
+    this.userName = user.username || '';
+    this.plainPassword = user.password || '';
     this.fullname = user.fullname || '';
-    this.EmailAddress = user.email || '';
+    this.emailAddress = user.email || '';
     this.roles = user.roles || [];
     this.occupation = user.occupation || '';
     this.companyName = user.companyName || '';

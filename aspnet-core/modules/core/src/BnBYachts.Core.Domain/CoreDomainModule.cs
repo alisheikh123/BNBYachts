@@ -13,6 +13,7 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using BnByachts.NotificationHub;
 
 namespace BnBYachts.Core
 {
@@ -27,7 +28,8 @@ namespace BnBYachts.Core
         typeof(AbpPermissionManagementDomainIdentityServerModule),
         typeof(AbpSettingManagementDomainModule),
         typeof(AbpTenantManagementDomainModule),
-        typeof(AbpEmailingModule)
+        typeof(AbpEmailingModule),
+         typeof(NotificationHubModule)
     )]
     public class CoreDomainModule : AbpModule
     {

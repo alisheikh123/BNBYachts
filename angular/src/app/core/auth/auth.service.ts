@@ -51,7 +51,6 @@ export class AuthService {
   }
   
   registerUser(userData: any): Observable<any> {
-    debugger
     this.isLoadingSubject.next(true);
     return this.http.post(this.apiCoreURl + "/register/", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));

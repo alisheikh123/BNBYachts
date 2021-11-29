@@ -7,8 +7,8 @@ import { catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ConfirmEmailComponent } from '../confirm-email/confirm-email.component';
-import Swal from 'sweetalert2';
 import { UserModel } from '../../model/UserModel';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup-modal',
@@ -26,7 +26,8 @@ export class SignupModalComponent implements OnInit {
     public activeModal: NgbActiveModal,
     public authService: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toaster: ToastrService
   ) {
     this.passwordValidator =
       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}$';
@@ -40,15 +41,11 @@ export class SignupModalComponent implements OnInit {
       {
         FirstName: [
           '',
-          Validators.compose([
-            Validators.required
-          ]),
+          Validators.required,
         ],
         LastName: [
           '',
-          Validators.compose([
-            Validators.required
-          ]),
+          Validators.required,
         ],
         DOB: ['', Validators.compose([Validators.required])],
         Email: [
@@ -95,7 +92,7 @@ export class SignupModalComponent implements OnInit {
         modalRef.componentInstance.username = user.Email;
       } else {
         this.hasError = true;
-        Swal.fire('Error', response.message, 'error');
+        this.toaster.warning(response.message,'Sorry');
       }
     });
   }

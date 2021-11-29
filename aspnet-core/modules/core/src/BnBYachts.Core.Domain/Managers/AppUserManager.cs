@@ -1,10 +1,14 @@
-﻿using BnByachts.NotificationHub.Consumers;
+﻿using BnByachts.NotificationHub.Services;
 using BnBYachts.Core.Shared;
+using BnBYachts.Core.Shared.DTO;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Transferable;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Volo.Abp.Data;
@@ -18,11 +22,15 @@ namespace BnBYachts.Core.Managers
     {
         private readonly IRepository<IdentityUser, Guid> _repository;
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
+        private readonly IMailer _mailer;
+        private readonly ResponseDTO _respone = new ResponseDTO();
 
-        public AppUserManager(IRepository<IdentityUser, Guid> repository, Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager)
+
+        public AppUserManager(IRepository<IdentityUser, Guid> repository, Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager, IMailer mailer)
         {
             _repository = repository;
             _userManager = userManager;
+            _mailer = mailer;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
@@ -36,20 +44,30 @@ namespace BnBYachts.Core.Managers
             return data;
         }
 
-        public async Task<UserDetailsTransferable> RegisterUser(string firstName, string lastName, string emailAddress, string userName, string plainPassword, string emailActivationLink, DateTime dob)
+        public async Task<ResponseDTO> RegisterUser(string firstName, string lastName, string emailAddress, string userName, string plainPassword, string emailActivationLink, DateTime dob)
         {
             try
             {
-                IdentityUser user = new IdentityUser(Guid.NewGuid(), emailAddress, emailAddress);
+                IdentityUser user = new IdentityUser(Guid.NewGuid(), userName, emailAddress);
                 user.Name = firstName + " " + lastName;
                 user.SetProperty(UserConstants.DOB, dob);
                 var result = await _userManager.CreateAsync(user, plainPassword);
                 if (result.Succeeded)
                 {
-                    var token = await SendEmailToAskForEmailConfirmationAsync(user);
+                    var isRoleAssigned = await _userManager.AddToRoleAsync(user, "User");
+                    if (isRoleAssigned.Succeeded)
+                    {
+                        await SendEmailToAskForEmailConfirmationAsync(user);
+                        _respone.Message = "Account created successfuly";
+                        _respone.Status = true;
+                    }
                 }
-                var data = UserFactory.Contruct(user.Id.ToString(), user.Name, "", user.Roles, user.CreationTime);
-                return data;
+                else
+                {
+                    _respone.Message = result.Errors.ToList().FirstOrDefault().Description;
+                    _respone.Status = false;
+                }
+                return _respone;
             }
             catch (Exception ex)
             {
@@ -57,34 +75,33 @@ namespace BnBYachts.Core.Managers
             }
         }
 
-        private async Task<Uri> SendEmailToAskForEmailConfirmationAsync(Volo.Abp.Identity.IdentityUser user)
+        public async Task SendEmailToAskForEmailConfirmationAsync(Volo.Abp.Identity.IdentityUser user)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
 
-            const string url = "http://44.197.69.129:8080/activate-account";
-            var uriBuilder = new UriBuilder(url);
-            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-            query["username"] = user.UserName;
-            query["id"] = token;
-            uriBuilder.Query = query.ToString();
-           var link = uriBuilder.Uri;
-            Console.WriteLine(link.AbsoluteUri);
-            Console.WriteLine(link.ToString());
-          
-            return link;
+            string baseUrl = "http://44.197.69.129:8080/activate-account";
+            //string baseUrl = "http://localhost:4200/activate-account";
+            var queryParams = new Dictionary<string, string>()
+            {
+            {"username", user.UserName },
+            {"id", token },
+            };
+            var url = QueryHelpers.AddQueryString(baseUrl, queryParams);
+            string body = $"<h4>Click on the link below to confirm your account </h4><span> <a href = '{url}'> Click Me </a></span>";
+            await _mailer.SendEmailAsync(user.Email, "Email Confirmation", body, true);
         }
 
-        public async Task<bool> ConfirmEmail(string username,string token)
+        public async Task<bool> ConfirmEmail(string username, string token)
         {
-            //var users = await _repository.GetAsync(x => x.Email == username);
             var users = await _repository.FirstOrDefaultAsync(x => x.Email == username);
+            var finalToken = token.Replace(" ", "+");
             if (users != null)
             {
-                if (users.GetProperty<String>(UserConstants.EmailConfirmationToken) == token)
+                if (users.GetProperty<String>(UserConstants.EmailConfirmationToken) == finalToken)
                 {
-                    var result = await _userManager.ConfirmEmailAsync(users, token);
+                    var result = await _userManager.ConfirmEmailAsync(users, finalToken);
                     if (result.Succeeded)
                     {
                         return true;
@@ -98,5 +115,10 @@ namespace BnBYachts.Core.Managers
             return false;
         }
 
+        public async Task ResendEmail(string username)
+        {
+            var user = await _repository.FirstOrDefaultAsync(x => x.Email == username);
+            await SendEmailToAskForEmailConfirmationAsync(user);
+        }
     }
 }

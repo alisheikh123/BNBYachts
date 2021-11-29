@@ -1,4 +1,5 @@
-﻿using BnBYachts.Core.Shared.Interface;
+﻿using BnBYachts.Core.Shared.DTO;
+using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Transferable;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,20 +32,21 @@ namespace BnBYachts.Core.Services
         {
             return await _appUserManager.GetLoggedInUserDetails(userId);
         }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<UserDetailsTransferable> UserRegister(UserData user)
+        public async Task<ResponseDTO> UserRegister(RegisterDTO registerDTO)
         {
             try
             {
-                return await _appUserManager.RegisterUser(user.FirstName, user.LastName, user.Email, user.UserName, user.Password, "", user.DOB);
+                return await _appUserManager.RegisterUser(registerDTO.FirstName, registerDTO.LastName, registerDTO.Email, registerDTO.Email, registerDTO.Password, "", registerDTO.DOB);
             }
             catch (Exception ex)
             {
                 throw;
             }
-            
+
         }
         [HttpGet]
         [AllowAnonymous]
@@ -62,17 +64,23 @@ namespace BnBYachts.Core.Services
             }
 
         }
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Resend-Email")]
+        public async Task<bool> ResendEmail(string username)
+        {
+            try
+            {
+                await _appUserManager.ResendEmail(username);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
     }
 
-    public class UserData
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public DateTime DOB{ get; set; }
-        public string Password { get; set; }
-
-    }
 
 }
