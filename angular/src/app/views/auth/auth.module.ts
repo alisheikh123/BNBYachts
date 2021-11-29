@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
       LoginModalComponent,
       SignupModalComponent,
       ForgotPasswordComponent,
-      ResetPasswordComponent
+      ResetPasswordComponent,
+      ConfirmEmailComponent,
+      ActivateAccountComponent
   ],
   providers: [
   AuthService

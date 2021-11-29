@@ -31,7 +31,48 @@ namespace BnBYachts.Core.Services
         {
             return await _appUserManager.GetLoggedInUserDetails(userId);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<UserDetailsTransferable> UserRegister(UserData user)
+        {
+            try
+            {
+                return await _appUserManager.RegisterUser(user.FirstName, user.LastName, user.Email, user.UserName, user.Password, "", user.DOB);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Confirm-Email")]
+        public async Task<bool> ConfirmEmail(string username, string token)
+        {
+            try
+            {
+                bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
+                return isConfirmed;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
     }
 
+    public class UserData
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public DateTime DOB{ get; set; }
+        public string Password { get; set; }
+
+    }
 
 }

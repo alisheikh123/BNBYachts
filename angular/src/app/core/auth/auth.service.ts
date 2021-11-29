@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,11 @@ export class AuthService {
 
   apiCoreURl = environment.CORE_API_URL;
   apiIdentityURl = environment.IDENTITY_API_URL;
-  constructor(private http: HttpClient, public oidcSecurityService: OidcSecurityService) {
+  isLoading$: Observable<boolean>;
+  isLoadingSubject: BehaviorSubject<boolean>;
+  constructor(private http: HttpClient, public oidcSecurityService: OidcSecurityService,) {
+    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.isLoading$ = this.isLoadingSubject.asObservable();
   }
 
   // Authenticate(loginDetail: any) {
@@ -42,6 +48,20 @@ export class AuthService {
 
   verifyUniqueId(uniqueId: any) {
     return this.http.get(this.apiCoreURl + "/verifyLink/" + uniqueId, { responseType: 'text' });
+  }
+  
+  registerUser(userData: any): Observable<any> {
+    debugger
+    this.isLoadingSubject.next(true);
+    return this.http.post(this.apiCoreURl + "/register/", userData)
+      .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
+
+  confirmEmail(userName: any, token: any) {
+    return this.http.get<any>(this.apiCoreURl + "/confirm-email?username="+userName+"&token="+token);
+  }
+  resendEmail(userName:any){
+    return this.http.get<any>(this.apiCoreURl + "/Resend-Email?username="+userName);
   }
 
 }
