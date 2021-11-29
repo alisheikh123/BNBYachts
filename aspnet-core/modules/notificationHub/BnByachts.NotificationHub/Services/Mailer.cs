@@ -34,9 +34,12 @@ namespace BnByachts.NotificationHub.Services
                 await client.AuthenticateAsync(SmtpSettings.Username, SmtpSettings.Password);
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
+                Console.WriteLine("Email send");
             }
             catch (Exception e)
             {
+
+                Console.WriteLine(e.Message);
                 throw new InvalidOperationException(e.Message);
             }
         }

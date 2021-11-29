@@ -51,7 +51,7 @@
                                         placeholder="Card Holder Name">
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <div class="custom-input-field">
                                     <input type="text" class="custom-input big-input" placeholder="Card Name">
@@ -209,7 +209,7 @@
            <div  class="col-md-6 py-2">
             <div class="payment-main-wrap">
                 <div class="payment-method-card-wrapper">
-                    
+
                     <div class="row custom-margin">
                         <div class="col-12">
                             <h6 class="medium py-md-3">Boatel Details</h6>
@@ -221,13 +221,13 @@
                             <div class="border-top my-3"></div>
                             <div class="custom-flex-between py-1"><p class="medium">Total(USD):</p> <p class="grey">$ {{boatDetails?.perDayCharges * calculateDays() + boatDetails?.taxFee + 20 }}.00</p></div>
                             <div class="custom-flex py-2">
-                                <button class="custom-btn blue big-btn">Go to Reservation</button>
+                                <button class="custom-btn blue big-btn" [routerLink]="['/boat-listing/all-reservations']">Go to Reservation</button>
                             </div>
                         </div>
                     </div>
                     </div>
-              
-             
+
+
             </div>
            </div>
        </div>

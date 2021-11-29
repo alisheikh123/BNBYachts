@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using BnBYachts.EventBusShared.Contracts;
@@ -21,6 +22,7 @@ namespace BnBYachts.EventBusShared.HostedServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+                Console.WriteLine("ping...");
                     _eventBusDispatcher.Send<IHeartbeatContract>(new HeartbeatContract
                     {
                         Message = "ping ..."

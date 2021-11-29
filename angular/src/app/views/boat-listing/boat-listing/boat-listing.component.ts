@@ -43,12 +43,10 @@ export class BoatListingComponent implements OnInit {
       this.mapDetails = this.yachtSearch.getFilters();
 
     this.filterMarkers();
-    navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
         lat: this.mapDetails?.latitude,
         lng: this.mapDetails?.longitude
-      }
-    })
+      };
   }
 
   filterMarkers() {
