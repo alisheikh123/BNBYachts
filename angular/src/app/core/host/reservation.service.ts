@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ReservationService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
+  boatApiUrl: string = environment.BOAT_API_URL;
   constructor(private http:HttpClient) { }
 
   getBoatelBookingRequests(){
@@ -30,6 +31,14 @@ export class ReservationService {
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
       return throwError(errorMessage);
+    }
+
+    getHostBoats()
+    {
+      return this.http.get(this.boatApiUrl +'/host-boat-details').pipe(catchError(this.handleError));
+    }
+    getBoatInfo(boatId: any) {
+      return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
     }
 
 }

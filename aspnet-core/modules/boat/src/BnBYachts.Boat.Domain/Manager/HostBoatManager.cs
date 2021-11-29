@@ -18,16 +18,18 @@ namespace BnBYachts.Boat.Manager
         private readonly IRepository<BoatFeatureEntity, int> _boatelFeatureRepo;
         private readonly IRepository<BoatRuleEntity, int> _boatelRulesRepo;
         private readonly IRepository<BoatCalendarEntity, int> _boatelCalendarRepo;
+        private readonly IRepository<BoatGalleryEntity, int> _boatelGalleryRepo;
         //Charters
         private readonly IRepository<CharterEntity, int> _charterRepository;
 
-        public HostBoatManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep, IRepository<BoatCalendarEntity, int> boatelCalendarRepo)
+        public HostBoatManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep, IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatelGalleryRepo)
         {
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
             _boatelRulesRepo = boatelRulesRep;
             _charterRepository = charterRepository;
+            _boatelGalleryRepo = boatelGalleryRepo;
 
 
         }
@@ -140,5 +142,13 @@ namespace BnBYachts.Boat.Manager
             var distanceinMeter = distanceInMM; //* 0.001;
             return distanceinMeter;
         }
+
+        public async Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId)
+        {
+            var hostBoats = await _boatRepository.GetListAsync(x=>x.CreatorId==userId && x.IsActive==true);
+            return hostBoats;
+        }
+
+        
     }
 }

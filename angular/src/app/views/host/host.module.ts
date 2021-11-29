@@ -8,10 +8,12 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { BoatelBookingsComponent } from './boatel-bookings/boatel-bookings.component';
 import { HostRoutingModule } from './host-routing.module';
+import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 
 @NgModule({
   declarations: [
-BoatelBookingsComponent
+BoatelBookingsComponent,
+HostBoatListingComponent
   ],
   imports: [
     HostRoutingModule,

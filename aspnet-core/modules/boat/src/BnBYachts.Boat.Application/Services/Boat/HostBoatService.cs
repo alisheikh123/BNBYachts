@@ -87,5 +87,13 @@ namespace BnBYachts.Services.Boat
             var boat = await _hostBoatManager.GetBoatDetailsById(boatId);
             return boat;
         }
+        [Route("host-boat-details")]
+        [HttpGet]
+        public async Task<ICollection<BoatEntity>> GetHostBoatDetails()
+        {
+            var boat = await _hostBoatManager.GetHostBoats(CurrentUser.Id);
+            return boat;
+        }
+       
     }
 }

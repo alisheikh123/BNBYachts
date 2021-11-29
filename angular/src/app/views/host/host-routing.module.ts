@@ -1,3 +1,4 @@
+import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoatelBookingsComponent } from './boatel-bookings/boatel-bookings.component';
@@ -5,6 +6,9 @@ import { BoatelBookingsComponent } from './boatel-bookings/boatel-bookings.compo
 const routes: Routes = [
   {
     path: "", component: BoatelBookingsComponent
+  },
+  {
+    path: "host-boat-listing", component: HostBoatListingComponent
   },
 ];
 
