@@ -31,7 +31,7 @@ namespace BnBYachts.Booking.Services
         public async Task<bool> UpdateReservationStatus(int bookingId,bool isAccpeted)
         {
             var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
-            booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.CancelApproved;
+            booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Cancel;
             return true;
         }
     }

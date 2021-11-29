@@ -16,13 +16,15 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { AuthAppModule } from './views/auth/auth.module';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { LoaderService } from './shared/loader/services/loader.service';
+import { TryHostingComponent } from './views/common/try-hosting/try-hosting.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    TryHostingComponent
   ],
   imports: [
     BrowserModule,

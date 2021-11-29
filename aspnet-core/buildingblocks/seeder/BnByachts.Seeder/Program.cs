@@ -1,44 +1,39 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using System;
+using System.Threading;
+using BnBYachts.EventBusShared.Queue;
+using BnByachts.Seeder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Events;
+using Volo.Abp;
 
-namespace BnByachts.Seeder
+namespace BnByachts.Simulator
 {
+
     class Program
     {
-        static async Task Main(string[] args)
+        private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
+        static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning)
-#if DEBUG
-                .MinimumLevel.Override("BnBYachts.Core", LogEventLevel.Debug)
-#else
-                .MinimumLevel.Override("BnBYachts.Core", LogEventLevel.Information)
-#endif
-                .Enrich.FromLogContext()
-                .WriteTo.Async(c => c.File("Logs/logs.txt"))
-                .WriteTo.Async(c => c.Console())
-                .CreateLogger();
+            Console.CancelKeyPress += (sender, eArgs) =>
+            {
+                QuitEvent.Set();
+                eArgs.Cancel = true;
+            };
 
-            await CreateHostBuilder(args).RunConsoleAsync();
+            using var application = AbpApplicationFactory.Create<SeederModule>(options =>
+            {
+                //options.UseAutofac();
+
+            });
+            application.Initialize();
+            using (var serviceScope = application.ServiceProvider.CreateScope())
+            {
+                
+                serviceScope.ServiceProvider.GetService<BoatSeederService>()?.MigrateAsync().GetAwaiter();
+            }
+            Console.WriteLine("Seeder is active");
+            Console.WriteLine("Ctrl + C to Quit");
+
+            QuitEvent.WaitOne();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(build =>
-                {
-                    build.AddJsonFile("appsettings.secrets.json", optional: true);
-                })
-                .ConfigureLogging((context, logging) => logging.ClearProviders())
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddHostedService<DbMigratorHostedService>();
-                });
     }
 }
