@@ -1,0 +1,418 @@
+2021-11-29 14:17:51.827 +00:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-29 14:17:54.911 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2021-11-29 14:17:54.916 +00:00 [INF] User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-29 14:17:54.985 +00:00 [INF] Creating key {f145bc2b-e901-4a55-a93e-e7eada182545} with creation date 2021-11-29 14:17:54Z, activation date 2021-11-29 14:17:54Z, and expiration date 2022-02-27 14:17:54Z.
+2021-11-29 14:17:55.015 +00:00 [WRN] No XML encryptor configured. Key {f145bc2b-e901-4a55-a93e-e7eada182545} may be persisted to storage in unencrypted form.
+2021-11-29 14:17:55.024 +00:00 [INF] Writing data to file '/root/.aspnet/DataProtection-Keys/key-f145bc2b-e901-4a55-a93e-e7eada182545.xml'.
+2021-11-29 14:17:55.134 +00:00 [INF] Loaded ABP modules:
+2021-11-29 14:17:55.134 +00:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-29 14:17:55.134 +00:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-29 14:17:55.134 +00:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-29 14:17:55.134 +00:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-29 14:17:55.134 +00:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-29 14:17:55.134 +00:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-29 14:17:55.134 +00:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-29 14:17:55.134 +00:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-29 14:17:55.134 +00:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-29 14:17:55.134 +00:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-29 14:17:55.134 +00:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-29 14:17:55.134 +00:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-29 14:17:55.134 +00:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-29 14:17:55.134 +00:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-29 14:17:55.134 +00:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-29 14:17:55.134 +00:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-29 14:17:55.842 +00:00 [INF] Initialized all ABP modules.
+2021-11-29 14:17:55.933 +00:00 [INF] Now listening on: http://[::]:80
+2021-11-29 14:17:55.934 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-29 14:17:55.934 +00:00 [INF] Hosting environment: Production
+2021-11-29 14:17:55.934 +00:00 [INF] Content root path: /app
+2021-11-29 14:38:23.015 +00:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-29 14:38:24.913 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2021-11-29 14:38:24.917 +00:00 [INF] User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-29 14:38:25.216 +00:00 [INF] Loaded ABP modules:
+2021-11-29 14:38:25.216 +00:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-29 14:38:25.216 +00:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-29 14:38:25.216 +00:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-29 14:38:25.216 +00:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-29 14:38:25.216 +00:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-29 14:38:25.216 +00:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-29 14:38:25.216 +00:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-29 14:38:25.216 +00:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-29 14:38:25.216 +00:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-29 14:38:25.216 +00:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-29 14:38:25.216 +00:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-29 14:38:25.217 +00:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-29 14:38:25.217 +00:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-29 14:38:25.217 +00:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-29 14:38:25.217 +00:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-29 14:38:25.217 +00:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-29 14:38:25.217 +00:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-29 14:38:25.217 +00:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-29 14:38:25.217 +00:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-29 14:38:25.217 +00:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-29 14:38:25.217 +00:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-29 14:38:25.217 +00:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-29 14:38:25.217 +00:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-29 14:38:25.217 +00:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-29 14:38:25.217 +00:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-29 14:38:25.217 +00:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-29 14:38:25.217 +00:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-29 14:38:25.217 +00:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-29 14:38:25.217 +00:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-29 14:38:25.217 +00:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-29 14:38:25.217 +00:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-29 14:38:25.218 +00:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-29 14:38:25.218 +00:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-29 14:38:25.218 +00:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-29 14:38:25.218 +00:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-29 14:38:25.218 +00:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-29 14:38:25.218 +00:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-29 14:38:25.218 +00:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-29 14:38:25.218 +00:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-29 14:38:25.218 +00:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-29 14:38:25.218 +00:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-29 14:38:25.218 +00:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-29 14:38:26.461 +00:00 [INF] Initialized all ABP modules.
+2021-11-29 14:38:26.620 +00:00 [INF] Now listening on: http://[::]:80
+2021-11-29 14:38:26.620 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-29 14:38:26.620 +00:00 [INF] Hosting environment: Production
+2021-11-29 14:38:26.620 +00:00 [INF] Content root path: /app
+2021-11-29 14:40:08.062 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - -
+2021-11-29 14:40:08.406 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - - - 404 0 - 344.6816ms
+2021-11-29 14:40:14.594 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger - -
+2021-11-29 14:40:14.601 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger - - - 404 0 - 6.7356ms
+2021-11-29 14:40:24.788 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - -
+2021-11-29 14:40:24.790 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - - - 404 0 - 2.4841ms
+2021-11-29 14:40:39.359 +00:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-29 14:40:41.526 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2021-11-29 14:40:41.529 +00:00 [INF] User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-29 14:40:41.690 +00:00 [INF] Loaded ABP modules:
+2021-11-29 14:40:41.690 +00:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-29 14:40:41.690 +00:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-29 14:40:41.690 +00:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-29 14:40:41.690 +00:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-29 14:40:41.690 +00:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-29 14:40:41.690 +00:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-29 14:40:41.690 +00:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-29 14:40:41.690 +00:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-29 14:40:41.690 +00:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-29 14:40:41.690 +00:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-29 14:40:41.690 +00:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-29 14:40:41.690 +00:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-29 14:40:41.690 +00:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-29 14:40:41.690 +00:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-29 14:40:41.690 +00:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-29 14:40:41.690 +00:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-29 14:40:41.690 +00:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-29 14:40:41.690 +00:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-29 14:40:41.690 +00:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-29 14:40:41.690 +00:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-29 14:40:41.690 +00:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-29 14:40:41.690 +00:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-29 14:40:41.690 +00:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-29 14:40:41.690 +00:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-29 14:40:41.690 +00:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-29 14:40:41.690 +00:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-29 14:40:41.690 +00:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-29 14:40:41.690 +00:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-29 14:40:41.690 +00:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-29 14:40:41.690 +00:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-29 14:40:41.690 +00:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-29 14:40:41.690 +00:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-29 14:40:41.690 +00:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-29 14:40:41.691 +00:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-29 14:40:41.691 +00:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-29 14:40:41.691 +00:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-29 14:40:41.691 +00:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-29 14:40:41.691 +00:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-29 14:40:41.691 +00:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-29 14:40:41.691 +00:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-29 14:40:41.691 +00:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-29 14:40:41.691 +00:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-29 14:40:41.691 +00:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-29 14:40:41.691 +00:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-29 14:40:41.691 +00:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-29 14:40:41.691 +00:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-29 14:40:41.691 +00:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-29 14:40:41.691 +00:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-29 14:40:42.364 +00:00 [INF] Initialized all ABP modules.
+2021-11-29 14:40:42.449 +00:00 [INF] Now listening on: http://[::]:80
+2021-11-29 14:40:42.450 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-29 14:40:42.450 +00:00 [INF] Hosting environment: Production
+2021-11-29 14:40:42.450 +00:00 [INF] Content root path: /app
+2021-11-29 14:41:02.592 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - -
+2021-11-29 14:41:02.806 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - - - 404 0 - 213.5924ms
+2021-11-29 14:41:14.188 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - -
+2021-11-29 14:41:14.196 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - - - 404 0 - 7.6693ms
+2021-11-29 14:41:39.944 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - -
+2021-11-29 14:41:39.947 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api - - - 404 0 - 2.9906ms
+2021-11-29 14:41:46.231 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger - -
+2021-11-29 14:41:46.234 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger - - - 404 0 - 3.3528ms
+2021-11-29 14:41:58.523 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/ - -
+2021-11-29 14:41:58.527 +00:00 [INF] Executing endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-29 14:41:58.575 +00:00 [INF] Route matched with {action = "Index", controller = "Home", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Boat.Controllers.HomeController (BnBYachts.Boat.HttpApi.Host).
+2021-11-29 14:41:58.598 +00:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-11-29 14:41:58.602 +00:00 [INF] Executed action BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host) in 22.9782ms
+2021-11-29 14:41:58.602 +00:00 [INF] Executed endpoint 'BnBYachts.Boat.Controllers.HomeController.Index (BnBYachts.Boat.HttpApi.Host)'
+2021-11-29 14:41:58.602 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/ - - - 302 0 - 79.5122ms
+2021-11-29 14:41:58.611 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger - -
+2021-11-29 14:41:58.612 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger - - - 301 0 - 0.7922ms
+2021-11-29 14:41:58.617 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/index.html - -
+2021-11-29 14:41:58.675 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/index.html - - - 200 - text/html;charset=utf-8 58.2732ms
+2021-11-29 14:41:58.701 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui.css - -
+2021-11-29 14:41:58.705 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.js - -
+2021-11-29 14:41:58.711 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.swagger.js - -
+2021-11-29 14:41:58.712 +00:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-11-29 14:41:58.712 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.js - - - 200 3025 application/javascript 7.4406ms
+2021-11-29 14:41:58.712 +00:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-11-29 14:41:58.712 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 1.4194ms
+2021-11-29 14:41:58.714 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-bundle.js - -
+2021-11-29 14:41:58.720 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-standalone-preset.js - -
+2021-11-29 14:41:58.731 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-29 14:41:58.735 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui.css - - - 200 143410 text/css 33.3743ms
+2021-11-29 14:41:58.749 +00:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-29 14:41:58.750 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 29.5260ms
+2021-11-29 14:41:58.779 +00:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-29 14:41:58.779 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 65.2070ms
+2021-11-29 14:41:59.561 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/v1/swagger.json - -
+2021-11-29 14:41:59.642 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:21021/swagger/favicon-32x32.png - -
+2021-11-29 14:41:59.643 +00:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-29 14:41:59.643 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/favicon-32x32.png - - - 200 628 image/png 0.8630ms
+2021-11-29 14:41:59.729 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:21021/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 167.6471ms
+2021-11-29 14:42:10.033 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - -
+2021-11-29 14:42:10.037 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - - - 404 0 - 4.1799ms
+2021-11-29 14:42:16.535 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - -
+2021-11-29 14:42:16.538 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - - - 404 0 - 2.3986ms
+2021-11-29 14:43:19.571 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - -
+2021-11-29 14:43:19.574 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - - - 404 0 - 2.8738ms
+2021-11-29 14:43:34.070 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - -
+2021-11-29 14:43:34.073 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - - - 404 0 - 2.3675ms
+2021-11-29 14:43:35.497 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - -
+2021-11-29 14:43:35.499 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - - - 404 0 - 2.2988ms
+2021-11-29 14:43:36.117 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - -
+2021-11-29 14:43:36.120 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - - - 404 0 - 2.5646ms
+2021-11-29 14:43:57.552 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - -
+2021-11-29 14:43:57.555 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/swagger/index.html - - - 404 0 - 2.5663ms
+2021-11-29 14:47:41.461 +00:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-29 14:47:43.745 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2021-11-29 14:47:43.749 +00:00 [INF] User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-29 14:47:43.929 +00:00 [INF] Loaded ABP modules:
+2021-11-29 14:47:43.929 +00:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-29 14:47:43.929 +00:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-29 14:47:43.929 +00:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-29 14:47:43.929 +00:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-29 14:47:43.929 +00:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-29 14:47:43.929 +00:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-29 14:47:43.929 +00:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-29 14:47:43.929 +00:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-29 14:47:43.929 +00:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-29 14:47:43.929 +00:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-29 14:47:43.929 +00:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-29 14:47:43.929 +00:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-29 14:47:43.929 +00:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-29 14:47:43.929 +00:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-29 14:47:43.929 +00:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-29 14:47:43.929 +00:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-29 14:47:43.929 +00:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-29 14:47:43.929 +00:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-29 14:47:43.929 +00:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-29 14:47:43.929 +00:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-29 14:47:43.929 +00:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-29 14:47:43.929 +00:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-29 14:47:43.929 +00:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-29 14:47:43.930 +00:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-29 14:47:43.930 +00:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-29 14:47:43.930 +00:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-29 14:47:43.930 +00:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-29 14:47:43.930 +00:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-29 14:47:43.930 +00:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-29 14:47:43.930 +00:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-29 14:47:43.930 +00:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-29 14:47:43.930 +00:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-29 14:47:43.930 +00:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-29 14:47:43.930 +00:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-29 14:47:43.930 +00:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-29 14:47:43.930 +00:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-29 14:47:43.930 +00:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-29 14:47:43.930 +00:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-29 14:47:43.930 +00:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-29 14:47:43.930 +00:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-29 14:47:44.588 +00:00 [INF] Initialized all ABP modules.
+2021-11-29 14:47:44.678 +00:00 [INF] Now listening on: http://[::]:80
+2021-11-29 14:47:44.679 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-29 14:47:44.679 +00:00 [INF] Hosting environment: Production
+2021-11-29 14:47:44.679 +00:00 [INF] Content root path: /app
+2021-11-29 14:48:23.684 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger - -
+2021-11-29 14:48:23.912 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/index.html - -
+2021-11-29 14:48:23.913 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger - - - 301 0 - 227.0864ms
+2021-11-29 14:48:24.017 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/index.html - - - 200 - text/html;charset=utf-8 104.8257ms
+2021-11-29 14:48:24.286 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/swagger-ui.css - -
+2021-11-29 14:48:24.287 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/ui/abp.js - -
+2021-11-29 14:48:24.302 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/ui/abp.swagger.js - -
+2021-11-29 14:48:24.304 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/swagger-ui-bundle.js - -
+2021-11-29 14:48:24.320 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/swagger-ui-standalone-preset.js - -
+2021-11-29 14:48:24.320 +00:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-11-29 14:48:24.320 +00:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-11-29 14:48:24.320 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/ui/abp.js - - - 200 3025 application/javascript 33.4943ms
+2021-11-29 14:48:24.320 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 18.2241ms
+2021-11-29 14:48:24.336 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-11-29 14:48:24.338 +00:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-11-29 14:48:24.354 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 33.6270ms
+2021-11-29 14:48:24.354 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/swagger-ui.css - - - 200 143410 text/css 68.2668ms
+2021-11-29 14:48:24.356 +00:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-11-29 14:48:24.356 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 52.2954ms
+2021-11-29 14:48:24.886 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/v1/swagger.json - -
+2021-11-29 14:48:24.951 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/favicon-32x32.png - -
+2021-11-29 14:48:24.952 +00:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-11-29 14:48:24.952 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/favicon-32x32.png - - - 200 628 image/png 1.7409ms
+2021-11-29 14:48:25.161 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 275.1009ms
+2021-11-29 14:48:35.930 +00:00 [INF] Request starting HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/abp/api-definition - -
+2021-11-29 14:48:36.126 +00:00 [INF] Executing endpoint 'Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc)'
+2021-11-29 14:48:36.212 +00:00 [INF] Route matched with {area = "abp", action = "Get", controller = "AbpApiDefinition"}. Executing controller action with signature Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel Get(Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto) on controller Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController (Volo.Abp.AspNetCore.Mvc).
+2021-11-29 14:48:36.533 +00:00 [INF] Executing ObjectResult, writing value of type 'Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel'.
+2021-11-29 14:48:36.585 +00:00 [INF] Executed action Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc) in 363.2566ms
+2021-11-29 14:48:36.585 +00:00 [INF] Executed endpoint 'Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController.Get (Volo.Abp.AspNetCore.Mvc)'
+2021-11-29 14:48:36.597 +00:00 [INF] Request finished HTTP/1.1 GET http://dev.boat.bnb.techverxapps.com/api/abp/api-definition - - - 200 - application/json;+charset=utf-8 667.4399ms
+2021-11-29 14:53:48.865 +00:00 [INF] Starting BnBYachts.Boat.HttpApi.Host.
+2021-11-29 14:53:51.281 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2021-11-29 14:53:51.285 +00:00 [INF] User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2021-11-29 14:53:51.436 +00:00 [INF] Loaded ABP modules:
+2021-11-29 14:53:51.436 +00:00 [INF] - BnBYachts.Boat.BoatHttpApiHostModule
+2021-11-29 14:53:51.436 +00:00 [INF]   - BnBYachts.Boat.BoatHttpApiModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - BnBYachts.Boat.BoatApplicationContractsModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - BnBYachts.Boat.BoatDomainSharedModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2021-11-29 14:53:51.436 +00:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-11-29 14:53:51.436 +00:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Threading.AbpThreadingModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Data.AbpDataModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-11-29 14:53:51.436 +00:00 [INF]             - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-11-29 14:53:51.436 +00:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Security.AbpSecurityModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Json.AbpJsonModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Timing.AbpTimingModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.Localization.AbpLocalizationModule
+2021-11-29 14:53:51.436 +00:00 [INF]             - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-11-29 14:53:51.436 +00:00 [INF]             - Volo.Abp.Settings.AbpSettingsModule
+2021-11-29 14:53:51.436 +00:00 [INF]   - BnBYachts.Boat.BoatApplicationModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - BnBYachts.Boat.BoatDomainModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.Guids.AbpGuidsModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-11-29 14:53:51.436 +00:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-11-29 14:53:51.436 +00:00 [INF]   - BnBYachts.Boat.EntityFrameworkCore.BoatEntityFrameworkCoreModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2021-11-29 14:53:51.436 +00:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Http.AbpHttpModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Minify.AbpMinifyModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Validation.AbpValidationModule
+2021-11-29 14:53:51.436 +00:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-11-29 14:53:51.436 +00:00 [INF]     - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.UI.AbpUiModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-11-29 14:53:51.436 +00:00 [INF]       - Volo.Abp.Application.AbpDddApplicationModule
+2021-11-29 14:53:51.436 +00:00 [INF]         - Volo.Abp.Features.AbpFeaturesModule
+2021-11-29 14:53:52.234 +00:00 [INF] Initialized all ABP modules.
+2021-11-29 14:53:52.349 +00:00 [INF] Now listening on: http://[::]:80
+2021-11-29 14:53:52.349 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-11-29 14:53:52.349 +00:00 [INF] Hosting environment: Production
+2021-11-29 14:53:52.349 +00:00 [INF] Content root path: /app
