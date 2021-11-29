@@ -18,7 +18,7 @@
               <div class="user-details">
                   <p class="medium py-2">{{item.name}}</p>
                   <p class="">Listing Status:<span class="small-text regular grey"> {{item.isActive==true?"Active":"Deactive"}} </span></p>
-                  <p class=" py-2">{{item.boatType==0? "Yacht":item.boatType==1?"PowerBoat":item.boatType==2?"PowerBoat2":""}}</p>
+                  <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht? "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"PowerBoat":item.boatType==BOAT_TYPE.PowerBoat2?"PowerBoat2":""}} </p>
                   <p class=" ">{{item.creationTime | date}}</p>
 
               </div>

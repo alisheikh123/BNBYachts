@@ -10,35 +10,33 @@ import { environment } from 'src/environments/environment';
 export class ReservationService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
   boatApiUrl: string = environment.BOAT_API_URL;
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getBoatelBookingRequests(){
+  getBoatelBookingRequests() {
     return this.http.get(this.bookingApiUrl + '/get-my-reservations').pipe(
       catchError(this.handleError));
   }
-  changeStatus(bookingId:number,status:boolean){
-    return this.http.get(this.bookingApiUrl + '/update-reservations-status/'+bookingId+'/'+status).pipe(
+  changeStatus(bookingId: number, status: boolean) {
+    return this.http.get(this.bookingApiUrl + '/update-reservations-status/' + bookingId + '/' + status).pipe(
       catchError(this.handleError));
   }
-    ///Exception handler
-    handleError(error: any) {
-      let errorMessage = '';
-      if (error.error instanceof ErrorEvent) {
-        // Get client-side error
-        errorMessage = error.error.message;
-      } else {
-        // Get server-side error
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      }
-      return throwError(errorMessage);
+  ///Exception handler
+  handleError(error: any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    return throwError(errorMessage);
+  }
 
-    getHostBoats()
-    {
-      return this.http.get(this.boatApiUrl +'/host-boat-details').pipe(catchError(this.handleError));
-    }
-    getBoatInfo(boatId: any) {
-      return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
-    }
-
+  getHostBoats() {
+    return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
+  }
+  getBoatInfo(boatId: number) {
+    return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
+  }
 }

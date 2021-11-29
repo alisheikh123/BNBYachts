@@ -3,3 +3,9 @@ export enum YachtTypes {
     charter = 2,
     event = 3
 };
+export enum BoatType {
+    Yacht = 0,
+    PowerBoat = 1,
+    PowerBoat2=2
+
+};

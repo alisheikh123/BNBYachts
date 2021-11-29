@@ -1,3 +1,4 @@
+import { BoatType } from './../../../shared/enums/yacht-search.constant';
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from 'src/app/core/host/reservation.service';
 import { environment } from 'src/environments/environment';
@@ -8,23 +9,19 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./host-boat-listing.component.scss']
 })
 export class HostBoatListingComponent implements OnInit {
-  hostBoats:any;
+  hostBoats: any;
   assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
-  constructor(private service:ReservationService) { }
+  BOAT_TYPE=BoatType;
+  constructor(private service: ReservationService) { }
 
   ngOnInit(): void {
-    this.service.getHostBoats().subscribe((res:any)=>{
-        this.hostBoats=res;
-        console.log(this.hostBoats);
-        res.forEach((elem: any) => {
-          this.service.getBoatInfo(elem.id).subscribe((boatdetail: any) => {
-            elem.boatImage = boatdetail.boatGalleries;
-
-
-
-          });
-
+    this.service.getHostBoats().subscribe((res: any) => {
+      this.hostBoats = res;
+      res.forEach((elem: any) => {
+        this.service.getBoatInfo(elem.id).subscribe((boatdetail: any) => {
+          elem.boatImage = boatdetail.boatGalleries;
         });
+      });
     });
   }
 
