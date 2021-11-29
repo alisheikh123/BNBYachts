@@ -9,7 +9,7 @@ namespace BnByachts.NotificationHub
     public class Program
     {
         private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
-        static void Main(string[] args)
+       public static void Main(string[] args)
         {
             Console.CancelKeyPress += (sender, eArgs) =>
             {

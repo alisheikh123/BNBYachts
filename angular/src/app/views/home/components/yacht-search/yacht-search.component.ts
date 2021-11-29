@@ -49,7 +49,6 @@ export class YachtSearchComponent implements OnInit {
         else {
           let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true });
         }
-        //console.log(res);
       });
     }
   }

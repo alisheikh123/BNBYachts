@@ -52,9 +52,12 @@ export class BookingService {
   getBookingBoatDetail(BookingId: any) {
     return this.http.get(this.bookingApiUrl + '/boatelbooking/' + BookingId).pipe(catchError(this.handleError));
   }
-
   saveCancellation(model: any) {
-    return this.http.post(this.bookingApiUrl + '/bookingcancel', model).pipe(
+    const data = JSON.stringify(model);
+    const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<boolean>(this.bookingApiUrl + '/bookingcancel', data, {
+      headers: headerOptions
+    }).pipe(
       catchError(this.handleError));
   }
 

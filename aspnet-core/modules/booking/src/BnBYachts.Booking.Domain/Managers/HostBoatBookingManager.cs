@@ -79,58 +79,50 @@ namespace BnBYachts.Booking.Managers
 
         public async Task<bool> IsBookingCancel(BookingCancellationDto data, string userId)
         {
-            try
+            if (data != null)
             {
-                if (data != null)
+                BookingCancelEntity model = new BookingCancelEntity();
+                var BookingDetail = await _boatelBookingRepository.GetAsync(data.BookingId);
+                string from = "ali.raza@techverx.com";
+                string to = "alisheikh14125@gmail.com";
+                var admin = new MailAddress(from, "BNBYechet");
+                var toAddress = new MailAddress(to, "Ali");
+                const string adminPass = "Alisheikh@123";
+                const string subject = "Your Booking is Cancelled!";
+                string body =
+                    "Your Booking is Cancelled From BNByachts";
+
+                var smtp = new SmtpClient
                 {
-                    var model = new BookingCancelEntity();
-                    var bookingDetail = await _boatelBookingRepository.GetAsync(data.BookingId);
-                    //string from = "ali.raza@techverx.com";
-                    //string to = "alisheikh14125@gmail.com";
-                    //var admin = new MailAddress(from, "BNBYechet");
-                    //var toAddress = new MailAddress(to, "Ali");
-                    //const string adminPass = "Alisheikh@123";
-                    //const string subject = "Your Booking is Cancelled!";
-                    //string body =
-                    //    "Your Booking is Cancelled From BNByachts";
-
-                    //var smtp = new SmtpClient
-                    //{
-                    //    Host = "smtp.gmail.com",
-                    //    Port = 587,
-                    //    EnableSsl = true,
-                    //    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    //    UseDefaultCredentials = false,
-                    //    Credentials = new NetworkCredential(admin.Address, adminPass)
-                    //};
-                    //using (var message = new MailMessage(admin, toAddress)
-                    //{
-                    //    Subject = subject,
-                    //    Body = body
-                    //})
-                    //{
-                    //    smtp.Send(message);
-                    //}
-
-                    model.BookingId = data.BookingId;
-                    bookingDetail.BookingStatus = data.BookingStatus;
-                    model.BookingType = data.BookingType;
-                    model.isNotificationSent = data.isNotificationSent;
-                    model.Reason = data.Reason;
-                    model.UserId = data.UserId;
-                    model.RefundAmount = data.RefundAmount;
-                    model.TotalAmount = data.TotalAmount;
-                    bookingDetail.BookingStatus = BookingStatus.Cancel;
-                    await _boatelCanceRepository.InsertAsync(model);
-                    return true;
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(admin.Address, adminPass)
+                };
+                using (var message = new MailMessage(admin, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
                 }
-                return false;
-            }
-            catch (Exception ex)
-            {
 
-                throw;
+                model.BookingId = data.BookingId;
+                BookingDetail.BookingStatus = data.BookingStatus;
+                model.BookingType = data.BookingType;
+                model.isNotificationSent = data.isNotificationSent;
+                model.Reason = data.Reason;
+                model.UserId = data.UserId;
+                model.RefundAmount = data.RefundAmount;
+                model.TotalAmount = data.TotalAmount;
+                BookingDetail.BookingStatus = BookingStatus.Cancel;
+                await _boatelCanceRepository.InsertAsync(model);
+                return true;
             }
+            return false;
         }
 
 

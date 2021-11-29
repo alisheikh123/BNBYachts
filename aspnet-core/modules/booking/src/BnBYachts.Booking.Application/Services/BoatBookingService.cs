@@ -72,8 +72,8 @@ namespace BnBYachts.Booking.Services
         [Route("bookingcancel")]
         public async Task<bool> BookingCancel(BookingCancellationDto data)
         {
-            //bool isBookingCancel = await _hostBoatBookingManager.IsBookingCancel(data, CurrentUser.Id.ToString());
-            return true;//isBookingCancel;
+            var isBookingCancel = await _hostBoatBookingManager.IsBookingCancel(data, CurrentUser.Id.ToString());
+            return isBookingCancel;
 
         }
 

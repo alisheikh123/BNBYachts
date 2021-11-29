@@ -23,9 +23,8 @@
 
 
                         <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
-                        <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="forgetPassword()"><span>Forget Password</span></a>
+                            data-bs-target="#signup-modal" (click)="login()"><span>SignUp/Login</span></a>
+
                         <a href="javascript:void(0)" class="underline-link-blk"
                             (click)="getUser()"><span>Help</span></a>
 
@@ -84,7 +83,8 @@
                                     Reservation
                                 </span>
                             </a>
-                            <a href="#" class="underline-link-blk">
+
+                            <a [routerLink]="['my-bookings/host-boat-listing']" class="underline-link-blk">
                                 <span>
                                     Listing
                                 </span>
@@ -108,7 +108,7 @@
                                 <li>
                                     <p class="header-content small-text">{{userDetails?.name}}</p>
                                 </li>
-                                <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/boat-listing/all-reservations']" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
                                 <li><a class="dropdown-item" href="#">Messages</a></li>
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
@@ -127,7 +127,7 @@
 </header>
 <ng-template #earnwithus>
      <div class="modal-content">
-        
+
         <div class="modal-body">
           <div class="custom-text-center">
             <h4 class="medium text-left mb-3">Earn With Us</h4>
@@ -137,7 +137,7 @@
                 <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
                 </div>
               <img src="../../../../assets/images/host-img-small.png" alt="">
-    
+
               </a>
               <a [ngClass]="{'active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider" class="custom-card custom-flex-between card-right-img mt-3">
                 <div class="card-right-img-inside">
@@ -145,13 +145,13 @@
                   <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
                   </div>
                 <img src="../../../../assets/images/service-provider.png" alt="">
-      
+
                 </a>
                 <div class="custom-margin mb-0">
                   <button class="custom-btn blue big-btn" (click)="continueToEarn()">Continue</button>
                 </div>
           </div>
         </div>
-       
+
       </div>
 </ng-template>
