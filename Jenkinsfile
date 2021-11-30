@@ -1,10 +1,10 @@
 #!groovy
 
 pipeline {
-  // agent {
-  //   label ('AWS-CLI && bnb-onbuild')
-  // }
-  // options { timestamps () }
+  agent {
+    label ('BnBYachts')
+  }
+  options { timestamps () }
   stages {
     stage('Clone') {
       steps {
