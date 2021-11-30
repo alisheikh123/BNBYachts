@@ -6,25 +6,25 @@ namespace BnBYachts.EventBusShared
 {
     public class EventBusDispatcher : DomainService
     {
-        private readonly IBusControl eventBus;
+        private readonly IBusControl _eventBus;
 
         public EventBusDispatcher(IBusControl eventBus)
         {
-            this.eventBus = eventBus;
+            this._eventBus = eventBus;
         }
 
 
         public void Send<T>(T contract)
             where T : class, IContractable
         {
-            this.eventBus.Send<T>(contract).ConfigureAwait(false);
+            this._eventBus.Send<T>(contract).ConfigureAwait(false);
         }
 
 
         public void Publish<T>(T contract)
             where T : class, IContractable
         {
-            this.eventBus.Publish<T>(contract).ConfigureAwait(false);
+            this._eventBus.Publish<T>(contract).ConfigureAwait(false);
         }
 
     }
