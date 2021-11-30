@@ -11,17 +11,12 @@ import { environment } from 'src/environments/environment';
 export class HostBoatListingComponent implements OnInit {
   hostBoats: any;
   assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
-  BOAT_TYPE=BoatType;
+  BOAT_TYPE = BoatType;
   constructor(private service: ReservationService) { }
 
   ngOnInit(): void {
     this.service.getHostBoats().subscribe((res: any) => {
       this.hostBoats = res;
-      res.forEach((elem: any) => {
-        this.service.getBoatInfo(elem.id).subscribe((boatdetail: any) => {
-          elem.boatImage = boatdetail.boatGalleries;
-        });
-      });
     });
   }
 

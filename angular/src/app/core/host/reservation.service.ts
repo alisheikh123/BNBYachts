@@ -36,7 +36,5 @@ export class ReservationService {
   getHostBoats() {
     return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
   }
-  getBoatInfo(boatId: number) {
-    return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
-  }
+
 }

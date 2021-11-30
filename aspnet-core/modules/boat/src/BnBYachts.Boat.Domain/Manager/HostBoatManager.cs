@@ -142,10 +142,16 @@ namespace BnBYachts.Boat.Manager
 
         public async Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId)
         {
-          return await _boatRepository.GetListAsync(x=>x.CreatorId==userId && x.IsActive==true).ConfigureAwait(false);
-           
+          var boats=await _boatRepository.GetListAsync(x=>x.CreatorId==userId).ConfigureAwait(false);
+            foreach(var boat in boats)
+            {
+                await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
+            }
+            return boats;
+
+
         }
 
-        
+
     }
 }
