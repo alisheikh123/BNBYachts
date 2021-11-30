@@ -8,10 +8,19 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { BoatelBookingsComponent } from './boatel-bookings/boatel-bookings.component';
 import { HostRoutingModule } from './host-routing.module';
+import { HostOnboardingComponent } from './host-onboarding/host-onboarding.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.component';
+import { NgxDateRangeModule } from 'ngx-daterange';
+import { TimePickerModule,DateRangePickerModule  } from '@syncfusion/ej2-angular-calendars';
+
+
 
 @NgModule({
   declarations: [
-BoatelBookingsComponent
+BoatelBookingsComponent,
+HostOnboardingComponent,
+AddDialogComponent
   ],
   imports: [
     HostRoutingModule,
@@ -21,6 +30,10 @@ BoatelBookingsComponent
     GoogleMapsModule, 
     CommonModule,
     SharedPipesModule,
+    GooglePlaceModule,
+    TimePickerModule ,
+    DateRangePickerModule
+    
   ],
   providers: [YachtSearchService,ReservationService]
 })

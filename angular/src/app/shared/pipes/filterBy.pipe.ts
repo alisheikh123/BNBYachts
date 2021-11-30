@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
-    name: 'filterBy'
+    name: 'filterBy',
+    pure: false
 })
 export class FilterByPipe implements PipeTransform {
     transform(arr: any[], prop: string, value:any): any {
