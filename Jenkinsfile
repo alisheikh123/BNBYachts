@@ -27,8 +27,7 @@ echo IMAGE_TAG: ${IMAGE_TAG} >> build_info.md
 
 echo IDV_URL: ${IDV_URL}:${IMAGE_TAG}  >> build_info.md
 
-cat build_info.md > aspnet-core/src/build_info.md
-cat build_info.md > ChatService/build_info.md
+cat build_info.md > aspnet-core/build_info.md
 
 '''
         }
