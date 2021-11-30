@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using BnBYachts.Core.MultiTenancy;
+using BnBYachts.EventBusShared;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
-using Volo.Abp.Emailing;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.IdentityServer;
@@ -13,7 +13,6 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
-using BnByachts.NotificationHub;
 
 namespace BnBYachts.Core
 {
@@ -28,7 +27,7 @@ namespace BnBYachts.Core
         typeof(AbpPermissionManagementDomainIdentityServerModule),
         typeof(AbpSettingManagementDomainModule),
         typeof(AbpTenantManagementDomainModule),
-         typeof(NotificationHubModule)
+         typeof(EventBusSharedModule)
     )]
     public class CoreDomainModule : AbpModule
     {
@@ -38,10 +37,6 @@ namespace BnBYachts.Core
             {
                 options.IsEnabled = MultiTenancyConsts.IsEnabled;
             });
-
-#if DEBUG
-            context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
-#endif
         }
     }
 }
