@@ -96,6 +96,14 @@ namespace BnBYachts.Services.Boat
             return await _hostBoatManager.GetHostBoats(CurrentUser.Id).ConfigureAwait(false);
             
         }
-       
+        [Route("host-boat-status/{boatId}/{status}")]
+        [HttpGet]
+        public async Task<bool> UpdateHostBoatStatus(long boatId,bool status)
+        {
+            var boatStatus= await _hostBoatManager.UpdateboatStatus(boatId, status).ConfigureAwait(false);
+            return boatStatus;
+
+        }
+
     }
 }

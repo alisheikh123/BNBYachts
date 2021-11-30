@@ -13,6 +13,7 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
         Task<ICollection<BoatEntity>> GetBoatelsByFilters(BoatelSearchFiltersRequestable param);
         Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar, Guid? userId);
         Task<BoatEntity> GetBoatDetailsById(int boatId);
+        Task<bool> UpdateboatStatus(long boatId,bool IsActive);
         Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId);
     }
 }

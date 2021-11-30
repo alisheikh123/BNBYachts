@@ -93,7 +93,7 @@ namespace BnBYachts.Boat.Manager
                 throw;
             }
         }
-        public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar,Guid? userId)
+        public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar, Guid? userId)
         {
             try
             {
@@ -142,8 +142,8 @@ namespace BnBYachts.Boat.Manager
 
         public async Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId)
         {
-          var boats=await _boatRepository.GetListAsync(x=>x.CreatorId==userId).ConfigureAwait(false);
-            foreach(var boat in boats)
+            var boats = await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false);
+            foreach (var boat in boats)
             {
                 await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
             }
@@ -152,6 +152,12 @@ namespace BnBYachts.Boat.Manager
 
         }
 
+        public async Task<bool> UpdateboatStatus(long boatId, bool IsActive)
+        {
+            var boat = await _boatRepository.FindAsync(x => x.Id == boatId).ConfigureAwait(false);
+            boat.IsActive = IsActive==false ? true : false;
+            return true;
 
+        }
     }
 }
