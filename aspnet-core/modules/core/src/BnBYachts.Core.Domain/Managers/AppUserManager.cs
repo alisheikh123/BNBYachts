@@ -24,7 +24,9 @@ namespace BnBYachts.Core.Managers
         private readonly ResponseDto _respone = new ResponseDto();
         private readonly EventBusDispatcher _eventBusDispatcher;
 
-        public AppUserManager(IRepository<IdentityUser, Guid> repository, Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager, EventBusDispatcher eventBusDispatcher)
+        public AppUserManager(IRepository<IdentityUser, Guid> repository,
+            Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
+            EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
             _userManager = userManager;
@@ -33,13 +35,7 @@ namespace BnBYachts.Core.Managers
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
-            string profileImage = null;
-            if (user.GetProperty<string>(UserConstants.ImagePath) != null)
-            {
-                profileImage = user.GetProperty<string>(UserConstants.ImagePath).ToString();
-            }
-            var data = UserFactory.Contruct(user.Id.ToString(), user.Name, profileImage, user.Roles, user.CreationTime);
-            return data;
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime);
         }
 
         public async Task<ResponseDto> RegisterUser(string firstName, string lastName, string emailAddress, string userName, string plainPassword, string emailActivationLink, DateTime dob)
@@ -93,24 +89,10 @@ namespace BnBYachts.Core.Managers
 
         public async Task<bool> ConfirmEmail(string username, string token)
         {
-            var users = await _repository.FirstOrDefaultAsync(x => x.Email == username);
+            var users = await _repository.FirstOrDefaultAsync(x => x.Email == username).ConfigureAwait(false);
             var finalToken = token.Replace(" ", "+");
-            if (users != null)
-            {
-                if (users.GetProperty<String>(UserConstants.EmailConfirmationToken) == finalToken)
-                {
-                    var result = await _userManager.ConfirmEmailAsync(users, finalToken);
-                    if (result.Succeeded)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            return false;
+            return users != null && users.GetProperty<string>(UserConstants.EmailConfirmationToken) == finalToken &&
+                   (await _userManager.ConfirmEmailAsync(users, finalToken).ConfigureAwait(false)).Succeeded;
         }
 
         public async Task ResendEmail(string username)
