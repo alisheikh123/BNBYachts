@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities.Auditing;
+﻿using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Boat
 {
-   public class BoatGalleryEntity : AuditedAggregateRoot<int>
+   public class BoatGalleryEntity : AuditedAggregateRoot<int>, IBoatAggregate
     {
         public string Title { get; set; }
         public bool IsCoverPic { get; set; }

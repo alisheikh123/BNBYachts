@@ -1,14 +1,11 @@
 ﻿using BnBYachts.Boat.Enum;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Boat
 {
-    public class BoatEntity : AuditedAggregateRoot<int>
+    public class BoatEntity : AuditedAggregateRoot<int>, IBoatAggregate
     {
         public string Name { get; set; }
         public string Description { get; set; }

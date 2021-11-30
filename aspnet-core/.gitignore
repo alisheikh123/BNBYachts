@@ -252,11 +252,9 @@ paket-files/
 *.sln.iml
 
 # BnBYachts
-src/BnBYachts.Web/Logs/*
-src/BnBYachts.Web.Host/Logs/*
-src/BnBYachts.IdentityServer/Logs/*
-src/BnBYachts.HttpApi.Host/Logs/*
-src/BnBYachts.HttpApi.HostWithIds/Logs/*
-src/BnBYachts.DbMigrator/Logs/*
-src/BnBYachts.Blazor.Server/Logs/*
-src/BnBYachts.Blazor.Server.Tiered/Logs/*
+microservices/BnBYachts.Boat.HttpApi.Host/Logs/*
+microservices/BnBYachts.Web.Host/Logs/*
+applications/BnBYachts.IdentityServer/Logs/*
+microservices/BnBYachts.Booking.HttpApi.Host/Logs/*
+microservices/BnBYachts.Core.HttpApi.Host/Logs/*
+microservices/BnBYachts.Payments.HttpApi.Host/Logs/*
