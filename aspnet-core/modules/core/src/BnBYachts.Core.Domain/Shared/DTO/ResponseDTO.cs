@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BnBYachts.Core.Shared.DTO
+﻿namespace BnBYachts.Core.Shared.Dto
 {
-    public class ResponseDTO
+    public class ResponseDto
     {
         public string Message { get; set; }
         public int ResponseCode { get; set; }
         public bool Status { get; set; }
         public object Data { get; set; }
 
-        public ResponseDTO()
+        public ResponseDto()
         {
             Status = true;
             Data = null;

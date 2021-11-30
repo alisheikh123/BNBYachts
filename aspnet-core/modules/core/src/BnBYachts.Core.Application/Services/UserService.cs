@@ -1,4 +1,4 @@
-﻿using BnBYachts.Core.Shared.DTO;
+﻿using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Transferable;
 using Microsoft.AspNetCore.Authorization;
@@ -36,49 +36,25 @@ namespace BnBYachts.Core.Services
         [HttpPost]
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<ResponseDTO> UserRegister(RegisterDTO registerDTO)
+        public async Task<ResponseDto> UserRegister(RegisterDto registerDTO)
         {
-            try
-            {
                 return await _appUserManager.RegisterUser(registerDTO.FirstName, registerDTO.LastName, registerDTO.Email, registerDTO.Email, registerDTO.Password, "", registerDTO.DOB);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         [HttpGet]
         [AllowAnonymous]
         [Route("Confirm-Email")]
         public async Task<bool> ConfirmEmail(string username, string token)
         {
-            try
-            {
                 bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
                 return isConfirmed;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         [HttpGet]
         [AllowAnonymous]
         [Route("Resend-Email")]
         public async Task<bool> ResendEmail(string username)
         {
-            try
-            {
                 await _appUserManager.ResendEmail(username);
                 return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-
         }
     }
 

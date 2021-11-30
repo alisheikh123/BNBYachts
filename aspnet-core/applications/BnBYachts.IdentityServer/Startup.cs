@@ -9,12 +9,9 @@ namespace BnBYachts
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication<BnBYachtsIdentityServerModule>();
-           
         }
-
         public void Configure(IApplicationBuilder app)
         {
-           
             app.InitializeApplication();
         }
     }

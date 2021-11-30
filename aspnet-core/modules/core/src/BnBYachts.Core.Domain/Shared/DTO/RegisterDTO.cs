@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BnBYachts.Core.Shared.DTO
+namespace BnBYachts.Core.Shared.Dto
 {
-    public class RegisterDTO
+    public class RegisterDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

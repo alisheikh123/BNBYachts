@@ -1,16 +1,13 @@
 ﻿using BnByachts.NotificationHub.Services;
 using BnBYachts.Core.Shared;
-using BnBYachts.Core.Shared.DTO;
+using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Transferable;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -23,7 +20,7 @@ namespace BnBYachts.Core.Managers
         private readonly IRepository<IdentityUser, Guid> _repository;
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
         private readonly IMailer _mailer;
-        private readonly ResponseDTO _respone = new ResponseDTO();
+        private readonly ResponseDto _respone = new ResponseDto();
 
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository, Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager, IMailer mailer)
@@ -44,35 +41,28 @@ namespace BnBYachts.Core.Managers
             return data;
         }
 
-        public async Task<ResponseDTO> RegisterUser(string firstName, string lastName, string emailAddress, string userName, string plainPassword, string emailActivationLink, DateTime dob)
+        public async Task<ResponseDto> RegisterUser(string firstName, string lastName, string emailAddress, string userName, string plainPassword, string emailActivationLink, DateTime dob)
         {
-            try
+            IdentityUser user = new IdentityUser(Guid.NewGuid(), userName, emailAddress);
+            user.Name = firstName + " " + lastName;
+            user.SetProperty(UserConstants.DOB, dob);
+            var result = await _userManager.CreateAsync(user, plainPassword);
+            if (result.Succeeded)
             {
-                IdentityUser user = new IdentityUser(Guid.NewGuid(), userName, emailAddress);
-                user.Name = firstName + " " + lastName;
-                user.SetProperty(UserConstants.DOB, dob);
-                var result = await _userManager.CreateAsync(user, plainPassword);
-                if (result.Succeeded)
+                var isRoleAssigned = await _userManager.AddToRoleAsync(user, "User");
+                if (isRoleAssigned.Succeeded)
                 {
-                    var isRoleAssigned = await _userManager.AddToRoleAsync(user, "User");
-                    if (isRoleAssigned.Succeeded)
-                    {
-                        await SendEmailToAskForEmailConfirmationAsync(user);
-                        _respone.Message = "Account created successfuly";
-                        _respone.Status = true;
-                    }
+                    await SendEmailToAskForEmailConfirmationAsync(user);
+                    _respone.Message = "Account created successfuly";
+                    _respone.Status = true;
                 }
-                else
-                {
-                    _respone.Message = result.Errors.ToList().FirstOrDefault().Description;
-                    _respone.Status = false;
-                }
-                return _respone;
             }
-            catch (Exception ex)
+            else
             {
-                throw;
+                _respone.Message = result.Errors.ToList().FirstOrDefault().Description;
+                _respone.Status = false;
             }
+            return _respone;
         }
 
         public async Task SendEmailToAskForEmailConfirmationAsync(Volo.Abp.Identity.IdentityUser user)

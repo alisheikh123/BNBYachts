@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-confirm-email',
@@ -19,12 +18,8 @@ export class ConfirmEmailComponent implements OnInit {
   }
   resendLink(){
     this.authService.resendEmail(this.username).subscribe((response: any) => {
-      if ((response == true)) {
-        this.toaster.success('Email sent successfuly');
-      }
-      else {
-        this.toaster.error('Error occured while sending email');
-      }
-    });;
+      (response == true) ? this.toaster.success('Email sent successfuly','Success'):this.toaster.error('Error occured while sending email','Error');
+    });
+    
   }
 }

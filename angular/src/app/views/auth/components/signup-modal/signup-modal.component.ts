@@ -63,7 +63,7 @@ export class SignupModalComponent implements OnInit {
           '',
           Validators.compose([Validators.pattern(this.passwordValidator)]),
         ],
-        cPassword: ['', Validators.compose([Validators.required])],
+        confirmPassword: ['', Validators.compose([Validators.required])],
         agree: [false, Validators.compose([Validators.required])],
       },
       {
@@ -78,9 +78,6 @@ export class SignupModalComponent implements OnInit {
 
   submit() {
     this.hasError = false;
-    const result = {};
-    const newUser = new UserModel();
-    newUser.setUser(result);
     var user = this.registrationForm.value;
 
     this.authService.registerUser(user).subscribe((response: any) => {
@@ -94,7 +91,12 @@ export class SignupModalComponent implements OnInit {
         this.hasError = true;
         this.toaster.warning(response.message,'Sorry');
       }
-    });
+    },
+     (error) => {                              //Error callback
+      console.error('error caught in component')
+      this.hasError = true;
+    }
+    );
   }
 
   login() {
@@ -108,7 +110,7 @@ export const passwordMatchingValidatior: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
   const password = control.get('Password');
-  const confirmPassword = control.get('cPassword');
+  const confirmPassword = control.get('confirmPassword');
 
   return password?.value === confirmPassword?.value
     ? null

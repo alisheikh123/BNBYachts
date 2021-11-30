@@ -22,12 +22,7 @@ export class ActivateAccountComponent implements OnInit {
 
   ConfirmAccont(username:string,token:string){
  this.authService.confirmEmail(username,token).subscribe((response: any) => {
-  if ((response == true)) {
-   this.dynamicMessage = "Account activated successfuly."
-  }
-  else {
-    this.dynamicMessage = "Account activation failed."
-  }
+   (response == true) ? this.dynamicMessage = 'Account activated successfuly.':this.dynamicMessage = 'Account activation failed.';
 });
   }
 }

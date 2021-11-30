@@ -22,7 +22,7 @@
             <div class="col-md-6 col-sm-12 py-2">
               <div class="custom-input-field">
                 <label>First Name</label>
-                <input  type="text" class="custom-input" placeholder="Abc"  name="firstname" formControlName="FirstName">
+                <input  type="text" class="custom-input" placeholder="First Name"  name="firstname" formControlName="FirstName">
                 <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                   validation: 'required',
                   message: 'First name is required',
@@ -31,7 +31,7 @@
               </div>
               <div class="custom-input-field">
                 <label>Email</label>
-                <input type="email" class="custom-input" placeholder="Johnlaila@Email.Com"  name="email" formControlName="Email" autocomplete="off">
+                <input type="email" class="custom-input" placeholder="Email Address"  name="email" formControlName="Email" autocomplete="off">
                 <!-- <p class="small-txt-error">Invalid email</p> -->
                 <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                   validation: 'required',
@@ -74,7 +74,7 @@
             <div class="col-md-6 col-sm-12 py-2">
               <div class="custom-input-field">
                 <label>Last Name</label>
-                <input type="text" class="custom-input"  name="lastname" formControlName="LastName"  placeholder="xyz">
+                <input type="text" class="custom-input"  name="lastname" formControlName="LastName"  placeholder="Last Name">
                 <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                   validation: 'required',
                   message: 'Last name is required',
@@ -95,11 +95,11 @@
                 <div class="custom-input-field pswd-field">
                   <label>Confirm Password</label>
                   <div class="p-relative">
-                  <input id="password-fields" type="password" class="custom-input" name="cPassword" formControlName="cPassword" autocomplete="off">
+                  <input id="password-fields" type="password" class="custom-input" name="confirmPassword" formControlName="confirmPassword" autocomplete="off">
                   <span toggle="#password-fields" class="fa fa-fw fa-eye field-icon toggle-cnfrm-pswd"></span>
                   <ng-container *ngIf="
-                  registrationForm.controls['cPassword'].errors &&
-                  registrationForm.controls['cPassword'].errors.ConfirmPassword
+                  registrationForm.controls['confirmPassword'].errors &&
+                  registrationForm.controls['confirmPassword'].errors.ConfirmPassword
                 ">
                 <div class="fv-plugins-message-container">
                   <div class="fv-help-block">
