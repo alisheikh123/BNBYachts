@@ -1,0 +1,46 @@
+.main-select-btn{
+    width: 640px;
+    height: 70px;
+    border: 1px solid #ccc;
+    text-align: start;
+    color:black;
+    &:hover{
+background-color: transparent;
+    }
+}
+.custom-select-btn{
+padding: 10px;
+border:none;
+    border-bottom: 1px solid #ccc;
+    &:hover{
+        border-left: 4px solid #13278B;
+    cursor:pointer;}
+}
+.dropdown-toggle::after {
+    display:none;
+}
+    
+    
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+  .custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+  }
+  .custom-day.focused {
+    background-color: #e6e6e6;
+  }
+  .custom-day.range, .custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+  }
+  .custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+  }

@@ -17,9 +17,14 @@
                 {{item.isActive==true?"Active":"InActive"}}
               </span>
             </p>
-            <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht?
-              "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"PowerBoat":item.boatType==BOAT_TYPE.PowerBoat2?"PowerBoat2":""}}
+            <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht?"Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing Boat":item.boatType==BOAT_TYPE.SailBoat?"Sail Boat":item.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
             </p>
+            PowerBoat = "Power Boat",
+            Pontoon = "Pontoon",
+            FishingBoat = "Fishing Boat",
+            SailBoat = "Sail Boat",
+            Yacht = "Yacht",
+            HouseBoat = "House Boat"
             <p class=" ">{{item.creationTime | date}}</p>
 
           </div>

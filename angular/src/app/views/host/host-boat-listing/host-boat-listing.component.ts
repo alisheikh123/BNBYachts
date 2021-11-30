@@ -1,4 +1,5 @@
-import { BoatType } from './../../../shared/enums/yacht-search.constant';
+import { BoatTypes } from 'src/app/shared/enums/yacht-search.constant';
+
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from 'src/app/core/host/reservation.service';
 import { environment } from 'src/environments/environment';
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class HostBoatListingComponent implements OnInit {
   hostBoats: any;
   assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
-  BOAT_TYPE = BoatType;
+  BOAT_TYPE = BoatTypes;
 
   constructor(private service: ReservationService, private toastr: ToastrService, private router: Router) { }
 
