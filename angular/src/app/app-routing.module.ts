@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./views/boat-listing/boat-listing.module').then(m => m.BoatListingModule)
   },
   {
-    path: 'my-bookings',
+    path: 'host',
     loadChildren: () => import('./views/host/host.module').then(m => m.HostModule)
   },
   { path: 'activate-account', component: ActivateAccountComponent },

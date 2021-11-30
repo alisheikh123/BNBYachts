@@ -98,6 +98,11 @@ namespace BnBYachts.Payments.Managers
                 var response = service.Create(options);
                 if (response.Status == PaymentConstants.StatusSucceed)
                 {
+                    //var paymentDetails = new PaymentDetailsEntity();
+                    //paymentDetails.BookingId = data.BookingId ?? 0;
+                    //paymentDetails.CreationTime = DateTime.Now;
+                    //paymentDetails.PaymentId = data.PaymentId;
+                    //await _userPaymentDetailsRepository.InsertAsync(paymentDetails).ConfigureAwait(false);
                     return true;
                 }
                 else
