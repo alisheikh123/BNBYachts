@@ -79,7 +79,7 @@ cat build_info.md > aspnet-core/build_info.md
     IMAGE_TAG = "dev"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
-    IDV_IMAGE_NAME = 'IDV'
+    IDV_IMAGE_NAME = 'idv'
     IDV_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
   }
 }
