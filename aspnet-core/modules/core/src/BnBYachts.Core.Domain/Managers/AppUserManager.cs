@@ -1,12 +1,14 @@
-﻿using BnByachts.NotificationHub.Services;
-using BnBYachts.Core.Shared;
+﻿using BnBYachts.Core.Shared;
 using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Transferable;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
@@ -19,15 +21,14 @@ namespace BnBYachts.Core.Managers
     {
         private readonly IRepository<IdentityUser, Guid> _repository;
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
-        private readonly IMailer _mailer;
         private readonly ResponseDto _respone = new ResponseDto();
+        private readonly EventBusDispatcher _eventBusDispatcher;
 
-
-        public AppUserManager(IRepository<IdentityUser, Guid> repository, Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager, IMailer mailer)
+        public AppUserManager(IRepository<IdentityUser, Guid> repository, Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager, EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
             _userManager = userManager;
-            _mailer = mailer;
+            _eventBusDispatcher = eventBusDispatcher;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
@@ -80,7 +81,14 @@ namespace BnBYachts.Core.Managers
             };
             var url = QueryHelpers.AddQueryString(baseUrl, queryParams);
             string body = $"<h4>Click on the link below to confirm your account </h4><span> <a href = '{url}'> Click Me </a></span>";
-            await _mailer.SendEmailAsync(user.Email, "Email Confirmation", body, true);
+            _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            {
+
+                To = user.Email,
+                Subject = "Email Confirmation",
+                Body = new StringBuilder().Append(body),
+                IsBodyHtml = true
+            }); ;
         }
 
         public async Task<bool> ConfirmEmail(string username, string token)

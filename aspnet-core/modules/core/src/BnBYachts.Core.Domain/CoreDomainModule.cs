@@ -28,7 +28,6 @@ namespace BnBYachts.Core
         typeof(AbpPermissionManagementDomainIdentityServerModule),
         typeof(AbpSettingManagementDomainModule),
         typeof(AbpTenantManagementDomainModule),
-        typeof(AbpEmailingModule),
          typeof(NotificationHubModule)
     )]
     public class CoreDomainModule : AbpModule
