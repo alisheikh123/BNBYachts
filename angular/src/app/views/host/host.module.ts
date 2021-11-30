@@ -11,6 +11,10 @@ import { HostRoutingModule } from './host-routing.module';
 import { HostOnboardingComponent } from './host-onboarding/host-onboarding.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.component';
+import { NgxDateRangeModule } from 'ngx-daterange';
+import { TimePickerModule,DateRangePickerModule  } from '@syncfusion/ej2-angular-calendars';
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ AddDialogComponent
     GoogleMapsModule, 
     CommonModule,
     SharedPipesModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    TimePickerModule ,
+    DateRangePickerModule
+    
   ],
   providers: [YachtSearchService,ReservationService]
 })

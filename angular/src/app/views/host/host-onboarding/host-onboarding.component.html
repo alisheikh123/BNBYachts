@@ -110,32 +110,36 @@
                                 <div class="row">
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Title</label>
+                                            <label>Title*</label>
                                             <input class="custom-input" formControlName="name"
                                                 placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+                                                <small class="text-danger" *ngIf="hostForm.name.touched && !hostForm.name.valid">Name is required.</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>About the boat</label>
+                                            <label>About the boat*</label>
                                             <input class="custom-input" formControlName="description"
                                                 placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+                                                <small class="text-danger" *ngIf="hostForm.description.touched && !hostForm.description.valid">Description is required.</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Current Location of Boat</label>
+                                            <label>Current Location of Boat*</label>
                                             <input class="custom-input" formControlName="location"
                                                 ngx-google-places-autocomplete
                                                 (onAddressChange)="handleAddressChange($event)"
                                                 placeholder="Bali Island">
+                                                <small class="text-danger" *ngIf="hostForm.location.touched && !hostForm.location.valid">Location is required.</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Boat Length</label>
+                                            <label>Boat Length*</label>
                                             <input type="number" class="custom-input" formControlName="length"
-                                                placeholder="50 ft">
+                                                placeholder="50 ft" >
+                                                <small class="text-danger" *ngIf="hostForm.length.touched && !hostForm.length.valid">Length is required.</small>
                                         </div>
                                     </div>
 
@@ -211,6 +215,7 @@
                                             <button class="custom-btn outline-blue-clr me-4"
                                                 (click)="currentTab=currentTab-1;">Later</button>
                                             <button class="custom-btn blue" id="save-btn"
+                                            [disabled]="!hostForm.name.valid"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
 
                                         </div>
@@ -285,38 +290,83 @@
                                         <div class="image-gallery-head-content custom-flex-between">
                                             <div class="">
                                                 <p class="medium">Add atleat 5 photos</p>
-                                                <p class="small-text light grey">Drag to reorder</p>
+                                                <!-- <p class="small-text light grey">Drag to reorder</p> -->
                                             </div>
-                                            <button class="custom-btn grey">Add More</button>
+                                            <div class="avatar-edit">
+                                                <input type="file"
+                                                style="display: none;"
+                                                id="addMoreImg"
+                                                (change)="onFileChoose($event)"
+                                                    accept=".png, .jpg, .jpeg">
+                                                <label for="addMoreImg"
+                                                    class="small-text"><span class="custom-btn grey">Add More</span></label>
+                                            </div>
                                         </div>
                                         <div class="image-gallery-collage">
                                             <div class="row">
                                                 <div class="col-md-6 py-2">
-                                                    <div class="gallery-img-large custom-image-prev">
-                                                        <img src="../../../../assets/images/banner-bg-1.png" alt="">
+                                                    <!-- <div class="gallery-img-large custom-image-prev">
+                                                        <img [src]="(boatGallery | filterBy : 'sortOrder':0)?.length > 0 ? (boatGallery | filterBy : 'sortOrder':0)[0]?.fileData : '../../../../assets/images/no-img.png'" alt="">
+                                                    </div> -->
+                                                    <div class="gallery-img-large custom-image-prev no-img-wrapper">
+                                                        <div class="no-img-inner">
+                                                            <img [src]="(boatGallery | filterBy : 'sortOrder':0)?.length > 0 ? (boatGallery | filterBy : 'sortOrder':0)[0]?.fileData : '../../../../assets/images/no-img.png'" alt="">
+                                                        </div>
+                                                        <div class="upload-btn">
+
+                                                            <div class="avatar-edit">
+                                                                <input type="file"
+                                                                id="coverImage"
+                                                                (change)="onFileChoose($event,0)"
+                                                                    accept=".png, .jpg, .jpeg">
+                                                                <label for="coverImage"
+                                                                    class="custom-btn grey small-text"><span
+                                                                        class="material-icons upload_file">
+                                                                        upload_file
+                                                                    </span>
+                                                                    Upload Image</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                             
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="gallery-images-small-wrapper">
                                                         <div class="row">
                                                             <div class="col-sm-6 py-2">
-                                                                <div class="gallery-images-small custom-image-prev">
-                                                                    <img src="../../../../assets/images/big-boat.png" alt="">
+                                                                <div class="no-img-wrapper">
+                                                                    <div class="no-img-inner">
+                                                                        <img [src]="(boatGallery | filterBy : 'sortOrder':1)?.length > 0 ? (boatGallery | filterBy : 'sortOrder':1)[0]?.fileData : '../../../../assets/images/no-img.png'" alt="">
+                                                                    </div>
+                                                                    <div class="upload-btn">
+
+                                                                        <div class="avatar-edit">
+                                                                            <input type="file"
+                                                                            id="image1"
+                                                                            (change)="onFileChoose($event,1)"
+                                                                                accept=".png, .jpg, .jpeg">
+                                                                            <label for="image1"
+                                                                                class="custom-btn grey small-text"><span
+                                                                                    class="material-icons upload_file">
+                                                                                    upload_file
+                                                                                </span>
+                                                                                Upload Image</label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6 py-2">
                                                                 <div class="no-img-wrapper">
                                                                     <div class="no-img-inner">
-                                                                        <img src="../../../../assets/images/no-img.png" alt="">
+                                                                        <img [src]="(boatGallery | filterBy : 'sortOrder':2)?.length > 0 ? (boatGallery | filterBy : 'sortOrder':2)[0]?.fileData : '../../../../assets/images/no-img.png'" alt="">
                                                                     </div>
                                                                     <div class="upload-btn">
 
                                                                         <div class="avatar-edit">
-                                                                            <input type="file" id="imageUpload"
-                                                                            (change)="onFileChoose($event)"
+                                                                            <input type="file"
+                                                                            id="image2"
+                                                                            (change)="onFileChoose($event,2)"
                                                                                 accept=".png, .jpg, .jpeg">
-                                                                            <label for="imageUpload"
+                                                                            <label for="image2"
                                                                                 class="custom-btn grey small-text"><span
                                                                                     class="material-icons upload_file">
                                                                                     upload_file
@@ -329,14 +379,16 @@
                                                             <div class="col-sm-6 py-2">
                                                                 <div class="no-img-wrapper">
                                                                     <div class="no-img-inner">
-                                                                        <img src="../../../../assets/" alt="">
+                                                                        <img [src]="(boatGallery | filterBy : 'sortOrder':3)?.length > 0 ? (boatGallery | filterBy : 'sortOrder':3)[0]?.fileData : '../../../../assets/images/no-img.png'" alt="">
                                                                     </div>
                                                                     <div class="upload-btn">
 
                                                                         <div class="avatar-edit">
-                                                                            <input type="file" id="imageUpload"
+                                                                            <input type="file"
+                                                                            id="image3"
+                                                                            (change)="onFileChoose($event,3)"
                                                                                 accept=".png, .jpg, .jpeg">
-                                                                            <label for="imageUpload"
+                                                                            <label for="image3"
                                                                                 class="custom-btn grey small-text"><span
                                                                                     class="material-icons upload_file">
                                                                                     upload_file
@@ -349,14 +401,16 @@
                                                             <div class="col-sm-6 py-2">
                                                                 <div class="no-img-wrapper">
                                                                     <div class="no-img-inner">
-                                                                        <img src="./images/no-img.png" alt="">
+                                                                        <img [src]="(boatGallery | filterBy : 'sortOrder':4)?.length > 0 ? (boatGallery | filterBy : 'sortOrder':4)[0]?.fileData : '../../../../assets/images/no-img.png'" alt="">
                                                                     </div>
                                                                     <div class="upload-btn">
 
                                                                         <div class="avatar-edit">
-                                                                            <input type="file" id="imageUpload"
+                                                                            <input type="file"
+                                                                            id="image4"
+                                                                            (change)="onFileChoose($event,4)"
                                                                                 accept=".png, .jpg, .jpeg">
-                                                                            <label for="imageUpload"
+                                                                            <label for="image4"
                                                                                 class="custom-btn grey small-text"><span
                                                                                     class="material-icons upload_file">
                                                                                     upload_file
@@ -369,13 +423,25 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-12">
+                                                    <div class="gallery-images-small-wrapper">
+                                                        <div class="row">
+                                                            <div class="col-sm-4 py-2" *ngFor="let item of otherGalleryImages">
+                                                                <div class="no-img-wrapper">
+                                                                    <div class="no-img-inner">
+                                                                        <img [src]="item?.fileData" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                </div>
                                                 <div class="col-sm-12 py-4">
                                                     <div class="custom-flex-end">
                                                         <button class="custom-btn outline-blue-clr me-4"
                                                             (click)="currentTab=currentTab-1;">Later</button>
                                                         <button class="custom-btn blue" id="save-btn"
                                                             (click)="currentTab=currentTab+1;">Continue</button>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -396,10 +462,8 @@
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
                                             <label>Availabilty</label>
-                                            <input type="number" class="custom-input"
-                                                formControlName="boatelAvailabilityDays"
-                                                placeholder="Book in next 60 Days">
                                         </div>
+                                        <ejs-daterangepicker  placeholder='Select Availabilty' [startDate]='boatCalendar.fromDate' [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="counter-input-wrapper">
@@ -420,25 +484,13 @@
                                     <div class="col-md-6 py-2">
                                         <div class="custom-select-field">
                                             <label>Check-in Time</label>
-                                            <select name="select" id="select" formControlName="checkinTime">
-                                                <option value="" selected>09 am</option>
-                                                <option value="1">Option 1</option>
-                                                <option value="2">Option 2</option>
-                                                <option value="3">Option 3</option>
-                                                ...
-                                            </select>
+                                            <ejs-timepicker formControlName="checkinTime" name="timepicker"></ejs-timepicker>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-select-field">
                                             <label>Check-Out Time</label>
-                                            <select name="select" id="select" formControlName="checkoutTime">
-                                                <option value="" selected>12 am</option>
-                                                <option value="1">Option 1</option>
-                                                <option value="2">Option 2</option>
-                                                <option value="3">Option 3</option>
-                                                ...
-                                            </select>
+                                            <ejs-timepicker formControlName="checkoutTime" name="timepicker" ></ejs-timepicker>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
@@ -446,6 +498,13 @@
                                             <label>Per day boatel fee charges</label>
                                             <input type="number" class="custom-input" placeholder="$20000"
                                                 formControlName="perDayCharges">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="custom-input-field">
+                                            <label>Tax Fee</label>
+                                            <input type="number" class="custom-input" formControlName="taxFee"
+                                                placeholder="Tax Fee">
                                         </div>
                                     </div>
                                     <div class="col-sm-12 py-2">
@@ -488,12 +547,12 @@
                                         Curabitur lobortis maximus scelerisque. Nam non justo luctus, scelerisque dolor
                                         pulvinar, aliquam mauris.</p>
                                     <label class="custom-checkbox my-2">
-                                        <input type="checkbox">
+                                        <input type="checkbox" [(ngModel)]="isAgree" [ngModelOptions]="{standalone: true}">
                                         <p class="small-text">I Agree to the terms and conditions </p>
                                         <span class="checkmark top-0"></span>
                                     </label>
                                     <div class="custom-flex-end py-5">
-                                        <button class="custom-btn grey" (click)="submit()">Continue</button>
+                                        <button class="custom-btn grey" [disabled]="!isAgree" (click)="submit()">Continue</button>
                                     </div>
                                 </div>
                             </div>

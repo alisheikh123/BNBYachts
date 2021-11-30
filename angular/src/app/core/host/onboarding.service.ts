@@ -16,6 +16,10 @@ export class OnboardingService {
     return this.http.get(this.boatApiUrl + '/GetHostOnBoardingLookup').pipe(
       catchError(this.handleError));
   }
+  addBoat(boat:any) {
+    return this.http.post(this.boatApiUrl + '/add-host-boats',boat).pipe(
+      catchError(this.handleError));
+  }
   ///Exception handler
   handleError(error: any) {
     let errorMessage = '';

@@ -10,6 +10,7 @@ namespace BnBYachts.Boat
    public class BoatFeatureEntity : AuditedAggregateRoot<int>
     {
         public FeatureEntity OfferedFeatures { get; set; }
-        public virtual int? BoatId { get; set; }
+        public virtual int? BoatEntityId { get; set; }
+        public virtual int? OfferedFeaturesId { get; set; }
     }
 }

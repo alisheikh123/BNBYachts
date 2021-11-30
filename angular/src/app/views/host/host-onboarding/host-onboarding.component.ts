@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { OnboardingService } from 'src/app/core/host/onboarding.service';
 import { BoatTypes, FeaturesTypes, OnBoardingTabs } from 'src/app/shared/enums/yacht-search.constant';
-import { validateLocaleAndSetLanguage } from 'typescript';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 @Component({
@@ -20,9 +21,25 @@ export class HostOnboardingComponent implements OnInit {
   FEATURES_TYPES = FeaturesTypes;
   hostOnBoardingForm: FormGroup;
   boatLookups: any;
+  boatGallery: any[] = [];
+  secondDateRange: any;
+  checkinTime = { hour: 13, minute: 30 };
+  checkoutTime = { hour: 13, minute: 30 };
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
+  isAgree:boolean = false;
+  ///
+  boatCalendar = {
+    fromDate: new Date(),
+    toDate: new Date(),
+  };
+  otherGalleryImages :any[] = [];
 
-  constructor(private fb: FormBuilder, private onBoardingService: OnboardingService, private modal: NgbModal) {
 
+  constructor(private fb: FormBuilder, private onBoardingService: OnboardingService, private modal: NgbModal, private toastr: ToastrService
+    ,private router:Router) {
   }
 
   ngOnInit(): void {
@@ -47,16 +64,17 @@ export class HostOnboardingComponent implements OnInit {
       isBoatelServicesOffered: [false],
       boatelCapacity: [0, Validators.required],
       boatelAvailabilityDays: [0, Validators.required],
-      checkinTime: [null, Validators.required],
-      checkoutTime: [null, Validators.required],
+      checkinTime: [new Date(), Validators.required],
+      checkoutTime: [new Date(), Validators.required],
       perDayCharges: [null, Validators.required],
-      isActive: [false],
+      isActive: [true],
       taxFee: [null, Validators.required],
       boatType: [null, Validators.required],
-      boatFeatures: this.fb.array([]),
-      boatGalleries: this.fb.array([]),
-      boatRules: this.fb.array([])
     });
+  }
+
+  get hostForm(){
+    return this.hostOnBoardingForm.controls;
   }
 
   getLookupData() {
@@ -98,11 +116,6 @@ export class HostOnboardingComponent implements OnInit {
     this.hostOnBoardingForm.controls.latitude.setValue(address.geometry.location.lat());
     this.hostOnBoardingForm.controls.longitude.setValue(address.geometry.location.lng());
   }
-
-  submit() {
-    console.log(this.hostOnBoardingForm.value);
-  }
-
   addNewOptions(featureType: number) {
     let modal = this.modal.open(AddDialogComponent, { centered: true });
     modal.componentInstance.onSave.subscribe((res: string) => {
@@ -122,18 +135,62 @@ export class HostOnboardingComponent implements OnInit {
     });
   }
 
-  onFileChoose(fileInput: any) {
+  onFileChoose(fileInput: any, index?: number) {
     let fileData: File;
     fileData = <File>fileInput.target.files[0];
     var mimeType = fileData.type;
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
+    debugger;
     var reader = new FileReader();
     reader.readAsDataURL(fileData);
     reader.onload = (_event) => {
-      //this.fBasic.profileImage.setValue(reader.result);
+      if(index != null){
+        if (!this.boatGallery[index]) {
+          let item = {
+            fileName: fileData.name,
+            fileData: reader.result,
+            fileType: fileData.type,
+            sortOrder: index,
+            isCoverPic: (index == 0) ? true:false
+          }
+          this.boatGallery.push(item);
+        }
+        else {
+          this.boatGallery[index]['fileName'] = fileData.name;
+          this.boatGallery[index]['fileData'] = reader.result;
+          this.boatGallery[index]['fileType'] = fileData.type;
+        }
+      }
+      else{
+        let item = {
+          fileName: fileData.name,
+          fileData: reader.result,
+          fileType: fileData.type
+        }
+        this.otherGalleryImages.push(item);
+      }
+
+
     }
+  }
+
+  submit() {
+    if(this.isAgree){
+      let data = this.hostOnBoardingForm.value;
+      data.boatGallery = this.boatGallery;
+      data.boatCalendar = this.boatCalendar;
+      data.boatFeatures = this.boatLookups.features.filter((res: any) => res.isChecked == true);
+      data.boatRules = this.boatLookups.rules.filter((res: any) => res.isChecked == true);
+      this.onBoardingService.addBoat(data).subscribe(res => {
+        if (res) {
+          //this.router.navigate[];
+          this.toastr.success("Boat added successfully.", "Boat");
+        }
+  
+      })
+    }  
   }
 
 }
