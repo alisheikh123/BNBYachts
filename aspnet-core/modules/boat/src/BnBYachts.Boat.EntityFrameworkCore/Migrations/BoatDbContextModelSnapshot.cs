@@ -172,9 +172,6 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int?>("BoatEntityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BoatId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -221,9 +218,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("BoatEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BoatId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -345,9 +339,6 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int?>("BoatEntityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BoatId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -392,9 +383,6 @@ namespace BnBYachts.Boat.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BoatId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -449,9 +437,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BoatId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -474,6 +459,9 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSafetyOption")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")

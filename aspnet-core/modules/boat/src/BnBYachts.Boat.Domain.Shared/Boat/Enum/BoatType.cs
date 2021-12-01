@@ -6,8 +6,11 @@ namespace BnBYachts.Boat.Enum
 {
     public enum BoatTypes
     {
-        Yacht = 0,
-        PowerBoat= 1,
-        PowerBoat2= 2
+        PowerBoat = 0,
+        Pontoon = 1,
+        FishingBoat = 2,
+        SailBoat = 3,
+        Yacht = 4,
+        HouseBoat = 5
     }
 }

@@ -16,7 +16,7 @@
             <p class="medium py-2">{{item.name}}</p>
             <p class="">Listing Status:<span class="" [ngStyle]="{'color':item.isActive == true ? 'small-text' : 'red' }"> {{item.isActive==true?"Active":"Deactive"}} </span></p>
             <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht?
-              "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"PowerBoat":item.boatType==BOAT_TYPE.PowerBoat2?"PowerBoat2":""}}
+              "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing Boat":item.boatType==BOAT_TYPE.SailBoat?"Sail Boat":item.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
             </p>
             <p class=" ">{{item.creationTime | date}}</p>
 
