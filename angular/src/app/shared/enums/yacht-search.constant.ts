@@ -29,4 +29,3 @@ export enum BoatTypes {
     OtherRules = 3,
     SafetyFeatures = 4
   }
-

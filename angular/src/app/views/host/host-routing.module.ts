@@ -9,11 +9,11 @@ const routes: Routes = [
     path: "my-bookings", component: BoatelBookingsComponent
   },
   {
-    path: "host-boat-listing", component: HostBoatListingComponent
-  },
-  {
     path: "onboarding", component: HostOnboardingComponent
   },
+  {
+    path: "host-boat-listing", component: HostBoatListingComponent
+  }
 ];
 
 @NgModule({

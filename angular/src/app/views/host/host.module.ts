@@ -35,7 +35,6 @@ HostBoatListingComponent
     GooglePlaceModule,
     TimePickerModule ,
     DateRangePickerModule
-
   ],
   providers: [YachtSearchService,ReservationService]
 })
