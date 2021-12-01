@@ -38,12 +38,12 @@ namespace BnBYachts.Core.Managers
             return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime);
         }
 
-        public async Task<ResponseDto> RegisterUser(string firstName, string lastName, string emailAddress, string userName, string plainPassword, string emailActivationLink, DateTime dob)
+        public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
-            IdentityUser user = new IdentityUser(Guid.NewGuid(), userName, emailAddress);
-            user.Name = firstName + " " + lastName;
-            user.SetProperty(UserConstants.DOB, dob);
-            var result = await _userManager.CreateAsync(user, plainPassword);
+            IdentityUser user = new IdentityUser(Guid.NewGuid(), userInput.Email, userInput.Email); // Username is same as email address
+            user.Name = userInput.FirstName + " " + userInput.LastName;
+            user.SetProperty(UserConstants.DOB, userInput.DOB);
+            var result = await _userManager.CreateAsync(user, userInput.Password);
             if (result.Succeeded)
             {
                 var isRoleAssigned = await _userManager.AddToRoleAsync(user, "User");
@@ -75,11 +75,9 @@ namespace BnBYachts.Core.Managers
             {"username", user.UserName },
             {"id", token },
             };
-            var url = QueryHelpers.AddQueryString(baseUrl, queryParams);
-            string body = $"<h4>Click on the link below to confirm your account </h4><span> <a href = '{url}'> Click Me </a></span>";
+            string body = $"<h4>Click on the link below to confirm your account </h4><span> <a href = '{QueryHelpers.AddQueryString(baseUrl, queryParams)}'> Click Me </a></span>";
             _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
-
                 To = user.Email,
                 Subject = "Email Confirmation",
                 Body = new StringBuilder().Append(body),

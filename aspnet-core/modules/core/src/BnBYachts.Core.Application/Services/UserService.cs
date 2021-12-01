@@ -36,9 +36,9 @@ namespace BnBYachts.Core.Services
         [HttpPost]
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<ResponseDto> UserRegister(RegisterDto registerDTO)
+        public async Task<ResponseDto> UserRegister(UserRegisterTransferable userInput)
         {
-                return await _appUserManager.RegisterUser(registerDTO.FirstName, registerDTO.LastName, registerDTO.Email, registerDTO.Email, registerDTO.Password, "", registerDTO.DOB);
+                return await _appUserManager.RegisterUser(userInput);
         }
         [HttpGet]
         [AllowAnonymous]

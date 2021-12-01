@@ -2,17 +2,9 @@
 {
     public class ResponseDto
     {
-        public string Message { get; set; }
-        public int ResponseCode { get; set; }
-        public bool Status { get; set; }
-        public object Data { get; set; }
-
-        public ResponseDto()
-        {
-            Status = true;
-            Data = null;
-            Message = string.Empty;
-            ResponseCode = 0;
-        }
+        public string Message { get; set; } = string.Empty;
+        public int ResponseCode { get; set; } = 0;
+        public bool Status { get; set; } = true;
+        public object Data { get; set; } = null;
     }
 }
