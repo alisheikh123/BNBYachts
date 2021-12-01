@@ -786,6 +786,7 @@ button{
       height: 100%;
       width: 100%;
       border-radius: 5px;
+      max-height: 560px;
       @include breakpoint(laptop){
         max-height: 410px;
       }
@@ -1878,6 +1879,10 @@ img{
   border-radius: 16px;
   @include custom-flex;
   min-height: 270px;
+  max-height: 270px;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
   @include breakpoint(laptop){
     min-height: 200px;
   }
@@ -1920,12 +1925,32 @@ label{
    }
    .upload-btn{
     display:flex;
+    z-index: 2;
+  }
+  &::before{
+    @include bg-layer-black();
+    z-index: 1;
+    background-color: rgba(34, 34, 34, 0.1);
   }
   }
   &.small-img-wrap{
     max-width: 550px;
     margin: 0 auto;
   }
+  &.active{
+    position: relative;
+    .upload-btn{
+      position: absolute;
+      left: 40%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .no-img-inner{
+      display:block !important;
+
+     }
+  }
+
 }
 
 
