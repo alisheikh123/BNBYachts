@@ -39,7 +39,7 @@ namespace BnBYachts.Payments.Managers
             var service = new PaymentMethodService();
             StripeList<PaymentMethod> paymentMethods = service.List(
                 options
-              );
+             );
 
             var userPaymentMethods = new List<UserPaymentMethodTransferable>();
             foreach (var item in paymentMethods)
@@ -93,28 +93,28 @@ namespace BnBYachts.Payments.Managers
                 Confirm = true
             };
             var service = new PaymentIntentService();
-            try
-            {
-                var response = service.Create(options);
-                if (response.Status == PaymentConstants.StatusSucceed)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
 
+            var response = service.Create(options);
+            if (response.Status == PaymentConstants.StatusSucceed)
+            {
+                PaymentDetailsEntity pm = new PaymentDetailsEntity
+                {
+                    BookingId = data.BookingId,
+                    PaymentId = response.Id,
+                    CustomerId = user.CustomerId,
+                    Amount = data.Amount
+                };
+                await _userPaymentDetailsRepository.InsertAsync(pm);
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }
 
         public async Task<bool> RefundPayment(int bookingId, long refundAmount)
         {
-
             var paymentDetails = await _userPaymentDetailsRepository.FindAsync(res => res.BookingId == bookingId).ConfigureAwait(false);
 
             var options = new RefundCreateOptions
@@ -125,14 +125,9 @@ namespace BnBYachts.Payments.Managers
             };
             var service = new RefundService();
             var response = service.Create(options);
-            if (response.Status == PaymentConstants.StatusSucceed)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return (response.Status == PaymentConstants.StatusSucceed) ? true : false;
+
         }
     }
 }

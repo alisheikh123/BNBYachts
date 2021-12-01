@@ -31,5 +31,9 @@ export class ReservationService {
       }
       return throwError(errorMessage);
     }
+    getBookedServices(){
+      return this.http.get(this.bookingApiUrl + '/get-my-approve-reservations').pipe(
+        catchError(this.handleError));
+    }
 
 }

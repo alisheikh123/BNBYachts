@@ -55,7 +55,7 @@
                     </div>
                     <div class="center-content">
                         <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
-                            <a href="#" class="underline-link-blk active">
+                            <a href="#" [routerLink]="['host-dashboard']" class="underline-link-blk active">
                                 <span>
 
                                     Dashboard

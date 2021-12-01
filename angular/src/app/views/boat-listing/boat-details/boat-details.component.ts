@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./boat-details.component.scss']
 })
 export class BoatDetailsComponent implements OnInit {
+  bookingId: any;
 
   constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute) {
     config.max = 5;
@@ -92,6 +93,7 @@ export class BoatDetailsComponent implements OnInit {
   }
 
   reserveBoat() {
+    debugger
     this.isSubmitted = true;
     let userId = Guid.create().toString();
     if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
@@ -108,7 +110,8 @@ export class BoatDetailsComponent implements OnInit {
         reviews: null
       };
       this.bookingService.boatelBooking(bookingModel).subscribe(res => {
-        if (res) {
+        this.bookingId = res.bookingId;
+        if (res.isSucces) {
           let boatCalendar = {
             creationTime: new Date(),
             isAvailable: false,
@@ -119,7 +122,7 @@ export class BoatDetailsComponent implements OnInit {
           this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
             if (res) {
               this.yachtParamService.setFilters(this.boatFilterDetails);
-              this.router.navigate(['/boat-listing/booking-payment', this.boatId], { relativeTo: this.activatedRoute });
+              this.router.navigate(['/boat-listing/booking-payment', this.boatId, this.bookingId], { relativeTo: this.activatedRoute });
               this.toastr.success('Boat reserved successfully.', 'Success');
             }
           });
