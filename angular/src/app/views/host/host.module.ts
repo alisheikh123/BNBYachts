@@ -15,6 +15,8 @@ import { NgxDateRangeModule } from 'ngx-daterange';
 import { TimePickerModule,DateRangePickerModule  } from '@syncfusion/ej2-angular-calendars';
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 
+
+
 @NgModule({
   declarations: [
 BoatelBookingsComponent,
@@ -33,7 +35,6 @@ HostBoatListingComponent
     GooglePlaceModule,
     TimePickerModule ,
     DateRangePickerModule
-
   ],
   providers: [YachtSearchService,ReservationService]
 })

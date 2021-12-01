@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: "host-boat-listing", component: HostBoatListingComponent
-  },
+  }
 ];
 
 @NgModule({
