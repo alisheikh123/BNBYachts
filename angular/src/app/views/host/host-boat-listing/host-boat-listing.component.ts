@@ -24,9 +24,11 @@ export class HostBoatListingComponent implements OnInit {
     });
   }
   isBoatActive(item: any) {
-    item.isActive = !item.isActive;
-    this.service.updateBoatStatus(item.id, item.isActive).subscribe((res: any) => {
+
+    this.service.updateBoatStatus(item.id).subscribe((res: any) => {
+      item.isActive = !item.isActive;
       this.toastr.success('Boat Status successfully Changed.', 'Success');
+
     });
   }
 

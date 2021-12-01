@@ -7,21 +7,19 @@
     <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile" *ngFor="let item of hostBoats">
       <div class="image-with-text custom-flex-between align-items-center">
         <div class="image-with-text-inner">
-          <div *ngFor="let img of item.boatGalleries">
-            <img *ngIf="img.isCoverPic==1" src="{{assetsUrl + img.imagePath}}" alt="">
+          <div *ngFor="let img of item.boatGalleries | filterBy : 'isCoverPic':true">
+            <img src="{{assetsUrl + img.imagePath}}" alt="">
           </div>
           <div class="user-details">
             <p class="medium py-2">{{item.name}}</p>
-            <p class="">Listing Status:<span class="" [ngStyle]="{'color':item.isActive == true ? 'small-text' : 'red' }"> {{item.isActive==true?"Active":"Deactive"}} </span></p>
+            <p class="">Listing Status:<span class=""
+                [ngStyle]="{'color':item.isActive == true ? 'small-text' : 'red' }">
+                {{item.isActive==true?"Active":"Deactive"}} </span></p>
             <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht?
-              "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing Boat":item.boatType==BOAT_TYPE.SailBoat?"Sail Boat":item.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
+              "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power
+              Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing
+              Boat":item.boatType==BOAT_TYPE.SailBoat?"Sail Boat":item.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
             </p>
-            PowerBoat = "Power Boat",
-            Pontoon = "Pontoon",
-            FishingBoat = "Fishing Boat",
-            SailBoat = "Sail Boat",
-            Yacht = "Yacht",
-            HouseBoat = "House Boat"
             <p class=" ">{{item.creationTime | date}}</p>
 
           </div>
