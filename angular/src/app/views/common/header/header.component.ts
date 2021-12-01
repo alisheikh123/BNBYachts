@@ -59,7 +59,6 @@ export class HeaderComponent implements OnInit {
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
       if (res == null) {
-        console.log("Error");
       }
       else {
         this.userDetails = res;
@@ -128,7 +127,7 @@ export class HeaderComponent implements OnInit {
       let modalRef = this.modal.open(SignupModalComponent,{ windowClass: 'custom-modal custom-large-modal'});
     }
   }
-  
+
   continueToEarn() {
     if(this.selectedOption.byHost){
       this.router.navigate(['try-hosting']);

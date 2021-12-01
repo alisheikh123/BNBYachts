@@ -229,5 +229,19 @@ namespace BnBYachts.Boat.Manager
             var distanceinMeter = distanceInMM; //* 0.001;
             return distanceinMeter;
         }
+
+        public async Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId)
+        {
+          var boats=await _boatRepository.GetListAsync(x=>x.CreatorId==userId).ConfigureAwait(false);
+            foreach(var boat in boats)
+            {
+                await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
+            }
+            return boats;
+
+
+        }
+
+
     }
 }

@@ -13,6 +13,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.component';
 import { NgxDateRangeModule } from 'ngx-daterange';
 import { TimePickerModule,DateRangePickerModule  } from '@syncfusion/ej2-angular-calendars';
+import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 
 
 
@@ -20,20 +21,20 @@ import { TimePickerModule,DateRangePickerModule  } from '@syncfusion/ej2-angular
   declarations: [
 BoatelBookingsComponent,
 HostOnboardingComponent,
-AddDialogComponent
+AddDialogComponent,
+HostBoatListingComponent
   ],
   imports: [
     HostRoutingModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    GoogleMapsModule, 
+    GoogleMapsModule,
     CommonModule,
     SharedPipesModule,
     GooglePlaceModule,
     TimePickerModule ,
     DateRangePickerModule
-    
   ],
   providers: [YachtSearchService,ReservationService]
 })

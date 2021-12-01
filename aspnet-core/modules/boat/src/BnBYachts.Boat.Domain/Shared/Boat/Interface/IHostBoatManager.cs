@@ -19,5 +19,6 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
         Task<HostLookupTransferable> GetHostOnBoardingLookup(Guid? userId);
         Task<bool> AddHostBoatManager(HostBoatRequestable boatDetails,Guid? userId);
         #endregion
+        Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId);
     }
 }
