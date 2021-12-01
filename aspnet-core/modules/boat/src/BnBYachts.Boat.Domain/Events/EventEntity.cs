@@ -9,11 +9,12 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Events
 {
-    public class Event : AuditedAggregateRoot<Guid>
+    public class EventEntity : AuditedAggregateRoot<int>
     {
         public BoatEntity Boat { get; set; }
-        public string LocationLat { get; set; }
-        public string LocationLong { get; set; }
+        public double LocationLat { get; set; }
+        public double LocationLong { get; set; }
+        public string Location { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int GuestCapacity { get; set; }

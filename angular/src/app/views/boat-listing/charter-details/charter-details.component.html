@@ -1,0 +1,703 @@
+<div class="main-wrapper">
+    <div class="image-gallery-bannner section-padding">
+        <div class="container">
+            <div class="image-gallery-head-content white-text">
+                <h3 class="bold mb-2">{{charterDetails?.boat?.name}}</h3>
+                <p>{{charterDetails?.boat?.location}}</p>
+            </div>
+            <div class="image-gallery-collage">
+                <div class="row" *ngIf="charterDetails?.boat?.boatGalleries?.length > 0">
+                    <div class="col-md-6 py-2">
+                        <div class="gallery-img-large custom-image-prev"
+                            *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                            <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="gallery-images-small-wrapper">
+                            <div class="row">
+                                <div class="col-sm-6 py-2"
+                                    *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : false)">
+                                    <div class="gallery-images-small custom-image-prev">
+                                        <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="gallery-link-wrapper"><a href="#" class="underline-white-link">Gallery <span><i
+                            class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="section-padding">
+                    <div class="card-wrapper p-0">
+                        <div class="custom-tabs-wrapper custom-filled-view">
+                            <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <button class="underline-link-blk active" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-profile" type="button" role="tab"
+                                    aria-controls="v-pills-profile" aria-selected="false">Charter</button>
+                            </div>
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                    aria-labelledby="v-pills-home-tab">
+                                    <div class="tabs-inner-details">
+                                        <div class="row">
+                                            <div class="col-xl-6 py-2">
+                                                <h6 class="bold">Charter Details</h6>
+                                                <div class="tabs-inner-details-inner">
+                                                    <div class="custom-flex-start py-1">
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text">Departing From:</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.departingFrom}}</p>
+                                                        </div>
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text-small">Destination:</p>
+                                                            <p>{{charterDetails?.destination}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text">Boat Capacity:</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.guestCapacity}}</p>
+                                                        </div>
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text-small">Seats Remaining:</p>
+                                                            <p>{{charterDetails?.guestCapacity}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text">Round Trip:</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.isRoundTrip ? 'Yes':'No'}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text">Departure:</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.departureFromDate |
+                                                                date:'MMM-dd-YYYY'}}</p>
+                                                        </div>
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text-small">Arrival:</p>
+                                                            <p>{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="medium min-width-text">Return Details:</p>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text">Departure:</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.returnDate | date:'MMM-dd-YYYY'}}</p>
+                                                        </div>
+                                                        <div class="custom-flex">
+                                                            <p class="medium min-width-text-small">Arrival:</p>
+                                                            <p>{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="custom-flex-start py-1">
+                                                        <p class="medium min-width-text">Check In time:</p>
+                                                        <p>{{boatDetails?.checkinTime | date :'hh:mm a'}}</p>
+                                                    </div> -->
+                                                    <!-- <div class="custom-flex-start py-1">
+                                                        <p class="medium min-width-text">Check Out time:</p>
+                                                        <p>{{boatDetails?.checkoutTime | date:'hh:mm a'}}</p>
+                                                    </div> -->
+                                                </div>
+                                                <h6 class="bold mt-3">Approval policy</h6>
+                                                <div class="tabs-inner-details-inner">
+                                                    <div class="custom-flex-coumn">
+                                                        <p>Short description about the host Lorem ipsum dolor sit amet,
+                                                            consectetur adipiscing elit, sed do eiusmod tempor
+                                                            incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                            minim veniam, quis nostrud</p>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                        class="underline-blue-link py-2 no-underline">Read All</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 py-2">
+                                                <div class="row pb-2 m-0 check-in-out-wrap">
+                                                    <div class="col-md-6 py-2">
+                                                        <div
+                                                            class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                                                            <div class="">
+                                                                <!-- <div class="">
+                                                                    <label>Check-in</label>
+                                                                    <input
+                                                                        placeholder="Add date" name="dp"
+                                                                        container="body"
+                                                                        [(ngModel)]="charterFilterDetails.checkinDate"
+                                                                        (click)="d.toggle()" ngbDatepicker
+                                                                        #d="ngbDatepicker">
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="border-left-1">
+                                                                <!-- <div class="">
+                                                                    <label>Check-out</label>
+                                                                    <input
+                                                                        placeholder="Add date" name="dp2"
+                                                                        container="body"
+                                                                        [(ngModel)]="charterFilterDetails.checkoutDate"
+                                                                        (click)="d2.toggle()" ngbDatepicker
+                                                                        #d2="ngbDatepicker">
+                                                                </div> -->
+                                                            </div>
+                                                            <!-- </div>
+                                                        <small class="text-danger"
+                                                            *ngIf="(charterFilterDetails?.checkinDate == '' || charterFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
+                                                            {{!charterFilterDetails.checkinDate ? 'check-in':'check-out'}}
+                                                            date</small> -->
+                                                        </div>
+                                                        <div class="col-md-6 py-2">
+                                                            <div class="">
+                                                                <div class="custom-flex select custom-select select-search custom-input-label-inside"
+                                                                    [ngbPopover]="popContent" placement="bottom"
+                                                                    autoClose="outside" triggers="manual"
+                                                                    #popOver="ngbPopover" (click)="openPopover()">
+                                                                    <label>Guests</label>
+
+                                                                    <div class="custom-flex w-100">
+                                                                        <p class="counter-text-total">
+                                                                            {{charterFilterDetails?.adults}}
+                                                                            Adults</p>
+                                                                        <p class="counter-text-total">
+                                                                            {{charterFilterDetails?.childrens}}
+                                                                            Children</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <small class="text-danger"
+                                                                *ngIf="(charterFilterDetails.adults == 0 && charterFilterDetails.childrens == 0) && isSubmitted">Enter
+                                                                guests deteils.</small>
+                                                        </div>
+                                                    </div>
+
+                                                    <ng-template #popContent>
+                                                        <div class="row p-2">
+                                                            <div class="col-12">
+                                                                <div class="counter-input-wrapper">
+                                                                    <div class="number border-0 p-0 w-100">
+                                                                        <div class="custom-flex-start w-100">
+                                                                            <label
+                                                                                class="m-0 max-width-50">Adults</label>
+                                                                            <div class="custom-flex-start max-width-50">
+                                                                                <span class="minus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults - 1;">-</span>
+                                                                                <input type="text"
+                                                                                    [(ngModel)]="popOverFilterData.adults" />
+                                                                                <span class="plus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+</span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="counter-input-wrapper">
+                                                                    <div class="number border-0 p-0 w-100">
+                                                                        <div class="custom-flex-start w-100">
+
+                                                                            <div class="max-width-50">
+                                                                                <label class="m-0">Children</label>
+                                                                                <label
+                                                                                    class="grey small-txt m-0 extra-small-text">Ages
+                                                                                    0-13</label>
+                                                                            </div>
+                                                                            <div class="custom-flex-start max-width-50">
+                                                                                <span class="minus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                                                <input type="text"
+                                                                                    [(ngModel)]="popOverFilterData.childrens" />
+                                                                                <span class="plus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens +1;">+</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 pt-2">
+                                                                <div class="custom-flex-end">
+                                                                    <button class="custom-btn blue small-btn"
+                                                                        (click)="updateGuests()">Done</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                    <div class="total-amount-wrap custom-padding-top">
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>$ {{charterDetails?.boat?.perDayCharges}} </p>
+                                                            <!-- <p>${{boatDetails?.perDayCharges * calculateDays()}}.00</p> -->
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Tax</p>
+                                                            <!-- <p>${{boatDetails?.taxFee}}.00</p> -->
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Service Fee</p>
+                                                            <!-- <p>$20.00</p> -->
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner bottom">
+                                                            <!-- <p class="medium">Total(USD)</p>
+                                                        <p class="medium">$ {{boatDetails?.perDayCharges *
+                                                            calculateDays() + boatDetails?.taxFee+ 20}}.00</p> -->
+
+                                                        </div>
+                                                        <button class="custom-btn blue"
+                                                            (click)="reserveCharter()">Reserve
+                                                            Now</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="section-padding">
+                        <h5 class="bold">About the boat</h5>
+                        <p class="max-width-content py-2">{{charterDetails?.boat?.description}}</p>
+                    </div>
+                    <div class="section-padding">
+                        <div class="what-offers">
+                            <div class="row" *ngIf="charterDetails?.boat?.boatFeatures">
+                                <div class="col-md-4">
+                                    <h5 class="bold">What this Boat offers</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings" style="width: 100%;">
+                                            <div class="row">
+                                                <div class="col-6"
+                                                    *ngFor="let item of (showMore ? featureFilter(false,false):(featureFilter(false,false)) | slice:0:4)">
+                                                    <p><i
+                                                            class="fa {{item.offeredFeatures.icon}}"></i>{{item.offeredFeatures.name}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="offerings">
+                                        <p *ngFor="let item of featureFilter(false,false) | mySlice:3:6"><i
+                                                class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                        </p>
+                                    </div> -->
+                                    </div>
+                                    <button (click)="showAllFeatures()" class="custom-btn outline-blue-clr my-2">Show
+                                        All</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="bold">Boat Capacity</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings" style="width: 100%;">
+                                            <div class="row">
+                                                <div>
+                                                    <p><i class="fas fa-bed"></i>{{charterDetails.boat?.totalBedrooms}}
+                                                        Bedrooms
+                                                    </p>
+                                                    <p><i
+                                                            class="fas fa-toilet"></i>{{charterDetails.boat?.totalWashrooms}}
+                                                        Bathrooms
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="bold">Favourites</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings">
+                                            <p *ngFor="let item of featureFilter(true,false) | mySlice:0:3"><i
+                                                    class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                            </p>
+                                        </div>
+                                        <div class="offerings">
+                                            <p *ngFor="let item of featureFilter(true,false) | mySlice:3:6"><i
+                                                    class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-padding">
+                        <div class="what-offers">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="bold">Boat Rules</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings">
+                                            <p *ngFor="let item of charterDetails?.boat?.boatRules"><i
+                                                    class="fa {{item?.offeredRule?.icon}}"></i>{{item?.offeredRule?.name}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6" *ngIf="charterDetails?.boat?.boatFeatures">
+                                    <h5 class="bold">Health & Safety</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings">
+                                            <p *ngFor="let item of featureFilter(false,true)"><i
+                                                    class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exlusive-offer section-padding  quote-section-blue">
+                        <div class="bg-image-wrap no-hover text-left">
+                            <div class="row h-100 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="custom-flex-start white-text h-100">
+                                        <h2 class="bold">Ask for a Quote</h2>
+                                        <p class="medium-container regular">Short description about the service how it
+                                            works
+                                            , ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud</p>
+                                        <p class="medium-container regular">Short description about the host Lorem ipsum
+                                            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut
+                                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                                        <a href="request-quote.html" class="custom-btn white">Get a quote</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 py-2">
+                                    <div class="row">
+                                        <div class="col-md-6 py-2">
+                                            <div class="custom-card-img-bottom-text-wrap">
+                                                <div class="custom-card-img-bottom-text-wrap-inner"
+                                                    *ngIf="charterDetails?.boat?.boatGalleries?.length > 0">
+                                                    <div class="card"
+                                                        *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                        <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
+                                                            alt="...">
+                                                        <div class="card-body bg-white">
+                                                            <p>Private Charter</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 py-2">
+                                            <div class="custom-card-img-bottom-text-wrap">
+                                                <div class="custom-card-img-bottom-text-wrap-inner">
+                                                    <div class="card"
+                                                        *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                        <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
+                                                            alt="...">
+                                                        <div class="card-body bg-white">
+                                                            <p>Private Charter</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="host-details section-padding">
+                        <div class="host-details-wrap">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 py-2 text-center-mobile">
+                                    <h5 class="bold">Hosted By</h5>
+                                    <p class="medium py-2">Name Host: {{boatHost?.name}}</p>
+                                    <div class="address-details">
+                                        <p>Join Date: {{boatHost?.creationTime | date:'dd-MMM-YYYY'}}</p>
+                                        <p><i class="fa fa-check"></i> Identity Verified: Verified </p>
+                                        <p><i class="fa fa-star"></i> Response Rate: 0%</p>
+                                        <p>Response Time: 0 min</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 py-2 text-center">
+                                    <div class="image-wrapper-host">
+                                        <img src="{{assetsCoreUrl + (boatHost?.imagePath || USER_DEFAULTS.avatar)}}"
+                                            alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 pt-2 text-center">
+                                    <a href="#" class="custom-btn blue big-btn">Contact Host</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rating-wrapper section-padding">
+                            <div class="rating-wrap-inner">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2 class="big-text-with-small">5.0<span>(0)Reviews</span></h2>
+                                        <ngb-rating [rate]="0"></ngb-rating>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="overall-rating-wrapper">
+                                            <div class="custom-flex-start progress-with-text">
+                                                <p>5</p>
+                                                <div class="custom-progress-bar progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: 75%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-flex-start progress-with-text">
+                                                <p>4</p>
+                                                <div class="custom-progress-bar progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: 60%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-flex-start progress-with-text">
+                                                <p>3</p>
+                                                <div class="custom-progress-bar progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: 45%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-flex-start progress-with-text">
+                                                <p>2</p>
+                                                <div class="custom-progress-bar progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: 30%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-flex-start progress-with-text">
+                                                <p>1</p>
+                                                <div class="custom-progress-bar progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: 15%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="persons-rating section-padding">
+                        <div class="row">
+                            <div class="col-md-6 py-2">
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 py-2">
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner">
+                                        <img src="./images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">Elijah</p>
+                                            <p class="small-stars">
+                                                <span class="fa fa-star stars-clr "></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                                <span class="fa fa-star stars-clr"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elitShort description about the </p>
+                                    <p class="text-right grey">12 July 2021, 13:44</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 py-2 text-right">
+
+                                <button class="underline-blue-link no-underline" data-bs-toggle="modal"
+                                    data-bs-target="#all-reviews-modal">See All</button>
+                            </div>
+                        </div>
+                    </div> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Modal-->
+    <ng-template #allFeaturesModal>
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold">What This Boat Offers</h4>
+                    <div class="py-2">
+                        <h5 class="bold text-left">Favorite</h5>
+
+                        <div class="custom-flex-start">
+                            <div class="row text-left">
+                                <div class="col-6" *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':false">
+                                    <p><i class="fa fa-cutlery pe-2"></i>{{item?.offeredFeatures.name}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="py-2">
+                        <h5 class="bold text-left">Safety Services</h5>
+                        <div class="custom-flex-start">
+                            <div class="row text-left">
+                                <div class="col-6" *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':true">
+                                    <p><i class="fa fa-cutlery pe-2"></i>{{item?.offeredFeatures.name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ng-template>
