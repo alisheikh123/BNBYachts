@@ -21,21 +21,18 @@ services:
       dockerfile: Boat.Dockerfile
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
-      "ConnectionStrings:Default": ""
-      "App:SelfUrl": ""
-      "App:ClientUrl": ""
-      "App:RedirectAllowedUrls": ""
-      "App:CorsOrigins": ""
-      "AuthServer:Authority": ""
-      "AuthServer:RequireHttpsMetadata": ""
-      "AuthServer:SwaggerClientId": ""
-      "AuthServer:SwaggerClientSecret": ""
-      "RabbitMq:Host": ""
-      "RabbitMq:UserName": ""
-      "RabbitMq:Password": ""
-      "RabbitMq:VirtualHost": ""
-      "StringEncryption:DefaultPassPhrase": ""
-      "Stripe:ApiKey": ""
+      "ConnectionStrings:Default": ${BNB_BOAT_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_Boat_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     ports:
       - "21021:80"
     volumes:
@@ -54,21 +51,18 @@ services:
       dockerfile: Booking.Dockerfile
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
-      "ConnectionStrings:Default": ""
-      "App:SelfUrl": ""
-      "App:ClientUrl": ""
-      "App:RedirectAllowedUrls": ""
-      "App:CorsOrigins": ""
-      "AuthServer:Authority": ""
-      "AuthServer:RequireHttpsMetadata": ""
-      "AuthServer:SwaggerClientId": ""
-      "AuthServer:SwaggerClientSecret": ""
-      "RabbitMq:Host": ""
-      "RabbitMq:UserName": ""
-      "RabbitMq:Password": ""
-      "RabbitMq:VirtualHost": ""
-      "StringEncryption:DefaultPassPhrase": ""
-      "Stripe:ApiKey": ""
+      "ConnectionStrings:Default": ${BNB_BOOKING_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_Booking_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_Booking_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_Booking_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     ports:
       - "21022:80"
     volumes:
@@ -86,21 +80,18 @@ services:
       dockerfile: Payment.Dockerfile
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
-      "ConnectionStrings:Default": ""
-      "App:SelfUrl": ""
-      "App:ClientUrl": ""
-      "App:RedirectAllowedUrls": ""
-      "App:CorsOrigins": ""
-      "AuthServer:Authority": ""
-      "AuthServer:RequireHttpsMetadata": ""
-      "AuthServer:SwaggerClientId": ""
-      "AuthServer:SwaggerClientSecret": ""
-      "RabbitMq:Host": ""
-      "RabbitMq:UserName": ""
-      "RabbitMq:Password": ""
-      "RabbitMq:VirtualHost": ""
-      "StringEncryption:DefaultPassPhrase": ""
-      "Stripe:ApiKey": ""
+      "ConnectionStrings:Default": ${BNB_Payment_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_Payment_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_Payment_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_Payment_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     ports:
       - "21023:80"
     volumes:
@@ -118,21 +109,18 @@ services:
       dockerfile: Core.Dockerfile
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
-      "ConnectionStrings:Default": ""
-      "App:SelfUrl": ""
-      "App:ClientUrl": ""
-      "App:RedirectAllowedUrls": ""
-      "App:CorsOrigins": ""
-      "AuthServer:Authority": ""
-      "AuthServer:RequireHttpsMetadata": ""
-      "AuthServer:SwaggerClientId": ""
-      "AuthServer:SwaggerClientSecret": ""
-      "RabbitMq:Host": ""
-      "RabbitMq:UserName": ""
-      "RabbitMq:Password": ""
-      "RabbitMq:VirtualHost": ""
-      "StringEncryption:DefaultPassPhrase": ""
-      "Stripe:ApiKey": ""
+      "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_CORE_APP_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_CORE_APP_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_CORE_APP_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     ports:
       - "21024:80"
     volumes:
@@ -151,21 +139,18 @@ services:
       dockerfile: IDV.Dockerfile
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
-      "ConnectionStrings:Default": ""
-      "App:SelfUrl": ""
-      "App:ClientUrl": ""
-      "App:RedirectAllowedUrls": ""
-      "App:CorsOrigins": ""
-      "AuthServer:Authority": ""
-      "AuthServer:RequireHttpsMetadata": ""
-      "AuthServer:SwaggerClientId": ""
-      "AuthServer:SwaggerClientSecret": ""
-      "RabbitMq:Host": ""
-      "RabbitMq:UserName": ""
-      "RabbitMq:Password": ""
-      "RabbitMq:VirtualHost": ""
-      "StringEncryption:DefaultPassPhrase": ""
-      "Stripe:ApiKey": ""
+      "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
+      "App:SelfUrl": ${BNB_IDENTITY_SELF_URL}
+      "App:ClientUrl": ${BNB_APP_CLIENT_URL}
+      "App:RedirectAllowedUrls": ${BNB_APP_REDIRECT_ALLOWED_URLS}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     ports:
       - "21025:80"
     volumes:
@@ -184,17 +169,17 @@ services:
       dockerfile: Notification.Dockerfile
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
-      "RabbitMq:Host": ""
-      "RabbitMq:UserName": ""
-      "RabbitMq:Password": ""
-      "RabbitMq:VirtualHost": ""
-      "Settings:Host": ""
-      "Settings:Port": ""
-      "Settings:UserName": ""
-      "Settings:Password": ""
-      "Settings:SenderName": ""
-      "Settings:SenderEmail": ""
-      "Settings:Server": ""
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "Settings:Host": ${BNB_SETTINGS_HOST}
+      "Settings:Port": ${BNB_SETTINGS_PORT}
+      "Settings:UserName": ${BNB_SETTINGS_USERNAME}
+      "Settings:Password": ${BNB_SETTINGS_PASSWORD}
+      "Settings:SenderName": ${BNB_SETTINGS_SENDERNAME}
+      "Settings:SenderEmail": ${BNB_SETTINGS_SENDEREMAIL}
+      "Settings:Server": ${BNB_SETTINGS_SERVER}
 
     volumes:
       - ./tmp-build/BNB/BnbNotify-Host/logs:/app/Logs
