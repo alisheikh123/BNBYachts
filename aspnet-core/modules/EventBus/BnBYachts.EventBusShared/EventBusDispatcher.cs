@@ -1,4 +1,6 @@
-﻿using BnBYachts.EventBusShared.Contracts;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using BnBYachts.EventBusShared.Contracts;
 using MassTransit;
 using Volo.Abp.Domain.Services;
 
@@ -6,25 +8,20 @@ namespace BnBYachts.EventBusShared
 {
     public class EventBusDispatcher : DomainService
     {
-        private readonly IBusControl eventBus;
-
+        private readonly IBusControl _eventBus;
         public EventBusDispatcher(IBusControl eventBus)
         {
-            this.eventBus = eventBus;
+            _eventBus = eventBus;
         }
-
-
-        public void Send<T>(T contract)
+        public async Task Send<T>(T contract, CancellationToken cancellationToken = default)
             where T : class, IContractable
         {
-            this.eventBus.Send<T>(contract).ConfigureAwait(false);
+            await _eventBus.Send<T>(contract, cancellationToken).ConfigureAwait(false);
         }
-
-
-        public void Publish<T>(T contract)
+        public async Task Publish<T>(T contract, CancellationToken cancellationToken = default)
             where T : class, IContractable
         {
-            this.eventBus.Publish<T>(contract).ConfigureAwait(false);
+            await _eventBus.Publish<T>(contract, cancellationToken).ConfigureAwait(false);
         }
 
     }

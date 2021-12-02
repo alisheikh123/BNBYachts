@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -12,6 +13,9 @@ namespace BnBYachts.Core
         {
             Console.WriteLine("3.9");
             services.AddApplication<CoreHttpApiHostModule>();
+
+            services.AddAbpIdentity().AddDefaultTokenProviders();
+
             Console.WriteLine("done");
         }
 

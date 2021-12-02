@@ -9,7 +9,6 @@ namespace BnBYachts.EventBusShared.Contracts
 
     public class HeartbeatContract:IHeartbeatContract
     {
-
         public string Message { get; set; }
     }
 

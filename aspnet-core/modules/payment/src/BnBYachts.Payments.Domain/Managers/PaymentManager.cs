@@ -106,11 +106,12 @@ namespace BnBYachts.Payments.Managers
                 };
                 await _userPaymentDetailsRepository.InsertAsync(pm);
                 return true;
-            }
-            else
-            {
-                return false;
-            }
+                }
+                else
+                {
+                    return false;
+                }
+
         }
 
         public async Task<bool> RefundPayment(int bookingId, long refundAmount)

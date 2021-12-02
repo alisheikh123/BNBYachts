@@ -6,8 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BnBYachts.Core.Domain\BnBYachts.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\..\payment\src\BnBYachts.Payments.Application.Contracts\BnBYachts.Payments.Application.Contracts.csproj" />
     <ProjectReference Include="..\BnBYachts.Core.Application.Contracts\BnBYachts.Core.Application.Contracts.csproj" />
+    <ProjectReference Include="..\BnBYachts.Core.Domain\BnBYachts.Core.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using BnBYachts.Boat.Enum;
 using Volo.Abp.Domain.Repositories;
@@ -9,6 +8,10 @@ using Volo.Abp.Domain.Services;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boats.Charter;
+using BnBYachts.Boat.Shared.Boat.Transferable;
+using BnBYachts.Boat.Helpers;
+using BnBYachts.Boat.Shared.Helper;
+using Volo.Abp.ObjectMapping;
 
 namespace BnBYachts.Boat.Manager
 {
@@ -18,41 +21,37 @@ namespace BnBYachts.Boat.Manager
         private readonly IRepository<BoatFeatureEntity, int> _boatelFeatureRepo;
         private readonly IRepository<BoatRuleEntity, int> _boatelRulesRepo;
         private readonly IRepository<BoatCalendarEntity, int> _boatelCalendarRepo;
+        private readonly IRepository<BoatGalleryEntity, int> _boatGalleryRepo;
         //Charters
         private readonly IRepository<CharterEntity, int> _charterRepository;
+        //Lookups
+        private readonly IRepository<RuleEntity, int> _rulesRepo;
+        private readonly IRepository<FeatureEntity, int> _featuresRepo;
+        private readonly IObjectMapper<BoatDomainModule> _objectMapper;
 
-        public HostBoatManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep, IRepository<BoatCalendarEntity, int> boatelCalendarRepo)
+
+        public HostBoatManager(IRepository<RuleEntity, int> rulesRepo,
+            IRepository<FeatureEntity, int> featuresRepo, IRepository<BoatEntity, int> boatRepository,
+            IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository,
+            IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep,
+            IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatGalleryRepo,
+            IObjectMapper<BoatDomainModule> objectMapper)
         {
+
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
             _boatelRulesRepo = boatelRulesRep;
             _charterRepository = charterRepository;
-
-
+            _rulesRepo = rulesRepo;
+            _featuresRepo = featuresRepo;
+            _objectMapper = objectMapper;
+            _boatGalleryRepo = boatGalleryRepo;
         }
         public async Task<HostBoatRequestable> Insert(HostBoatRequestable input)
         {
-            var boat = new BoatEntity
-            {
-                Name = "my Boat",
-                Length = 200,
-                TotalBedrooms = 2,
-                TotalWashrooms = 3,
-                IsBoatelServicesOffered = true,
-                BoatelAvailabilityDays = 20,
-                CheckinTime = new DateTime(),
-                CheckoutTime = new DateTime().AddDays(3),
-                Latitude = 32.073978,
-                Longitude = 72.686073,
-                PerDayCharges = 200,
-                IsActive = true,
-                BoatType = BoatTypes.PowerBoat,
-                CreationTime = new DateTime()
-            };
-            var response = await _boatRepository.InsertAsync(boat, true);
+            await _boatRepository.InsertAsync(_objectMapper.Map<HostBoatRequestable, BoatEntity>(input), true);
             return new HostBoatRequestable();
-
         }
         public async Task<ICollection<BoatEntity>> GetBoatelsByFilters(BoatelSearchFiltersRequestable parameters)
         {
@@ -94,7 +93,7 @@ namespace BnBYachts.Boat.Manager
                 throw;
             }
         }
-        public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar,Guid? userId)
+        public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar, Guid? userId)
         {
             try
             {
@@ -127,6 +126,86 @@ namespace BnBYachts.Boat.Manager
 
             return boat;
         }
+        #region Host Onboarding
+
+        public async Task<HostLookupTransferable> GetHostOnBoardingLookup(Guid? userId)
+        {
+            var rules = await _rulesRepo.GetListAsync(r => r.IsDefault == true || r.CreatorId == userId).ConfigureAwait(false);
+            var features = await _featuresRepo.GetListAsync(r => r.IsDefaultFeature == true || r.CreatorId == userId).ConfigureAwait(false);
+            var data = HostLookupFactory.Contruct(rules, features);
+            return data;
+        }
+
+        public async Task<bool> AddHostBoatManager(HostBoatRequestable boatDetails, Guid? userId)
+        {
+            //boat
+            var boat = boatDetails.CreateMapped<HostBoatRequestable, BoatEntity>();
+            boat.CreationTime = DateTime.Now;
+            boat.LastModifierId = boat.CreatorId = userId;
+            boat.BoatType = (BoatTypes)(boatDetails.BoatType);
+            var postBoatData = await _boatRepository.InsertAsync(boat, autoSave: true);
+            //Gallery added
+            foreach (var gallery in boatDetails.BoatGallery)
+            {
+                var boatGallery = gallery.CreateMapped<BoatGalleryRequestable, BoatGalleryEntity>();
+                boatGallery.BoatEntityId = postBoatData.Id;
+                string uploadedFilePath = FileUploader.UploadFilesLocal(gallery.FileName, gallery.FileData);
+                //await S3FileUploader.UploadFileToAWSAsync(gallery.FileName, gallery.FileData, "boatGallery", "");
+                boatGallery.ImagePath = uploadedFilePath;
+                await _boatGalleryRepo.InsertAsync(boatGallery).ConfigureAwait(false);
+
+            }
+            //Features added
+            foreach (var features in boatDetails.BoatFeatures)
+            {
+                var boatFeatures = new BoatFeatureEntity();
+                if (features.Id == null)
+                {
+                    var featureEntity = features.CreateMapped<BoatFeaturesRequestable, FeatureEntity>();
+                    featureEntity.CreatorId = userId;
+                    featureEntity.CreationTime = DateTime.Now;
+                    var response = await _featuresRepo.InsertAsync(featureEntity, autoSave: true).ConfigureAwait(false);
+                    features.Id = response.Id;
+                }
+                boatFeatures.OfferedFeaturesId = features.Id; //CreateMapped<BoatFeaturesRequestable, FeatureEntity>();
+                boatFeatures.BoatEntityId = postBoatData.Id;
+                boatFeatures.CreatorId = userId;
+                boatFeatures.CreationTime = DateTime.Now;
+                boatFeatures.LastModifierId = boat.CreatorId = userId;
+                await _boatelFeatureRepo.InsertAsync(boatFeatures, autoSave: true).ConfigureAwait(false);
+            }
+            //Rules added
+            foreach (var rule in boatDetails.BoatRules)
+            {
+                var boatRule = new BoatRuleEntity();
+                if (rule.Id == null)
+                {
+                    var ruleEntity = rule.CreateMapped<BoatRulesRequestable, RuleEntity>();
+                    ruleEntity.CreatorId = userId;
+                    ruleEntity.CreationTime = DateTime.Now;
+                    var response = await _rulesRepo.InsertAsync(ruleEntity, autoSave: true).ConfigureAwait(false);
+                    rule.Id = response.Id;
+                }
+                boatRule.OfferedRuleId = rule.Id;
+                boatRule.BoatEntityId = postBoatData.Id;
+                boatRule.CreatorId = userId;
+                boatRule.CreationTime = DateTime.Now;
+                await _boatelRulesRepo.InsertAsync(boatRule, autoSave: true).ConfigureAwait(false);
+            }
+            ////Calendar added
+            var boatCalendar = boatDetails.BoatCalendar.CreateMapped<BoatCalendarRequestable, BoatCalendarEntity>();
+            boatCalendar.BoatEntityId = postBoatData.Id;
+            boatCalendar.IsAvailable = true;
+            await _boatelCalendarRepo.InsertAsync(boatCalendar, autoSave: true).ConfigureAwait(false);
+            return true;
+        }
+
+        #endregion
+
+
+
+
+
         ///helpers
         public static double GetDistanceInMeters(double sLat, double sLong, double dLat, double dLong)
         {
@@ -140,5 +219,19 @@ namespace BnBYachts.Boat.Manager
             var distanceinMeter = distanceInMM; //* 0.001;
             return distanceinMeter;
         }
+
+        public async Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId)
+        {
+            var boats = await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false);
+            foreach (var boat in boats)
+            {
+                await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
+            }
+            return boats;
+
+
+        }
+
+
     }
 }
