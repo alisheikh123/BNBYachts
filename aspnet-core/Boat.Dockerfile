@@ -11,7 +11,6 @@ WORKDIR /src
 COPY ["microservices/BnBYachts.Boat.HttpApi.Host/BnBYachts.Boat.HttpApi.Host.csproj", "microservices/BnBYachts.Boat.HttpApi.Host/"]
 COPY ["modules/boat/src/BnBYachts.Boat.EntityFrameworkCore/BnBYachts.Boat.EntityFrameworkCore.csproj", "modules/boat/src/BnBYachts.Boat.EntityFrameworkCore/"]
 COPY ["modules/boat/src/BnBYachts.Boat.Domain/BnBYachts.Boat.Domain.csproj", "modules/boat/src/BnBYachts.Boat.Domain/"]
-COPY ["buildingblocks/sharedModule/BnByachts.SharedModule/BnByachts.SharedModule.csproj", "./buildingblocks/SharedModule/BnByachts.SharedModule/"]
 COPY ["modules/boat/src/BnBYachts.Boat.Domain.Shared/BnBYachts.Boat.Domain.Shared.csproj", "modules/boat/src/BnBYachts.Boat.Domain.Shared/"]
 COPY ["modules/boat/src/BnBYachts.Boat.HttpApi/BnBYachts.Boat.HttpApi.csproj", "modules/boat/src/BnBYachts.Boat.HttpApi/"]
 COPY ["modules/boat/src/BnBYachts.Boat.Application.Contracts/BnBYachts.Boat.Application.Contracts.csproj", "modules/boat/src/BnBYachts.Boat.Application.Contracts/"]
