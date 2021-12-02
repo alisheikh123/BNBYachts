@@ -251,10 +251,10 @@ paket-files/
 .idea/
 *.sln.iml
 
-*.appsettings.json
-*.appsettings.Development.json
-*.appsettings.Development.json
-*.appsettings.secrets.json
+** appsettings.json
+** appsettings.Development.json
+
+** appsettings.secrets.json
 
 # BnBYachts
 microservices/BnBYachts.Boat.HttpApi.Host/Logs/*
