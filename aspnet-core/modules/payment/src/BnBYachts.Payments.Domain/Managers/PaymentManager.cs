@@ -99,7 +99,7 @@ namespace BnBYachts.Payments.Managers
             {
                 PaymentDetailsEntity pm = new PaymentDetailsEntity
                 {
-                    BookingId = data.BookingId,
+                    BookingId = data.BookingId??0,
                     PaymentId = response.Id,
                     CustomerId = user.CustomerId,
                     Amount = data.Amount
