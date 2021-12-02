@@ -1,12 +1,12 @@
 ﻿using BnBYachts.Booking.Booking;
 using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Shared.BoatBooking.Interface;
+using BnBYachts.Booking.Shared.BoatBooking.Transferable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -17,30 +17,36 @@ namespace BnBYachts.Booking.Managers
     {
         private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
         private readonly IRepository<BookingCancelEntity, int> _boatelCanceRepository;
+
         public HostBoatBookingManager(IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel)
         {
             _boatelBookingRepository = repository;
             _boatelCanceRepository = repositorycancel;
         }
 
-        public async Task<bool> BoatelBooking(BoatelBookingEntity data, Guid? userId, string userName)
+        public async Task<BoatelBookingTransferable> BoatelBooking(BoatelBookingEntity data, Guid? userId, string userName)
         {
+            BoatelBookingTransferable dto = new BoatelBookingTransferable();
             data.LastModifierId = data.CreatorId = userId;
             data.UserId = userId.ToString();
             data.UserName = userName;
             var response = await _boatelBookingRepository.InsertAsync(data).ConfigureAwait(false);
             if (response.Id > 0)
             {
-                return true;
+                dto.isSucces = true;
+                return dto;
             }
             else
             {
-                return false;
+                var currentBooking = await _boatelBookingRepository.GetListAsync().ConfigureAwait(false);
+                dto.BookingId = currentBooking.LastOrDefault().Id + 1;
+                dto.isSucces = true;
+                return dto;
             }
         }
         public async Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName)
         {
-         
+
             var booking = await _boatelBookingRepository.GetAsync(data.Id);
             if (booking != null)
             {
@@ -59,11 +65,7 @@ namespace BnBYachts.Booking.Managers
             {
                 return false;
             }
-            
-          
         }
-
-
 
         public async Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail(string userId)
         {
@@ -133,15 +135,23 @@ namespace BnBYachts.Booking.Managers
             return pastBooking;
         }
 
-
-
         public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId)
         {
             var upcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate > DateTime.Today).ConfigureAwait(false);
             return upcomingBookings;
         }
 
-       
+        public async Task<ICollection<BoatelBookingEntity>> GetMyBookings(string userId)
+        {
+            var myBookings = await _boatelBookingRepository.GetListAsync(x => x.CreatorId.ToString() == userId).ConfigureAwait(false);
+            return myBookings;
+        }
+
+        public async Task<ICollection<BoatelBookingEntity>> UpcomingHostBoatelBookingDetail(string userId)
+        {
+            var upcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.HostId == userId && x.CheckinDate > DateTime.Today).ConfigureAwait(false);
+            return upcomingBookings;
+        }
     }
 }
 

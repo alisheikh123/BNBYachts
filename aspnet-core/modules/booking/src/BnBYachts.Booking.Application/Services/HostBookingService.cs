@@ -34,5 +34,12 @@ namespace BnBYachts.Booking.Services
             booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Cancel;
             return true;
         }
+        [HttpGet]
+        [Route("get-my-approve-reservations")]
+        public async Task<List<BoatelBookingEntity>> GetApprovedHostBookings()
+        {
+            var boatelBookings = await _boatelBookingRepository.GetListAsync(res => res.HostId == CurrentUser.Id.ToString() && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false);
+            return boatelBookings;
+        }
     }
 }

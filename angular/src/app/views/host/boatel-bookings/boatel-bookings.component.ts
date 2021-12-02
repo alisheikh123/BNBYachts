@@ -13,11 +13,12 @@ import { environment } from 'src/environments/environment';
 })
 export class BoatelBookingsComponent implements OnInit {
 
-  constructor(config: NgbRatingConfig, private reservationService: ReservationService, private boatService: YachtSearchService, private toastr: ToastrService) {
+  constructor(config: NgbRatingConfig, private reservationService: ReservationService, private boatService: YachtSearchService, private toastr: ToastrService,private bookingServices : BookingService) {
     config.max = 5;
     config.readonly = true;
   };
   boatelBookings: any;
+  bookedServices: any;
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
 
@@ -25,6 +26,15 @@ export class BoatelBookingsComponent implements OnInit {
     this.reservationService.getBoatelBookingRequests().subscribe(res => {
       this.boatelBookings = res;
       this.boatelBookings.forEach((element: any) => {
+        this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
+          element.boatDetail = boatdetail;
+        });
+      });
+    })
+    // For booked services
+    this.reservationService.getBookedServices().subscribe(res => {
+      this.bookedServices = res;
+      this.bookedServices.forEach((element: any) => {
         this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
           element.boatDetail = boatdetail;
         });
@@ -43,5 +53,4 @@ export class BoatelBookingsComponent implements OnInit {
       this.boatelBookings.splice(index, 1);
     });
   }
-
 }

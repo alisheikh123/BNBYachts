@@ -37,6 +37,7 @@ export class ReservationCancellationComponent implements OnInit {
   checkoutCombindDateTime: any;
   totalHours: any;
   bookingStatus: any;
+  isHost:boolean;
   constructor(private service: BookingService, private fb: FormBuilder, private modal: NgbModal, public activatedRoute: ActivatedRoute, private route: Router, private modalService: NgbModal) { }
   @ViewChild('template') templateRef: TemplateRef<any>;
   @ViewChild('bookingstatus') bookingtemplate: TemplateRef<any>;
@@ -46,12 +47,12 @@ export class ReservationCancellationComponent implements OnInit {
       this.bkCancel = res['id'].toString();
 
     });
-
+    //Check if Host
+    var userRole = localStorage.getItem('userRole');
+    (userRole == 'a8e857de-7ca6-f663-feb0-3a003661104b')? this.isHost = true: this.isHost = false;
+    //
     this.service.getBookingBoatDetail(this.bkCancel).subscribe((res: any) => {
       this.bookingCancelDetail = res;
-
-
-
 
       res.forEach((elem: any) => {
 
@@ -128,7 +129,6 @@ export class ReservationCancellationComponent implements OnInit {
               //   }
               // });
 
-
             }
             if (this.remaingHours == 72 || (this.remaingHours < 72 && this.remaingHours >= 24)) {
 
@@ -162,22 +162,14 @@ export class ReservationCancellationComponent implements OnInit {
               //     this.modal.open(this.bookingtemplate);
               //   }
               // });
-
             }
-
           }
-
-
-
-
         });
 
 
       });
 
     });
-
-
   }
 
   goBack() {
@@ -202,7 +194,6 @@ export class ReservationCancellationComponent implements OnInit {
   }
   confirmCancel() {
     let bookingCancellationModel = {
-
       BookingId: this.bookingId,
       BookingType: this.bookingType,
       Reason: this.ReasonValue,
@@ -218,13 +209,18 @@ export class ReservationCancellationComponent implements OnInit {
     this.service.saveCancellation(bookingCancellationModel).subscribe((res: any) => {
 
       if (res == true) {
-        this.modal.dismissAll();
-        this.modal.open(this.cancelledRef);
+        this.service.getRefundable(bookingCancellationModel.BookingId, bookingCancellationModel.RefundAmount).subscribe((res: any) => {
+          if (res == true) {
+            this.modal.dismissAll();
+            this.modal.open(this.cancelledRef);
+          }
+          else {
+            this.modal.open(this.bookingtemplate);
+          }
+        });        
       }
       else {
-
       }
-
     });
   }
 
