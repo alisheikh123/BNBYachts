@@ -30,11 +30,14 @@ export class ReservationService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+
+    getBookedServices(){
+      return this.http.get(this.bookingApiUrl + '/get-my-approve-reservations').pipe(
+        catchError(this.handleError));
+    }
     return throwError(errorMessage);
   }
-
   getHostBoats() {
     return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
   }
-
 }
