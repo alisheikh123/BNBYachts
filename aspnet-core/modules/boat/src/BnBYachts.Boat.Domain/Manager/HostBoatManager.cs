@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using BnBYachts.Boat.Enum;
 using Volo.Abp.Domain.Repositories;
@@ -12,6 +11,7 @@ using BnBYachts.Boats.Charter;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boat.Helpers;
 using BnBYachts.Boat.Shared.Helper;
+using Volo.Abp.ObjectMapping;
 
 namespace BnBYachts.Boat.Manager
 {
@@ -27,10 +27,17 @@ namespace BnBYachts.Boat.Manager
         //Lookups
         private readonly IRepository<RuleEntity, int> _rulesRepo;
         private readonly IRepository<FeatureEntity, int> _featuresRepo;
+        private readonly IObjectMapper<BoatDomainModule> _objectMapper;
 
 
-        public HostBoatManager(IRepository<RuleEntity, int> rulesRepo, IRepository<FeatureEntity, int> featuresRepo, IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep, IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatGalleryRepo)
+        public HostBoatManager(IRepository<RuleEntity, int> rulesRepo,
+            IRepository<FeatureEntity, int> featuresRepo, IRepository<BoatEntity, int> boatRepository,
+            IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository,
+            IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep,
+            IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatGalleryRepo,
+            IObjectMapper<BoatDomainModule> objectMapper)
         {
+
             _boatRepository = repository;
             _boatelFeatureRepo = boatelFeatureRepo;
             _boatelCalendarRepo = boatelCalendarRepo;
@@ -38,30 +45,13 @@ namespace BnBYachts.Boat.Manager
             _charterRepository = charterRepository;
             _rulesRepo = rulesRepo;
             _featuresRepo = featuresRepo;
+            _objectMapper = objectMapper;
             _boatGalleryRepo = boatGalleryRepo;
         }
         public async Task<HostBoatRequestable> Insert(HostBoatRequestable input)
         {
-            var boat = new BoatEntity
-            {
-                Name = "my Boat",
-                Length = 200,
-                TotalBedrooms = 2,
-                TotalWashrooms = 3,
-                IsBoatelServicesOffered = true,
-                BoatelAvailabilityDays = 20,
-                CheckinTime = new DateTime(),
-                CheckoutTime = new DateTime().AddDays(3),
-                Latitude = 32.073978,
-                Longitude = 72.686073,
-                PerDayCharges = 200,
-                IsActive = true,
-                BoatType = BoatTypes.PowerBoat,
-                CreationTime = new DateTime()
-            };
-            var response = await _boatRepository.InsertAsync(boat, true);
+            await _boatRepository.InsertAsync(_objectMapper.Map<HostBoatRequestable, BoatEntity>(input), true);
             return new HostBoatRequestable();
-
         }
         public async Task<ICollection<BoatEntity>> GetBoatelsByFilters(BoatelSearchFiltersRequestable parameters)
         {

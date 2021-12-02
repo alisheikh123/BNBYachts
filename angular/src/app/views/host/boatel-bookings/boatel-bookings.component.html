@@ -131,12 +131,12 @@
                   </ul>
                 </div>
               </div>
-              <div class="custom-card req-user-card">
+              <div class="custom-card req-user-card" *ngFor="let item of bookedServices;let i = index">
                 <div class="image-with-text custom-flex-between align-items-start">
                   <div class="image-with-text-inner">
-                    <img src="./images/user-img.png" alt="">
+                    <img src="../../../../assets/images/user-img.png" alt="">
                     <div class="user-details">
-                      <p class="medium">Guest Name .<span class="small-text regular grey">Boat Name: Andiamo </span></p>
+                      <p class="medium">{{item.userName}} <span class="small-text regular grey">Boat Name:{{item.boatDetail?.name}} </span></p>
                       <p class="small-stars  grey-stars py-2">
                         <span class="fa fa-star stars-clr "></span>
                         <span class="fa fa-star stars-clr"></span>
@@ -144,73 +144,21 @@
                         <span class="fa fa-star stars-clr"></span>
                         <span class="fa fa-star stars-clr"></span>
                       </p>
-                      <p class="small-text grey ">Location : Karachi</p>
-                      <p class="small-text grey ">Guest: 4</p>
+                      <p class="small-text grey ">Location : {{item.boatDetail?.location}}</p>
+                      <p class="small-text grey ">Guest: {{item.noOfAdults + item.noOfChildrens}}</p>
 
                     </div>
                   </div>
                   <div class="right-content custom-flex flex-column align-items-end">
-                    <p class="small-text grey">1July/2021 - 1July/2021</p>
+                    <p class="small-text grey">{{item.checkinDate | date:'dd MMM/YYYY'}} - {{item.checkoutDate |
+                      date:'dd MMM/YYYY'}}</p>
                     <div class="custom-flex mt-4">
-                      <a href="charter-reservation.html" class="custom-btn blue">Modify Reservation </a>
-
+                      <a [routerLink]="['/boat-listing/reservation-cancellation',item.id]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="custom-card req-user-card custom-margin">
-                <div class="image-with-text custom-flex-between align-items-start">
-                  <div class="image-with-text-inner">
-                    <img src="./images/user-img.png" alt="">
-                    <div class="user-details">
-                      <p class="medium">Guest Name .<span class="small-text regular grey">Boat Name: Ohana</span></p>
-                      <p class="small-stars  grey-stars py-2">
-                        <span class="fa fa-star stars-clr "></span>
-                        <span class="fa fa-star stars-clr"></span>
-                        <span class="fa fa-star stars-clr"></span>
-                        <span class="fa fa-star stars-clr"></span>
-                        <span class="fa fa-star stars-clr"></span>
-                      </p>
-                      <p class="small-text grey ">Location : Karachi</p>
-                      <p class="small-text grey ">Guest: 4</p>
-
-                    </div>
-                  </div>
-                  <div class="right-content custom-flex flex-column align-items-end">
-                    <p class="small-text grey">1July/2021 - 1July/2021</p>
-                    <div class="custom-flex mt-4">
-                      <a href="charter-reservation.html" class="custom-btn blue">Modify Reservation </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="custom-card req-user-card my-2 custom-margin">
-                <div class="image-with-text custom-flex-between align-items-start">
-                  <div class="image-with-text-inner">
-                    <img src="./images/user-img.png" alt="">
-                    <div class="user-details">
-                      <p class="medium">Guest Name .<span class="small-text regular grey">Boat Name: Enless Summer
-                        </span></p>
-                      <p class="small-stars  grey-stars py-2">
-                        <span class="fa fa-star stars-clr "></span>
-                        <span class="fa fa-star stars-clr"></span>
-                        <span class="fa fa-star stars-clr"></span>
-                        <span class="fa fa-star stars-clr"></span>
-                        <span class="fa fa-star stars-clr"></span>
-                      </p>
-                      <p class="small-text grey ">Location : Karachi</p>
-                      <p class="small-text grey ">Guest: 4</p>
-
-                    </div>
-                  </div>
-                  <div class="right-content custom-flex flex-column align-items-end">
-                    <p class="small-text grey">1July/2021 - 1July/2021</p>
-                    <div class="custom-flex mt-4">
-                      <a href="charter-reservation.html" class="custom-btn blue">Modify Reservation </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
             </div>
             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
               <div class="status-wrapper custom-flex-start pb-3">

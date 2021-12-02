@@ -11,6 +11,7 @@ import { YachtServicesComponent } from './components/yacht-services/yacht-servic
 import { YachtSubscriptionComponent } from './components/yacht-subscription/yacht-subscription.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { NoFoundModalComponent } from './components/no-found-modal/no-found-modal.component';
+import { HostDashboardComponent } from './components/host-dashboard/host-dashboard.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NoFoundModalComponent } from './components/no-found-modal/no-found-moda
     YachtSubscriptionComponent,
     FeaturedCitiesComponent,
     NoFoundModalComponent,
+    HostDashboardComponent,
   ],
   imports: [
     HomeRoutingModule,

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Volo.Abp.Application.Dtos;
 
 namespace BnBYachts.Booking.DTO
@@ -8,7 +6,6 @@ namespace BnBYachts.Booking.DTO
     public class BoatelBookingDto : AuditedEntityDto<int>
     {
         public DateTime CheckinDate { get; set; }
-        
         public DateTime CheckoutDate { get; set; }
         public BookingStatus BookingStatus { get; set; }
         public PaymentStatus PaymentStatus { get; set; }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using BnBYachts.EventBusShared.Queue;
 using BnByachts.Seeder;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
@@ -21,7 +20,6 @@ namespace BnByachts.Simulator
 
             using var application = AbpApplicationFactory.Create<SeederModule>(options =>
             {
-                //options.UseAutofac();
 
             });
             application.Initialize();

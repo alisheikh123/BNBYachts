@@ -17,6 +17,7 @@ import { AuthAppModule } from './views/auth/auth.module';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { LoaderService } from './shared/loader/services/loader.service';
 import { TryHostingComponent } from './views/common/try-hosting/try-hosting.component';
+import { BookingService } from './core/Booking/booking.service';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { TryHostingComponent } from './views/common/try-hosting/try-hosting.comp
       multi: true
     },
     LoaderService,
+    BookingService,
     {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter}
   ],
   bootstrap: [AppComponent]

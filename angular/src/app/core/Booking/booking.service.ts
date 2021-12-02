@@ -12,7 +12,7 @@ export class BookingService {
   constructor(private http: HttpClient) { }
 
   boatelBooking(model: any) {
-    return this.http.post(this.bookingApiUrl + '/boatelbooking', model).pipe(
+    return this.http.post<any>(this.bookingApiUrl + '/boatelbooking', model).pipe(
       catchError(this.handleError));
   }
   modifyboatelBooking(model: any) {
@@ -66,4 +66,7 @@ export class BookingService {
   }
 
   /* Ali */
+  getUpcomingHostBookingDetail() {
+    return this.http.get(this.bookingApiUrl + '/upcominghostboatelbookingdetail').pipe(catchError(this.handleError));
+  }
 }
