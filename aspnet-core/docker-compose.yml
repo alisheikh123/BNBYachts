@@ -12,8 +12,6 @@ services:
     build:
       context: ../angular
       dockerfile: Angular.Dockerfile
-    ports:
-      - "8080:80"
   bnb_boat_api:
     container_name: bnb_boat_api
     build:
@@ -33,8 +31,6 @@ services:
       "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
       "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
       "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
-    ports:
-      - "21021:80"
     volumes:
       - ./tmp-build/BNB/BNBBoat-Webhost/logs:/app/Logs
       - ./tmp-build/BNB/BNBBoat-Webhost/.aspnet/https:/root/.aspnet/https:ro
@@ -63,8 +59,6 @@ services:
       "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
       "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
       "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
-    ports:
-      - "21022:80"
     volumes:
       - ./tmp-build/BNB/BNBBooking-Host/logs:/app/Logs
       - ./tmp-build/BNB/BNBBooking-Host/.aspnet/https:/root/.aspnet/https:ro
@@ -92,8 +86,6 @@ services:
       "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
       "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
       "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
-    ports:
-      - "21023:80"
     volumes:
       - ./tmp-build/BNB/BNBPayment-Host/logs:/app/Logs
       - ./tmp-build/BNB/BNBPayment-Host/.aspnet/https:/root/.aspnet/https:ro
@@ -121,8 +113,6 @@ services:
       "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
       "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
       "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
-    ports:
-      - "21024:80"
     volumes:
       - ./tmp-build/BNB/BnbCore-Host/logs:/app/Logs
       - ./tmp-build/BNB/BnbCore-Host/.aspnet/https:/root/.aspnet/https:ro
@@ -151,8 +141,6 @@ services:
       "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
       "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
       "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
-    ports:
-      - "21025:80"
     volumes:
       - ./tmp-build/BNB/BnbIdv-Host/logs:/app/Logs
       - ./tmp-build/BNB/BnbIdv-Host/.aspnet/https:/root/.aspnet/https:ro

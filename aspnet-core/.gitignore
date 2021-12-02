@@ -251,6 +251,7 @@ paket-files/
 .idea/
 *.sln.iml
 
+
 # BnBYachts
 microservices/BnBYachts.Boat.HttpApi.Host/Logs/*
 microservices/BnBYachts.Web.Host/Logs/*
