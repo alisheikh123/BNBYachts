@@ -130,58 +130,49 @@
                                             <div class="col-xl-6 py-2">
                                                 <div class="row pb-2 m-0 check-in-out-wrap">
                                                     <div class="col-md-6 py-2">
-                                                        <div
-                                                            class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                                                        <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row"
+                                                            *ngIf="charterSchedule?.length > 0">
+                                                            <span class="fas fa-chevron-left"
+                                                                (click)="onChangeDate(false)"
+                                                                [hidden]="dateScheduleIndex == 0">
+                                                            </span>
                                                             <div class="">
-                                                                <!-- <div class="">
-                                                                    <label>Check-in</label>
-                                                                    <input
-                                                                        placeholder="Add date" name="dp"
-                                                                        container="body"
-                                                                        [(ngModel)]="charterFilterDetails.checkinDate"
-                                                                        (click)="d.toggle()" ngbDatepicker
-                                                                        #d="ngbDatepicker">
-                                                                </div> -->
+                                                                <div class="">
+                                                                    <span>
+                                                                        <b>{{charterSchedule[dateScheduleIndex]?.departureDate
+                                                                            | date : 'MMM-dd-YYYY'}}</b></span>
+                                                                </div>
                                                             </div>
-                                                            <div class="border-left-1">
-                                                                <!-- <div class="">
-                                                                    <label>Check-out</label>
-                                                                    <input
-                                                                        placeholder="Add date" name="dp2"
-                                                                        container="body"
-                                                                        [(ngModel)]="charterFilterDetails.checkoutDate"
-                                                                        (click)="d2.toggle()" ngbDatepicker
-                                                                        #d2="ngbDatepicker">
-                                                                </div> -->
-                                                            </div>
+                                                            <span
+                                                                [hidden]="dateScheduleIndex == charterSchedule.length -1 "
+                                                                class="fas fa-chevron-right"
+                                                                (click)="onChangeDate(true)"></span>
                                                             <!-- </div>
                                                         <small class="text-danger"
                                                             *ngIf="(charterFilterDetails?.checkinDate == '' || charterFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
                                                             {{!charterFilterDetails.checkinDate ? 'check-in':'check-out'}}
                                                             date</small> -->
                                                         </div>
-                                                        <div class="col-md-6 py-2">
-                                                            <div class="">
-                                                                <div class="custom-flex select custom-select select-search custom-input-label-inside"
-                                                                    [ngbPopover]="popContent" placement="bottom"
-                                                                    autoClose="outside" triggers="manual"
-                                                                    #popOver="ngbPopover" (click)="openPopover()">
-                                                                    <label>Guests</label>
+                                                    </div>
+                                                    <div class="col-md-6 py-2">
+                                                        <div class="custom-flex select custom-select select-search custom-input-label-inside"
+                                                            [ngbPopover]="popContent" placement="bottom"
+                                                            autoClose="outside" triggers="manual" #popOver="ngbPopover"
+                                                            (click)="openPopover()">
+                                                            <label>Guests</label>
 
-                                                                    <div class="custom-flex w-100">
-                                                                        <p class="counter-text-total">
-                                                                            {{charterFilterDetails?.adults}}
-                                                                            Adults</p>
-                                                                        <p class="counter-text-total">
-                                                                            {{charterFilterDetails?.childrens}}
-                                                                            Children</p>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="custom-flex w-100">
+                                                                <p class="counter-text-total">
+                                                                    {{charterFilterDetails?.adults}}
+                                                                    Adults</p>
+                                                                <p class="counter-text-total">
+                                                                    {{charterFilterDetails?.childrens}}
+                                                                    Children</p>
                                                             </div>
-                                                            <small class="text-danger"
-                                                                *ngIf="(charterFilterDetails.adults == 0 && charterFilterDetails.childrens == 0) && isSubmitted">Enter
-                                                                guests deteils.</small>
                                                         </div>
+                                                        <small class="text-danger"
+                                                            *ngIf="(charterFilterDetails.adults == 0 && charterFilterDetails.childrens == 0) && isSubmitted">Enter
+                                                            guests deteils.</small>
                                                     </div>
 
                                                     <ng-template #popContent>
@@ -242,24 +233,29 @@
                                                     </ng-template>
                                                     <div class="total-amount-wrap custom-padding-top">
                                                         <div class="total-amount-wrap-inner">
-                                                            <p>$ {{charterDetails?.boat?.perDayCharges}} </p>
-                                                            <!-- <p>${{boatDetails?.perDayCharges * calculateDays()}}.00</p> -->
+                                                            <p>$ {{charterDetails?.charterFee}} X {{charterFilterDetails.adults +
+                                                                charterFilterDetails.childrens}} </p>
+                                                            <p>${{charterDetails?.charterFee *
+                                                                (charterFilterDetails.adults +
+                                                                charterFilterDetails.childrens)}}.00</p>
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner">
                                                             <p>Tax</p>
-                                                            <!-- <p>${{boatDetails?.taxFee}}.00</p> -->
+                                                            <p>${{charterDetails?.boat?.taxFee}}.00</p>
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner">
                                                             <p>Service Fee</p>
-                                                            <!-- <p>$20.00</p> -->
+                                                            <p>$20.00</p>
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner bottom">
-                                                            <!-- <p class="medium">Total(USD)</p>
-                                                        <p class="medium">$ {{boatDetails?.perDayCharges *
-                                                            calculateDays() + boatDetails?.taxFee+ 20}}.00</p> -->
+                                                            <p class="medium">Total(USD)</p>
+                                                            <p class="medium">$ {{charterDetails?.charterFee *
+                                                                (charterFilterDetails.adults +
+                                                                charterFilterDetails.childrens) +
+                                                                charterDetails?.boat?.taxFee+ 20}}.00</p>
 
                                                         </div>
                                                         <button class="custom-btn blue"
@@ -679,7 +675,8 @@
 
                         <div class="custom-flex-start">
                             <div class="row text-left">
-                                <div class="col-6" *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':false">
+                                <div class="col-6"
+                                    *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':false">
                                     <p><i class="fa fa-cutlery pe-2"></i>{{item?.offeredFeatures.name}}</p>
                                 </div>
                             </div>
@@ -690,7 +687,8 @@
                         <h5 class="bold text-left">Safety Services</h5>
                         <div class="custom-flex-start">
                             <div class="row text-left">
-                                <div class="col-6" *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':true">
+                                <div class="col-6"
+                                    *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':true">
                                     <p><i class="fa fa-cutlery pe-2"></i>{{item?.offeredFeatures.name}}</p>
                                 </div>
                             </div>

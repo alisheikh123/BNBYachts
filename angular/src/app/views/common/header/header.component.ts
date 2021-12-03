@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
         }
         else {
           this.canSwitchAccount = false;
-          this.app.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.user.toLowerCase()).roleId;
+          this.app.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.user.toLowerCase())?.roleId;
         }
         if (localStorage.getItem('userRole')) {
           this.app.loggedInUserRole = localStorage.getItem('userRole');

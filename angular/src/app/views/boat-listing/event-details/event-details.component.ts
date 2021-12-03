@@ -24,7 +24,8 @@ export class EventDetailsComponent implements OnInit {
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
-
+  eventSchedule: any;
+  dateScheduleIndex = 0;
 
   eventFilterDetails = {
     adults: 0,
@@ -53,8 +54,8 @@ export class EventDetailsComponent implements OnInit {
 
   getEventDetailsById() {
     this.yachtSearchService.eventDetailsById(this.eventId).subscribe((res: any) => {
-      this.eventDetails = res;
-      debugger;
+      this.eventDetails = res.eventDetails;
+      this.eventSchedule = res.eventSchedule;
       this.getHostDetails(this.eventDetails?.boat.creatorId);
     })
   }
@@ -92,5 +93,12 @@ export class EventDetailsComponent implements OnInit {
     this.eventFilterDetails.adults = this.popOverFilterData.adults;
     this.eventFilterDetails.childrens = this.popOverFilterData.childrens;
     this.popover.close();
+  }
+
+  onChangeDate(isIncrease: boolean) {
+    this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
+    this.yachtSearchService.eventDetailsById(this.eventSchedule[this.dateScheduleIndex]?.eventId).subscribe((res: any) => {
+      this.eventDetails = res?.eventDetails;
+    })
   }
 }

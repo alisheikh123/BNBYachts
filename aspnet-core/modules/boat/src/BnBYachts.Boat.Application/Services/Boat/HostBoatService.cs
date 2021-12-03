@@ -54,7 +54,7 @@ namespace BnBYachts.Services.Boat
 
         [Route("FilterChartersBoats")]
         [HttpPost]
-        public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable parameters)
+        public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable parameters) 
         {
             var response = await _hostBoatManager.GetChartersByFilters(parameters);
             return response;
@@ -77,14 +77,14 @@ namespace BnBYachts.Services.Boat
 
         [Route("charter-details/{charterId}")]
         [HttpGet]
-        public async Task<CharterEntity> GetCharterDetailsById(int charterId)
+        public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
         {
             var charter = await _hostBoatManager.GetCharterDetailsById(charterId);
             return charter;
         }
         [Route("event-details/{eventId}")]
         [HttpGet]
-        public async Task<EventEntity> GetEventDetailsById(int eventId)
+        public async Task<EventDetailTransferable> GetEventDetailsById(int eventId)
         {
             var eventData = await _hostBoatManager.GetEventsDetailsById(eventId);
             return eventData;

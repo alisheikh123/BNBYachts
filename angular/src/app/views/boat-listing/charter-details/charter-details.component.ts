@@ -14,19 +14,22 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./charter-details.component.scss']
 })
 export class CharterDetailsComponent implements OnInit {
-  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute,private modal:NgbModal) {
+  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute, private modal: NgbModal) {
     config.max = 5;
     config.readonly = true;
   }
   charterId: number;
   charterDetails: any;
+  charterSchedule: any;
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   @ViewChild('allFeaturesModal', { static: true }) templateRef: any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
+  dateScheduleIndex = 0;
 
 
   charterFilterDetails = {
+    departureDate: new Date(),
     adults: 0,
     childrens: 0
   };
@@ -53,7 +56,9 @@ export class CharterDetailsComponent implements OnInit {
 
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
-      this.charterDetails = res;
+      this.charterDetails = res?.charterDetails;
+      this.charterSchedule = res.charterSchedule;
+      console.log(this.charterSchedule);
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
   }
@@ -93,7 +98,14 @@ export class CharterDetailsComponent implements OnInit {
     this.popover.close();
   }
 
-  showAllFeatures(){
-    this.modal.open(this.templateRef, {centered: true ,windowClass:'custom-modal custom-small-modal'});
+  showAllFeatures() {
+    this.modal.open(this.templateRef, { centered: true, windowClass: 'custom-modal custom-small-modal' });
+  }
+
+  onChangeDate(isIncrease:boolean) {
+    this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex -1;
+    this.yachtSearchService.charterDetailsById(this.charterSchedule[this.dateScheduleIndex]?.charterId).subscribe((res: any) => {
+      this.charterDetails = res?.charterDetails;
+    })
   }
 }

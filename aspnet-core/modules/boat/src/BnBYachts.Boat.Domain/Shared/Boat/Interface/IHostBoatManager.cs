@@ -17,9 +17,9 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
         Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar, Guid? userId);
         Task<BoatEntity> GetBoatDetailsById(int boatId);
         Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable param);
-        Task<CharterEntity> GetCharterDetailsById(int charterId);
+        Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId);
         Task<ICollection<EventEntity>> GetEventsByFilters(EventSearchRequestable param);
-        Task<EventEntity> GetEventsDetailsById(int eventId);
+        Task<EventDetailTransferable> GetEventsDetailsById(int eventId);
 
         #region Host OnBoarding
         Task<HostLookupTransferable> GetHostOnBoardingLookup(Guid? userId);

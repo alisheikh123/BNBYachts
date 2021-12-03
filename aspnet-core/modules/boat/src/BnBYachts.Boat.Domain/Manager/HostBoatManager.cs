@@ -108,17 +108,9 @@ namespace BnBYachts.Boat.Manager
         }
         public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar, Guid? userId)
         {
-            try
-            {
                 boatCalendar.LastModifierId = boatCalendar.CreatorId = userId;
                 await _boatelCalendarRepo.InsertAsync(boatCalendar).ConfigureAwait(false);
                 return true;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
         }
         public async Task<BoatEntity> GetBoatDetailsById(int boatId)
         {
@@ -141,42 +133,50 @@ namespace BnBYachts.Boat.Manager
         }
         public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable param)
         {
-            var getCharters = await _charterRepository.GetListAsync();
-
-
-            var filterdCharters = new List<CharterEntity>();
-            foreach (var charter in getCharters)
-            {
-                double departureDistance = GetDistanceInMeters(charter.DepartingLatitude, charter.DepartingLongitude, param.DepartureLatitude, param.DepartureLongitude);
-                double destinationDistance = GetDistanceInMeters(charter.DestinationLatitude, charter.DestinationLongitude, param.DestinationLatitude, param.DestinationLongitude);
-                if (departureDistance <= 500 && destinationDistance <= 500)
+                var getCharters = await _charterRepository.GetListAsync();
+                var filterdCharters = new List<CharterEntity>();
+                foreach (var charter in getCharters)
                 {
-                    await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
-                    await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
-                    filterdCharters.Add(charter);
+                    double departureDistance = GetDistanceInMeters(charter.DepartingLatitude, charter.DepartingLongitude, param.DepartureLatitude, param.DepartureLongitude);
+                    double destinationDistance = GetDistanceInMeters(charter.DestinationLatitude, charter.DestinationLongitude, param.DestinationLatitude, param.DestinationLongitude);
+                    if (departureDistance <= 500 && destinationDistance <= 500)
+                    {
+                        await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
+                        await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+                        filterdCharters.Add(charter);
+                    }
                 }
-            }
-            ///guest Filters
-            return filterdCharters.WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
+                ///guest Filters
+                return filterdCharters.WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
         }
-        public async Task<CharterEntity> GetCharterDetailsById(int charterId)
+        public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
         {
-                var charter = await _charterRepository.GetAsync(b => b.Id == charterId, false).ConfigureAwait(false);
-                await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
-                await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
-                await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatFeatures).ConfigureAwait(false);
-                foreach (var feature in charter.Boat.BoatFeatures)
-                {
-                    await _boatelFeatureRepo.EnsurePropertyLoadedAsync(feature, x => x.OfferedFeatures);
-                }
-                await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatRules).ConfigureAwait(false);
-                foreach (var rule in charter.Boat.BoatRules)
-                {
-                    await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
-                }
-                await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatLocations).ConfigureAwait(false);
+            var charter = await _charterRepository.GetAsync(b => b.Id == charterId, false).ConfigureAwait(false);
+            var allCharters = await _charterRepository.GetListAsync(b => b.BoatId == charter.BoatId, false).ConfigureAwait(false);
+            await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
+            await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+            await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatFeatures).ConfigureAwait(false);
+            foreach (var feature in charter.Boat.BoatFeatures)
+            {
+                await _boatelFeatureRepo.EnsurePropertyLoadedAsync(feature, x => x.OfferedFeatures);
+            }
+            await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatRules).ConfigureAwait(false);
+            foreach (var rule in charter.Boat.BoatRules)
+            {
+                await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
+            }
+            await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatLocations).ConfigureAwait(false);
 
-                return charter;
+            var charterSchedule = new List<CharterAvailableDates>();
+            foreach(var ch in allCharters)
+            {
+                charterSchedule.Add(new CharterAvailableDates {DepartureDate = ch.DepartureFromDate,CharterId = ch.Id});
+            }
+            return new CharterDetailsTransferable
+            {
+                charterDetails = charter,
+                charterSchedule = charterSchedule
+            };
         }
         public async Task<ICollection<EventEntity>> GetEventsByFilters(EventSearchRequestable param)
         {
@@ -187,13 +187,13 @@ namespace BnBYachts.Boat.Manager
             foreach (var evnt in getEvents)
             {
                 double distance = GetDistanceInMeters(evnt.LocationLat, evnt.LocationLong, param.Latitude, param.Longitude);
-                if (distance <= 500 )
+                if (distance <= 500)
                 {
                     await _eventRepository.EnsurePropertyLoadedAsync(evnt, x => x.Boat).ConfigureAwait(false);
                     await _boatRepository.EnsureCollectionLoadedAsync(evnt.Boat, x => x.BoatGalleries).ConfigureAwait(false);
                     if (param.EventDate.HasValue)
                     {
-                        if(evnt.StartDateTime.Date == param.EventDate.Value.Date)
+                        if (evnt.StartDateTime.Date == param.EventDate.Value.Date)
                         {
                             filterdEvents.Add(evnt);
                         }
@@ -205,11 +205,12 @@ namespace BnBYachts.Boat.Manager
                 }
             }
             ///guest Filters
-            return filterdEvents.WhereIf(param.Adults > 0 || param.Childrens > 0 , res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
+            return filterdEvents.WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
         }
-        public async Task<EventEntity> GetEventsDetailsById(int eventId)
+        public async Task<EventDetailTransferable> GetEventsDetailsById(int eventId)
         {
             var eventDetail = await _eventRepository.GetAsync(b => b.Id == eventId, false).ConfigureAwait(false);
+            var allEvents = await _eventRepository.GetListAsync(res => res.BoatId == eventDetail.BoatId);
             await _eventRepository.EnsurePropertyLoadedAsync(eventDetail, x => x.Boat).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatGalleries).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatFeatures).ConfigureAwait(false);
@@ -224,7 +225,16 @@ namespace BnBYachts.Boat.Manager
             }
             await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatLocations).ConfigureAwait(false);
 
-            return eventDetail;
+            var eventSchedule = new List<EventSchedule>();
+            foreach (var ev in allEvents)
+            {
+                eventSchedule.Add(new EventSchedule { EventDate = ev.StartDateTime, EventId= ev.Id });
+            }
+            return new EventDetailTransferable
+            {
+                eventDetails = eventDetail,
+                eventSchedule = eventSchedule
+            };
         }
 
         #region Host Onboarding
