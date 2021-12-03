@@ -37,6 +37,7 @@ namespace BnBYachts.Boat.Manager
             IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository,
             IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep,
             IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatGalleryRepo,
+            IRepository<EventEntity, int> eventRepository,
             IObjectMapper<BoatDomainModule> objectMapper)
         {
 

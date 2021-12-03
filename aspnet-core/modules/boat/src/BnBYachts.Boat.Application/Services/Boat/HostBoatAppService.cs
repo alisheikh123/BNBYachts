@@ -13,7 +13,6 @@ using BnBYachts.Events;
 
 namespace BnBYachts.Services.Boat
 {
-    [Authorize]
     public class HostBoatAppService : ApplicationService
     {
         private readonly IHostBoatManager _hostBoatManager;
