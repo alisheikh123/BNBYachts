@@ -19,17 +19,20 @@ namespace BnBYachts.Payments.Managers
         private readonly IRepository<PaymentDetailsEntity, int> _userPaymentDetailsRepository;
         public PaymentManager(IRepository<UserCardInfoEntity, int> userCardRepository, IRepository<PaymentDetailsEntity, int> userPaymentDetailsRepository)
         {
-            var configurationBuilder = new ConfigurationBuilder()
-                         .SetBasePath(Directory.GetCurrentDirectory())
-                         .AddJsonFile("appsettings.json", optional: false).Build();
+            //var configurationBuilder = new ConfigurationBuilder()
+            //             .SetBasePath(Directory.GetCurrentDirectory())
+            //             .AddJsonFile("appsettings.Development.json", optional: false).Build();
 
-            StripeConfiguration.ApiKey = configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
+            StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("BNB_STRIPE_APIKEY");//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             _userCardRepository = userCardRepository;
             _userPaymentDetailsRepository = userPaymentDetailsRepository;
+
+            
         }
 
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId)
         {
+            
             var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
             var options = new PaymentMethodListOptions
             {
