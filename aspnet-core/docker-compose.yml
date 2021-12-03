@@ -7,34 +7,30 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
-      
-
   bnb_client_portal:
     container_name: bnb_client_portal
     build:
       context: ../angular
       dockerfile: Angular.Dockerfile
-    ports:
-      - "8080:80"
-
   bnb_boat_api:
     container_name: bnb_boat_api
     build:
       context: .
       dockerfile: Boat.Dockerfile
-    # environment:
-    #   "ASPNETCORE_ENVIRONMENT": "Production"
-    #   "ConnectionStrings:Default": ${VD_API_CONNECTION_STRING}
-    #   "App:ServerRootAddress": ${VD_APP_SERVER_ROOT_ADDRESS}
-    #   "App:ClientRootAddress": ${VD_APP_CLIENT_ROOT_ADDRESS}
-    #   "App:CorsOrigins": ${VD_APP_CORES_ORIGINS}
-    #   "Authentication:JwtBearer:IsEnabled": ${VD_AUTHENTICATION_JWT_BEARER_ISENABLED}
-    #   "App:ImageKey": ${VD_APP_IMAGE_KEY}
-    #   "Authentication:JwtBearer:SecurityKey": ${VD_AUTHENTICATION_JWT_SECURITY_KEY}
-    #   "Authentication:JwtBearer:Issuer": ${VD_AUTHENTICATION_JWT_ISSUER}
-    #   "Authentication:JwtBearer:Audience": ${VD_AUTHENTICATION_JWT_AUDIENCE}
-    ports:
-      - "21021:80"
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "ConnectionStrings:Default": ${BNB_BOAT_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_Boat_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     volumes:
       - ./tmp-build/BNB/BNBBoat-Webhost/logs:/app/Logs
       - ./tmp-build/BNB/BNBBoat-Webhost/.aspnet/https:/root/.aspnet/https:ro
@@ -44,31 +40,25 @@ services:
     depends_on:
       - rabbitmq
 
-
   bnb_booking_api:
     container_name: bnb_booking_api
     build:
       context: .
       dockerfile: Booking.Dockerfile
-    # environment:
-    #   "ASPNETCORE_ENVIRONMENT": "Production"
-    #   "ConnectionStrings:Default": ${VD_API_CONNECTION_STRING}
-    #   "App:ServerRootAddress": ${VD_APP_SERVER_ROOT_ADDRESS}
-    #   "App:ClientRootAddress": ${VD_APP_CLIENT_ROOT_ADDRESS}
-    #   "App:CorsOrigins": ${VD_APP_CORES_ORIGINS}
-    #   "Authentication:JwtBearer:IsEnabled": ${VD_AUTHENTICATION_JWT_BEARER_ISENABLED}
-    #   "App:ImageKey": ${VD_APP_IMAGE_KEY}
-    #   "Authentication:JwtBearer:SecurityKey": ${VD_AUTHENTICATION_JWT_SECURITY_KEY}
-    #   "Authentication:JwtBearer:Issuer": ${VD_AUTHENTICATION_JWT_ISSUER}
-    #   "Authentication:JwtBearer:Audience": ${VD_AUTHENTICATION_JWT_AUDIENCE}
-    #   "RabbitMq:Host": ${VD_MQ_HOST}
-    #   "RabbitMq:UserName": ${VD_MQ_USER_NAME}
-    #   "RabbitMq:Password": ${VD_MQ_PASSWORD}
-    #   "RabbitMq:VirtualHost": ${VD_MQ_VIRTUAL_HOST}
-    #   "MongoDB:DatabaseName": ${VD_MONG_DB_NAME}
-    #   "MongoDB:ConnectionString": ${VD_MONG_CONNECTION_STRING}
-    ports:
-      - "21022:80"
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "ConnectionStrings:Default": ${BNB_BOOKING_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_Booking_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_Booking_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_Booking_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     volumes:
       - ./tmp-build/BNB/BNBBooking-Host/logs:/app/Logs
       - ./tmp-build/BNB/BNBBooking-Host/.aspnet/https:/root/.aspnet/https:ro
@@ -77,25 +67,25 @@ services:
       - rabbitmq:rabbitmq
     depends_on:
       - rabbitmq
-
-
-
   bnb_payment_api:
     container_name: bnb_payment_api
     build:
       context: .
       dockerfile: Payment.Dockerfile
-    # environment:
-    #   "ASPNETCORE_ENVIRONMENT": "Production"
-    #   "ConnectionStrings:Default": ${VD_API_CONNECTION_STRING}
-    #   "RabbitMq:Host": ${VD_MQ_HOST}
-    #   "RabbitMq:UserName": ${VD_MQ_USER_NAME}
-    #   "RabbitMq:Password": ${VD_MQ_PASSWORD}
-    #   "RabbitMq:VirtualHost": ${VD_MQ_VIRTUAL_HOST}
-    #   "MongoDB:DatabaseName": ${VD_MONG_DB_NAME}
-    #   "MongoDB:ConnectionString": ${VD_MONG_CONNECTION_STRING}
-    ports:
-      - "21023:80"
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "ConnectionStrings:Default": ${BNB_Payment_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_Payment_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_Payment_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_Payment_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
     volumes:
       - ./tmp-build/BNB/BNBPayment-Host/logs:/app/Logs
       - ./tmp-build/BNB/BNBPayment-Host/.aspnet/https:/root/.aspnet/https:ro
@@ -104,79 +94,97 @@ services:
       - rabbitmq:rabbitmq
     depends_on:
       - rabbitmq
-
-
-
   bnb_core_api:
     container_name: bnb_core_api
     build:
       context: .
       dockerfile: Core.Dockerfile
-    # environment:
-    #   "ASPNETCORE_ENVIRONMENT": "Production"
-    #   "ConnectionStrings:Default": ${VD_API_CONNECTION_STRING}
-    #   "RabbitMq:Host": ${VD_MQ_HOST}
-    #   "RabbitMq:UserName": ${VD_MQ_USER_NAME}
-    #   "RabbitMq:Password": ${VD_MQ_PASSWORD}
-    #   "RabbitMq:VirtualHost": ${VD_MQ_VIRTUAL_HOST}
-    #   "MongoDB:DatabaseName": ${VD_MONG_DB_NAME}
-    #   "MongoDB:ConnectionString": ${VD_MONG_CONNECTION_STRING}
-    ports:
-      - "21024:80"
-    # volumes:
-      # - ./tmp-build/BNB/BNBCore-Host/logs:/app/Logs
-      # - ./tmp-build/BNB/BNBCore-Host/.aspnet/https:/root/.aspnet/https:ro
-    #   - ./tmp-build/BNB/BNBCore-Host/.microsoft/usersecrets:/root/.microsoft/usersecrets:ros:ro
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "AuthServer:RequireHttpsMetadata": ${BNB_CORE_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_CORE_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_CORE_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
+    volumes:
+      - ./tmp-build/BNB/BnbCore-Host/logs:/app/Logs
+      - ./tmp-build/BNB/BnbCore-Host/.aspnet/https:/root/.aspnet/https:ro
+      - ./tmp-build/BNB/BnbCore-Host/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     links:
       - rabbitmq:rabbitmq
     depends_on:
       - rabbitmq
-
-
 
   bnb_idv_api:
     container_name: bnb_idv_api
     build:
       context: .
       dockerfile: IDV.Dockerfile
-    # environment:
-    #   "ASPNETCORE_ENVIRONMENT": "Production"
-    #   "ConnectionStrings:Default": ${VD_API_CONNECTION_STRING}
-    #   "RabbitMq:Host": ${VD_MQ_HOST}
-    #   "RabbitMq:UserName": ${VD_MQ_USER_NAME}
-    #   "RabbitMq:Password": ${VD_MQ_PASSWORD}
-    #   "RabbitMq:VirtualHost": ${VD_MQ_VIRTUAL_HOST}
-    #   "MongoDB:DatabaseName": ${VD_MONG_DB_NAME}
-    #   "MongoDB:ConnectionString": ${VD_MONG_CONNECTION_STRING}
-    ports:
-      - "21025:80"
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
+      "App:SelfUrl": ${BNB_IDENTITY_SELF_URL}
+      "App:ClientUrl": ${BNB_APP_CLIENT_URL}
+      "App:RedirectAllowedUrls": ${BNB_APP_REDIRECT_ALLOWED_URLS}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
+    volumes:
+      - ./tmp-build/BNB/BnbIdv-Host/logs:/app/Logs
+      - ./tmp-build/BNB/BnbIdv-Host/.aspnet/https:/root/.aspnet/https:ro
+      - ./tmp-build/BNB/BnbIdv-Host/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro  
     links:
       - rabbitmq:rabbitmq  
     depends_on:
       - rabbitmq  
-  
 
   bnb_notification_hub_engine:
     container_name: bnb_notification_hub_engine
     build:
       context: .
       dockerfile: Notification.Dockerfile
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "Settings:Host": ${BNB_SETTINGS_HOST}
+      "Settings:Port": ${BNB_SETTINGS_PORT}
+      "Settings:UserName": ${BNB_SETTINGS_USERNAME}
+      "Settings:Password": ${BNB_SETTINGS_PASSWORD}
+      "Settings:SenderName": ${BNB_SETTINGS_SENDERNAME}
+      "Settings:SenderEmail": ${BNB_SETTINGS_SENDEREMAIL}
+      "Settings:Server": ${BNB_SETTINGS_SERVER}
+
+    volumes:
+      - ./tmp-build/BNB/BnbNotify-Host/logs:/app/Logs
+      - ./tmp-build/BNB/BnbNotify-Host/.aspnet/https:/root/.aspnet/https:ro
+      - ./tmp-build/BNB/BnbNotify-Host/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro   
     links:
       - rabbitmq:rabbitmq  
     depends_on:
       - rabbitmq  
-
   proxyapp:
     image: nginx:alpine
     container_name: proxyapp
     environment:
       "FILE_MANAGER_PATH": "/app/App_Data/FileManager"
-    volumes:
-
-      - ../proxy/conf.d:/etc/nginx/conf.d
-      # - ${MTR_DATA_HOME}/FileManager:/app/App_Data/FileManager
-      # - ${MTR_DATA_HOME}/Reports:/app/App_Data/ReportData
       
+    volumes:
+      - ../proxy/conf.d:/etc/nginx/conf.d
     depends_on:
       - bnb_boat_api
       - bnb_booking_api
@@ -184,7 +192,6 @@ services:
       - bnb_core_api
       - bnb_idv_api
       - bnb_client_portal
-      
     links:
       - bnb_client_portal:bnb_client_portal
       - bnb_boat_api:bnb_boat_api

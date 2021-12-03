@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BnBYachts
@@ -8,15 +9,9 @@ namespace BnBYachts
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication<BnBYachtsIdentityServerModule>();
-            
-          
-           
-
         }
-
         public void Configure(IApplicationBuilder app)
         {
-           
             app.InitializeApplication();
         }
     }

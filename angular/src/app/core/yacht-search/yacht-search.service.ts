@@ -24,9 +24,8 @@ export class YachtSearchService {
     return this.http.get(this.apiUrl + '/boat-details/' + id).pipe(
       catchError(this.handleError));
   }
-  hostDetailsById(id: string) {
-    debugger;
-    return this.http.get(this.apiCoreURL + '/GetUserDetailsById/' + id).pipe(
+  hostDetailsById(id:string) {
+    return this.http.get(this.apiCoreURL + '/GetUserDetailsById/'+id).pipe(
       catchError(this.handleError));
   }
   charterSearch(param: any) {

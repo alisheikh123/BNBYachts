@@ -23,3 +23,8 @@
 **/values.dev.yaml
 LICENSE
 README.md
+
+
+**/appsettings.Staging.json
+**/appsettings.json
+**/appsettings.secrets.json

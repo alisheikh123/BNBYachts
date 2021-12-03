@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit {
     this.oidcSecurityService
       .checkAuth()
       .subscribe((res: any) => {
+        debugger
         if (res.isAuthenticated) {
           if (res?.accessToken != null && res?.userData?.sub != null) {
             localStorage.setItem('accessToken', res?.accessToken);
@@ -59,7 +60,6 @@ export class HeaderComponent implements OnInit {
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
       if (res == null) {
-        console.log("Error");
       }
       else {
         this.userDetails = res;
@@ -128,7 +128,7 @@ export class HeaderComponent implements OnInit {
       let modalRef = this.modal.open(SignupModalComponent,{ windowClass: 'custom-modal custom-large-modal'});
     }
   }
-  
+
   continueToEarn() {
     if(this.selectedOption.byHost){
       this.router.navigate(['try-hosting']);
