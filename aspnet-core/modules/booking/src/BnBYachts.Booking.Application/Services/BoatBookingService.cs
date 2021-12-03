@@ -1,16 +1,10 @@
-﻿using BnBYachts.Booking.Booking;
-using BnBYachts.Booking.DTO;
+﻿using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Shared.BoatBooking.Interface;
+using BnBYachts.Booking.Shared.BoatBooking.Transferable;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
-using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Booking.Services
 {
@@ -24,10 +18,10 @@ namespace BnBYachts.Booking.Services
 
         [HttpPost]
         [Route("boatelbooking")]
-        public async Task<bool> BoatelBooking(BoatelBookingEntity data)
+        public async Task<BoatelBookingTransferable> BoatelBooking(BoatelBookingEntity data)
         {
-            await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
-            return true;
+            var result = await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
+            return result;
         }
         [HttpPost]
         [Route("modifyboatelbooking")]
@@ -75,8 +69,22 @@ namespace BnBYachts.Booking.Services
             var isBookingCancel = await _hostBoatBookingManager.IsBookingCancel(data, CurrentUser.Id.ToString());
             return isBookingCancel;
 
+
+        }
+        [HttpGet]
+        [Route("getmybookings")]
+        public async Task<ICollection<BoatelBookingEntity>> GetMyBookings()
+        {
+            var myBookings = await _hostBoatBookingManager.GetMyBookings(CurrentUser.Id.ToString());
+            return myBookings;
         }
 
-
+        [HttpGet]
+        [Route("upcominghostboatelbookingdetail")]
+        public async Task<ICollection<BoatelBookingEntity>> UpcomingHostBoatelBookingDetail()
+        {
+            var bookings = await _hostBoatBookingManager.UpcomingHostBoatelBookingDetail(CurrentUser.Id.ToString()).ConfigureAwait(false);
+            return bookings;
+        }
     }
 }

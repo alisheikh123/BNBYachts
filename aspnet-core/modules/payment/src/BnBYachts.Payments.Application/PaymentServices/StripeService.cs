@@ -1,16 +1,10 @@
-﻿
-using BnBYachts.Payments.Payments;
-using BnBYachts.Payments.PaymentVM;
-using BnBYachts.Payments.Shared.Interface;
+﻿using BnBYachts.Payments.Shared.Interface;
 using BnBYachts.Payments.Shared.Transferable;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
-using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Payments.PaymentServices
 {

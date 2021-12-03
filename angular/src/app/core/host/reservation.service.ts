@@ -20,6 +20,15 @@ export class ReservationService {
     return this.http.get(this.bookingApiUrl + '/update-reservations-status/' + bookingId + '/' + status).pipe(
       catchError(this.handleError));
   }
+
+  getBookedServices() {
+    return this.http.get(this.bookingApiUrl + '/get-my-approve-reservations').pipe(
+      catchError(this.handleError));
+  }
+  getHostBoats() {
+    return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
+  }
+
   ///Exception handler
   handleError(error: any) {
     let errorMessage = '';
@@ -32,9 +41,4 @@ export class ReservationService {
     }
     return throwError(errorMessage);
   }
-
-  getHostBoats() {
-    return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
-  }
-
 }

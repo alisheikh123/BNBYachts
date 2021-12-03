@@ -27,6 +27,8 @@ namespace BnByachts.SeedObservable
         {
             context.Services.AddAssemblyOf<SeederObservableModule>();
 
+            context.Services.AddAutoMapperObjectMapper<SeederObservableModule>();
+
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<SeederObservableModule>();

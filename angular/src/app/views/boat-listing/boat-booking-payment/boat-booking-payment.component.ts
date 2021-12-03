@@ -59,11 +59,13 @@ export class BoatBookingPaymentComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'en'
   };
+  bookingId: any;
   constructor(public app: AppComponent, private stripeService: StripeService, private activatedRoute: ActivatedRoute, private boatService: YachtSearchService, private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.boatId = Number(res['id']);
+      this.bookingId = Number(res['bookingid']);
     });
     this.boatFilterDetails = this.yachtParamService.getFilters();
     this.loadBoatDetails();
@@ -121,6 +123,7 @@ export class BoatBookingPaymentComponent implements OnInit {
     var token = (this.addCardDetails ? await this.createToken() : null);
     let model = {
       paymentId: this.paymentMethodId,
+      bookingId: this.bookingId,
       amount: amount + this.boatDetails.taxFee + 20,
       IsSaveNewPaymentMethod: this.isSaveNewPayment,
       token: token,
