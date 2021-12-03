@@ -26,7 +26,7 @@ namespace BnByachts.Simulator
             application.Initialize();
             using (var serviceScope = application.ServiceProvider.CreateScope())
             {
-                 serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
+              //   serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
                  serviceScope.ServiceProvider.GetService<Notifiy>()?.pushEmail();
             }
             Console.WriteLine("Simulator Active");
