@@ -10,6 +10,7 @@ using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using Microsoft.AspNetCore.Authorization;
 using BnBYachts.Boat.Shared.Boat.Transferable;
+using BnBYachts.Boat.Helpers;
 
 namespace BnBYachts.Services.Boat
 {
@@ -105,6 +106,13 @@ namespace BnBYachts.Services.Boat
         {
             var data = await _hostBoatManager.AddHostBoatManager(boatDetails, CurrentUser.Id);
             return true;
+        }
+
+        [HttpPost]
+        [Route("update-location")]
+        public async Task<bool> updateBoatLocation(BoatLocationRequestable boat)
+        {
+            return await _hostBoatManager.UpdateBoatLocation(boat,CurrentUser.Id);
         }
         #endregion
 

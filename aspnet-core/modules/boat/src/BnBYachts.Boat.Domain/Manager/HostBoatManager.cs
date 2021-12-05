@@ -200,6 +200,20 @@ namespace BnBYachts.Boat.Manager
             return true;
         }
 
+
+        public async Task<bool> UpdateBoatLocation(BoatLocationRequestable boatDetails, Guid? userId)
+        {
+            var boat = await _boatRepository.FindAsync(res => res.Id == boatDetails.BoatId).ConfigureAwait(false);
+            boat.Location = boatDetails.Location;
+            boat.Latitude = boatDetails.Latitude;
+            boat.Longitude = boatDetails.Longitude;
+            boat.LastModifierId = userId;
+            boat.LastModificationTime = DateTime.Now;
+            return true;
+        }
+
+
+
         #endregion
 
 
