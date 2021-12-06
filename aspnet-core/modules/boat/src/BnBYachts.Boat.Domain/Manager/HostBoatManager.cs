@@ -246,6 +246,12 @@ namespace BnBYachts.Boat.Manager
 
         }
 
+        public async Task<bool> UpdateboatStatus(long boatId)
+        {
+            var boat = await _boatRepository.FindAsync(x => x.Id == boatId).ConfigureAwait(false);
+            boat.IsActive = !boat.IsActive;
+            return true;
 
+        }
     }
 }
