@@ -13,7 +13,6 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.component';
 import { TimePickerModule,DateRangePickerModule, CalendarModule  } from '@syncfusion/ej2-angular-calendars';
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
-import { NgMonthPickerModule } from 'ng-month-picker';
 import { BoatLoationSettingsComponent } from './boat-loation-settings/boat-loation-settings.component';
 
 
