@@ -25,7 +25,7 @@ namespace BnBYachts.Payments.Managers
 
             StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             _userCardRepository = userCardRepository;
-            _userPaymentDetailsRepository = userPaymentDetailsRepository;
+            _userPaymentDetailsRepository = userPaymentDetailsRepository;            
         }
 
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId)
