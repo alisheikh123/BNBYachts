@@ -301,6 +301,21 @@ namespace BnBYachts.Boat.Manager
             await _boatelCalendarRepo.InsertAsync(boatCalendar, autoSave: true).ConfigureAwait(false);
             return true;
         }
+
+
+        public async Task<bool> UpdateBoatLocation(BoatLocationRequestable boatDetails, Guid? userId)
+        {
+            var boat = await _boatRepository.FindAsync(res => res.Id == boatDetails.BoatId).ConfigureAwait(false);
+            boat.Location = boatDetails.Location;
+            boat.Latitude = boatDetails.Latitude;
+            boat.Longitude = boatDetails.Longitude;
+            boat.LastModifierId = userId;
+            boat.LastModificationTime = DateTime.Now;
+            return true;
+        }
+
+
+
         #endregion
 
 
