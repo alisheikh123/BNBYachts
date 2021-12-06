@@ -786,6 +786,7 @@ button{
       height: 100%;
       width: 100%;
       border-radius: 5px;
+      max-height: 560px;
       @include breakpoint(laptop){
         max-height: 410px;
       }
@@ -843,14 +844,30 @@ button{
     @include breakpoint(sm){
       padding: 5px 0;
     }
+    .custom-flex-start{
+      width: 100%;
+    }
+    .custom-flex{
+      width: 50%;
+      justify-content: flex-start;
+    }
     .min-width-text{
-      min-width: 200px;
+      max-width: 200px;
+      width: 100%;
+      @include breakpoint(laptop){
+        min-width: 150px;
+      }
       @include breakpoint(xs){
         min-width: 150px;
       }
     }
     .min-width-text-small{
-      min-width: 100px;
+      max-width: 200px;
+      width: 100%;
+      padding: 0 5px;
+      @include breakpoint(laptop){
+        min-width: 150px;
+      }
       @include breakpoint(xs){
         min-width: 150px;
       }
@@ -1481,6 +1498,7 @@ img{
       width: 100%;
       height: 100%;
       border-radius: 13px;
+      max-width: 220px;
     }
     span{
       color: $green-clr;
@@ -1524,10 +1542,12 @@ img{
       width: 100%;
       height: 100%;
       position: relative;
+
       img{
         width: 100%;
         height: 100%;
         border-radius: 13px;
+        max-width: 220px;
 
       }
     }
@@ -1875,11 +1895,16 @@ img{
   border-radius: 16px;
   @include custom-flex;
   min-height: 270px;
+  max-height: 270px;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
   @include breakpoint(laptop){
     min-height: 200px;
   }
   .no-img-inner{
     text-align: center;
+    height: 100%;
     img{
       margin-bottom: 15px;
     }
@@ -1917,12 +1942,32 @@ label{
    }
    .upload-btn{
     display:flex;
+    z-index: 2;
+  }
+  &::before{
+    @include bg-layer-black();
+    z-index: 1;
+    background-color: rgba(34, 34, 34, 0.1);
   }
   }
   &.small-img-wrap{
     max-width: 550px;
     margin: 0 auto;
   }
+  &.active{
+    position: relative;
+    .upload-btn{
+      position: absolute;
+      left: 40%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .no-img-inner{
+      display:block !important;
+
+     }
+  }
+
 }
 
 

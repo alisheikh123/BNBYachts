@@ -3,13 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BnBYachts.Boat.Migrations
 {
-    public partial class boatentities : Migration
+    public partial class boatcharterevent : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "TestApp");
-
             migrationBuilder.CreateTable(
                 name: "Boats",
                 columns: table => new
@@ -56,7 +53,6 @@ namespace BnBYachts.Boat.Migrations
                     IsGuestFavourite = table.Column<bool>(type: "bit", nullable: false),
                     IsSafetyFeature = table.Column<bool>(type: "bit", nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BoatId = table.Column<int>(type: "int", nullable: false),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -78,7 +74,7 @@ namespace BnBYachts.Boat.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDefault = table.Column<bool>(type: "bit", nullable: false),
-                    BoatId = table.Column<int>(type: "int", nullable: true),
+                    IsSafetyOption = table.Column<bool>(type: "bit", nullable: false),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -100,7 +96,6 @@ namespace BnBYachts.Boat.Migrations
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
                     ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BoatId = table.Column<int>(type: "int", nullable: true),
                     BoatEntityId = table.Column<int>(type: "int", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
@@ -130,7 +125,6 @@ namespace BnBYachts.Boat.Migrations
                     IsCoverPic = table.Column<bool>(type: "bit", nullable: false),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BoatId = table.Column<int>(type: "int", nullable: true),
                     BoatEntityId = table.Column<int>(type: "int", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
@@ -224,10 +218,12 @@ namespace BnBYachts.Boat.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     BoatId = table.Column<int>(type: "int", nullable: true),
-                    LocationLat = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocationLong = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocationLat = table.Column<double>(type: "float", nullable: false),
+                    LocationLong = table.Column<double>(type: "float", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GuestCapacity = table.Column<int>(type: "int", nullable: false),
@@ -259,9 +255,8 @@ namespace BnBYachts.Boat.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OfferedFeaturesId = table.Column<int>(type: "int", nullable: true),
-                    BoatId = table.Column<int>(type: "int", nullable: true),
                     BoatEntityId = table.Column<int>(type: "int", nullable: true),
+                    OfferedFeaturesId = table.Column<int>(type: "int", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -292,9 +287,8 @@ namespace BnBYachts.Boat.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OfferedRuleId = table.Column<int>(type: "int", nullable: true),
-                    BoatId = table.Column<int>(type: "int", nullable: true),
                     BoatEntityId = table.Column<int>(type: "int", nullable: true),
+                    OfferedRuleId = table.Column<int>(type: "int", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -396,27 +390,6 @@ namespace BnBYachts.Boat.Migrations
 
             migrationBuilder.DropTable(
                 name: "Boats");
-
-            migrationBuilder.CreateTable(
-                name: "TestApp",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    PublishDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestApp", x => x.Id);
-                });
         }
     }
 }

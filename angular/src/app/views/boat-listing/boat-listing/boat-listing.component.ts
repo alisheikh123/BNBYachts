@@ -33,20 +33,20 @@ export class BoatListingComponent implements OnInit {
   mapDetails: any;
   markers: any[] = [];
 
-  constructor(private yachtSearch: YachtSearchDataService,config: NgbRatingConfig) {
+  constructor(private yachtSearch: YachtSearchDataService, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit(): void {
-      this.boats = this.yachtSearch.getBoats();
-      this.mapDetails = this.yachtSearch.getFilters();
+    this.boats = this.yachtSearch.getBoats();
+    this.mapDetails = this.yachtSearch.getFilters();
 
     this.filterMarkers();
-      this.center = {
-        lat: this.mapDetails?.latitude,
-        lng: this.mapDetails?.longitude
-      };
+    this.center = {
+      lat: this.mapDetails?.latitude,
+      lng: this.mapDetails?.longitude
+    };
   }
 
   filterMarkers() {

@@ -6,19 +6,19 @@ import { AnonymousSubject } from 'rxjs/internal/Subject';
   providedIn: 'root'
 })
 export class YachtSearchDataService {
-  private boats :any = undefined;
-  private filters :any = undefined;
+  private boats: any = undefined;
+  private filters: any = undefined;
   constructor() { }
-   getBoats() {
+  getBoats() {
     return this.boats;
   }
-   getFilters() {
+  getFilters() {
     return this.filters
   }
-   setBoats(boats:any): void {
+  setBoats(boats: any): void {
     this.boats = boats;
   }
-  setFilters(filters:any): void {
+  setFilters(filters: any): void {
     this.filters = filters;
   }
 }
