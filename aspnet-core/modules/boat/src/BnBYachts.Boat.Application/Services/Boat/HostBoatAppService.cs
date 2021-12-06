@@ -13,7 +13,7 @@ using BnBYachts.Boat.Shared.Boat.Transferable;
 
 namespace BnBYachts.Services.Boat
 {
-    [Authorize]
+
     public class HostBoatAppService : ApplicationService
     {
         private readonly IHostBoatManager _hostBoatManager;
@@ -113,6 +113,14 @@ namespace BnBYachts.Services.Boat
         public async Task<ICollection<BoatEntity>> GetHostBoatDetails()
         {
             return await _hostBoatManager.GetHostBoats(CurrentUser.Id).ConfigureAwait(false);
-        }       
+        }
+        [Route("host-boat-status/{boatId}")]
+        [HttpGet]
+        public async Task<bool> UpdateHostBoatStatus(long boatId)
+        {
+            var boatStatus = await _hostBoatManager.UpdateboatStatus(boatId).ConfigureAwait(false);
+            return boatStatus;
+        }
+
     }
 }
