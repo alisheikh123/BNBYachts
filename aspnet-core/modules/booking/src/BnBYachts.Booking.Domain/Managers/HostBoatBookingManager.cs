@@ -30,19 +30,10 @@ namespace BnBYachts.Booking.Managers
             data.LastModifierId = data.CreatorId = userId;
             data.UserId = userId.ToString();
             data.UserName = userName;
-            var response = await _boatelBookingRepository.InsertAsync(data).ConfigureAwait(false);
-            if (response.Id > 0)
-            {
-                dto.isSucces = true;
-                return dto;
-            }
-            else
-            {
-                var currentBooking = await _boatelBookingRepository.GetListAsync().ConfigureAwait(false);
-                dto.BookingId = currentBooking.LastOrDefault().Id + 1;
-                dto.isSucces = true;
-                return dto;
-            }
+            var response = await _boatelBookingRepository.InsertAsync(data, autoSave: true).ConfigureAwait(false);
+            dto.isSucces = true;
+            dto.BookingId = response.Id;
+            return dto;
         }
         public async Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName)
         {

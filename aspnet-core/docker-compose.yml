@@ -104,9 +104,9 @@ services:
       "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
       "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
       "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
-      "AuthServer:RequireHttpsMetadata": ${BNB_CORE_APP_AUTHSERVER_REQUIREHTTPSMETADATA}
-      "AuthServer:SwaggerClientId": ${BNB_CORE_APP_AUTHSERVER_SWAGGERCLIENTID}
-      "AuthServer:SwaggerClientSecret": ${BNB_CORE_APP_AUTHSERVER_SWAGGERCLIENTSECRET}
+      "AuthServer:RequireHttpsMetadata": ${BNB_CORE_AUTHSERVER_REQUIREHTTPSMETADATA}
+      "AuthServer:SwaggerClientId": ${BNB_CORE_AUTHSERVER_SWAGGERCLIENTID}
+      "AuthServer:SwaggerClientSecret": ${BNB_CORE_AUTHSERVER_SWAGGERCLIENTSECRET}
       "RabbitMq:Host": ${BNB_MQ_HOST}
       "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
       "RabbitMq:Password": ${BNB_MQ_PASSWORD}

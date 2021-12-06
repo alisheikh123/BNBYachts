@@ -20,6 +20,15 @@ export class ReservationService {
     return this.http.get(this.bookingApiUrl + '/update-reservations-status/' + bookingId + '/' + status).pipe(
       catchError(this.handleError));
   }
+
+  getBookedServices() {
+    return this.http.get(this.bookingApiUrl + '/get-my-approve-reservations').pipe(
+      catchError(this.handleError));
+  }
+  getHostBoats() {
+    return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
+  }
+
   ///Exception handler
   handleError(error: any) {
     let errorMessage = '';
@@ -30,18 +39,6 @@ export class ReservationService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-
-    getBookedServices(){
-      return this.http.get(this.bookingApiUrl + '/get-my-approve-reservations').pipe(
-        catchError(this.handleError));
-    }
     return throwError(errorMessage);
   }
-  getHostBoats() {
-    return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
-  }
-  updateBoatStatus(boatId:number){
-    return this.http.get(this.boatApiUrl + '/host-boat-status/'+boatId).pipe(catchError(this.handleError));
-  }
-
 }
