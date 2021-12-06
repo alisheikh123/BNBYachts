@@ -11,9 +11,9 @@ import { HostRoutingModule } from './host-routing.module';
 import { HostOnboardingComponent } from './host-onboarding/host-onboarding.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.component';
-import { NgxDateRangeModule } from 'ngx-daterange';
-import { TimePickerModule,DateRangePickerModule  } from '@syncfusion/ej2-angular-calendars';
+import { TimePickerModule,DateRangePickerModule, CalendarModule  } from '@syncfusion/ej2-angular-calendars';
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
+import { BoatLoationSettingsComponent } from './boat-loation-settings/boat-loation-settings.component';
 
 
 
@@ -22,7 +22,8 @@ import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.
 BoatelBookingsComponent,
 HostOnboardingComponent,
 AddDialogComponent,
-HostBoatListingComponent
+HostBoatListingComponent,
+BoatLoationSettingsComponent
   ],
   imports: [
     HostRoutingModule,

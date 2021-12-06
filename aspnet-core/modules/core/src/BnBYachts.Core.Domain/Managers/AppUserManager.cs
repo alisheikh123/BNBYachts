@@ -68,15 +68,14 @@ namespace BnBYachts.Core.Managers
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
 
-            string baseUrl = "http://44.197.69.129:8080/activate-account";
-            //string baseUrl = "http://localhost:4200/activate-account";
+            string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL") + "activate-account";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },
             {"id", token },
             };
             string body = $"<h4>Click on the link below to confirm your account </h4><span> <a href = '{QueryHelpers.AddQueryString(baseUrl, queryParams)}'> Click Me </a></span>";
-            _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
                 To = user.Email,
                 Subject = "Email Confirmation",
