@@ -29,17 +29,17 @@ export class HostOnboardingComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl(),
   });
-  isAgree:boolean = false;
+  isAgree: boolean = false;
   ///
   boatCalendar = {
     fromDate: new Date(),
     toDate: new Date(),
   };
-  otherGalleryImages :any[] = [];
+  otherGalleryImages: any[] = [];
 
 
   constructor(private fb: FormBuilder, private onBoardingService: OnboardingService, private modal: NgbModal, private toastr: ToastrService
-    ,private router:Router) {
+    , private router: Router) {
   }
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class HostOnboardingComponent implements OnInit {
     });
   }
 
-  get hostForm(){
+  get hostForm() {
     return this.hostOnBoardingForm.controls;
   }
 
@@ -145,14 +145,14 @@ export class HostOnboardingComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(fileData);
     reader.onload = (_event) => {
-      if(index != null){
+      if (index != null) {
         if (!this.boatGallery[index]) {
           let item = {
             fileName: fileData.name,
             fileData: reader.result,
             fileType: fileData.type,
             sortOrder: index,
-            isCoverPic: (index == 0) ? true:false
+            isCoverPic: (index == 0) ? true : false
           }
           this.boatGallery.push(item);
         }
@@ -162,7 +162,7 @@ export class HostOnboardingComponent implements OnInit {
           this.boatGallery[index]['fileType'] = fileData.type;
         }
       }
-      else{
+      else {
         let item = {
           fileName: fileData.name,
           fileData: reader.result,
@@ -176,20 +176,34 @@ export class HostOnboardingComponent implements OnInit {
   }
 
   submit() {
-    if(this.isAgree){
+    if (this.isAgree) {
       let data = this.hostOnBoardingForm.value;
       data.boatGallery = this.boatGallery;
       data.boatCalendar = this.boatCalendar;
       data.boatFeatures = this.boatLookups.features.filter((res: any) => res.isChecked == true);
       data.boatRules = this.boatLookups.rules.filter((res: any) => res.isChecked == true);
-      this.onBoardingService.addBoat(data).subscribe(res => {
-        if (res) {
+      this.onBoardingService.addBoat(data).subscribe((res: any) => {
+        if (res.isSuccess == true) {
           //this.router.navigate[];
-          this.toastr.success("Boat added successfully.", "Boat");
+          if (res.isHostExists == false) {
+            this.onBoardingService.addHostRole().subscribe(res => {
+              if (res == true) {
+                this.toastr.success("Host onboarding successfully.", "Boat");
+                this.router.navigate(['']);
+                setTimeout(() => {
+                  window.location.reload();
+                }, 3000);
+              }
+            });
+          }
+          else {
+            this.toastr.success("Boat added successfully.", "Boat");
+            this.router.navigate(['host/host-boat-listing']);
+          }
+
         }
-  
       })
-    }  
+    }
   }
 
 }

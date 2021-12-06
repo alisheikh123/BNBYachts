@@ -97,5 +97,12 @@ namespace BnBYachts.Core.Managers
             var user = await _repository.FirstOrDefaultAsync(x => x.Email == username);
             await SendEmailToAskForEmailConfirmationAsync(user);
         }
+
+        public async Task<bool> AddHostRole(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            await _userManager.AddToRoleAsync(user, "Host");
+            return true;
+        }
     }
 }

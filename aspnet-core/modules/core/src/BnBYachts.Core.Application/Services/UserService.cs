@@ -41,6 +41,21 @@ namespace BnBYachts.Core.Services
             }
         }
 
+        [HttpGet]
+        [Route("AddHostRole")]
+        public async Task<bool> AddHostRole()
+        {
+            try
+            {
+                return await _appUserManager.AddHostRole(CurrentUser.Id.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("Register")]
