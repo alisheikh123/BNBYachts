@@ -142,7 +142,6 @@ export class HostOnboardingComponent implements OnInit {
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
-    debugger;
     var reader = new FileReader();
     reader.readAsDataURL(fileData);
     reader.onload = (_event) => {

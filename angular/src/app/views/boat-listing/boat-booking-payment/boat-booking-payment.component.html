@@ -218,6 +218,7 @@
                             <div class="custom-flex-between py-1"><p class="medium">Bathrooms:</p> <p class="grey">{{boatDetails?.totalWashrooms}}</p></div>
                             <div class="custom-flex-between py-1"><p class="medium">Check In:</p> <p class="grey">{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p></div>
                             <div class="custom-flex-between py-1"><p class="medium">Check Out:</p> <p class="grey">{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">Total Nights:</p> <p class="grey">{{calculateDays()}} Nights</p></div>
                             <div class="border-top my-3"></div>
                             <div class="custom-flex-between py-1"><p class="medium">Total(USD):</p> <p class="grey">$ {{boatDetails?.perDayCharges * calculateDays() + boatDetails?.taxFee + 20 }}.00</p></div>
                             <div class="custom-flex py-2">

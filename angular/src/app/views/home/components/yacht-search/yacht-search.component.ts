@@ -134,7 +134,6 @@ export class YachtSearchComponent implements OnInit {
   }
 
   handleEventAddressChange(address: any) {
-    debugger;
     this.eventSearchParam.location = address.formatted_address;
     this.eventSearchParam.latitude = address.geometry.location.lat();
     this.eventSearchParam.longitude = address.geometry.location.lng();
