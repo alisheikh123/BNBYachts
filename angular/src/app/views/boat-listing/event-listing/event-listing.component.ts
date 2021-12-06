@@ -5,13 +5,12 @@ import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-d
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-boat-listing',
-  templateUrl: './boat-listing.component.html',
-  styleUrls: ['./boat-listing.component.scss']
+  selector: 'app-event-listing',
+  templateUrl: './event-listing.component.html',
+  styleUrls: ['./event-listing.component.scss']
 })
-export class BoatListingComponent implements OnInit {
+export class EventListingComponent implements OnInit {
 
-  //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
 
   mapOptions: google.maps.MapOptions = {
@@ -25,21 +24,21 @@ export class BoatListingComponent implements OnInit {
     minZoom: 8,
   };
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+
   mapInfoDetails!: any;
   zoom = 14;
   center!: google.maps.LatLngLiteral;
   infoContent = '';
-  boats: any[] = [];
+  events: any[] = [];
   mapDetails: any;
   markers: any[] = [];
-
   constructor(private yachtSearch: YachtSearchDataService, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit(): void {
-    this.boats = this.yachtSearch.getBoats();
+    this.events = this.yachtSearch.getBoats();
     this.mapDetails = this.yachtSearch.getFilters();
 
     this.filterMarkers();
@@ -48,25 +47,24 @@ export class BoatListingComponent implements OnInit {
       lng: this.mapDetails?.longitude
     };
   }
-
   filterMarkers() {
-    this.boats.forEach((element: any) => {
+    this.events.forEach((element: any) => {
       let marker = {
-        boatId: element.id,
+        charterId: element.id,
         position: {
-          lat: element.latitude,
-          lng: element.longitude
-
+          lat: element.locationLat,
+          lng: element.locationLong
         },
         draggable: false,
-        title: element.name,
+        title: element.boat.name,
         options: { animation: google.maps.Animation.DROP }
       };
       this.markers.push(marker);
     });
   }
   openInfoWindow(marker: MapMarker, data: any) {
-    this.mapInfoDetails = this.boats.find(res => res.id == data?.boatId);
+    this.mapInfoDetails = this.events.find(res => res.id == data?.charterId);
     this.infoWindow.open(marker);
   }
+
 }

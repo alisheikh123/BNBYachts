@@ -11,8 +11,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace BnBYachts.Boat.Migrations
 {
     [DbContext(typeof(BoatDbContext))]
-    [Migration("20211129183916_remove-extra-col")]
-    partial class removeextracol
+    [Migration("20211202144242_virtual-id")]
+    partial class virtualid
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -489,7 +489,7 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BoatId")
+                    b.Property<int?>("BoatEntityId")
                         .HasColumnType("int");
 
                     b.Property<int>("CharterFee")
@@ -557,17 +557,31 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<string>("ReturnAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("ReturnLocationLat")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ReturnLocationLng")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BoatId");
+                    b.HasIndex("BoatEntityId");
 
                     b.ToTable("Charteres");
                 });
 
-            modelBuilder.Entity("BnBYachts.Events.Event", b =>
+            modelBuilder.Entity("BnBYachts.Events.EventEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AmountPerPerson")
                         .HasColumnType("int");
@@ -613,11 +627,14 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<string>("LocationLat")
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LocationLong")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("LocationLat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("LocationLong")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
@@ -683,12 +700,12 @@ namespace BnBYachts.Boat.Migrations
                 {
                     b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()
-                        .HasForeignKey("BoatId");
+                        .HasForeignKey("BoatEntityId");
 
                     b.Navigation("Boat");
                 });
 
-            modelBuilder.Entity("BnBYachts.Events.Event", b =>
+            modelBuilder.Entity("BnBYachts.Events.EventEntity", b =>
                 {
                     b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()

@@ -11,8 +11,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace BnBYachts.Boat.Migrations
 {
     [DbContext(typeof(BoatDbContext))]
-    [Migration("20211118092333_boat-entities")]
-    partial class boatentities
+    [Migration("20211203091512_boatid-added")]
+    partial class boatidadded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,9 +31,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("BoatEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BoatId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -177,9 +174,6 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int?>("BoatEntityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BoatId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -226,9 +220,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("BoatEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BoatId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -350,9 +341,6 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int?>("BoatEntityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BoatId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -397,9 +385,6 @@ namespace BnBYachts.Boat.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BoatId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -454,9 +439,6 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BoatId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -479,6 +461,9 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSafetyOption")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -572,6 +557,18 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<string>("ReturnAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("ReturnLocationLat")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ReturnLocationLng")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BoatId");
@@ -579,10 +576,12 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("Charteres");
                 });
 
-            modelBuilder.Entity("BnBYachts.Events.Event", b =>
+            modelBuilder.Entity("BnBYachts.Events.EventEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AmountPerPerson")
                         .HasColumnType("int");
@@ -628,11 +627,14 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<string>("LocationLat")
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LocationLong")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("LocationLat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("LocationLong")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
@@ -703,7 +705,7 @@ namespace BnBYachts.Boat.Migrations
                     b.Navigation("Boat");
                 });
 
-            modelBuilder.Entity("BnBYachts.Events.Event", b =>
+            modelBuilder.Entity("BnBYachts.Events.EventEntity", b =>
                 {
                     b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()

@@ -1,6 +1,4 @@
 ﻿using BnBYachts.Boat;
-using BnBYachts.Boat.ViewModel;
-using BnBYachts.ViewModel.Boat;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,10 +8,11 @@ using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using Microsoft.AspNetCore.Authorization;
 using BnBYachts.Boat.Shared.Boat.Transferable;
+using BnBYachts.Boats.Charter;
+using BnBYachts.Events;
 
 namespace BnBYachts.Services.Boat
 {
-
     public class HostBoatAppService : ApplicationService
     {
         private readonly IHostBoatManager _hostBoatManager;
@@ -56,39 +55,40 @@ namespace BnBYachts.Services.Boat
 
         [Route("FilterChartersBoats")]
         [HttpPost]
-        public async Task<List<BoatEntity>> GetChartersByFilters(CharterFilters param)
+        public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable parameters) 
         {
-            try
-            {
-                throw new NotImplementedException();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            var response = await _hostBoatManager.GetChartersByFilters(parameters);
+            return response;
         }
-        [Route("FilterEventsBoats")]
-        [HttpPost]
-        public async Task<List<BoatEntity>> GetEventsByFilters(SearchFilters parameters)
-        {
-            try
-            {
-                throw new NotImplementedException();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-
         [Route("boat-details/{boatId}")]
         [HttpGet]
         public async Task<BoatEntity> GetBoatDetailsById(int boatId)
         {
             var boat = await _hostBoatManager.GetBoatDetailsById(boatId);
             return boat;
+        }
+
+        [Route("FilterEventsBoats")]
+        [HttpPost]
+        public async Task<ICollection<EventEntity>> GetEventsByFilters(EventSearchRequestable parameters)
+        {
+            var response = await _hostBoatManager.GetEventsByFilters(parameters);
+            return response;
+        }
+
+        [Route("charter-details/{charterId}")]
+        [HttpGet]
+        public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
+        {
+            var charter = await _hostBoatManager.GetCharterDetailsById(charterId);
+            return charter;
+        }
+        [Route("event-details/{eventId}")]
+        [HttpGet]
+        public async Task<EventDetailTransferable> GetEventDetailsById(int eventId)
+        {
+            var eventData = await _hostBoatManager.GetEventsDetailsById(eventId);
+            return eventData;
         }
 
         #region Host On Boarding

@@ -844,14 +844,30 @@ button{
     @include breakpoint(sm){
       padding: 5px 0;
     }
+    .custom-flex-start{
+      width: 100%;
+    }
+    .custom-flex{
+      width: 50%;
+      justify-content: flex-start;
+    }
     .min-width-text{
-      min-width: 200px;
+      max-width: 200px;
+      width: 100%;
+      @include breakpoint(laptop){
+        min-width: 150px;
+      }
       @include breakpoint(xs){
         min-width: 150px;
       }
     }
     .min-width-text-small{
-      min-width: 100px;
+      max-width: 200px;
+      width: 100%;
+      padding: 0 5px;
+      @include breakpoint(laptop){
+        min-width: 150px;
+      }
       @include breakpoint(xs){
         min-width: 150px;
       }
@@ -1888,6 +1904,7 @@ img{
   }
   .no-img-inner{
     text-align: center;
+    height: 100%;
     img{
       margin-bottom: 15px;
     }

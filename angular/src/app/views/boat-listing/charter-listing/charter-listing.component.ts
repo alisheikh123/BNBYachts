@@ -5,13 +5,12 @@ import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-d
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-boat-listing',
-  templateUrl: './boat-listing.component.html',
-  styleUrls: ['./boat-listing.component.scss']
+  selector: 'app-charter-listing',
+  templateUrl: './charter-listing.component.html',
+  styleUrls: ['./charter-listing.component.scss']
 })
-export class BoatListingComponent implements OnInit {
+export class CharterListingComponent implements OnInit {
 
-  //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
 
   mapOptions: google.maps.MapOptions = {
@@ -25,48 +24,47 @@ export class BoatListingComponent implements OnInit {
     minZoom: 8,
   };
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+
   mapInfoDetails!: any;
   zoom = 14;
   center!: google.maps.LatLngLiteral;
   infoContent = '';
-  boats: any[] = [];
+  charters: any[] = [];
   mapDetails: any;
   markers: any[] = [];
-
   constructor(private yachtSearch: YachtSearchDataService, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit(): void {
-    this.boats = this.yachtSearch.getBoats();
+    this.charters = this.yachtSearch.getBoats();
     this.mapDetails = this.yachtSearch.getFilters();
 
     this.filterMarkers();
     this.center = {
-      lat: this.mapDetails?.latitude,
-      lng: this.mapDetails?.longitude
+      lat: this.mapDetails?.departureLatitude,
+      lng: this.mapDetails?.departureLongitude
     };
   }
-
   filterMarkers() {
-    this.boats.forEach((element: any) => {
+    this.charters.forEach((element: any) => {
       let marker = {
-        boatId: element.id,
+        charterId: element.id,
         position: {
-          lat: element.latitude,
-          lng: element.longitude
-
+          lat: element.departingLatitude,
+          lng: element.departingLongitude
         },
         draggable: false,
-        title: element.name,
+        title: element.boat.name,
         options: { animation: google.maps.Animation.DROP }
       };
       this.markers.push(marker);
     });
   }
   openInfoWindow(marker: MapMarker, data: any) {
-    this.mapInfoDetails = this.boats.find(res => res.id == data?.boatId);
+    this.mapInfoDetails = this.charters.find(res => res.id == data?.charterId);
     this.infoWindow.open(marker);
   }
+
 }

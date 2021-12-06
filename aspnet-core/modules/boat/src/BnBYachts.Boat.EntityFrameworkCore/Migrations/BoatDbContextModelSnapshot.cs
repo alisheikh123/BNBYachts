@@ -552,6 +552,18 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<string>("ReturnAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("ReturnLocationLat")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ReturnLocationLng")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BoatId");
@@ -559,10 +571,12 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("Charteres");
                 });
 
-            modelBuilder.Entity("BnBYachts.Events.Event", b =>
+            modelBuilder.Entity("BnBYachts.Events.EventEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AmountPerPerson")
                         .HasColumnType("int");
@@ -608,11 +622,14 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<string>("LocationLat")
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LocationLong")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("LocationLat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("LocationLong")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
@@ -683,7 +700,7 @@ namespace BnBYachts.Boat.Migrations
                     b.Navigation("Boat");
                 });
 
-            modelBuilder.Entity("BnBYachts.Events.Event", b =>
+            modelBuilder.Entity("BnBYachts.Events.EventEntity", b =>
                 {
                     b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()
