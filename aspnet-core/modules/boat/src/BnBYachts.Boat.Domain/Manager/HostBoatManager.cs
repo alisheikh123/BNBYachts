@@ -251,9 +251,9 @@ namespace BnBYachts.Boat.Manager
             {
                 var boatGallery = gallery.CreateMapped<BoatGalleryRequestable, BoatGalleryEntity>();
                 boatGallery.BoatEntityId = postBoatData.Id;
-                string uploadedFilePath = FileUploader.UploadFilesLocal(gallery.FileName, gallery.FileData);
-                //await FileUploader.UploadFileToAWSAsync(gallery.FileName, gallery.FileData, "boatGallery", "");
-                boatGallery.ImagePath = uploadedFilePath;
+                string uploadedFilePath = boatGallery.ImagePath;//FileUploader.UploadFilesLocal(gallery.FileName, gallery.FileData);
+                await FileUploader.UploadFileToAWSAsync(gallery.FileName, gallery.FileData, "boatGallery", "");
+                boatGallery.ImagePath = gallery.FileName;
                 await _boatGalleryRepo.InsertAsync(boatGallery).ConfigureAwait(false);
 
             }

@@ -14,24 +14,24 @@ namespace BnBYachts.Boat.Shared.Helper
         {
             try
             {
-                var configurationBuilder = new ConfigurationBuilder()
-                                .SetBasePath(Directory.GetCurrentDirectory())
-                                .AddJsonFile("appsettings.json", optional: false).Build();
+                //var configurationBuilder = new ConfigurationBuilder()
+                //                .SetBasePath(Directory.GetCurrentDirectory())
+                //                .AddJsonFile("appsettings.json", optional: false).Build();
 
-                var accessKey = configurationBuilder.GetSection("S3Amazon")["AccessKey"].ToString();
-                var secretKey = configurationBuilder.GetSection("S3Amazon")["SecretKey"].ToString();
+                var accessKey = "AKIA6M3C2QK343O5JL4U";//configurationBuilder.GetSection("S3Amazon")["AccessKey"].ToString();
+                var secretKey = "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";//configurationBuilder.GetSection("S3Amazon")["SecretKey"].ToString();
                 var s3Client = new AmazonS3Client(accessKey, secretKey, RegionEndpoint.USEast1);
-                var bucketName = "boatGallery";
+                var bucketName = "bnbyachts";
                 var keyName = "";
                 if (!string.IsNullOrEmpty(subFolder))
                 {
                     if (!string.IsNullOrEmpty(childFolder))
                     {
-                        keyName = keyName + "/" + subFolder.Trim() + "/" + childFolder.Trim();
+                        keyName = subFolder.Trim() + "/" + childFolder.Trim();
                     }
                     else
                     {
-                        keyName = keyName + "/" + subFolder.Trim();
+                        keyName = subFolder.Trim();
                     }
 
                 }
@@ -42,7 +42,7 @@ namespace BnBYachts.Boat.Shared.Helper
                     BucketName = bucketName,
                     Key = keyName,
                     InputStream = new MemoryStream(bytes),
-                    //ContentType = myfile.ContentType,
+                    ContentType = "image/png",
                     CannedACL = S3CannedACL.PublicRead
                 };
                 var response = await s3Client.PutObjectAsync(request);
