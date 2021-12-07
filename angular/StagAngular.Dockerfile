@@ -11,11 +11,10 @@ RUN npx npm-force-resolutions
 
 RUN npm install
 
- COPY . .
- COPY ./docker-build/appconfig.preview2.production.json /app/src/assets/appconfig.production.json
+COPY . .
+COPY ./docker-build/appconfig.preview2.production.json /app/src/assets/appconfig.production.json
 
 RUN npm run stag
-
 ######################################################################
 FROM nginx:alpine
 

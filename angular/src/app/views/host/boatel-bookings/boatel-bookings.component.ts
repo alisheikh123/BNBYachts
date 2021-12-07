@@ -23,6 +23,7 @@ export class BoatelBookingsComponent implements OnInit {
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
 
   ngOnInit(): void {
+
     this.reservationService.getBoatelBookingRequests().subscribe(res => {
       this.boatelBookings = res;
       this.boatelBookings.forEach((element: any) => {
@@ -40,16 +41,13 @@ export class BoatelBookingsComponent implements OnInit {
         });
       });
     })
+
   }
 
   changeStatus(item: any, isAccepted: boolean, index: any) {
     this.reservationService.changeStatus(item.id, isAccepted).subscribe(res => {
-      if (isAccepted) {
-        this.toastr.success('Request accepted successfully.', 'Success');
-      }
-      else {
-        this.toastr.success('Request rejected successfully.', 'Success');
-      }
+      
+      isAccepted ? this.toastr.success('Request accepted successfully.', 'Success') : this.toastr.success('Request rejected successfully.', 'Success');
       this.boatelBookings.splice(index, 1);
     });
   }
