@@ -45,7 +45,7 @@ namespace BnBYachts.ApiGateway.Host
                 configuration["AuthServer:Authority"],
                 new Dictionary<string, string>
                 {
-                    {"Boat", "Boat API"}
+                    {"HostGateway", "HostGateway API"},
                 },
                 options =>
                 {
@@ -69,9 +69,13 @@ namespace BnBYachts.ApiGateway.Host
             app.UseAbpClaimsMap();
 
             app.UseSwagger();
-            app.UseSwaggerUI(options =>
+            app.UseAbpSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "PublicWebSite Gateway API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BNB Gateway");
+                var configuration = context.GetConfiguration();
+                options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+                options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
+                options.OAuthScopes("HostGateway");
             });
 
             app.MapWhen(

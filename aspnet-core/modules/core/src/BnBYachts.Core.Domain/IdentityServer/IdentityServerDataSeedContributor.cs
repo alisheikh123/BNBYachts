@@ -65,7 +65,7 @@ namespace BnBYachts.Core.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "gateway" });
+            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "HostGateway" });
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,7 +80,7 @@ namespace BnBYachts.Core.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "gateway" }, commonApiUserClaims);
+            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "HostGateway" }, commonApiUserClaims);
         }
 
         private async Task<ApiResource> CreateApiResourceAsync(string[] item, IEnumerable<string> claims)
@@ -148,7 +148,7 @@ namespace BnBYachts.Core.IdentityServer
                 "Booking",
                 "Boat",
                 "BnBYachts",
-                "gateway"
+                "HostGateway"
 
             };
 
@@ -245,15 +245,15 @@ namespace BnBYachts.Core.IdentityServer
             }
 
             //gateway
-            var swaggerGatewayClientId = configurationSection["Boat_Gateway:ClientId"];
+            var swaggerGatewayClientId = configurationSection["gateway_Swagger:ClientId"];
             if (!swaggerPaymentsClientId.IsNullOrWhiteSpace())
             {
-                var swaggerRootUrl = configurationSection["Boat_Gateway:RootUrl"].TrimEnd('/');
+                var swaggerRootUrl = configurationSection["gateway_Swagger:RootUrl"].TrimEnd('/');
                 await CreateClientAsync(
                     name: swaggerGatewayClientId,
                     scopes: commonScopes,
                     grantTypes: new[] { "authorization_code" },
-                    secret: configurationSection["Boat_Gateway:ClientSecret"]?.Sha256(),
+                    secret: configurationSection["gateway_Swagger:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
