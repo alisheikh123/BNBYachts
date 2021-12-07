@@ -44,7 +44,10 @@ export class YachtSearchService {
     return this.http.get(this.apiUrl + '/event-details/' + id).pipe(
       catchError(this.handleError));
   }
-
+  defaultFeatures() {
+    return this.http.get(this.apiUrl + '/get-default-features').pipe(
+      catchError(this.handleError));
+  }
 
   ///Exception handler
   handleError(error: any) {

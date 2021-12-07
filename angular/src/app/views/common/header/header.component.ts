@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit {
   }
 
   signUp() {
-    let modalRef = this.modal.open(SignupModalComponent, { windowClass: 'custom-modal custom-large-modal',centered:true });
+    let modalRef = this.modal.open(SignupModalComponent, { windowClass: 'custom-modal custom-large-modal' , centered:true});
   }
 
   login() {

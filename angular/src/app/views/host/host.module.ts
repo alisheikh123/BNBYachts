@@ -35,7 +35,7 @@ BoatLoationSettingsComponent
     SharedPipesModule,
     GooglePlaceModule,
     TimePickerModule ,
-    DateRangePickerModule
+    DateRangePickerModule,
   ],
   providers: [YachtSearchService,ReservationService]
 })

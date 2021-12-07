@@ -1,5 +1,6 @@
 ﻿using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
+using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Transferable;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -61,23 +62,32 @@ namespace BnBYachts.Core.Services
         [Route("Register")]
         public async Task<ResponseDto> UserRegister(UserRegisterTransferable userInput)
         {
-                return await _appUserManager.RegisterUser(userInput);
+            return await _appUserManager.RegisterUser(userInput);
         }
         [HttpGet]
         [AllowAnonymous]
         [Route("Confirm-Email")]
         public async Task<bool> ConfirmEmail(string username, string token)
         {
-                bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
-                return isConfirmed;
+            bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
+            return isConfirmed;
         }
         [HttpGet]
         [AllowAnonymous]
         [Route("Resend-Email")]
         public async Task<bool> ResendEmail(string username)
         {
-                await _appUserManager.ResendEmail(username);
-                return true;
+            await _appUserManager.ResendEmail(username);
+            return true;
+        }
+
+        [AllowAnonymous]
+        [Route("Update-User-Profile")]
+        public async Task<bool> UpdateUserProfile(UserProfileRequestable userInput)
+        {
+            userInput.Id = CurrentUser.Id.ToString();
+            var result = await _appUserManager.UpdateUserProfile(userInput);
+            return result;
         }
     }
 

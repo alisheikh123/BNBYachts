@@ -1,6 +1,7 @@
 ﻿using BnBYachts.Core.Shared;
 using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
+using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Transferable;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
@@ -35,7 +36,7 @@ namespace BnBYachts.Core.Managers
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime);
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email);
         }
 
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
@@ -68,7 +69,8 @@ namespace BnBYachts.Core.Managers
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
 
-            string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL") + "activate-account";
+            string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
+            //string baseUrl = "http://localhost:4200/activate-account";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },
@@ -81,7 +83,7 @@ namespace BnBYachts.Core.Managers
                 Subject = "Email Confirmation",
                 Body = new StringBuilder().Append(body),
                 IsBodyHtml = true
-            }); ;
+            });
         }
 
         public async Task<bool> ConfirmEmail(string username, string token)
@@ -98,6 +100,20 @@ namespace BnBYachts.Core.Managers
             await SendEmailToAskForEmailConfirmationAsync(user);
         }
 
+        public async Task<bool> UpdateUserProfile(UserProfileRequestable userInput)
+        {
+            var user = await _repository.GetAsync(x => x.Id.ToString() == userInput.Id).ConfigureAwait(false);
+            if (user != null)
+            {
+                user.Name = userInput.Name;
+                user.SetProperty(UserConstants.About, userInput.About);
+                var changePhoneNumberToken = await _userManager.GenerateChangePhoneNumberTokenAsync(user, userInput.PhoneNumber);
+                var changePhoneResult = await _userManager.ChangePhoneNumberAsync(user, userInput.PhoneNumber, changePhoneNumberToken);
+                var res = await _repository.UpdateAsync(user);
+                return true;
+            }
+            return false;
+        }
         public async Task<bool> AddHostRole(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);

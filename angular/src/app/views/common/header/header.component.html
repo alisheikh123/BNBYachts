@@ -113,6 +113,7 @@
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
