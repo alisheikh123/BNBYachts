@@ -11,5 +11,6 @@ namespace BnBYachts.Core.IdentityServer
         public string ImagePath { get; set; }
         public string EmailConfirmationToken { get; set; }
         public DateTime DOB { get; set; }
+        public string About { get; set; }
     }
 }

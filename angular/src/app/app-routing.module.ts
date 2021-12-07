@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ConfirmEmailComponent } from './views/auth/components/confirm-email/confirm-email.component';
 import { ActivateAccountComponent } from './views/auth/components/activate-account/activate-account.component';
 import { TryHostingComponent } from './views/common/try-hosting/try-hosting.component';
+import { MyProfileComponent } from './views/common/user-profile/my-profile/my-profile.component';
+import { UpdateProfileComponent } from './views/common/user-profile/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,12 @@ const routes: Routes = [
   { path: 'activate-account', component: ActivateAccountComponent },
   {
     path: "try-hosting", component: TryHostingComponent
+  },
+  {
+    path: "my-profile", component: MyProfileComponent
+  },
+  {
+    path: "update-profile/:id", component: UpdateProfileComponent
   }
 ];
 

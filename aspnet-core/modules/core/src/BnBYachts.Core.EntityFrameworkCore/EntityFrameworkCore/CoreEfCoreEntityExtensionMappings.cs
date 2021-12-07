@@ -27,6 +27,10 @@ namespace BnBYachts.Core.EntityFrameworkCore
                 ObjectExtensionManager.Instance
                .MapEfCoreProperty<IdentityUser, DateTime>
                    (nameof(AppUser.DOB));
+                ObjectExtensionManager.Instance
+              .MapEfCoreProperty<IdentityUser, string>
+                  (nameof(AppUser.About));
+
 
                 /* You can configure extra properties for the
                  * entities defined in the modules used by your application.

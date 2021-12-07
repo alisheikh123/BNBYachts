@@ -42,12 +42,6 @@
                                 <button class="underline-link-blk active" id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">Boatel</button>
-                                <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-profile" type="button" role="tab"
-                                    aria-controls="v-pills-profile" aria-selected="false">Charter</button>
-                                <button class="underline-link-blk" id="v-pills-settings-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-settings" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false">Event</button>
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -121,7 +115,7 @@
                                                             </div>
                                                         </div>
                                                         <small class="text-danger"
-                                                            *ngIf="(boatFilterDetails?.checkinDate == '' || boatFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
+                                                            *ngIf="(boatFilterDetails?.checkinDate == null || boatFilterDetails?.checkoutDate == null)&& isSubmitted">Enter
                                                             {{!boatFilterDetails.checkinDate ? 'check-in':'check-out'}}
                                                             date</small>
                                                     </div>
@@ -218,7 +212,7 @@
                                                             calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue" (click)="reserveBoat()">Reserve
+                                                    <button class="custom-btn blue" (click)="reserveBoat()">Book
                                                         Now</button>
                                                 </div>
                                             </div>
@@ -350,7 +344,7 @@
                                                     <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                         alt="...">
                                                     <div class="card-body bg-white">
-                                                        <p>Private Charter</p>
+                                                        <p>Private Event</p>
 
                                                     </div>
                                                 </div>

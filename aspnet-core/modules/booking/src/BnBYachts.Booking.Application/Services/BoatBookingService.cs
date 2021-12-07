@@ -20,7 +20,7 @@ namespace BnBYachts.Booking.Services
         [Route("boatelbooking")]
         public async Task<BoatelBookingTransferable> BoatelBooking(BoatelBookingEntity data)
         {
-            var result = await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
+            var result = await _hostBoatBookingManager.BoatelBooking(data, CurrentUser.Id, CurrentUser.Email);
             return result;
         }
         [HttpPost]
@@ -40,17 +40,17 @@ namespace BnBYachts.Booking.Services
         }
         [HttpGet]
         [Route("upcomingboatelbookingdetail")]
-        public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail()
+        public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string month, string year)
         {
-            var bookings = await _hostBoatBookingManager.UpcomingBoatelBookingDetail(CurrentUser.Id.ToString()).ConfigureAwait(false);
+            var bookings = await _hostBoatBookingManager.UpcomingBoatelBookingDetail(CurrentUser.Id.ToString(),month,year).ConfigureAwait(false);
             return bookings;
         }
         [HttpGet]
         [Route("pastboatelbookingdetail")]
-        public async Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail()
+        public async Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string month, string year)
         {
 
-            var pastBooking = await _hostBoatBookingManager.PastBoatelBookingDetail(CurrentUser.Id.ToString()).ConfigureAwait(false);
+            var pastBooking = await _hostBoatBookingManager.PastBoatelBookingDetail(CurrentUser.Id.ToString(),month,year).ConfigureAwait(false);
             return pastBooking;
         }
 

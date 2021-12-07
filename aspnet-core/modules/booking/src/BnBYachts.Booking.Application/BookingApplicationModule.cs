@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Account;
+﻿using BnBYachts.EventBusShared;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -12,12 +13,14 @@ namespace BnBYachts.Booking
     [DependsOn(
         typeof(BookingDomainModule),
         //typeof(AbpAccountApplicationModule),
-        typeof(BookingApplicationContractsModule)
+        typeof(BookingApplicationContractsModule),
+         typeof(EventBusSharedModule)
         //typeof(AbpIdentityApplicationModule),
         //typeof(AbpPermissionManagementApplicationModule),
         //typeof(AbpTenantManagementApplicationModule),
         //typeof(AbpFeatureManagementApplicationModule),
         //typeof(AbpSettingManagementApplicationModule)
+
         )]
     public class BookingApplicationModule : AbpModule
     {

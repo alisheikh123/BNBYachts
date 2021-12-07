@@ -79,10 +79,10 @@ namespace BnBYachts.Services.Boat
         }
         [Route("add-host-boats")]
         [HttpPost]
-        public async Task<bool> AddHostBoats(HostBoatRequestable boatDetails)
+        public async Task<BoatAddResponseTransferable> AddHostBoats(HostBoatRequestable boatDetails)
         {
             var data = await _hostBoatManager.AddHostBoatManager(boatDetails, CurrentUser.Id);
-            return true;
+            return data;
         }
 
         [HttpPost]
@@ -99,6 +99,16 @@ namespace BnBYachts.Services.Boat
         {
             return await _hostBoatManager.GetHostBoats(CurrentUser.Id).ConfigureAwait(false);
         }
+
+        #region Features
+        [Route("get-default-features")]
+        [HttpGet]
+        public async Task<ICollection<FeatureEntity>> GetDefaultFeatures()
+        {
+            var result =  await _hostBoatManager.GetDefaultFeatures().ConfigureAwait(false);
+            return result;
+        }
+        #endregion
         [Route("host-boat-status/{boatId}")]
         [HttpGet]
         public async Task<bool> UpdateHostBoatStatus(long boatId)

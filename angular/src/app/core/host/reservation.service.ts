@@ -12,8 +12,8 @@ export class ReservationService {
   boatApiUrl: string = environment.BOAT_API_URL;
   constructor(private http: HttpClient) { }
 
-  getBoatelBookingRequests() {
-    return this.http.get(this.bookingApiUrl + '/get-my-reservations').pipe(
+  getBoatelBookingRequests(Month? : string,Year?: string) {
+    return this.http.get(this.bookingApiUrl + '/get-my-reservations?month='+Month+'&year='+Year).pipe(
       catchError(this.handleError));
   }
   changeStatus(bookingId: number, status: boolean) {
