@@ -36,7 +36,10 @@ export class YachtSearchService {
     return this.http.get(this.apiUrl + '/').pipe(
       catchError(this.handleError));
   }
-
+  defaultFeatures() {
+    return this.http.get(this.apiUrl + '/get-default-features').pipe(
+      catchError(this.handleError));
+  }
 
   ///Exception handler
   handleError(error: any) {

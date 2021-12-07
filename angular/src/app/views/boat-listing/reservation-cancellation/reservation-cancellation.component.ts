@@ -87,8 +87,8 @@ export class ReservationCancellationComponent implements OnInit {
           elem.remaingHours = this.remaingHours;
 
 
-          this.remainingDays = Math.ceil((this.checkinCombindDateTime - this.currentCombindDateTime) / 8.64e7) + 1;
-          this.totalDays = Math.ceil((this.checkoutCombindDateTime - this.checkinCombindDateTime) / 8.64e7) + 1;
+          this.remainingDays = Math.ceil((this.checkinCombindDateTime - this.currentCombindDateTime) / 8.64e7);
+          this.totalDays = Math.ceil((this.checkoutCombindDateTime - this.checkinCombindDateTime) / 8.64e7);
 
           // Add in booking Detail
           elem.remaingDays = this.remainingDays;

@@ -66,6 +66,7 @@ namespace BnBYachts.Boat.Manager
                 {
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
+                    await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatFeatures).ConfigureAwait(false);
                     double distance = GetDistanceInMeters(boat.Latitude, boat.Longitude, parameters.Latitude, parameters.Longitude);
                     if (distance <= 500)
                     {
@@ -232,6 +233,11 @@ namespace BnBYachts.Boat.Manager
 
         }
 
-
+        #region Features
+        public async Task<ICollection<FeatureEntity>> GetDefaultFeatures()
+        {
+           return await _featuresRepo.GetListAsync(x => x.IsDefaultFeature == true).ConfigureAwait(false);
+        }
+        #endregion
     }
 }

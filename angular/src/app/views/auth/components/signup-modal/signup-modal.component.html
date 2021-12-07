@@ -84,7 +84,7 @@
               <div class="custom-input-field">
                 <label>Date of Birth </label>
                 <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-                    <input class="custom-input" type="date" formControlName="DOB">
+                    <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
                     <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                       validation: 'required',
                       message: 'Date of birth is required',
@@ -124,9 +124,9 @@
               [disabled]="registrationForm.invalid"
               >Agree & Continue </button>
             </div>
-            <div class="col-sm-12 text-center">
+            <!-- <div class="col-sm-12 text-center">
               <p class="small-text light">Already have an Account? <a href="javascript:void(0)"  (click)="login()" class="underline-blue-link">Log in</a></p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

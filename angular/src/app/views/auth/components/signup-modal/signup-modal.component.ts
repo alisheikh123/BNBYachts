@@ -105,6 +105,9 @@ export class SignupModalComponent implements OnInit {
       windowClass: 'custom-modal custom-small-modal',
     });
   }
+  getToday(): string {
+    return new Date().toISOString().split('T')[0]
+ }
 }
 export const passwordMatchingValidatior: ValidatorFn = (
   control: AbstractControl

@@ -113,6 +113,16 @@ namespace BnBYachts.Services.Boat
         public async Task<ICollection<BoatEntity>> GetHostBoatDetails()
         {
             return await _hostBoatManager.GetHostBoats(CurrentUser.Id).ConfigureAwait(false);
-        }       
+        }
+
+        #region Features
+        [Route("get-default-features")]
+        [HttpGet]
+        public async Task<ICollection<FeatureEntity>> GetDefaultFeatures()
+        {
+            var result =  await _hostBoatManager.GetDefaultFeatures().ConfigureAwait(false);
+            return result;
+        }
+        #endregion
     }
 }

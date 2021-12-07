@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Booking.MultiTenancy;
+using BnBYachts.EventBusShared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Volo.Abp.AuditLogging;
@@ -10,7 +11,8 @@ namespace BnBYachts.Booking
 {
     [DependsOn(
         typeof(BookingDomainSharedModule),
-        typeof(AbpAuditLoggingDomainModule)
+        typeof(AbpAuditLoggingDomainModule),
+         typeof(EventBusSharedModule)
     //typeof(AbpBackgroundJobsDomainModule),
     //typeof(AbpFeatureManagementDomainModule),
     //typeof(AbpIdentityDomainModule),

@@ -14,6 +14,10 @@ import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.comp
 import { NgxDateRangeModule } from 'ngx-daterange';
 import { TimePickerModule,DateRangePickerModule  } from '@syncfusion/ej2-angular-calendars';
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
+import { setTheme } from 'ngx-bootstrap/utils';
+setTheme('bs4'); // or 'bs4'
 
 
 
@@ -34,7 +38,8 @@ HostBoatListingComponent
     SharedPipesModule,
     GooglePlaceModule,
     TimePickerModule ,
-    DateRangePickerModule
+    DateRangePickerModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [YachtSearchService,ReservationService]
 })
