@@ -11,12 +11,6 @@ namespace BnBYachts.Boat
 {
     [DependsOn(
         typeof(BoatApplicationContractsModule)
-        //typeof(AbpAccountHttpApiModule),
-        //typeof(AbpIdentityHttpApiModule),
-        //typeof(AbpPermissionManagementHttpApiModule),
-        //typeof(AbpTenantManagementHttpApiModule),
-        //typeof(AbpFeatureManagementHttpApiModule),
-        //typeof(AbpSettingManagementHttpApiModule)
         )]
     public class BoatHttpApiModule : AbpModule
     {
@@ -27,14 +21,6 @@ namespace BnBYachts.Boat
 
         private void ConfigureLocalization()
         {
-            //Configure<AbpLocalizationOptions>(options =>
-            //{
-            //    options.Resources
-            //        .Get<BoatResource>()
-            //        .AddBaseTypes(
-            //            typeof(AbpUiResource)
-            //        );
-            //});
         }
     }
 }

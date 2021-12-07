@@ -37,7 +37,7 @@ export class BookingService {
 
   /* Ali */
   bookingDetail(month? : string,year?: string) {
-    return this.http.get(this.bookingApiUrl + '/boatelbookingdetail?month='+month+'&year='+year).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl + '/boatelbookingdetail').pipe(catchError(this.handleError));
   }
   upcomingbookingDetail(month? : string,year?: string) {
     return this.http.get(this.bookingApiUrl + '/upcomingboatelbookingdetail?month='+month+'&year='+year).pipe(catchError(this.handleError));

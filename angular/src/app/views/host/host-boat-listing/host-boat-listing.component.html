@@ -2,28 +2,30 @@
   <div class="listing-main-wrapper section-padding">
     <div class="custom-flex-between mb-3">
       <h2 class="bold">Listing</h2>
-      <a href="location.html" class="custom-btn grey">Add New</a>
+      <a [routerLink]="['/host/onboarding']" class="custom-btn grey">Add New</a>
     </div>
     <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile" *ngFor="let item of hostBoats">
       <div class="image-with-text custom-flex-between align-items-center">
         <div class="image-with-text-inner">
-          <div *ngFor="let img of item.boatGalleries">
-            <div *ngIf="img.isCoverPic==1">
-              <img src="{{assetsUrl + img.imagePath}}" alt="">
-            </div>
+          <div *ngFor="let img of item.boatGalleries | filterBy : 'isCoverPic':true">
+            <img src="{{assetsUrl + img.imagePath}}" alt="">
           </div>
           <div class="user-details">
             <p class="medium py-2">{{item.name}}</p>
-            <p class="">Listing Status:<span class="" [ngStyle]="{'color':item.isActive == true ? 'small-text' : 'red' }"> {{item.isActive==true?"Active":"Deactive"}} </span></p>
+            <p class="">Listing Status:<span class=""
+                [ngStyle]="{'color':item.isActive == true ? 'small-text' : 'red' }">
+                {{item.isActive==true?"Active":"Deactive"}} </span></p>
             <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht?
-              "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing Boat":item.boatType==BOAT_TYPE.SailBoat?"Sail Boat":item.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
+              "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power
+              Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing
+              Boat":item.boatType==BOAT_TYPE.SailBoat?"Sail Boat":item.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
             </p>
             <p class=" ">{{item.creationTime | date}}</p>
 
           </div>
         </div>
         <div class="right-content custom-flex flex-wrap">
-          <a href="location.html" class="custom-btn small-round grey"><svg id="place_black_24dp_1_"
+          <a [routerLink]="['/host/boat-location',item.id]" class="custom-btn small-round grey"><svg id="place_black_24dp_1_"
               data-name="place_black_24dp (1)" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               viewBox="0 0 24 24">
               <path id="Path_21117" data-name="Path 21117" d="M0,0H24V24H0Z" fill="none" />
@@ -55,9 +57,14 @@
                 d="M14.787,9.416l.98.98L6.112,20.052h-.98v-.98l9.655-9.656M18.623,3a1.067,1.067,0,0,0-.746.309l-1.95,1.95,4,4,1.95-1.95a1.061,1.061,0,0,0,0-1.5L19.38,3.309A1.047,1.047,0,0,0,18.623,3ZM14.787,6.4,3,18.187v4H7L18.783,10.4l-4-4Z"
                 transform="translate(-0.609 -0.609)" fill="#777" />
             </svg></a>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="'customSwitches_'+{{item.id}}"
+              (click)="isBoatActive(item)" [checked]="item.isActive">
+            <label class="custom-control-label" for="'customSwitches_'+{{item.id}}"></label>
+          </div>
+
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
-</div>

@@ -13,5 +13,7 @@ namespace BnBYachts.Core.Shared.Interface
         Task<bool> ConfirmEmail(string username, string token);
         Task ResendEmail(string username);
         Task<bool> UpdateUserProfile(UserProfileRequestable userInput);
+        Task<bool> AddHostRole(string userId);
     }
+
 }

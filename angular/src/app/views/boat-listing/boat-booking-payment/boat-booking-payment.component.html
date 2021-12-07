@@ -2,7 +2,7 @@
     <div class="container section-padding payment-method-wrapper">
 
         <div class="btn-back">
-            <a [routerLink]="['/boat-listing/boat-details',boatId]"> <span class="material-icons arrow_back_ios">
+            <a [routerLink]="['/boat-listing/boatel-details',boatId]"> <span class="material-icons arrow_back_ios">
                     arrow_back_ios
                 </span></a>
             <h2 class="bold">Book a Boatel</h2>
@@ -202,7 +202,7 @@
                <div class="img-wrapper big-image">
                    <img src="../../../../assets/images/boat.png" alt="">
                </div>
-               <h2 class="medium">Booking Confirmed</h2>
+               <h2 class="medium">Booking Request Sent!</h2>
                <p class="line-clamp-1 my-2 medium-container"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Learn more</p>
                <button class="custom-btn blue big-btn my-2">Home</button>
            </div>
@@ -218,6 +218,7 @@
                             <div class="custom-flex-between py-1"><p class="medium">Bathrooms:</p> <p class="grey">{{boatDetails?.totalWashrooms}}</p></div>
                             <div class="custom-flex-between py-1"><p class="medium">Check In:</p> <p class="grey">{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p></div>
                             <div class="custom-flex-between py-1"><p class="medium">Check Out:</p> <p class="grey">{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">Total Nights:</p> <p class="grey">{{calculateDays()}} Nights</p></div>
                             <div class="border-top my-3"></div>
                             <div class="custom-flex-between py-1"><p class="medium">Total(USD):</p> <p class="grey">$ {{boatDetails?.perDayCharges * calculateDays() + boatDetails?.taxFee + 20 }}.00</p></div>
                             <div class="custom-flex py-2">

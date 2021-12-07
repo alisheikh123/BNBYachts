@@ -71,7 +71,7 @@ export class BoatListingComponent implements OnInit {
     this.filterMarkers();
     this.center = {
       lat: this.mapDetails?.latitude,
-      lng: this.mapDetails?.longitude,
+      lng: this.mapDetails?.longitude
     };
   }
 

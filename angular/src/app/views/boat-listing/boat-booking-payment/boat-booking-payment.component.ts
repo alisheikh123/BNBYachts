@@ -89,7 +89,7 @@ export class BoatBookingPaymentComponent implements OnInit {
       var date1 = new Date(this.boatFilterDetails.checkinDate);
       var date2 = new Date(this.boatFilterDetails.checkoutDate);
       var Time = date2.getTime() - date1.getTime();
-      var Days = Time / (1000 * 3600 * 24);
+      var Days = Math.floor(Time / (1000 * 3600 * 24));
       return Days < 0 ? 0 : Days + 1;
     }
     else {

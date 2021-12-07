@@ -114,5 +114,11 @@ namespace BnBYachts.Core.Managers
             }
             return false;
         }
+        public async Task<bool> AddHostRole(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            await _userManager.AddToRoleAsync(user, "Host");
+            return true;
+        }
     }
 }

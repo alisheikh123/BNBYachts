@@ -78,10 +78,10 @@
                           min-width: 76px !important;
                           cursor: pointer;
                         "
-                        (click)="applyPriceFilter(minPrice,maxPrice)"
+                        (click)="applyPriceFilter(minPrice, maxPrice)"
                       >
                         Save
-                    </a>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -125,134 +125,138 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="bg-grey">
-    <div class="section-padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 py-2">
-            <p class="small-mini-text grey white-bg-card">
-              <span class="circle-icon"><i class="fa fa-info"></i></span>Given
-              List is based on distance from the selected location, covers 50
-              miles from the selected location.
-            </p>
-            <div class="boatel-search-card" *ngFor="let item of boats">
-              <div class="row h-100">
-                <div class="col-sm-5 pr-0">
-                  <div
-                    class="boatel-search-card-img"
-                    *ngFor="
-                      let gallery of item?.boatGalleries
-                        | filterBy: 'isCoverPic':true
-                    "
-                  >
-                    <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
-                    <img src="{{ assetsUrl + gallery?.imagePath }}" />
+    <div class="bg-grey">
+      <div class="section-padding">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 py-2">
+              <p class="small-mini-text grey white-bg-card">
+                <span class="circle-icon"><i class="fa fa-info"></i></span>Given
+                List is based on distance from the selected location, covers 50
+                miles from the selected location.
+              </p>
+              <div class="boatel-search-card" *ngFor="let item of boats">
+                <div class="row h-100">
+                  <div class="col-sm-5 pr-0">
+                    <div
+                      class="boatel-search-card-img"
+                      *ngFor="
+                        let gallery of item?.boatGalleries
+                          | filterBy: 'isCoverPic':true
+                      "
+                    >
+                      <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
+                      <img src="{{ assetsUrl + gallery?.imagePath }}" />
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-7">
-                  <div class="boatel-search-card-content">
-                    <div class="boatel-search-card-content-title">
-                      <a
-                        [routerLink]="['/boat-listing/boat-details', item.id]"
-                        class="underline-black-link p-0"
-                        >{{ item.name }}</a
-                      >
-                      <a href="javascript:void(0)" class="fav-btn"
-                        ><i class="fa fa-heart-o"></i
-                      ></a>
-                    </div>
-                    <p class="grey">
-                      {{ item.boatelCapacity }} Guests -
-                      {{ item.totalBedrooms }} Bed Rooms -
-                      {{ item.totalWashrooms }} Bathroom
-                    </p>
-                    <div class="boatel-search-card-content-title">
-                      <p class="grey">{{ item.location }}</p>
-                    </div>
-                    <div class="custom-flex-between">
-                      <ngb-rating [rate]="0"></ngb-rating>
-                      <p class="bold-span-text">
-                        <span>$ {{ item.perDayCharges }}</span
-                        >/ Night
+                  <div class="col-sm-7">
+                    <div class="boatel-search-card-content">
+                      <div class="boatel-search-card-content-title">
+                        <a
+                          [routerLink]="[
+                            '/boat-listing/boatel-details',
+                            item.id
+                          ]"
+                          class="underline-black-link p-0"
+                          >{{ item.name }}</a
+                        >
+                        <a href="javascript:void(0)" class="fav-btn"
+                          ><i class="fa fa-heart-o"></i
+                        ></a>
+                      </div>
+                      <p class="grey">
+                        {{ item.boatelCapacity }} Guests -
+                        {{ item.totalBedrooms }} Bed Rooms -
+                        {{ item.totalWashrooms }} Bathroom
                       </p>
+                      <div class="boatel-search-card-content-title">
+                        <p class="grey">{{ item.location }}</p>
+                      </div>
+                      <div class="custom-flex-between">
+                        <ngb-rating [rate]="0"></ngb-rating>
+                        <p class="bold-span-text">
+                          <span>$ {{ item.perDayCharges }}</span
+                          >/ Night
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6 py-2">
-            <div class="iframe-wrapper">
-              <google-map
-                height="560px"
-                width="600px"
-                [options]="mapOptions"
-                [center]="center"
-                [zoom]="zoom"
-              >
-                <map-marker
-                  #markerr="mapMarker"
-                  *ngFor="let marker of markers"
-                  [position]="marker.position"
-                  [label]="marker.label"
-                  [title]="marker.title"
-                  [options]="marker.options"
-                  (mapClick)="openInfoWindow(markerr, marker)"
+            <div class="col-sm-6 py-2">
+              <div class="iframe-wrapper">
+                <google-map
+                  height="560px"
+                  width="600px"
+                  [options]="mapOptions"
+                  [center]="center"
+                  [zoom]="zoom"
                 >
-                </map-marker>
-                <map-info-window>
-                  <div class="boatel-search-card">
-                    <div class="row m-0">
-                      <div class="col-sm-5 pr-0">
-                        <div
-                          class="boatel-search-card-img"
-                          *ngFor="
-                            let gallery of mapInfoDetails?.boatGalleries
-                              | filterBy: 'isCoverPic':true
-                          "
-                        >
-                          <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
-                          <img src="{{ assetsUrl + gallery?.imagePath }}" />
+                  <map-marker
+                    #markerr="mapMarker"
+                    *ngFor="let marker of markers"
+                    [position]="marker.position"
+                    [label]="marker.label"
+                    [title]="marker.title"
+                    [options]="marker.options"
+                    (mapClick)="openInfoWindow(markerr, marker)"
+                  >
+                  </map-marker>
+                  <map-info-window>
+                    <div class="boatel-search-card">
+                      <div class="row m-0">
+                        <div class="col-sm-5 pr-0">
+                          <div
+                            class="boatel-search-card-img"
+                            *ngFor="
+                              let gallery of mapInfoDetails?.boatGalleries
+                                | filterBy: 'isCoverPic':true
+                            "
+                          >
+                            <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
+                            <img src="{{ assetsUrl + gallery?.imagePath }}" />
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-sm-7">
-                        <div class="boatel-search-card-content">
-                          <div class="boatel-search-card-content-title">
-                            <a
-                              href="boatel-search-details.html"
-                              class="underline-black-link p-0"
-                              >{{ mapInfoDetails?.name }}</a
-                            >
-                            <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
-                          </div>
-                          <p class="grey">
-                            {{ mapInfoDetails?.boatelCapacity }} Guests -
-                            {{ mapInfoDetails?.totalBedrooms }} Bed Rooms -
-                            {{ mapInfoDetails?.totalWashrooms }} Bathroom
-                          </p>
-                          <div class="boatel-search-card-content-title">
-                            <p class="grey">{{ mapInfoDetails?.location }}</p>
-                          </div>
-                          <div class="custom-flex-between">
-                            <ngb-rating [rate]="0"></ngb-rating>
-                            <!-- <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p> -->
-                          </div>
-                          <div class="pt-2 boatel-search-card-content-title">
-                            <p class="bold-span-text">
-                              <span>$ {{ mapInfoDetails?.perDayCharges }}</span
-                              >/ Night
+                        <div class="col-sm-7">
+                          <div class="boatel-search-card-content">
+                            <div class="boatel-search-card-content-title">
+                              <a
+                                href="boatel-search-details.html"
+                                class="underline-black-link p-0"
+                                >{{ mapInfoDetails?.name }}</a
+                              >
+                              <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
+                            </div>
+                            <p class="grey">
+                              {{ mapInfoDetails?.boatelCapacity }} Guests -
+                              {{ mapInfoDetails?.totalBedrooms }} Bed Rooms -
+                              {{ mapInfoDetails?.totalWashrooms }} Bathroom
                             </p>
-                            <a href="javascript:void(0)" class="fav-btn"
-                              ><i class="fa fa-heart-o"></i
-                            ></a>
+                            <div class="boatel-search-card-content-title">
+                              <p class="grey">{{ mapInfoDetails?.location }}</p>
+                            </div>
+                            <div class="custom-flex-between">
+                              <ngb-rating [rate]="0"></ngb-rating>
+                              <!-- <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p> -->
+                            </div>
+                            <div class="pt-2 boatel-search-card-content-title">
+                              <p class="bold-span-text">
+                                <span
+                                  >$ {{ mapInfoDetails?.perDayCharges }}</span
+                                >/ Night
+                              </p>
+                              <a href="javascript:void(0)" class="fav-btn"
+                                ><i class="fa fa-heart-o"></i
+                              ></a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </map-info-window>
-              </google-map>
+                  </map-info-window>
+                </google-map>
+              </div>
             </div>
           </div>
         </div>
@@ -554,10 +558,7 @@
   <ng-template #filterTemplate>
     <div class="modal-content">
       <div class="modal-header no-border">
-        <button
-          type="button"
-          class="btn-close"
-        ></button>
+        <button type="button" class="btn-close"></button>
       </div>
       <div class="modal-body" style="font-size: 0.8em !important">
         <div class="custom-text-center">
