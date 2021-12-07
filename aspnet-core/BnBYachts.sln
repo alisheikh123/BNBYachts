@@ -129,6 +129,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnByachts.SeedObservable", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnByachts.NotificationHub", "modules\notificationHub\BnByachts.NotificationHub\BnByachts.NotificationHub.csproj", "{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BnBYachts.Socket.Web", "microservices\BnBYachts.Socket.Web\BnBYachts.Socket.Web.csproj", "{4B0DC72C-FC18-42C1-B0F0-3FF1F96E43AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,6 +313,10 @@ Global
 		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0DC72C-FC18-42C1-B0F0-3FF1F96E43AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0DC72C-FC18-42C1-B0F0-3FF1F96E43AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0DC72C-FC18-42C1-B0F0-3FF1F96E43AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0DC72C-FC18-42C1-B0F0-3FF1F96E43AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -374,6 +380,7 @@ Global
 		{3F20B686-62DC-43F1-B600-A53E96A5E0AF} = {4F58C216-B903-489A-997E-281015BFD573}
 		{CAA254C7-5D21-4AAF-BE16-737ACF13845B} = {3F20B686-62DC-43F1-B600-A53E96A5E0AF}
 		{4FA2507E-6AE8-45EF-B2AB-F989BFD187C1} = {5B43B67C-D3DE-4E14-B785-576B1D612EAF}
+		{4B0DC72C-FC18-42C1-B0F0-3FF1F96E43AE} = {10399C2F-1B2E-4141-97C9-9212B90B78E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

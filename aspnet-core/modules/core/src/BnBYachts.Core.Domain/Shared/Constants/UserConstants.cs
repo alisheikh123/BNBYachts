@@ -11,5 +11,6 @@ namespace BnBYachts.Core.Shared
         public const string ImagePath = "ImagePath";
         public const string EmailConfirmationToken = "EmailConfirmationToken";
         public const string DOB = "DOB";
+        public const string About = "About";
     }
 }

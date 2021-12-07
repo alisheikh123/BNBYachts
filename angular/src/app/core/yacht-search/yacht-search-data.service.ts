@@ -21,4 +21,5 @@ export class YachtSearchDataService {
   setFilters(filters: any): void {
     this.filters = filters;
   }
+  
 }

@@ -23,10 +23,11 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
 
         #region Host OnBoarding
         Task<HostLookupTransferable> GetHostOnBoardingLookup(Guid? userId);
-        Task<bool> AddHostBoatManager(HostBoatRequestable boatDetails,Guid? userId);
+        Task<BoatAddResponseTransferable> AddHostBoatManager(HostBoatRequestable boatDetails,Guid? userId);
         Task<bool> UpdateBoatLocation(BoatLocationRequestable boatDetails, Guid? userId);
         #endregion
         Task<bool> UpdateboatStatus(long boatId);
         Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId);
+        Task<ICollection<FeatureEntity>> GetDefaultFeatures();
     }
 }

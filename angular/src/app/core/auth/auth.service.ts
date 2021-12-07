@@ -62,5 +62,10 @@ export class AuthService {
   resendEmail(userName:any){
     return this.http.get<any>(this.apiCoreURl + "/Resend-Email?username="+userName);
   }
+  updateUserProfile(userData: any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.http.put(this.apiCoreURl + "/Update-User-Profile/", userData)
+      .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
 
 }

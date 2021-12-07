@@ -26,8 +26,6 @@
                             data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
                             <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
                             data-bs-target="#signup-modal" (click)="signUp()"><span>Sign Up</span></a>
-                        <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="forgetPassword()"><span>Forget Password</span> </a>
                         <a href="javascript:void(0)" class="underline-link-blk"
                             (click)="getUser()"><span>Help</span></a>
 
@@ -115,6 +113,7 @@
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
@@ -133,7 +132,7 @@
         <div class="modal-body">
           <div class="custom-text-center">
             <h4 class="medium text-left mb-3">Earn With Us</h4>
-          <a [ngClass]="{'active': selectedOption.byHost}" (click)="selectedOption.byServiceProvider = false;selectedOption.byHost = !selectedOption.byHost;" class="custom-card custom-flex-between card-right-img">
+          <a [ngClass]="{'earn-active': selectedOption.byHost}" (click)="selectedOption.byServiceProvider = false;selectedOption.byHost = !selectedOption.byHost;" class="custom-card custom-flex-between card-right-img">
               <div class="card-right-img-inside">
                 <h6 class="medium p-0 text-start">Become a Host</h6>
                 <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
@@ -141,7 +140,7 @@
               <img src="../../../../assets/images/host-img-small.png" alt="">
 
               </a>
-              <a [ngClass]="{'active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider" class="custom-card custom-flex-between card-right-img mt-3">
+              <a [ngClass]="{'earn-active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider" class="custom-card custom-flex-between card-right-img mt-3">
                 <div class="card-right-img-inside">
                   <h6 class="medium p-0 text-start">Service Provider</h6>
                   <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>

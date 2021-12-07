@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
+using BnByachts.Simulator.socket;
 using Volo.Abp.DependencyInjection;
 
 namespace BnByachts.Simulator
@@ -20,14 +21,16 @@ namespace BnByachts.Simulator
         }
         public void pushEmail()
         {
-            Console.WriteLine("email sending");
 
-            _ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
-            {
-                To = "umar.draz@techverx.com",
-                Subject = "test",
-                Body = new StringBuilder().Append("test")
-            });
+            new SignalRClient().SendMessage();
+            //Console.WriteLine("email sending");
+
+            //_ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            //{
+            //    To = "umar.draz@techverx.com",
+            //    Subject = "test",
+            //    Body = new StringBuilder().Append("test")
+            //});
         }
     }
 }

@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class OnboardingService {
   boatApiUrl: string = environment.BOAT_API_URL;
+  coreApiUrl: string = environment.CORE_API_URL;
 
   constructor(private http: HttpClient) { }
 
@@ -18,6 +19,10 @@ export class OnboardingService {
   }
   addBoat(boat:any) {
     return this.http.post(this.boatApiUrl + '/add-host-boats',boat).pipe(
+      catchError(this.handleError));
+  }
+  addHostRole(){
+    return this.http.get(this.coreApiUrl + '/AddHostRole').pipe(
       catchError(this.handleError));
   }
   ///Exception handler

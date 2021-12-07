@@ -1,0 +1,199 @@
+<div class="main-wrapper">
+    <div class="section-padding user-info-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 py-2">
+            <div class="custom-card user-info-wrap">
+              <div class="image-with-text">
+                <div class="image-with-text-inner big-image">
+                  <img src="../../../../../assets/images/upload-img.png" alt="" />
+                </div>
+                <p class="medium text-center py-2">Update profile photo</p>
+                <h6 class="bold text-center p-0 pb-3">{{userResponse.name}}</h6>
+              </div>
+              <div class="border-top"></div>
+              <div class="py-2">
+                <p class="medium text-center">Verification</p>
+                <p class="medium text-center py-2">
+                  <i *ngIf="userResponse.isPhoneConfirmed" class="fa fa-check pe-2"></i>
+                  <i *ngIf="!userResponse.isPhoneConfirmed" class="fa fa-times pe-2"></i>Number Verified
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9 col-md-8 py-2">
+            <div class="user-details-info-wrapper">
+              <div class="custom-flex-between align-items-start">
+                <div class="user-details-info-wrapper-inner">
+                  <p class="bold">{{userResponse.name}}</p>
+                  <p class="grey py-2">Joined 2021</p>
+                </div>
+              </div>
+              <form
+                [formGroup]="profileForm"
+                novalidate="novalidate"
+                (ngSubmit)="submit()"
+              >
+                <div class="row">
+                  <div class="col-lg-7">
+                    <div class="custom-input-field">
+                      <label>Name</label>
+                      <input
+                        type="text"
+                        class="custom-input"
+                        placeholder="Name"
+                        name="name"
+                        formControlName="Name"
+                      />
+                      <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Name is required',
+                        control: profileForm.controls['Name']
+                      }"></ng-container>
+                    </div>
+  
+                    <div class="custom-input-field">
+                      <label>Contact Number</label>
+                      <input
+                      type="text"
+                        class="custom-input"
+                        placeholder="Number"
+                        name="phoneNumber"
+                        formControlName="PhoneNumber"
+                      />
+                      <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Contact number is required',
+                        control: profileForm.controls['PhoneNumber']
+                      }"></ng-container>
+                    </div>
+  
+                    <div class="custom-input-field">
+                      <label>About</label>
+                      <textarea
+                        class="custom-input"
+                        id="exampleFormControlTextarea1"
+                        placeholder="Description"
+                        name="about"
+                        formControlName="About"
+                        rows="3"
+                      ></textarea>
+                      <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'About is required',
+                        control: profileForm.controls['About']
+                      }"></ng-container>
+                    </div>
+  
+                    <div class="custom-input-field">
+                      <label>Email</label>
+                      <input
+                        type="email"
+                        readonly="true"
+                        class="custom-input"
+                        placeholder="Email"
+                        placeholder="Email"
+                        name="email"
+                        formControlName="Email"
+                      />
+  
+                      <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Email is required',
+                        control: profileForm.controls['Email']
+                      }"></ng-container>
+      
+                      <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'pattern',
+                        message: 'Invalid Email',
+                        control: profileForm.controls['Email']
+                      }"></ng-container>
+                    </div>
+  
+                    <div class="py-2">
+                      <div class="custom-flex-end">
+                        <button class="custom-btn grey">Cancel</button>
+                        <button
+                          class="custom-btn blue ms-3"
+                          [disabled]="profileForm.invalid"
+                          >Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+  
+              <!-- <div class="py-2">
+                <p class="bold pb-2">My Listing</p>
+                <div class="image-wrapper-boat">
+                  <img src="./images/character-boat-img.png" alt="" />
+                </div>
+                <div class="custom-flex-start py-1">
+                  <p class="bold">New</p>
+                  <div class="small-stars yellow-stars ms-2">
+                    <span class="fa fa-star stars-clr"></span>
+                  </div>
+                </div>
+                <p class="regular grey">Power Boat</p>
+              </div>
+            </div>
+            <div class="total-reviews section-padding">
+              <div class="custom-flex-start small-stars black-stars me-2">
+                <span class="fa fa-star stars-clr me-2"></span>
+                <p class="medium">2 Reviews</p>
+              </div>
+              <div class="image-with-text pt-4 pb-2">
+                <div class="image-with-text-inner">
+                  <img src="./images/user-img.png" alt="" />
+                  <div class="user-details">
+                    <p class="medium">Elijah</p>
+                    <p class="small-stars">
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                    </p>
+                  </div>
+                </div>
+                <p class="my-3 line-clamp-1">
+                  Short description about the host Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elitShort description about the
+                </p>
+                <p class="text-right grey">12 July 2021, 13:44</p>
+              </div>
+              <div class="image-with-text py-2">
+                <div class="image-with-text-inner">
+                  <img src="./images/user-img.png" alt="" />
+                  <div class="user-details">
+                    <p class="medium">Elijah</p>
+                    <p class="small-stars">
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                    </p>
+                  </div>
+                </div>
+                <p class="my-3 line-clamp-1">
+                  Short description about the host Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elitShort description about the
+                </p>
+                <p class="text-right grey">12 July 2021, 13:44</p>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          {{ message }}
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>

@@ -10,9 +10,9 @@ namespace BnBYachts.Booking.Shared.BoatBooking.Interface
     {
         Task<BoatelBookingTransferable> BoatelBooking(BoatelBookingEntity data, Guid? userId, string userName);
         Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName);
-        Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId);
+        Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId,string month, string year);
         Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail(string userId);
-        Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId);
+        Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId, string month, string year);
 
         Task<ICollection<BoatelBookingEntity>> BoatelBooking(int bookingId);
         Task<bool> IsBookingCancel(BookingCancellationDto data, string userId);

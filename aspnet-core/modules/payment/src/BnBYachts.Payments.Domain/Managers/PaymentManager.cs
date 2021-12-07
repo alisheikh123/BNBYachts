@@ -121,7 +121,7 @@ namespace BnBYachts.Payments.Managers
             var options = new RefundCreateOptions
             {
                 PaymentIntent = paymentDetails.PaymentId,
-                Amount = refundAmount * 100,
+                Amount = refundAmount,
                 Reason = PaymentConstants.RefundReason,
             };
             var service = new RefundService();
