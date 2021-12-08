@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { utils } from 'src/app/shared/utility/utils';
+import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 
 @Component({
   selector: 'app-reservation-detail',
@@ -10,8 +13,8 @@ import { utils } from 'src/app/shared/utility/utils';
 })
 export class ReservationDetailComponent implements OnInit {
 
-  public bd: any;
-  public booking: any;
+  bookingId: number;
+  booking: any;
   checkInDate: any;
   checkOutDate: any;
   totalDays: any;
@@ -19,16 +22,16 @@ export class ReservationDetailComponent implements OnInit {
   hideCancellationbtn: boolean;
   isHourslessthanones: any;
   isCurrentDateGreater: any;
-  constructor(private service: BookingService, public activatedRoute: ActivatedRoute, private route: Router) { }
+  constructor(private service: BookingService, public activatedRoute: ActivatedRoute, private route: Router, private modal: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe(res => {
-      this.bd = res['id'].toString();
+      this.bookingId = Number(res['id']);
 
     });
 
-    this.service.getBookingBoatDetail(this.bd).subscribe((res: any) => {
+    this.service.getBookingBoatDetail(this.bookingId).subscribe((res: any) => {
       this.booking = res;
       res.forEach((elem: any) => {
         this.currentDate = new Date();
@@ -58,6 +61,23 @@ export class ReservationDetailComponent implements OnInit {
   }
   goBack() {
     this.route.navigate(['/boat-listing/all-reservations']);
+  }
+
+  addReview() {
+    this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
+      let review = {
+        revieweeID: this.booking[0]?.boatId,
+        bookingId: this.bookingId,
+        reviewDescription: res.reviewText,
+        ratings: res.ratingStars
+      };
+      this.service.addReview(review).subscribe(res => {
+        if (res) {
+          this.modal.dismissAll();
+          this.toastr.success("Review Added Successfully", "Review");
+        }
+      });
+    });
   }
 
 }
