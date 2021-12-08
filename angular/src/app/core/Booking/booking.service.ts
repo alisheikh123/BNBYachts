@@ -65,6 +65,10 @@ export class BookingService {
     return this.http.get(this.paymentApiUrl + '/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
   }
 
+  addReview(review:any) {
+    return this.http.post(this.bookingApiUrl + '/api/app/review/review',review).pipe(catchError(this.handleError));
+  }
+
   /* Ali */
   getUpcomingHostBookingDetail() {
     return this.http.get(this.bookingApiUrl + '/upcominghostboatelbookingdetail').pipe(catchError(this.handleError));

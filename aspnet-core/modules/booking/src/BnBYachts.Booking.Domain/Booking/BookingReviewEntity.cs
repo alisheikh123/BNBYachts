@@ -7,11 +7,12 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Booking
 {
-    public class ReviewEntity : AuditedAggregateRoot<int>
+    public class BookingReviewEntity : AuditedAggregateRoot<int>
     {
         public string ReviewerId { get; set; }
-        public string RevieweeID { get; set; }
+        public int RevieweeID { get; set; }
         public string ReviewDescription { get; set; }
         public int Ratings { get; set; }
+        public int BookingId { get; set; }
     }
 }
