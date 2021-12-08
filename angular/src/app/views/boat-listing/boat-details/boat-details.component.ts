@@ -127,7 +127,7 @@ export class BoatDetailsComponent implements OnInit {
             if (res) {
               this.yachtParamService.setFilters(this.boatFilterDetails);
               this.router.navigate(['/boat-listing/booking-payment', this.boatId, this.bookingId], { relativeTo: this.activatedRoute });
-              this.toastr.success('Boat reserved for 1 hour successfully.', 'Success');
+              this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
             }
           });
         }

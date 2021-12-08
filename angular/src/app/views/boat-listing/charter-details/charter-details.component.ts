@@ -58,7 +58,6 @@ export class CharterDetailsComponent implements OnInit {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
       this.charterSchedule = res.charterSchedule;
-      console.log(this.charterSchedule);
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
   }

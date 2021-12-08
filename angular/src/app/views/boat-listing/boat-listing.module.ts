@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
@@ -20,6 +20,7 @@ import { CharterListingComponent } from './charter-listing/charter-listing.compo
 import { EventListingComponent } from './event-listing/event-listing.component';
 import { CharterDetailsComponent } from './charter-details/charter-details.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { NotFoundModule } from '../common/not-found-component/not-found.module';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,9 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     GoogleMapsModule,
     CommonModule,
     SharedPipesModule,
-    NgxStripeModule.forRoot(environment.stripeKey)
+    NgxStripeModule.forRoot(environment.stripeKey),
+    NotFoundModule
   ],
-  providers: [YachtSearchService, BookingService]
+    providers: [YachtSearchService, BookingService]
 })
 export class BoatListingModule { }

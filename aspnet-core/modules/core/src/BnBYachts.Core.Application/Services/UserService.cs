@@ -29,11 +29,11 @@ namespace BnBYachts.Core.Services
         [HttpGet]
         [AllowAnonymous]
         [Route("GetUserDetailsById/{userId}")]
-        public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId)
+        public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId) =>                return await _appUserManager.GetLoggedInUserDetails(userId);
         {
             try
             {
-                return await _appUserManager.GetLoggedInUserDetails(userId);
+
             }
             catch (Exception ex)
             {
