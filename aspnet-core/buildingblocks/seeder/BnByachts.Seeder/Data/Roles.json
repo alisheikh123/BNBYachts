@@ -1,0 +1,28 @@
+﻿[
+  {
+    "Id": "A8E857DE-7CA6-F663-FEB0-3A003661104B",
+    "Name": "host",
+    "NormalizedName": "HOST",
+    "IsDefault": false,
+    "IsStatic": true,
+    "IsPublic": true
+  },
+  {
+    "Id": "A8E857DE-7CA6-F663-FEB0-3A003661114B",
+    "Name": "user",
+    "NormalizedName": "USER",
+    "IsDefault": true,
+    "IsStatic": true,
+    "IsPublic": true
+  },
+  {
+    "Id": "69445978-E34F-B624-22EE-3A005EA21C09",
+    "Name": "admin",
+    "NormalizedName": "ADMIN",
+    "IsDefault": false,
+    "IsStatic": true,
+    "IsPublic": true,
+    "ExtraProperties": "{}",
+    "ConcurrencyStamp": "0784392c-537d-45f7-9bcd-f771eb1e8e8d"
+  }
+]

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using BnBYachts.Boat.Shared.Boat.Requestable;
+using BnBYachts.Boats.Charter;
+using BnBYachts.Events;
 using Volo.Abp.AutoMapper;
 
 namespace BnBYachts.Boat
@@ -9,9 +11,14 @@ namespace BnBYachts.Boat
         public BoatDomainAutoMapperProfile()
         {
             CreateMap<BoatGalleryRequestable, BoatGalleryEntity>();
-            CreateMap<BoatFeaturesRequestable, BoatFeatureEntity>();
-            CreateMap<BoatRulesRequestable, BoatRuleEntity>();
+            CreateMap<BoatFeaturesMapperRequestable, BoatFeatureEntity>();
+            CreateMap<BoatRulesMapperRequestable, BoatRuleEntity>();
             CreateMap<BoatCalendarRequestable, BoatCalendarEntity>();
+            CreateMap<FeaturesRequestable, FeatureEntity>();
+            CreateMap<RulesRequestable, RuleEntity>();
+            CreateMap<ChartersMapperRequestable, CharterEntity>();
+            CreateMap<EventsMapperRequestable, EventEntity>();
+            
             CreateMap<HostBoatRequestable, BoatEntity>()
                 .ForMember(x => x.BoatGalleries,
                     opt =>
@@ -26,6 +33,9 @@ namespace BnBYachts.Boat
                 .Ignore(x => x.BoatCalendars);
                 
             CreateMap<BoatEntity, HostBoatRequestable>();
+
+
+           
         }
     }
 }

@@ -18,7 +18,7 @@ namespace BnBYachts.Core.EntityFrameworkCore
 {
     [ReplaceDbContext(typeof(IIdentityDbContext))]
     [ReplaceDbContext(typeof(ITenantManagementDbContext))]
-    [ConnectionStringName("Default")]
+    [ConnectionStringName("Core")]
     public class CoreDbContext :
         AbpDbContext<CoreDbContext>,
         IIdentityDbContext,
