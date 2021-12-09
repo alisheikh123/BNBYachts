@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace BnBYachts.Core
+namespace BnBYachts.Chat
 {
     public class Program
     {
@@ -28,18 +28,12 @@ namespace BnBYachts.Core
 
             try
             {
-                Log.Information("Starting BnBYachts.Core.HttpApi.Host.");
+                Log.Information("Starting BnBYachts.Chat.HttpApi.Host.");
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                }
-
                 Log.Fatal(ex, "Host terminated unexpectedly!");
                 return 1;
             }

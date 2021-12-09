@@ -10,8 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using BnBYachts.Core.EntityFrameworkCore;
-using BnBYachts.Core.MultiTenancy;
+using BnBYachts.Chat.EntityFrameworkCore;
 using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
@@ -21,46 +20,39 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
-using BnBYachts.EventBusShared;
 
-namespace BnBYachts.Core
+namespace BnBYachts.Chat
 {
     [DependsOn(
-        typeof(CoreHttpApiModule),
+        typeof(ChatHttpApiModule),
         typeof(AbpAutofacModule),
-        typeof(AbpCachingStackExchangeRedisModule),
         typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-        typeof(CoreApplicationModule),
-        typeof(CoreEntityFrameworkCoreModule),
+        typeof(ChatApplicationModule),
+        typeof(ChatEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule)
-        //typeof(EventBusSharedModule)
     )]
-    public class CoreHttpApiHostModule : AbpModule
+    public class ChatHttpApiHostModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-                var configuration = context.Services.GetConfiguration();
-                var hostingEnvironment = context.Services.GetHostingEnvironment();
+            var configuration = context.Services.GetConfiguration();
 
-                ConfigureConventionalControllers();
-                ConfigureAuthentication(context, configuration);
-                ConfigureLocalization();
-                ConfigureCache(configuration);
-                ConfigureVirtualFileSystem(context);
-                //  ConfigureRedis(context, configuration, hostingEnvironment);
-                ConfigureCors(context, configuration);
-                ConfigureSwaggerServices(context, configuration);
+            ConfigureConventionalControllers();
+            ConfigureAuthentication(context, configuration);
+            ConfigureCache(configuration);
+            ConfigureVirtualFileSystem(context);
+            ConfigureCors(context, configuration);
+            ConfigureSwaggerServices(context, configuration);
         }
 
         private void ConfigureCache(IConfiguration configuration)
         {
-            Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Core:"; });
+            Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Chat:"; });
         }
 
         private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
@@ -69,7 +61,6 @@ namespace BnBYachts.Core
 
             if (hostingEnvironment.IsDevelopment())
             {
-              
             }
         }
 
@@ -77,7 +68,7 @@ namespace BnBYachts.Core
         {
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
-                options.ConventionalControllers.Create(typeof(CoreApplicationModule).Assembly);
+                options.ConventionalControllers.Create(typeof(ChatApplicationModule).Assembly);
             });
         }
 
@@ -88,7 +79,7 @@ namespace BnBYachts.Core
                 {
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                    options.Audience = "Core";
+                    options.Audience = "Chat";
                 });
         }
 
@@ -98,53 +89,17 @@ namespace BnBYachts.Core
                 configuration["AuthServer:Authority"],
                 new Dictionary<string, string>
                 {
-                    {"Core", "Core API"}
+                    {"Chat", "Chat API"}
                 },
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Core API", Version = "v1"});
+                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Chat API", Version = "v1"});
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
                 });
         }
 
-        private void ConfigureLocalization()
-        {
-            Configure<AbpLocalizationOptions>(options =>
-            {
-                options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-                options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-                options.Languages.Add(new LanguageInfo("en", "en", "English"));
-                options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-                options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-                options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-                options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-                options.Languages.Add(new LanguageInfo("it", "it", "Italian", "it"));
-                options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-                options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-                options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-                options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-                options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
-                options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-                options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
-                options.Languages.Add(new LanguageInfo("es", "es", "Español", "es"));
-            });
-        }
-
-        private void ConfigureRedis(
-            ServiceConfigurationContext context,
-            IConfiguration configuration,
-            IWebHostEnvironment hostingEnvironment)
-        {
-            if (!hostingEnvironment.IsDevelopment())
-            {
-                var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-                context.Services
-                    .AddDataProtection()
-                    .PersistKeysToStackExchangeRedis(redis, "Core-Protection-Keys");
-            }
-        }
+      
 
         private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
         {
@@ -191,22 +146,17 @@ namespace BnBYachts.Core
             app.UseCors();
             app.UseAuthentication();
 
-            if (MultiTenancyConsts.IsEnabled)
-            {
-                app.UseMultiTenancy();
-            }
-
             app.UseAuthorization();
 
             app.UseSwagger();
             app.UseAbpSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Core API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Chat API");
 
                 var configuration = context.GetConfiguration();
                 options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
                 options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
-                options.OAuthScopes("Core");
+                options.OAuthScopes("Chat");
             });
 
             app.UseAuditing();

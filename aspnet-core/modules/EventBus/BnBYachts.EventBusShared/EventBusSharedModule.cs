@@ -52,6 +52,7 @@ namespace BnBYachts.EventBusShared
             EndpointConvention.Map<IHeartbeatContract>(new Uri($"{queueHost}/{EventBusQueue.HeartBeat}"));
             EndpointConvention.Map<IHostBoatContract>(new Uri($"{queueHost}/{EventBusQueue.QSeeder}"));
             EndpointConvention.Map<IEmailContract>(new Uri($"{queueHost}/{EventBusQueue.QEmailNotification}"));
+            EndpointConvention.Map<IEmailContract>(new Uri($"{queueHost}/{EventBusQueue.QBackgroundWorker}"));
         }
     }
 
