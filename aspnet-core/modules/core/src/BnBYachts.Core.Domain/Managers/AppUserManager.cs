@@ -23,6 +23,8 @@ namespace BnBYachts.Core.Managers
    
     public class AppUserManager : DomainService, IAppUserManager
     {
+        private readonly IdentityUserManager _identityUserManager;
+
         private readonly IRepository<IdentityUser, Guid> _repository;
         private readonly ResponseDto _respone = new ResponseDto();
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
@@ -35,7 +37,7 @@ namespace BnBYachts.Core.Managers
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
             IRepository<IdentityUser, Guid> userRepository, IRepository<IdentityRole, Guid> roleRepository,
-            EventBusDispatcher eventBusDispatcher)
+            EventBusDispatcher eventBusDispatcher, IdentityUserManager identityUserManager)
         {
             _repository = repository;
             _userManager = userManager;
@@ -43,6 +45,7 @@ namespace BnBYachts.Core.Managers
             _userRepository = userRepository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _identityUserManager = identityUserManager;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
@@ -114,11 +117,24 @@ namespace BnBYachts.Core.Managers
         [UnitOfWork]
         public virtual async Task<UserRequestable> InsertUsers(UserRequestable input)
         {
-            IdentityUser userName = new IdentityUser(Guid.NewGuid(), input.Email, input.UserName);
-            userName.Name = input.Name;
-            userName.SetProperty(UserConstants.DOB, input.DOB);
-            await _userManager.CreateAsync(userName, input.PasswordHash);
-            //await _userManager.AddToRoleAsync(userName, input.RoleName);
+            try
+            {
+
+                IdentityUser userName = new IdentityUser(Guid.NewGuid(), input.Email, input.UserName);
+                userName.Name = input.Name;
+                
+                userName.SetProperty(UserConstants.DOB, input.DOB);
+                await _identityUserManager.CreateAsync(new IdentityUser { 
+                UserName = "testabc",
+                Email = "test@test.com",
+                
+                });
+            }
+            catch (Exception e)
+            {
+
+            
+            }
             return new UserRequestable();
         }
         public async Task<RolesRequestable> InsertRoles(RolesRequestable input)

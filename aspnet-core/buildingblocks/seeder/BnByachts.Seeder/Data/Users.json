@@ -6,7 +6,7 @@
     "Email": "ali@techverx.com",
     "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
     "DOB": "2021-11-09T00:00:00",
-    "RoleName": "User"
+    "RoleId": "A8E857DE-7CA6-F663-FEB0-3A003661114B"
   },
   {
     "Id": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61",
@@ -15,6 +15,6 @@
     "Email": "umar@techverx.com",
     "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
     "DOB": "2021-11-09T00:00:00",
-    "RoleName": "Host"
+    "RoleId": "A8E857DE-7CA6-F663-FEB0-3A003661104B"
   }
 ]
