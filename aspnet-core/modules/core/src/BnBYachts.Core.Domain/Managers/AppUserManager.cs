@@ -11,36 +11,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
-using Volo.Abp.Identity;
 using Volo.Abp.ObjectMapping;
-using Volo.Abp.Uow;
+using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace BnBYachts.Core.Managers
 {
-   
+
     public class AppUserManager : DomainService, IAppUserManager
     {
-        private readonly IdentityUserManager _identityUserManager;
-
         private readonly IRepository<IdentityUser, Guid> _repository;
-        private readonly ResponseDto _respone = new ResponseDto();
-        private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
+
+        private readonly UserManager<IdentityUser> _userManager;
+
         private readonly EventBusDispatcher _eventBusDispatcher;
-      
 
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
-            Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
-            EventBusDispatcher eventBusDispatcher, IdentityUserManager identityUserManager)
+            UserManager<IdentityUser> userManager,
+            EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
             _userManager = userManager;
             _eventBusDispatcher = eventBusDispatcher;
-            _identityUserManager = identityUserManager;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
@@ -50,16 +47,17 @@ namespace BnBYachts.Core.Managers
 
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
+            var _respone = new ResponseDto();
             var user = new IdentityUser(Guid.NewGuid(), userInput.Email, userInput.Email)
             {
                 Name = userInput.FirstName + " " + userInput.LastName
-            }; 
+            };
             user.SetProperty(UserConstants.DOB, userInput.DOB);
             var result = await _userManager.CreateAsync(user, userInput.Password);
             if (result.Succeeded)
             {
                 var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
-                if(!isRoleAssigned.Succeeded)
+                if (!isRoleAssigned.Succeeded)
                 {
                     return _respone;
                 }
@@ -82,7 +80,6 @@ namespace BnBYachts.Core.Managers
             await _repository.UpdateAsync(user);
 
             string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
-            //string baseUrl = "http://localhost:4200/activate-account";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },
