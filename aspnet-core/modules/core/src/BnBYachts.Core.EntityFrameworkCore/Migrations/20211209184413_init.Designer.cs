@@ -11,7 +11,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace BnBYachts.Core.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20211209093843_init")]
+    [Migration("20211209184413_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

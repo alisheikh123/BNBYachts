@@ -1,14 +1,14 @@
+using System;
 using System.Threading.Tasks;
 using BnBYachts.EventBusShared.Contracts;
 using MassTransit;
 using Volo.Abp.ObjectMapping;
 using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Interface;
-using Volo.Abp.Data;
+using BnBYachts.Core.Shared.Transferable;
 
 namespace BnByachts.SeedObservable.Consumers
 {
-    [ConnectionStringName("AbpIdentityServer")]
     public class UsersConsumer : IConsumer<IUserContract>
     {
         private readonly IAppUserManager _appUserManager;
@@ -20,8 +20,17 @@ namespace BnByachts.SeedObservable.Consumers
         }
         public async Task Consume(ConsumeContext<IUserContract> context)
         {
-            var response= _objectMapper.Map<IUserContract, UserRequestable>(context.Message);
-            await _appUserManager.InsertUsers(response);
+           // var response= _objectMapper.Map<IUserContract, UserRequestable>(context.Message);
+           await  _appUserManager.RegisterUser(new UserRegisterTransferable
+            {
+
+                Password = "Password123!",
+                DOB = DateTime.Now,
+                Email = "test@gmail.com",
+                FirstName = "umar",
+                LastName = "draz",
+                UserName = "test"
+            }).ConfigureAwait(false);
         }
     }
 }

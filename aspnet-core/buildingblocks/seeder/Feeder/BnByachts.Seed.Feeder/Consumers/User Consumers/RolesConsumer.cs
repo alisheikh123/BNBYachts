@@ -19,7 +19,6 @@ namespace BnByachts.SeedObservable.Consumers
         public async Task Consume(ConsumeContext<IRolesContract> context)
         {
             var response= _objectMapper.Map<IRolesContract, RolesRequestable>(context.Message);
-            await _appUserManager.InsertRoles(response);
         }
     }
 }

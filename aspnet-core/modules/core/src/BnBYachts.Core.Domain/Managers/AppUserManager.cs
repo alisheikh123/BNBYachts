@@ -29,22 +29,17 @@ namespace BnBYachts.Core.Managers
         private readonly ResponseDto _respone = new ResponseDto();
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
         private readonly EventBusDispatcher _eventBusDispatcher;
-        private readonly IRepository<IdentityUser, Guid> _userRepository;
-        private readonly IRepository<IdentityRole, Guid> _roleRepository;
+      
 
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
-            IRepository<IdentityUser, Guid> userRepository, IRepository<IdentityRole, Guid> roleRepository,
             EventBusDispatcher eventBusDispatcher, IdentityUserManager identityUserManager)
         {
             _repository = repository;
             _userManager = userManager;
             _eventBusDispatcher = eventBusDispatcher;
-            _userRepository = userRepository;
-            _userRepository = userRepository;
-            _roleRepository = roleRepository;
             _identityUserManager = identityUserManager;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
@@ -55,23 +50,26 @@ namespace BnBYachts.Core.Managers
 
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
-            IdentityUser user = new IdentityUser(Guid.NewGuid(), userInput.Email, userInput.Email); // Username is same as email address
-            user.Name = userInput.FirstName + " " + userInput.LastName;
+            var user = new IdentityUser(Guid.NewGuid(), userInput.Email, userInput.Email)
+            {
+                Name = userInput.FirstName + " " + userInput.LastName
+            }; 
             user.SetProperty(UserConstants.DOB, userInput.DOB);
             var result = await _userManager.CreateAsync(user, userInput.Password);
             if (result.Succeeded)
             {
-                var isRoleAssigned = await _userManager.AddToRoleAsync(user, "User");
-                if (isRoleAssigned.Succeeded)
+                var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
+                if(!isRoleAssigned.Succeeded)
                 {
-                    await SendEmailToAskForEmailConfirmationAsync(user);
-                    _respone.Message = "Account created successfuly";
-                    _respone.Status = true;
+                    return _respone;
                 }
+
+                await SendEmailToAskForEmailConfirmationAsync(user);
+                _respone.Message = "Account created successfully";
             }
             else
             {
-                _respone.Message = result.Errors.ToList().FirstOrDefault().Description;
+                _respone.Message = result.Errors.ToList().FirstOrDefault()?.Description;
                 _respone.Status = false;
             }
             return _respone;
