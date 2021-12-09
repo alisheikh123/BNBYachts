@@ -19,7 +19,7 @@ namespace BnBYachts.Booking.EntityFrameworkCore
         public DbSet<BoatelBookingEntity> BoatelBookings { get; set; }
         public DbSet<CharterBookingEntity> CharterBookings { get; set; }
         public DbSet<EventBookingEntity> EventBookings { get; set; }
-        public DbSet<ReviewEntity> Reviews { get; set; }
+        public DbSet<BookingReviewEntity> Reviews { get; set; }
         public DbSet<BookingCancelEntity> BookingCancel { get; set; }
         #endregion
 

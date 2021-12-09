@@ -50,7 +50,7 @@ namespace BnBYachts.Core.Managers
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime);
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email);
         }
 
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
@@ -83,7 +83,7 @@ namespace BnBYachts.Core.Managers
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
 
-            string baseUrl = "http://44.197.69.129:8080/activate-account";
+            string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
             //string baseUrl = "http://localhost:4200/activate-account";
             var queryParams = new Dictionary<string, string>()
             {
@@ -91,7 +91,7 @@ namespace BnBYachts.Core.Managers
             {"id", token },
             };
             string body = $"<h4>Click on the link below to confirm your account </h4><span> <a href = '{QueryHelpers.AddQueryString(baseUrl, queryParams)}'> Click Me </a></span>";
-            _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
                 To = user.Email,
                 Subject = "Email Confirmation",
@@ -114,38 +114,25 @@ namespace BnBYachts.Core.Managers
             await SendEmailToAskForEmailConfirmationAsync(user);
         }
 
-        [UnitOfWork]
-        public virtual async Task<UserRequestable> InsertUsers(UserRequestable input)
+        public async Task<bool> UpdateUserProfile(UserProfileRequestable userInput)
         {
-            try
+            var user = await _repository.GetAsync(x => x.Id.ToString() == userInput.Id).ConfigureAwait(false);
+            if (user != null)
             {
-
-                IdentityUser userName = new IdentityUser(Guid.NewGuid(), input.Email, input.UserName);
-                userName.Name = input.Name;
-                
-                userName.SetProperty(UserConstants.DOB, input.DOB);
-                await _identityUserManager.CreateAsync(new IdentityUser { 
-                UserName = "testabc",
-                Email = "test@test.com",
-                
-                });
+                user.Name = userInput.Name;
+                user.SetProperty(UserConstants.About, userInput.About);
+                var changePhoneNumberToken = await _userManager.GenerateChangePhoneNumberTokenAsync(user, userInput.PhoneNumber);
+                var changePhoneResult = await _userManager.ChangePhoneNumberAsync(user, userInput.PhoneNumber, changePhoneNumberToken);
+                var res = await _repository.UpdateAsync(user);
+                return true;
             }
-            catch (Exception e)
-            {
-
-            
-            }
-            return new UserRequestable();
+            return false;
         }
-        public async Task<RolesRequestable> InsertRoles(RolesRequestable input)
+        public async Task<bool> AddHostRole(string userId)
         {
-            await _roleRepository.InsertAsync(_objectMapper.Map<RolesRequestable, IdentityRole>(input), true);
-            return new RolesRequestable();
-        }
-
-        public Task<UserRolesRequestable> InsertUserRoles(UserRolesRequestable input)
-        {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            await _userManager.AddToRoleAsync(user, "Host");
+            return true;
         }
     }
 }

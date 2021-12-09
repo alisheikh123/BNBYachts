@@ -10,19 +10,15 @@
       </div>
       <div>
         <div class="row pb-4">
-            <div class="col-12">
+            <div class="col-4">
               <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
               <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button>
-              <div class="col-10"></div>
             </div>
           </div>
         <div class="filter-wrap mb-3 custom-flex-start">
-          <div class="dropdown custom-dropdown dropdown-rounded">
-            <select class="dropdown custom-dropdown dropdown-rounded custom-select" (select)="selectedMonth($event)">
-              <option *ngFor="let item of month" [ngValue]="item.Id">{{item.name}}</option>
-            </select>
-          </div>
-
+          <div class="calendar">                
+            <input type="month" [(ngModel)]="modelDate" (ngModelChange)="applyDateFilter()" id="start"  placeholder="Year,Month" name="date" >                
+        </div>
         </div>
         <div class="custom-card req-user-card" *ngFor="let item of booking" >
          <div [routerLink]="['/boat-listing/reservation-detail',item.id]">
@@ -50,7 +46,7 @@
               <p class="small-text grey">{{item.checkinDate | date}} - {{item.checkoutDate | date}}</p>
               <div class="custom-flex mt-4 mr-3">
                 <span *ngIf="item.bookingStatus==0"><strong >{{item.bookingStatus==0 ? 'Pending' : ''}}</strong></span>
-                <span *ngIf="item.bookingStatus==1"><strong >{{item.bookingStatus==1 ? 'Accepted' : ''}}</strong></span>
+                <span *ngIf="item.bookingStatus==1"><strong >{{item.bookingStatus==1 ? 'Approved' : ''}}</strong></span>
                 <span *ngIf="item.bookingStatus==2"><strong >{{item.bookingStatus==2 ? 'Rejected' : ''}}</strong></span>
                 <span *ngIf="item.bookingStatus==3"><strong >{{item.bookingStatus==3 ? 'Cancelled' : ''}}</strong></span>
               </div>

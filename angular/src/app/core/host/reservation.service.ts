@@ -12,8 +12,8 @@ export class ReservationService {
   boatApiUrl: string = environment.BOAT_API_URL;
   constructor(private http: HttpClient) { }
 
-  getBoatelBookingRequests() {
-    return this.http.get(this.bookingApiUrl + '/get-my-reservations').pipe(
+  getBoatelBookingRequests(Month? : string,Year?: string) {
+    return this.http.get(this.bookingApiUrl + '/get-my-reservations?month='+Month+'&year='+Year).pipe(
       catchError(this.handleError));
   }
   changeStatus(bookingId: number, status: boolean) {
@@ -29,8 +29,13 @@ export class ReservationService {
     return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
   }
 
-  updateBoatStatus(boatId:number){
-    return this.http.get(this.boatApiUrl + '/host-boat-status/'+boatId).pipe(catchError(this.handleError));
+  updateBoatLocation(boatLocation: any) {
+    return this.http.post(this.boatApiUrl + '/update-location', boatLocation).pipe(
+      catchError(this.handleError));
+  }
+  
+  updateBoatStatus(boatId: number) {
+    return this.http.get(this.boatApiUrl + '/host-boat-status/' + boatId).pipe(catchError(this.handleError));
   }
 
   ///Exception handler

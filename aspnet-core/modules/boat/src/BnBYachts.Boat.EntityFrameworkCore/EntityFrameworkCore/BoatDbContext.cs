@@ -60,7 +60,7 @@ namespace BnBYachts.Boat.EntityFrameworkCore
         public DbSet<CharterEntity> Charteres { get; set; }
 
         //Event
-        public DbSet<EventEntity> Events { get; set; }
+        public DbSet<Events.EventEntity> Events { get; set; }
 
 
 

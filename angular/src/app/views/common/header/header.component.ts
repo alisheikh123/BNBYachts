@@ -43,7 +43,6 @@ export class HeaderComponent implements OnInit {
     this.oidcSecurityService
       .checkAuth()
       .subscribe((res: any) => {
-        debugger
         if (res.isAuthenticated) {
           if (res?.accessToken != null && res?.userData?.sub != null) {
             localStorage.setItem('accessToken', res?.accessToken);
@@ -69,7 +68,7 @@ export class HeaderComponent implements OnInit {
         }
         else {
           this.canSwitchAccount = false;
-          this.app.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.user.toLowerCase()).roleId;
+          this.app.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.user.toLowerCase())?.roleId;
         }
         if (localStorage.getItem('userRole')) {
           this.app.loggedInUserRole = localStorage.getItem('userRole');
@@ -83,7 +82,7 @@ export class HeaderComponent implements OnInit {
   }
 
   signUp() {
-    let modalRef = this.modal.open(SignupModalComponent, { windowClass: 'custom-modal custom-large-modal' });
+    let modalRef = this.modal.open(SignupModalComponent, { windowClass: 'custom-modal custom-large-modal' , centered:true});
   }
 
   login() {

@@ -2,7 +2,7 @@
   <div class="listing-main-wrapper section-padding">
     <div class="custom-flex-between mb-3">
       <h2 class="bold">Listing</h2>
-      <a href="location.html" class="custom-btn grey">Add New</a>
+      <a [routerLink]="['/host/onboarding']" class="custom-btn grey">Add New</a>
     </div>
     <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile" *ngFor="let item of hostBoats">
       <div class="image-with-text custom-flex-between align-items-center">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="right-content custom-flex flex-wrap">
-          <a href="location.html" class="custom-btn small-round grey"><svg id="place_black_24dp_1_"
+          <a [routerLink]="['/host/boat-location',item.id]" class="custom-btn small-round grey"><svg id="place_black_24dp_1_"
               data-name="place_black_24dp (1)" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               viewBox="0 0 24 24">
               <path id="Path_21117" data-name="Path 21117" d="M0,0H24V24H0Z" fill="none" />

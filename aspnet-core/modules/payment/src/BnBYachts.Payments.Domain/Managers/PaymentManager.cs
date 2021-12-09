@@ -19,21 +19,21 @@ namespace BnBYachts.Payments.Managers
         private readonly IRepository<PaymentDetailsEntity, int> _userPaymentDetailsRepository;
         public PaymentManager(IRepository<UserCardInfoEntity, int> userCardRepository, IRepository<PaymentDetailsEntity, int> userPaymentDetailsRepository)
         {
-            var configurationBuilder = new ConfigurationBuilder()
-                         .SetBasePath(Directory.GetCurrentDirectory())
-                         .AddJsonFile("appsettings.json", optional: false).Build();
+            //var configurationBuilder = new ConfigurationBuilder()
+            //             .SetBasePath(Directory.GetCurrentDirectory())
+            //             .AddJsonFile("appsettings.json", optional: false).Build();
 
-            StripeConfiguration.ApiKey = configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
+            StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             _userCardRepository = userCardRepository;
-            _userPaymentDetailsRepository = userPaymentDetailsRepository;
+            _userPaymentDetailsRepository = userPaymentDetailsRepository;            
         }
 
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId)
         {
-            var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
+            //var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
             var options = new PaymentMethodListOptions
             {
-                Customer = user.CustomerId,
+                Customer = "cus_Ka64Lkvdloaevt",
                 Type = PaymentConstants.Card,
             };
             var service = new PaymentMethodService();
@@ -51,7 +51,7 @@ namespace BnBYachts.Payments.Managers
 
         public async Task<bool> Pay(BookingPaymentRequestable data)
         {
-            var user = await _userCardRepository.FindAsync(res => res.UserId == data.UserId).ConfigureAwait(false);
+            //var user = await _userCardRepository.FindAsync(res => res.UserId == data.UserId).ConfigureAwait(false);
 
             if (data.IsSaveNewPaymentMethod)
             {
@@ -70,7 +70,7 @@ namespace BnBYachts.Payments.Managers
 
                 var attachOptions = new PaymentMethodAttachOptions
                 {
-                    Customer = user.CustomerId,
+                    Customer = "cus_Ka64Lkvdloaevt",
                 };
                 var attachService = new PaymentMethodService();
                 await attachService.AttachAsync(
@@ -87,7 +87,7 @@ namespace BnBYachts.Payments.Managers
                     {
                         PaymentConstants.Card
                     },
-                Customer = user.CustomerId,
+                Customer = "cus_Ka64Lkvdloaevt",
                 PaymentMethod = data.PaymentId,
                 Description = data.Description,
                 Confirm = true
@@ -101,7 +101,7 @@ namespace BnBYachts.Payments.Managers
                 {
                     BookingId = data.BookingId??0,
                     PaymentId = response.Id,
-                    CustomerId = user.CustomerId,
+                    CustomerId = "cus_Ka64Lkvdloaevt",
                     Amount = data.Amount
                 };
                 await _userPaymentDetailsRepository.InsertAsync(pm);
@@ -121,7 +121,7 @@ namespace BnBYachts.Payments.Managers
             var options = new RefundCreateOptions
             {
                 PaymentIntent = paymentDetails.PaymentId,
-                Amount = refundAmount * 100,
+                Amount = refundAmount,
                 Reason = PaymentConstants.RefundReason,
             };
             var service = new RefundService();

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class HostBoatListingComponent implements OnInit {
   hostBoats: any;
-  assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   BOAT_TYPE = BoatTypes;
 
   constructor(private service: ReservationService, private toastr: ToastrService, private router: Router) { }

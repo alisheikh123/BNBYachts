@@ -17,5 +17,6 @@ namespace BnBYachts.EventBusShared
         public const string QUserRoleSeeder = "q-userrolesseeder";
         public const string QUsersSeeder = "q-usersseeder";
         public const string QEmailNotification = "q-email-notification";
+        public const string QBackgroundWorker = "q-background-worker";
     }
 }

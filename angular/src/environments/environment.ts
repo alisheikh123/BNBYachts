@@ -16,7 +16,7 @@ export const environment = {
     redirectUrl: "http://localhost:4200",
     postLogoutRedirectUri: "http://localhost:4200",
     clientId: "BnBYachts_App",
-    scope: "openid Core Booking Boat Payments",
+    scope: "openid Core Booking Boat Payments HostGateway",
     responseType: 'code'
   }
 };

@@ -214,6 +214,59 @@ namespace BnBYachts.Booking.Migrations
                     b.ToTable("EventBookings");
                 });
 
+            modelBuilder.Entity("BnBYachts.Booking.BookingReviewEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int>("Ratings")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RevieweeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("BnBYachts.Booking.CharterBookingEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -278,59 +331,9 @@ namespace BnBYachts.Booking.Migrations
                     b.ToTable("CharterBookings");
                 });
 
-            modelBuilder.Entity("BnBYachts.Booking.ReviewEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<int>("Ratings")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReviewDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RevieweeID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReviewerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reviews");
-                });
-
             modelBuilder.Entity("BnBYachts.Booking.BoatelBookingEntity", b =>
                 {
-                    b.HasOne("BnBYachts.Booking.ReviewEntity", "Reviews")
+                    b.HasOne("BnBYachts.Booking.BookingReviewEntity", "Reviews")
                         .WithMany()
                         .HasForeignKey("ReviewsId");
 
@@ -339,7 +342,7 @@ namespace BnBYachts.Booking.Migrations
 
             modelBuilder.Entity("BnBYachts.Booking.Booking.EventBookingEntity", b =>
                 {
-                    b.HasOne("BnBYachts.Booking.ReviewEntity", "Reviews")
+                    b.HasOne("BnBYachts.Booking.BookingReviewEntity", "Reviews")
                         .WithMany()
                         .HasForeignKey("ReviewsId");
 
@@ -348,7 +351,7 @@ namespace BnBYachts.Booking.Migrations
 
             modelBuilder.Entity("BnBYachts.Booking.CharterBookingEntity", b =>
                 {
-                    b.HasOne("BnBYachts.Booking.ReviewEntity", "Reviews")
+                    b.HasOne("BnBYachts.Booking.BookingReviewEntity", "Reviews")
                         .WithMany()
                         .HasForeignKey("ReviewsId");
 

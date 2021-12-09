@@ -13,8 +13,8 @@ namespace BnBYachts.Core.Shared.Interface
         Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput);
         Task<bool> ConfirmEmail(string username, string token);
         Task ResendEmail(string username);
-        Task<UserRequestable> InsertUsers(UserRequestable input);
-        Task<RolesRequestable> InsertRoles(RolesRequestable input);
-        Task<UserRolesRequestable> InsertUserRoles(UserRolesRequestable input);
+        Task<bool> UpdateUserProfile(UserProfileRequestable userInput);
+        Task<bool> AddHostRole(string userId);
     }
+
 }

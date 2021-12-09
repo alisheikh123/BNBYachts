@@ -16,6 +16,10 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from 'src/environments/environment';
 import { ReservationCancellationComponent } from './reservation-cancellation/reservation-cancellation.component';
 import { ModifyReservationComponent } from './modify-reservation/modify-reservation.component';
+import { CharterListingComponent } from './charter-listing/charter-listing.component';
+import { EventListingComponent } from './event-listing/event-listing.component';
+import { CharterDetailsComponent } from './charter-details/charter-details.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { ModifyReservationComponent } from './modify-reservation/modify-reservat
     ReservationDetailComponent,
     BoatBookingPaymentComponent,
     ReservationCancellationComponent,
-    ModifyReservationComponent
+    ModifyReservationComponent,
+    CharterListingComponent,
+    EventListingComponent,
+    CharterDetailsComponent,
+    EventDetailsComponent
   ],
   imports: [
     BoatListingRoutingModule,

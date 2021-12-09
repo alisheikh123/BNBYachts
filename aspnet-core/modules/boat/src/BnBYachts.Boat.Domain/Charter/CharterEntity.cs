@@ -28,7 +28,7 @@ namespace BnBYachts.Boats.Charter
         public double DestinationLongitude { get; set; }
         public DateTime? ReturnDate { get; set; }
         public string ReturnAddress { get; set; }
-        public double? ReturnLocationLat { get; set; }
+        public double? ReturnLocationLat{ get; set; }
         public double? ReturnLocationLng { get; set; }
         public virtual int? BoatId { get; set; }
     }

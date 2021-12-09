@@ -36,15 +36,15 @@ export class BookingService {
 
 
   /* Ali */
-  bookingDetail() {
+  bookingDetail(month? : string,year?: string) {
     return this.http.get(this.bookingApiUrl + '/boatelbookingdetail').pipe(catchError(this.handleError));
   }
-  upcomingbookingDetail() {
-    return this.http.get(this.bookingApiUrl + '/upcomingboatelbookingdetail').pipe(catchError(this.handleError));
+  upcomingbookingDetail(month? : string,year?: string) {
+    return this.http.get(this.bookingApiUrl + '/upcomingboatelbookingdetail?month='+month+'&year='+year).pipe(catchError(this.handleError));
 
   }
-  pastbookingDetail() {
-    return this.http.get(this.bookingApiUrl + '/pastboatelbookingdetail').pipe(catchError(this.handleError));
+  pastbookingDetail(month? : string,year?: string) {
+    return this.http.get(this.bookingApiUrl + '/pastboatelbookingdetail?month='+month+'&year='+year).pipe(catchError(this.handleError));
   }
   getBoatInfo(boatId: any) {
     return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
@@ -63,6 +63,10 @@ export class BookingService {
 
   getRefundable(bookingId: number, refundAmount: number) {
     return this.http.get(this.paymentApiUrl + '/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
+  }
+
+  addReview(review:any) {
+    return this.http.post(this.bookingApiUrl + '/api/app/review/review',review).pipe(catchError(this.handleError));
   }
 
   /* Ali */

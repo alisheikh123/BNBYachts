@@ -102,8 +102,8 @@
                 <div class="center-content">
                     <a class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">I changed my
                         mind</a>&nbsp;&nbsp;
-                    <a class="custom-btn btn-big blue"  *ngIf='!isHost' (click)="openModal(template,b)">Confirm Cancellation</a>
-                    <a class="custom-btn btn-big  blue" (click)="openModal(hosttemplate,b)">Confirm Cancellation</a>
+                    <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(template,b)">Confirm Cancellation</a>
+                    <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,b)">Confirm Cancellation</a>
                 </div>
             </div>
         </div>
@@ -163,7 +163,7 @@
                         <a (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
                             data-bs-dismiss="modal" data-bs-toggle="modal"
                             data-bs-target="#cancellation-confirmed">Cancel</a>&nbsp;
-                        <a class="custom-btn blue big-btn" (click)="confirmCancel()">Confirm</a>
+                        <a class="custom-btn blue big-btn" style="cursor: pointer;" (click)="confirmCancel()">Confirm</a>
                     </div>
                 </div>
             </div>

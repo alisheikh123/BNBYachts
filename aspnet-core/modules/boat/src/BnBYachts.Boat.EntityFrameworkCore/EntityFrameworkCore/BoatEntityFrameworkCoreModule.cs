@@ -24,7 +24,6 @@ namespace BnBYachts.Boat.EntityFrameworkCore
             {
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
-
             Configure<AbpDbContextOptions>(options =>
             {
                 options.UseSqlServer();
