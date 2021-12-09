@@ -1,106 +1,121 @@
 <div class="reservation-page section-padding" *ngFor="let b of booking">
-    <div class="container">
-        <div class="row">
-          <div class="btn-back">
-            <a (click)="goBack()" style="border: 1px solid #122ba8;">
-             <!-- <i class="material-icons arrow_back_ios" >
+  <div class="container">
+    <div class="row">
+      <div class="btn-back">
+        <a (click)="goBack()" style="border: 1px solid #122ba8;">
+          <!-- <i class="material-icons arrow_back_ios" >
              
             </i> -->
-            <i class="fas fa-chevron-left" style="color:#122ba8"></i>
-          </a>
-           
-            <h2 class="bold">Boatel Reservation</h2>
+          <i class="fas fa-chevron-left" style="color:#122ba8"></i>
+        </a>
+
+        <h2 class="bold">Boatel Reservation</h2>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-8 py-2">
+        <div>
+          <h5 class="bold pb-1">Description</h5>
+          <p class="small-text medium-container text-left grey">{{b?.boatDetail.description }}</p>
+          <a class="custom-btn underline-blue-link no-before-content p-0">more.</a>
         </div>
-      
-        </div>
-        <div class="row">
-          <div class="col-sm-8 py-2">
-            <div>
-            <h5 class="bold pb-1">Description</h5>
-            <p class="small-text medium-container text-left grey">{{b?.boatDetail.description }}</p>
-            <a class="custom-btn underline-blue-link no-before-content p-0">more.</a>
-          </div>
-          <div class="">
-            <div class="character-info-wrapper  custom-flex">
-              <div class="custom-flex-start character-info py-2">
+        <div class="">
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
               <p class="medium description-fotmat">Boat Name:</p>
               <p class="grey">{{b?.boatDetail.name }}</p>
-              </div>
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat"></p>
-                <p class="grey">
-                 
-                </p>
-                </div>
-              </div>
-            <div class="character-info-wrapper  custom-flex">
-              <div class="custom-flex-start character-info py-2">
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat"></p>
+              <p class="grey">
+
+              </p>
+            </div>
+          </div>
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
               <p class="medium description-fotmat">Check In Date:</p>
               <p class="grey">{{b.checkinDate | date}}</p>
-              </div>
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">Check Out Date:</p>
-                <p class="grey">{{b.checkoutDate | date}}</p>
-                </div>
-              </div>
-              <div class="character-info-wrapper  custom-flex">
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">No of Guest:</p>
-                <p class="grey"> {{b.noOfAdults + b.noOfChildrens}}</p>
-                </div>
-                <div class="custom-flex-start character-info py-2">
-                  <p class="medium description-fotmat">Location :</p>
-                  <p class="grey">{{b?.boatDetail.location}}</p>
-                  </div>
-              </div>
-              <div class="character-info-wrapper  custom-flex">
-                <div class="custom-flex-start character-info py-2">
-                  <p class="medium description-fotmat">Check In Time:</p>
-                  <p class="grey">{{b?.boatDetail.checkinTime | date:'h:mm a' }}</p>
-                  </div>
-                  <div class="custom-flex-start character-info py-2">
-                    <p class="medium description-fotmat">Check Out Time:</p>
-                    <p class="grey">{{b?.boatDetail.checkoutTime | date:'h:mm a'}}</p>
-                    </div>
-                  </div>
-                  <div class="character-info-wrapper  custom-flex">
-                  <div class="custom-flex-start character-info py-2">
-                    <p class="medium description-fotmat">Bedroom:</p>
-                    <p class="grey">{{b?.boatDetail.totalBedrooms}}</p>
-                    </div>
-                    <div class="custom-flex-start character-info py-2">
-                      <p class="medium description-fotmat">Bathroom:</p>
-                      <p class="grey">{{b?.boatDetail.totalWashrooms}}</p>
-                      </div>
-                      
-                  </div>
-              
-                
-                          <div class="price-detail py-4">
-                            <h5 class="bold pt-3 pb-1">Price Details</h5>
-                            <div class="custom-flex-between"><p class="medium">{{b?.boatDetail.perDayCharges}}  x  {{ b.TotalDays}} Night</p><p class="medium text-right py-1">{{b?.boatDetail.perDayCharges * b.TotalDays }}.00 $</p></div>
-                            <div class="custom-flex-between"><p class="medium">Service Fee</p><p class="medium text-right py-1">20.00 $</p></div>
-                            <div class="custom-flex-between"><p class="medium">Tax</p><p class="medium text-right py-1">{{b?.boatDetail.taxFee}}.00 $</p></div>
-                            <div class="custom-flex-between"><p class="medium">Total(USD)</p><p class="medium text-right py-1">{{(b?.boatDetail.perDayCharges * b.TotalDays) + 20 + 20 + b?.boatDetail.taxFee}}.00 $</p></div>
-                          </div>
-                        </div>
-                       </div>
-                       <div class="col-sm-4 py-2">
-                        <div class="character-info-img">
-                          <div *ngFor="let imgs of b?.boatDetail.boatGalleries | filterBy : 'isCoverPic':true">
-                          <img src={{imgs.imagePath}} alt="">
-                        </div>
-                        </div>
-                      </div>
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">Check Out Date:</p>
+              <p class="grey">{{b.checkoutDate | date}}</p>
+            </div>
+          </div>
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">No of Guest:</p>
+              <p class="grey"> {{b.noOfAdults + b.noOfChildrens}}</p>
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">Location :</p>
+              <p class="grey">{{b?.boatDetail.location}}</p>
+            </div>
+          </div>
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">Check In Time:</p>
+              <p class="grey">{{b?.boatDetail.checkinTime | date:'h:mm a' }}</p>
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">Check Out Time:</p>
+              <p class="grey">{{b?.boatDetail.checkoutTime | date:'h:mm a'}}</p>
+            </div>
+          </div>
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">Bedroom:</p>
+              <p class="grey">{{b?.boatDetail.totalBedrooms}}</p>
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">Bathroom:</p>
+              <p class="grey">{{b?.boatDetail.totalWashrooms}}</p>
+            </div>
 
-                      <div class="col-sm-12 custom-margin text-center mobile-padding-btns" >
-                     <div class="center-content" >
-                      <a [routerLink]="['/boat-listing/reservation-cancellation',b.id]" class="custom-btn btn-big outline-blue-clr me-sm-3">Cancel Reservation</a>&nbsp;&nbsp;
-                       <a [routerLink]="['/boat-listing/modify-reservation',b.boatId,b.id]" class="custom-btn btn-big blue">Modify Reservation</a>
-                    </div>
+          </div>
 
-                      </div>
-         </div>
-                     
-         </div>
+
+          <div class="price-detail py-4">
+            <h5 class="bold pt-3 pb-1">Price Details</h5>
+            <div class="custom-flex-between">
+              <p class="medium">{{b?.boatDetail.perDayCharges}} x {{ b.TotalDays}} Night</p>
+              <p class="medium text-right py-1">{{b?.boatDetail.perDayCharges * b.TotalDays }}.00 $</p>
+            </div>
+            <div class="custom-flex-between">
+              <p class="medium">Service Fee</p>
+              <p class="medium text-right py-1">20.00 $</p>
+            </div>
+            <div class="custom-flex-between">
+              <p class="medium">Tax</p>
+              <p class="medium text-right py-1">{{b?.boatDetail.taxFee}}.00 $</p>
+            </div>
+            <div class="custom-flex-between">
+              <p class="medium">Total(USD)</p>
+              <p class="medium text-right py-1">{{(b?.boatDetail.perDayCharges * b.TotalDays) + 20 + 20 +
+                b?.boatDetail.taxFee}}.00 $</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-2">
+        <div class="character-info-img">
+          <div *ngFor="let imgs of b?.boatDetail.boatGalleries | filterBy : 'isCoverPic':true">
+            <img src={{imgs.imagePath}} alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 custom-margin text-center mobile-padding-btns">
+        <div class="center-content">
+          <a [routerLink]="['/boat-listing/reservation-cancellation',b.id]"
+            class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">Cancel Reservation</a>
+          <a [routerLink]="['/boat-listing/modify-reservation',b.boatId,b.id]"
+            class="custom-btn btn-big blue me-sm-3">Modify Reservation</a>
+          <a (click)="addReview()" class="custom-btn btn-big blue">Add
+            Review</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
