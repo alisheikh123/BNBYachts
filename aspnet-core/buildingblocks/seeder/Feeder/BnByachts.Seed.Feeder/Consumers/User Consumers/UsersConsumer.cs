@@ -26,7 +26,7 @@ namespace BnByachts.SeedObservable.Consumers
 
                 Password = "Password123!",
                 DOB = DateTime.Now,
-                Email = "test@gmail.com",
+                Email = "test1@gmail.com",
                 FirstName = "umar",
                 LastName = "draz",
                 UserName = "test"

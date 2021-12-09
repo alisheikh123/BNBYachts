@@ -1,4 +1,11 @@
-﻿using BnBYachts.Core.Shared;
+﻿
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BnBYachts.Core.Shared;
 using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Requestable;
@@ -6,33 +13,27 @@ using BnBYachts.Core.Shared.Transferable;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using Microsoft.AspNetCore.WebUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
-using Volo.Abp.ObjectMapping;
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using Volo.Abp.Identity;
+using Volo.Abp.Uow;
 
 namespace BnBYachts.Core.Managers
 {
-
+    [UnitOfWork]
     public class AppUserManager : DomainService, IAppUserManager
     {
         private readonly IRepository<IdentityUser, Guid> _repository;
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IdentityUserManager _userManager;
 
         private readonly EventBusDispatcher _eventBusDispatcher;
 
-        private readonly IObjectMapper<CoreDomainModule> _objectMapper;
+        //private readonly IObjectMapper<CoreDomainModule> _objectMapper;
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
-            UserManager<IdentityUser> userManager,
+            IdentityUserManager userManager,
             EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
@@ -47,33 +48,35 @@ namespace BnBYachts.Core.Managers
 
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
-            var _respone = new ResponseDto();
-            var user = new IdentityUser(Guid.NewGuid(), userInput.Email, userInput.Email)
-            {
-                Name = userInput.FirstName + " " + userInput.LastName
-            };
-            user.SetProperty(UserConstants.DOB, userInput.DOB);
-            var result = await _userManager.CreateAsync(user, userInput.Password);
-            if (result.Succeeded)
-            {
-                var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
-                if (!isRoleAssigned.Succeeded)
+           
+                var _respone = new ResponseDto();
+                var user = new IdentityUser(Guid.NewGuid(), userInput.Email, userInput.Email)
                 {
-                    return _respone;
-                }
+                    Name = userInput.FirstName + " " + userInput.LastName
+                };
+                user.SetProperty(UserConstants.DOB, userInput.DOB);
+                var result = await _userManager.CreateAsync(user, userInput.Password);
+                if (result.Succeeded)
+                {
+                    var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
+                    if (!isRoleAssigned.Succeeded)
+                    {
+                        return _respone;
+                    }
 
-                await SendEmailToAskForEmailConfirmationAsync(user);
-                _respone.Message = "Account created successfully";
-            }
-            else
-            {
-                _respone.Message = result.Errors.ToList().FirstOrDefault()?.Description;
-                _respone.Status = false;
-            }
-            return _respone;
+                    if(false)
+                     await SendEmailToAskForEmailConfirmationAsync(user);
+                    _respone.Message = "Account created successfully";
+                }
+                else
+                {
+                    _respone.Message = result.Errors.ToList().FirstOrDefault()?.Description;
+                    _respone.Status = false;
+                }
+                return _respone;
         }
 
-        public async Task SendEmailToAskForEmailConfirmationAsync(Volo.Abp.Identity.IdentityUser user)
+        public async Task SendEmailToAskForEmailConfirmationAsync(IdentityUser user)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
