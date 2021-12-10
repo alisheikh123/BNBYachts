@@ -629,6 +629,9 @@ namespace BnBYachts.Core.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("About")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("AccessFailedCount")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")

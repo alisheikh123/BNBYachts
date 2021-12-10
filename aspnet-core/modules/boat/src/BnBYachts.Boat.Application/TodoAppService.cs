@@ -9,7 +9,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Boat
 {
-    [Authorize]
+    //[Authorize]
     public class TodoAppService : ApplicationService, ITodoAppService
     {
        

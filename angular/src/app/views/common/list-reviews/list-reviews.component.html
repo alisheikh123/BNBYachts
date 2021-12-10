@@ -1,0 +1,19 @@
+<div *ngIf="reviews.length > 0" class="total-reviews section-padding">
+    <div class="custom-flex-start small-stars black-stars me-2">
+      <span class="fa fa-star stars-clr me-2"></span>
+      <p class="medium">{{reviews.length}} reviews</p>
+    </div>
+    <div class="image-with-text pt-4 pb-2" *ngFor="let item of reviews">
+      <div class="image-with-text-inner">
+        <img src="../../../../assets/images/user-img.png" alt="" />
+        <div class="user-details">
+          <p class="medium">{{item.userDetails?.name}}</p>
+          <ngb-rating [rate]=item.ratings [max]="5"></ngb-rating>
+        </div>
+      </div>
+      <p class="my-3 line-clamp-1">
+        {{item.reviewDescription}}
+      </p>
+      <p class="text-right grey" style="font-size: 0.8em;">{{item.creationTime}}</p>
+    </div>
+</div>

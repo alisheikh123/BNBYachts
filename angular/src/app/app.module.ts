@@ -21,6 +21,7 @@ import { BookingService } from './core/Booking/booking.service';
 import { MyProfileComponent } from './views/common/user-profile/my-profile/my-profile.component';
 import { UpdateProfileComponent } from './views/common/user-profile/update-profile/update-profile.component';
 import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
+import { AddReviewModalComponent } from './views/common/add-review-modal/add-review-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
     LoaderComponent,
     TryHostingComponent,
     MyProfileComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    AddReviewModalComponent,
   ],
   imports: [
     BrowserModule,

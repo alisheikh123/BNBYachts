@@ -96,7 +96,7 @@
                                         <label>Location</label>
                                         <input type="text" ngx-google-places-autocomplete
                                             (onAddressChange)="handleAddressChange($event)"
-                                            [(ngModel)]="boatelSearchParam.location" class="custom-input"
+                                            [(ngModel)]="boatelSearchParam.location" class="custom-input search-input"
                                             placeholder="Search Location"><i class="fa fa-search font-awesom-icon"></i>
                                     </div>
                                     <small class="text-danger"
@@ -195,7 +195,7 @@
                                         <label>Departing From?</label>
                                         <input type="text" ngx-google-places-autocomplete
                                             (onAddressChange)="handleCharterAddressChange($event,true)"
-                                            [(ngModel)]="charterSearchParam.departureLoc" class="custom-input"
+                                            [(ngModel)]="charterSearchParam.departureLoc" class="custom-input search-input"
                                             placeholder="Search Location"><i class="fa fa-search font-awesom-icon"></i>
                                     </div>
                                     <small class="text-danger"
@@ -208,7 +208,7 @@
                                         <label>Destination</label>
                                         <input type="text" ngx-google-places-autocomplete
                                             (onAddressChange)="handleCharterAddressChange($event,false)"
-                                            [(ngModel)]="charterSearchParam.destinationLoc" class="custom-input"
+                                            [(ngModel)]="charterSearchParam.destinationLoc" class="custom-input search-input"
                                             placeholder="Search Location"><i class="fa fa-search font-awesom-icon"></i>
                                     </div>
                                     <small class="text-danger"
@@ -303,7 +303,7 @@
                                         <label>Location</label>
                                         <input type="text" ngx-google-places-autocomplete
                                             (onAddressChange)="handleEventAddressChange($event)"
-                                            [(ngModel)]="eventSearchParam.location" class="custom-input"
+                                            [(ngModel)]="eventSearchParam.location" class="custom-input search-input"
                                             placeholder="Search Location"><i
                                             class="fa fa-search fa fa-search font-awesom-icon"></i>
                                     </div>

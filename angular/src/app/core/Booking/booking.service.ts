@@ -65,6 +65,16 @@ export class BookingService {
     return this.http.get(this.paymentApiUrl + '/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
   }
 
+  addReview(review:any) {
+    return this.http.post(this.bookingApiUrl + '/api/app/review/review',review).pipe(catchError(this.handleError));
+  }
+  getReviews(bookingId:number){
+    return this.http.get(this.bookingApiUrl + '/api/app/review/booking-reviews/'+bookingId).pipe(catchError(this.handleError));
+  }
+  isReviewPosted(bookingId:number) {
+    return this.http.get(this.bookingApiUrl + '/api/app/review/if-review-already-posted/'+bookingId).pipe(catchError(this.handleError));
+  }
+
   /* Ali */
   getUpcomingHostBookingDetail() {
     return this.http.get(this.bookingApiUrl + '/upcominghostboatelbookingdetail').pipe(catchError(this.handleError));

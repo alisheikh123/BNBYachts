@@ -24,35 +24,12 @@ namespace BnBYachts.Services.Boat
 
         [Route("FilterBoatelBoats")]
         [HttpPost]
-        public async Task<ICollection<BoatEntity>> GetBoatelsByFilters(BoatelSearchFiltersRequestable parameters)
-        {
-            try
-            {
-                var result = await _hostBoatManager.GetBoatelsByFilters(parameters);
-                return result;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
+        public async Task<ICollection<BoatEntity>> GetBoatelsByFilters(BoatelSearchFiltersRequestable parameters) => await _hostBoatManager.GetBoatelsByFilters(parameters);
 
         [Route("BoatCalendarUpdate")]
         [HttpPost]
-        public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar)
-        {
-            try
-            {
-                bool response = await _hostBoatManager.BoatCalendarUpdate(boatCalendar, CurrentUser.Id);
-                return response;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
+        public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar) => await _hostBoatManager.BoatCalendarUpdate(boatCalendar, CurrentUser.Id);
+        
 
         [Route("FilterChartersBoats")]
         [HttpPost]

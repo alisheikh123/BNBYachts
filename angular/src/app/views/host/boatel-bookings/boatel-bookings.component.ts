@@ -57,17 +57,14 @@ export class BoatelBookingsComponent implements OnInit {
         });
       });
     })
+
   }
 
   changeStatus(item: any, isAccepted: boolean, index: any) {
     // Get user against which booking has been approved/rejected
     this.reservationService.changeStatus(item.id, isAccepted).subscribe(res => {
-      if (isAccepted) {
-        this.toastr.success('Request accepted successfully.', 'Success');
-      }
-      else {
-        this.toastr.success('Request rejected successfully.', 'Success');
-      }
+      
+      isAccepted ? this.toastr.success('Request accepted successfully.', 'Success') : this.toastr.success('Request rejected successfully.', 'Success');
       this.boatelBookings.splice(index, 1);
       this.getBookedServices();
     });

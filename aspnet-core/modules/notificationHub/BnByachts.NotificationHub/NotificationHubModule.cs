@@ -28,7 +28,6 @@ namespace BnByachts.NotificationHub
                     e.Name = EventBusQueue.QEmailNotification;
                 });
             });
-            Console.WriteLine("Queue Lissiner add ");
         }
     }
 }

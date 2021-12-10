@@ -68,31 +68,7 @@ namespace BnBYachts.Boat
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainSharedModule>(
-                    //    Path.Combine(hostingEnvironment.ContentRootPath,
-                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Domain.Shared"));
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainModule>(
-                    //    Path.Combine(hostingEnvironment.ContentRootPath,
-                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Domain"));
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationContractsModule>(
-                    //    Path.Combine(hostingEnvironment.ContentRootPath,
-                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application.Contracts"));
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationMod ule>(
-                    //    Path.Combine(hostingEnvironment.ContentRootPath,
-                    //        $"..{Path.DirectorySeparatorChar}BnBYachts.Boat.Application"));
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainSharedModule>(
-                    //   Path.Combine(hostingEnvironment.ContentRootPath,
-                    //       $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Domain.Shared"));
-
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatDomainModule>(
-                    //    Path.Combine(hostingEnvironment.ContentRootPath,
-                    //        $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Domain"));
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationContractsModule>(
-                    //    Path.Combine(hostingEnvironment.ContentRootPath,
-                    //        $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Application.Contracts"));
-                    //options.FileSets.ReplaceEmbeddedByPhysical<BoatApplicationModule>(
-                    //    Path.Combine(hostingEnvironment.ContentRootPath,
-                    //        $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\boat\\src\\BnBYachts.Boat.Application"));
+           
                 });
             }
         }
