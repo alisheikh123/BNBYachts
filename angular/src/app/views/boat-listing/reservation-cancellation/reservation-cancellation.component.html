@@ -104,8 +104,11 @@
                         mind</button>&nbsp;&nbsp;
                     <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(template,b)">Confirm Cancellation</a>
                     <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,b)">Confirm Cancellation</a>
+                    <a (click)="addReview(b?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">Add
+                        Review</a>
                 </div>
             </div>
+            <app-list-reviews [bookingId]=bkCancel></app-list-reviews>
         </div>
     </div>
     <!--Cancelation Policy Modal -->

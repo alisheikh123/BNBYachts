@@ -32,7 +32,7 @@ import { AddReviewModalComponent } from './views/common/add-review-modal/add-rev
     TryHostingComponent,
     MyProfileComponent,
     UpdateProfileComponent,
-    AddReviewModalComponent
+    AddReviewModalComponent,
   ],
   imports: [
     BrowserModule,

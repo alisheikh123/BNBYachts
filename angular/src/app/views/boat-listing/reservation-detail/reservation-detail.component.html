@@ -112,10 +112,11 @@
             class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">Cancel Reservation</a>
           <a [routerLink]="['/boat-listing/modify-reservation',b.boatId,b.id]"
             class="custom-btn btn-big blue me-sm-3">Modify Reservation</a>
-          <button (click)="addReview()" class="custom-btn btn-big blue">Add
-            Review</button>
+          <a (click)="addReview()" *ngIf='!isPosted && isBookingPassed()' class="custom-btn btn-big blue">Add
+            Review</a>
         </div>
       </div>
+      <app-list-reviews [bookingId]=bookingId></app-list-reviews>
     </div>
   </div>
 </div>

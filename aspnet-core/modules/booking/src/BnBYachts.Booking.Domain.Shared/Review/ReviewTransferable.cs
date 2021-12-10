@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BnBYachts.Booking.Review
 {
@@ -11,5 +9,6 @@ namespace BnBYachts.Booking.Review
         public string ReviewDescription { get; set; }
         public int Ratings { get; set; }
         public int BookingId { get; set; }
+        public DateTime CreationDateTime { get; set; }
     }
 }

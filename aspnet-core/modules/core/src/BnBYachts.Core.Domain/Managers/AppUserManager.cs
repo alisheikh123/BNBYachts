@@ -76,7 +76,7 @@ namespace BnBYachts.Core.Managers
             {"username", user.UserName },
             {"id", token },
             };
-            string body = $"<h4>Click on the link below to confirm your account </h4><span> <a href = '{QueryHelpers.AddQueryString(baseUrl, queryParams)}'> Click Me </a></span>";
+            string body = $"<h4>Hello {user.Name} </h4> <div> You registered an account on BnByachts, before being able to use your account you need to verify your email address by clicking here: <a href='{QueryHelpers.AddQueryString(baseUrl, queryParams)}'>Click Here</a> </div><br>Best Regard";
             await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
                 To = user.Email,

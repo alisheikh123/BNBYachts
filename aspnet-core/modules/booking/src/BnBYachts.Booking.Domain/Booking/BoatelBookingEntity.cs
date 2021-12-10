@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Booking
 {
-   public class BoatelBookingEntity : AuditedAggregateRoot<int>
+    public class BoatelBookingEntity : AuditedAggregateRoot<int>
     {
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }
