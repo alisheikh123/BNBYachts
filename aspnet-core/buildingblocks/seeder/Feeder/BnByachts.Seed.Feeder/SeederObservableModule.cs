@@ -98,10 +98,7 @@ namespace BnByachts.SeedObservable
                 //{
                 //    e.Name = EventBusQueue.QRoleSeeder;
                 //});
-                //mt.AddConsumer<UserRolesConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QUserRoleSeeder;
-                //});
+              
 
 
             });

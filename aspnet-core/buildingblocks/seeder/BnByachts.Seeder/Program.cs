@@ -37,7 +37,6 @@ namespace BnByachts.Simulator
                 //serviceScope.ServiceProvider.GetService<RulesSeederService>()?.MigrateAsync().GetAwaiter();
                 //serviceScope.ServiceProvider.GetService<RolesSeederService>()?.MigrateAsync().GetAwaiter();
                   serviceScope.ServiceProvider.GetService<UserSeederService>()?.MigrateAsync().GetAwaiter();
-                //serviceScope.ServiceProvider.GetService<UserRolesSeederService>()?.MigrateAsync().GetAwaiter();
             }
             Console.WriteLine("Seeder is active");
             Console.WriteLine("Ctrl + C to Quit");
