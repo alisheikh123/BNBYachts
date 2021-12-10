@@ -20,6 +20,7 @@ import { CharterListingComponent } from './charter-listing/charter-listing.compo
 import { EventListingComponent } from './event-listing/event-listing.component';
 import { CharterDetailsComponent } from './charter-details/charter-details.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { ListReviewsComponent } from '../common/list-reviews/list-reviews.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     CharterListingComponent,
     EventListingComponent,
     CharterDetailsComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    ListReviewsComponent
   ],
   imports: [
     BoatListingRoutingModule,
