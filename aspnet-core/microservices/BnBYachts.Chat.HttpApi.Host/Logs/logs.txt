@@ -1,0 +1,187 @@
+2021-12-09 18:45:31.738 +05:00 [INF] Starting BnBYachts.Chat.HttpApi.Host.
+2021-12-09 18:45:39.036 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-09 18:45:39.236 +05:00 [INF] Loaded ABP modules:
+2021-12-09 18:45:39.236 +05:00 [INF] - BnBYachts.Chat.ChatHttpApiHostModule
+2021-12-09 18:45:39.236 +05:00 [INF]   - BnBYachts.Chat.ChatHttpApiModule
+2021-12-09 18:45:39.236 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2021-12-09 18:45:39.236 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2021-12-09 18:45:39.236 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2021-12-09 18:45:39.236 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-12-09 18:45:39.236 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2021-12-09 18:45:39.236 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-12-09 18:45:39.236 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2021-12-09 18:45:39.236 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-12-09 18:45:39.236 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2021-12-09 18:45:39.236 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-12-09 18:45:39.236 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-12-09 18:45:39.236 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2021-12-09 18:45:39.236 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2021-12-09 18:45:39.236 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2021-12-09 18:45:39.236 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2021-12-09 18:45:39.236 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-12-09 18:45:39.236 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2021-12-09 18:45:39.236 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-12-09 18:45:39.236 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-12-09 18:45:39.236 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-12-09 18:45:39.236 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-12-09 18:45:39.236 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2021-12-09 18:45:39.236 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2021-12-09 18:45:39.236 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2021-12-09 18:45:39.236 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2021-12-09 18:45:39.236 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2021-12-09 18:45:39.236 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2021-12-09 18:45:39.236 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2021-12-09 18:45:39.236 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2021-12-09 18:45:39.236 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2021-12-09 18:45:39.236 +05:00 [INF]   - BnBYachts.Chat.ChatApplicationModule
+2021-12-09 18:45:39.236 +05:00 [INF]     - BnBYachts.Chat.ChatDomainModule
+2021-12-09 18:45:39.236 +05:00 [INF]   - BnBYachts.Chat.EntityFrameworkCore.ChatEntityFrameworkCoreModule
+2021-12-09 18:45:39.236 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-12-09 18:45:39.236 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-12-09 18:45:39.236 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-12-09 18:45:39.236 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-12-09 18:45:40.260 +05:00 [INF] Initialized all ABP modules.
+2021-12-09 18:45:40.291 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-09 18:45:40.291 +05:00 [INF] Hosting environment: Development
+2021-12-09 18:45:40.291 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host
+2021-12-09 18:45:40.378 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/ - -
+2021-12-09 18:45:40.922 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2021-12-09 18:45:40.977 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Chat.Controllers.HomeController (BnBYachts.Chat.HttpApi.Host).
+2021-12-09 18:45:41.134 +05:00 [INF] Executing action method BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) - Validation state: "Valid"
+2021-12-09 18:45:41.140 +05:00 [INF] Executed action method BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 0.4165ms.
+2021-12-09 18:45:41.146 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-12-09 18:45:41.152 +05:00 [INF] Executed action BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) in 170.0599ms
+2021-12-09 18:45:41.153 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2021-12-09 18:45:41.192 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger - -
+2021-12-09 18:45:41.221 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/index.html - -
+2021-12-09 18:45:41.228 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger - - - 301 - - 35.6180ms
+2021-12-09 18:45:41.228 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/ - - - 302 - - 851.0809ms
+2021-12-09 18:45:41.674 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/index.html - - - 200 - text/html;charset=utf-8 452.5975ms
+2021-12-09 18:45:41.674 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/swagger-ui.css - -
+2021-12-09 18:45:41.674 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/ui/abp.js - -
+2021-12-09 18:45:41.676 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/ui/abp.swagger.js - -
+2021-12-09 18:45:41.680 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - -
+2021-12-09 18:45:41.678 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/swagger-ui-standalone-preset.js - -
+2021-12-09 18:45:41.688 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/swagger-ui-bundle.js - -
+2021-12-09 18:45:41.702 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - - - 200 11960 application/javascript;+charset=utf-8 21.2802ms
+2021-12-09 18:45:41.724 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2021-12-09 18:45:41.725 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2021-12-09 18:45:41.725 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 48.3654ms
+2021-12-09 18:45:41.726 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/ui/abp.js - - - 200 3025 application/javascript 51.9357ms
+2021-12-09 18:45:41.736 +05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-12-09 18:45:41.736 +05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-12-09 18:45:41.739 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/swagger-ui.css - - - 200 143410 text/css 64.9617ms
+2021-12-09 18:45:41.749 +05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-12-09 18:45:41.750 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 71.3272ms
+2021-12-09 18:45:41.787 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 99.0807ms
+2021-12-09 18:45:42.751 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - -
+2021-12-09 18:45:42.944 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/favicon-32x32.png - -
+2021-12-09 18:45:42.946 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-12-09 18:45:42.947 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/favicon-32x32.png - - - 200 628 image/png 3.3195ms
+2021-12-09 18:45:43.089 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 337.8547ms
+2021-12-09 18:55:05.862 +05:00 [INF] Starting BnBYachts.Chat.HttpApi.Host.
+2021-12-09 18:55:10.638 +05:00 [INF] User profile is available. Using 'C:\Users\hp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-12-09 18:55:10.830 +05:00 [INF] Loaded ABP modules:
+2021-12-09 18:55:10.831 +05:00 [INF] - BnBYachts.Chat.ChatHttpApiHostModule
+2021-12-09 18:55:10.831 +05:00 [INF]   - BnBYachts.Chat.ChatHttpApiModule
+2021-12-09 18:55:10.831 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2021-12-09 18:55:10.831 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2021-12-09 18:55:10.831 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2021-12-09 18:55:10.831 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2021-12-09 18:55:10.831 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2021-12-09 18:55:10.831 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2021-12-09 18:55:10.831 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2021-12-09 18:55:10.831 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2021-12-09 18:55:10.831 +05:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2021-12-09 18:55:10.831 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2021-12-09 18:55:10.831 +05:00 [INF]                     - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2021-12-09 18:55:10.831 +05:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2021-12-09 18:55:10.831 +05:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Json.AbpJsonModule
+2021-12-09 18:55:10.831 +05:00 [INF]                   - Volo.Abp.Timing.AbpTimingModule
+2021-12-09 18:55:10.831 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationModule
+2021-12-09 18:55:10.831 +05:00 [INF]                       - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2021-12-09 18:55:10.831 +05:00 [INF]                       - Volo.Abp.Settings.AbpSettingsModule
+2021-12-09 18:55:10.831 +05:00 [INF]                         - Volo.Abp.Security.AbpSecurityModule
+2021-12-09 18:55:10.831 +05:00 [INF]                         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2021-12-09 18:55:10.831 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2021-12-09 18:55:10.831 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2021-12-09 18:55:10.831 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2021-12-09 18:55:10.831 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2021-12-09 18:55:10.831 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2021-12-09 18:55:10.831 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2021-12-09 18:55:10.831 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2021-12-09 18:55:10.831 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2021-12-09 18:55:10.831 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2021-12-09 18:55:10.831 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2021-12-09 18:55:10.831 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2021-12-09 18:55:10.831 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2021-12-09 18:55:10.831 +05:00 [INF]   - BnBYachts.Chat.ChatApplicationModule
+2021-12-09 18:55:10.831 +05:00 [INF]     - BnBYachts.Chat.ChatDomainModule
+2021-12-09 18:55:10.831 +05:00 [INF]   - BnBYachts.Chat.EntityFrameworkCore.ChatEntityFrameworkCoreModule
+2021-12-09 18:55:10.831 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2021-12-09 18:55:10.831 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2021-12-09 18:55:10.831 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2021-12-09 18:55:10.831 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2021-12-09 18:55:11.475 +05:00 [INF] Initialized all ABP modules.
+2021-12-09 18:55:11.526 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-12-09 18:55:11.526 +05:00 [INF] Hosting environment: Development
+2021-12-09 18:55:11.526 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host
+2021-12-09 18:55:11.689 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/ - -
+2021-12-09 18:55:12.070 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2021-12-09 18:55:12.151 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Chat.Controllers.HomeController (BnBYachts.Chat.HttpApi.Host).
+2021-12-09 18:55:12.339 +05:00 [INF] Executing action method BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) - Validation state: "Valid"
+2021-12-09 18:55:12.345 +05:00 [INF] Executed action method BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host), returned result Microsoft.AspNetCore.Mvc.RedirectResult in 0.4647ms.
+2021-12-09 18:55:12.350 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2021-12-09 18:55:12.357 +05:00 [INF] Executed action BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) in 200.4879ms
+2021-12-09 18:55:12.358 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2021-12-09 18:55:12.416 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/index.html - -
+2021-12-09 18:55:12.431 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/ - - - 302 - - 743.6874ms
+2021-12-09 18:55:12.737 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/index.html - - - 200 - text/html;charset=utf-8 320.3015ms
+2021-12-09 18:55:12.825 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - -
+2021-12-09 18:55:12.837 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - - - 200 11960 application/javascript;+charset=utf-8 11.5806ms
+2021-12-09 18:55:14.302 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - -
+2021-12-09 18:55:14.492 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 190.5575ms
