@@ -21,7 +21,7 @@ export class AllReservationsComponent implements OnInit {
   boatbookingDetail: any;
   currentMonth: any;
   isRecordNotFound: boolean;
-  assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   date: any;
   selectedYear: string = "";
   selectedMonth: string = "";
