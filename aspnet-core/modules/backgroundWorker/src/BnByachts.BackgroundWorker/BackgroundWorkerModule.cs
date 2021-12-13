@@ -14,6 +14,11 @@ namespace BnByachts.BackgroundWorker
     )]
     public class BackgroundWorkerModule:AbpModule
     {
+
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+
+        }
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.AddMassTransit(mt =>
