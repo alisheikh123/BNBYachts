@@ -8,7 +8,7 @@ namespace BnBYachts.EventBusShared.Contracts
 {
     public interface IRolesContract : IContractable
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }
         public bool IsDefault { get; set; }
@@ -18,7 +18,7 @@ namespace BnBYachts.EventBusShared.Contracts
     }
     public class RolesContract : IRolesContract
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }
         public bool IsDefault { get; set; }

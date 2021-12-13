@@ -4,6 +4,7 @@ using MassTransit;
 using Volo.Abp.ObjectMapping;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Requestable;
+using BnBYachts.Core.Shared.Transferable;
 
 namespace BnByachts.SeedObservable.Consumers
 {
@@ -18,7 +19,16 @@ namespace BnByachts.SeedObservable.Consumers
         }
         public async Task Consume(ConsumeContext<IRolesContract> context)
         {
-            var response= _objectMapper.Map<IRolesContract, RolesRequestable>(context.Message);
+            await _appUserManager.AddRoles(new RolesTransferable
+            {
+                Id = context.Message.Id,
+                Name= context.Message.Name,
+                NormalizedName = context.Message.NormalizedName,
+                IsStatic = context.Message.IsStatic,
+                IsDefault = context.Message.IsDefault,
+                IsPublic = context.Message.IsPublic
+
+            }).ConfigureAwait(false);
         }
     }
 }

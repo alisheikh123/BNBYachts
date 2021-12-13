@@ -98,6 +98,7 @@ namespace BnBYachts.Boat.Manager
 
         public async Task<FeaturesRequestable> InsertFeatures(FeaturesRequestable input)
         {
+           
             await _featuresRepo.InsertAsync(_objectMapper.Map<FeaturesRequestable, FeatureEntity>(input), true);
             return new FeaturesRequestable();
         }

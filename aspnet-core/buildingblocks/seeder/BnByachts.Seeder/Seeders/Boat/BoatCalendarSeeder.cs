@@ -13,12 +13,14 @@ namespace BnByachts.Seeder
     public class BoatCalendarSeederService : ITransientDependency
     {
         private readonly EventBusDispatcher _eventBusDispatcher;
+        private readonly BoatGallerySeederService _boatGallerySeederService;
 
-        private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
+         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
 
-        public BoatCalendarSeederService(EventBusDispatcher eventBusDispatcher)
+        public BoatCalendarSeederService(EventBusDispatcher eventBusDispatcher, BoatGallerySeederService boatGallerySeederService)
         {
             _eventBusDispatcher = eventBusDispatcher;
+            _boatGallerySeederService = boatGallerySeederService;
         }
 
         public async Task MigrateAsync()
@@ -38,6 +40,9 @@ namespace BnByachts.Seeder
 
             JsonConvert.DeserializeObject<List<HostBoatCalendarContract>>(await File.ReadAllTextAsync($"{GetFullPath}BoatsCalendar.json", cancellationToken))
                 ?.ForEach(Action);
+            await Task.Delay(10000, cancellationToken);
+
+            await _boatGallerySeederService.MigrateAsync();
         }
         #endregion
 

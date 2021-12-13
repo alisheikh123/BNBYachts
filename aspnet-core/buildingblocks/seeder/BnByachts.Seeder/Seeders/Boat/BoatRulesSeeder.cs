@@ -14,7 +14,8 @@ namespace BnByachts.Seeder
     {
         private readonly EventBusDispatcher _eventBusDispatcher;
 
-        private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data");
+        //private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data");
+        private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
         public BoatRulesSeederService(EventBusDispatcher eventBusDispatcher)
         {
             _eventBusDispatcher = eventBusDispatcher;

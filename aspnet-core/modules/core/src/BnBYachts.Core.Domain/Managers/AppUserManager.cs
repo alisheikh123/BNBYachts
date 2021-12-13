@@ -27,17 +27,18 @@ namespace BnBYachts.Core.Managers
         private readonly IRepository<IdentityUser, Guid> _repository;
 
         private readonly IdentityUserManager _userManager;
-
+        private readonly IdentityRoleManager _roleManager;
         private readonly EventBusDispatcher _eventBusDispatcher;
 
         //private readonly IObjectMapper<CoreDomainModule> _objectMapper;
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
-            IdentityUserManager userManager,
+            IdentityUserManager userManager, IdentityRoleManager roleManager,
             EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
             _userManager = userManager;
+            _roleManager = roleManager;
             _eventBusDispatcher = eventBusDispatcher;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
@@ -50,7 +51,7 @@ namespace BnBYachts.Core.Managers
         {
            
                 var _respone = new ResponseDto();
-                var user = new IdentityUser(Guid.NewGuid(), userInput.Email, userInput.Email)
+                var user = new IdentityUser(userInput.Id, userInput.UserName, userInput.Email)
                 {
                     Name = userInput.FirstName + " " + userInput.LastName
                 };
@@ -58,7 +59,7 @@ namespace BnBYachts.Core.Managers
                 var result = await _userManager.CreateAsync(user, userInput.Password);
                 if (result.Succeeded)
                 {
-                    var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
+                    var isRoleAssigned = await _userManager.AddToRolesAsync(user, userInput.RoleId);
                     if (!isRoleAssigned.Succeeded)
                     {
                         return _respone;
@@ -131,6 +132,29 @@ namespace BnBYachts.Core.Managers
             var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
             await _userManager.AddToRoleAsync(user, "Host");
             return true;
+        }
+
+        public  async Task<ResponseDto> AddRoles(RolesTransferable userInput)
+        {
+            var _respone = new ResponseDto();
+            var user = new IdentityRole(Guid.NewGuid(), userInput.NormalizedName)
+            {
+                IsDefault = userInput.IsDefault,
+                IsPublic = userInput.IsPublic,
+                IsStatic = userInput.IsStatic
+            };
+            var isRoleCreated= await _roleManager.CreateAsync(user);
+            if (isRoleCreated.Succeeded)
+            {
+                    return _respone;
+            }
+            else
+            {
+                _respone.Message = isRoleCreated.Errors.ToList().FirstOrDefault()?.Description;
+                _respone.Status = false;
+            }
+            return _respone;
+
         }
     }
 }
