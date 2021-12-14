@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
+using BnBYachts.Events;
 using Volo.Abp.AutoMapper;
 
 namespace BnBYachts.Boat
@@ -12,6 +15,9 @@ namespace BnBYachts.Boat
             CreateMap<BoatFeaturesRequestable, BoatFeatureEntity>();
             CreateMap<BoatRulesRequestable, BoatRuleEntity>();
             CreateMap<BoatCalendarRequestable, BoatCalendarEntity>();
+            CreateMap<BoatEntity, BoatLookupTransferable>();
+            CreateMap<EventRequestable, EventEntity>();
+            CreateMap<EventEntity, EventRequestable>();
             CreateMap<HostBoatRequestable, BoatEntity>()
                 .ForMember(x => x.BoatGalleries,
                     opt =>
