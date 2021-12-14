@@ -99,7 +99,6 @@ export class BoatEditComponent implements OnInit {
       this.boatFeatures = res?.boatFeatures;
       this.boatRules = res?.boatRules;
       res?.boatFeatures?.forEach((element: any) => {
-        debugger;
         var findIndex = this.boatLookups?.features?.findIndex((res: any) => res.id == element.offeredFeaturesId);
         if (findIndex >= 0) {
           this.boatLookups.features[findIndex].isChecked = true;

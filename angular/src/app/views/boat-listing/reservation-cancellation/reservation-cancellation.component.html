@@ -89,21 +89,21 @@
                             <p class="grey text-right py-1">{{b?.boatDetail.totalWashrooms}}</p>
                         </div>
                         <div class="custom-margin" *ngIf="!isHost">
-                            <h5 class="bold mb-1">Cancellation Policy</h5>
-                            <p class="small-text text-left">Deduction on payments after cancellation will be as follows
+                            <h5 class="bold mb-1">{{'CancellationPolicy' | localization}}</h5>
+                            <p class="small-text text-left">{{'CancellationDeductionOnPayments' | localization}}
                             </p>
                             <ul class="custom-ul">
                                 <li>
-                                    <p>If reservation is being cancelled before 3 days of check-in time, 100% will refund. </p>
+                                    <p>{{'CancellationDeductionPolicy1' | localization}}</p>
                                 </li>
                                 <li>
-                                    <p>If reservation is being cancelled 72 -24 hours before then 50% of one night charge will be deducted.</p>
+                                    <p>{{'CancellationDeductionPolicy2' | localization}}</p>
                                 </li>
                                 <li>
-                                    <p>If less than 24 hours: one night charge will be deducted and rest amount is refunded.</p>
+                                    <p>{{'CancellationDeductionPolicy3' | localization}}</p>
                                 </li>
                                 <li>
-                                    <p>Payment processing fees is not refundable in any case.</p>
+                                    <p>{{'CancellationDeductionPolicy4' | localization}}</p>
                                 </li>
     
                             </ul>
@@ -133,26 +133,26 @@
             </div>
             <div class="modal-body">
                 <div class="custom-text-center">
-                    <h4 class="bold text-center">Cancellation Policy</h4>
+                    <h4 class="bold text-center">{{'CancellationPolicy' | localization}}</h4>
                     <div class="py-2">
-                        <p class="small-text text-left">Deduction on payments after cancellation will be as follows
+                        <p class="small-text text-left">{{'CancellationDeductionOnPayments' | localization}}
                         </p>
                         <ul class="custom-ul">
                             <li>
-                                <p>If reservation is being cancelled before 3 days of check-in time, 100% will refund. </p>
+                                <p>{{'CancellationDeductionPolicy1' | localization}}</p>
                             </li>
                             <li>
-                                <p>If reservation is being cancelled 72 -24 hours before then 50% of one night charge will be deducted.</p>
+                                <p>{{'CancellationDeductionPolicy2' | localization}}</p>
                             </li>
                             <li>
-                                <p>If less than 24 hours: one night charge will be deducted and rest amount is refunded.</p>
+                                <p>{{'CancellationDeductionPolicy3' | localization}}</p>
                             </li>
                             <li>
-                                <p>Payment processing fees is not refundable in any case.</p>
+                                <p>{{'CancellationDeductionPolicy4' | localization}}</p>
                             </li>
 
                         </ul>
-                        <p><strong>Are you sure you want cancel the booking ?</strong></p>
+                        <p><strong>{{'ConfirmCancelation' | localization}}</strong></p>
                     </div>
                     <div class="py-4 text-center">
                         <button (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
