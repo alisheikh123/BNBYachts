@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BnBYachts.Boat.Shared.Boat.Requestable;
 
 namespace BnBYachts.Boat
 {
@@ -10,6 +11,7 @@ namespace BnBYachts.Boat
              * Alternatively, you can split your mapping configurations
              * into multiple profile classes for a better organization. */
             CreateMap<BoatEntity, BoatDto>();
+            CreateMap<BoatFeaturesRequestable, FeatureEntity>();
         }
     }
 }

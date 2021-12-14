@@ -5,6 +5,7 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
 {
     public class HostBoatRequestable
     {
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
@@ -30,6 +31,7 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
 
     public class BoatGalleryRequestable
     {
+        public int Id { get; set; }
         public string FileName { get; set; }
         public string FileType { get; set; }
         public string FileData { get; set; }
