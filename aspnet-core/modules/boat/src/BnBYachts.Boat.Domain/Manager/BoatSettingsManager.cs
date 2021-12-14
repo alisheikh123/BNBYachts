@@ -39,7 +39,13 @@ namespace BnBYachts.Boat.Manager
 
         public async Task<bool> UpdateBoat(HostBoatRequestable boatDetails, Guid? userId)
         {
-            var boat = _objectMapper.Map<HostBoatRequestable, BoatEntity>(boatDetails);
+            var boatEntity = await _boatRepository.FindAsync(res => res.Id == boatDetails.Id);
+            _objectMapper.Map<HostBoatRequestable, BoatEntity>(boatDetails, boatEntity);
+            boatEntity.BoatCalendars = null;
+            boatEntity.BoatFeatures = null;
+            boatEntity.BoatRules = null;
+            boatEntity.BoatLocations = null;
+            boatEntity.BoatGalleries = null;
             foreach (var gallery in boatDetails.BoatGallery)
             {
                 var boatGallery = _objectMapper.Map<BoatGalleryRequestable, BoatGalleryEntity>(gallery);
@@ -53,7 +59,7 @@ namespace BnBYachts.Boat.Manager
                 }
             }
             //Features Removed
-            var boatAllFeatures = await _boatelFeatureRepo.GetListAsync(res => res.BoatEntityId == boat.Id).ConfigureAwait(false);
+            var boatAllFeatures = await _boatelFeatureRepo.GetListAsync(res => res.BoatEntityId == boatEntity.Id).ConfigureAwait(false);
             foreach (var f in boatAllFeatures)
             {
                 var findFeature = boatDetails.BoatFeatures.Any(res => res.Id == f.OfferedFeaturesId);
@@ -68,25 +74,25 @@ namespace BnBYachts.Boat.Manager
                 var boatFeatures = new BoatFeatureEntity();
                 if (features.Id == null)
                 {
-                        var featureEntity = _objectMapper.Map<BoatFeaturesRequestable, FeatureEntity>(features);
-                        featureEntity.CreatorId = userId;
-                        featureEntity.CreationTime = DateTime.Now;
-                        var response = await _featuresRepo.InsertAsync(featureEntity, autoSave: true).ConfigureAwait(false);
-                        features.Id = response.Id;
+                    var featureEntity = _objectMapper.Map<BoatFeaturesRequestable, FeatureEntity>(features);
+                    featureEntity.CreatorId = userId;
+                    featureEntity.CreationTime = DateTime.Now;
+                    var response = await _featuresRepo.InsertAsync(featureEntity, autoSave: true).ConfigureAwait(false);
+                    features.Id = response.Id;
                 }
-                var getFeature = await _boatelFeatureRepo.FindAsync(res => res.OfferedFeaturesId == features.Id && res.BoatEntityId == boat.Id).ConfigureAwait(false);
+                var getFeature = await _boatelFeatureRepo.FindAsync(res => res.OfferedFeaturesId == features.Id && res.BoatEntityId == boatEntity.Id).ConfigureAwait(false);
                 if (getFeature == null)
                 {
                     boatFeatures.OfferedFeaturesId = features.Id;
                     boatFeatures.BoatEntityId = boatDetails.Id;
                     boatFeatures.CreatorId = userId;
                     boatFeatures.CreationTime = DateTime.Now;
-                    boatFeatures.LastModifierId = boat.CreatorId = userId;
+                    boatFeatures.LastModifierId = boatEntity.CreatorId = userId;
                     await _boatelFeatureRepo.InsertAsync(boatFeatures).ConfigureAwait(false);
                 }
             }
             //Rules Removed
-            var boatAllRules = await _boatelRulesRepo.GetListAsync(res => res.BoatEntityId == boat.Id).ConfigureAwait(false);
+            var boatAllRules = await _boatelRulesRepo.GetListAsync(res => res.BoatEntityId == boatEntity.Id).ConfigureAwait(false);
             foreach (var r in boatAllRules)
             {
                 var findRule = boatDetails.BoatRules.Any(res => res.Id == r.OfferedRuleId);
@@ -107,7 +113,7 @@ namespace BnBYachts.Boat.Manager
                     var response = await _rulesRepo.InsertAsync(ruleEntity, autoSave: true).ConfigureAwait(false);
                     rule.Id = response.Id;
                 }
-                var getRule = await _boatelRulesRepo.FindAsync(res => res.OfferedRuleId == rule.Id && res.BoatEntityId == boat.Id).ConfigureAwait(false);
+                var getRule = await _boatelRulesRepo.FindAsync(res => res.OfferedRuleId == rule.Id && res.BoatEntityId == boatEntity.Id).ConfigureAwait(false);
                 if (getRule == null)
                 {
                     boatRule.OfferedRuleId = rule.Id;
@@ -117,33 +123,8 @@ namespace BnBYachts.Boat.Manager
                     await _boatelRulesRepo.InsertAsync(boatRule, autoSave: true).ConfigureAwait(false);
                 }
             }
-            var boatEntity = await _boatRepository.FindAsync(res => res.Id == boat.Id);
-            boatEntity.Name = boat.Name;
-            boatEntity.Description = boat.Description;
-            boatEntity.Location = boat.Location;
-            boatEntity.Latitude = boat.Latitude;
-            boatEntity.Longitude = boat.Longitude;
-            boatEntity.Length = boat.Length;
-            boatEntity.TotalBedrooms = boat.TotalBedrooms;
-            boatEntity.TotalWashrooms = boat.TotalWashrooms;
-            boatEntity.IsActive = boat.IsActive;
-            boatEntity.IsBoatelServicesOffered = boat.IsBoatelServicesOffered;
-            boatEntity.BoatelCapacity = boat.BoatelCapacity;
-            boatEntity.CheckinTime = boat.CheckinTime;
-            boatEntity.CheckoutTime = boat.CheckoutTime;
-            boatEntity.PerDayCharges = boat.PerDayCharges;
-            boatEntity.TaxFee = boat.TaxFee;
-            try
-            {
-                //var boatEntity = await _boatRepository.FindAsync(res => res.Id == boat.Id);
-                var res = await _boatRepository.UpdateAsync(boatEntity, autoSave: true).ConfigureAwait(false);
-                return true;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            var res = await _boatRepository.UpdateAsync(boatEntity, autoSave: true).ConfigureAwait(false);
+            return true;
         }
     }
 }
