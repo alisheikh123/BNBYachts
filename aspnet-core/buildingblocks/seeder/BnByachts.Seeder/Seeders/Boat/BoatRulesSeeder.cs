@@ -11,7 +11,10 @@ namespace BnByachts.Seeder
 {
     public class BoatRulesSeederService : BaseSeeder
     {
-      
+
+        public BoatRulesSeederService(EventBusDispatcher eventBusDispatcher) : base(eventBusDispatcher)
+        {
+        }
         public async Task MigrateAsync()
         {
             await SeedBoatsRules().ConfigureAwait(false);

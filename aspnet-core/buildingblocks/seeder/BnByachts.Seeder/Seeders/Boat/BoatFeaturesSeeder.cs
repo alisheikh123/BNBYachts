@@ -11,6 +11,10 @@ namespace BnByachts.Seeder
 {
     public class BoatFeaturesSeederService : BaseSeeder
     {
+        public BoatFeaturesSeederService(EventBusDispatcher eventBusDispatcher) : base(eventBusDispatcher)
+        {
+        }
+
         public async Task MigrateAsync()
         {
             await SeedBoatsFeature().ConfigureAwait(false);

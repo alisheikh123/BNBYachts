@@ -13,6 +13,9 @@ namespace BnByachts.Seeder
 {
     public class EventSeederService : BaseSeeder
     {
+        public EventSeederService(EventBusDispatcher eventBusDispatcher) : base(eventBusDispatcher)
+        {
+        }
         public async Task MigrateAsync()
         {
             await SeedEvents().ConfigureAwait(false);

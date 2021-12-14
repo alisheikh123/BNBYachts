@@ -137,7 +137,7 @@ namespace BnBYachts.Core.Managers
         public  async Task<ResponseDto> AddRoles(RolesTransferable userInput)
         {
             var _respone = new ResponseDto();
-            var user = new IdentityRole(Guid.NewGuid(), userInput.NormalizedName)
+            var user = new IdentityRole(userInput.Id, userInput.NormalizedName)
             {
                 IsDefault = userInput.IsDefault,
                 IsPublic = userInput.IsPublic,

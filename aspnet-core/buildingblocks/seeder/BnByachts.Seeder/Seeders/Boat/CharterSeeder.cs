@@ -13,7 +13,7 @@ namespace BnByachts.Seeder
     {
         private readonly EventSeederService _eventSeederService;
 
-        public CharterSeederService(EventSeederService eventSeederService)
+        public CharterSeederService(EventSeederService eventSeederService, EventBusDispatcher eventBusDispatcher) : base(eventBusDispatcher)
         {
             _eventSeederService = eventSeederService;
         }

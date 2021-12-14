@@ -12,7 +12,7 @@ namespace BnByachts.Seeder
     public class BoatCalendarSeederService : BaseSeeder
     {
         private readonly BoatGallerySeederService _boatGallerySeederService;
-        public BoatCalendarSeederService( BoatGallerySeederService boatGallerySeederService)
+        public BoatCalendarSeederService( BoatGallerySeederService boatGallerySeederService ,EventBusDispatcher eventBusDispatcher) : base(eventBusDispatcher)
         {
             _boatGallerySeederService = boatGallerySeederService;
         }
