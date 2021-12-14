@@ -58,9 +58,11 @@
                 transform="translate(-0.609 -0.609)" fill="#777" />
             </svg></a>
           <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="'customSwitches_'+{{item.id}}"
-              (click)="isBoatActive(item)" [checked]="item.isActive">
-            <label class="custom-control-label" for="'customSwitches_'+{{item.id}}"></label>
+            <label class="switch">
+              <input type="checkbox" [checked]="item.isActive" (click)="isBoatActive(item)">
+              <span class="slider round"></span>
+            </label>
+            
           </div>
 
         </div>
