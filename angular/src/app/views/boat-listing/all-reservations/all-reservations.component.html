@@ -10,59 +10,69 @@
       </div>
       <div>
         <div class="row pb-4">
-            <div class="col-12">
-              <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
-              <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button>
-              <div class="col-10"></div>
+          <div class="col-12">
+            <!-- <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
+              <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button> -->
+            <div class="btn-group btn-group-toggle pe-2" ngbRadioGroup name="radioBasic" [(ngModel)]="modelDate">
+              <label ngbButtonLabel class="btn-outline-primary">
+                <input [hidden]="true" ngbButton type="radio" [value]="1"> All
+              </label>
+              <label ngbButtonLabel class="btn-outline-primary" (click)="upcomingReservation()">
+                <input [hidden]="true" ngbButton type="radio" [value]="0"> Upcoming
+              </label>
+              <label ngbButtonLabel class="btn-outline-primary" (click)="pastReservation()">
+                <input [hidden]="true" ngbButton type="radio" [value]="2"> Past
+              </label>
             </div>
-          </div>
-        <div class="filter-wrap mb-3 custom-flex-start">
-          <div class="dropdown custom-dropdown dropdown-rounded">
-            <select class="dropdown custom-dropdown dropdown-rounded custom-select" (select)="selectedMonth($event)">
-              <option *ngFor="let item of month" [ngValue]="item.Id">{{item.name}}</option>
-            </select>
-          </div>
-
-        </div>
-        <div class="custom-card req-user-card" *ngFor="let item of booking" >
-         <div [routerLink]="['/boat-listing/reservation-detail',item.id]">
-          <div class="image-with-text custom-flex-between align-items-start">
-            <div class="image-with-text-inner">
-              <div *ngFor="let imgs of item?.boatDetail.boatGalleries | filterBy : 'isCoverPic':true">
-
-              <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top"
-              alt="...">
-            </div>
-              <div class="user-details">
-                <p class="medium">{{item?.boatDetail.name}}<span class="small-text regular grey"> </span></p>
-                <ngb-rating [rate]="0"></ngb-rating>
-                <p class="small-text grey ">Location :{{item?.boatDetail.location}} </p>
-                <p class="small-text grey ">Guest: {{item.noOfAdults + item.noOfChildrens}}</p>
-
+            <div class="filter-wrap mb-3 custom-flex-start" style="display: inline-block !important;">
+              <div class="calendar">
+                <input type="month" [(ngModel)]="modelDate" (ngModelChange)="applyDateFilter()" id="start"
+                  placeholder="Year,Month" name="date">
               </div>
-            </div>
-            <div class="center-content custom-flex flex-column align-items-end">
-
-
-            </div>
-
-            <div class="right-content custom-flex flex-column align-items-end">
-              <p class="small-text grey">{{item.checkinDate | date}} - {{item.checkoutDate | date}}</p>
-              <div class="custom-flex mt-4 mr-3">
-                <span *ngIf="item.bookingStatus==0"><strong >{{item.bookingStatus==0 ? 'Pending' : ''}}</strong></span>
-                <span *ngIf="item.bookingStatus==1"><strong >{{item.bookingStatus==1 ? 'Accepted' : ''}}</strong></span>
-                <span *ngIf="item.bookingStatus==2"><strong >{{item.bookingStatus==2 ? 'Rejected' : ''}}</strong></span>
-                <span *ngIf="item.bookingStatus==3"><strong >{{item.bookingStatus==3 ? 'Cancelled' : ''}}</strong></span>
-              </div>
-
-
             </div>
           </div>
         </div>
-      </div>
-      <div *ngIf="isRecordNotFound">
-        <p>No Record Found</p>
-     </div>
+        <div class="custom-card req-user-card" *ngFor="let item of booking">
+          <div [routerLink]="['/boat-listing/reservation-detail',item.id]">
+            <div class="image-with-text custom-flex-between align-items-start">
+              <div class="image-with-text-inner">
+                <div *ngFor="let imgs of item?.boatDetail.boatGalleries | filterBy : 'isCoverPic':true">
+
+                  <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+                </div>
+                <div class="user-details">
+                  <p class="medium">{{item?.boatDetail.name}}<span class="small-text regular grey"> </span></p>
+                  <ngb-rating [rate]="0"></ngb-rating>
+                  <p class="small-text grey ">Location :{{item?.boatDetail.location}} </p>
+                  <p class="small-text grey ">Guest: {{item.noOfAdults + item.noOfChildrens}}</p>
+
+                </div>
+              </div>
+              <div class="center-content custom-flex flex-column align-items-end">
+
+
+              </div>
+
+              <div class="right-content custom-flex flex-column align-items-end">
+                <p class="small-text grey">{{item.checkinDate | date}} - {{item.checkoutDate | date}}</p>
+                <div class="custom-flex mt-4 mr-3">
+                  <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' : ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
+                      ''}}</strong></span>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="booking?.length == 0">
+          <app-not-found-component></app-not-found-component>
+        </div>
 
 
       </div>

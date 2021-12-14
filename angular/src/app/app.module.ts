@@ -18,6 +18,10 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { LoaderService } from './shared/loader/services/loader.service';
 import { TryHostingComponent } from './views/common/try-hosting/try-hosting.component';
 import { BookingService } from './core/Booking/booking.service';
+import { MyProfileComponent } from './views/common/user-profile/my-profile/my-profile.component';
+import { UpdateProfileComponent } from './views/common/user-profile/update-profile/update-profile.component';
+import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
+import { AddReviewModalComponent } from './views/common/add-review-modal/add-review-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import { BookingService } from './core/Booking/booking.service';
     HeaderComponent,
     FooterComponent,
     LoaderComponent,
-    TryHostingComponent
+    TryHostingComponent,
+    MyProfileComponent,
+    UpdateProfileComponent,
+    AddReviewModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +44,7 @@ import { BookingService } from './core/Booking/booking.service';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     AuthAppModule,
+    SharedPipesModule,
     AuthModule.forRoot({
       config: {
         authority: environment.Identity.authority,

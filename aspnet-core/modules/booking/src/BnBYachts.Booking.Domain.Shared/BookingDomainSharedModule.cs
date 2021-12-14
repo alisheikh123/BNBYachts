@@ -40,6 +40,12 @@ namespace BnBYachts.Booking
                 options.FileSets.AddEmbedded<BookingDomainSharedModule>();
             });
 
+            //context.Services.AddAutoMapperObjectMapper<BookingDomainSharedModule>();
+            //Configure<AbpAutoMapperOptions>(options =>
+            //{
+            //    options.AddMaps<SeederObservableModule>();
+            //});
+
             Configure<AbpLocalizationOptions>(options =>
             {
                 options.Resources

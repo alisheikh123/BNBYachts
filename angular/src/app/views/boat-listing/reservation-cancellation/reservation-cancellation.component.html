@@ -100,12 +100,15 @@
             </div>
             <div class="col-sm-12 custom-margin text-center mobile-padding-btns">
                 <div class="center-content">
-                    <a class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">I changed my
-                        mind</a>&nbsp;&nbsp;
-                    <a class="custom-btn btn-big blue"  *ngIf='!isHost' (click)="openModal(template,b)">Confirm Cancellation</a>
-                    <a class="custom-btn btn-big  blue" (click)="openModal(hosttemplate,b)">Confirm Cancellation</a>
+                    <button class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">I changed my
+                        mind</button>&nbsp;&nbsp;
+                    <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(template,b)">Confirm Cancellation</a>
+                    <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,b)">Confirm Cancellation</a>
+                    <a (click)="addReview(b?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">Add
+                        Review</a>
                 </div>
             </div>
+            <app-list-reviews [bookingId]=bkCancel></app-list-reviews>
         </div>
     </div>
     <!--Cancelation Policy Modal -->
@@ -163,7 +166,7 @@
                         <a (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
                             data-bs-dismiss="modal" data-bs-toggle="modal"
                             data-bs-target="#cancellation-confirmed">Cancel</a>&nbsp;
-                        <a class="custom-btn blue big-btn" (click)="confirmCancel()">Confirm</a>
+                        <a class="custom-btn blue big-btn" style="cursor: pointer;" (click)="confirmCancel()">Confirm</a>
                     </div>
                 </div>
             </div>

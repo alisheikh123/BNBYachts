@@ -2,11 +2,14 @@
 using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Shared.BoatBooking.Interface;
 using BnBYachts.Booking.Shared.BoatBooking.Transferable;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -17,11 +20,14 @@ namespace BnBYachts.Booking.Managers
     {
         private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
         private readonly IRepository<BookingCancelEntity, int> _boatelCanceRepository;
+        private readonly EventBusDispatcher _eventBusDispatcher;
 
-        public HostBoatBookingManager(IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel)
+
+        public HostBoatBookingManager(IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel, EventBusDispatcher eventBusDispatcher)
         {
             _boatelBookingRepository = repository;
             _boatelCanceRepository = repositorycancel;
+            _eventBusDispatcher = eventBusDispatcher;
         }
 
         public async Task<BoatelBookingTransferable> BoatelBooking(BoatelBookingEntity data, Guid? userId, string userName)
@@ -33,6 +39,16 @@ namespace BnBYachts.Booking.Managers
             var response = await _boatelBookingRepository.InsertAsync(data, autoSave: true).ConfigureAwait(false);
             dto.isSucces = true;
             dto.BookingId = response.Id;
+            #region Send-Email
+            string body = $"<h4> Your boat has been booked successfuly. Please wait for the host's approval. </h4>";
+            await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            {
+                To = data.UserName,
+                Subject = "Boat Booked",
+                Body = new StringBuilder().Append(body),
+                IsBodyHtml = true
+            });
+            #endregion
             return dto;
         }
         public async Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName)
@@ -119,15 +135,24 @@ namespace BnBYachts.Booking.Managers
         }
 
 
-
-        public async Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId)
+        public async Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId,string month, string year)
         {
+            if (!string.IsNullOrEmpty(month) || !string.IsNullOrEmpty(year))
+            {
+                var filteredPastBooking = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate < DateTime.Today && (x.CheckinDate.Month.ToString() == month && x.CheckinDate.Year.ToString() == year)).ConfigureAwait(false);
+                return filteredPastBooking;
+            }
             var pastBooking = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate < DateTime.Today).ConfigureAwait(false);
             return pastBooking;
         }
 
-        public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId)
+        public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId,string month, string year)
         {
+            if (!string.IsNullOrEmpty(month) || !string.IsNullOrEmpty(year))
+            {
+                var filteredUpcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate > DateTime.Today && (x.CheckinDate.Month.ToString() == month && x.CheckinDate.Year.ToString() == year)).ConfigureAwait(false);
+                return filteredUpcomingBookings;
+            }
             var upcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate > DateTime.Today).ConfigureAwait(false);
             return upcomingBookings;
         }

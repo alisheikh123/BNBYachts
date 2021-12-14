@@ -21,7 +21,12 @@ export class AllReservationsComponent implements OnInit {
   boatbookingDetail: any;
   currentMonth: any;
   isRecordNotFound: boolean;
-  assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
+  date: any;
+  selectedYear: string = "";
+  selectedMonth: string = "";
+  selectedTab: string = "";
+  modelDate = "";
   constructor(private fb: FormBuilder, private service: BookingService, config: NgbRatingConfig) {
     /* Rating Configuration*/
     config.max = 5;
@@ -37,7 +42,6 @@ export class AllReservationsComponent implements OnInit {
         this.isRecordNotFound = true;
       }
       else {
-
         res.forEach((elem: any) => {
           this.service.getBoatInfo(elem.boatId).subscribe((boatdetail: any) => {
             elem.boatDetail = boatdetail;
@@ -52,19 +56,18 @@ export class AllReservationsComponent implements OnInit {
       monthName: ['', [Validators.required]]
     })
   }
-  selectedMonth(e: any) {
+  // selectedMonth(e: any) {
 
-    this.monthName.setValue(e.target.value, {
-      onlySelf: true
-    })
-  }
+  //   this.monthName.setValue(e.target.value, {
+  //     onlySelf: true
+  //   })
+  // }
   upcomingReservation() {
-
-
-    this.service.upcomingbookingDetail().subscribe((res: any) => {
+    this.service.upcomingbookingDetail(this.selectedMonth,this.selectedYear).subscribe((res: any) => {
       this.booking = res;
       if (this.booking.length == 0) {
         this.isRecordNotFound = true;
+        this.selectedTab = "Upcoming";
       }
       else {
         res.forEach((elem: any) => {
@@ -73,18 +76,18 @@ export class AllReservationsComponent implements OnInit {
           });
         });
         this.isRecordNotFound = false;
+        this.selectedTab = "Upcoming";
       }
     });
 
 
   }
   pastReservation() {
-
-
-    this.service.pastbookingDetail().subscribe((res: any) => {
+    this.service.pastbookingDetail(this.selectedMonth,this.selectedYear).subscribe((res: any) => {
       this.booking = res;
       if (this.booking.length == 0) {
         this.isRecordNotFound = true;
+        this.selectedTab = "Past";
       }
       else {
 
@@ -94,11 +97,15 @@ export class AllReservationsComponent implements OnInit {
           });
         });
         this.isRecordNotFound = false;
+        this.selectedTab = "Past";
       }
     });
   }
-
-
-
-
+  applyDateFilter(){
+    const stringToSplit = this.modelDate;
+    let result = stringToSplit.split('-');
+    this.selectedYear = result[0];
+    this.selectedMonth = result[1];
+    (this.selectedTab == "Upcoming") ? this.upcomingReservation : this.pastReservation();
+  }
 }

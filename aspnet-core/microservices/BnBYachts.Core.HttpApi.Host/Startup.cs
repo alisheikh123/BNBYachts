@@ -11,19 +11,13 @@ namespace BnBYachts.Core
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            Console.WriteLine("3.9");
             services.AddApplication<CoreHttpApiHostModule>();
-
             services.AddAbpIdentity().AddDefaultTokenProviders();
-
-            Console.WriteLine("done");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            Console.WriteLine("4");
             app.InitializeApplication();
-            Console.WriteLine("end");
         }
     }
 }
