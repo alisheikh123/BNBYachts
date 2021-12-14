@@ -8,16 +8,8 @@ using BnBYachts.Boat;
 using Microsoft.Extensions.DependencyInjection;
 using BnBYachts.Boat.EntityFrameworkCore;
 using BnByachts.SeedObservable.Consumers;
-using Volo.Abp.Data;
 using BnBYachts.Core.EntityFrameworkCore;
 using BnBYachts.Core;
-using Volo.Abp.Account.Web;
-using Volo.Abp.Account;
-using Volo.Abp.Identity;
-using Volo.Abp.SettingManagement;
-using Volo.Abp.IdentityServer;
-using Volo.Abp.IdentityServer.EntityFrameworkCore;
-using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace BnByachts.SeedObservable
 {
@@ -27,11 +19,8 @@ namespace BnByachts.SeedObservable
         typeof(AbpAutofacModule),
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
-
         typeof(CoreApplicationModule),
         typeof(CoreEntityFrameworkCoreModule)
-
-    //typeof(AbpAccountApplicationModule),
 
     )]
     public class SeederObservableModule : AbpModule
@@ -98,11 +87,6 @@ namespace BnByachts.SeedObservable
                 {
                     e.Name = EventBusQueue.QEventSeeder;
                 });
-
-
-
-
-
             });
 
         }
