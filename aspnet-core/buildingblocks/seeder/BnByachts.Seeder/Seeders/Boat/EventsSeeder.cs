@@ -7,19 +7,12 @@ using System.Threading.Tasks;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using Volo.Abp.DependencyInjection;
+using BnByachts.Seeder.Seeders;
 
 namespace BnByachts.Seeder
 {
-    public class EventSeederService : ITransientDependency
+    public class EventSeederService : BaseSeeder
     {
-        private readonly EventBusDispatcher _eventBusDispatcher;
-
-         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
-        public EventSeederService(EventBusDispatcher eventBusDispatcher)
-        {
-            _eventBusDispatcher = eventBusDispatcher;
-        }
-
         public async Task MigrateAsync()
         {
             await SeedEvents().ConfigureAwait(false);
@@ -28,7 +21,7 @@ namespace BnByachts.Seeder
         {
             async void Action(EventsContract events)
             {
-                await _eventBusDispatcher.Publish<IEventsContract>(events, cancellationToken);
+                await EventBusDispatcher.Publish<IEventsContract>(events, cancellationToken);
             }
 
             JsonConvert.DeserializeObject<List<EventsContract>>(await File.ReadAllTextAsync($"{GetFullPath}Event.json", cancellationToken))

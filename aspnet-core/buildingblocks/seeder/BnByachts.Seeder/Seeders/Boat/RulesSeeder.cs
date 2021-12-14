@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using Volo.Abp.DependencyInjection;
+using BnByachts.Seeder.Seeders;
 
 namespace BnByachts.Seeder
 {
-    public class RulesSeederService : ITransientDependency
+    public class RulesSeederService : BaseSeeder
     {
-        private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly BoatRulesSeederService _boatrulesSeeder;
-
-         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
-
-        public RulesSeederService(EventBusDispatcher eventBusDispatcher, BoatRulesSeederService boatrulesSeeder)
+        public RulesSeederService(BoatRulesSeederService boatrulesSeeder)
         {
-            _eventBusDispatcher = eventBusDispatcher;
             _boatrulesSeeder = boatrulesSeeder;
         }
 
@@ -31,7 +27,7 @@ namespace BnByachts.Seeder
         {
             async void Action(RuleContract rules)
             {
-                await _eventBusDispatcher.Publish<IRuleContract>(rules, cancellationToken);
+                await EventBusDispatcher.Publish<IRuleContract>(rules, cancellationToken);
             }
 
             JsonConvert.DeserializeObject<List<RuleContract>>(await File.ReadAllTextAsync($"{GetFullPath}Rules.json", cancellationToken))

@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using Volo.Abp.DependencyInjection;
+using BnByachts.Seeder.Seeders;
 
 namespace BnByachts.Seeder
 {
-    public class FeatureSeederService : ITransientDependency
+    public class FeatureSeederService : BaseSeeder
     {
-        private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly BoatFeaturesSeederService _boatFeaturesSeederService;
-
-         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
-
-        public FeatureSeederService(EventBusDispatcher eventBusDispatcher, BoatFeaturesSeederService boatFeaturesSeederService)
+        public FeatureSeederService(BoatFeaturesSeederService boatFeaturesSeederService)
         {
-            _eventBusDispatcher = eventBusDispatcher;
             _boatFeaturesSeederService = boatFeaturesSeederService;
         }
 
@@ -32,7 +28,7 @@ namespace BnByachts.Seeder
         {
             async void Action(FeatureContract feature)
             {
-                await _eventBusDispatcher.Publish<IFeatureContract>(feature, cancellationToken);
+                await EventBusDispatcher.Publish<IFeatureContract>(feature, cancellationToken);
             }
 
             JsonConvert.DeserializeObject<List<FeatureContract>>(await File.ReadAllTextAsync($"{GetFullPath}Features.json", cancellationToken))

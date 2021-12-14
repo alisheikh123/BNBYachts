@@ -1,23 +1,17 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
-using Volo.Abp.DependencyInjection;
+using BnByachts.Seeder.Seeders;
 
 namespace BnByachts.Seeder
 {
-    public class BoatRulesSeederService : ITransientDependency
+    public class BoatRulesSeederService : BaseSeeder
     {
-        private readonly EventBusDispatcher _eventBusDispatcher;
-        private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
-        public BoatRulesSeederService(EventBusDispatcher eventBusDispatcher)
-        {
-            _eventBusDispatcher = eventBusDispatcher;
-        }
+      
         public async Task MigrateAsync()
         {
             await SeedBoatsRules().ConfigureAwait(false);
@@ -26,7 +20,7 @@ namespace BnByachts.Seeder
         {
             async void Action(HostBoatRulesContract hostBoatRules)
             {
-                await _eventBusDispatcher.Publish<IHostBoatRulesContract>(hostBoatRules, cancellationToken);
+                await EventBusDispatcher.Publish<IHostBoatRulesContract>(hostBoatRules, cancellationToken);
             }
 
             JsonConvert.DeserializeObject<List<HostBoatRulesContract>>(await File.ReadAllTextAsync($"{GetFullPath}BoatRules.json", cancellationToken))
