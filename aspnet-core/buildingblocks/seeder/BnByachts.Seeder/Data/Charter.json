@@ -14,7 +14,7 @@
     "Destination": "Islamabad",
     "DestinationLatitude": 2.484222916018870e+001,
     "DestinationLongitude": 6.699838505109470e+001,
-    "CreationTime": "2021-11-11T00:00:00"
+    "CreatorId": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61"
   },
   {
     "BoatId": 2,
@@ -31,7 +31,58 @@
     "Destination": "Lahore",
     "DestinationLatitude": 2.484222916018870e+001,
     "DestinationLongitude": 6.699838505109470e+001,
-    "CreationTime": "2021-11-11T00:00:00"
+    "CreatorId": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61"
+  },
+  {
+    "BoatId": 5,
+    "IsRoundTrip": true,
+    "GuestCapacity": 20,
+    "Description": "Charter for Karachi",
+    "DepartureFromDate": "2021-12-12T00:00:00",
+    "DepartureToDate": "2021-12-14T00:00:00",
+    "CharterFee": 200,
+    "IsFullBoatCharges": false,
+    "DepartingFrom": "Karachi",
+    "DepartingLatitude": 2.600000000000000e+001,
+    "DepartingLongitude": 2.500000000000000e+001,
+    "Destination": "Lahore",
+    "DestinationLatitude": 2.484222916018870e+001,
+    "DestinationLongitude": 6.699838505109470e+001,
+    "CreatorId": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61"
+  },
+  {
+    "BoatId": 3,
+    "IsRoundTrip": true,
+    "GuestCapacity": 20,
+    "Description": "Charter for Sialkot",
+    "DepartureFromDate": "2021-12-12T00:00:00",
+    "DepartureToDate": "2021-12-14T00:00:00",
+    "CharterFee": 200,
+    "IsFullBoatCharges": false,
+    "DepartingFrom": "Islamabad",
+    "DepartingLatitude": 2.600000000000000e+001,
+    "DepartingLongitude": 2.500000000000000e+001,
+    "Destination": "Lahore",
+    "DestinationLatitude": 2.484222916018870e+001,
+    "DestinationLongitude": 6.699838505109470e+001,
+    "CreatorId": "ACE3A140-9F44-4B80-8AB0-CD10CC4A0CD5"
+  },
+  {
+    "BoatId": 6,
+    "IsRoundTrip": true,
+    "GuestCapacity": 20,
+    "Description": "Charter for Lahore",
+    "DepartureFromDate": "2021-12-12T00:00:00",
+    "DepartureToDate": "2021-12-14T00:00:00",
+    "CharterFee": 200,
+    "IsFullBoatCharges": false,
+    "DepartingFrom": "Multan",
+    "DepartingLatitude": 2.600000000000000e+001,
+    "DepartingLongitude": 2.500000000000000e+001,
+    "Destination": "Lahore",
+    "DestinationLatitude": 2.484222916018870e+001,
+    "DestinationLongitude": 6.699838505109470e+001,
+    "CreatorId": "ACE3A140-9F44-4B80-8AB0-CD10CC4A0CD5"
   }
 ]
 

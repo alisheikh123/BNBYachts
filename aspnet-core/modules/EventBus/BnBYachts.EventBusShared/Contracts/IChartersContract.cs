@@ -27,6 +27,7 @@ namespace BnBYachts.EventBusShared.Contracts
         public string ReturnAddress { get; set; }
         public double? ReturnLocationLat { get; set; }
         public double? ReturnLocationLng { get; set; }
+        public Guid? CreatorId { get; set; }
     }
     public class ChartersContract : IChartersContract
     {
@@ -48,5 +49,6 @@ namespace BnBYachts.EventBusShared.Contracts
         public string ReturnAddress { get; set; }
         public double? ReturnLocationLat { get; set; }
         public double? ReturnLocationLng { get; set; }
+        public Guid? CreatorId { get; set; }
     }
 }

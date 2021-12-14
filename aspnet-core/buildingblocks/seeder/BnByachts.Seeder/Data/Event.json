@@ -1,6 +1,5 @@
 [
   {
-    "Id": 1,
     "BoatId": 1,
     "LocationLat": 2.484222916018870e+001,
     "LocationLong": 6.699838505109470e+001,
@@ -12,10 +11,9 @@
     "EndDateTime": "2021-12-09T00:00:00",
     "AmountPerPerson": 100,
     "EventType": 1,
-    "CreationTime": "2021-11-11T00:00:00"
+    "CreatorId": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61"
   },
   {
-    "Id": 2,
     "BoatId": 1,
     "LocationLat": 2.484222916018870e+001,
     "LocationLong": 6.699838505109470e+001,
@@ -27,6 +25,34 @@
     "EndDateTime": "2021-12-11T00:00:00",
     "AmountPerPerson": 200,
     "EventType": 1,
-    "CreationTime": "2021-11-11T00:00:00"
+    "CreatorId": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61"
+  },
+  {
+    "BoatId": 2,
+    "LocationLat": 2.484222916018870e+001,
+    "LocationLong": 6.699838505109470e+001,
+    "Location": "Afghanistan New Year Advance Party",
+    "Title": "Afghanistan new year party before new year",
+    "Description": "New Year",
+    "GuestCapacity": 400,
+    "StartDateTime": "2021-12-11T00:00:00",
+    "EndDateTime": "2021-12-11T00:00:00",
+    "AmountPerPerson": 200,
+    "EventType": 2,
+    "CreatorId": "ACE3A140-9F44-4B80-8AB0-CD10CC4A0CD5"
+  },
+  {
+    "BoatId": 3,
+    "LocationLat": 2.484222916018870e+001,
+    "LocationLong": 6.699838505109470e+001,
+    "Location": "Iran New Year Advance Party",
+    "Title": "Iran new year party before new year",
+    "Description": "New Year",
+    "GuestCapacity": 400,
+    "StartDateTime": "2021-12-11T00:00:00",
+    "EndDateTime": "2021-12-11T00:00:00",
+    "AmountPerPerson": 200,
+    "EventType": 2,
+    "CreatorId": "ACE3A140-9F44-4B80-8AB0-CD10CC4A0CD5"
   }
 ]

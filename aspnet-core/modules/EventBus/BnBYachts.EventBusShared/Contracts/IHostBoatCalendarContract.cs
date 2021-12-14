@@ -13,6 +13,7 @@ namespace BnBYachts.EventBusShared.Contracts
         public DateTime ToDate { get; set; }
         public DateTime FromDate { get; set; }
         public int? BoatEntityId { get; set; }
+        public Guid? CreatorId { get; set; }
     }
     public class HostBoatCalendarContract : IHostBoatCalendarContract
     {
@@ -21,5 +22,6 @@ namespace BnBYachts.EventBusShared.Contracts
         public DateTime ToDate { get; set; }
         public DateTime FromDate { get; set; }
         public int? BoatEntityId { get; set; }
+        public Guid? CreatorId { get; set; }
     }
 }

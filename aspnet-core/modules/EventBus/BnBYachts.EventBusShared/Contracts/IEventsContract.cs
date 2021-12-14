@@ -18,7 +18,8 @@ namespace BnBYachts.EventBusShared.Contracts
         public DateTime EndDateTime { get; set; }
         public int AmountPerPerson { get; set; }
         public EventsType EventType { get; set; }
-    
+        public Guid? CreatorId { get; set; }
+
     }
     
     public class EventsContract : IEventsContract
@@ -34,5 +35,6 @@ namespace BnBYachts.EventBusShared.Contracts
         public DateTime EndDateTime { get; set; }
         public int AmountPerPerson { get; set; }
         public EventsType EventType { get; set; }
+        public Guid? CreatorId { get; set; }
     }
 }
