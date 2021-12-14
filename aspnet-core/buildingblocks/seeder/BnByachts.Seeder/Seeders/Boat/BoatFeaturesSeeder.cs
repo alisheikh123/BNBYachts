@@ -6,19 +6,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
+using BnByachts.Seeder.Seeders;
 using Volo.Abp.DependencyInjection;
 
 namespace BnByachts.Seeder
 {
-    public class BoatFeaturesSeederService : ITransientDependency
+    public class BoatFeaturesSeederService : BaseSeeder,ITransientDependency
     {
-        private readonly EventBusDispatcher _eventBusDispatcher;
-
-         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
-
-        public BoatFeaturesSeederService(EventBusDispatcher eventBusDispatcher)
+        public BoatFeaturesSeederService(EventBusDispatcher eventBusDispatcher) : base(eventBusDispatcher)
         {
-            _eventBusDispatcher = eventBusDispatcher;
         }
 
         public async Task MigrateAsync()
