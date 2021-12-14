@@ -23,6 +23,7 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
         public int PerDayCharges { get; set; }
         public bool IsActive { get; set; }
         public int TaxFee { get; set; }
+        public Guid? CreatorId { get; set; }
         public ICollection<BoatGalleryRequestable> BoatGallery { get; set; }        
         public ICollection<BoatFeaturesRequestable> BoatFeatures { get; set; }
         public ICollection<BoatRulesRequestable> BoatRules { get; set; }
@@ -73,6 +74,7 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
         public DateTime ToDate { get; set; }
         public DateTime FromDate { get; set; }
         public int? BoatEntityId { get; set; }
+        public Guid? CreatorId { get; set; }
 
     }
     public class FeaturesRequestable
@@ -132,7 +134,8 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
         public string ReturnAddress { get; set; }
         public double? ReturnLocationLat { get; set; }
         public double? ReturnLocationLng { get; set; }
-        
+        public Guid? CreatorId { get; set; }
+
     }
     public class EventsMapperRequestable
     {
@@ -146,7 +149,10 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public int AmountPerPerson { get; set; }
-       // public EventsType EventType { get; set; }
+        public Guid? CreatorId { get; set; }
+        // public EventsType EventType { get; set; }
 
     }
+   
+  
 }

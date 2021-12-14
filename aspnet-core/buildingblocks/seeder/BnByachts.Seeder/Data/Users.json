@@ -1,0 +1,41 @@
+[
+  {
+    "Id": "3B54B737-F6D5-405B-AA00-02F05888E280",
+    "UserName": "ali123",
+    "Name": "Ali Raza",
+    "Email": "ali@techverx.com",
+    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "DOB": "2021-11-09T00:00:00",
+    "RoleName": ["USER","HOST"]
+  },
+  {
+    "Id": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61",
+    "UserName": "umer123",
+    "Name": "Umer Daraz",
+    "Email": "umar@techverx.com",
+    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "DOB": "2021-11-09T00:00:00",
+    "RoleName": ["USER", "HOST"]
+  },
+
+  {
+    "Id": "ace3a140-9f44-4b80-8ab0-cd10cc4a0cd5",
+    "UserName": "hanan123",
+    "Name": "Hanan Gondal",
+    "Email": "hanan@techverx.com",
+    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "DOB": "2021-11-09T00:00:00",
+    "RoleName": [ "ADMIN", "HOST" ]
+  },
+  {
+    "Id": "d6cbda9b-9e52-4e04-adca-ec6ed7f185e0",
+    "UserName": "farhan123",
+    "Name": "Farhan",
+    "Email": "farhan@techverx.com",
+    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "DOB": "2021-11-09T00:00:00",
+    "RoleName": [ "USER" ]
+  }
+
+
+]

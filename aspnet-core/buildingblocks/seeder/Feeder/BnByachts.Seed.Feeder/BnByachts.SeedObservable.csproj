@@ -21,11 +21,15 @@
 		<PackageReference Include="Volo.Abp" Version="4.4.3" />
 		<PackageReference Include="Volo.Abp.Autofac" Version="4.4.3" />
 		<PackageReference Include="Volo.Abp.AutoMapper" Version="4.4.4" />
+		<PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="4.4.3" />
+		<PackageReference Include="Volo.Abp.Account.Application" Version="4.4.3" />
 		</ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\modules\boat\src\BnBYachts.Boat.Application.Contracts\BnBYachts.Boat.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\..\..\modules\boat\src\BnBYachts.Boat.Application\BnBYachts.Boat.Application.csproj" />
     <ProjectReference Include="..\..\..\..\modules\boat\src\BnBYachts.Boat.EntityFrameworkCore\BnBYachts.Boat.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\core\src\BnBYachts.Core.Application\BnBYachts.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\core\src\BnBYachts.Core.Domain\BnBYachts.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\core\src\BnBYachts.Core.EntityFrameworkCore\BnBYachts.Core.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\..\..\modules\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
   </ItemGroup>
 
