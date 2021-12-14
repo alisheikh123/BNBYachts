@@ -24,7 +24,6 @@ export class MyProfileComponent implements OnInit {
     this.getUserInfo().subscribe(responseList => {
       this.userResponse = responseList[0];
       this.userBoats = responseList[1];
-      console.log(this.userResponse)
       this.loggedInUserRole = localStorage.getItem('userRole');
   });
   }

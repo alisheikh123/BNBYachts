@@ -46,15 +46,7 @@ namespace BnBYachts.Core.Services
         [Route("AddHostRole")]
         public async Task<bool> AddHostRole()
         {
-            try
-            {
-                return await _appUserManager.AddHostRole(CurrentUser.Id.ToString());
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            return await _appUserManager.AddHostRole(CurrentUser.Id.ToString());
         }
 
         [HttpPost]

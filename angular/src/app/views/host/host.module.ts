@@ -14,6 +14,7 @@ import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.comp
 import { TimePickerModule,DateRangePickerModule, CalendarModule  } from '@syncfusion/ej2-angular-calendars';
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 import { BoatLoationSettingsComponent } from './boat-loation-settings/boat-loation-settings.component';
+import { BoatEditComponent } from './boat-edit/boat-edit.component';
 
 
 
@@ -23,7 +24,8 @@ BoatelBookingsComponent,
 HostOnboardingComponent,
 AddDialogComponent,
 HostBoatListingComponent,
-BoatLoationSettingsComponent
+BoatLoationSettingsComponent,
+BoatEditComponent
   ],
   imports: [
     HostRoutingModule,

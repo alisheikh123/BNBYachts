@@ -19,20 +19,17 @@ using Volo.Abp.IdentityServer;
 using Volo.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 
+
 namespace BnByachts.SeedObservable
 {
     [DependsOn(
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
         typeof(AbpAutofacModule),
-
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
-
         typeof(CoreApplicationModule),
         typeof(CoreEntityFrameworkCoreModule)
-
-    //typeof(AbpAccountApplicationModule),
 
     )]
     public class SeederObservableModule : AbpModule
@@ -43,7 +40,7 @@ namespace BnByachts.SeedObservable
             context.Services.AddAssemblyOf<SeederObservableModule>();
 
             context.Services.AddAutoMapperObjectMapper<SeederObservableModule>();
-
+          
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<SeederObservableModule>();
@@ -99,11 +96,6 @@ namespace BnByachts.SeedObservable
                 {
                     e.Name = EventBusQueue.QEventSeeder;
                 });
-
-
-
-
-
             });
 
         }

@@ -69,7 +69,6 @@ export class UpdateProfileComponent implements OnInit {
     }
 
     submit() {
-      debugger
       this.hasError = false;
       var user = this.profileForm.value;
       this.authService.updateUserProfile(user).subscribe((result: any) => {
