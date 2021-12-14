@@ -5,11 +5,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { Guid } from 'guid-typescript';
 import { utils } from 'src/app/shared/utility/utils';
-
+import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
+import { ToastrService } from 'ngx-toastr';
+import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 
 @Component({
   selector: 'app-reservation-cancellation',
-  templateUrl: './reservation-cancellation.component.html'
+  templateUrl: './reservation-cancellation.component.html',
 })
 export class ReservationCancellationComponent implements OnInit {
   public bkCancel: any;
@@ -30,33 +32,44 @@ export class ReservationCancellationComponent implements OnInit {
   ReasonValue: string;
   currentDateHours: any;
   checkInTime: any;
-  currentTime: any
-  checkoutTime: any
+  currentTime: any;
+  checkoutTime: any;
   currentCombindDateTime: any;
   checkinCombindDateTime: any;
   checkoutCombindDateTime: any;
   totalHours: any;
   bookingStatus: any;
-  isHost:boolean;
-  constructor(private service: BookingService, private fb: FormBuilder, private modal: NgbModal, public activatedRoute: ActivatedRoute, private route: Router, private modalService: NgbModal) { }
+  isHost: boolean;
+  isPosted: boolean;
+  isChanged: boolean;
+
+  constructor(
+    private service: BookingService,
+    private fb: FormBuilder,
+    private modal: NgbModal,
+    public activatedRoute: ActivatedRoute,
+    private route: Router,
+    private modalService: NgbModal,
+    private toaster: ToastrService
+  ) {}
   @ViewChild('template') templateRef: TemplateRef<any>;
   @ViewChild('bookingstatus') bookingtemplate: TemplateRef<any>;
   @ViewChild('bookingcancelled') cancelledRef: TemplateRef<any>;
+  @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(res => {
+    this.activatedRoute.params.subscribe((res) => {
       this.bkCancel = res['id'].toString();
-
     });
     //Check if Host
     var userRole = localStorage.getItem('userRole');
-    (userRole == 'a8e857de-7ca6-f663-feb0-3a003661104b')? this.isHost = true: this.isHost = false;
+    userRole == 'a8e857de-7ca6-f663-feb0-3a003661104b'
+      ? (this.isHost = true)
+      : (this.isHost = false);
     //
     this.service.getBookingBoatDetail(this.bkCancel).subscribe((res: any) => {
       this.bookingCancelDetail = res;
 
       res.forEach((elem: any) => {
-
-
         this.currentDate = utils.formatDate(new Date());
 
         // From BookingDetail
@@ -71,14 +84,23 @@ export class ReservationCancellationComponent implements OnInit {
           this.checkoutTime = utils.formatTime(boatdetail.checkoutTime);
 
           // Concat current date with current Time
-          this.currentCombindDateTime = new Date(this.currentDate + ' ' + this.currentTime);
+          this.currentCombindDateTime = new Date(
+            this.currentDate + ' ' + this.currentTime
+          );
           // Concat checkin date with checkin Time
-          this.checkinCombindDateTime = new Date(this.checkInDate + ' ' + this.checkInTime);
+          this.checkinCombindDateTime = new Date(
+            this.checkInDate + ' ' + this.checkInTime
+          );
           // Concat checkout date with checkin Time
-          this.checkoutCombindDateTime = new Date(this.checkOutDate + ' ' + this.checkoutTime);
+          this.checkoutCombindDateTime = new Date(
+            this.checkOutDate + ' ' + this.checkoutTime
+          );
 
           // Calculate Remaing
-          this.remaingHours = Math.abs(this.checkinCombindDateTime - this.currentCombindDateTime) / 36e5;
+          this.remaingHours =
+            Math.abs(
+              this.checkinCombindDateTime - this.currentCombindDateTime
+            ) / 36e5;
 
           // Add in booking Detail
           elem.currentCombindDateTime = this.currentCombindDateTime;
@@ -86,19 +108,25 @@ export class ReservationCancellationComponent implements OnInit {
           elem.checkoutCombindDateTime = this.checkoutCombindDateTime;
           elem.remaingHours = this.remaingHours;
 
-
-          this.remainingDays = Math.ceil((this.checkinCombindDateTime - this.currentCombindDateTime) / 8.64e7);
-          this.totalDays = Math.ceil((this.checkoutCombindDateTime - this.checkinCombindDateTime) / 8.64e7);
+          this.remainingDays = Math.ceil(
+            (this.checkinCombindDateTime - this.currentCombindDateTime) / 8.64e7
+          );
+          this.totalDays = Math.ceil(
+            (this.checkoutCombindDateTime - this.checkinCombindDateTime) /
+              8.64e7
+          );
 
           // Add in booking Detail
           elem.remaingDays = this.remainingDays;
           elem.TotalDays = this.totalDays;
 
           if (elem.bookingStatus == 0) {
-
             // Refund 100%
             elem.deductedAmount = 0;
-            elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + (elem.boatDetail.taxFee);
+            elem.totalreservationFee =
+              elem.boatDetail.perDayCharges * elem.TotalDays +
+              20 +
+              elem.boatDetail.taxFee;
             elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
 
             // this.service.getRefundable(elem.id, elem.totalreservationFee).subscribe((res: any) => {
@@ -109,15 +137,14 @@ export class ReservationCancellationComponent implements OnInit {
             //     this.modal.open(this.bookingtemplate);
             //   }
             // });
-          }
-          else {
-
-
+          } else {
             if (this.remaingHours > 72) {
-
               // Refund 100%
               elem.deductedAmount = 0;
-              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + (elem.boatDetail.taxFee);
+              elem.totalreservationFee =
+                elem.boatDetail.perDayCharges * elem.TotalDays +
+                20 +
+                elem.boatDetail.taxFee;
               elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
 
               // this.service.getRefundable(elem.id, elem.totalreservationFee).subscribe((res: any) => {
@@ -128,15 +155,25 @@ export class ReservationCancellationComponent implements OnInit {
               //     this.modal.open(this.bookingtemplate);
               //   }
               // });
-
             }
-            if (this.remaingHours == 72 || (this.remaingHours < 72 && this.remaingHours >= 24)) {
-
+            if (
+              this.remaingHours == 72 ||
+              (this.remaingHours < 72 && this.remaingHours >= 24)
+            ) {
               // deducted 50%
-              elem.deductedAmount = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
-              elem.totalreservationFee = ((elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + (elem.boatDetail.taxFee)) * 50 / 100;
+              elem.deductedAmount =
+                ((elem.boatDetail.perDayCharges * elem.TotalDays +
+                  20 +
+                  elem.boatDetail.taxFee) *
+                  50) /
+                100;
+              elem.totalreservationFee =
+                ((elem.boatDetail.perDayCharges * elem.TotalDays +
+                  20 +
+                  elem.boatDetail.taxFee) *
+                  50) /
+                100;
               elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
-
 
               // this.service.getRefundable(elem.id, elem.totalreservationFee).subscribe((res: any) => {
               //   if (res == true) {
@@ -148,10 +185,13 @@ export class ReservationCancellationComponent implements OnInit {
               // });
             }
             if (this.remaingHours < 24) {
-
               // Deducted 1 Night Fee
-              elem.deductedAmount = (elem.boatDetail.perDayCharges * 1);
-              elem.totalreservationFee = (elem.boatDetail.perDayCharges * elem.TotalDays) + 20 + (elem.boatDetail.taxFee) - (elem.boatDetail.perDayCharges * this.remainingDays);
+              elem.deductedAmount = elem.boatDetail.perDayCharges * 1;
+              elem.totalreservationFee =
+                elem.boatDetail.perDayCharges * elem.TotalDays +
+                20 +
+                elem.boatDetail.taxFee -
+                elem.boatDetail.perDayCharges * this.remainingDays;
               elem.totalAmount = elem.deductedAmount + elem.totalreservationFee;
 
               // this.service.getRefundable(elem.id, elem.totalreservationFee).subscribe((res: any) => {
@@ -165,13 +205,11 @@ export class ReservationCancellationComponent implements OnInit {
             }
           }
         });
-
-
       });
-
     });
-  }
 
+    this.isReviewPosted();
+  }
   goBack() {
     this.modal.dismissAll();
     this.route.navigate(['/boat-listing/all-reservations']);
@@ -179,8 +217,6 @@ export class ReservationCancellationComponent implements OnInit {
   cancelpopup() {
     this.modal.dismissAll();
   }
-
-
 
   openModal(template: TemplateRef<any>, data: any) {
     this.bookingStatus = data.bookingStatus;
@@ -201,27 +237,61 @@ export class ReservationCancellationComponent implements OnInit {
       isNotificationSent: true,
       RefundAmount: this.refundAmount.toString(),
       TotalAmount: this.totalAmount.toString(),
-      BookingStatus: 3
+      BookingStatus: 3,
     };
-
-
-
-    this.service.saveCancellation(bookingCancellationModel).subscribe((res: any) => {
-
-      if (res == true) {
-        this.service.getRefundable(bookingCancellationModel.BookingId, bookingCancellationModel.RefundAmount).subscribe((res: any) => {
-          if (res == true) {
-            this.modal.dismissAll();
-            this.modal.open(this.cancelledRef);
-          }
-          else {
-            this.modal.open(this.bookingtemplate);
-          }
-        });        
-      }
-      else {
-      }
-    });
+    this.service
+      .saveCancellation(bookingCancellationModel)
+      .subscribe((res: any) => {
+        if (res == true) {
+          this.service
+            .getRefundable(
+              bookingCancellationModel.BookingId,
+              bookingCancellationModel.RefundAmount
+            )
+            .subscribe((res: any) => {
+              if (res == true) {
+                this.modal.dismissAll();
+                this.modal.open(this.cancelledRef);
+              } else {
+                this.modal.open(this.bookingtemplate);
+              }
+            });
+        } else {
+        }
+      });
   }
 
+  addReview(boatId: number) {
+    this.modal
+      .open(AddReviewModalComponent, {
+        windowClass: 'custom-modal custom-small-modal',
+        centered: true,
+      })
+      .componentInstance.onSave.subscribe((res: any) => {
+        let review = {
+          revieweeID: boatId,
+          bookingId: this.bkCancel,
+          reviewDescription: res.reviewText,
+          ratings: res.ratingStars,
+        };
+        this.service.addReview(review).subscribe((res) => {
+          if (res) {
+            this.modal.dismissAll();
+            this.toaster.success('Review Added Successfully', 'Review');
+            this.isPosted = true;
+            this.listReviewComponent.getReviews();
+          }
+        });
+      });
+  }
+  isReviewPosted() {
+    this.service.isReviewPosted(this.bkCancel).subscribe((res: any) => {
+      this.isPosted = res;
+    });
+  }
+  isBookingPassed(): boolean {
+    let parsedDate = Date.parse(this.checkOutDate);
+    let today = Date.parse(new Date().toISOString().slice(0, 10));
+    return (today > parsedDate) ? true : false;
+  }
 }

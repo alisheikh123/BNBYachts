@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Boat\Transferables\" />
     <Folder Include="Interface\" />
   </ItemGroup>
 

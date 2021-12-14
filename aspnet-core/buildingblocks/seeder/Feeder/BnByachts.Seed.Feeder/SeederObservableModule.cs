@@ -25,7 +25,6 @@ namespace BnByachts.SeedObservable
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
         typeof(AbpAutofacModule),
-
         typeof(BoatApplicationModule),
         typeof(BoatEntityFrameworkCoreModule),
 

@@ -90,22 +90,38 @@
                         </div>
                         <div class="custom-margin" *ngIf="!isHost">
                             <h5 class="bold mb-1">Cancellation Policy</h5>
-                            <p class="small-text">Short description about the host Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud. <a href="disclaimer.html"
-                                    class="custom-btn underline-blue-link no-before-content p-0">Read more</a></p>
+                            <p class="small-text text-left">Deduction on payments after cancellation will be as follows
+                            </p>
+                            <ul class="custom-ul">
+                                <li>
+                                    <p>If reservation is being cancelled before 3 days of check-in time, 100% will refund. </p>
+                                </li>
+                                <li>
+                                    <p>If reservation is being cancelled 72 -24 hours before then 50% of one night charge will be deducted.</p>
+                                </li>
+                                <li>
+                                    <p>If less than 24 hours: one night charge will be deducted and rest amount is refunded.</p>
+                                </li>
+                                <li>
+                                    <p>Payment processing fees is not refundable in any case.</p>
+                                </li>
+    
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 custom-margin text-center mobile-padding-btns">
                 <div class="center-content">
-                    <a class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">I changed my
-                        mind</a>&nbsp;&nbsp;
+                    <button class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">I changed my
+                        mind</button>&nbsp;&nbsp;
                     <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(template,b)">Confirm Cancellation</a>
                     <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,b)">Confirm Cancellation</a>
+                    <a (click)="addReview(b?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">Add
+                        Review</a>
                 </div>
             </div>
+            <app-list-reviews [bookingId]=bkCancel></app-list-reviews>
         </div>
     </div>
     <!--Cancelation Policy Modal -->
@@ -119,30 +135,30 @@
                 <div class="custom-text-center">
                     <h4 class="bold text-center">Cancellation Policy</h4>
                     <div class="py-2">
-                        <p class="small-text text-left">Short description about the host Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna.Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                        <p class="small-text text-left">Deduction on payments after cancellation will be as follows
+                        </p>
                         <ul class="custom-ul">
                             <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit
-                                    eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed
-                                    nulla. Nullam volutpat vitae</p>
+                                <p>If reservation is being cancelled before 3 days of check-in time, 100% will refund. </p>
                             </li>
                             <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit
-                                    eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed
-                                    nulla. Nullam volutpat vitae</p>
+                                <p>If reservation is being cancelled 72 -24 hours before then 50% of one night charge will be deducted.</p>
+                            </li>
+                            <li>
+                                <p>If less than 24 hours: one night charge will be deducted and rest amount is refunded.</p>
+                            </li>
+                            <li>
+                                <p>Payment processing fees is not refundable in any case.</p>
                             </li>
 
                         </ul>
                         <p><strong>Are you sure you want cancel the booking ?</strong></p>
                     </div>
                     <div class="py-4 text-center">
-                        <a (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
+                        <button (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
                             data-bs-dismiss="modal" data-bs-toggle="modal"
-                            data-bs-target="#cancellation-confirmed">Cancel</a>&nbsp;
-                        <a class="custom-btn blue big-btn" (click)="confirmCancel()">Confirm</a>
+                            data-bs-target="#cancellation-confirmed">Cancel</button>&nbsp;
+                        <button class="custom-btn blue big-btn" (click)="confirmCancel()">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -163,7 +179,7 @@
                         <a (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
                             data-bs-dismiss="modal" data-bs-toggle="modal"
                             data-bs-target="#cancellation-confirmed">Cancel</a>&nbsp;
-                        <a class="custom-btn blue big-btn" style="cursor: pointer;" (click)="confirmCancel()">Confirm</a>
+                        <button class="custom-btn blue big-btn" style="cursor: pointer;" (click)="confirmCancel()">Confirm</button>
                     </div>
                 </div>
             </div>
