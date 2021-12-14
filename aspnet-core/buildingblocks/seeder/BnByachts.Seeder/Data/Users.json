@@ -4,7 +4,7 @@
     "UserName": "ali123",
     "Name": "Ali Raza",
     "Email": "ali@techverx.com",
-    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "PasswordHash": "1q2w3E*",
     "DOB": "2021-11-09T00:00:00",
     "RoleName": ["USER","HOST"]
   },
@@ -13,9 +13,9 @@
     "UserName": "umer123",
     "Name": "Umer Daraz",
     "Email": "umar@techverx.com",
-    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "PasswordHash": "1q2w3E",
     "DOB": "2021-11-09T00:00:00",
-    "RoleName": ["USER", "HOST"]
+    "RoleName": [ "USER", "HOST" ]
   },
 
   {
@@ -23,7 +23,7 @@
     "UserName": "hanan123",
     "Name": "Hanan Gondal",
     "Email": "hanan@techverx.com",
-    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "PasswordHash": "1q2w3E",
     "DOB": "2021-11-09T00:00:00",
     "RoleName": [ "ADMIN", "HOST" ]
   },
@@ -32,7 +32,7 @@
     "UserName": "farhan123",
     "Name": "Farhan",
     "Email": "farhan@techverx.com",
-    "PasswordHash": "$2a$07$VfvNskJYdJK2.OzKxlu3Hu9d52xr5w.lxlurUe2Uo27BJ2yHnTSkq",
+    "PasswordHash": "1q2w3E",
     "DOB": "2021-11-09T00:00:00",
     "RoleName": [ "USER" ]
   }
