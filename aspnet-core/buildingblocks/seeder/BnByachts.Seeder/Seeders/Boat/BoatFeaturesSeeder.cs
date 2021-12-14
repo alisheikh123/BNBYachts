@@ -13,10 +13,6 @@ namespace BnByachts.Seeder
 {
     public class BoatFeaturesSeederService : BaseSeeder,ITransientDependency
     {
-        public BoatFeaturesSeederService(EventBusDispatcher eventBusDispatcher) : base(eventBusDispatcher)
-        {
-        }
-
         public async Task MigrateAsync()
         {
             await SeedBoatsFeature().ConfigureAwait(false);
@@ -29,7 +25,7 @@ namespace BnByachts.Seeder
         {
             async void Action(HostBoatFeaturesContract hostBoatFeature)
             {
-                await _eventBusDispatcher.Publish<IHostBoatFeaturesContract>(hostBoatFeature, cancellationToken);
+                await EventBusDispatcher.Publish<IHostBoatFeaturesContract>(hostBoatFeature, cancellationToken);
             }
 
             JsonConvert.DeserializeObject<List<HostBoatFeaturesContract>>(await File.ReadAllTextAsync($"{GetFullPath}BoatsFeatures.json", cancellationToken))
