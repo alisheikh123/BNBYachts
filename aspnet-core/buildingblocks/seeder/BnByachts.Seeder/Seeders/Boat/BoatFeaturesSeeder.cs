@@ -13,9 +13,7 @@ namespace BnByachts.Seeder
     public class BoatFeaturesSeederService : ITransientDependency
     {
         private readonly EventBusDispatcher _eventBusDispatcher;
-
          private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
-
         public BoatFeaturesSeederService(EventBusDispatcher eventBusDispatcher)
         {
             _eventBusDispatcher = eventBusDispatcher;
@@ -25,10 +23,6 @@ namespace BnByachts.Seeder
         {
             await SeedBoatsFeature().ConfigureAwait(false);
         }
-
-
-
-        #region Seeder Boat feature
         public async Task SeedBoatsFeature(CancellationToken cancellationToken = default)
         {
             async void Action(HostBoatFeaturesContract hostBoatFeature)
@@ -39,7 +33,7 @@ namespace BnByachts.Seeder
             JsonConvert.DeserializeObject<List<HostBoatFeaturesContract>>(await File.ReadAllTextAsync($"{GetFullPath}BoatsFeatures.json", cancellationToken))
                 ?.ForEach(Action);
         }
-        #endregion
+        
 
 
     }

@@ -27,10 +27,6 @@ namespace BnByachts.Seeder
         {
             await SeedRules().ConfigureAwait(false);
         }
-
-
-
-        #region Seeder Rules
         public async Task SeedRules(CancellationToken cancellationToken = default)
         {
             async void Action(RuleContract rules)
@@ -44,8 +40,6 @@ namespace BnByachts.Seeder
 
             await _boatrulesSeeder.MigrateAsync();
         }
-
-        #endregion
 
 
 

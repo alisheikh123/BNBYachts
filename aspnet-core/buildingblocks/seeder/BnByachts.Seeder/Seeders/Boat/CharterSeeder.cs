@@ -27,10 +27,6 @@ namespace BnByachts.Seeder
         {
             await SeedCharter().ConfigureAwait(false);
         }
-
-
-
-        #region Seeder Charters
         public async Task SeedCharter(CancellationToken cancellationToken = default)
         {
             async void Action(ChartersContract chaters)
@@ -44,7 +40,7 @@ namespace BnByachts.Seeder
 
             await _eventSeederService.MigrateAsync();
         }
-        #endregion
+     
 
 
 

@@ -14,8 +14,6 @@ namespace BnByachts.Seeder
     {
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly CharterSeederService _charterSeederService;
-
-      
         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
         public BoatGallerySeederService(EventBusDispatcher eventBusDispatcher, CharterSeederService charterSeederService)
         {
@@ -27,9 +25,6 @@ namespace BnByachts.Seeder
         {
             await SeedBoatsGallery().ConfigureAwait(false);
         }
-
-
-        #region Seed Boat Gallery
         public async Task SeedBoatsGallery(CancellationToken cancellationToken = default)
         {
             async void Action(HostBoatGalleryContract hostBoatGallery)
@@ -44,7 +39,6 @@ namespace BnByachts.Seeder
 
             await _charterSeederService.MigrateAsync();
         }
-        #endregion
 
 
 

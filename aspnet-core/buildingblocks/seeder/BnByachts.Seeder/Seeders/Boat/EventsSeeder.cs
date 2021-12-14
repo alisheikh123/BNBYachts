@@ -24,10 +24,6 @@ namespace BnByachts.Seeder
         {
             await SeedEvents().ConfigureAwait(false);
         }
-
-
-
-        #region Seeder Events
         public async Task SeedEvents(CancellationToken cancellationToken = default)
         {
             async void Action(EventsContract events)
@@ -38,7 +34,6 @@ namespace BnByachts.Seeder
             JsonConvert.DeserializeObject<List<EventsContract>>(await File.ReadAllTextAsync($"{GetFullPath}Event.json", cancellationToken))
                 ?.ForEach(Action);
         }
-        #endregion
 
 
 

@@ -28,8 +28,6 @@ namespace BnByachts.Seeder
             await SeedFeatures().ConfigureAwait(false);
         }
 
-
-        #region Seeder Feature
         public async Task SeedFeatures(CancellationToken cancellationToken = default)
         {
             async void Action(FeatureContract feature)
@@ -44,7 +42,6 @@ namespace BnByachts.Seeder
 
            await _boatFeaturesSeederService.MigrateAsync();
         }
-        #endregion
 
 
 

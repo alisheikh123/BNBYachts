@@ -13,8 +13,6 @@ namespace BnByachts.Seeder
     public class RolesSeederService : ITransientDependency
     {
         private readonly EventBusDispatcher _eventBusDispatcher;
-
-        //private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
         public RolesSeederService(EventBusDispatcher eventBusDispatcher)
         {
@@ -25,10 +23,6 @@ namespace BnByachts.Seeder
         {
             await SeedRoles().ConfigureAwait(false);
         }
-
-
-
-        #region Roles Seeders
         public async Task SeedRoles(CancellationToken cancellationToken = default)
         {
             async void Action(RolesContract role)
@@ -39,7 +33,6 @@ namespace BnByachts.Seeder
             JsonConvert.DeserializeObject<List<RolesContract>>(await File.ReadAllTextAsync($"{GetFullPath}Roles.json", cancellationToken))
                 ?.ForEach(Action);
         }
-        #endregion
 
 
 

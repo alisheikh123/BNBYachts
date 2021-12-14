@@ -13,8 +13,6 @@ namespace BnByachts.Seeder
     public class UserSeederService : ITransientDependency
     {
         private readonly EventBusDispatcher _eventBusDispatcher;
-
-        //private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
         private static string GetFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data/");
 
 
@@ -28,9 +26,6 @@ namespace BnByachts.Seeder
         {
             await SeedUsers().ConfigureAwait(false);
         }
-
-
-        #region User seeders
         public async Task SeedUsers(CancellationToken cancellationToken = default)
         {
             async void Action(UserContract user)
@@ -41,7 +36,6 @@ namespace BnByachts.Seeder
             JsonConvert.DeserializeObject<List<UserContract>>(await File.ReadAllTextAsync($"{GetFullPath}Users.json", cancellationToken))
                 ?.ForEach(Action);
         }
-        #endregion
 
 
 

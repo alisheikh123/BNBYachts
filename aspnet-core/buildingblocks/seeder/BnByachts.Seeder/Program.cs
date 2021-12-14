@@ -36,14 +36,6 @@ namespace BnByachts.Simulator
 
                 serviceScope.ServiceProvider.GetService<RulesSeederService>()?.MigrateAsync().GetAwaiter();
 
-                //serviceScope.ServiceProvider.GetService<BoatGallerySeederService>()?.MigrateAsync().GetAwaiter();
-                //serviceScope.ServiceProvider.GetService<BoatCalendarSeederService>()?.MigrateAsync().GetAwaiter();
-                //serviceScope.ServiceProvider.GetService<BoatRulesSeederService>()?.MigrateAsync().GetAwaiter();
-                //  serviceScope.ServiceProvider.GetService<BoatFeaturesSeederService>()?.MigrateAsync().GetAwaiter();
-                //serviceScope.ServiceProvider.GetService<CharterSeederService>()?.MigrateAsync().GetAwaiter();
-                //serviceScope.ServiceProvider.GetService<EventSeederService>()?.MigrateAsync().GetAwaiter();
-
-
             }
             Console.WriteLine("Seeder is active");
             Console.WriteLine("Ctrl + C to Quit");
