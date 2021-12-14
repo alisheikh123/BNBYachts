@@ -1,0 +1,9 @@
+{
+  "CancellationPolicy":"Cancellation Policy",
+  "CancellationDeductionOnPayments":"Deduction on payments after cancellation will be as follows",
+  "CancellationDeductionPolicy1":"If reservation is being cancelled before 3 days of check-in time, 100% will refund.",
+  "CancellationDeductionPolicy2":"If reservation is being cancelled 72 -24 hours before then 50% of one night charge will be deducted.",
+  "CancellationDeductionPolicy3":"If less than 24 hours: one night charge will be deducted and rest amount is refunded.",
+  "CancellationDeductionPolicy4":"Payment processing fees is not refundable in any case.",
+  "ConfirmCancelation":"Are you sure you want cancel the booking ?"
+}
