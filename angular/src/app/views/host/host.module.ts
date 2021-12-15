@@ -16,6 +16,7 @@ import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.
 import { BoatLoationSettingsComponent } from './boat-loation-settings/boat-loation-settings.component';
 import { BoatEditComponent } from './boat-edit/boat-edit.component';
 import { EventCreationComponent } from './event-creation/event-creation.component';
+import { EventCreationSuccessModalComponent } from './event-creation/event-creation-success-modal/event-creation-success-modal.component';
 
 
 
@@ -27,7 +28,8 @@ AddDialogComponent,
 HostBoatListingComponent,
 BoatLoationSettingsComponent,
 BoatEditComponent,
-EventCreationComponent, 
+EventCreationComponent,
+EventCreationSuccessModalComponent, 
   ],
   imports: [
     HostRoutingModule,

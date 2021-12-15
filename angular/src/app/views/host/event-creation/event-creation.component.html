@@ -4,8 +4,8 @@
             style="background-image: url('../../../../assets/images/charter-bg.png');">
             <div class="custom-flex-start white-text h-100">
                 <div class="container">
-                    <h3 class="bold">Event Creation</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h3 class="bold">{{'EventCreation' | localization}}</h3>
+                    <p>{{'EventCreationDescription' | localization}}</p>
                 </div>
             </div>
         </div>
@@ -19,15 +19,15 @@
                         <button class="underline-link-blk active" id="v-pills-home-tab" data-bs-toggle="pill"
                             (click)="currentTab = 1" data-bs-target="#v-pills-home" type="button" role="tab"
                             aria-controls="v-pills-home" aria-selected="true"><span
-                                [ngClass]="{'active': currentTab == 1}">1</span>Event Description</button>
+                                [ngClass]="{'active': currentTab == 1}">1</span>{{'EventDescription' | localization}}</button>
                         <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
                             (click)="currentTab =2" data-bs-target="#v-pills-profile" type="button" role="tab"
                             aria-controls="v-pills-profile" aria-selected="false"><span
-                                [ngClass]="{'active': currentTab == 2}">2</span>Scheduling & Payment</button>
+                                [ngClass]="{'active': currentTab == 2}">2</span>{{'SchedulingPayment' | localization}}</button>
                         <button class="underline-link-blk" id="v-pills-settings-tab" data-bs-toggle="pill"
                             (click)="currentTab = 3" data-bs-target="#v-pills-settings" type="button" role="tab"
                             aria-controls="v-pills-settings" aria-selected="false"><span
-                                [ngClass]="{'active': currentTab == 3}">3</span>Event Rules</button>
+                                [ngClass]="{'active': currentTab == 3}">3</span>{{'EventRules' | localization}}</button>
                     </div>
                     <form [formGroup]="eventCreationForm">
                         <div class="tab-content" id="v-pills-tabContent">
@@ -36,24 +36,24 @@
                                 <div class="row">
                                     <div class="col-md-6 py-2">
                                         <div class="custom-select-field">
-                                            <label>Boat Listing</label>
+                                            <label>{{'BoatListing' | localization}}</label>
                                             <select name="select" id="select" formControlName="boatId"
                                             (change)="getBoatBookedDates()"
                                                 [ngClass]="{  'is-invalid':submitted && form.boatId.errors }"
                                                 *ngFor="let item of boats">
-                                                <option [ngValue]="null">Select the boat</option>
+                                                <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
                                                 <option [ngValue]="item.id">{{item?.name}}</option>
                                             </select>
                                             <small class="text-danger"
                                                 *ngIf="((form.boatId.dirty && form.boatId.touched || submitted) && form.boatId.hasError('required'))">
-                                                Boat is required.
+                                                {{'vBoatIsRequired'|localization}}
                                             </small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="">
                                             <div class="custom-input-field">
-                                                <label>Event Location</label>
+                                                <label>{{'EventLocation'|localization}}</label>
                                                 <input class="custom-input" placeholder="Enter Boat Address"
                                                     [ngClass]="{  'is-invalid':submitted && form.location.errors }"
                                                     formControlName="location" ngx-google-places-autocomplete
@@ -61,62 +61,62 @@
                                             </div>
                                             <small class="text-danger"
                                                 *ngIf="((form.location.touched || submitted) && form.location.hasError('required'))">
-                                                Address is required.
+                                                {{'vAddressRequired' | localization}}
                                             </small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="">
                                             <div class="custom-input-field">
-                                                <label>Event Title</label>
+                                                <label>{{'EventTitle'|localization}}</label>
                                                 <input type="text" class="custom-input" placeholder="Enter Title"
                                                     [ngClass]="{  'is-invalid':submitted && form.title.errors }"
                                                     formControlName="title">
                                                 <small class="text-danger"
                                                     *ngIf="((form.title.touched || submitted) && form.title.hasError('required'))">
-                                                    Title is required.
+                                                    {{'vTitleRequired' | localization}}
                                                 </small>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Event Description</label>
+                                            <label>{{'EventDescription' | localization}}</label>
                                             <textarea class="custom-input" id="exampleFormControlTextarea1"
                                                 [ngClass]="{  'is-invalid':submitted && form.description.errors }"
                                                 formControlName="description"
-                                                rows="2">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</textarea>
+                                                rows="2"></textarea>
                                         </div>
                                         <small class="text-danger"
                                             *ngIf="((form.description.touched || submitted) && form.description.hasError('required'))">
-                                            Title is required.
+                                            {{'vDescriptionRequired' | localization}}
                                         </small>
                                     </div>
                                     <div class="col-sm-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Event Type</label>
+                                            <label>{{'EventType' | localization}}</label>
                                             <div class="custom-flex">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
                                                         formControlName="eventType" name="eventType" [value]="1"
                                                         id="flexRadioDefault1">
-                                                    Adult
+                                                    {{'Adult' | localization}}
                                                 </div>
                                                 <div class="form-check ms-5">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
                                                         formControlName="eventType" name="eventType" value="2"
                                                         id="flexRadioDefault1">
-                                                    Family
+                                                    {{'Family' | localization}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="counter-input-wrapper">
-                                            <label>Guest Capacity</label>
+                                            <label>{{'GuestCapacity' | localization}}</label>
                                             <div class="number">
                                                 <div class="custom-flex-start">
-                                                    <label>Guests</label>
+                                                    <label>{{'Guests' | localization}}</label>
                                                     <div class="custom-flex-start">
                                                         <span class="minus" (click)="removeGuests()">-</span>
                                                         <input type="text" formControlName="guestCapacity" />
@@ -124,7 +124,7 @@
                                                     </div>
                                                     <small class="text-danger"
                                                         *ngIf="((form.guestCapacity.touched || submitted) && form.guestCapacity.hasError('required'))">
-                                                        Guest is required.
+                                                        {{'vGuestRequired' | localization}}
                                                     </small>
                                                 </div>
 
@@ -156,7 +156,7 @@
                                             </div>
                                             <small class="text-danger"
                                                 *ngIf="((form.startDateTime.touched || submitted) && form.startDateTime.hasError('required'))">
-                                                Start date is required.
+                                               {{'vStartDateRequired' | localization}}
                                             </small>
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@
                                                 </ejs-datetimepicker>
                                                 <small class="text-danger"
                                                     *ngIf="((form.endDateTime.touched || submitted) && form.endDateTime.hasError('required'))">
-                                                    End date is required.
+                                                    {{'vEndDateRequired' | localization}}
                                                 </small>
                                             </div>
                                         </div>
@@ -182,7 +182,7 @@
                                                     formControlName="amountPerPerson">
                                                 <small class="text-danger"
                                                     *ngIf="((form.amountPerPerson.touched || submitted) && form.amountPerPerson.hasError('required'))">
-                                                    Amount is required.
+                                                    {{'vAmountREquired' | localization}}
                                                 </small>
                                             </div>
                                         </div>
@@ -201,34 +201,12 @@
                             <div class="tab-pane" [ngClass]="{'active': currentTab == 3}" id="v-pills-settings"
                                 role="tabpanel" *ngIf="currentTab == 3" aria-labelledby="v-pills-settings-tab">
                                 <div class="charter-rules-wrap">
-                                    <h5 class="bold">Event Rules</h5>
-                                    <p class="small-text grey py-2">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit.
-                                        Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus
-                                        consequat ultrices nec sed nulla. Nullam volutpat vitae lectus sed pretium.
-                                        Integer
-                                        rutrum libero eget risus aliquam, ut imperdiet velit scelerisque. Donec commodo
-                                        mi
-                                        odio, sed accumsan justo aliquam quis. In tincidunt sollicitudin felis, et
-                                        faucibus
-                                        mauris posuere non. Quisque elementum sit amet enim viverra iaculis. Fusce nec
-                                        urna
-                                        non elit posuere commodo at quis lorem. Duis ac quam tincidunt, aliquam turpis
-                                        vel,
-                                        laoreet purus. Aliquam at ante sit amet sem bibendum scelerisque sit amet a
-                                        lacus.
-                                        Praesent non posuere nisi. Orci varius natoque penatibus et magnis dis
-                                        parturient
-                                        montes, nascetur ridiculus mus. Ut suscipit sollicitudin velit, sed porttitor
-                                        turpis
-                                        efficitur eu. Cras augue turpis, tempor in imperdiet in, venenatis sodales
-                                        turpis.
-                                        Curabitur lobortis maximus scelerisque. Nam non justo luctus, scelerisque dolor
-                                        pulvinar, aliquam mauris.</p>
+                                    <h5 class="bold">{{'EventRules' | localization}}</h5>
+                                    <p class="small-text grey py-2">{{'EventRulesDescription' | localization}}</p>
                                     <label class="custom-checkbox my-2">
                                         <input type="checkbox" [(ngModel)]="isAgree"
                                             [ngModelOptions]="{standalone: true}">
-                                        <p class="small-text">I Agree to the terms and conditions </p>
+                                        <p class="small-text">{{'AgreeToTerms' | localization}} </p>
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="custom-flex-end py-5">

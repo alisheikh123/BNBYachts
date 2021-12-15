@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { EventService } from 'src/app/core/Event/event.service';
 import { EventTypes } from 'src/app/shared/enums/yacht-search.constant';
+import { EventCreationSuccessModalComponent } from './event-creation-success-modal/event-creation-success-modal.component';
 
 @Component({
   selector: 'app-event-creation',
@@ -76,7 +77,8 @@ export class EventCreationComponent implements OnInit {
       let data = this.eventCreationForm.value;
       this.eventService.saveEvent(data).subscribe(res => {
         if (res) {
-          this.modal.open(this.templateRef, { centered: true, windowClass: 'custom-modal custom-small-modal' });
+          let modal = this.modal.open(EventCreationSuccessModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
+          modal.componentInstance.data = this.eventCreationForm.value;
         }
       })
     }
