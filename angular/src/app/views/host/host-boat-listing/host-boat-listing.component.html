@@ -1,34 +1,36 @@
 <div class="container">
-  <div class="row">
-    <div class="col-12">
-            <button (click)="activeTab = 0" class="underline-link-blk" [ngClass]="{'active':activeTab == 0 }">
-                <span>
-                    All
-                </span>
-            </button>
-            <button (click)="activeTab = 1" class="underline-link-blk" [ngClass]="{'active':activeTab == 1 }">
-                <span>
-                    Boatel
-                </span>
-            </button>
-            <button (click)="activeTab = 2" class="underline-link-blk" [ngClass]="{'active':activeTab == 2}">
-                <span>
-                    Charters
-                </span>
-            </button>
-            <button (click)="activeTab = 3" class="underline-link-blk" [ngClass]="{'active':activeTab == 3}">
-                <span>
-                    Events
-                </span>
-            </button>
+    <div class="listing-main-wrapper section-padding">
+        <div class="custom-flex-between mb-3">
+            <h2 class="bold">My Boats</h2>
+            <a [routerLink]="['/host/onboarding']" class="custom-btn grey">Add New</a>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button (click)="activeTab = 0" class="underline-link-blk px-4"
+                    [ngClass]="{'active':activeTab == 0,'text-primary':activeTab == 0 }">
+                    <span>
+                        All
+                    </span>
+                </button>
+                <button (click)="activeTab = 1" class="underline-link-blk px-4" [ngClass]="{'active':activeTab == 1 }">
+                    <span>
+                        Boatel
+                    </span>
+                </button>
+                <button (click)="activeTab = 2" class="underline-link-blk px-4" [ngClass]="{'active':activeTab == 2}">
+                    <span>
+                        Charters
+                    </span>
+                </button>
+                <button (click)="activeTab = 3" class="underline-link-blk px-4" [ngClass]="{'active':activeTab == 3}">
+                    <span>
+                        Events
+                    </span>
+                </button>
+            </div>
+        </div>
+        <app-boat-listing *ngIf="activeTab == 0" [showAllBoats]="true"></app-boat-listing>
+        <app-boat-listing *ngIf="activeTab == 1" [showAllBoats]="false"></app-boat-listing>
+        <app-all-charters-listing *ngIf="activeTab == 2"></app-all-charters-listing>
+        <app-all-events-listing *ngIf="activeTab == 3"></app-all-events-listing>
     </div>
-  </div>
-  <div class="listing-main-wrapper section-padding">
-    <div class="custom-flex-between mb-3">
-      <h2 class="bold">Listing</h2>
-      <a [routerLink]="['/host/onboarding']" class="custom-btn grey">Add New</a>
-    </div>
-    <app-boat-listing *ngIf="activeTab == 0 || activeTab == 1" [showAllBoats]="activeTab == 0 ? true:false"></app-boat-listing>
-    <app-charter-listing *ngIf="activeTab == 2"></app-charter-listing>
-    <app-event-listing *ngIf="activeTab == 3"></app-event-listing>
-  </div>

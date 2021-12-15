@@ -12,5 +12,7 @@ namespace BnBYachts.Boat.Interfaces.Boat
         Task<ICollection<BoatLookupTransferable>> GetBoats();
         Task<bool> SaveEvent(EventRequestable boatEvent);
         Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId);
+
+        Task<ICollection<EventDTO>> GetEvents();
     }
 }

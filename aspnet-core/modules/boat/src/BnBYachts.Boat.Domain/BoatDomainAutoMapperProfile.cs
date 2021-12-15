@@ -40,7 +40,7 @@ namespace BnBYachts.Boat
             CreateMap<BoatFeatureEntity, BoatFeatureDTO>();
             CreateMap<BoatRuleEntity, BoatRuleDTO>();
             CreateMap<BoatLocationEntity, BoatFeatureDTO>();
-
+            CreateMap<EventEntity, EventDTO>();
 
         }
     }

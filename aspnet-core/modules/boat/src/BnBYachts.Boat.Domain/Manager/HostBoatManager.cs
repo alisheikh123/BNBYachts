@@ -352,15 +352,6 @@ namespace BnBYachts.Boat.Manager
             }
             return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatDTO>>(boats);
         }
-        public async Task<ICollection<EventEntity>> GetEvents(Guid? userId)
-        {
-            var events = await _eventRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
-            foreach(var evnt in events)
-            {
-                await _eventRepository.EnsurePropertyLoadedAsync(evnt, res => res.Boat);
-            }
-            return events;            
-        }
 
         #region Features
         public async Task<ICollection<FeatureEntity>> GetDefaultFeatures()
