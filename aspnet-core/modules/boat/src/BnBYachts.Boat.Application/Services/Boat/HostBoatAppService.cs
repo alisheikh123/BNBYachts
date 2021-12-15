@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
-using BnBYachts.Boat.Helpers;
+using BnBYachts.Boat.Boat.Transferables;
 
 namespace BnBYachts.Services.Boat
 {
@@ -93,9 +93,7 @@ namespace BnBYachts.Services.Boat
         }
         #endregion
 
-        [Route("host-boat-details")]
-        [HttpGet]
-        public async Task<ICollection<BoatEntity>> GetHostBoatDetails()
+        public async Task<ICollection<BoatDTO>> GetHostBoats()
         {
             return await _hostBoatManager.GetHostBoats(CurrentUser.Id).ConfigureAwait(false);
         }

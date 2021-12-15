@@ -15,6 +15,9 @@ import { TimePickerModule,DateRangePickerModule, CalendarModule  } from '@syncfu
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 import { BoatLoationSettingsComponent } from './boat-loation-settings/boat-loation-settings.component';
 import { BoatEditComponent } from './boat-edit/boat-edit.component';
+import { BoatListingComponent } from './host-boat-listing/boat-listing/boat-listing.component';
+import { CharterListingComponent } from './host-boat-listing/charter-listing/charter-listing.component';
+import { EventListingComponent } from './host-boat-listing/event-listing/event-listing.component';
 
 
 
@@ -25,7 +28,10 @@ HostOnboardingComponent,
 AddDialogComponent,
 HostBoatListingComponent,
 BoatLoationSettingsComponent,
-BoatEditComponent
+BoatEditComponent,
+BoatListingComponent,
+CharterListingComponent,
+EventListingComponent
   ],
   imports: [
     HostRoutingModule,

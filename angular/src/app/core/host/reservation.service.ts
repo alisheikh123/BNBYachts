@@ -26,7 +26,7 @@ export class ReservationService {
       catchError(this.handleError));
   }
   getHostBoats() {
-    return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
+    return this.http.get(this.boatApiUrl + '/api/app/host-boat/host-boats').pipe(catchError(this.handleError));
   }
 
   updateBoatLocation(boatLocation: any) {
