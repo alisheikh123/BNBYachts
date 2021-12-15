@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
@@ -19,6 +21,9 @@ namespace BnBYachts.Boat
             CreateMap<ChartersMapperRequestable, CharterEntity>();
             CreateMap<EventsMapperRequestable, EventEntity>();
             
+            CreateMap<BoatEntity, BoatLookupTransferable>();
+            CreateMap<EventRequestable, EventEntity>();
+            CreateMap<EventEntity, EventRequestable>();
             CreateMap<HostBoatRequestable, BoatEntity>()
                 .ForMember(x => x.BoatGalleries,
                     opt =>
