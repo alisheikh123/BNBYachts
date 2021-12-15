@@ -51,5 +51,16 @@ namespace BnBYachts.Boat.Manager
             }
             return boatBookedDates;
         }
+
+        public async Task<ICollection<EventDTO>> GetEvents(Guid? userId)
+        {
+            var events = await _eventRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
+            foreach (var evnt in events)
+            {
+                await _eventRepository.EnsurePropertyLoadedAsync(evnt, res => res.Boat).ConfigureAwait(false);
+                await _boatRepository.EnsureCollectionLoadedAsync(evnt.Boat, res => res.BoatGalleries).ConfigureAwait(false);
+            }
+            return _objectMapper.Map<ICollection<EventEntity>,ICollection<EventDTO>>(events);
+        }
     }
 }

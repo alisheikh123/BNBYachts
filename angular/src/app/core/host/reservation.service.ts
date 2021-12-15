@@ -25,17 +25,10 @@ export class ReservationService {
     return this.http.get(this.bookingApiUrl + '/get-my-approve-reservations').pipe(
       catchError(this.handleError));
   }
-  getHostBoats() {
-    return this.http.get(this.boatApiUrl + '/host-boat-details').pipe(catchError(this.handleError));
-  }
 
   updateBoatLocation(boatLocation: any) {
     return this.http.post(this.boatApiUrl + '/update-location', boatLocation).pipe(
       catchError(this.handleError));
-  }
-  
-  updateBoatStatus(boatId: number) {
-    return this.http.get(this.boatApiUrl + '/host-boat-status/' + boatId).pipe(catchError(this.handleError));
   }
 
   ///Exception handler

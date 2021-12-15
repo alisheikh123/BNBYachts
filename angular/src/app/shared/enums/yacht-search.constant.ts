@@ -5,12 +5,21 @@ export enum ServiceTypes {
 };
 
 export enum BoatTypes {
-  PowerBoat = "Power Boat",
+  PowerBoat = "Power Boat" ,
   Pontoon = "Pontoon",
   FishingBoat = "Fishing Boat",
   SailBoat = "Sail Boat",
   Yacht = "Yacht",
   HouseBoat = "House Boat"
+}
+
+export enum BoatTypesId {
+  PowerBoat = 0,
+  Pontoon = 1,
+  FishingBoat = 2,
+  SailBoat = 3,
+  Yacht = 4,
+  HouseBoat = 5
 }
 
 

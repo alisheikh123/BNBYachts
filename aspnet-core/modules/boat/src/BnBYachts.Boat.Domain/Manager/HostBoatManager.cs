@@ -13,6 +13,7 @@ using BnBYachts.Boat.Helpers;
 using BnBYachts.Boat.Shared.Helper;
 using BnBYachts.Events;
 using Volo.Abp.ObjectMapping;
+using BnBYachts.Boat.Boat.Transferables;
 
 namespace BnBYachts.Boat.Manager
 {
@@ -100,9 +101,9 @@ namespace BnBYachts.Boat.Manager
         }
         public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar, Guid? userId)
         {
-                boatCalendar.LastModifierId = boatCalendar.CreatorId = userId;
-                await _boatelCalendarRepo.InsertAsync(boatCalendar).ConfigureAwait(false);
-                return true;
+            boatCalendar.LastModifierId = boatCalendar.CreatorId = userId;
+            await _boatelCalendarRepo.InsertAsync(boatCalendar).ConfigureAwait(false);
+            return true;
         }
         public async Task<BoatEntity> GetBoatDetailsById(int boatId)
         {
@@ -125,21 +126,21 @@ namespace BnBYachts.Boat.Manager
         }
         public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable param)
         {
-                var getCharters = await _charterRepository.GetListAsync();
-                var filterdCharters = new List<CharterEntity>();
-                foreach (var charter in getCharters)
+            var getCharters = await _charterRepository.GetListAsync();
+            var filterdCharters = new List<CharterEntity>();
+            foreach (var charter in getCharters)
+            {
+                double departureDistance = GetDistanceInMeters(charter.DepartingLatitude, charter.DepartingLongitude, param.DepartureLatitude, param.DepartureLongitude);
+                double destinationDistance = GetDistanceInMeters(charter.DestinationLatitude, charter.DestinationLongitude, param.DestinationLatitude, param.DestinationLongitude);
+                if (departureDistance <= 500 && destinationDistance <= 500)
                 {
-                    double departureDistance = GetDistanceInMeters(charter.DepartingLatitude, charter.DepartingLongitude, param.DepartureLatitude, param.DepartureLongitude);
-                    double destinationDistance = GetDistanceInMeters(charter.DestinationLatitude, charter.DestinationLongitude, param.DestinationLatitude, param.DestinationLongitude);
-                    if (departureDistance <= 500 && destinationDistance <= 500)
-                    {
-                        await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
-                        await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
-                        filterdCharters.Add(charter);
-                    }
+                    await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
+                    await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+                    filterdCharters.Add(charter);
                 }
-                ///guest Filters
-                return filterdCharters.WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
+            }
+            ///guest Filters
+            return filterdCharters.WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
         }
         public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
         {
@@ -160,9 +161,9 @@ namespace BnBYachts.Boat.Manager
             await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatLocations).ConfigureAwait(false);
 
             var charterSchedule = new List<CharterAvailableDates>();
-            foreach(var ch in allCharters)
+            foreach (var ch in allCharters)
             {
-                charterSchedule.Add(new CharterAvailableDates {DepartureDate = ch.DepartureFromDate,CharterId = ch.Id});
+                charterSchedule.Add(new CharterAvailableDates { DepartureDate = ch.DepartureFromDate, CharterId = ch.Id });
             }
             return new CharterDetailsTransferable
             {
@@ -220,7 +221,7 @@ namespace BnBYachts.Boat.Manager
             var eventSchedule = new List<EventSchedule>();
             foreach (var ev in allEvents)
             {
-                eventSchedule.Add(new EventSchedule { EventDate = ev.StartDateTime, EventId= ev.Id });
+                eventSchedule.Add(new EventSchedule { EventDate = ev.StartDateTime, EventId = ev.Id });
             }
             return new EventDetailTransferable
             {
@@ -245,7 +246,7 @@ namespace BnBYachts.Boat.Manager
             var totalBoats = await _boatRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
             //Host Role
             var dataResponse = new BoatAddResponseTransferable();
-            dataResponse.isHostExists = totalBoats.Count == 0 ? false : true ;
+            dataResponse.isHostExists = totalBoats.Count == 0 ? false : true;
             var boat = boatDetails.CreateMapped<HostBoatRequestable, BoatEntity>();
             boat.CreationTime = DateTime.Now;
             boat.LastModifierId = boat.CreatorId = userId;
@@ -342,22 +343,20 @@ namespace BnBYachts.Boat.Manager
             return distanceinMeter;
         }
 
-        public async Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId)
+        public async Task<ICollection<BoatDTO>> GetHostBoats(Guid? userId)
         {
             var boats = await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false);
             foreach (var boat in boats)
             {
                 await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
             }
-            return boats;
-
-
+            return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatDTO>>(boats);
         }
 
         #region Features
         public async Task<ICollection<FeatureEntity>> GetDefaultFeatures()
         {
-           return await _featuresRepo.GetListAsync(x => x.IsDefaultFeature == true).ConfigureAwait(false);
+            return await _featuresRepo.GetListAsync(x => x.IsDefaultFeature == true).ConfigureAwait(false);
         }
         #endregion
         public async Task<bool> UpdateboatStatus(long boatId)

@@ -15,8 +15,12 @@ import { TimePickerModule,DateRangePickerModule, DateTimePickerModule  } from '@
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 import { BoatLoationSettingsComponent } from './boat-loation-settings/boat-loation-settings.component';
 import { BoatEditComponent } from './boat-edit/boat-edit.component';
+import { BoatListingComponent } from './host-boat-listing/boat-listing/boat-listing.component';
 import { EventCreationComponent } from './event-creation/event-creation.component';
 import { EventCreationSuccessModalComponent } from './event-creation/event-creation-success-modal/event-creation-success-modal.component';
+import { AllEventsListingComponent } from './host-boat-listing/all-events-listing/all-events-listing.component';
+import { AllChartersListingComponent } from './host-boat-listing/all-charters-listing/all-charters-listing.component';
+import { NotFoundModule } from '../common/not-found-component/not-found.module';
 
 
 
@@ -28,8 +32,11 @@ AddDialogComponent,
 HostBoatListingComponent,
 BoatLoationSettingsComponent,
 BoatEditComponent,
+BoatListingComponent,
 EventCreationComponent,
-EventCreationSuccessModalComponent, 
+EventCreationSuccessModalComponent,
+AllEventsListingComponent,
+AllChartersListingComponent
   ],
   imports: [
     HostRoutingModule,
@@ -42,7 +49,8 @@ EventCreationSuccessModalComponent,
     GooglePlaceModule,
     TimePickerModule ,
     DateRangePickerModule,
-    DateTimePickerModule
+    DateTimePickerModule,
+    NotFoundModule
   ],
   providers: [YachtSearchService,ReservationService]
 })
