@@ -1,106 +1,107 @@
 [
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06123",
+ 
     "Name": "Sound System",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 1,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": true,
+    "IsSafetyFeature": false,
+    "Icon": "fa-soundcloud"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06124",
+    
     "Name": "Kayak",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 1,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": true,
+    "IsSafetyFeature": false,
+    "Icon": "fa-wifi"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06210",
+    
     "Name": "Wifi",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": false,
+    "Icon": "fa-wifi"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06211",
+    
     "Name": "Sound System",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": false,
+    "Icon": "fa-soundcloud"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06212",
+    
     "Name": "Kitchen",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": false,
+    "Icon": "fa-cutlery"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06244",
+    
     "Name": "Fridge",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": false,
+    "Icon": "fa-cutlery"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06290",
+    
     "Name": "Wellness cell",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 1,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": true,
+    "IsSafetyFeature": false,
+    "Icon": "fa-cutlery"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06299",
+    
     "Name": "HVAC",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": false,
+    "Icon": "fa-cutlery"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06333",
+    
     "Name": "Bluethooth",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": false,
+    "Icon": "fa-soundcloud"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06888",
+    
     "Name": "Portable Heater",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 1,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": true,
+    "IsSafetyFeature": false,
+    "Icon": "fa-cutlery"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06889",
+   
     "Name": "Fire Extinguisher",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": true,
+    "Icon": "fa-cutlery"
   },
   {
-    "Id": "E792C792-10B3-E91D-6DDD-39FFD2E06988",
+    
     "Name": "First Aid Kit",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": true,
+    "Icon": "fa-cutlery"
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E96888",
+   
     "Name": "Life Jackets",
-    "IsDefaultFeature": 1,
-    "IsGuestFavourite": 0,
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "IsDefaultFeature": true,
+    "IsGuestFavourite": false,
+    "IsSafetyFeature": true,
+    "Icon": "fa-cutlery"
+    
   }
-]:
+]
