@@ -11,13 +11,15 @@ import { HostRoutingModule } from './host-routing.module';
 import { HostOnboardingComponent } from './host-onboarding/host-onboarding.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AddDialogComponent } from './host-onboarding/add-dialog/add-dialog.component';
-import { TimePickerModule,DateRangePickerModule, CalendarModule  } from '@syncfusion/ej2-angular-calendars';
+import { TimePickerModule,DateRangePickerModule, DateTimePickerModule  } from '@syncfusion/ej2-angular-calendars';
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 import { BoatLoationSettingsComponent } from './boat-loation-settings/boat-loation-settings.component';
 import { BoatEditComponent } from './boat-edit/boat-edit.component';
 import { BoatListingComponent } from './host-boat-listing/boat-listing/boat-listing.component';
 import { CharterListingComponent } from './host-boat-listing/charter-listing/charter-listing.component';
 import { EventListingComponent } from './host-boat-listing/event-listing/event-listing.component';
+import { EventCreationComponent } from './event-creation/event-creation.component';
+import { EventCreationSuccessModalComponent } from './event-creation/event-creation-success-modal/event-creation-success-modal.component';
 
 
 
@@ -31,7 +33,9 @@ BoatLoationSettingsComponent,
 BoatEditComponent,
 BoatListingComponent,
 CharterListingComponent,
-EventListingComponent
+EventListingComponent,
+EventCreationComponent,
+EventCreationSuccessModalComponent, 
   ],
   imports: [
     HostRoutingModule,
@@ -44,6 +48,7 @@ EventListingComponent
     GooglePlaceModule,
     TimePickerModule ,
     DateRangePickerModule,
+    DateTimePickerModule
   ],
   providers: [YachtSearchService,ReservationService]
 })
