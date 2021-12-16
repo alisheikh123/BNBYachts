@@ -86,5 +86,11 @@ namespace BnBYachts.Booking.Services
             var bookings = await _hostBoatBookingManager.UpcomingHostBoatelBookingDetail(CurrentUser.Id.ToString()).ConfigureAwait(false);
             return bookings;
         }
+        public async Task<ICollection<BoatelBookingEntity>> GetDroppedServices()
+        {
+
+            var Booking = await _hostBoatBookingManager.BoatelBookingDetail(CurrentUser.Id.ToString());
+            return Booking;
+        }
     }
 }

@@ -223,26 +223,3 @@
         </div>
     </div>
 </div>
-
-<ng-template #createEventSuccessModal>
-    <div class="modal-content">
-        <div class="modal-header no-border">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="custom-text-center">
-                <div class="img-wrapper">
-                    <img src="../../../../assets/images/password-updated.png" alt="">
-                </div>
-                <h4 class="bold">Event Created</h4>
-                <p class="pt-2">{{form.location.value}}</p>
-                <p class="py-2">{{form.startDateTime.value | date:'dd-MMM-YYYY hh:mm a'}}</p>
-                <div class="bottom-btn py-2">
-                    <button class="custom-btn blue big-btn" data-bs-toggle="modal" data-bs-target="#captain-need"
-                        data-bs-dismiss="modal">Continue</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</ng-template>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
+import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class AllReservationsComponent implements OnInit {
   month = [{ name: "chooose your month", Id: "0", selected: true }, { name: "January", Id: "1", }, { name: "February", Id: "2", }, { name: "March", Id: "3", }, { name: "April", Id: "4", }, { name: "May", Id: "5", }, { name: "June", Id: "6", }, { name: "July", Id: "7", }, { name: "August", Id: "8", }, { name: "September", Id: "9", }, { name: "October", Id: "10", }, { name: "November", Id: "11", }, { name: "December", Id: "12", },];
   monthName: any;
   booking: any;
+  allBoolings: any;
   monthSelect: any
   reservationForm: FormGroup;
   userId: string;
@@ -27,6 +29,8 @@ export class AllReservationsComponent implements OnInit {
   selectedMonth: string = "";
   selectedTab: string = "";
   modelDate = "";
+  BOOKING_STATUS = BookingStatus;
+  selectedStatusFilter: any= null;
   constructor(private fb: FormBuilder, private service: BookingService, config: NgbRatingConfig) {
     /* Rating Configuration*/
     config.max = 5;
@@ -35,27 +39,14 @@ export class AllReservationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.service.bookingDetail().subscribe((res: any) => {
-      this.booking = res;
-      if (this.booking.length == 0) {
-        this.isRecordNotFound = true;
-      }
-      else {
-        res.forEach((elem: any) => {
-          this.service.getBoatInfo(elem.boatId).subscribe((boatdetail: any) => {
-            elem.boatDetail = boatdetail;
-
-
-          });
-        });
-        this.isRecordNotFound = false;
-      }
-    });
+      this.allBoolings = res;
+    this.statusFilter(this.selectedStatusFilter);
     this.reservationForm = this.fb.group({
       monthName: ['', [Validators.required]]
-    })
-  }
+    });
+  });
+}
   // selectedMonth(e: any) {
 
   //   this.monthName.setValue(e.target.value, {
@@ -63,49 +54,34 @@ export class AllReservationsComponent implements OnInit {
   //   })
   // }
   upcomingReservation() {
-    this.service.upcomingbookingDetail(this.selectedMonth,this.selectedYear).subscribe((res: any) => {
-      this.booking = res;
-      if (this.booking.length == 0) {
-        this.isRecordNotFound = true;
-        this.selectedTab = "Upcoming";
-      }
-      else {
-        res.forEach((elem: any) => {
-          this.service.getBoatInfo(elem.boatId).subscribe((boatdetail: any) => {
-            elem.boatDetail = boatdetail;
-          });
-        });
-        this.isRecordNotFound = false;
-        this.selectedTab = "Upcoming";
-      }
+    this.service.upcomingbookingDetail(this.selectedMonth, this.selectedYear).subscribe((res: any) => {
+      this.allBoolings = res;
+      this.selectedTab = "Upcoming";
+      this.statusFilter(this.selectedStatusFilter);
     });
 
 
   }
   pastReservation() {
-    this.service.pastbookingDetail(this.selectedMonth,this.selectedYear).subscribe((res: any) => {
-      this.booking = res;
-      if (this.booking.length == 0) {
-        this.isRecordNotFound = true;
-        this.selectedTab = "Past";
-      }
-      else {
-
-        res.forEach((elem: any) => {
-          this.service.getBoatInfo(elem.boatId).subscribe((boatdetail: any) => {
-            elem.boatDetail = boatdetail;
-          });
-        });
-        this.isRecordNotFound = false;
-        this.selectedTab = "Past";
-      }
+    this.service.pastbookingDetail(this.selectedMonth, this.selectedYear).subscribe((res: any) => {
+      this.allBoolings = res;
+      this.statusFilter(this.selectedStatusFilter);
     });
   }
-  applyDateFilter(){
+  applyDateFilter() {
     const stringToSplit = this.modelDate;
     let result = stringToSplit.split('-');
     this.selectedYear = result[0];
     this.selectedMonth = result[1];
     (this.selectedTab == "Upcoming") ? this.upcomingReservation : this.pastReservation();
+  }
+  statusFilter(status: any) {
+    this.selectedStatusFilter = status;
+    this.booking = status != null ? this.allBoolings.filter((res: any) => res.bookingStatus == status) : this.allBoolings;
+    this.booking.forEach((elem: any) => {
+      this.service.getBoatInfo(elem.boatId).subscribe((boatdetail: any) => {
+        elem.boatDetail = boatdetail;
+      });
+    });
   }
 }
