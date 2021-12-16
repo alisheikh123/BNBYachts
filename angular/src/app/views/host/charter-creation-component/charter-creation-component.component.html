@@ -8,38 +8,41 @@
       </div>
     </div>
   </div>
-  <form [formGroup]="chartercreationForm" (ngSubmit)="onSubmit()">
 
-    <div class="section-padding">
+    <div class="section-padding host-on-board-steps">
         <div class="container">
         <div class="charter-info-tabs space-between-tabs">
             <div class="custom-tabs-wrapper">
                 <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <button class="underline-link-blk active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><span class="active">1</span>Charter Description</button>
-                  <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span>2</span>Scheduling & Payment</button>
-                  <button class="underline-link-blk" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><span>3</span>Charter Rules</button>
+                  <button class="underline-link-blk small-text" type="button"
+                  (click)="currentTab = CHARTER_TABS.BoatSelection"
+                  [ngClass]="{'active': currentTab ==  CHARTER_TABS.BoatSelection}"><span
+                      class="active">1</span>Charter Description</button>
+              <button class="underline-link-blk small-text" type="button"
+                  (click)="currentTab =CHARTER_TABS.CharterDestination"
+                  [ngClass]="{'active': currentTab == CHARTER_TABS.CharterDestination}"><span
+                      [ngClass]="{'active': currentTab > CHARTER_TABS.CharterDestination}">2</span>Scheduling & Payment
+                  & Description</button>
+              <button class="underline-link-blk small-text" type="button"
+                  (click)="currentTab = CHARTER_TABS.CharterRules"
+                  [ngClass]="{'active': currentTab == CHARTER_TABS.CharterRules}"><span
+                      [ngClass]="{'active': currentTab > CHARTER_TABS.CharterRules}">3</span>Charter Rules
+                  Options</button>
                 </div>
                 <div class="tab-content" id="v-pills-tabContent">
-                  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                      <div class="row">
-                          <div class="col-md-6 py-2">
-                            <div class="custom-select-field">
+                <form [formGroup]="charterCreationForm">
+                <div class="tab-pane"  [ngClass]="{'active': currentTab == CHARTER_TABS.BoatSelection}" *ngIf="currentTab == CHARTER_TABS.BoatSelection">
+                         <div class="row">
+                          <div class="col">
+                            <div class="custom-select-field" ngbDropdown #myDrop="ngbDropdown"  placement="bottom">
                                 <label>Boat Listing</label>
-                                <!-- <select name="select" id="select" (change)="boatList()" formControlName="boatName" >
-                                  <option value="" selected>Select the boat</option>
-                                  <option value="1">Option 1</option>
-                                  <option value="2">Option 2</option>
-                                  <option value="3">Option 3</option>
-                                  ...
-                                </select> -->
-                                <select class="custom-select" formControlName="boatName">
-                                    <option value="" disabled>Select the boat</option>
-                                    <option *ngFor="let b in boatList" [ngValue]="b">{{b}}</option>
-                                 </select>
-                                <!-- <div class="invalid-feedback" *ngIf="isSubmitted && boatName.errors?.required">
-                                    <sup>*</sup>Please enter your city name
-                                </div> -->
-
+                                <select formControlName="boatId" class="form-control" (change)="selectBoatName($event)">
+                                    <option value="0"> Choose boat name</option>
+                                    <option *ngFor="let item of boatlistOptions" value={{item.id}} >{{item.name}}</option>
+                                </select>
+                                <div *ngIf="charterForm.boatId.touched && charterForm.boatId.invalid">
+                                    <div *ngIf="charterForm.boatId.errors!.required" class="text-danger">boatName is required.</div>
+                                </div>
                               </div>
                           </div>
                           <div class="col-md-6 py-2">
@@ -49,9 +52,9 @@
                                 <div class="custom-flex-start">
                                   <label>Guests</label>
                                   <div class="custom-flex-start">
-                                    <span class="minus">-</span>
-                                <input type="text" value="1"/>
-                                <span class="plus">+</span>
+                                    <span class="minus" (click)="removeGuests()">-</span>
+                                <input type="text" formControlName="guestCapacity"/>
+                                <span class="plus" (click)="addGuests()">+</span>
                                   </div>
                                 </div>
 
@@ -61,55 +64,51 @@
                           <div class="col-md-6 py-2">
                             <div class="custom-input-field">
                                 <label>Charter Description</label>
-                                <textarea class="custom-input" id="exampleFormControlTextarea1" rows="2">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</textarea>
+                                <textarea class="custom-input" formControlName="description" rows="2"></textarea>
+                                <small class="text-danger" *ngIf="charterForm.description.touched && !charterForm.description.valid">Description is required.</small>
                               </div>
                           </div>
                           <div class="col-sm-12">
                               <div class="custom-flex-end">
-                                  <button class="custom-btn outline-blue-clr me-4">Later</button>
-                                  <button class="custom-btn blue" id="save-bt">Save</button>
+                                  <button class="custom-btn outline-blue-clr me-4"  (click)="currentTab = currentTab-1;">Later</button>
+                                  <button class="custom-btn blue" id="save-bt"  (click)="currentTab = currentTab+1;">Continue</button>
 
                               </div>
                           </div>
-                      </div>
 
                   </div>
-                  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                </div>
+                <div class="tab-pane" [ngClass]="{'active': currentTab == CHARTER_TABS.CharterDestination}"
+                *ngIf="currentTab == CHARTER_TABS.CharterDestination">
                     <div class="row">
                         <div class="col-md-6 py-2">
-                          <div class="custom-select-field">
-                              <label>Departing From</label>
-                              <select name="select" id="select">
-                                <option value="" selected>Select the State</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                                ...
-                              </select>
-                            </div>
+                        <div class="custom-input-field">
+                            <label>Departing From*</label>
+                            <input class="custom-input" formControlName="departingFrom"
+                                ngx-google-places-autocomplete
+                                (onAddressChange)="handleDepartingAddress($event)"
+                                placeholder="Bali Island">
+                                <small class="text-danger" *ngIf="charterForm.departingFrom.touched && !charterForm.departingFrom.valid">departing From is required.</small>
                         </div>
+                    </div>
                         <div class="col-md-6 py-2">
-                            <div class="custom-select-field">
-                                <label>Destination</label>
-                                <select name="select" id="select">
-                                  <option value="" selected>Select the State</option>
-                                  <option value="1">Option 1</option>
-                                  <option value="2">Option 2</option>
-                                  <option value="3">Option 3</option>
-                                  ...
-                                </select>
-                              </div>
+                            <div class="custom-input-field">
+                                <label>To Destination*</label>
+                                <input class="custom-input" formControlName="destination"
+                                    ngx-google-places-autocomplete
+                                    (onAddressChange)="handleDestinationAddress($event)"
+                                    placeholder="Qubarland">
+                                    <small class="text-danger" *ngIf="charterForm.destination.touched && !charterForm.destination.valid">destination is required.</small>
+                            </div>
                           </div>
                           <div class="col-md-6 py-2">
                             <div class="custom-select-field">
                                 <label>Departure Date</label>
-                                <select name="select" id="select">
-                                  <option value="" selected>Select the State</option>
-                                  <option value="1">Option 1</option>
-                                  <option value="2">Option 2</option>
-                                  <option value="3">Option 3</option>
-                                  ...
-                                </select>
+                                <!-- (renderDayCell)='onRenderCell($event)'[value]='dateValue'  -->
+                                <ejs-datetimepicker formControlName="departureFromDate" name="datetimepicker" ></ejs-datetimepicker>
+                                <div *ngIf="charterForm.departureFromDate.invalid && (charterForm.dirty||charterForm.touched)" class="alert alert-danger">
+                                departure Date is Required
+                                </div>
                               </div>
                           </div>
                         <div class="col-md-6 py-2">
@@ -117,72 +116,110 @@
                                 <div class="col-md-6">
                                     <div class="custom-input-field">
                                         <label>Charter Fee</label>
-                                        <input class="custom-input" placeholder="Type">
+                                        <input type="number" class="custom-input" placeholder="$20000"
+                                                formControlName="charterFee">
                                       </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="custom-input-field">
                                         <div class="custom-flex">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault1" checked>
-                                                    Per Person
+                                             <input  type="radio" class="form-check-input" [value]="true" formControlName="isFullBoatCharges">
+                                                Per Person
                                             </div>
                                             <div class="form-check ms-5">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault1">
-                                                    Entire Boat
+                                                    <input  type="radio" class="form-check-input" [value]="false" formControlName="isFullBoatCharges">
+                                                Entire Boat
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-sm-6 py-2">
                             <div class="custom-input-field">
                                 <label>Is it a round trip</label>
                                 <div class="custom-flex">
+
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1" checked>
-                                        Yes
-                                    </div>
-                                    <div class="form-check ms-5">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        No
-                                    </div>
+                                        <input  type="radio" class="form-check-input" [value]="true"   formControlName="isRoundTrip">
+                                           Yes
+                                       </div>
+                                       <div class="form-check ms-5">
+                                               <input  type="radio" class="form-check-input" [value]="false"formControlName="isRoundTrip" checked>
+                                           No
+                                       </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12">
+                            <div class="col-md-6 py-2" *ngIf="charterCreationForm.value.isRoundTrip === true ">
+                                <div class="custom-select-field">
+                                    <label>Return Date</label>
+                                    <ejs-datetimepicker formControlName="returnDate"></ejs-datetimepicker>
+                                  </div>
+                              </div>
                             <div class="custom-flex-end">
-                                <button class="custom-btn outline-blue-clr me-4">Later</button>
-                                <button class="custom-btn blue" id="save-btn">Save</button>
+                                <button class="custom-btn outline-blue-clr me-4"
+                                (click)="currentTab = currentTab-1;">Later</button>
+                            <button class="custom-btn blue" id="save-bt"
+                                (click)="currentTab = currentTab+1;">Continue</button>
 
                             </div>
                         </div>
                     </div>
-                  </div>
-                  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                </div>
+
+                <div class="tab-pane" [ngClass]="{'active': currentTab == CHARTER_TABS.CharterRules}"
+                *ngIf="currentTab == CHARTER_TABS.CharterRules">
                     <div class="charter-rules-wrap">
                         <h5 class="bold">Charter Rules</h5>
                         <p class="small-text grey py-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed nulla. Nullam volutpat vitae lectus sed pretium. Integer rutrum libero eget risus aliquam, ut imperdiet velit scelerisque. Donec commodo mi odio, sed accumsan justo aliquam quis. In tincidunt sollicitudin felis, et faucibus mauris posuere non. Quisque elementum sit amet enim viverra iaculis. Fusce nec urna non elit posuere commodo at quis lorem. Duis ac quam tincidunt, aliquam turpis vel, laoreet purus. Aliquam at ante sit amet sem bibendum scelerisque sit amet a lacus. Praesent non posuere nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut suscipit sollicitudin velit, sed porttitor turpis efficitur eu. Cras augue turpis, tempor in imperdiet in, venenatis sodales turpis. Curabitur lobortis maximus scelerisque. Nam non justo luctus, scelerisque dolor pulvinar, aliquam mauris.</p>
                         <label class="custom-checkbox my-2">
                             <input type="checkbox">
-                            <p class="small-text">I Agree to the terms and conditions </p>
-                            <span class="checkmark"></span>
+                            <p class="small-text" >I Agree to the terms and conditions </p>
+                            <!--  -->
+                            <span class="checkmark" ></span>
                           </label>
                           <div class="custom-flex-end py-5">
-                              <button class="custom-btn grey" data-bs-toggle="modal" data-bs-target="#charter-created" data-bs-dismiss="modal">Continue</button>
+                              <button class="custom-btn grey"  type="submit" [disabled]="!charterCreationForm.valid" (click)="submit()" >Continue</button>
                           </div>
                     </div>
 
                   </div>
+
+                </form>
                 </div>
               </div>
         </div>
         </div>
+
+        <ng-template #chartercreationpopup>
+
+                  <div class="modal-content text-center">
+                    <div class="modal-header no-border">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="custom-text-center">
+                        <div class="img-wrapper">
+                            <img src="assets/images/password-updated.png" alt="">
+                          </div>
+                        <h4 class="bold">Charter Created</h4>
+                        <p class="pt-2">Karachi - Lahore - Karachi</p>
+                        <p class="py-2">2021-07-31 09:00 AM - 11:00AM</p>
+
+
+                        <div class="bottom-btn py-2">
+                          <button class="custom-btn blue big-btn" [routerLink]="['/host/charter-creation']">Continue</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+        </ng-template>
     </div>
-  </form>
+
+
+

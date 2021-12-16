@@ -6,7 +6,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace BnBYachts.Boat
 {
-   public class BoatDto : AuditedEntityDto<int>
+   public class BoatDto
     {
         public string Name { get; set; }
         public string Description { get; set; }

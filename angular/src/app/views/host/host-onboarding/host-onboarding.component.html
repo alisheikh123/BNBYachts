@@ -48,6 +48,7 @@
 
 
                     </div>
+                    {{hostOnBoardingForm.value | json}}
                     <div class="tab-content" id="v-pills-tabContent">
                         <form [formGroup]="hostOnBoardingForm">
                             <div class="tab-pane" [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatType}"
@@ -462,8 +463,8 @@
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
                                             <label>Availabilty</label>
-                                        </div>
-                                        <ejs-daterangepicker  placeholder='Select Availabilty' [startDate]='boatCalendar.fromDate' [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
+                                        </div><ejs-daterangepicker  placeholder='Select Availabilty' [startDate]='boatCalendar.fromDate' [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
+
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="counter-input-wrapper">

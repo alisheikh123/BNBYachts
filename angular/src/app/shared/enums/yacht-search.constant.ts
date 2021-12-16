@@ -33,3 +33,8 @@ export enum EventTypes {
   Adults = 1,
   Family = 2
 }
+export enum CharterCreationTab{
+  BoatSelection=1,
+  CharterDestination=2,
+  CharterRules=3
+}

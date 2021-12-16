@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
 
-namespace BnBYachts.Boat.Shared.Boat.Requestable
+namespace BnBYachts.Boat.DTO.Charter
 {
-    public class CharterRequestable
+    public class CharterDto:AuditedEntityDto<int>
     {
-        public BoatEntity Boat { get; set; }
         public bool IsRoundTrip { get; set; }
         public int GuestCapacity { get; set; }
         public string Description { get; set; }
