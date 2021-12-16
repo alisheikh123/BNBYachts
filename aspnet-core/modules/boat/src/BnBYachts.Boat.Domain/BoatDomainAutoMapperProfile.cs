@@ -41,7 +41,7 @@ namespace BnBYachts.Boat
             CreateMap<BoatRuleEntity, BoatRuleDTO>();
             CreateMap<BoatLocationEntity, BoatFeatureDTO>();
             CreateMap<EventEntity, EventDTO>();
-
+            CreateMap<BoatEntity, BoatLookupTransferable>();
         }
     }
 }

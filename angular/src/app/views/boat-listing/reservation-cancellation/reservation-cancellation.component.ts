@@ -8,6 +8,7 @@ import { utils } from 'src/app/shared/utility/utils';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
+import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 
 @Component({
   selector: 'app-reservation-cancellation',
@@ -42,6 +43,7 @@ export class ReservationCancellationComponent implements OnInit {
   isHost: boolean;
   isPosted: boolean;
   isChanged: boolean;
+  BOOKING_STATUS = BookingStatus
 
   constructor(
     private service: BookingService,

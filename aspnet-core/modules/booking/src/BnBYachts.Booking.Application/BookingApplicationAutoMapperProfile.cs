@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BnBYachts.Booking.Booking.Transferables;
 using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Review;
 
@@ -13,6 +14,8 @@ namespace BnBYachts.Booking
              * into multiple profile classes for a better organization. */
             CreateMap<BoatelBookingEntity, BoatelBookingDto>();
             CreateMap<BookingReviewEntity, ReviewTransferable>();
+            CreateMap<BoatelBookingEntity, BookingRequestsDto>();
+            CreateMap<BookingReviewEntity, BookingReviewsDto>();
         }
     }
 }
