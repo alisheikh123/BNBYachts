@@ -1,4 +1,5 @@
 ﻿
+using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Charter.Dto;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace BnBYachts.Charter.Interface
 {
     public interface ICharterManager
     {
-        Task<ICollection<BoatDto>> BoatList(Guid? userId);
+        Task<ICollection<BoatDTO>> BoatList(Guid? userId);
         Task<ICollection<CharterDto>> BookedCharter(int boatId);
         Task<CharterDto> InsertCharter(CharterDto charterForm);
     }

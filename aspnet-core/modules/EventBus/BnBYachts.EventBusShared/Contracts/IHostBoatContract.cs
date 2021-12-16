@@ -21,6 +21,8 @@ namespace BnBYachts.EventBusShared.Contracts
         public bool IsActive { get; set; }
         public int TaxFee { get; set; }
         public int BoatType { get; set; }
+        public Guid? CreatorId { get; set; }
+
     }
 
     public class HostBoatContract : IHostBoatContract
@@ -42,5 +44,6 @@ namespace BnBYachts.EventBusShared.Contracts
         public bool IsActive { get; set; }
         public int TaxFee { get; set; }
         public int BoatType { get; set; }
+        public Guid? CreatorId { get; set; }
     }
 }

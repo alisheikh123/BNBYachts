@@ -1,62 +1,60 @@
+
 [
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06212",
-    "Title": "Boat Side Cove 3",
-    "IsCoverPic": 0,
-    "SortOrder": 4,
+    
+    "Title": "Boat Side Cover",
+    "IsCoverPic": false,
+    "SortOrder": 1,
     "ImagePath": "side-3.png",
-    "HostBoatId": "E792C792-10B3-E92D-6DDD-39FFD2E06222",
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "BoatEntityId": 1
+   
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06333",
-    "Title": "Boat Cover",
-    "IsCoverPic": 1,
-    "SortOrder": 1,
-    "ImagePath": "boat-1.png",
-    "HostBoatId": "E792C792-10B3-E92D-6DDD-39FFD2E06222",
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
-  },
-  {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06432",
-    "Title": "Boat Side 1",
-    "IsCoverPic": 0,
+    
+    "Title": "Boat Side Cove 1",
+    "IsCoverPic": false,
     "SortOrder": 2,
-    "ImagePath": "side-1.png",
-    "HostBoatId": "E792C792-10B3-E92D-6DDD-39FFD2E06222",
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "ImagePath": "side-3.png",
+    "BoatEntityId": 2
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2E06567",
-    "Title": "Boat Side 2",
-    "IsCoverPic": 0,
+   
+    "Title": "Boat Cover 2",
+    "IsCoverPic": true,
+    "SortOrder": 4,
+    "ImagePath": "boat-1.png",
+    "BoatEntityId": 3
+  },
+  {
+    
+    "Title": "Boat Side",
+    "IsCoverPic": false,
     "SortOrder": 3,
-    "ImagePath": "side-2.png",
-    "HostBoatId": "E792C792-10B3-E92D-6DDD-39FFD2E06222",
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "ImagePath": "side-1.png",
+    "BoatEntityId": 4
   },
   {
-    "Id": "E792C792-10B3-E92D-6DDD-39FFD2F06222",
-    "Title": "Boat side cover 4",
-    "IsCoverPic": 0,
+    
+    "Title": "Boat Side 2",
+    "IsCoverPic": false,
     "SortOrder": 5,
-    "ImagePath": "side-4.png",
-    "HostBoatId": "E792C792-10B3-E92D-6DDD-39FFD2E06222",
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "ImagePath": "side-2.png",
+    "BoatEntityId": 4
   },
   {
-    "Id": "63DC3BA4-D905-3943-8919-39FFD2FFF99D",
-    "Title": "Boat Coverr",
-    "IsCoverPic": 1,
-    "SortOrder": 1,
+    
+    "Title": "Boat side cover 4",
+    "IsCoverPic": false,
+    "SortOrder": 6,
+    "ImagePath": "side-4.png",
+    "BoatEntityId": 7
+  },
+  {
+
+    "Title": "Boat Cover",
+    "IsCoverPic": true,
+    "SortOrder": 2,
     "ImagePath": "ships-img.png",
-    "HostBoatId": "63DC3BA4-D905-3943-8919-39FFD2FFF79D",
-    "CreationTime": "2021-10-27 12:42:45.5499294",
-    "CreatorId": "E792C792-10B3-E92D-6DDD-39FFD2E06434"
+    "BoatEntityId": 9
   }
 ]

@@ -71,7 +71,9 @@
                           <div class="col-sm-12">
                               <div class="custom-flex-end">
                                   <button class="custom-btn outline-blue-clr me-4"  (click)="currentTab = currentTab-1;">Later</button>
-                                  <button class="custom-btn blue" id="save-bt"  (click)="currentTab = currentTab+1;">Continue</button>
+                                  <button class="custom-btn blue" id="save-bt"
+                                  [disabled]="charterForm.boatId.value == 0 || charterForm.guestCapacity.value == 0 || charterForm.description.value ==null"
+                                   (click)="currentTab = currentTab+1;" >Continue</button>
 
                               </div>
                           </div>
@@ -79,7 +81,7 @@
                   </div>
                 </div>
                 <div class="tab-pane" [ngClass]="{'active': currentTab == CHARTER_TABS.CharterDestination}"
-                *ngIf="currentTab == CHARTER_TABS.CharterDestination">
+                [hidden]="currentTab != CHARTER_TABS.CharterDestination">
                     <div class="row">
                         <div class="col-md-6 py-2">
                         <div class="custom-input-field">
@@ -104,11 +106,10 @@
                           <div class="col-md-6 py-2">
                             <div class="custom-select-field">
                                 <label>Departure Date</label>
-                                <!-- (renderDayCell)='onRenderCell($event)'[value]='dateValue'  -->
-                                <ejs-datetimepicker formControlName="departureFromDate" name="datetimepicker" ></ejs-datetimepicker>
-                                <div *ngIf="charterForm.departureFromDate.invalid && (charterForm.dirty||charterForm.touched)" class="alert alert-danger">
-                                departure Date is Required
-                                </div>
+                                <ejs-daterangepicker placeholder='Select Departure From & To Date'
+                                [startDate]="boatCalendar.startDate"
+                                [endDate]="boatCalendar.endDate" ></ejs-daterangepicker>
+
                               </div>
                           </div>
                         <div class="col-md-6 py-2">
@@ -163,6 +164,8 @@
                                 <button class="custom-btn outline-blue-clr me-4"
                                 (click)="currentTab = currentTab-1;">Later</button>
                             <button class="custom-btn blue" id="save-bt"
+                            [disabled]="charterForm.departingFrom.value == null || charterForm.destination.value == null || charterForm.description.value ==null||
+                            charterForm.departureFromDate.value == null || charterForm.charterFee.value == 0  "
                                 (click)="currentTab = currentTab+1;">Continue</button>
 
                             </div>
@@ -175,14 +178,16 @@
                     <div class="charter-rules-wrap">
                         <h5 class="bold">Charter Rules</h5>
                         <p class="small-text grey py-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed nulla. Nullam volutpat vitae lectus sed pretium. Integer rutrum libero eget risus aliquam, ut imperdiet velit scelerisque. Donec commodo mi odio, sed accumsan justo aliquam quis. In tincidunt sollicitudin felis, et faucibus mauris posuere non. Quisque elementum sit amet enim viverra iaculis. Fusce nec urna non elit posuere commodo at quis lorem. Duis ac quam tincidunt, aliquam turpis vel, laoreet purus. Aliquam at ante sit amet sem bibendum scelerisque sit amet a lacus. Praesent non posuere nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut suscipit sollicitudin velit, sed porttitor turpis efficitur eu. Cras augue turpis, tempor in imperdiet in, venenatis sodales turpis. Curabitur lobortis maximus scelerisque. Nam non justo luctus, scelerisque dolor pulvinar, aliquam mauris.</p>
+
                         <label class="custom-checkbox my-2">
-                            <input type="checkbox">
-                            <p class="small-text" >I Agree to the terms and conditions </p>
-                            <!--  -->
-                            <span class="checkmark" ></span>
-                          </label>
-                          <div class="custom-flex-end py-5">
-                              <button class="custom-btn grey"  type="submit" [disabled]="!charterCreationForm.valid" (click)="submit()" >Continue</button>
+                            <input type="checkbox" [(ngModel)]="isAgree" [ngModelOptions]="{standalone: true}">
+                            <p class="small-text">I Agree to the terms and conditions </p>
+                            <span class="checkmark top-0"></span>
+                        </label>
+                          <div class="custom-flex-end py-3">
+                              <button class="custom-btn" [ngClass]="{'grey': !isAgree,'blue':isAgree}"
+                               type="submit" [disabled]="!charterCreationForm.valid" (click)="submit()"
+                                [disabled]="!isAgree" >Save</button>
                           </div>
                     </div>
 
@@ -196,9 +201,9 @@
 
         <ng-template #chartercreationpopup>
 
-                  <div class="modal-content text-center">
-                    <div class="modal-header no-border">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header no-border">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <div class="custom-text-center">
@@ -206,12 +211,14 @@
                             <img src="assets/images/password-updated.png" alt="">
                           </div>
                         <h4 class="bold">Charter Created</h4>
-                        <p class="pt-2">Karachi - Lahore - Karachi</p>
-                        <p class="py-2">2021-07-31 09:00 AM - 11:00AM</p>
+                        <p class="pt-2">{{charterForm.departingFrom.value}}</p>
+                        <p class="pt-2">{{charterForm.destination.value}}</p>
+
+                        <p class="py-2">{{charterForm.departureFromDate.value|  date:'dd-MMM-YYYY hh:mm a'}}</p>
 
 
                         <div class="bottom-btn py-2">
-                          <button class="custom-btn blue big-btn" [routerLink]="['/host/charter-creation']">Continue</button>
+                          <button class="custom-btn blue big-btn" (click)="Redirect()" >Home</button>
                         </div>
                       </div>
                     </div>

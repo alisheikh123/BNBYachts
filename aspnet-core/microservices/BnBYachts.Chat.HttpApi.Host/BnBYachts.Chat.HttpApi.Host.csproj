@@ -34,6 +34,7 @@
     <ProjectReference Include="..\..\modules\chat\src\BnBYachts.Chat.Application\BnBYachts.Chat.Application.csproj" />
     <ProjectReference Include="..\..\modules\chat\src\BnBYachts.Chat.EntityFrameworkCore\BnBYachts.Chat.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\chat\src\BnBYachts.Chat.HttpApi\BnBYachts.Chat.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\chat\src\BnBYachts.Chat.MongoDB\BnBYachts.Chat.MongoDB.csproj" />
   </ItemGroup>
 
 </Project>

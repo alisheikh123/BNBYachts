@@ -6,7 +6,7 @@ using BnBYachts.Boat.Interfaces.Charter;
 using BnBYachts.Boat.DTO.Charter;
 using BnBYachts.Charter.Interface;
 using BnBYachts.Boat.Charter.Dto;
-using BnBYachts.Boat.DTO.Boat;
+using BnBYachts.Boat.Boat.Transferables;
 
 namespace BnBYachts.Services.Charter
 {
@@ -19,7 +19,7 @@ namespace BnBYachts.Services.Charter
         {
             _charterManager = charterManager;
         }
-        public async Task<ICollection<BnBYachts.Boat.Charter.Dto.BoatDto>> GetAllBoats()=>
+        public async Task<ICollection<BoatDTO>> GetAllBoats()=>
             await _charterManager.BoatList(CurrentUser.Id).ConfigureAwait(false);
         
 
@@ -30,6 +30,7 @@ namespace BnBYachts.Services.Charter
 
         public async Task<BnBYachts.Boat.Charter.Dto.CharterDto> InsertCharters(BnBYachts.Boat.Charter.Dto.CharterDto charterDto)=>
             await _charterManager.InsertCharter(charterDto).ConfigureAwait(false);
-        
+
+      
     }
 }

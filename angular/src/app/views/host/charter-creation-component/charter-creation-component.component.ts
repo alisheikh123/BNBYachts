@@ -1,10 +1,9 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CharterCreationTab } from 'src/app/shared/enums/yacht-search.constant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CharterService } from 'src/app/core/host/charter.service';
-import { RenderDayCellEventArgs } from '@syncfusion/ej2-angular-calendars/public_api';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,12 +20,10 @@ export class CharterCreationComponentComponent implements OnInit {
   currentTab = this.CHARTER_TABS.BoatSelection;
   boatlistOptions:any=[];
   isAgree: boolean = false;
-  CharterCalendar = {
-    fromDate: new Date().getDay(),
-    toDate: new Date().getDay(),
+  boatCalendar = {
+    startDate: new Date(),
+    endDate: new Date(),
   };
-
-
 
   ngOnInit(): void {
 
@@ -48,7 +45,7 @@ export class CharterCreationComponentComponent implements OnInit {
       isFullBoatCharges: [true],
       charterFee: [0,Validators.required],
       departureFromDate: [new Date(), Validators.required],
-      departureToDate: [new Date()],
+      departureToDate: [new Date(),Validators.required],
       isRoundTrip: [false],
       departingFrom: [null, Validators.required],
       returnDate: [new Date()],
@@ -57,14 +54,8 @@ export class CharterCreationComponentComponent implements OnInit {
   }
   submit() {
       let data = this.charterCreationForm.value;
-      console.log(data);
       this.service.saveCharter(data).subscribe((res: any) => {
-
           this.openModal(this.templateRef);
-          // setTimeout(() => {
-          //   window.location.reload();
-          // }, 3000);
-
       });
   }
   get charterForm() {
@@ -98,24 +89,16 @@ export class CharterCreationComponentComponent implements OnInit {
     let Id = event.target.value;
     this.service.getSelectedBoatDetail(Id).subscribe((res:any)=>
     {
-      console.log(res);
-      res.forEach((element:any) => {
-        this.CharterCalendar.fromDate = element.departureFromDate;
-        this.CharterCalendar.toDate = element.departureToDate;
-      });
-      console.log(this.CharterCalendar.fromDate);
-      console.log(this.CharterCalendar.toDate);
     })
   }
-   onRenderCell(args: RenderDayCellEventArgs): void {
 
-    if (args.date?.getDay() == 16  || args.date?.getDay() ==18) {
-      args.isDisabled = true;
-    }
-
-}
 openModal(template: TemplateRef<any>) {
-  debugger;
   this.modal.open(template,{ windowClass: 'custom-modal custom-small-modal' });
+}
+onRenderCell(args: any) {
+}
+Redirect(){
+  this.modal.dismissAll();
+    this.route.navigate(['/host-dashboard']);
 }
 }

@@ -1,4 +1,5 @@
 ﻿
+using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Charter.Interface;
@@ -28,9 +29,9 @@ namespace BnBYachts.Boat.Manager.Charter
 
         }
 
-        public async Task<ICollection<BoatDto>> BoatList(Guid? userId)
+        public async Task<ICollection<BoatDTO>> BoatList(Guid? userId)
         {
-            return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatDto>>(await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false));
+            return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatDTO>>(await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false));
         }
 
         public async Task<ICollection<CharterDto>> BookedCharter(int boatId) => _objectMapper

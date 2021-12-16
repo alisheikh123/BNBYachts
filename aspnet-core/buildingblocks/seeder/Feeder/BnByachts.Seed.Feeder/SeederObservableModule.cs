@@ -7,6 +7,9 @@ using Volo.Abp.Modularity;
 using BnBYachts.Boat;
 using Microsoft.Extensions.DependencyInjection;
 using BnBYachts.Boat.EntityFrameworkCore;
+using BnByachts.SeedObservable.Consumers;
+using BnBYachts.Core.EntityFrameworkCore;
+using BnBYachts.Core;
 
 namespace BnByachts.SeedObservable
 {
@@ -14,22 +17,21 @@ namespace BnByachts.SeedObservable
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
         typeof(AbpAutofacModule),
-
         typeof(BoatApplicationModule),
-        typeof(BoatEntityFrameworkCoreModule)
-
-    //typeof(AbpAccountApplicationModule),
+        typeof(BoatEntityFrameworkCoreModule),
+        typeof(CoreApplicationModule),
+        typeof(CoreEntityFrameworkCoreModule)
 
     )]
     public class SeederObservableModule : AbpModule
     {
-        
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.AddAssemblyOf<SeederObservableModule>();
 
             context.Services.AddAutoMapperObjectMapper<SeederObservableModule>();
-          
+
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<SeederObservableModule>();
@@ -37,56 +39,54 @@ namespace BnByachts.SeedObservable
 
             context.Services.AddMassTransit(mt =>
             {
-                //mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QBoatSeeder;
-                //});
+                mt.AddConsumer<RolesConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QRoleSeeder;
+                });
+                mt.AddConsumer<UsersConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QUsersSeeder;
+                });
+                mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatSeeder;
+                });
+                mt.AddConsumer<FeaturesConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QFeatureSeeder;
+                });
 
-                //mt.AddConsumer<BoatHostGalleryConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QBoatGallerySeeder;
-                //});
-                //mt.AddConsumer<BoatHostCalendarConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QBoatCalendarSeeder;
-                //});
-
-                //mt.AddConsumer<FeaturesConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QFeatureSeeder;
-                //});
-                //mt.AddConsumer<BoatHostFeatureConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QBoatFeatureSeeder;
-                //});
-
-                //mt.AddConsumer<RulesConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QRulesSeeder;
-                //});
-                //mt.AddConsumer<BoatHostRulesConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QBoatRulesSeeder;
-                //});
-                //mt.AddConsumer<CharterConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QCharterSeeder;
-                //});
-                //mt.AddConsumer<EventsConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QEventSeeder;
-                //});
-               
-                //mt.AddConsumer<RolesConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QRoleSeeder;
-                //});
-                //mt.AddConsumer<UserRolesConsumer>().Endpoint(e =>
-                //{
-                //    e.Name = EventBusQueue.QUserRoleSeeder;
-                //});
+                mt.AddConsumer<RulesConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QRulesSeeder;
+                });
+                mt.AddConsumer<BoatHostGalleryConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatGallerySeeder;
+                });
+                mt.AddConsumer<BoatHostCalendarConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatCalendarSeeder;
+                });
 
 
+                mt.AddConsumer<BoatHostFeatureConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatFeatureSeeder;
+                });
+
+                mt.AddConsumer<BoatHostRulesConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatRulesSeeder;
+                });
+                mt.AddConsumer<CharterConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QCharterSeeder;
+                });
+                mt.AddConsumer<EventsConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QEventSeeder;
+                });
             });
 
         }

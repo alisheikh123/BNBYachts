@@ -13,6 +13,7 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using Volo.Abp.AutoMapper;
 
 namespace BnBYachts.Core
 {
@@ -27,15 +28,21 @@ namespace BnBYachts.Core
         typeof(AbpPermissionManagementDomainIdentityServerModule),
         typeof(AbpSettingManagementDomainModule),
         typeof(AbpTenantManagementDomainModule),
-         typeof(EventBusSharedModule)
+         typeof(EventBusSharedModule),
+         typeof(AbpAutoMapperModule)
     )]
     public class CoreDomainModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            context.Services.AddAutoMapperObjectMapper<CoreDomainModule>();
             Configure<AbpMultiTenancyOptions>(options =>
             {
                 options.IsEnabled = MultiTenancyConsts.IsEnabled;
+            });
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<CoreDomainModule>(validate: false);
             });
         }
     }

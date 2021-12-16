@@ -21,8 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\NewFolder\" />
-    <Folder Include="Interfaces\NewFolder\" />
+    <Folder Include="DTO\Boat\" />
   </ItemGroup>
 
 </Project>
