@@ -18,8 +18,8 @@ export class DroppedServicesComponent implements OnInit {
 
 
   getDroppedServices() {
-    this.service.getDroppedServices().subscribe(res => {
-      this.droppedServices = res;
+    this.service.getDroppedServices().subscribe((res:any) => {
+      this.droppedServices = res?.data;
       this.droppedServices.forEach((element: any) => {
         this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
           element.boatDetail = boatdetail;

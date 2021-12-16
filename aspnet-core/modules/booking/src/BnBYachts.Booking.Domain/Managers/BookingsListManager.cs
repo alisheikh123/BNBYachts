@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using BnBYachts.Booking.Booking;
 using BnBYachts.Booking.Booking.Enums;
 using BnBYachts.Booking.Booking.Transferables;
 using BnBYachts.Booking.Interfaces;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
+using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
@@ -18,49 +21,61 @@ namespace BnBYachts.Booking.Managers
     public class BookingsListManager : DomainService, IBookingsListManager
     {
         private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
+        private readonly IRepository<CharterBookingEntity, int> _charterBookingRepository;
+        private readonly IRepository<EventBookingEntity, int> _eventsBookingRepository;
         private readonly IObjectMapper<BookingDomainModule> _objectMapper;
         private readonly EventBusDispatcher _eventBusDispatcher;
-        public BookingsListManager(IRepository<BoatelBookingEntity, int> boatelBookingRepository, IObjectMapper<BookingDomainModule> objectMapper, EventBusDispatcher eventBusDispatcher)
+        public BookingsListManager(IRepository<BoatelBookingEntity, int> boatelBookingRepository, IObjectMapper<BookingDomainModule> objectMapper,
+            EventBusDispatcher eventBusDispatcher, IRepository<CharterBookingEntity, int> charterBookingRepository, IRepository<EventBookingEntity, int> eventsBookingRepository)
         {
             _boatelBookingRepository = boatelBookingRepository;
             _objectMapper = objectMapper;
             _eventBusDispatcher = eventBusDispatcher;
+            _charterBookingRepository = charterBookingRepository;
+            _eventsBookingRepository = eventsBookingRepository;
         }
-        public async Task<ICollection<BookingRequestsDto>> GetBookedServices(Guid? userId, int serviceType)
+        public async Task<EntityResponseListModel<BookingRequestsDto>> GetBookedServices(Guid? userId, int serviceType)
         {
+            var response = new EntityResponseListModel<BookingRequestsDto>();
             if (serviceType == (int)BookingTypes.Boatel)
             {
-                return _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BookingRequestsDto>>
+                response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsDto>>
                 (await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
             }
             else if (serviceType == (int)BookingTypes.Charter)
             {
-                return _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BookingRequestsDto>>
-                (await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
+                response.Data = _objectMapper.Map<List<CharterBookingEntity>, List<BookingRequestsDto>>
+                (await _charterBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
             }
             else
             {
-                return _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BookingRequestsDto>>
-                (await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
+                response.Data = _objectMapper.Map<List<EventBookingEntity>, List<BookingRequestsDto>>
+                (await _eventsBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
             }
-
+            return response;
         }
-        public async Task<ICollection<BookingRequestsDto>> GetBookingsRequests(Guid? userId, string month, string year)
+        public async Task<EntityResponseListModel<BookingRequestsDto>> GetBookingsRequests(Guid? userId, string month, string year)
         {
+            var response = new EntityResponseListModel<BookingRequestsDto>();
             if (!string.IsNullOrEmpty(month) || !string.IsNullOrEmpty(year))
             {
-                return _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BookingRequestsDto>>(await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString() && res.BookingStatus == BookingStatus.Pending && (res.CheckinDate.Month.ToString() == month && res.CheckinDate.Year.ToString() == year)).ConfigureAwait(false));
+                response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsDto>>(await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString() && res.BookingStatus == BookingStatus.Pending && (res.CheckinDate.Month.ToString() == month && res.CheckinDate.Year.ToString() == year)).ConfigureAwait(false));
             }
-            return _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BookingRequestsDto>>(await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString() && res.BookingStatus == BookingStatus.Pending).ConfigureAwait(false));
+            response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsDto>>(await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString() && res.BookingStatus == BookingStatus.Pending).ConfigureAwait(false));
+            return response;
         }
 
-        public async Task<ICollection<BookingRequestsDto>> GetDroppedServices(Guid? userId) => _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BookingRequestsDto>>
+        public async Task<EntityResponseListModel<BookingRequestsDto>> GetDroppedServices(Guid? userId)
+        {
+            var response = new EntityResponseListModel<BookingRequestsDto>();
+            response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsDto>>
             (await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
             && res.BookingStatus == BookingStatus.Rejected).ConfigureAwait(false));
-
+            return response;
+        }
         public async Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted)
         {
             var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);

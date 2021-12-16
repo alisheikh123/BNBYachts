@@ -13,7 +13,7 @@ export class ReservationListsService {
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
   getBookedServices(serviceType:number) {
-    return this.http.get(this.bookingApiUrl + '/booked-services').pipe(
+    return this.http.get(this.bookingApiUrl + '/booked-services?serviceType='+serviceType).pipe(
       catchError(this.errorService.handleError));
   }
   getBoatelBookingRequests(Month?: string, Year?: string) {

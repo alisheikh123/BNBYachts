@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\BnBYachts.Shared\BnBYachts.Shared.csproj" />
     <ProjectReference Include="..\..\..\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
     <ProjectReference Include="..\BnBYachts.Booking.Application.Contracts\BnBYachts.Booking.Application.Contracts.csproj" />
     <ProjectReference Include="..\BnBYachts.Booking.Domain.Shared\BnBYachts.Booking.Domain.Shared.csproj" />

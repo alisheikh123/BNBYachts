@@ -27,8 +27,8 @@ export class BookedServicesComponent implements OnInit {
 
 
   getBookedServices() {
-    this.reservationService.getBookedServices(this.selectedServiceType).subscribe(res => {
-      this.bookedServices = res;
+    this.reservationService.getBookedServices(this.selectedServiceType).subscribe((res:any) => {
+      this.bookedServices = res?.data;
       this.bookedServices.forEach((element: any) => {
         this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
           element.boatDetail = boatdetail;
@@ -39,6 +39,7 @@ export class BookedServicesComponent implements OnInit {
   
   filterServiceType(serviceType: number) {
     this.selectedServiceType = serviceType;
+    debugger;
     this.getBookedServices();
   }
 

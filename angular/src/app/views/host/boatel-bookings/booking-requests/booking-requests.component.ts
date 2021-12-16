@@ -15,7 +15,7 @@ export class BookingRequestsComponent implements OnInit {
   date: any;
   selectedYear: string = "";
   selectedMonth: string = "";
-  @Input() boatelBookings: any;
+  @Input() boatelBookings: any = [];
   selectedServiceType: string = "Service Type";
   SERVICE_TYPES = ServiceType;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
@@ -30,8 +30,8 @@ export class BookingRequestsComponent implements OnInit {
   }
 
   getReservations() {
-    this.reservationService.getBoatelBookingRequests(this.selectedMonth, this.selectedYear).subscribe(res => {
-      this.boatelBookings = res;
+    this.reservationService.getBoatelBookingRequests(this.selectedMonth, this.selectedYear).subscribe((res:any) => {
+      this.boatelBookings = res?.data;
       this.boatelBookings.forEach((element: any) => {
         this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
           element.boatDetail = boatdetail;

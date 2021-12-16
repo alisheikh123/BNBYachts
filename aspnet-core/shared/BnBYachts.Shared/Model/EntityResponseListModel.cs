@@ -8,8 +8,8 @@ namespace BnBYachts.Shared.Model
     {
         public bool ReturnStatus { get; set; }
         public List<String> ReturnMessage { get; set; }
-        public Hashtable Errors;
-        public List<T> Data;
+        public Hashtable Errors { get; set; }
+        public List<T> Data { get; set; }
         public EntityResponseListModel()
         {
             ReturnMessage = new List<String>();
