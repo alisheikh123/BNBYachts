@@ -1,4 +1,5 @@
-﻿using BnBYachts.Boat.Shared.Boat.Requestable;
+﻿using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
@@ -27,7 +28,7 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
         Task<bool> UpdateBoatLocation(BoatLocationRequestable boatDetails, Guid? userId);
         #endregion
         Task<bool> UpdateboatStatus(long boatId);
-        Task<ICollection<BoatEntity>> GetHostBoats(Guid? userId);
+        Task<ICollection<BoatDTO>> GetHostBoats(Guid? userId);
         Task<ICollection<FeatureEntity>> GetDefaultFeatures();
     }
 }

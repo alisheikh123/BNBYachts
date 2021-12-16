@@ -1,0 +1,25 @@
+<div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile" *ngFor="let item of hostCharters">
+    <div class="image-with-text custom-flex-between align-items-center">
+        <div class="image-with-text-inner">
+            <div *ngFor="let img of item?.boat?.boatGalleries | filterBy : 'isCoverPic':true">
+                <img src="{{assetsUrl + img.imagePath}}" alt="">
+            </div>
+            <div class="user-details">
+                <p class="medium py-2">{{item?.boat?.name}}</p>
+                <p class="">Listing Status:<span
+                        [ngClass]="{'text-success' : item?.boat.isActive, 'text-danger':!item?.boat.isActive}">{{item?.boat?.isActive
+                        ? "Active":"Deactive"}}</span></p>
+                <p class=" py-2">{{item?.boat?.boatType==BOAT_TYPE.Yacht?
+                    "Yacht":item?.boat?.boatType==BOAT_TYPE.PowerBoat?"Power
+                    Boat":item?.boat?.boatType==BOAT_TYPE.Pontoon?"Pontoon":item?.boat?.boatType==BOAT_TYPE.FishingBoat?"Fishing
+                    Boat":item?.boat?.boatType==BOAT_TYPE.SailBoat?"Sail
+                    Boat":item?.boat?.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
+                </p>
+                <p class=" ">{{item?.boat?.creationTime | date}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="hostCharters?.length == 0">
+    <app-not-found-component></app-not-found-component>
+</div>
