@@ -3,7 +3,7 @@
 namespace BnBYachts.Chat
 {
     
-    public class UtilityModule : AbpModule
+    public class SharedModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
