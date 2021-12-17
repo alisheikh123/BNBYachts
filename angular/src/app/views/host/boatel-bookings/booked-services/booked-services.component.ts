@@ -39,7 +39,6 @@ export class BookedServicesComponent implements OnInit {
   
   filterServiceType(serviceType: number) {
     this.selectedServiceType = serviceType;
-    debugger;
     this.getBookedServices();
   }
 

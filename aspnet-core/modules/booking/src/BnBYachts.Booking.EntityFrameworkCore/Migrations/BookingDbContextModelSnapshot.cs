@@ -280,14 +280,14 @@ namespace BnBYachts.Booking.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BankingDetailsId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BankingDetailsId")
+                        .HasColumnType("int");
 
                     b.Property<int>("BookingStatus")
                         .HasColumnType("int");
 
-                    b.Property<string>("CharterId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CharterId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
