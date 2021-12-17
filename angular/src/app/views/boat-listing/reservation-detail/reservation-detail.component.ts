@@ -25,6 +25,7 @@ export class ReservationDetailComponent implements OnInit {
   isCurrentDateGreater: any;
   isPosted: boolean;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
+  boatDetail: any;
   constructor(private service: BookingService, public activatedRoute: ActivatedRoute, private route: Router, private modal: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class ReservationDetailComponent implements OnInit {
           elem.TotalDays = this.totalDays;
           elem.checkinDate = this.checkInDate;
           elem.checkoutDate = this.checkOutDate;
+          this.boatDetail = boatdetail;
           // if(this.checkInDate<this.currentDate)
           // {
           //   this.isCurrentDateGreater=false;
@@ -90,8 +92,8 @@ export class ReservationDetailComponent implements OnInit {
     });
   }
   isBookingPassed(): boolean {
-    let parsedDate = Date.parse(this.checkOutDate);
-    let today = Date.parse(new Date().toISOString().slice(0, 10));
+    let parsedDate = Date.parse(this.boatDetail.checkoutTime);
+    let today = Date.parse(new Date().toISOString());
     return (today > parsedDate) ? true : false;
   }
 

@@ -204,6 +204,12 @@ export class ReservationCancellationComponent implements OnInit {
               // });
             }
           }
+          // #region Set data for Host
+          if (this.isHost) {
+            elem.deductedAmount = (elem.boatDetail.perDayCharges * elem.TotalDays + 20 + elem.boatDetail.taxFee) * 0.029 + 0.030;
+            elem.totalAmount = elem.totalreservationFee -   elem.deductedAmount;
+          }
+          // #endregion
         });
       });
     });
@@ -290,8 +296,8 @@ export class ReservationCancellationComponent implements OnInit {
     });
   }
   isBookingPassed(): boolean {
-    let parsedDate = Date.parse(this.checkOutDate);
-    let today = Date.parse(new Date().toISOString().slice(0, 10));
-    return (today > parsedDate) ? true : false;
+    let parsedDate = Date.parse(this.checkoutCombindDateTime);
+    let today = Date.parse(new Date().toString());
+    return today > parsedDate ? true : false;
   }
 }
