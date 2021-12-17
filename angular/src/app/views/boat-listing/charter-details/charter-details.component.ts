@@ -28,7 +28,7 @@ export class CharterDetailsComponent implements OnInit {
   dateScheduleIndex = 0;
   charterFilterDetails = {
     departureDate: new Date(),
-    adults: 0,
+    adults: 1,
     childrens: 0
   };
   popOverFilterData = {
@@ -46,9 +46,6 @@ export class CharterDetailsComponent implements OnInit {
       this.charterId = Number(res['id']);
     });
     this.getCharterDetailsById();
-    if (this.yachtParamService.getFilters()) {
-      this.charterFilterDetails = this.yachtParamService.getFilters();
-    }
   }
 
 
@@ -85,7 +82,7 @@ export class CharterDetailsComponent implements OnInit {
     if ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens) > 0) {
       let bookingModel = {
         charterId: this.charterId,
-        departureDate: this.charterFilterDetails.departureDate,
+        departureDate: this.charterDetails.departureDate,
         noOfAdults: this.charterFilterDetails.adults,
         noOfChildrens: this.charterFilterDetails.childrens,
         hostId: this.charterDetails.boat.creatorId,

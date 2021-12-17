@@ -24,6 +24,7 @@ namespace BnBYachts.Booking
             CreateMap<BoatelBookingTransferableDto, BoatelBookingEntity>();
             CreateMap<CharterBookingRequestableDto, CharterBookingEntity>();
             CreateMap<BoatelBookingRequestableDto, BoatelBookingEntity>();
+            CreateMap<EventBookingRequestableDto, EventBookingEntity>();
         }
     }
 }
