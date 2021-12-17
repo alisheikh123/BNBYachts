@@ -20,17 +20,20 @@ namespace BnBYachts.Booking.Managers
     {
         private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
         private readonly IRepository<CharterBookingEntity, int> _charterBookingRepository;
-        //private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
+        private readonly IRepository<EventBookingEntity, int> _eventBookingRepository;
         private readonly IRepository<BookingCancelEntity, int> _boatelCanceRepository;
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly IObjectMapper<BookingDomainModule> _objectMapper;
-        public BoatBookingManager(IRepository<CharterBookingEntity, int> charterBookingRepository, IObjectMapper<BookingDomainModule> objectMapper, IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel, EventBusDispatcher eventBusDispatcher)
+        public BoatBookingManager(IRepository<CharterBookingEntity, int> charterBookingRepository, IObjectMapper<BookingDomainModule> objectMapper,
+            IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel, EventBusDispatcher eventBusDispatcher
+            , IRepository<EventBookingEntity, int> eventBookingRepository)
         {
             _boatelBookingRepository = repository;
             _boatelCanceRepository = repositorycancel;
             _eventBusDispatcher = eventBusDispatcher;
             _objectMapper = objectMapper;
             _charterBookingRepository = charterBookingRepository;
+            _eventBookingRepository = eventBookingRepository;
         }
 
         public async Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data, Guid? userId, string userName)
@@ -71,6 +74,31 @@ namespace BnBYachts.Booking.Managers
             {
                 To = email,
                 Subject = "Charter Booked",
+                Body = new StringBuilder().Append(body),
+                IsBodyHtml = true
+            });
+            #endregion
+            return new EntityResponseModel()
+            {
+                ReturnStatus = true,
+                Errors = null,
+                Data = response
+            };
+        }
+        public async Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data, Guid? userId, string email)
+        {
+            var eventEntity = _objectMapper.Map<EventBookingRequestableDto, EventBookingEntity>(data);
+            eventEntity.LastModifierId = eventEntity.CreatorId = userId;
+            eventEntity.UserId = userId.ToString();
+            eventEntity.BookingStatus = BookingStatus.Pending;
+            eventEntity.PaymentStatus = PaymentStatus.Pending;
+            var response = await _eventBookingRepository.InsertAsync(eventEntity, autoSave: true).ConfigureAwait(false);
+            #region Send-Email
+            string body = $"<h4> Your event has been booked successfuly. Please wait for the host's approval. </h4>";
+            await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            {
+                To = email,
+                Subject = "Event Booked",
                 Body = new StringBuilder().Append(body),
                 IsBodyHtml = true
             });

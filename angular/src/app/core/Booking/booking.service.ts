@@ -20,6 +20,10 @@ export class BookingService {
     return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/charter-booking', model).pipe(
       catchError(this.handleError));
   }
+  eventBooking(model: any) {
+    return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/event-booking', model).pipe(
+      catchError(this.handleError));
+  }
 
   modifyboatelBooking(model: any) {
     return this.http.post(this.bookingApiUrl + '/api/app/boat-booking/modify-boatel-booking', model).pipe(
