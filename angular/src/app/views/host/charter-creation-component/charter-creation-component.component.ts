@@ -5,10 +5,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CharterService } from 'src/app/core/host/charter.service';
 import { Router } from '@angular/router';
+import { utils } from 'src/app/shared/utility/utils';
 
 @Component({
   selector: 'app-charter-creation-component',
-  templateUrl: './charter-creation-component.component.html'
+  templateUrl: './charter-creation-component.component.html',
+  styleUrls: ['./charter-creation-component.scss']
+
 })
 export class CharterCreationComponentComponent implements OnInit {
   public dateValue:Date = new Date();
@@ -20,10 +23,8 @@ export class CharterCreationComponentComponent implements OnInit {
   currentTab = this.CHARTER_TABS.BoatSelection;
   boatlistOptions:any=[];
   isAgree: boolean = false;
-  boatCalendar = {
-    startDate: new Date(),
-    endDate: new Date(),
-  };
+
+
 
   ngOnInit(): void {
 
@@ -53,10 +54,17 @@ export class CharterCreationComponentComponent implements OnInit {
     });
   }
   submit() {
+
+    if(this.charterCreationForm.valid){
       let data = this.charterCreationForm.value;
       this.service.saveCharter(data).subscribe((res: any) => {
           this.openModal(this.templateRef);
       });
+    }
+    else
+    {
+      this.toastr.error('Invalid Form Data ', 'Error');
+    }
   }
   get charterForm() {
     return this.charterCreationForm.controls;
