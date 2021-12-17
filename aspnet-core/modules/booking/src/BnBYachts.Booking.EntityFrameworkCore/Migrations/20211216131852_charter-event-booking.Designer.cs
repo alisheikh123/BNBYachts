@@ -4,15 +4,17 @@ using BnBYachts.Booking.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace BnBYachts.Booking.Migrations
 {
     [DbContext(typeof(BookingDbContext))]
-    partial class BookingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211216131852_charter-event-booking")]
+    partial class chartereventbooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,9 +165,6 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<string>("BankingDetailsId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BookingStatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -283,9 +282,6 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<string>("BankingDetailsId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BookingStatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("CharterId")
                         .HasColumnType("nvarchar(max)");
 
@@ -309,9 +305,6 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
-
-                    b.Property<string>("HostId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")

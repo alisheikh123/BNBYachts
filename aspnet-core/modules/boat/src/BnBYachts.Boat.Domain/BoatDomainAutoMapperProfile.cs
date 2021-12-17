@@ -34,7 +34,6 @@ namespace BnBYachts.Boat
                     opt =>
                         opt.MapFrom(source => (source.BoatRules)))
                 .Ignore(x => x.BoatCalendars);
-                
             CreateMap<BoatEntity, HostBoatRequestable>();
             CreateMap<BoatEntity,BoatDTO>();
             CreateMap<BoatGalleryEntity, BoatGalleryDTO>();
@@ -46,7 +45,7 @@ namespace BnBYachts.Boat
             CreateMap<BoatEntity, BoatDto>();
             CreateMap<CharterEntity, CharterDto>();
             CreateMap<CharterDto, CharterEntity>();
-            
+            CreateMap<BoatEntity, BoatLookupTransferable>();
         }
     }
 }

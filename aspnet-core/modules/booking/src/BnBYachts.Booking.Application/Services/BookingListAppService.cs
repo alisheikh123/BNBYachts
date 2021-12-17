@@ -1,0 +1,31 @@
+﻿using BnBYachts.Booking.Booking;
+using BnBYachts.Booking.Booking.Transferables;
+using BnBYachts.Booking.Interfaces;
+using BnBYachts.Shared.Model;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
+
+namespace BnBYachts.Booking.Services
+{
+    public class BookingListAppService : ApplicationService, IBookingsListAppService
+    {
+        private readonly IBookingsListManager _bookingManager;
+        public BookingListAppService(IBookingsListManager manager)
+        {
+            _bookingManager = manager;
+        }
+        public async Task<EntityResponseListModel<BookingRequestsDto>> GetBookedServices(int serviceType) => await _bookingManager.GetBookedServices(CurrentUser.Id, serviceType).ConfigureAwait(false);
+
+        public async Task<EntityResponseListModel<BookingRequestsDto>> GetBookingsRequests(string month, string year)
+        {
+            var res = await _bookingManager.GetBookingsRequests(CurrentUser.Id, month, year).ConfigureAwait(false);
+            return res;
+        }
+
+        public async Task<EntityResponseListModel<BookingRequestsDto>> GetDroppedServices() => await _bookingManager.GetDroppedServices(CurrentUser.Id).ConfigureAwait(false);
+
+        public async Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted) => await _bookingManager.UpdateReservationStatus(bookingId, isAccpeted).ConfigureAwait(false);
+
+    }
+}
