@@ -1,44 +1,45 @@
 ﻿using BnBYachts.Booking.Booking;
+using BnBYachts.Booking.Booking.Requestable;
 using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Shared.BoatBooking.Interface;
-using BnBYachts.Booking.Shared.BoatBooking.Transferable;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
+using BnBYachts.Shared.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
+using Volo.Abp.ObjectMapping;
 
 namespace BnBYachts.Booking.Managers
 {
-    public class HostBoatBookingManager : DomainService, IHostBoatBookingManager
+    public class BoatBookingManager : DomainService, IBoatBookingManager
     {
         private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
+        private readonly IRepository<CharterBookingEntity, int> _charterBookingRepository;
+        //private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
         private readonly IRepository<BookingCancelEntity, int> _boatelCanceRepository;
         private readonly EventBusDispatcher _eventBusDispatcher;
-
-
-        public HostBoatBookingManager(IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel, EventBusDispatcher eventBusDispatcher)
+        private readonly IObjectMapper<BookingDomainModule> _objectMapper;
+        public BoatBookingManager(IRepository<CharterBookingEntity, int> charterBookingRepository, IObjectMapper<BookingDomainModule> objectMapper, IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel, EventBusDispatcher eventBusDispatcher)
         {
             _boatelBookingRepository = repository;
             _boatelCanceRepository = repositorycancel;
             _eventBusDispatcher = eventBusDispatcher;
+            _objectMapper = objectMapper;
+            _charterBookingRepository = charterBookingRepository;
         }
 
-        public async Task<BoatelBookingTransferable> BoatelBooking(BoatelBookingEntity data, Guid? userId, string userName)
+        public async Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data, Guid? userId, string userName)
         {
-            BoatelBookingTransferable dto = new BoatelBookingTransferable();
-            data.LastModifierId = data.CreatorId = userId;
-            data.UserId = userId.ToString();
-            data.UserName = userName;
-            var response = await _boatelBookingRepository.InsertAsync(data, autoSave: true).ConfigureAwait(false);
-            dto.isSucces = true;
-            dto.BookingId = response.Id;
+            var boatelEntity = _objectMapper.Map<BoatelBookingRequestableDto, BoatelBookingEntity>(data);
+            boatelEntity.LastModifierId = boatelEntity.CreatorId = userId;
+            boatelEntity.UserId = userId.ToString();
+            boatelEntity.UserName = userName;
+            var response = await _boatelBookingRepository.InsertAsync(boatelEntity, autoSave: true).ConfigureAwait(false);
             #region Send-Email
             string body = $"<h4> Your boat has been booked successfuly. Please wait for the host's approval. </h4>";
             await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
@@ -49,9 +50,39 @@ namespace BnBYachts.Booking.Managers
                 IsBodyHtml = true
             });
             #endregion
-            return dto;
+            return new EntityResponseModel()
+            {
+                ReturnStatus = true,
+                Errors = null,
+                Data = response
+            };
         }
-        public async Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName)
+        public async Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data, Guid? userId, string email)
+        {
+            var charterEntity = _objectMapper.Map<CharterBookingRequestableDto, CharterBookingEntity>(data);
+            charterEntity.LastModifierId = charterEntity.CreatorId = userId;
+            charterEntity.UserId = userId.ToString();
+            charterEntity.BookingStatus = BookingStatus.Pending;
+            charterEntity.PaymentStatus = PaymentStatus.Pending;
+            var response = await _charterBookingRepository.InsertAsync(charterEntity, autoSave: true).ConfigureAwait(false);
+            #region Send-Email
+            string body = $"<h4> Your charter has been booked successfuly. Please wait for the host's approval. </h4>";
+            await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            {
+                To = email,
+                Subject = "Charter Booked",
+                Body = new StringBuilder().Append(body),
+                IsBodyHtml = true
+            });
+            #endregion
+            return new EntityResponseModel()
+            {
+                ReturnStatus = true,
+                Errors = null,
+                Data = response
+            };
+        }
+        public async Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data, Guid? userId, string userName)
         {
 
             var booking = await _boatelBookingRepository.GetAsync(data.Id);
@@ -65,7 +96,6 @@ namespace BnBYachts.Booking.Managers
                 booking.PaymentStatus = data.PaymentStatus;
                 booking.LastModificationTime = DateTime.Now;
                 booking.LastModifierId = userId;
-
                 return true;
             }
             else
@@ -73,20 +103,7 @@ namespace BnBYachts.Booking.Managers
                 return false;
             }
         }
-
-        public async Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail(string userId)
-        {
-            var Booking = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate == DateTime.Today).ConfigureAwait(false);
-            return Booking;
-        }
-
-        public async Task<ICollection<BoatelBookingEntity>> BoatelBooking(int bookingId)
-        {
-            var booking = await _boatelBookingRepository.GetListAsync(x => x.Id == bookingId).ConfigureAwait(false);
-            return booking;
-        }
-
-        public async Task<bool> IsBookingCancel(BookingCancellationDto data, string userId)
+        public async Task<bool> IsBookingCancel(BookingCancellationRequestableDto data, string userId)
         {
             if (data != null)
             {
@@ -134,40 +151,6 @@ namespace BnBYachts.Booking.Managers
             return false;
         }
 
-
-        public async Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId,string month, string year)
-        {
-            if (!string.IsNullOrEmpty(month) || !string.IsNullOrEmpty(year))
-            {
-                var filteredPastBooking = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate < DateTime.Today && (x.CheckinDate.Month.ToString() == month && x.CheckinDate.Year.ToString() == year)).ConfigureAwait(false);
-                return filteredPastBooking;
-            }
-            var pastBooking = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate < DateTime.Today).ConfigureAwait(false);
-            return pastBooking;
-        }
-
-        public async Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId,string month, string year)
-        {
-            if (!string.IsNullOrEmpty(month) || !string.IsNullOrEmpty(year))
-            {
-                var filteredUpcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate > DateTime.Today && (x.CheckinDate.Month.ToString() == month && x.CheckinDate.Year.ToString() == year)).ConfigureAwait(false);
-                return filteredUpcomingBookings;
-            }
-            var upcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.UserId == userId && x.CheckinDate > DateTime.Today).ConfigureAwait(false);
-            return upcomingBookings;
-        }
-
-        public async Task<ICollection<BoatelBookingEntity>> GetMyBookings(string userId)
-        {
-            var myBookings = await _boatelBookingRepository.GetListAsync(x => x.CreatorId.ToString() == userId).ConfigureAwait(false);
-            return myBookings;
-        }
-
-        public async Task<ICollection<BoatelBookingEntity>> UpcomingHostBoatelBookingDetail(string userId)
-        {
-            var upcomingBookings = await _boatelBookingRepository.GetListAsync(x => x.HostId == userId && x.CheckinDate > DateTime.Today).ConfigureAwait(false);
-            return upcomingBookings;
-        }
     }
 }
 

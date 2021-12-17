@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 
@@ -10,10 +11,10 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 export class HostDashboardComponent implements OnInit {
   upcomingReservations: any;
 
-  constructor(private reservationService : BookingService,private boatService: YachtSearchService) { }
+  constructor(private service: BookingListingService, private boatService: YachtSearchService) { }
 
   ngOnInit(): void {
-    this.reservationService.getUpcomingHostBookingDetail().subscribe(res => {
+    this.service.getHostBookings().subscribe(res => {
       this.upcomingReservations = res;
       this.upcomingReservations.forEach((element: any) => {
         this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {

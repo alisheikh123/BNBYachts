@@ -1,5 +1,5 @@
 <div class="main-wrapper">
-    <div class="reservation-page section-padding charter-cancelation" *ngFor="let b of bookingCancelDetail">
+    <div class="reservation-page section-padding charter-cancelation">
         <div class="container">
 
             <div class="row col-md-12">
@@ -18,8 +18,8 @@
                     <div class="price-detail py-4">
                         <h5 class="bold pt-3 pb-1">Refund Details</h5>
                         <div class="custom-flex-between">
-                            <p>{{b?.boatDetail.perDayCharges}} x {{ b.TotalDays}} Night</p>
-                            <p class=" text-right py-1">{{b?.boatDetail.perDayCharges * b.TotalDays }}.00 $</p>
+                            <p>{{bookingCancelDetail?.boatDetail?.perDayCharges}} x {{ bookingCancelDetail?.TotalDays}} Night</p>
+                            <p class=" text-right py-1">{{bookingCancelDetail?.boatDetail.perDayCharges * bookingCancelDetail?.TotalDays }}.00 $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p>Service Fee</p>
@@ -31,21 +31,21 @@
                         </div> -->
                         <div class="custom-flex-between">
                             <p>Tax Fee</p>
-                            <p class=" text-right py-1">{{b?.boatDetail.taxFee}}.00 $</p>
+                            <p class=" text-right py-1">{{bookingCancelDetail?.boatDetail.taxFee}}.00 $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p>Total(USD)</p>
-                            <p class=" text-right py-1">{{(b?.boatDetail.perDayCharges * b.TotalDays) + 20 +
-                                b?.boatDetail.taxFee}}.00 $</p>
+                            <p class=" text-right py-1">{{(bookingCancelDetail?.boatDetail.perDayCharges * bookingCancelDetail.TotalDays) + 20 +
+                                bookingCancelDetail?.boatDetail.taxFee}}.00 $</p>
                         </div>
                         <div class="border-top my-3"></div>
                         <div class="custom-flex-between">
                             <p class="medium">Deducted Amount(USD)</p>
-                            <p class="text-right py-1">{{b?.deductedAmount}}.00 $</p>
+                            <p class="text-right py-1">{{bookingCancelDetail?.deductedAmount}}.00 $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p class="medium">Refundable Amount(USD)</p>
-                            <p class="text-right py-1">{{b?.totalAmount}}.00 $</p>
+                            <p class="text-right py-1">{{bookingCancelDetail?.totalAmount}}.00 $</p>
                         </div>
                     </div>
                 </div>
@@ -54,39 +54,39 @@
                         <h5 class="bold py-2">Reservation Details</h5>
                         <div class="custom-flex-start">
                             <p class="medium">Boat Name:</p>
-                            <p class="grey text-right py-1">{{b.boatDetail.name}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail.boatDetail.name}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check In Date:</p>
-                            <p class="grey text-right py-1">{{b.checkinDate | date}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail.checkinDate | date}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check Out Date:</p>
-                            <p class="grey text-right py-1">{{b.checkoutDate | date}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail.checkoutDate | date}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">No of Guest:</p>
-                            <p class="grey text-right py-1">{{b.noOfAdults + b.noOfChildrens}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.noOfAdults + bookingCancelDetail?.noOfChildrens}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Location :</p>
-                            <p class="grey text-right py-1">{{b?.boatDetail.location}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.location}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check In Time:</p>
-                            <p class="grey text-right py-1">{{b?.boatDetail.checkinTime | date:'h:mm a' }}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.checkinTime | date:'h:mm a' }}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check Out Time:</p>
-                            <p class="grey text-right py-1">{{b?.boatDetail.checkoutTime | date:'h:mm a'}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.checkoutTime | date:'h:mm a'}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Bedroom:</p>
-                            <p class="grey text-right py-1">{{b?.boatDetail.totalBedrooms}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.totalBedrooms}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Bathroom:</p>
-                            <p class="grey text-right py-1">{{b?.boatDetail.totalWashrooms}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.totalWashrooms}}</p>
                         </div>
                         <div class="custom-margin" *ngIf="!isHost">
                             <h5 class="bold mb-1">{{'CancellationPolicy' | localization}}</h5>
@@ -111,13 +111,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="b?.bookingStatus != BOOKING_STATUS.Rejected && b?.bookingStatus != BOOKING_STATUS.Cancel">
+            <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="bookingCancelDetail?.bookingStatus != BOOKING_STATUS.Rejected && bookingCancelDetail?.bookingStatus != BOOKING_STATUS.Cancel">
                 <div class="center-content">
                     <button class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">I changed my
                         mind</button>&nbsp;&nbsp;
-                    <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(template,b)">Confirm Cancellation</a>
-                    <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,b)">Confirm Cancellation</a>
-                    <a (click)="addReview(b?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">Add
+                    <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(template,bookingCancelDetail)">Confirm Cancellation</a>
+                    <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,bookingCancelDetail)">Confirm Cancellation</a>
+                    <a (click)="addReview(bookingCancelDetail?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">Add
                         Review</a>
                 </div>
             </div>
