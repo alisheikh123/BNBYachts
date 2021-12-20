@@ -39,10 +39,9 @@
                                             <label>{{'BoatListing' | localization}}</label>
                                             <select name="select" id="select" formControlName="boatId"
                                             (change)="getBoatBookedDates()"
-                                                [ngClass]="{  'is-invalid':submitted && form.boatId.errors }"
-                                                *ngFor="let item of boats">
+                                                [ngClass]="{  'is-invalid':submitted && form.boatId.errors }">
                                                 <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
-                                                <option [ngValue]="item.id">{{item?.name}}</option>
+                                                <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
                                             </select>
                                             <small class="text-danger"
                                                 *ngIf="((form.boatId.dirty && form.boatId.touched || submitted) && form.boatId.hasError('required'))">
