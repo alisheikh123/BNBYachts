@@ -14,7 +14,7 @@ import { UserRoles } from 'src/app/shared/enums/user-roles';
 export class MyProfileComponent implements OnInit {
   userResponse: any;
   userBoats: any;
-  assetsUrl = environment.BOAT_API_URL + '/boatGallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   USER_ROLE = UserRoles;
   loggedInUserRole: string | null;
 
