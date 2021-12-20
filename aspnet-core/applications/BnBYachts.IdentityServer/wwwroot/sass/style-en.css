@@ -4698,7 +4698,7 @@ input::-webkit-inner-spin-button {
 }
 
 * {
-  -webkit-box-sizing: border-box;
+/*  -webkit-box-sizing: border-box;
           box-sizing: border-box;
   
 }
