@@ -20,14 +20,14 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
-        [Route("GetLoggedInUserDetails")]
+        [Route("api/GetLoggedInUserDetails")]
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails()
         {
             return await _appUserManager.GetLoggedInUserDetails(CurrentUser.Id);
         }
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetUserDetailsByUserName")]
+        [Route("api/GetUserDetailsByUserName")]
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             return await _appUserManager.GetUserDetailsByUserName(username);
@@ -35,7 +35,7 @@ namespace BnBYachts.Core.Services
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetUserDetailsById/{userId}")]
+        [Route("api/GetUserDetailsById/{userId}")]
         public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId)
         {
             try
@@ -50,7 +50,7 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
-        [Route("AddHostRole")]
+        [Route("api/AddHostRole")]
         public async Task<bool> AddHostRole()
         {
             return await _appUserManager.AddHostRole(CurrentUser.Id.ToString());
@@ -58,14 +58,14 @@ namespace BnBYachts.Core.Services
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("Register")]
+        [Route("api/Register")]
         public async Task<ResponseDto> UserRegister(UserRegisterTransferable userInput)
         {
             return await _appUserManager.RegisterUser(userInput);
         }
         [HttpGet]
         [AllowAnonymous]
-        [Route("Confirm-Email")]
+        [Route("api/Confirm-Email")]
         public async Task<bool> ConfirmEmail(string username, string token)
         {
             bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
@@ -73,7 +73,7 @@ namespace BnBYachts.Core.Services
         }
         [HttpGet]
         [AllowAnonymous]
-        [Route("Resend-Email")]
+        [Route("api/Resend-Email")]
         public async Task<bool> ResendEmail(string username)
         {
             await _appUserManager.ResendEmail(username);
@@ -81,7 +81,7 @@ namespace BnBYachts.Core.Services
         }
 
         [AllowAnonymous]
-        [Route("Update-User-Profile")]
+        [Route("api/Update-User-Profile")]
         public async Task<bool> UpdateUserProfile(UserProfileRequestable userInput)
         {
             userInput.Id = CurrentUser.Id.ToString();
