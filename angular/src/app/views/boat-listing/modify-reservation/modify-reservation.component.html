@@ -1,15 +1,15 @@
-<div class="main-wrapper" *ngFor="let b of bookingModifyDetail">
+<div class="main-wrapper" >
     <div class="image-gallery-bannner section-padding">
         <div class="container">
             <div class="image-gallery-head-content white-text">
-                <h3 class="bold mb-2">{{b.boatDetail?.name}}</h3>
-                <p>{{b.boatDetail?.location}}</p>
+                <h3 class="bold mb-2">{{bookingModifyDetail?.boatDetail?.name}}</h3>
+                <p>{{bookingModifyDetail?.boatDetail?.location}}</p>
             </div>
             <div class="image-gallery-collage">
-                <div class="row" *ngIf="b.boatDetail?.boatGalleries?.length > 0">
+                <div class="row" *ngIf="bookingModifyDetail?.boatDetail?.boatGalleries?.length > 0">
                     <div class="col-md-6 py-2">
                         <div class="gallery-img-large custom-image-prev"
-                            *ngFor="let item of (b.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                            *ngFor="let item of (bookingModifyDetail?.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : true)">
                             <img src="{{assetsUrl + item?.imagePath}}" alt="">
                         </div>
                     </div>
@@ -17,7 +17,7 @@
                         <div class="gallery-images-small-wrapper">
                             <div class="row">
                                 <div class="col-sm-6 py-2"
-                                    *ngFor="let item of (b.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : false)">
+                                    *ngFor="let item of (bookingModifyDetail?.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : false)">
                                     <div class="gallery-images-small custom-image-prev">
                                         <img src="{{assetsUrl + item?.imagePath}}" alt="">
                                     </div>
@@ -43,12 +43,7 @@
                                 <button class="underline-link-blk active" id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">Boatel</button>
-                                <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-profile" type="button" role="tab"
-                                    aria-controls="v-pills-profile" aria-selected="false">Charter</button>
-                                <button class="underline-link-blk" id="v-pills-settings-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-settings" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false">Event</button>
+
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -60,27 +55,27 @@
                                                 <div class="tabs-inner-details-inner">
                                                     <div class="custom-flex-start py-1">
                                                         <p class="medium min-width-text">Location:</p>
-                                                        <p>{{b.boatDetail?.location}}</p>
+                                                        <p>{{bookingModifyDetail?.boatDetail?.location}}</p>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex">
                                                             <p class="medium min-width-text">Bedrooms:</p>
                                                             <p class="min-width-text-small">
-                                                                {{b.boatDetail?.totalBedrooms}}</p>
+                                                                {{bookingModifyDetail?.boatDetail?.totalBedrooms}}</p>
                                                         </div>
                                                         <div class="custom-flex">
                                                             <p class="medium min-width-text-small">Bathrooms:</p>
-                                                            <p>{{b.boatDetail?.totalWashrooms}}</p>
+                                                            <p>{{bookingModifyDetail?.boatDetail?.totalWashrooms}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1">
                                                         <p class="medium min-width-text">Check In time:</p>
-                                                        <p>{{b.boatDetail?.checkinTime | date :'hh:mm a'}}</p>
+                                                        <p>{{bookingModifyDetail?.boatDetail?.checkinTime | date :'hh:mm a'}}</p>
 
                                                     </div>
                                                     <div class="custom-flex-start py-1">
                                                         <p class="medium min-width-text">Check Out time:</p>
-                                                        <p>{{b.boatDetail?.checkoutTime | date:'hh:mm a'}}</p>
+                                                        <p>{{bookingModifyDetail?.boatDetail?.checkoutTime | date:'hh:mm a'}}</p>
                                                     </div>
                                                 </div>
                                                 <h6 class="bold mt-3">Approval policy</h6>
@@ -95,16 +90,16 @@
                                                         class="underline-blue-link py-2 no-underline">Read All</a>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 py-2">
-                                                <div class="row pb-2">
-                                                    <div class="col-md-6">
-                                                        <div class="row custom-border m-0">
-                                                            <div class="col-5">
-                                                                <div class="d-flex flex-column pl-2">
-                                                                    <small style="font-size: 12px;">Check-in</small>
+                                            <div class="col-xl-6 py-2">
+                                                <div class="row pb-2 m-0 check-in-out-wrap">
+                                                    <div class="col-md-6 py-2">
+                                                        <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row">
+                                                            <div class="">
+                                                                <div class="">
+                                                                    <label>Check-in</label>
                                                                     <input
-                                                                        style="border:none;cursor:pointer;font-size:12px"
                                                                         placeholder="Add date" name="dp"
+                                                                        container="body"
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
@@ -112,13 +107,12 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-2">|</div>
-                                                            <div class="col-5">
-                                                                <div class="d-flex flex-column">
-                                                                    <small style="font-size: 12px;">Check-out</small>
+                                                            <div class="border-left-1">
+                                                                <div class="">
+                                                                    <label>Check-out</label>
                                                                     <input
-                                                                        style="border:none;cursor:pointer;font-size:12px"
                                                                         placeholder="Add date" name="dp2"
+                                                                        container="body"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
                                                                         (ngModelChange)="changecheckoutDate($event)"
                                                                         (click)="d2.toggle()" ngbDatepicker
@@ -127,34 +121,31 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- <small class="text-danger"
-                                                            *ngIf="(boatFilterDetails?.checkinDate == '' || boatFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
-                                                            {{!boatFilterDetails.checkinDate ? 'check-in':'check-out'}}
-                                                            date</small> -->
+                                                        <small class="text-danger"
+                                                            *ngIf="(bookingModifyDetail?.checkinDate == '' || bookingModifyDetail?.checkoutDate == '')&& isSubmitted">Enter
+                                                            {{!bookingModifyDetail?.checkinDate ? 'check-in':'check-out'}}
+                                                            date</small>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="row custom-border m-0">
-                                                            <div class="col-12" [ngbPopover]="popContent"
-                                                                placement="bottom" autoClose="outside">
-                                                                <div class="row m-0">
-                                                                    <div class="col-12">
-                                                                        <small style="font-size: 12px;">Guests</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row m-0">
-                                                                    <small
-                                                                        style="border:none;cursor:pointer;font-size:12px"
-                                                                        class="col-6">{{boatFilterDetails.adults}}
-                                                                        Adults</small>
-                                                                    <small
-                                                                        style="border:none;cursor:pointer;font-size:12px"
-                                                                        class="col-6">{{boatFilterDetails.childrens}}
-                                                                        Children</small>
+                                                    <div class="col-md-6 py-2">
+                                                        <div class="">
+                                                            <div class="custom-flex select custom-select select-search custom-input-label-inside" [ngbPopover]="popContent"
+                                                            placement="bottom" autoClose="outside" triggers="manual"
+                                                            #popOver="ngbPopover"
+                                                            (click)="openPopover()"
+                                                            >
+                                                                <label>Guests</label>
+                                                                <div class="custom-flex w-100">
+                                                                    <p
+                                                                    class="counter-text-total">{{bookingModifyDetail?.noOfAdults}}
+                                                                        Adults</p>
+                                                                    <p
+                                                                    class="counter-text-total">{{bookingModifyDetail?.noOfChildrens}}
+                                                                        Children</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <small class="text-danger"
-                                                            *ngIf="(boatFilterDetails.adults == 0 && boatFilterDetails.childrens == 0) && isSubmitted">Enter
+                                                            *ngIf="(bookingModifyDetail?.adults == 0 && bookingModifyDetail?.childrens == 0) && isSubmitted">Enter
                                                             guests deteils.</small>
                                                     </div>
                                                 </div>
@@ -168,11 +159,11 @@
                                                                         <label>Adults</label>
                                                                         <div class="custom-flex-start">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults - 1;">-</span>
+                                                                                (click)="bookingModifyDetail.noOfAdults = bookingModifyDetail.noOfAdults - 1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="boatFilterDetails.adults" />
+                                                                                [(ngModel)]="bookingModifyDetail.noOfAdults" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="boatFilterDetails.adults = boatFilterDetails.adults + 1;">+</span>
+                                                                                (click)="bookingModifyDetail.noOfAdults = bookingModifyDetail.noOfAdults + 1;">+</span>
                                                                         </div>
                                                                     </div>
 
@@ -186,30 +177,34 @@
                                                                         <label>Children</label>
                                                                         <div class="custom-flex-start">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="this.boatFilterDetails.childrens = this.boatFilterDetails.childrens -1;">-</span>
+                                                                                (click)="bookingModifyDetail.noOfChildrens = bookingModifyDetail.noOfChildrens -1;">-</span>
                                                                             <input type="text"
-                                                                                [(ngModel)]="this.boatFilterDetails.childrens" />
+                                                                                [(ngModel)]="bookingModifyDetail.noOfChildrens" />
                                                                             <span class="plus" style="cursor: pointer;"
-                                                                                (click)="this.boatFilterDetails.childrens = this.boatFilterDetails.childrens +1;">+</span>
+                                                                                (click)="bookingModifyDetail.noOfChildrens = bookingModifyDetail.noOfChildrens +1;">+</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        <div class="col-12 pt-2">
+                                                            <div class="custom-flex-end">
+                                                              <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
+                                                            </div>
+                                                          </div>
                                                     </div>
                                                 </ng-template>
                                                 <div class="total-amount-wrap">
                                                     <div class="total-amount-wrap-inner">
-                                                        <p>$ {{b?.boatDetail.perDayCharges}} x {{calculateDays()}}
+                                                        <p>$ {{bookingModifyDetail?.boatDetail?.perDayCharges}} x {{calculateDays()}}
                                                             Nights
                                                         </p>
-                                                        <p>${{b?.boatDetail.perDayCharges * calculateDays()}}.00</p>
+                                                        <p>${{bookingModifyDetail?.boatDetail?.perDayCharges * calculateDays()}}.00</p>
 
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
                                                         <p>Tax</p>
-                                                        <p>${{b?.boatDetail.taxFee}}.00</p>
+                                                        <p>${{bookingModifyDetail?.boatDetail?.taxFee}}.00</p>
 
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
@@ -224,9 +219,9 @@
                                                     </div>
                                                     <div class="total-amount-wrap-inner bottom">
                                                         <p class="medium">Total(USD)</p>
-                                                        <p class="medium">$ {{b?.boatDetail.perDayCharges *
+                                                        <p class="medium">$ {{bookingModifyDetail?.boatDetail?.perDayCharges *
                                                             calculateDays()+(this.perdayFee || 0) +
-                                                            b?.boatDetail.taxFee+ 20}}.00</p>
+                                                            bookingModifyDetail?.boatDetail?.taxFee+ 20}}.00</p>
 
                                                     </div>
                                                     <button class="custom-btn blue" (click)="reserveBoat()">Modify
@@ -238,6 +233,54 @@
                                     </div>
                                 </div>
 
+                                <ng-template #popContent>
+                                    <div class="row p-2">
+                                        <div class="col-12">
+                                            <div class="counter-input-wrapper">
+                                                <div class="number border-0 p-0 w-100">
+                                                    <div class="custom-flex-start w-100">
+                                                        <label class="m-0 max-width-50">Adults</label>
+                                                        <div class="custom-flex-start max-width-50">
+                                                            <span class="minus" style="cursor: pointer;"
+                                                                (click)="popOverFilterData.adults = popOverFilterData.adults - 1;">-</span>
+                                                            <input type="text"
+                                                                [(ngModel)]="popOverFilterData.adults" />
+                                                            <span class="plus" style="cursor: pointer;"
+                                                                (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="counter-input-wrapper">
+                                                <div class="number border-0 p-0 w-100">
+                                                    <div class="custom-flex-start w-100">
+
+                                                      <div class="max-width-50">
+                                                        <label class="m-0">Children</label>
+                                                        <label class="grey small-txt m-0 extra-small-text">Ages 0-13</label>
+                                                      </div>
+                                                        <div class="custom-flex-start max-width-50">
+                                                            <span class="minus" style="cursor: pointer;"
+                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                            <input type="text"
+                                                                [(ngModel)]="popOverFilterData.childrens" />
+                                                            <span class="plus" style="cursor: pointer;"
+                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens +1;">+</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 pt-2">
+                                          <div class="custom-flex-end">
+                                            <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
                                 <!-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                 <div class="tabs-inner-details">
                                     <div class="row align-items-end">
@@ -385,15 +428,15 @@
                 </div>
                 <div class="section-padding">
                     <h5 class="bold">About the boat</h5>
-                    <p class="max-width-content py-2">{{b.boatDetail?.description}}</p>
+                    <p class="max-width-content py-2">{{bookingModifyDetail?.boatDetail?.description}}</p>
                 </div>
                 <div class="section-padding">
                     <div class="what-offers">
-                        <div class="row" *ngIf="b.boatDetail?.boatFeatures">
+                        <div class="row" *ngIf="bookingModifyDetail?.boatDetail?.boatFeatures">
                             <div class="col-md-6">
                                 <h5 class="bold">What this Boat offers</h5>
-                                <div class="custom-flex-start">
-                                    <!-- <div class="offerings" style="width: 100%;">
+                                 <div class="custom-flex-start">
+                                    <div class="offerings" style="width: 100%;">
                                         <div class="row">
                                             <div class="col-6"
                                                 *ngFor="let item of (showMore ? featureFilter(false,false):(featureFilter(false,false)) | slice:0:4)">
@@ -402,10 +445,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                    </div> -->
-
-
-
+                                    </div>
                                     <!-- <div class="offerings">
                                         <p *ngFor="let item of featureFilter(false,false) | mySlice:3:6"><i
                                                 class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
@@ -415,7 +455,7 @@
                                 <button (click)="showMore = !showMore;" class="custom-btn outline-blue-clr my-2">Show
                                     {{showMore ? 'less' :'all'}}</button>
                             </div>
-                            <!-- <div class="col-md-6">
+                            <div class="col-md-6">
                                 <h5 class="bold">Favourites</h5>
                                 <div class="custom-flex-start">
                                     <div class="offerings">
@@ -429,7 +469,7 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -440,7 +480,7 @@
                                 <h5 class="bold">Boat Rules</h5>
                                 <div class="custom-flex-start">
                                     <div class="offerings">
-                                        <p *ngFor="let item of b.boatDetail?.boatRules"><i
+                                        <p *ngFor="let item of bookingModifyDetail?.boatDetail?.boatRules"><i
                                                 class="fa {{item?.offeredRule?.icon}}"></i>{{item?.offeredRule?.name}}
                                         </p>
                                     </div>
@@ -448,14 +488,14 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-6" *ngIf="b.boatDetail?.boatFeatures">
+                            <div class="col-md-6" *ngIf="bookingModifyDetail?.boatDetail?.boatFeatures">
                                 <h5 class="bold">Health & Safety</h5>
                                 <div class="custom-flex-start">
-                                    <!-- <div class="offerings">
+                                    <div class="offerings">
                                         <p *ngFor="let item of featureFilter(false,true)"><i
                                                 class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
                                         </p>
-                                    </div> -->
+                                    </div>
 
                                 </div>
                             </div>
@@ -483,9 +523,9 @@
                                     <div class="col-md-6 py-2">
                                         <div class="custom-card-img-bottom-text-wrap">
                                             <div class="custom-card-img-bottom-text-wrap-inner"
-                                                *ngIf="b.boatDetail?.boatGalleries?.length > 0">
+                                                *ngIf="bookingModifyDetail?.boatDetail?.boatGalleries?.length > 0">
                                                 <div class="card"
-                                                    *ngFor="let item of (b.boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                    *ngFor="let item of (bookingModifyDetail?.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : true)">
                                                     <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                         alt="...">
                                                     <div class="card-body bg-white">
@@ -501,7 +541,7 @@
                                         <div class="custom-card-img-bottom-text-wrap">
                                             <div class="custom-card-img-bottom-text-wrap-inner">
                                                 <div class="card"
-                                                    *ngFor="let item of (b.boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                    *ngFor="let item of (bookingModifyDetail?.boatDetail?.boatGalleries | filterBy : 'isCoverPic' : true)">
                                                     <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                         alt="...">
                                                     <div class="card-body bg-white">
@@ -518,14 +558,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="host-details section-padding">
+                <div class="host-details section-padding">
                     <div class="host-details-wrap">
                         <div class="row align-items-center">
                             <div class="col-md-6 py-2 text-center-mobile">
                                 <h5 class="bold">Hosted By</h5>
                                 <p class="medium py-2">Name Host {{boatHost?.name}}</p>
                                 <div class="address-details">
-                                    <p>Join Date: 20 - Jan - 2020 {{boatHost?.creationTime}}</p>
+                                    <p>Join Date: 20 - Jan - 2020 {{boatHost?.creationTime | date:'dd-MMM-YYYY'}}</p>
                                     <p><i class="fa fa-check"></i> Identity Verified: Varified </p>
                                     <p><i class="fa fa-star"></i> Response Rate: 85%</p>
                                     <p>Response Time: 10 min</p>
@@ -533,7 +573,7 @@
                             </div>
                             <div class="col-md-6 py-2 text-center">
                                 <div class="image-wrapper-host">
-                                    <img src="../../../../assets/images/user.png" alt="">
+                                    <img src="{{assetsCoreUrl + (bookingModifyDetail?.boatDetail?.boatGalleries?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 </div>
                             </div>
                             <div class="col-sm-12 pt-2 text-center">
@@ -542,211 +582,9 @@
                         </div>
                     </div>
                     <div class="rating-wrapper section-padding">
-                        <div class="rating-wrap-inner">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h2 class="big-text-with-small">5.0<span>(0)Reviews</span></h2>
-                                    <ngb-rating [rate]="0"></ngb-rating>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="overall-rating-wrapper">
-                                        <div class="custom-flex-start progress-with-text">
-                                            <p>5</p>
-                                            <div class="custom-progress-bar progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 75%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="custom-flex-start progress-with-text">
-                                            <p>4</p>
-                                            <div class="custom-progress-bar progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 60%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="custom-flex-start progress-with-text">
-                                            <p>3</p>
-                                            <div class="custom-progress-bar progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 45%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="custom-flex-start progress-with-text">
-                                            <p>2</p>
-                                            <div class="custom-progress-bar progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 30%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="custom-flex-start progress-with-text">
-                                            <p>1</p>
-                                            <div class="custom-progress-bar progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 15%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="persons-rating section-padding">
-                        <div class="row">
-                            <div class="col-md-6 py-2">
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 py-2">
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner">
-                                        <img src="./images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">Elijah</p>
-                                            <p class="small-stars">
-                                                <span class="fa fa-star stars-clr "></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                                <span class="fa fa-star stars-clr"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p class="my-3 line-clamp-1">Short description about the host Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elitShort description about the </p>
-                                    <p class="text-right grey">12 July 2021, 13:44</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 py-2 text-right">
 
-                                <button class="underline-blue-link no-underline" data-bs-toggle="modal"
-                                    data-bs-target="#all-reviews-modal">See All</button>
-                            </div>
-                        </div>
-                    </div> -->
+                    </div>
+
             </div>
         </div>
     </div>
