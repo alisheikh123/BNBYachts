@@ -15,7 +15,9 @@ namespace BnBYachts.Core
 #if DEBUG
                 .MinimumLevel.Debug()
 #else
+                .MinimumLevel.Debug()
                 .MinimumLevel.Information()
+                .MinimumLevel.Error()
 #endif
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
@@ -24,6 +26,7 @@ namespace BnBYachts.Core
 #if DEBUG
                 .WriteTo.Async(c => c.Console())
 #endif
+                .WriteTo.Async(c => c.Console())
                 .CreateLogger();
 
             try
