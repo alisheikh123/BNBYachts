@@ -1,0 +1,41 @@
+<div class="custom-card req-user-card" *ngFor="let item of droppedServices; let i = index">
+    <div class="image-with-text custom-flex-between align-items-start">
+        <div class="image-with-text-inner">
+            <img src="../../../../assets/images/user-img.png" alt="" />
+            <div class="user-details">
+                <p class="medium">
+                    {{ item.userName }}
+                    <span class="small-text regular grey">Boat Name:{{ item.boatDetail?.name }}
+                    </span>
+                </p>
+                <ngb-rating [rate]="0"></ngb-rating>
+                <p class="small-text grey">
+                    Location : {{ item.boatDetail?.location }}
+                </p>
+                <p class="small-text grey">
+                    Guest: {{ item.noOfAdults + item.noOfChildrens }}
+                </p>
+            </div>
+        </div>
+        <div class="
+          right-content
+          custom-flex
+          flex-column
+          align-items-end
+        ">
+            <p class="small-text grey">
+                {{ item.checkinDate | date: "dd MMM/YYYY" }} -
+                {{ item.checkoutDate | date: "dd MMM/YYYY" }}
+            </p>
+            <div class="custom-flex mt-4">
+                <a [routerLink]="[
+              '/boat-listing/reservation-cancellation',
+              item.id
+            ]" class="custom-btn blue">View Details</a>&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="droppedServices?.length == 0">
+    <app-not-found-component></app-not-found-component>
+</div>

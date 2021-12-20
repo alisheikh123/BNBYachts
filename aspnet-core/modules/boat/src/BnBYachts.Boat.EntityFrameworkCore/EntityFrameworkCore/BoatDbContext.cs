@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Boats.Charter;
+using BnBYachts.Events;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -10,7 +11,7 @@ namespace BnBYachts.Boat.EntityFrameworkCore
 {
     //[ReplaceDbContext(typeof(IIdentityDbContext))]
     //[ReplaceDbContext(typeof(ITenantManagementDbContext))]
-    [ConnectionStringName("Default")]
+    [ConnectionStringName("Boat")]
     public class BoatDbContext : 
         AbpDbContext<BoatDbContext>
         //IIdentityDbContext,
@@ -59,7 +60,7 @@ namespace BnBYachts.Boat.EntityFrameworkCore
         public DbSet<CharterEntity> Charteres { get; set; }
 
         //Event
-        public DbSet<Events.Event> Events { get; set; }
+        public DbSet<Events.EventEntity> Events { get; set; }
 
 
 

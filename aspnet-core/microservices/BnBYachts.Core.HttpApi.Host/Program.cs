@@ -28,10 +28,8 @@ namespace BnBYachts.Core
 
             try
             {
-                Console.WriteLine("in");
                 Log.Information("Starting BnBYachts.Core.HttpApi.Host.");
                 CreateHostBuilder(args).Build().Run();
-                Console.WriteLine("end");
                 return 0;
             }
             catch (Exception ex)

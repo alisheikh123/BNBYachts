@@ -9,12 +9,14 @@ namespace BnBYachts.Booking.Booking
 {
    public class EventBookingEntity : AuditedAggregateRoot<int>
     {
-        public string EventId { get; set; }
+        public int EventId { get; set; }
         public int NoOfGuests { get; set; }
         public DateTime EventDate { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public string BankingDetailsId { get; set; }
         public string UserId { get; set; }
-        public ReviewEntity Reviews { get; set; }
+        public BookingReviewEntity Reviews { get; set; }
+        public string HostId { get; set; }
+        public BookingStatus BookingStatus { get; set; }
     }
 }

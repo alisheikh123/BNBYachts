@@ -1,0 +1,199 @@
+<div class="main-wrapper">
+    <div class="container">
+        <div class="listing-main-wrapper edit-boat section-padding">
+            <div class="custom-flex-between mb-3">
+                <h5 class="bold">Edit Boat Features</h5>
+            </div>
+            <form [formGroup]="boatEditForm">
+                <div class="row">
+                    <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
+                            <label>Boat Title</label>
+                            <input class="custom-input" placeholder="Enter Boat Name" formControlName="name">
+                        </div>
+                        <div class="custom-input-field ">
+                            <label>About</label>
+                            <textarea class="custom-input" id="exampleFormControlTextarea1"
+                                formControlName="description" rows="4"></textarea>
+                        </div>
+                        <div class="custom-input-field">
+                            <label>Current Location</label>
+                            <input class="custom-input" placeholder="Enter Boat Address" formControlName="location"
+                                ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event)">
+                        </div>
+                        <div class="custom-input-field">
+                            <label>Boat Length</label>
+                            <input class="custom-input" placeholder="Enter Boat length" formControlName="length">
+                        </div>
+                        <div class="counter-input-wrapper">
+                            <label>Bedrooms</label>
+                            <div class="number">
+                                <div class="custom-flex-start">
+                                    <label>Bedrooms</label>
+                                    <div class="custom-flex-start">
+                                        <span class="minus" (click)="removeCapacity(true)">-</span>
+                                        <input type="text" formControlName="totalBedrooms" />
+                                        <span class="plus" (click)="addCapacity(true)">+</span>
+                                    </div>
+                                </div>
+                                <div class="custom-flex-start ms-3">
+                                    <label>Bathrooms</label>
+                                    <div class="custom-flex-start">
+                                        <span class="minus" (click)="removeCapacity(false)">-</span>
+                                        <input type="text" formControlName="totalWashrooms" />
+                                        <span class="plus" (click)="addCapacity(false)">+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="custom-input-field ">
+                            <label>Guests Favorites</label>
+                            <div class="custom-card">
+                                <div class="row w-100">
+                                    <div class="col-sm-6 py-2"
+                                        *ngFor="let item of ((boatLookups?.features) | filterBy : 'isGuestFavourite' : true )">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                [ngModelOptions]="{standalone: true}">
+                                            <p class="small-text">{{item?.name}}</p>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12 py-2">
+                                        <button class="custom-blue-btn" (click)="addNewOptions(FEATURES_TYPES.GuestFavoriteFeature)"><i
+                                                class="fa fa-plus"></i>Add more</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-input-field ">
+                            <label>Let guests know what your boat offers</label>
+                            <div class="custom-card">
+                                <div class="row w-100">
+                                    <div class="col-sm-6 py-2" *ngFor="let item of (boatLookups?.rules)">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                [ngModelOptions]="{standalone: true}">
+                                            <p class="small-text">{{item?.name}}</p>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="image-gallery-bannner bg-none blck-color">
+                        <div class="image-gallery-head-content custom-flex-between">
+                            <div class="">
+                                <p class="medium">Edit Pictures</p>
+                            </div>
+                            <div class="avatar-edit">
+                                <input type="file" style="display: none;" id="addMoreImg"
+                                    (change)="onFileChoose($event)" accept=".png, .jpg, .jpeg">
+                                <label for="addMoreImg" class="small-text"><span class="custom-btn grey">Add
+                                        More</span></label>
+                            </div>
+                        </div>
+                        <div class="image-gallery-collage">
+                            <div class="row">
+                                <div class="col-md-6 py-2">
+                                    <div class="gallery-img-large custom-image-prev"
+                                        *ngFor="let item of (boatGallery | filterBy : 'isCoverPic' : true)">
+                                        <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="gallery-images-small-wrapper">
+                                        <div class="row">
+                                            <div class="col-sm-6 py-2"
+                                                *ngFor="let item of (boatGallery | filterBy : 'isCoverPic' : false)">
+                                                <div class="gallery-images-small custom-image-prev">
+                                                    <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="col-md-4 py-2" *ngFor="let item of otherGalleryImages">
+                        <div class="gallery-images-small custom-image-prev">
+                            <img src="{{item?.fileData}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="col-sm-12">
+                        <label class="custom-checkbox my-2">
+                            <input type="checkbox" formControlName="isBoatelServicesOffered">
+                            <p class="small-text">Want to offer Boatel Services</p>
+                            <span class="checkmark top-0"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
+                            <label>Availabilty</label>
+                        </div>
+                        <ejs-daterangepicker placeholder='Select Availabilty' [startDate]='boatCalendar.fromDate'
+                            [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
+                    </div>
+                    <div class="col-md-6 py-2">
+                        <div class="counter-input-wrapper">
+                            <label>Boatel Capacity</label>
+                            <div class="number">
+                                <div class="custom-flex-start">
+                                    <label>Guests</label>
+                                    <div class="custom-flex-start">
+                                        <span class="minus" (click)="removeGuests()">-</span>
+                                        <input type="text" formControlName="boatelCapacity" />
+                                        <span class="plus" (click)="addGuests()">+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 py-2">
+                        <div class="custom-select-field">
+                            <label>Check-in Time</label>
+                            <ejs-timepicker name="timepicker" formControlName="checkinTime"></ejs-timepicker>
+                        </div>
+                    </div>
+                    <div class="col-md-6 py-2">
+                        <div class="custom-select-field">
+                            <label>Check-Out Time</label>
+                            <ejs-timepicker name="timepicker" formControlName="checkoutTime"></ejs-timepicker>
+                        </div>
+                    </div>
+                    <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
+                            <label>Per day boatel fee charges</label>
+                            <input type="number" class="custom-input" placeholder="$20000"
+                                formControlName="perDayCharges">
+                        </div>
+                    </div>
+                    <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
+                            <label>Tax Fee</label>
+                            <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="custom-flex-end">
+                    <button class="custom-btn outline-blue-clr me-sm-2">Cancel</button>
+                    <button class="custom-btn blue" (click)="updateBoat()">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

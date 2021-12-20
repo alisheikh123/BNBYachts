@@ -1,10 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
-import { BookingService } from 'src/app/core/Booking/booking.service';
-import { ReservationService } from 'src/app/core/host/reservation.service';
-import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-boatel-bookings',
@@ -13,44 +7,12 @@ import { environment } from 'src/environments/environment';
 })
 export class BoatelBookingsComponent implements OnInit {
 
-  constructor(config: NgbRatingConfig, private reservationService: ReservationService, private boatService: YachtSearchService, private toastr: ToastrService,private bookingServices : BookingService) {
-    config.max = 5;
-    config.readonly = true;
+  constructor() {
   };
-  boatelBookings: any;
-  bookedServices: any;
-  //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
-  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
-
+  currentTab = 1;
   ngOnInit(): void {
-    this.reservationService.getBoatelBookingRequests().subscribe(res => {
-      this.boatelBookings = res;
-      this.boatelBookings.forEach((element: any) => {
-        this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
-          element.boatDetail = boatdetail;
-        });
-      });
-    })
-    // For booked services
-    this.reservationService.getBookedServices().subscribe(res => {
-      this.bookedServices = res;
-      this.bookedServices.forEach((element: any) => {
-        this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
-          element.boatDetail = boatdetail;
-        });
-      });
-    })
   }
 
-  changeStatus(item: any, isAccepted: boolean, index: any) {
-    this.reservationService.changeStatus(item.id, isAccepted).subscribe(res => {
-      if (isAccepted) {
-        this.toastr.success('Request accepted successfully.', 'Success');
-      }
-      else {
-        this.toastr.success('Request rejected successfully.', 'Success');
-      }
-      this.boatelBookings.splice(index, 1);
-    });
-  }
+
+
 }

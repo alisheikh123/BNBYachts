@@ -7,6 +7,7 @@ import { FilterByPipe } from './filterBy.pipe';
 import { SafeHtmlPipe } from './safe.pipe';
 import { FileTypePipe } from './file-type-icon.pipe';
 import { MySlicePipe } from './my-slice.pipe';
+import { LocalizationPipe } from './localization.pipe';
 const pipes = [
   ExcerptPipe,
   GetValueByKeyPipe,
@@ -14,7 +15,8 @@ const pipes = [
   FilterByPipe,
   SafeHtmlPipe,
   FileTypePipe,
-  MySlicePipe
+  MySlicePipe,
+  LocalizationPipe
 ];
 
 @NgModule({

@@ -29,9 +29,9 @@ export class BoatDetailsComponent implements OnInit {
 
   guidId!: Guid;
   boatFilterDetails = {
-    checkinDate: '',
-    checkoutDate: '',
-    adults: 0,
+    checkinDate: new Date(),
+    checkoutDate: new Date(),
+    adults: 1,
     childrens: 0
   };
   popOverFilterData = {
@@ -52,13 +52,18 @@ export class BoatDetailsComponent implements OnInit {
     if (this.yachtParamService.getFilters()) {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
+    if (this.boatFilterDetails.checkinDate == null && this.boatFilterDetails.checkoutDate == null) {
+      this.boatFilterDetails.checkinDate = new Date();
+      this.boatFilterDetails.checkoutDate = new Date();
+      this.boatFilterDetails.adults = 1;
+    }
   }
   calculateDays() {
-    if (this.boatFilterDetails.checkinDate != '' && this.boatFilterDetails.checkoutDate != '') {
+    if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null) {
       var date1 = new Date(this.boatFilterDetails.checkinDate);
       var date2 = new Date(this.boatFilterDetails.checkoutDate);
       var Time = date2.getTime() - date1.getTime();
-      var Days = Time / (1000 * 3600 * 24);
+      var Days = Math.floor(Time / (1000 * 3600 * 24));
       return Days < 0 ? 0 : Days + 1;
     }
     else {
@@ -93,9 +98,7 @@ export class BoatDetailsComponent implements OnInit {
   }
 
   reserveBoat() {
-    debugger
     this.isSubmitted = true;
-    let userId = Guid.create().toString();
     if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
       let bookingModel = {
         creationTime: new Date(),
@@ -110,8 +113,8 @@ export class BoatDetailsComponent implements OnInit {
         reviews: null
       };
       this.bookingService.boatelBooking(bookingModel).subscribe(res => {
-        this.bookingId = res.bookingId;
-        if (res.isSucces) {
+        this.bookingId = res?.data?.id;
+        if (res.returnStatus) {
           let boatCalendar = {
             creationTime: new Date(),
             isAvailable: false,
@@ -122,8 +125,8 @@ export class BoatDetailsComponent implements OnInit {
           this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
             if (res) {
               this.yachtParamService.setFilters(this.boatFilterDetails);
-              this.router.navigate(['/boat-listing/booking-payment', this.boatId, this.bookingId], { relativeTo: this.activatedRoute });
-              this.toastr.success('Boat reserved successfully.', 'Success');
+              this.router.navigate(['/payments/boatel-payments', this.boatId, this.bookingId], { relativeTo: this.activatedRoute });
+              this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
             }
           });
         }

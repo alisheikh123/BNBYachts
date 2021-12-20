@@ -25,7 +25,7 @@ namespace BnBYachts.Core.EntityFrameworkCore
         {
             var builder = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("appsettings.development.json", optional: false);
+               .AddJsonFile("appsettings.json", optional: false);
 
             return builder.Build();
         }

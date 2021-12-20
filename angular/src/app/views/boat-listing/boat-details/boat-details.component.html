@@ -42,12 +42,6 @@
                                 <button class="underline-link-blk active" id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">Boatel</button>
-                                <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-profile" type="button" role="tab"
-                                    aria-controls="v-pills-profile" aria-selected="false">Charter</button>
-                                <button class="underline-link-blk" id="v-pills-settings-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-settings" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false">Event</button>
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -121,7 +115,7 @@
                                                             </div>
                                                         </div>
                                                         <small class="text-danger"
-                                                            *ngIf="(boatFilterDetails?.checkinDate == '' || boatFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
+                                                            *ngIf="(boatFilterDetails?.checkinDate == null || boatFilterDetails?.checkoutDate == null)&& isSubmitted">Enter
                                                             {{!boatFilterDetails.checkinDate ? 'check-in':'check-out'}}
                                                             date</small>
                                                     </div>
@@ -218,7 +212,7 @@
                                                             calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue" (click)="reserveBoat()">Reserve
+                                                    <button class="custom-btn blue" (click)="reserveBoat()">Book
                                                         Now</button>
                                                 </div>
                                             </div>
@@ -226,146 +220,6 @@
 
                                     </div>
                                 </div>
-                                <!-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                <div class="tabs-inner-details">
-                                    <div class="row align-items-end">
-                                        <div class="col-md-6 py-2">
-                                          <h5 class="bold">Charter Details</h5>
-                                         <div class="tabs-inner-details-inner">
-                                             <div class="custom-flex-start py-1">
-                                             <p class="medium min-width-text">Location:</p>
-                                             <p >Karachi</p>
-                                             </div>
-                                             <div class="custom-flex-start py-1 flex-mobile-column">
-                                                 <div class="custom-flex">
-                                              <p class="medium min-width-text">Bedrooms:</p>
-                                              <p class="min-width-text-small">4</p>
-                                              </div>
-                                              <div class="custom-flex">
-                                                <p class="medium min-width-text-small">Bathrooms:</p>
-                                                <p >2</p>
-                                            </div>
-                                              </div>
-                                              <div class="custom-flex-start py-1">
-                                                  <p class="medium min-width-text">Check In time:</p>
-                                                  <p >12:00 pm</p>
-                                                  </div>
-                                                  <div class="custom-flex-start py-1">
-                                                      <p class="medium min-width-text">Check Out time:</p>
-                                                      <p >12:00 pm</p>
-                                                      </div>
-                                                      <div class="custom-flex-start py-1">
-                                                          <p class="medium min-width-text">Location:</p>
-                                                          <p >Karachi</p>
-                                                          </div>
-                                          </div>
-                                          <h5 class="bold mt-3">Approval policy</h5>
-                                          <div class="tabs-inner-details-inner">
-                                              <div class="custom-flex-coumn">
-                                                  <p class="small-text">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                               </div>
-                                             <a href="javascript:void(0)" class="underline-blue-link py-2 no-underline">Read All</a>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-6 py-2">
-                                           <div class="total-amount-wrap">
-                                               <div class="total-amount-wrap-inner">
-                                                   <p>$ 450  x 2 Nights</p>
-                                                   <p>$900.00</p>
-
-                                               </div>
-                                               <div class="total-amount-wrap-inner">
-                                                  <p>Tax</p>
-                                                  <p>$20.00</p>
-
-                                              </div>
-                                              <div class="total-amount-wrap-inner">
-                                                  <p>Service Fee</p>
-                                                  <p>$20.00</p>
-
-                                              </div>
-                                              <div class="total-amount-wrap-inner bottom">
-                                                  <p class="medium">Total(USD)</p>
-                                                  <p class="medium">$940.00</p>
-
-                                              </div>
-                                              <button class="custom-btn blue" data-bs-toggle="modal" data-bs-target="#no-charter" >Reserve Now</button>
-                                           </div>
-                                       </div>
-                                </div>
-
-                              </div>
-                            </div> -->
-                                <!-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                                <div class="tabs-inner-details">
-                                    <div class="row align-items-end">
-                                        <div class="col-md-6 py-2">
-                                          <h5 class="bold">Event Details</h5>
-                                         <div class="tabs-inner-details-inner">
-                                             <div class="custom-flex-start py-1">
-                                             <p class="medium min-width-text">Location:</p>
-                                             <p >Karachi</p>
-                                             </div>
-                                             <div class="custom-flex-start py-1 flex-mobile-column">
-                                                 <div class="custom-flex">
-                                              <p class="medium min-width-text">Bedrooms:</p>
-                                              <p class="min-width-text-small">4</p>
-                                              </div>
-                                              <div class="custom-flex">
-                                                <p class="medium min-width-text-small">Bathrooms:</p>
-                                                <p >2</p>
-                                            </div>
-                                              </div>
-                                              <div class="custom-flex-start py-1">
-                                                  <p class="medium min-width-text">Check In time:</p>
-                                                  <p >12:00 pm</p>
-                                                  </div>
-                                                  <div class="custom-flex-start py-1">
-                                                      <p class="medium min-width-text">Check Out time:</p>
-                                                      <p >12:00 pm</p>
-                                                      </div>
-                                                      <div class="custom-flex-start py-1">
-                                                          <p class="medium min-width-text">Location:</p>
-                                                          <p >Karachi</p>
-                                                          </div>
-                                          </div>
-                                          <h5 class="bold mt-3">Approval policy</h5>
-                                          <div class="tabs-inner-details-inner">
-                                              <div class="custom-flex-coumn">
-                                                  <p class="small-text">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                               </div>
-                                             <a href="javascript:void(0)" class="underline-blue-link py-2 no-underline">Read All</a>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-6 py-2">
-                                           <div class="total-amount-wrap">
-                                               <div class="total-amount-wrap-inner">
-                                                   <p>$ 450  x 2 Nights</p>
-                                                   <p>$900.00</p>
-
-                                               </div>
-                                               <div class="total-amount-wrap-inner">
-                                                  <p>Tax</p>
-                                                  <p>$20.00</p>
-
-                                              </div>
-                                              <div class="total-amount-wrap-inner">
-                                                  <p>Service Fee</p>
-                                                  <p>$20.00</p>
-
-                                              </div>
-                                              <div class="total-amount-wrap-inner bottom">
-                                                  <p class="medium">Total(USD)</p>
-                                                  <p class="medium">$940.00</p>
-
-                                              </div>
-                                              <button class="custom-btn blue" data-bs-toggle="modal" data-bs-target="#no-charter" >Reserve Now</button>
-                                           </div>
-                                       </div>
-                                </div>
-
-                              </div>
-                            </div> -->
                             </div>
                         </div>
 
@@ -475,7 +329,6 @@
                                                         alt="...">
                                                     <div class="card-body bg-white">
                                                         <p>Private Charter</p>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -490,7 +343,7 @@
                                                     <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                         alt="...">
                                                     <div class="card-body bg-white">
-                                                        <p>Private Charter</p>
+                                                        <p>Private Event</p>
 
                                                     </div>
                                                 </div>

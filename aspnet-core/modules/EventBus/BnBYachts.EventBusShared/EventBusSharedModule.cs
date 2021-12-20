@@ -50,8 +50,19 @@ namespace BnBYachts.EventBusShared
         public static void RegisterEndpointMap(string queueHost)
         {
             EndpointConvention.Map<IHeartbeatContract>(new Uri($"{queueHost}/{EventBusQueue.HeartBeat}"));
-            EndpointConvention.Map<IHostBoatContract>(new Uri($"{queueHost}/{EventBusQueue.QSeeder}"));
+            EndpointConvention.Map<IHostBoatContract>(new Uri($"{queueHost}/{EventBusQueue.QBoatSeeder}"));
+            EndpointConvention.Map<IHostBoatGalleryContract>(new Uri($"{queueHost}/{EventBusQueue.QBoatGallerySeeder}"));
+            EndpointConvention.Map<IHostBoatRulesContract>(new Uri($"{queueHost}/{EventBusQueue.QBoatRulesSeeder}"));
+            EndpointConvention.Map<IHostBoatCalendarContract>(new Uri($"{queueHost}/{EventBusQueue.QBoatCalendarSeeder}"));
+            EndpointConvention.Map<IHostBoatFeaturesContract>(new Uri($"{queueHost}/{EventBusQueue.QBoatFeatureSeeder}"));
+            EndpointConvention.Map<IRuleContract>(new Uri($"{queueHost}/{EventBusQueue.QRulesSeeder}"));
+            EndpointConvention.Map<IChartersContract>(new Uri($"{queueHost}/{EventBusQueue.QCharterSeeder}"));
+            EndpointConvention.Map<IEventsContract>(new Uri($"{queueHost}/{EventBusQueue.QEventSeeder}"));
+            EndpointConvention.Map<IRolesContract>(new Uri($"{queueHost}/{EventBusQueue.QRoleSeeder}"));
+            EndpointConvention.Map<IUserRolesContract>(new Uri($"{queueHost}/{EventBusQueue.QUserRoleSeeder}"));
+            EndpointConvention.Map<IUserContract>(new Uri($"{queueHost}/{EventBusQueue.QUsersSeeder}"));
             EndpointConvention.Map<IEmailContract>(new Uri($"{queueHost}/{EventBusQueue.QEmailNotification}"));
+            EndpointConvention.Map<IEmailContract>(new Uri($"{queueHost}/{EventBusQueue.QBackgroundWorker}"));
         }
     }
 

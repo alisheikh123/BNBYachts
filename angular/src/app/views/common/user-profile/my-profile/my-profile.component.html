@@ -1,0 +1,127 @@
+<div class="main-wrapper">
+    <div class="section-padding user-info-page">
+    <div class="container">
+       <div class="row">
+           <div class="col-lg-3 col-md-4 py-2">
+               <div class="custom-card user-info-wrap">
+                <div class="image-with-text">
+                    <div class="image-with-text-inner big-image">
+                        <img src="../../../../assets/images/chat-avatar.png" alt="">
+                        
+                    </div>
+                  <p class="medium text-center py-2">Update profile photo</p>
+                  <h6 class="bold text-center p-0 pb-3">{{userResponse.name}}</h6>
+                </div>
+                <div class="border-top"></div>
+                <div class="py-2">
+                    <p class="medium text-center">Verification</p>
+                    <p class="medium text-center py-2">
+                   <i *ngIf="userResponse.isPhoneConfirmed" class="fa fa-check pe-2"></i>
+                   <i *ngIf="!userResponse.isPhoneConfirmed" class="fa fa-times pe-2"></i> Number Verified</p>
+                </div>
+               </div>
+           </div>
+           <div class="col-lg-9 col-md-8 py-2">
+               <div class="user-details-info-wrapper">
+                   <div class="custom-flex-between align-items-start">
+                       <div class="user-details-info-wrapper-inner">
+                           <p class="bold">{{userResponse.name}}</p>
+                           <p class="grey py-2">{{userResponse.creationTime | date}}</p>
+                        </div>
+                        <div class="edit-btn-wrapper">
+                            <a [routerLink]="['/update-profile',userResponse.id]" class="custom-btn grey"><i class="fa fa-pencil me-2"></i>Edit Profile</a>
+                        </div>
+                   </div>
+                   <div class="py-2">
+                       <p class="bold">About</p>
+                       <p class="regular py-2 medium-container line-clamp-3 text-left grey">{{userResponse.about}}.</p>
+                   </div>
+                   <div class="py-2">
+                       <p class="medium"><i class="fa fa-map-pin me-3"></i>Lives in Lahore</p>
+                   </div>
+                   <div class="py-2" *ngIf="loggedInUserRole == USER_ROLE.host">
+                        <p class="bold pb-2">My Listing</p>
+                        <div class="boat-container" *ngFor="let item of userBoats">
+                            <div class="image-wrapper-boat"  *ngFor="let item of (item?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                <img  src="{{assetsUrl + item?.imagePath}}" alt="">
+                            </div>
+                           <div class="custom-flex-start py-1"> <p class="bold ">New</p> <div class="small-stars yellow-stars ms-2"><span class="fa fa-star stars-clr"></span></div></div>
+                            <p class="regular grey">{{item.name}}</p>
+                        </div>
+                      
+                   </div>
+               </div>
+               <div class="total-reviews section-padding">
+                 <div class=" custom-flex-start small-stars black-stars me-2"><span class="fa fa-star stars-clr me-2"></span> <p class="medium ">9 Reviews</p></div>
+                    <div class="custom-tabs-wrapper py-3">
+                        <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                          <button *ngIf="loggedInUserRole == USER_ROLE.host" class="underline-link-blk custom-flex flex-row active m-0" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">From User <div class="ms-2">(5)</div></button>
+                          <button class="underline-link-blk custom-flex flex-row" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">From Host <div class="ms-2">(4)</div></button>
+                        </div>
+                        <div class="tab-content" id="v-pills-tabContent">
+                          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div class="image-with-text">
+                                <div class="image-with-text-inner">
+                                    <img src="../../../../assets/images/user-img.png" alt="">
+                                    <div class="user-details">
+                                        <p class="medium">Elijah</p>
+                                        <p class="small-stars">
+                                            <span class="fa fa-star stars-clr "></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="my-3 line-clamp-1">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elitShort description about the </p>
+                                <p class="text-right grey">12 July 2021, 13:44</p>
+                            </div>
+                           
+                          </div>
+                          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                            <div class="image-with-text">
+                                <div class="image-with-text-inner">
+                                    <img src="../../../../assets/images/user-img.png" alt="">
+                                    <div class="user-details">
+                                        <p class="medium">Elijah</p>
+                                        <p class="small-stars">
+                                            <span class="fa fa-star stars-clr "></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="my-3 line-clamp-1">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elitShort description about the </p>
+                                <p class="text-right grey">12 July 2021, 13:44</p>
+                            </div>
+                            
+                            <div class="image-with-text">
+                                <div class="image-with-text-inner">
+                                    <img src="../../../../assets/images/user-img.png" alt="">
+                                    <div class="user-details">
+                                        <p class="medium">Elijah</p>
+                                        <p class="small-stars">
+                                            <span class="fa fa-star stars-clr "></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                            <span class="fa fa-star stars-clr"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="my-3 line-clamp-1">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elitShort description about the </p>
+                                <p class="text-right grey">12 July 2021, 13:44</p>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+               </div>
+            </div>
+       </div>
+    </div>
+    </div>
+</div>

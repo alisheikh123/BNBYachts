@@ -1,339 +1,665 @@
 <div class="main-wrapper">
-    <div class="boatel-search ">
-        <div class="section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4 py-2">
-                        <p class="small-text">{{boats?.length}} boatel available, {{mapDetails?.checkinDate | date:'MMM d'}} - {{mapDetails?.checkoutDate | date:'MMM d'}}, {{mapDetails?.adults + mapDetails?.childrens}} guests</p>
-                        <h5 class="bold head-text">Boatel in {{this.mapDetails?.location}}</h5>
-                        <div class="custom-filters">
-                            <div class="dropdown custom-dropdown filters-wrap">
-                                <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Price Range
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <p class="header-content small-text">John Cena</p>
-                                    </li>
-                                    <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
-                                    <li><a class="dropdown-item" href="home.html">Log Out</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown custom-dropdown filters-wrap">
-                                <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    More Filter
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <p class="header-content small-text">John Cena</p>
-                                    </li>
-                                    <li><a class="dropdown-item" href="Reservation.html">My Bookings</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Messages</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Notification</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Wishlist</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Setting</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)">Help</a></li>
-                                    <li><a class="dropdown-item" href="home.html">Log Out</a></li>
+  <div class="boatel-search">
+    <div class="section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 py-2">
+            <p class="small-text">
+              {{ boats?.length }} boatel available,
+              {{ mapDetails?.checkinDate | date: "MMM d" }} -
+              {{ mapDetails?.checkoutDate | date: "MMM d" }},
+              {{ mapDetails?.adults + mapDetails?.childrens }} guests
+            </p>
+            <h5 class="bold head-text">
+              Boatel in {{ this.mapDetails?.location }}
+            </h5>
+            <div class="custom-filters">
+              <div class="dropdown custom-dropdown filters-wrap">
+                <button
+                  class="dropdown-btn dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Price Range
+                </button>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton1"
+                  style="width: 400px; font-size: 13px"
+                >
+                  <div style="margin: 10px; padding: 10px">
+                    <span style="font-weight: bold; padding: 10px">
+                      Set the price range:</span
+                    >
 
-                                </ul>
-                            </div>
-
-                        </div>
+                    <div style="display: flex">
+                      <div class="form-floating">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="minPrice"
+                          placeholder="min price"
+                          [(ngModel)]="minPrice"
+                        />
+                        <label for="floatingPassword">min price</label>
+                      </div>
+                      <div
+                        style="
+                          position: relative;
+                          top: -19px;
+                          color: gray;
+                          font-size: 50px;
+                          font-weight: 200;
+                          padding: 12px;
+                          margin-bottom: -20px;
+                        "
+                      >
+                        -
+                      </div>
+                      <div class="form-floating">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="maxPrice"
+                          placeholder="max price"
+                          [(ngModel)]="maxPrice"
+                        />
+                        <label for="floatingPassword">max price</label>
+                      </div>
                     </div>
-                    <div class="col-sm-4 py-2">
-                        <div class="search-wrapper custom-input-field"> <input type="text" class="custom-input"
-                                placeholder="Search" data-bs-toggle="modal" data-bs-target="#filters-modal"><i class="fa fa-search"></i> 
-                        </div>
+                    <div>
+                      <a
+                        class="custom-btn blue"
+                        style="
+                          float: right;
+                          font-size: 12px;
+                          min-width: 76px !important;
+                          cursor: pointer;
+                        "
+                        (click)="applyPriceFilter(minPrice, maxPrice)"
+                      >
+                        Save
+                      </a>
                     </div>
-                    <div class="col-sm-4  py-2">
-                        <button class="wishlist-wrapper">
-                            <div class="custom-flex-between">
-                                <p class="small-text medium">Added to Wishlist</p>
-                            <div class="text-right">
-                                <a href="javascript:void(0)" class="close-btn"></a>
-                            </div>
-                         
-                        </div>
-                            <p class="small-text grey">Midwayabad</p>
-                    </button>
-                    </div>
+                  </div>
                 </div>
+              </div>
+              <div class="dropdown custom-dropdown filters-wrap">
+                <button
+                  class="dropdown-btn dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  (click)="openModal(filterTemplate)"
+                >
+                  More Filter
+                </button>
+              </div>
             </div>
+          </div>
+          <div class="col-sm-4 py-2">
+            <div class="search-wrapper custom-input-field">
+              <input
+                type="text"
+                class="custom-input"
+                placeholder="Search"
+                data-bs-toggle="modal"
+                data-bs-target="#filters-modal"
+              /><i class="fa fa-search"></i>
+            </div>
+          </div>
+          <div class="col-sm-4 py-2">
+            <button class="wishlist-wrapper">
+              <div class="custom-flex-between">
+                <p class="small-text medium">Added to Wishlist</p>
+                <div class="text-right">
+                  <a href="javascript:void(0)" class="close-btn"></a>
+                </div>
+              </div>
+              <p class="small-text grey">Midwayabad</p>
+            </button>
+          </div>
         </div>
+      </div>
     </div>
     <div class="bg-grey">
-        <div class="section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 py-2">
-                        <p class="small-mini-text grey white-bg-card"><span class="circle-icon"><i class="fa fa-info"></i></span>Given List is based on distance from the selected location, covers 50 miles from the selected location.</p>
-                        <div class="boatel-search-card" *ngFor="let item of boats">
-                            <div class="row h-100">
-                                <div class="col-sm-5 pr-0">
-                                    <div class="boatel-search-card-img" *ngFor ="let gallery of (item?.boatGalleries | filterBy : 'isCoverPic' : true)">
-                                        <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
-                                        <img src="{{assetsUrl + gallery?.imagePath}}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="boatel-search-card-content">
-                                    <div class="boatel-search-card-content-title">
-                                        <a [routerLink]="['/boat-listing/boat-details',item.id]" class="underline-black-link p-0">{{item.name}}</a>
-                                        <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                    <p class="grey">{{item.boatelCapacity}} Guests - {{item.totalBedrooms}} Bed Rooms  - {{item.totalWashrooms}} Bathroom</p>
-                                    <div class="boatel-search-card-content-title">
-                                        <p class="grey">{{item.location}}</p>
-                                            
-                                    </div>
-                                    <div class="custom-flex-between">
-                                      <ngb-rating [rate]="0"></ngb-rating>
-                                        <p class="bold-span-text"><span>$ {{item.perDayCharges}}</span>/ Night</p>
-                                    </div>
-                                   
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+      <div class="section-padding">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 py-2">
+              <p class="small-mini-text grey white-bg-card">
+                <span class="circle-icon"><i class="fa fa-info"></i></span>Given
+                List is based on distance from the selected location, covers 50
+                miles from the selected location.
+              </p>
+              <div class="boatel-search-card" *ngFor="let item of boats">
+                <div class="row h-100">
+                  <div class="col-sm-5 pr-0">
+                    <div
+                      class="boatel-search-card-img"
+                      *ngFor="
+                        let gallery of item?.boatGalleries
+                          | filterBy: 'isCoverPic':true
+                      "
+                    >
+                      <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
+                      <img src="{{ assetsUrl + gallery?.imagePath }}" />
                     </div>
-                    <div class="col-sm-6 py-2">
-                        <div class="iframe-wrapper">
-                            <google-map height="560px" width="600px" [options]="mapOptions" [center]="center" [zoom]="zoom">
-                                <map-marker #markerr="mapMarker"  *ngFor="let marker of markers" [position]="marker.position"
-                                  [label]="marker.label" [title]="marker.title" [options]="marker.options" (mapClick)="openInfoWindow(markerr,marker)">
-                                </map-marker>
-                                                            <map-info-window>
-                                                              <div class="boatel-search-card">
-                                                                <div class="row m-0">
-                                                                  <div class="col-sm-5 pr-0">
-                                                                      <div class="boatel-search-card-img" *ngFor ="let gallery of (mapInfoDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
-                                                                          <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
-                                                                          <img  src="{{assetsUrl + gallery?.imagePath}}">
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="col-sm-7">
-                                                                      <div class="boatel-search-card-content">
-                                                                      <div class="boatel-search-card-content-title">
-                                                                          <a href="boatel-search-details.html" class="underline-black-link p-0">{{mapInfoDetails?.name}}</a>
-                                                                          <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
-                                                                      </div>
-                                                                      <p class="grey">{{mapInfoDetails?.boatelCapacity}} Guests - {{mapInfoDetails?.totalBedrooms}} Bed Rooms  - {{mapInfoDetails?.totalWashrooms}} Bathroom</p>
-                                                                      <div class="boatel-search-card-content-title">
-                                                                          <p class="grey">{{mapInfoDetails?.location}}</p>
-                                                                              
-                                                                      </div>
-                                                                      <div class="custom-flex-between">
-                                                                        <ngb-rating [rate]="0"></ngb-rating>
-                                                                          <!-- <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p> -->
-                                                                      </div>
-                                                                      <div class="pt-2 boatel-search-card-content-title">
-                                                                        <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p>
-                                                                        <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a>
-                                                                    </div>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>   
-                                                              </div>
-                                                              
-                                </map-info-window> 
-                              </google-map>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Custom Search bar Modal -->
-    <div class="modal fade custom-modal custom-large-modal" id="filters-modal" tabindex="-1"
-        aria-labelledby="signup-modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header no-border">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card-wrapper">
-                        <div class="custom-tabs-wrapper">
-                            <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                              <button class="underline-link-blk small-text active" id="v-pills-home-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                                aria-selected="true">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18.331" height="18.295" viewBox="0 0 18.331 18.295">
-                                  <path id="Path_20748" data-name="Path 20748" d="M-623.107-973.379l-.23-.355a8.591,8.591,0,0,1-1.376-4.032,1.221,1.221,0,0,1,.854-1.327c.368-.136.733-.279,1.107-.4a.283.283,0,0,0,.224-.328c-.008-1.017,0-2.035,0-3.052s.42-1.435,1.42-1.456c.052,0,.1-.008.175-.014v-2.008c-.373,0-.735,0-1.1,0-.316,0-.492-.148-.49-.4s.184-.4.5-.4q1.607,0,3.213,0h.319c0-.51-.013-.99,0-1.469a1.391,1.391,0,0,1,1.836-1.276,1.355,1.355,0,0,1,.961,1.253c.015.488,0,.977,0,1.492h3.431a1.938,1.938,0,0,1,.214,0,.4.4,0,0,1,.386.4.386.386,0,0,1-.414.395c-.383.007-.766,0-1.171,0v2.024c.123,0,.244,0,.364,0a1.184,1.184,0,0,1,1.221,1.191c.021.678.007,1.357.007,2.035,0,.437.007.875,0,1.312a.257.257,0,0,0,.2.29q.605.213,1.2.451a1.182,1.182,0,0,1,.784,1.287,8.669,8.669,0,0,1-1.52,4.257c-.025.036-.047.074-.09.144.089,0,.153,0,.217,0A1.487,1.487,0,0,1-609.8-973a.757.757,0,0,0,1.1.056.4.4,0,0,1,.572.046c.14.172.11.351-.09.533a1.5,1.5,0,0,1-2.044.039.721.721,0,0,0-1.131-.008,1.52,1.52,0,0,1-2.05-.008.711.711,0,0,0-1.051-.009,1.509,1.509,0,0,1-2.108-.007.706.706,0,0,0-1.031,0,1.5,1.5,0,0,1-2.085.017.76.76,0,0,0-1.084,0,1.511,1.511,0,0,1-2.027,0,.759.759,0,0,0-1.141,0,1.5,1.5,0,0,1-2,0,.4.4,0,0,1-.088-.588.392.392,0,0,1,.591-.031.731.731,0,0,0,1.038-.036A1.637,1.637,0,0,1-623.107-973.379Zm1.6.591c.08-.057.14-.094.194-.139a1.5,1.5,0,0,1,2.145,0,.749.749,0,0,0,1.042-.04,1.513,1.513,0,0,1,2.049-.007.728.728,0,0,0,1.112-.011,1.491,1.491,0,0,1,2.023-.017c.08.067.167.125.26.193a7.643,7.643,0,0,0,2.388-4.911c.048-.474.009-.518-.443-.682q-2.841-1.025-5.684-2.047c-.078-.028-.159-.049-.272-.083v.36q0,2.437,0,4.874a1.529,1.529,0,0,1-.021.319.359.359,0,0,1-.383.3.358.358,0,0,1-.382-.305,1.546,1.546,0,0,1-.02-.319q0-2.451,0-4.9v-.341l-1.1.4-4.9,1.775c-.374.136-.438.224-.4.611a7.917,7.917,0,0,0,.114.82A7.693,7.693,0,0,0-621.5-972.788Zm-.222-7.078c.117-.039.2-.065.281-.094,1.324-.477,2.651-.95,3.972-1.437a1.087,1.087,0,0,1,.8.006c1.3.482,2.612.951,3.919,1.424.086.031.174.058.286.1,0-1.113.006-2.183,0-3.253,0-.286-.169-.4-.521-.4h-8.195c-.414,0-.536.123-.538.547,0,.794,0,1.589,0,2.383Zm7.626-4.475v-1.993h-6v1.993Zm-2.406-2.821c0-.517.016-1.014-.006-1.509a.542.542,0,0,0-.552-.482.543.543,0,0,0-.608.446c-.03.511-.009,1.024-.009,1.546Z" transform="translate(626.265 990.076)" fill="#122ba8" stroke="#122ba8" stroke-width="0.2"/>
-                                </svg>                
-                                Boatel
-                              </button>
-                              <button class="underline-link-blk small-text" id="v-pills-profile-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
-                                aria-selected="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="34.924" height="19.342" viewBox="0 0 34.924 19.342">
-                                  <g id="Group_6810" data-name="Group 6810" transform="translate(1149.4 303.439)">
-                                    <path id="Path_20740" data-name="Path 20740" d="M-1140.483-298.522c-.693,0-1.3,0-1.913,0-.49,0-.766-.219-.775-.6-.009-.4.274-.628.785-.629q2.263,0,4.525,0a1.381,1.381,0,0,0,1.4-1.964,4.624,4.624,0,0,0-.355-.718.611.611,0,0,1,.522-1c.652-.014,1.3-.018,1.955.007a1.029,1.029,0,0,1,.516.206c1.51,1.073,3.012,2.159,4.52,3.235a.956.956,0,0,0,.437.207,11,11,0,0,1,4.842,1.685c.92.547,1.776,1.2,2.67,1.792a1.083,1.083,0,0,0,.549.192c1.828.015,3.656.013,5.484.008.323,0,.616.027.78.358s0,.586-.2.834a14.059,14.059,0,0,1-4.891,3.867l-.318.158c.169.013.259.026.349.026q2.013,0,4.026,0c.484,0,.77.224.779.6.009.392-.283.626-.791.626h-33.016c-.615,0-.838-.245-.785-.849a5.879,5.879,0,0,1,4.961-5.348,17.025,17.025,0,0,1,2.091-.236.509.509,0,0,0,.46-.255C-1141.441-297.03-1140.983-297.736-1140.483-298.522Zm24.062,3.681h-14.973c-3.629,0-7.259-.005-10.888.005a7.18,7.18,0,0,0-3.619.836,4.5,4.5,0,0,0-2.211,3.146h.382c7.259,0,14.517.012,21.776-.013a14.775,14.775,0,0,0,2.888-.309A13.036,13.036,0,0,0-1116.421-294.841Zm-6.844-1.246a1.87,1.87,0,0,0-1.591-.6,10.038,10.038,0,0,1-1.149.008c-.959,0-1.917,0-2.876,0a.584.584,0,0,1-.617-.469.54.54,0,0,1,.273-.654,1.1,1.1,0,0,1,.477-.1c.691-.01,1.382,0,2.073,0l.021-.161a13.57,13.57,0,0,0-2.307-.426c-3.271-.049-6.543-.024-9.815-.02a.4.4,0,0,0-.294.111c-.5.753-.976,1.516-1.486,2.318Zm-12.2-3.688h4.28c-.128-.1-.2-.167-.282-.225-.867-.632-1.751-1.243-2.6-1.9a1.4,1.4,0,0,0-1.21-.268A2.7,2.7,0,0,1-1135.463-299.775Z" fill="#acacac"/>
-                                    <path id="Path_20741" data-name="Path 20741" d="M-1092.607-102.483h-13c-.6,0-.943-.393-.747-.848a.683.683,0,0,1,.725-.384q4.046.007,8.091,0l17.793,0h.115c.542,0,.842.226.834.622s-.3.607-.851.607h-12.962Z" transform="translate(-39.688 -184.378)" fill="#acacac"/>
-                                    <path id="Path_20742" data-name="Path 20742" d="M-1022.464-66.535q-3.566,0-7.132,0a1.257,1.257,0,0,1-.45-.057.555.555,0,0,1-.364-.679.589.589,0,0,1,.64-.49q1.553,0,3.106,0h11.312c.089,0,.179,0,.268,0a.621.621,0,0,1,.6.62.61.61,0,0,1-.621.6c-.524.014-1.048.006-1.572.007Z" transform="translate(-109.832 -217.564)" fill="#acacac"/>
-                                    <path id="Path_20743" data-name="Path 20743" d="M-1075.546-178.352c-.482,0-.762-.219-.768-.6s.277-.623.75-.625.767.23.775.607S-1075.079-178.354-1075.546-178.352Z" transform="translate(-67.47 -114.341)" fill="#acacac"/>
-                                    <path id="Path_20744" data-name="Path 20744" d="M-1043.614-178.318c-.476,0-.758-.23-.756-.616s.282-.61.761-.61.763.237.762.616S-1043.142-178.317-1043.614-178.318Z" transform="translate(-96.959 -114.375)" fill="#acacac"/>
-                                    <path id="Path_20745" data-name="Path 20745" d="M-1011.7-178.346c-.473,0-.759-.238-.751-.622s.293-.609.769-.607.762.245.756.624S-1011.22-178.345-1011.7-178.346Z" transform="translate(-126.429 -114.347)" fill="#acacac"/>
-                                    <path id="Path_20747" data-name="Path 20747" d="M-1010.8-230.274c-.971,0-1.942,0-2.914,0-.453,0-.724-.231-.731-.6s.28-.623.752-.623c1.943,0,3.885,0,5.827,0a.7.7,0,0,1,.71.349.612.612,0,0,1-.615.878C-1008.779-230.267-1009.789-230.274-1010.8-230.274Z" transform="translate(-124.586 -66.408)" fill="#acacac"/>
-                                  </g>
-                                </svg>                
-                                Charter
-                              </button>
-                              <button class="underline-link-blk small-text" id="v-pills-settings-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings"
-                                aria-selected="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18.888" height="17.723" viewBox="0 0 18.888 17.723">
-                                  <g id="Group_6813" data-name="Group 6813" transform="translate(509.082 2241.805)">
-                                    <path id="Path_20749" data-name="Path 20749" d="M-507.188-2240.485c0-.3,0-.56,0-.821s.1-.344.345-.346q.806-.005,1.613,0c.249,0,.343.1.347.342,0,.267,0,.533,0,.813H-494.4c0-.235,0-.47,0-.7,0-.391.062-.451.458-.451.494,0,.988,0,1.482,0,.271,0,.365.094.369.368,0,.253,0,.507,0,.788.09,0,.166.011.243.012a1.439,1.439,0,0,1,1.5,1.514q0,2.68,0,5.36,0,3.922,0,7.844a1.43,1.43,0,0,1-1.012,1.462,1.709,1.709,0,0,1-.492.071q-7.8.005-15.6,0a1.433,1.433,0,0,1-1.478-1.472q0-6.656,0-13.313a1.431,1.431,0,0,1,1.456-1.469Zm-1.182,4.057c0,.111,0,.2,0,.283q0,1.417,0,2.833,0,3.759,0,7.517a.9.9,0,0,0,.995,1h15.407a.917.917,0,0,0,1.056-1.048q0-5.164,0-10.327c0-.084-.009-.168-.014-.26Zm13.971-3.482h-10.482c0,.448,0,.882,0,1.316,0,.34-.073.414-.406.414H-506.7c-.431,0-.484-.053-.485-.49,0-.411,0-.823,0-1.229a.92.92,0,0,0-1.182.966c0,.566.008,1.133-.005,1.7,0,.2.065.237.249.237q8.476-.007,16.951,0h.242c.008-.082.019-.138.019-.195,0-.6.007-1.191,0-1.787a.9.9,0,0,0-1.15-.917c-.006.013-.016.026-.016.039q0,.631-.008,1.263c0,.333-.082.416-.409.416h-1.285c-.615,0-.616,0-.616-.62C-494.4-2239.168-494.4-2239.537-494.4-2239.91Zm-11.061,1.161v-2.341c-.332,0-.649.008-.966,0-.169-.006-.206.059-.2.215.008.645,0,1.291,0,1.936,0,.062.011.125.018.193Zm11.647-2.34v2.337h1.154c0-.749,0-1.487-.005-2.226,0-.038-.077-.105-.12-.107C-493.124-2241.093-493.463-2241.089-493.813-2241.089Z" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                    <path id="Path_20750" data-name="Path 20750" d="M-240.968-2010.49c.057-.352.13-.738.177-1.127a.429.429,0,0,0-.1-.3c-.236-.266-.5-.506-.735-.773a.407.407,0,0,1-.1-.322.4.4,0,0,1,.271-.2c.326-.069.658-.111.989-.154a.321.321,0,0,0,.293-.211c.135-.321.291-.632.438-.948.061-.131.142-.27.3-.228a.5.5,0,0,1,.28.225c.168.312.315.637.456.962a.306.306,0,0,0,.278.2c.317.04.635.078.946.146.12.026.283.107.316.2a.456.456,0,0,1-.122.354,9.815,9.815,0,0,1-.7.72.363.363,0,0,0-.115.367c.064.35.128.7.167,1.053a.393.393,0,0,1-.1.32.433.433,0,0,1-.355-.006c-.308-.146-.6-.318-.9-.491a.278.278,0,0,0-.319,0q-.46.269-.934.516C-240.774-2010.062-240.976-2010.189-240.968-2010.49Zm2.412-.462c-.043-.27-.069-.5-.118-.723a.492.492,0,0,1,.158-.526c.174-.154.327-.332.521-.532-.288-.046-.515-.093-.744-.114a.416.416,0,0,1-.376-.279c-.093-.217-.2-.428-.321-.689-.128.27-.24.494-.341.722a.383.383,0,0,1-.332.241c-.241.031-.48.074-.769.119.2.2.353.381.528.539a.488.488,0,0,1,.153.509c-.048.228-.077.459-.122.735.226-.124.41-.209.578-.321a.485.485,0,0,1,.6-.005C-238.969-2011.159-238.777-2011.072-238.556-2010.952Z" transform="translate(-255.552 -217.002)" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                    <path id="Path_20751" data-name="Path 20751" d="M-436-1881.644h5.62a1.226,1.226,0,0,1,.217.006.264.264,0,0,1,.239.289.256.256,0,0,1-.243.262,1.769,1.769,0,0,1-.218.007h-11.263c-.334,0-.45-.07-.456-.272s.127-.292.46-.292Z" transform="translate(-63.912 -344.314)" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                    <path id="Path_20752" data-name="Path 20752" d="M-227.558-2091.987c-.363,0-.726.005-1.088,0-.273-.006-.353-.088-.353-.354q0-1.089,0-2.178c0-.247.1-.347.341-.348q1.111,0,2.221,0c.222,0,.326.1.327.317q.009,1.121,0,2.243c0,.224-.1.318-.322.321-.377.006-.755,0-1.133,0Zm-.865-.557h1.2c.519,0,.519,0,.545-.5,0-.007,0-.014,0-.022,0-.4,0-.81,0-1.224h-1.751Z" transform="translate(-267.729 -140.385)" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                    <path id="Path_20753" data-name="Path 20753" d="M-332.77-2093.4c0,.363,0,.726,0,1.089,0,.243-.107.34-.351.34q-1.077,0-2.155-.006c-.3,0-.389-.088-.39-.391q0-1.067,0-2.134c0-.267.09-.357.351-.358q1.089,0,2.178,0c.271,0,.359.092.361.371,0,.363,0,.726,0,1.089Zm-.577-.881h-1.729v1.723h1.729Z" transform="translate(-165.711 -140.389)" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                    <path id="Path_20754" data-name="Path 20754" d="M-332.778-2000.313c0,.37,0,.74,0,1.11,0,.256-.1.355-.358.356q-1.088,0-2.176,0c-.255,0-.352-.1-.354-.359q-.007-1.109-.006-2.219a.285.285,0,0,1,.308-.318q1.142-.007,2.284,0c.2,0,.3.123.306.341,0,.363,0,.725,0,1.088Zm-.562.883c0-.552,0-1.087-.007-1.622,0-.042-.1-.117-.149-.119-.275-.012-.551-.006-.827-.006h-.763v1.748Z" transform="translate(-165.706 -229.449)" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                    <path id="Path_20755" data-name="Path 20755" d="M-439.344-2000.272c0,.37,0,.74,0,1.111,0,.262-.092.353-.357.354q-1.089,0-2.178,0c-.248,0-.346-.1-.347-.343q0-1.111,0-2.221a.286.286,0,0,1,.32-.327q1.121-.008,2.243,0c.233,0,.32.1.321.341,0,.363,0,.726,0,1.089Zm-2.312.882h1.748c0-.553,0-1.089-.007-1.625,0-.042-.1-.115-.151-.118-.239-.012-.479,0-.718,0h-.873Z" transform="translate(-63.794 -229.489)" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                    <path id="Path_20756" data-name="Path 20756" d="M-440.78-2091.968h-1.131a.277.277,0,0,1-.307-.313q0-1.132,0-2.263a.277.277,0,0,1,.316-.3q1.132,0,2.264,0a.269.269,0,0,1,.3.295q.006,1.143,0,2.285a.278.278,0,0,1-.319.3h-1.132Zm.866-.574v-1.726h-1.729v1.726Z" transform="translate(-63.805 -140.405)" fill="#acacac" stroke="#acacac" stroke-width="0.3"/>
-                                  </g>
-                                </svg>
-                                
-                                Event
-                              </button>
-                            </div>
-                            <div class="tab-content" id="v-pills-tabContent">
-                              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                                aria-labelledby="v-pills-home-tab">
-                                <div class="text-center check-img">
-                                <img src="./images/character-boat-img.png" class="mb-4"alt="">
-                                </div>
-                                <div class="custom-flex"><a href="javascript:void(0)" class="custom-btn blue big-btn">Search</a></div>
-                              </div>
-                              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                <div class="text-center check-img">
-                                  <img src="./images/character-boat-img.png" class="mb-4"alt="">
-                                  </div>
-                                <div class="custom-flex"><a href="javascript:void(0)" class="custom-btn blue big-btn">Search</a></div>
-                              </div>
-                              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                                <div class="text-center check-img">
-                                  <img src="./images/character-boat-img.png" class="mb-4"alt="">
-                                  </div>
-                                <div class="custom-flex"><a href="javascript:void(0)" class="custom-btn blue big-btn">Search</a></div>
-                              </div>
-                            </div>
-                          </div>
-
+                  </div>
+                  <div class="col-sm-7">
+                    <div class="boatel-search-card-content">
+                      <div class="boatel-search-card-content-title">
+                        <a
+                          [routerLink]="[
+                            '/boat-listing/boatel-details',
+                            item.id
+                          ]"
+                          class="underline-black-link p-0"
+                          >{{ item.name }}</a
+                        >
+                        <a href="javascript:void(0)" class="fav-btn"
+                          ><i class="fa fa-heart-o"></i
+                        ></a>
                       </div>
+                      <p class="grey">
+                        {{ item.boatelCapacity }} Guests -
+                        {{ item.totalBedrooms }} Bed Rooms -
+                        {{ item.totalWashrooms }} Bathroom
+                      </p>
+                      <div class="boatel-search-card-content-title">
+                        <p class="grey">{{ item.location }}</p>
+                      </div>
+                      <div class="custom-flex-between">
+                        <ngb-rating [rate]="0"></ngb-rating>
+                        <p class="bold-span-text">
+                          <span>$ {{ item.perDayCharges }}</span
+                          >/ Night
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
+              </div>
             </div>
-        </div>
-    </div>
-        <!--More Filters Modal -->
-        <div class="modal fade custom-modal custom-small-modal" id="more-filters-modal" tabindex="-1"
-        aria-labelledby="signup-modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header no-border">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="custom-text-center">
-                        <h4 class="bold">More Filters</h4>
-                       <h5 class="bold text-left">Bedrooms</h5>
-                       <div class="custom-flex-between py-2">
-                           <p>Number of Bedrooms</p>
-                           <div class="boatel-counter">
-                            <div class="center container">
-                                  <div class="counter-button">
-                                      <button id="minus-btn">-</button>
-                                  </div>
-                                  <div class="number">
-                                      <p id="count">0</p>
-                                  </div>
-                                  <div class="counter-button">
-                                      <button id="plus-btn">+</button>
-                                </div>
-                              </div>
+            <div class="col-sm-6 py-2">
+              <div class="iframe-wrapper">
+                <google-map
+                  height="560px"
+                  width="600px"
+                  [options]="mapOptions"
+                  [center]="center"
+                  [zoom]="zoom"
+                >
+                  <map-marker
+                    #markerr="mapMarker"
+                    *ngFor="let marker of markers"
+                    [position]="marker.position"
+                    [label]="marker.label"
+                    [title]="marker.title"
+                    [options]="marker.options"
+                    (mapClick)="openInfoWindow(markerr, marker)"
+                  >
+                  </map-marker>
+                  <map-info-window>
+                    <div class="boatel-search-card">
+                      <div class="row m-0">
+                        <div class="col-sm-5 pr-0">
+                          <div
+                            class="boatel-search-card-img"
+                            *ngFor="
+                              let gallery of mapInfoDetails?.boatGalleries
+                                | filterBy: 'isCoverPic':true
+                            "
+                          >
+                            <!-- <img src="../../../assets/images/ships-img.png" alt=""> -->
+                            <img src="{{ assetsUrl + gallery?.imagePath }}" />
                           </div>
                         </div>
-                        <div class="custom-flex-between py-2">
-                            <p>Bathrooms</p>
-                            <div class="boatel-counter">
-                             <div class="center container">
-                                   <div class="counter-button">
-                                       <button id="minus-btn">-</button>
-                                   </div>
-                                   <div class="number">
-                                       <p id="count">0</p>
-                                   </div>
-                                   <div class="counter-button">
-                                       <button id="plus-btn">+</button>
-                                 </div>
-                               </div>
-                           </div>
-                         </div>
-                         <div class="amenties-wrapper">
-                         <h5 class="bold text-left">Amenities</h5>
-                         <div class="row">
-                             <div class="col-sm-6 py-2">
-                                <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                                  <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                                  <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                                  <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                             </div>
-                             <div class="col-sm-6 py-2">
-                                <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                                  <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                                  <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                                  <label class="custom-checkbox my-4">
-                                    <input type="checkbox" checked="checked">
-                                    <p class="small-text">Kitchen</p>
-                                    <span class="checkmark"></span>
-                                  </label>
-                             </div>
-                             <div class="col-sm-12 pt-4">
-                                 <button class="custom-btn blue"  data-bs-dismiss="modal" >Save</button>
-                             </div>
-                         </div>
+                        <div class="col-sm-7">
+                          <div class="boatel-search-card-content">
+                            <div class="boatel-search-card-content-title">
+                              <a
+                                href="boatel-search-details.html"
+                                class="underline-black-link p-0"
+                                >{{ mapInfoDetails?.name }}</a
+                              >
+                              <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
+                            </div>
+                            <p class="grey">
+                              {{ mapInfoDetails?.boatelCapacity }} Guests -
+                              {{ mapInfoDetails?.totalBedrooms }} Bed Rooms -
+                              {{ mapInfoDetails?.totalWashrooms }} Bathroom
+                            </p>
+                            <div class="boatel-search-card-content-title">
+                              <p class="grey">{{ mapInfoDetails?.location }}</p>
+                            </div>
+                            <div class="custom-flex-between">
+                              <ngb-rating [rate]="0"></ngb-rating>
+                              <!-- <p class="bold-span-text"><span>$ {{mapInfoDetails?.perDayCharges}}</span>/ Night</p> -->
+                            </div>
+                            <div class="pt-2 boatel-search-card-content-title">
+                              <p class="bold-span-text">
+                                <span
+                                  >$ {{ mapInfoDetails?.perDayCharges }}</span
+                                >/ Night
+                              </p>
+                              <a href="javascript:void(0)" class="fav-btn"
+                                ><i class="fa fa-heart-o"></i
+                              ></a>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                </div>
-
+                    </div>
+                  </map-info-window>
+                </google-map>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <!--Custom Search bar Modal -->
+  <div
+    class="modal fade custom-modal custom-large-modal"
+    id="filters-modal"
+    tabindex="-1"
+    aria-labelledby="signup-modalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header no-border">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
-</div>  
+        <div class="modal-body">
+          <div class="card-wrapper">
+            <div class="custom-tabs-wrapper">
+              <div
+                class="nav nav-pills custom-tabs-btns"
+                id="v-pills-tab"
+                role="tablist"
+                aria-orientation="vertical"
+              >
+                <button
+                  class="underline-link-blk small-text active"
+                  id="v-pills-home-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-home"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-home"
+                  aria-selected="true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18.331"
+                    height="18.295"
+                    viewBox="0 0 18.331 18.295"
+                  >
+                    <path
+                      id="Path_20748"
+                      data-name="Path 20748"
+                      d="M-623.107-973.379l-.23-.355a8.591,8.591,0,0,1-1.376-4.032,1.221,1.221,0,0,1,.854-1.327c.368-.136.733-.279,1.107-.4a.283.283,0,0,0,.224-.328c-.008-1.017,0-2.035,0-3.052s.42-1.435,1.42-1.456c.052,0,.1-.008.175-.014v-2.008c-.373,0-.735,0-1.1,0-.316,0-.492-.148-.49-.4s.184-.4.5-.4q1.607,0,3.213,0h.319c0-.51-.013-.99,0-1.469a1.391,1.391,0,0,1,1.836-1.276,1.355,1.355,0,0,1,.961,1.253c.015.488,0,.977,0,1.492h3.431a1.938,1.938,0,0,1,.214,0,.4.4,0,0,1,.386.4.386.386,0,0,1-.414.395c-.383.007-.766,0-1.171,0v2.024c.123,0,.244,0,.364,0a1.184,1.184,0,0,1,1.221,1.191c.021.678.007,1.357.007,2.035,0,.437.007.875,0,1.312a.257.257,0,0,0,.2.29q.605.213,1.2.451a1.182,1.182,0,0,1,.784,1.287,8.669,8.669,0,0,1-1.52,4.257c-.025.036-.047.074-.09.144.089,0,.153,0,.217,0A1.487,1.487,0,0,1-609.8-973a.757.757,0,0,0,1.1.056.4.4,0,0,1,.572.046c.14.172.11.351-.09.533a1.5,1.5,0,0,1-2.044.039.721.721,0,0,0-1.131-.008,1.52,1.52,0,0,1-2.05-.008.711.711,0,0,0-1.051-.009,1.509,1.509,0,0,1-2.108-.007.706.706,0,0,0-1.031,0,1.5,1.5,0,0,1-2.085.017.76.76,0,0,0-1.084,0,1.511,1.511,0,0,1-2.027,0,.759.759,0,0,0-1.141,0,1.5,1.5,0,0,1-2,0,.4.4,0,0,1-.088-.588.392.392,0,0,1,.591-.031.731.731,0,0,0,1.038-.036A1.637,1.637,0,0,1-623.107-973.379Zm1.6.591c.08-.057.14-.094.194-.139a1.5,1.5,0,0,1,2.145,0,.749.749,0,0,0,1.042-.04,1.513,1.513,0,0,1,2.049-.007.728.728,0,0,0,1.112-.011,1.491,1.491,0,0,1,2.023-.017c.08.067.167.125.26.193a7.643,7.643,0,0,0,2.388-4.911c.048-.474.009-.518-.443-.682q-2.841-1.025-5.684-2.047c-.078-.028-.159-.049-.272-.083v.36q0,2.437,0,4.874a1.529,1.529,0,0,1-.021.319.359.359,0,0,1-.383.3.358.358,0,0,1-.382-.305,1.546,1.546,0,0,1-.02-.319q0-2.451,0-4.9v-.341l-1.1.4-4.9,1.775c-.374.136-.438.224-.4.611a7.917,7.917,0,0,0,.114.82A7.693,7.693,0,0,0-621.5-972.788Zm-.222-7.078c.117-.039.2-.065.281-.094,1.324-.477,2.651-.95,3.972-1.437a1.087,1.087,0,0,1,.8.006c1.3.482,2.612.951,3.919,1.424.086.031.174.058.286.1,0-1.113.006-2.183,0-3.253,0-.286-.169-.4-.521-.4h-8.195c-.414,0-.536.123-.538.547,0,.794,0,1.589,0,2.383Zm7.626-4.475v-1.993h-6v1.993Zm-2.406-2.821c0-.517.016-1.014-.006-1.509a.542.542,0,0,0-.552-.482.543.543,0,0,0-.608.446c-.03.511-.009,1.024-.009,1.546Z"
+                      transform="translate(626.265 990.076)"
+                      fill="#122ba8"
+                      stroke="#122ba8"
+                      stroke-width="0.2"
+                    />
+                  </svg>
+                  Boatel
+                </button>
+                <button
+                  class="underline-link-blk small-text"
+                  id="v-pills-profile-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-profile"
+                  aria-selected="false"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="34.924"
+                    height="19.342"
+                    viewBox="0 0 34.924 19.342"
+                  >
+                    <g
+                      id="Group_6810"
+                      data-name="Group 6810"
+                      transform="translate(1149.4 303.439)"
+                    >
+                      <path
+                        id="Path_20740"
+                        data-name="Path 20740"
+                        d="M-1140.483-298.522c-.693,0-1.3,0-1.913,0-.49,0-.766-.219-.775-.6-.009-.4.274-.628.785-.629q2.263,0,4.525,0a1.381,1.381,0,0,0,1.4-1.964,4.624,4.624,0,0,0-.355-.718.611.611,0,0,1,.522-1c.652-.014,1.3-.018,1.955.007a1.029,1.029,0,0,1,.516.206c1.51,1.073,3.012,2.159,4.52,3.235a.956.956,0,0,0,.437.207,11,11,0,0,1,4.842,1.685c.92.547,1.776,1.2,2.67,1.792a1.083,1.083,0,0,0,.549.192c1.828.015,3.656.013,5.484.008.323,0,.616.027.78.358s0,.586-.2.834a14.059,14.059,0,0,1-4.891,3.867l-.318.158c.169.013.259.026.349.026q2.013,0,4.026,0c.484,0,.77.224.779.6.009.392-.283.626-.791.626h-33.016c-.615,0-.838-.245-.785-.849a5.879,5.879,0,0,1,4.961-5.348,17.025,17.025,0,0,1,2.091-.236.509.509,0,0,0,.46-.255C-1141.441-297.03-1140.983-297.736-1140.483-298.522Zm24.062,3.681h-14.973c-3.629,0-7.259-.005-10.888.005a7.18,7.18,0,0,0-3.619.836,4.5,4.5,0,0,0-2.211,3.146h.382c7.259,0,14.517.012,21.776-.013a14.775,14.775,0,0,0,2.888-.309A13.036,13.036,0,0,0-1116.421-294.841Zm-6.844-1.246a1.87,1.87,0,0,0-1.591-.6,10.038,10.038,0,0,1-1.149.008c-.959,0-1.917,0-2.876,0a.584.584,0,0,1-.617-.469.54.54,0,0,1,.273-.654,1.1,1.1,0,0,1,.477-.1c.691-.01,1.382,0,2.073,0l.021-.161a13.57,13.57,0,0,0-2.307-.426c-3.271-.049-6.543-.024-9.815-.02a.4.4,0,0,0-.294.111c-.5.753-.976,1.516-1.486,2.318Zm-12.2-3.688h4.28c-.128-.1-.2-.167-.282-.225-.867-.632-1.751-1.243-2.6-1.9a1.4,1.4,0,0,0-1.21-.268A2.7,2.7,0,0,1-1135.463-299.775Z"
+                        fill="#acacac"
+                      />
+                      <path
+                        id="Path_20741"
+                        data-name="Path 20741"
+                        d="M-1092.607-102.483h-13c-.6,0-.943-.393-.747-.848a.683.683,0,0,1,.725-.384q4.046.007,8.091,0l17.793,0h.115c.542,0,.842.226.834.622s-.3.607-.851.607h-12.962Z"
+                        transform="translate(-39.688 -184.378)"
+                        fill="#acacac"
+                      />
+                      <path
+                        id="Path_20742"
+                        data-name="Path 20742"
+                        d="M-1022.464-66.535q-3.566,0-7.132,0a1.257,1.257,0,0,1-.45-.057.555.555,0,0,1-.364-.679.589.589,0,0,1,.64-.49q1.553,0,3.106,0h11.312c.089,0,.179,0,.268,0a.621.621,0,0,1,.6.62.61.61,0,0,1-.621.6c-.524.014-1.048.006-1.572.007Z"
+                        transform="translate(-109.832 -217.564)"
+                        fill="#acacac"
+                      />
+                      <path
+                        id="Path_20743"
+                        data-name="Path 20743"
+                        d="M-1075.546-178.352c-.482,0-.762-.219-.768-.6s.277-.623.75-.625.767.23.775.607S-1075.079-178.354-1075.546-178.352Z"
+                        transform="translate(-67.47 -114.341)"
+                        fill="#acacac"
+                      />
+                      <path
+                        id="Path_20744"
+                        data-name="Path 20744"
+                        d="M-1043.614-178.318c-.476,0-.758-.23-.756-.616s.282-.61.761-.61.763.237.762.616S-1043.142-178.317-1043.614-178.318Z"
+                        transform="translate(-96.959 -114.375)"
+                        fill="#acacac"
+                      />
+                      <path
+                        id="Path_20745"
+                        data-name="Path 20745"
+                        d="M-1011.7-178.346c-.473,0-.759-.238-.751-.622s.293-.609.769-.607.762.245.756.624S-1011.22-178.345-1011.7-178.346Z"
+                        transform="translate(-126.429 -114.347)"
+                        fill="#acacac"
+                      />
+                      <path
+                        id="Path_20747"
+                        data-name="Path 20747"
+                        d="M-1010.8-230.274c-.971,0-1.942,0-2.914,0-.453,0-.724-.231-.731-.6s.28-.623.752-.623c1.943,0,3.885,0,5.827,0a.7.7,0,0,1,.71.349.612.612,0,0,1-.615.878C-1008.779-230.267-1009.789-230.274-1010.8-230.274Z"
+                        transform="translate(-124.586 -66.408)"
+                        fill="#acacac"
+                      />
+                    </g>
+                  </svg>
+                  Charter
+                </button>
+                <button
+                  class="underline-link-blk small-text"
+                  id="v-pills-settings-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-settings"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-settings"
+                  aria-selected="false"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18.888"
+                    height="17.723"
+                    viewBox="0 0 18.888 17.723"
+                  >
+                    <g
+                      id="Group_6813"
+                      data-name="Group 6813"
+                      transform="translate(509.082 2241.805)"
+                    >
+                      <path
+                        id="Path_20749"
+                        data-name="Path 20749"
+                        d="M-507.188-2240.485c0-.3,0-.56,0-.821s.1-.344.345-.346q.806-.005,1.613,0c.249,0,.343.1.347.342,0,.267,0,.533,0,.813H-494.4c0-.235,0-.47,0-.7,0-.391.062-.451.458-.451.494,0,.988,0,1.482,0,.271,0,.365.094.369.368,0,.253,0,.507,0,.788.09,0,.166.011.243.012a1.439,1.439,0,0,1,1.5,1.514q0,2.68,0,5.36,0,3.922,0,7.844a1.43,1.43,0,0,1-1.012,1.462,1.709,1.709,0,0,1-.492.071q-7.8.005-15.6,0a1.433,1.433,0,0,1-1.478-1.472q0-6.656,0-13.313a1.431,1.431,0,0,1,1.456-1.469Zm-1.182,4.057c0,.111,0,.2,0,.283q0,1.417,0,2.833,0,3.759,0,7.517a.9.9,0,0,0,.995,1h15.407a.917.917,0,0,0,1.056-1.048q0-5.164,0-10.327c0-.084-.009-.168-.014-.26Zm13.971-3.482h-10.482c0,.448,0,.882,0,1.316,0,.34-.073.414-.406.414H-506.7c-.431,0-.484-.053-.485-.49,0-.411,0-.823,0-1.229a.92.92,0,0,0-1.182.966c0,.566.008,1.133-.005,1.7,0,.2.065.237.249.237q8.476-.007,16.951,0h.242c.008-.082.019-.138.019-.195,0-.6.007-1.191,0-1.787a.9.9,0,0,0-1.15-.917c-.006.013-.016.026-.016.039q0,.631-.008,1.263c0,.333-.082.416-.409.416h-1.285c-.615,0-.616,0-.616-.62C-494.4-2239.168-494.4-2239.537-494.4-2239.91Zm-11.061,1.161v-2.341c-.332,0-.649.008-.966,0-.169-.006-.206.059-.2.215.008.645,0,1.291,0,1.936,0,.062.011.125.018.193Zm11.647-2.34v2.337h1.154c0-.749,0-1.487-.005-2.226,0-.038-.077-.105-.12-.107C-493.124-2241.093-493.463-2241.089-493.813-2241.089Z"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                      <path
+                        id="Path_20750"
+                        data-name="Path 20750"
+                        d="M-240.968-2010.49c.057-.352.13-.738.177-1.127a.429.429,0,0,0-.1-.3c-.236-.266-.5-.506-.735-.773a.407.407,0,0,1-.1-.322.4.4,0,0,1,.271-.2c.326-.069.658-.111.989-.154a.321.321,0,0,0,.293-.211c.135-.321.291-.632.438-.948.061-.131.142-.27.3-.228a.5.5,0,0,1,.28.225c.168.312.315.637.456.962a.306.306,0,0,0,.278.2c.317.04.635.078.946.146.12.026.283.107.316.2a.456.456,0,0,1-.122.354,9.815,9.815,0,0,1-.7.72.363.363,0,0,0-.115.367c.064.35.128.7.167,1.053a.393.393,0,0,1-.1.32.433.433,0,0,1-.355-.006c-.308-.146-.6-.318-.9-.491a.278.278,0,0,0-.319,0q-.46.269-.934.516C-240.774-2010.062-240.976-2010.189-240.968-2010.49Zm2.412-.462c-.043-.27-.069-.5-.118-.723a.492.492,0,0,1,.158-.526c.174-.154.327-.332.521-.532-.288-.046-.515-.093-.744-.114a.416.416,0,0,1-.376-.279c-.093-.217-.2-.428-.321-.689-.128.27-.24.494-.341.722a.383.383,0,0,1-.332.241c-.241.031-.48.074-.769.119.2.2.353.381.528.539a.488.488,0,0,1,.153.509c-.048.228-.077.459-.122.735.226-.124.41-.209.578-.321a.485.485,0,0,1,.6-.005C-238.969-2011.159-238.777-2011.072-238.556-2010.952Z"
+                        transform="translate(-255.552 -217.002)"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                      <path
+                        id="Path_20751"
+                        data-name="Path 20751"
+                        d="M-436-1881.644h5.62a1.226,1.226,0,0,1,.217.006.264.264,0,0,1,.239.289.256.256,0,0,1-.243.262,1.769,1.769,0,0,1-.218.007h-11.263c-.334,0-.45-.07-.456-.272s.127-.292.46-.292Z"
+                        transform="translate(-63.912 -344.314)"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                      <path
+                        id="Path_20752"
+                        data-name="Path 20752"
+                        d="M-227.558-2091.987c-.363,0-.726.005-1.088,0-.273-.006-.353-.088-.353-.354q0-1.089,0-2.178c0-.247.1-.347.341-.348q1.111,0,2.221,0c.222,0,.326.1.327.317q.009,1.121,0,2.243c0,.224-.1.318-.322.321-.377.006-.755,0-1.133,0Zm-.865-.557h1.2c.519,0,.519,0,.545-.5,0-.007,0-.014,0-.022,0-.4,0-.81,0-1.224h-1.751Z"
+                        transform="translate(-267.729 -140.385)"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                      <path
+                        id="Path_20753"
+                        data-name="Path 20753"
+                        d="M-332.77-2093.4c0,.363,0,.726,0,1.089,0,.243-.107.34-.351.34q-1.077,0-2.155-.006c-.3,0-.389-.088-.39-.391q0-1.067,0-2.134c0-.267.09-.357.351-.358q1.089,0,2.178,0c.271,0,.359.092.361.371,0,.363,0,.726,0,1.089Zm-.577-.881h-1.729v1.723h1.729Z"
+                        transform="translate(-165.711 -140.389)"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                      <path
+                        id="Path_20754"
+                        data-name="Path 20754"
+                        d="M-332.778-2000.313c0,.37,0,.74,0,1.11,0,.256-.1.355-.358.356q-1.088,0-2.176,0c-.255,0-.352-.1-.354-.359q-.007-1.109-.006-2.219a.285.285,0,0,1,.308-.318q1.142-.007,2.284,0c.2,0,.3.123.306.341,0,.363,0,.725,0,1.088Zm-.562.883c0-.552,0-1.087-.007-1.622,0-.042-.1-.117-.149-.119-.275-.012-.551-.006-.827-.006h-.763v1.748Z"
+                        transform="translate(-165.706 -229.449)"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                      <path
+                        id="Path_20755"
+                        data-name="Path 20755"
+                        d="M-439.344-2000.272c0,.37,0,.74,0,1.111,0,.262-.092.353-.357.354q-1.089,0-2.178,0c-.248,0-.346-.1-.347-.343q0-1.111,0-2.221a.286.286,0,0,1,.32-.327q1.121-.008,2.243,0c.233,0,.32.1.321.341,0,.363,0,.726,0,1.089Zm-2.312.882h1.748c0-.553,0-1.089-.007-1.625,0-.042-.1-.115-.151-.118-.239-.012-.479,0-.718,0h-.873Z"
+                        transform="translate(-63.794 -229.489)"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                      <path
+                        id="Path_20756"
+                        data-name="Path 20756"
+                        d="M-440.78-2091.968h-1.131a.277.277,0,0,1-.307-.313q0-1.132,0-2.263a.277.277,0,0,1,.316-.3q1.132,0,2.264,0a.269.269,0,0,1,.3.295q.006,1.143,0,2.285a.278.278,0,0,1-.319.3h-1.132Zm.866-.574v-1.726h-1.729v1.726Z"
+                        transform="translate(-63.805 -140.405)"
+                        fill="#acacac"
+                        stroke="#acacac"
+                        stroke-width="0.3"
+                      />
+                    </g>
+                  </svg>
+
+                  Event
+                </button>
+              </div>
+              <div class="tab-content" id="v-pills-tabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="v-pills-home"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-home-tab"
+                >
+                  <div class="text-center check-img">
+                    <img
+                      src="./images/character-boat-img.png"
+                      class="mb-4"
+                      alt=""
+                    />
+                  </div>
+                  <div class="custom-flex">
+                    <a href="javascript:void(0)" class="custom-btn blue big-btn"
+                      >Search</a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="v-pills-profile"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-profile-tab"
+                >
+                  <div class="text-center check-img">
+                    <img
+                      src="./images/character-boat-img.png"
+                      class="mb-4"
+                      alt=""
+                    />
+                  </div>
+                  <div class="custom-flex">
+                    <a href="javascript:void(0)" class="custom-btn blue big-btn"
+                      >Search</a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="v-pills-settings"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-settings-tab"
+                >
+                  <div class="text-center check-img">
+                    <img
+                      src="./images/character-boat-img.png"
+                      class="mb-4"
+                      alt=""
+                    />
+                  </div>
+                  <div class="custom-flex">
+                    <a href="javascript:void(0)" class="custom-btn blue big-btn"
+                      >Search</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--More Filters Modal -->
+  <ng-template #filterTemplate>
+    <div class="modal-content">
+      <div class="modal-header no-border">
+        <button type="button" class="btn-close"></button>
+      </div>
+      <div class="modal-body" style="font-size: 0.8em !important">
+        <div class="custom-text-center">
+          <h5 class="bold">More Filters</h5>
+          <h6 class="bold text-left">Bedrooms</h6>
+          <div class="custom-flex-between py-2">
+            <p>Number of Bedrooms</p>
+            <div class="boatel-counter">
+              <div class="center container">
+                <div class="counter-button">
+                  <button id="minus-btn" (click)="decrement('fromRoom')">
+                    -
+                  </button>
+                </div>
+                <div class="number">
+                  <input
+                    style="width: 10px"
+                    [(ngModel)]="roomCount"
+                    value="{{ roomCount }}"
+                  />
+                </div>
+                <div class="counter-button">
+                  <button id="plus-btn" (click)="increment('fromRoom')">
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="custom-flex-between py-2">
+            <p>Bathrooms</p>
+            <div class="boatel-counter">
+              <div class="center container">
+                <div class="counter-button">
+                  <button id="minus-btn" (click)="decrement('bathRoom')">
+                    -
+                  </button>
+                </div>
+                <div class="number">
+                  <input
+                    style="width: 10px"
+                    [(ngModel)]="bathroomCount"
+                    value="{{ bathroomCount }}"
+                  />
+                </div>
+                <div class="counter-button">
+                  <button id="plus-btn" (click)="increment('bathRoom')">
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="amenties-wrapper">
+            <h6 class="bold text-left">Amenities</h6>
+            <div class="row">
+              <div class="col-sm-6 py-2">
+                <label
+                  class="custom-checkbox my-4"
+                  *ngFor="let item of defaultFeatures; let i = index"
+                >
+                  <div *ngIf="i % 2 == 0">
+                    <input
+                      type="checkbox"
+                      value="{{ item.id }}"
+                      (change)="toggleAdditionalFilters($event)"
+                    />
+                    <p class="small-text">{{ item.name }}</p>
+                    <span class="checkmark"></span>
+                  </div>
+                </label>
+              </div>
+              <div class="col-sm-6 py-2">
+                <label
+                  class="custom-checkbox my-4"
+                  *ngFor="let item of defaultFeatures; let i = index"
+                >
+                  <div *ngIf="i % 2 != 0">
+                    <input
+                      type="checkbox"
+                      value="{{ item.id }}"
+                      (change)="toggleAdditionalFilters($event)"
+                    />
+                    <p class="small-text">{{ item.name }}</p>
+                    <span class="checkmark"></span>
+                  </div>
+                </label>
+              </div>
+              <div class="col-sm-12 pt-4">
+                <button
+                  class="custom-btn blue"
+                  (click)="applyAdditionalFilters()"
+                  data-bs-dismiss="modal"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
