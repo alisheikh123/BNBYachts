@@ -26,6 +26,7 @@ export class ModifyReservationComponent implements OnInit {
   currentCookingId: any;
   assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   guidId!: Guid;
+  boatDetail:any;
   bookingModifyDetail: any;
   currentcheckInDate: any;
   currentcheckOutDate: any;
@@ -42,20 +43,32 @@ export class ModifyReservationComponent implements OnInit {
   oneNightCharges: any;
   perdayFee: any;
   constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService,
-     private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
-      private activatedRoute: ActivatedRoute, private service: BookingService,private bookingListService:BookingListingService) {
+  private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
+   private activatedRoute: ActivatedRoute, private service: BookingService,private bookingListService:BookingListingService) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
-      this.bookingId = res['id'];
+      this.bookingId = res['id'].toString();
     });
     if (this.yachtParamService.getFilters()) {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
     this.getBookingDetail();
+  }
+  getBookingDetail() {
+
+    this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
+      this.bookingModifyDetail = res;
+        this.service.getBoatInfo(res?.boatId).subscribe((boatdetail: any) => {
+          debugger;
+          this.bookingModifyDetail.boatDetail = boatdetail;
+          console.log(this.bookingModifyDetail);
+        });
+
+    });
   }
   goBack() {
     this.router.navigate(['/boat-listing/all-reservations']);
@@ -178,35 +191,7 @@ export class ModifyReservationComponent implements OnInit {
 
 
 
-  getBookingDetail() {
-    this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
-      this.bookingModifyDetail = res;
-      res.forEach((elem: any) => {
-        // // From BookingDetail
-        this.currentcheckInDate = elem?.checkinDate;
-        this.currentcheckOutDate = elem?.checkoutDate;
-        this.boatFilterDetails.checkinDate = this.currentcheckInDate;
-        this.boatFilterDetails.checkoutDate = this.currentcheckOutDate;
-        this.boatFilterDetails.adults = elem.noOfAdults;
-        this.boatFilterDetails.childrens = elem.noOfChildrens;
-        this.boatId = elem.boatId;
-        this.currentCookingId = elem.id;
-        elem.checkinDate = utils.formatDate(elem?.checkinDate);
-        elem.checkoutDate = utils.formatDate(elem?.checkoutDate);
-        this.service.getBoatInfo(elem.boatId).subscribe((boatdetail: any) => {
-          elem.boatDetail = boatdetail;
-          this.oneNightCharges = elem.boatDetail.perDayCharges;
-        });
 
-
-      });
-
-      this.boatFilterDetails.checkinDate = new Date(this.bookingModifyDetail[0].checkinDate);//this.bookingModifyDetail[0].checkinDate;
-      this.boatFilterDetails.checkoutDate = new Date(this.bookingModifyDetail[0].checkoutDate);
-
-
-    });
-  }
 }
 
 
