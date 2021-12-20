@@ -12,24 +12,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./host-boat-listing.component.scss']
 })
 export class HostBoatListingComponent implements OnInit {
-  hostBoats: any;
-  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
-  BOAT_TYPE = BoatTypes;
 
-  constructor(private service: ReservationService, private toastr: ToastrService, private router: Router) { }
+  constructor() { }
+  activeTab = 0;
 
   ngOnInit(): void {
-    this.service.getHostBoats().subscribe((res: any) => {
-      this.hostBoats = res;
-    });
   }
-  isBoatActive(item: any) {
 
-    this.service.updateBoatStatus(item.id).subscribe((res: any) => {
-      item.isActive = !item.isActive;
-      this.toastr.success('Boat Status successfully Changed.', 'Success');
-
-    });
+  switch(tab:number){
+    this.activeTab = tab;
   }
 
 

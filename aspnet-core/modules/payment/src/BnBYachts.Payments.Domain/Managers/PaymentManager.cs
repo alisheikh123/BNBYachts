@@ -1,12 +1,11 @@
 ﻿using BnBYachts.Payments.Enum;
 using BnBYachts.Payments.Payments;
 using BnBYachts.Payments.Shared.Interface;
+using BnBYachts.Payments.Shared.Requestable;
 using BnBYachts.Payments.Shared.Transferable;
-using Microsoft.Extensions.Configuration;
 using Stripe;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -25,15 +24,15 @@ namespace BnBYachts.Payments.Managers
 
             StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             _userCardRepository = userCardRepository;
-            _userPaymentDetailsRepository = userPaymentDetailsRepository;            
+            _userPaymentDetailsRepository = userPaymentDetailsRepository;
         }
 
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId)
         {
-            //var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
+            var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
             var options = new PaymentMethodListOptions
             {
-                Customer = "cus_Ka64Lkvdloaevt",
+                Customer = user.CustomerId,
                 Type = PaymentConstants.Card,
             };
             var service = new PaymentMethodService();
@@ -48,10 +47,29 @@ namespace BnBYachts.Payments.Managers
             }
             return userPaymentMethods;
         }
+        public async Task<bool> CreateCustomer(StripeCustomerRequestable data)
+        {
+            var customerOptions = new CustomerCreateOptions
+            {
+                Description = "Customer created for future payments",
+                Name = data.Name,
+                Email = data.Email,
+                Validate = true
+            };
+            var customerService = new CustomerService();
+            var customerResponse = await customerService.CreateAsync(customerOptions);
+            var userCardEntity = new UserCardInfoEntity
+            {
+                UserId = data.Id,
+                CustomerId = customerResponse.Id
+            };
+            var result = await _userCardRepository.InsertAsync(userCardEntity).ConfigureAwait(false);
+            return true;
+        }
 
         public async Task<bool> Pay(BookingPaymentRequestable data)
         {
-            //var user = await _userCardRepository.FindAsync(res => res.UserId == data.UserId).ConfigureAwait(false);
+            var user = await _userCardRepository.FindAsync(res => res.UserId == data.UserId).ConfigureAwait(false);
 
             if (data.IsSaveNewPaymentMethod)
             {
@@ -63,14 +81,13 @@ namespace BnBYachts.Payments.Managers
                         Token = data.Token
                     }
                 };
-
                 var paymentMethodService = new PaymentMethodService();
                 var cardResponse = await paymentMethodService.CreateAsync(cardOptions).ConfigureAwait(false);
                 data.PaymentId = cardResponse.Id;
 
                 var attachOptions = new PaymentMethodAttachOptions
                 {
-                    Customer = "cus_Ka64Lkvdloaevt",
+                    Customer = user.CustomerId,
                 };
                 var attachService = new PaymentMethodService();
                 await attachService.AttachAsync(
@@ -87,7 +104,7 @@ namespace BnBYachts.Payments.Managers
                     {
                         PaymentConstants.Card
                     },
-                Customer = "cus_Ka64Lkvdloaevt",
+                Customer = user.CustomerId,
                 PaymentMethod = data.PaymentId,
                 Description = data.Description,
                 Confirm = true
@@ -99,19 +116,15 @@ namespace BnBYachts.Payments.Managers
             {
                 PaymentDetailsEntity pm = new PaymentDetailsEntity
                 {
-                    BookingId = data.BookingId??0,
+                    BookingId = data.BookingId ?? 0,
                     PaymentId = response.Id,
-                    CustomerId = "cus_Ka64Lkvdloaevt",
+                    CustomerId = user.CustomerId,
                     Amount = data.Amount
                 };
                 await _userPaymentDetailsRepository.InsertAsync(pm);
                 return true;
-                }
-                else
-                {
-                    return false;
-                }
-
+            }
+            return false;
         }
 
         public async Task<bool> RefundPayment(int bookingId, long refundAmount)

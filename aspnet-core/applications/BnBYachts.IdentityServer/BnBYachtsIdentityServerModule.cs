@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,15 +16,8 @@ using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Caching;
-using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Identity;
-using BnBYachts.Services.Classes;
-using BnBYachts.Interfaces.IdentityInterface;
-using BnBYachts.Services;
-using BnBYachts.Core.Localization;
 using BnBYachts.Core.EntityFrameworkCore;
 using BnBYachts.Core.MultiTenancy;
 using Microsoft.AspNetCore.Http;
@@ -117,32 +109,6 @@ namespace BnBYachts
             var emailConfig = configuration.GetSection("EmailConfiguration:");
            
 
-            Configure<AbpLocalizationOptions>(options =>
-            {
-                options.Resources
-                    .Get<CoreResource>()
-                    .AddBaseTypes(
-                        typeof(AbpUiResource)
-                    );
-
-                options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-                options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-                options.Languages.Add(new LanguageInfo("en", "en", "English"));
-                options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-                options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-                options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-                options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-                options.Languages.Add(new LanguageInfo("it", "it", "Italian", "it"));
-                options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-                options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-                options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-                options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-                options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
-                options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-                options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
-                options.Languages.Add(new LanguageInfo("es", "es", "Español", "es"));
-            });
 
             Configure<AbpBundlingOptions>(options =>
             {
@@ -161,14 +127,6 @@ namespace BnBYachts
                 options.ApplicationName = "AuthServer";
             });
 
-            if (hostingEnvironment.IsDevelopment())
-            {
-                //Configure<AbpVirtualFileSystemOptions>(options =>
-                //{
-                //    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain.Shared"));
-                //    options.FileSets.ReplaceEmbeddedByPhysical<CoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}modules\\core\\src\\BnBYachts.Core.Domain"));
-                //});
-            }
 
             Configure<AppUrlOptions>(options =>
             {
@@ -211,35 +169,7 @@ namespace BnBYachts
                         .AllowCredentials();
                 });
             });
-            var contact = new OpenApiContact()
-            {
-                Name = "FirstName LastName",
-                Email = "user@example.com",
-                Url = new Uri("http://www.example.com")
-            };
-
-            var license = new OpenApiLicense()
-            {
-                Name = "My License",
-                Url = new Uri("http://www.example.com")
-            };
-
-            var info = new OpenApiInfo()
-            {
-                Version = "v1",
-                Title = "Swagger Demo API",
-                Description = "Swagger Demo API Description",
-                TermsOfService = new Uri("http://www.example.com"),
-                Contact = contact,
-                License = license
-            };
-
-            context.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", info);
-            });
-            context.Services.GetObject<IdentityBuilder>().AddDefaultTokenProviders().AddPasswordlessLoginProvider();
-            context.Services.AddScoped<ILoginService, LoginService>();
+           
             context.Services.AddSingleton(emailConfig);
             context.Services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -286,16 +216,6 @@ namespace BnBYachts
             app.UseAuthorization();
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
-
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json",
-                "Swagger Demo API v1");
-            });
-
-
             app.UseConfiguredEndpoints();
         }
 

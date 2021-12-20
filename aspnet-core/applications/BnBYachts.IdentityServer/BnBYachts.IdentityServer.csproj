@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controller\ValuesController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\custom.js" />
     <None Include="wwwroot\js\select.js" />

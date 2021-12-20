@@ -133,7 +133,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backgroundWorker", "backgro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3BB7BE9-C98F-4EB2-A21F-64678F1E1BA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BnByachts.BackgroundWorker", "modules\backgroundWorker\src\BnByachts.BackgroundWorker\BnByachts.BackgroundWorker.csproj", "{6E6728F3-DBE5-454B-91A8-A5749CAF00EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnByachts.BackgroundWorker", "modules\backgroundWorker\src\BnByachts.BackgroundWorker\BnByachts.BackgroundWorker.csproj", "{6E6728F3-DBE5-454B-91A8-A5749CAF00EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{010BCD36-66EF-40C2-A840-B7EF06EDBE13}"
 EndProject
@@ -146,6 +146,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Chat.HttpApi", "modules\chat\src\BnBYachts.Chat.HttpApi\BnBYachts.Chat.HttpApi.csproj", "{F37A05A4-30E6-4720-B70A-7BB4B30858BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Chat.HttpApi.Host", "microservices\BnBYachts.Chat.HttpApi.Host\BnBYachts.Chat.HttpApi.Host.csproj", "{E4111961-B3E1-489A-8526-DB7605C117E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Chat.MongoDB", "modules\chat\src\BnBYachts.Chat.MongoDB\BnBYachts.Chat.MongoDB.csproj", "{B65E2978-C63E-49DB-8B42-400197F2BD09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{68030C4D-E603-49A4-80AC-0EE54F765BFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BnBYachts.Shared", "shared\BnBYachts.Shared\BnBYachts.Shared.csproj", "{535E684C-E626-452C-9510-39A8A2ABA2F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -353,6 +359,14 @@ Global
 		{E4111961-B3E1-489A-8526-DB7605C117E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4111961-B3E1-489A-8526-DB7605C117E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4111961-B3E1-489A-8526-DB7605C117E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B65E2978-C63E-49DB-8B42-400197F2BD09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B65E2978-C63E-49DB-8B42-400197F2BD09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B65E2978-C63E-49DB-8B42-400197F2BD09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B65E2978-C63E-49DB-8B42-400197F2BD09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{535E684C-E626-452C-9510-39A8A2ABA2F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{535E684C-E626-452C-9510-39A8A2ABA2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{535E684C-E626-452C-9510-39A8A2ABA2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{535E684C-E626-452C-9510-39A8A2ABA2F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -425,6 +439,8 @@ Global
 		{F2C100C2-3D04-45DE-A8F6-935A76162299} = {010BCD36-66EF-40C2-A840-B7EF06EDBE13}
 		{F37A05A4-30E6-4720-B70A-7BB4B30858BB} = {010BCD36-66EF-40C2-A840-B7EF06EDBE13}
 		{E4111961-B3E1-489A-8526-DB7605C117E3} = {10399C2F-1B2E-4141-97C9-9212B90B78E6}
+		{B65E2978-C63E-49DB-8B42-400197F2BD09} = {010BCD36-66EF-40C2-A840-B7EF06EDBE13}
+		{535E684C-E626-452C-9510-39A8A2ABA2F7} = {68030C4D-E603-49A4-80AC-0EE54F765BFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

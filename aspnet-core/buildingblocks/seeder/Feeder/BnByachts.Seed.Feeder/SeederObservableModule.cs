@@ -8,6 +8,8 @@ using BnBYachts.Boat;
 using Microsoft.Extensions.DependencyInjection;
 using BnBYachts.Boat.EntityFrameworkCore;
 using BnByachts.SeedObservable.Consumers;
+using BnBYachts.Core.EntityFrameworkCore;
+using BnBYachts.Core;
 
 namespace BnByachts.SeedObservable
 {
@@ -16,13 +18,14 @@ namespace BnByachts.SeedObservable
         typeof(AbpAutoMapperModule),
         typeof(AbpAutofacModule),
         typeof(BoatApplicationModule),
-        typeof(BoatEntityFrameworkCoreModule)
-    //typeof(AbpAccountApplicationModule),
+        typeof(BoatEntityFrameworkCoreModule),
+        typeof(CoreApplicationModule),
+        typeof(CoreEntityFrameworkCoreModule)
 
     )]
     public class SeederObservableModule : AbpModule
     {
-        
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.AddAssemblyOf<SeederObservableModule>();
@@ -36,16 +39,54 @@ namespace BnByachts.SeedObservable
 
             context.Services.AddMassTransit(mt =>
             {
+                mt.AddConsumer<RolesConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QRoleSeeder;
+                });
+                mt.AddConsumer<UsersConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QUsersSeeder;
+                });
                 mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
                 {
-                    e.Name = EventBusQueue.QSeeder;
+                    e.Name = EventBusQueue.QBoatSeeder;
                 });
-
-                mt.AddConsumer<BoatHostConsumer>().Endpoint(e =>
+                mt.AddConsumer<FeaturesConsumer>().Endpoint(e =>
                 {
-                    e.Name = EventBusQueue.QSeeder;
+                    e.Name = EventBusQueue.QFeatureSeeder;
                 });
 
+                mt.AddConsumer<RulesConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QRulesSeeder;
+                });
+                mt.AddConsumer<BoatHostGalleryConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatGallerySeeder;
+                });
+                mt.AddConsumer<BoatHostCalendarConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatCalendarSeeder;
+                });
+
+
+                mt.AddConsumer<BoatHostFeatureConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatFeatureSeeder;
+                });
+
+                mt.AddConsumer<BoatHostRulesConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QBoatRulesSeeder;
+                });
+                mt.AddConsumer<CharterConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QCharterSeeder;
+                });
+                mt.AddConsumer<EventsConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QEventSeeder;
+                });
             });
 
         }

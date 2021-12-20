@@ -15,7 +15,9 @@ import { environment } from 'src/environments/environment';
 })
 export class EventDetailsComponent implements OnInit {
 
-  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute) {
+  constructor(config: NgbRatingConfig, private toastr: ToastrService,
+     private yachtSearchService: YachtSearchService,
+      private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute) {
     config.max = 5;
     config.readonly = true;
   }
@@ -28,8 +30,9 @@ export class EventDetailsComponent implements OnInit {
   dateScheduleIndex = 0;
 
   eventFilterDetails = {
-    adults: 0,
-    childrens: 0
+    adults: 1,
+    childrens: 0,
+    eventDate:new Date()
   };
   popOverFilterData = {
     adults: 0,
@@ -46,9 +49,6 @@ export class EventDetailsComponent implements OnInit {
       this.eventId = Number(res['id']);
     });
     this.getEventDetailsById();
-    if (this.yachtParamService.getFilters()) {
-      this.eventFilterDetails = this.yachtParamService.getFilters();
-    }
   }
 
 
@@ -80,8 +80,35 @@ export class EventDetailsComponent implements OnInit {
     return this.eventDetails?.boat.boatRules.filter((res: any) => res.offeredFeatures.isGuestFavourite == isHealthSafetyRule);
   }
 
-  reserveCharter() {
+  reserveEvent() {
     this.isSubmitted = true;
+    if ((this.eventFilterDetails.adults + this.eventFilterDetails.childrens) > 0) {
+      let bookingModel = {
+        eventId: this.eventId,
+        eventDate: this.eventDetails.startDateTime,
+        noOfGuests: this.eventFilterDetails.adults + this.eventFilterDetails.childrens,
+        hostId: this.eventDetails.boat.creatorId,
+        bookingStatus: 0
+      };
+      this.bookingService.eventBooking(bookingModel).subscribe(res => {
+        let bookingId = res?.data?.id;
+        if (res.returnStatus) {
+          let boatCalendar = {
+            isAvailable: false,
+            toDate: this.eventDetails?.eventDate,
+            fromDate: this.eventDetails?.eventDate,
+            boatEntityId: this.eventDetails?.boat?.id
+          }
+          this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
+            if (res) {
+              this.yachtParamService.setFilters(this.eventFilterDetails);
+              this.router.navigate(['/payments/event-payments', this.eventId, bookingId], { relativeTo: this.activatedRoute });
+              this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
+            }
+          });
+        }
+      })
+    }
   }
 
   openPopover() {

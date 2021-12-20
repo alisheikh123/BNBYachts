@@ -7,7 +7,7 @@ using Volo.Abp;
 namespace BnByachts.Simulator
 {
 
-    class Program
+    public class Program
     {
         private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
         static void Main(string[] args)
