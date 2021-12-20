@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
@@ -42,6 +43,7 @@ namespace BnBYachts.Boat
             CreateMap<BoatLocationEntity, BoatFeatureDTO>();
             CreateMap<EventEntity, EventDTO>();
             CreateMap<BoatEntity, BoatLookupTransferable>();
+            CreateMap<EventRequestable, EventEntity>();
         }
     }
 }
