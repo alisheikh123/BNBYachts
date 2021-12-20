@@ -16,6 +16,7 @@ export class AllChartersListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAllCharters().subscribe((res: any) => {
+      debugger;
       this.hostCharters = [...new Map(res.map((item:any) =>
         [item['boatId'], item])).values()];
     });

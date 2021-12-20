@@ -24,8 +24,10 @@ export class ActivateAccountComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.activatedRoute.snapshot.queryParams.username;
     this.token = this.activatedRoute.snapshot.queryParams.id;
+    debugger;
     this.authService.getUserInfoByUserName(this.username).subscribe((res:any)=>{
       this.userData = res;
+      debugger;
       this.ConfirmAccont(this.username, this.token);
     })
   }

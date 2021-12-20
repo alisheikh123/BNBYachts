@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BnBYachts.Boat.Boat.Transferables;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -24,5 +25,6 @@ namespace BnBYachts.Boat.Charter.Dto
         public double? ReturnLocationLat { get; set; }
         public double? ReturnLocationLng { get; set; }
         public virtual int? BoatId { get; set; }
+        public virtual BoatDTO Boat { get; set; }
     }
 }

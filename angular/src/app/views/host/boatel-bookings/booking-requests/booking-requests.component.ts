@@ -16,7 +16,7 @@ export class BookingRequestsComponent implements OnInit {
   selectedYear: string = "";
   selectedMonth: string = "";
   @Input() boatelBookings: any = [];
-  selectedServiceType: string = "Service Type";
+  selectedServiceType: number = 1;
   SERVICE_TYPES = ServiceType;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   modelDate = "";
@@ -24,13 +24,18 @@ export class BookingRequestsComponent implements OnInit {
     config.max = 5;
     config.readonly = true;
   }
+  bookedServicesTypes = {
+    boatel :1,
+    charter:2,
+    event:3
+  };
 
   ngOnInit(): void {
     this.getReservations();
   }
 
   getReservations() {
-    this.reservationService.getBoatelBookingRequests(this.selectedMonth, this.selectedYear).subscribe((res:any) => {
+    this.reservationService.getBoatelBookingRequests(this.selectedServiceType,this.selectedMonth, this.selectedYear).subscribe((res:any) => {
       this.boatelBookings = res?.data;
       this.boatelBookings.forEach((element: any) => {
         this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
@@ -53,9 +58,9 @@ export class BookingRequestsComponent implements OnInit {
     this.selectedMonth = result[1];
     this.getReservations();
   }
-  filterServiceType(input: string) {
-    this.selectedServiceType = input;
-    (input == 'Boatels') ? this.getReservations() : this.clearData();
+  filterServiceType(serviceType: number) {
+    this.selectedServiceType = serviceType;
+   this.getReservations();
   }
   clearData() {
     this.boatelBookings = null;

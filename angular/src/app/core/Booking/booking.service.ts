@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class BookingService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
-  boatApiUrl: string = environment.BOAT_API_URL;
+  boatApiUrl: string = environment.BOAT_API_URL+'/api';
   paymentApiUrl: string = environment.PAYMENTS_API_URL;
   constructor(private http: HttpClient) { }
 

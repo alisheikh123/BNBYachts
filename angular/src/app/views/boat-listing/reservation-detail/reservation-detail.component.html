@@ -105,8 +105,7 @@
           </div>
         </div>
       </div>
-
-      <div class="col-sm-12 custom-margin text-center mobile-padding-btns">
+      <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="booking.bookingStatus != BOOKING_STATUS.Rejected">
         <div class="center-content">
           <a [routerLink]="['/boat-listing/reservation-cancellation',booking.id]"
             class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">Cancel Reservation</a>

@@ -10,5 +10,6 @@ namespace BnBYachts.Boat.Interfaces.Charter
         Task<ICollection<BoatDTO>> GetAllBoats();
         Task<CharterDto> InsertCharters(CharterDto charterDto);
         Task<ICollection<CharterDto>> GetBookedCharters(int id);
+        Task<ICollection<CharterDto>> GetCharters();
     }
 }

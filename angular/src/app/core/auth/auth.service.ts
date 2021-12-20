@@ -23,10 +23,10 @@ export class AuthService {
   // }
 
   getUserInfo() {
-    return this.http.get(this.apiCoreURl + "/GetLoggedInUserDetails");
+    return this.http.get(this.apiCoreURl + "/api/GetLoggedInUserDetails");
   }
   getUserInfoByUserName(userName: string){
-    return this.http.get(this.apiCoreURl + "/GetUserDetailsByUserName?username="+userName);
+    return this.http.get(this.apiCoreURl + "/api/GetUserDetailsByUserName?username="+userName);
   }
 
   login() {
@@ -39,35 +39,36 @@ export class AuthService {
   }
 
   sendEmail(Email: any) {
-    return this.http.get(this.apiCoreURl + "/forgot/" + Email);
+    return this.http.get(this.apiCoreURl + "/api/forgot/" + Email);
   }
 
   updatePassword(userId: any, Password: any) {
     let params = new HttpParams()
       .set('userId', userId)
       .set('Password', Password);
-    return this.http.get(this.apiCoreURl + "/reset/", { params: params });
+    return this.http.get(this.apiCoreURl + "/api/reset/", { params: params });
   }
 
   verifyUniqueId(uniqueId: any) {
-    return this.http.get(this.apiCoreURl + "/verifyLink/" + uniqueId, { responseType: 'text' });
+    return this.http.get(this.apiCoreURl + "/api/verifyLink/" + uniqueId, { responseType: 'text' });
   }
   
   registerUser(userData: any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.http.post(this.apiCoreURl + "/register/", userData)
+    return this.http.post(this.apiCoreURl + "/api/register/", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
   confirmEmail(userName: any, token: any) {
-    return this.http.get<any>(this.apiCoreURl + "/confirm-email?username="+userName+"&token="+token);
+    debugger;
+    return this.http.get<any>(this.apiCoreURl + "/api/confirm-email?username="+userName+"&token="+token);
   }
   resendEmail(userName:any){
-    return this.http.get<any>(this.apiCoreURl + "/Resend-Email?username="+userName);
+    return this.http.get<any>(this.apiCoreURl + "/api/Resend-Email?username="+userName);
   }
   updateUserProfile(userData: any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.http.put(this.apiCoreURl + "/Update-User-Profile/", userData)
+    return this.http.put(this.apiCoreURl + "/api/Update-User-Profile/", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 

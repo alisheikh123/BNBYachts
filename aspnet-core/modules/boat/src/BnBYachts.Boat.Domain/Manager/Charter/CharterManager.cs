@@ -36,6 +36,16 @@ namespace BnBYachts.Boat.Manager.Charter
                 GetListAsync(x => x.BoatId == boatId && x.DepartureFromDate >= DateTime.Now.Date)
             .ConfigureAwait(false));
 
+        public async Task<ICollection<CharterDto>> GetCharters(Guid? userId)
+        {
+            var charters = await _charterRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
+            foreach (var charter in charters)
+            {
+                await _charterRepository.EnsurePropertyLoadedAsync(charter, res => res.Boat).ConfigureAwait(false);
+                await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, res => res.BoatGalleries).ConfigureAwait(false);
+            }
+            return _objectMapper.Map<ICollection<CharterEntity>, ICollection<CharterDto>>(charters);
+        }
 
         public async Task<CharterDto> InsertCharter(CharterDto charterForm)
         {

@@ -25,7 +25,7 @@ namespace BnBYachts.Services.Charter
         public async Task<ICollection<CharterDto>> GetBookedCharters(int boatId)=> 
             await _charterManager.BookedCharter(boatId).ConfigureAwait(false);
 
-       
+        public async Task<ICollection<CharterDto>> GetCharters() => await _charterManager.GetCharters(CurrentUser.Id).ConfigureAwait(false);
 
         public async Task<CharterDto> InsertCharters(CharterDto charterDto)=>
             await _charterManager.InsertCharter(charterDto).ConfigureAwait(false);
