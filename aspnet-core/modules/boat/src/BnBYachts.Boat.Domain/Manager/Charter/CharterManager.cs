@@ -3,11 +3,8 @@ using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Charter.Interface;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -40,7 +37,6 @@ namespace BnBYachts.Boat.Manager.Charter
             .ConfigureAwait(false));
 
 
-        [HttpPost]
         public async Task<CharterDto> InsertCharter(CharterDto charterForm)
         {
            await _charterRepository.InsertAsync(_objectMapper.Map<CharterDto, CharterEntity>(charterForm),true).ConfigureAwait(false);
