@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
+using Volo.Abp.MongoDB;
 using Volo.Abp.Uow;
 
 namespace BnBYachts.Chat.MongoDB
 {
     [DependsOn(
-        typeof(ChatDomainModule)
+        typeof(ChatDomainModule),
+        typeof(AbpMongoDbModule)
         )]
     public class ChatMongoDbModule : AbpModule
     {
