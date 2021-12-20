@@ -1,11 +1,10 @@
-﻿using System;
-using BnBYachts.Booking.Interfaces;
+﻿using BnBYachts.Booking.Interfaces;
 using BnBYachts.Booking.Review;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
-using Volo.Abp.ObjectMapping;       
+using Volo.Abp.ObjectMapping;
 
 namespace BnBYachts.Booking.Managers
 {
@@ -25,21 +24,24 @@ namespace BnBYachts.Booking.Managers
             return res.Id > 0 ? true : false;
         }
 
-        public async Task<ICollection<ReviewTransferable>> GetReviews(int revieweeId, bool isAllReview,string userId)
+        public async Task<ICollection<ReviewTransferable>> GetReviews(int revieweeId, bool isAllReview, string userId)
         {
             var reviews = await _reviewRepository.GetListAsync(res => res.RevieweeID == revieweeId && (isAllReview ? true : res.ReviewerId == userId)).ConfigureAwait(false);
             return _objectMapper.Map<ICollection<BookingReviewEntity>, ICollection<ReviewTransferable>>(reviews);
         }
         public async Task<ICollection<ReviewTransferable>> GetBookingReviews(int bookingId)
         {
-           
-                var reviews = await _reviewRepository.GetListAsync(res => res.BookingId == bookingId).ConfigureAwait(false);
-                return _objectMapper.Map<ICollection<BookingReviewEntity>, ICollection<ReviewTransferable>>(reviews);
-           
+            var reviews = await _reviewRepository.GetListAsync(res => res.BookingId == bookingId).ConfigureAwait(false);
+            return _objectMapper.Map<ICollection<BookingReviewEntity>, ICollection<ReviewTransferable>>(reviews);
         }
-        public async Task<bool> IsReviewAlreadyPosted(string userId,int bookingId)
+        public async Task<ICollection<ReviewTransferable>> GetBoatReviews(int boatId)
         {
-            var reviews = await _reviewRepository.GetListAsync(x=>x.BookingId == bookingId && x.ReviewerId == userId).ConfigureAwait(false);
+            var reviews = await _reviewRepository.GetListAsync(res => res.RevieweeID == boatId).ConfigureAwait(false);
+            return _objectMapper.Map<ICollection<BookingReviewEntity>, ICollection<ReviewTransferable>>(reviews);
+        }
+        public async Task<bool> IsReviewAlreadyPosted(string userId, int bookingId)
+        {
+            var reviews = await _reviewRepository.GetListAsync(x => x.BookingId == bookingId && x.ReviewerId == userId).ConfigureAwait(false);
             return reviews.Count > 0 ? true : false;
         }
     }
