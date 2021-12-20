@@ -39,12 +39,12 @@
                 </li>
               </ul>
             </div>
-            <div class="btn-group btn-group-toggle pe-2" ngbRadioGroup name="radioBasic" [(ngModel)]="modelDate">
+            <div class="btn-group btn-group-toggle pe-2" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedTab">
               <label ngbButtonLabel class="btn-outline-primary">
-                <input [hidden]="true" ngbButton type="radio" [value]="1"> All
+                <input [hidden]="true" ngbButton type="radio" (click)="allReservation()" [value]="0"> All
               </label>
               <label ngbButtonLabel class="btn-outline-primary" (click)="upcomingReservation()">
-                <input [hidden]="true" ngbButton type="radio" [value]="0"> Upcoming
+                <input [hidden]="true" ngbButton type="radio" [value]="1"> Upcoming
               </label>
               <label ngbButtonLabel class="btn-outline-primary" (click)="pastReservation()">
                 <input [hidden]="true" ngbButton type="radio" [value]="2"> Past

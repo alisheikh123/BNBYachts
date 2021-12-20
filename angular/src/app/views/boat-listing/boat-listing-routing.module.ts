@@ -4,7 +4,6 @@ import { ReservationDetailComponent } from './reservation-detail/reservation-det
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllReservationsComponent } from './all-reservations/all-reservations.component';
-import { BoatBookingPaymentComponent } from './boat-booking-payment/boat-booking-payment.component';
 import { BoatDetailsComponent } from './boat-details/boat-details.component';
 import { BoatListingComponent } from './boat-listing/boat-listing.component';
 import { EventListingComponent } from './event-listing/event-listing.component';
@@ -36,9 +35,6 @@ const routes: Routes = [
   },
   {
     path: "reservation-detail/:id", component: ReservationDetailComponent
-  },
-  {
-    path: "booking-payment/:id/:bookingid", component: BoatBookingPaymentComponent
   },
   {
     path: "reservation-cancellation/:id", component: ReservationCancellationComponent

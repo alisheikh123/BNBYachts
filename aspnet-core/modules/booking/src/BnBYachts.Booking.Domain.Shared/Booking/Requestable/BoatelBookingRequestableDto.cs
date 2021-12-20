@@ -1,10 +1,12 @@
-﻿using System;
-using Volo.Abp.Application.Dtos;
+﻿using BnBYachts.Shared.Interface;
+using System;
 
-namespace BnBYachts.Booking.DTO
+
+namespace BnBYachts.Booking.Booking.Requestable
 {
-    public class BoatelBookingDto : AuditedEntityDto<int>
+    public class BoatelBookingRequestableDto:IRequestable
     {
+        public int? Id { get; set; }
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }
         public BookingStatus BookingStatus { get; set; }
@@ -12,8 +14,9 @@ namespace BnBYachts.Booking.DTO
         public int NoOfAdults { get; set; }
         public int NoOfChildrens { get; set; }
         public int BoatId { get; set; }
-        public string BankingDetailsId { get; set; }
         public string UserId { get; set; }
+        public BookingReviewRequestableDto Reviews { get; set; }
+        public string HostId { get; set; }
         public string UserName { get; set; }
     }
 }

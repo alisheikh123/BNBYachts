@@ -9,3 +9,9 @@ export enum ServiceType {
     Rejected = 2,
     Cancel = 3
   }
+  export enum BookingResponseFilter
+  {
+      All=0,
+      Upcomings= 1,
+      Past = 2
+  }

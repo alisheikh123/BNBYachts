@@ -12,11 +12,21 @@ export class BookingService {
   constructor(private http: HttpClient) { }
 
   boatelBooking(model: any) {
-    return this.http.post<any>(this.bookingApiUrl + '/boatelbooking', model).pipe(
+    return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/boatel-booking', model).pipe(
       catchError(this.handleError));
   }
+
+  charterBooking(model: any) {
+    return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/charter-booking', model).pipe(
+      catchError(this.handleError));
+  }
+  eventBooking(model: any) {
+    return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/event-booking', model).pipe(
+      catchError(this.handleError));
+  }
+
   modifyboatelBooking(model: any) {
-    return this.http.post(this.bookingApiUrl + '/modifyboatelbooking', model).pipe(
+    return this.http.post(this.bookingApiUrl + '/api/app/boat-booking/modify-boatel-booking', model).pipe(
       catchError(this.handleError));
   }
 
@@ -36,22 +46,11 @@ export class BookingService {
 
 
   /* Ali */
-  bookingDetail(month? : string,year?: string) {
-    return this.http.get(this.bookingApiUrl + '/boatelbookingdetail').pipe(catchError(this.handleError));
-  }
-  upcomingbookingDetail(month? : string,year?: string) {
-    return this.http.get(this.bookingApiUrl + '/upcomingboatelbookingdetail?month='+month+'&year='+year).pipe(catchError(this.handleError));
 
-  }
-  pastbookingDetail(month? : string,year?: string) {
-    return this.http.get(this.bookingApiUrl + '/pastboatelbookingdetail?month='+month+'&year='+year).pipe(catchError(this.handleError));
-  }
   getBoatInfo(boatId: any) {
     return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
   }
-  getBookingBoatDetail(BookingId: any) {
-    return this.http.get(this.bookingApiUrl + '/boatelbooking/' + BookingId).pipe(catchError(this.handleError));
-  }
+
   saveCancellation(model: any) {
     const data = JSON.stringify(model);
     const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -73,10 +72,5 @@ export class BookingService {
   }
   isReviewPosted(bookingId:number) {
     return this.http.get(this.bookingApiUrl + '/api/app/review/if-review-already-posted/'+bookingId).pipe(catchError(this.handleError));
-  }
-
-  /* Ali */
-  getUpcomingHostBookingDetail() {
-    return this.http.get(this.bookingApiUrl + '/upcominghostboatelbookingdetail').pipe(catchError(this.handleError));
   }
 }

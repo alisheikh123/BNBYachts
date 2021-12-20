@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BnBYachts.Shared.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BnBYachts.Booking.Booking.Transferables
+namespace BnBYachts.Booking.Booking.Requestable
 {
-   public class BookingReviewsDto
+    public class BookingReviewRequestableDto : IRequestable
     {
         public string ReviewerId { get; set; }
         public int RevieweeID { get; set; }

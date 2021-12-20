@@ -34,7 +34,11 @@ const routes: Routes = [
   },
   {
     path: "update-profile/:id", component: UpdateProfileComponent
-  }
+  },
+  {
+    path: 'payments',
+    loadChildren: () => import('./views/payments/payments.module').then(m => m.PaymentsModule)
+  },
 ];
 
 @NgModule({

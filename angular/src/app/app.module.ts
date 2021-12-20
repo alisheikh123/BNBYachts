@@ -33,7 +33,7 @@ import { TranslateService } from './core/translate.service';
     TryHostingComponent,
     MyProfileComponent,
     UpdateProfileComponent,
-    AddReviewModalComponent,
+    AddReviewModalComponent
   ],
   imports: [
     BrowserModule,

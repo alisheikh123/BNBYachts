@@ -30,7 +30,6 @@
                   Options</button>
                 </div>
                 <div class="tab-content" id="v-pills-tabContent">
-                    {{charterCreationForm.value | json}}
                 <form [formGroup]="charterCreationForm">
                 <div class="tab-pane"  [ngClass]="{'active': currentTab == CHARTER_TABS.BoatSelection}" *ngIf="currentTab == CHARTER_TABS.BoatSelection">
                          <div class="row">

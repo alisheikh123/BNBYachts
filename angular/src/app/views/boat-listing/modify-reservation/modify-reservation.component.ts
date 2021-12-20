@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
+import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
@@ -40,7 +41,9 @@ export class ModifyReservationComponent implements OnInit {
   isSubmitted: boolean = false;
   oneNightCharges: any;
   perdayFee: any;
-  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute, private service: BookingService) {
+  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService,
+     private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
+      private activatedRoute: ActivatedRoute, private service: BookingService,private bookingListService:BookingListingService) {
     config.max = 5;
     config.readonly = true;
   }
@@ -176,10 +179,9 @@ export class ModifyReservationComponent implements OnInit {
 
 
   getBookingDetail() {
-    this.service.getBookingBoatDetail(this.bookingId).subscribe((res: any) => {
+    this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.bookingModifyDetail = res;
       res.forEach((elem: any) => {
-
         // // From BookingDetail
         this.currentcheckInDate = elem?.checkinDate;
         this.currentcheckOutDate = elem?.checkoutDate;
