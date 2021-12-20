@@ -21,6 +21,9 @@ import { EventCreationSuccessModalComponent } from './event-creation/event-creat
 import { AllEventsListingComponent } from './host-boat-listing/all-events-listing/all-events-listing.component';
 import { AllChartersListingComponent } from './host-boat-listing/all-charters-listing/all-charters-listing.component';
 import { NotFoundModule } from '../common/not-found-component/not-found.module';
+import { BookingRequestsComponent } from './boatel-bookings/booking-requests/booking-requests.component';
+import { BookedServicesComponent } from './boatel-bookings/booked-services/booked-services.component';
+import { DroppedServicesComponent } from './boatel-bookings/dropped-services/dropped-services.component';
 
 
 
@@ -36,7 +39,10 @@ BoatListingComponent,
 EventCreationComponent,
 EventCreationSuccessModalComponent,
 AllEventsListingComponent,
-AllChartersListingComponent
+AllChartersListingComponent,
+BookingRequestsComponent,
+BookedServicesComponent,
+DroppedServicesComponent
   ],
   imports: [
     HostRoutingModule,

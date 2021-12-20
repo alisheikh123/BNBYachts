@@ -1,7 +1,5 @@
-﻿using BnBYachts.Booking.DTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BnBYachts.Booking.Booking.Requestable;
+using BnBYachts.Shared.Model;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
@@ -9,9 +7,9 @@ namespace BnBYachts.Booking
 {
     public interface IBoatBookingService : IApplicationService
     {
-        //Task<bool> BoatelBooking();
-        //Task<bool> CharterBooking();
-        //Task<bool> EventBooking();
-
+        Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data);
+        Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data);
+        Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data);
+        Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data);
     }
 }

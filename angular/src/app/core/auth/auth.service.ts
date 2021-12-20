@@ -25,6 +25,9 @@ export class AuthService {
   getUserInfo() {
     return this.http.get(this.apiCoreURl + "/GetLoggedInUserDetails");
   }
+  getUserInfoByUserName(userName: string){
+    return this.http.get(this.apiCoreURl + "/GetUserDetailsByUserName?username="+userName);
+  }
 
   login() {
     this.oidcSecurityService.authorize();
