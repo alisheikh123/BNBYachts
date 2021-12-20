@@ -207,8 +207,8 @@ export class ReservationCancellationComponent implements OnInit {
           }
           // #region Set data for Host
           if (this.isHost) {
-            elem.deductedAmount = (elem.boatDetail.perDayCharges * elem.TotalDays + 20 + elem.boatDetail.taxFee) * 0.029 + 0.030;
-            elem.totalAmount = elem.totalreservationFee -   elem.deductedAmount;
+            this.bookingCancelDetail.deductedAmount = (this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays + 20 + this.bookingCancelDetail.boatDetail.taxFee) * 0.029 + 0.030;
+            this.bookingCancelDetail.totalAmount = this.bookingCancelDetail.totalreservationFee -   this.bookingCancelDetail.deductedAmount;
           }
           // #endregion
         });
