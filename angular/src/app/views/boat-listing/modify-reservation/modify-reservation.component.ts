@@ -80,9 +80,8 @@ export class ModifyReservationComponent implements OnInit {
   }
 
   calculateDays() {
-
     if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null) {
-
+debugger;
       var date1 = new Date(this.boatFilterDetails.checkinDate);
       var date2 = new Date(this.boatFilterDetails.checkoutDate);
       var Time = date2.getTime() - date1.getTime();
@@ -97,17 +96,18 @@ export class ModifyReservationComponent implements OnInit {
 
   }
   changecheckoutDate(checkout: any) {
-
+    debugger;
     let checkoutLatest = utils.formatDate(checkout);
-    if (this.currentcheckOutDate <= checkoutLatest) {
+    let currentcheckOutDate = utils.formatDate(this.bookingModifyDetail?.checkoutDate);
+    if (currentcheckOutDate <= checkoutLatest) {
       this.perdayFee = 0;
     }
-    if (this.currentcheckOutDate == checkoutLatest) {
+    if (currentcheckOutDate == checkoutLatest) {
       this.perdayFee = 0;
 
 
     }
-    if (this.currentcheckOutDate > checkoutLatest) {
+    if (currentcheckOutDate > checkoutLatest) {
 
       this.perdayFee = this.oneNightCharges;
 
@@ -185,8 +185,9 @@ export class ModifyReservationComponent implements OnInit {
             if (res) {
               debugger;
               this.yachtParamService.setFilters(this.boatFilterDetails);
-              this.router.navigate(['/boat-listing/booking-payment', this.bookingModifyDetail?.boatId], { relativeTo: this.activatedRoute });
-              this.toastr.success('Boat reserved successfully.', 'Success');
+              this.toastr.success('Boat reservation Successfully Modified.', 'Success');
+              this.router.navigate(['/boat-listing/all-reservations'], { relativeTo: this.activatedRoute });
+
             }
           });
         }

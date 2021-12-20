@@ -19,7 +19,7 @@
                         <h5 class="bold pt-3 pb-1">Refund Details</h5>
                         <div class="custom-flex-between">
                             <p>{{bookingCancelDetail?.boatDetail?.perDayCharges}} x {{ bookingCancelDetail?.TotalDays}} Night</p>
-                            <p class=" text-right py-1">{{bookingCancelDetail?.boatDetail.perDayCharges * bookingCancelDetail?.TotalDays }}.00 $</p>
+                            <p class=" text-right py-1">{{bookingCancelDetail?.boatDetail?.perDayCharges * bookingCancelDetail?.TotalDays }}.00 $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p>Service Fee</p>
@@ -31,12 +31,12 @@
                         </div> -->
                         <div class="custom-flex-between">
                             <p>Tax Fee</p>
-                            <p class=" text-right py-1">{{bookingCancelDetail?.boatDetail.taxFee}}.00 $</p>
+                            <p class=" text-right py-1">{{bookingCancelDetail?.boatDetail?.taxFee}}.00 $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p>Total(USD)</p>
-                            <p class=" text-right py-1">{{(bookingCancelDetail?.boatDetail.perDayCharges * bookingCancelDetail.TotalDays) + 20 +
-                                bookingCancelDetail?.boatDetail.taxFee}}.00 $</p>
+                            <p class=" text-right py-1">{{(bookingCancelDetail?.boatDetail?.perDayCharges * bookingCancelDetail?.TotalDays) + 20 +
+                                bookingCancelDetail?.boatDetail?.taxFee}}.00 $</p>
                         </div>
                         <div class="border-top my-3"></div>
                         <div class="custom-flex-between">
@@ -54,15 +54,15 @@
                         <h5 class="bold py-2">Reservation Details</h5>
                         <div class="custom-flex-start">
                             <p class="medium">Boat Name:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail.boatDetail.name}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.name}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check In Date:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail.checkinDate | date}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.checkinDate | date}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check Out Date:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail.checkoutDate | date}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.checkoutDate | date}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">No of Guest:</p>
@@ -70,23 +70,23 @@
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Location :</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.location}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.location}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check In Time:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.checkinTime | date:'h:mm a' }}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.checkinTime | date:'h:mm a' }}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check Out Time:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.checkoutTime | date:'h:mm a'}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.checkoutTime | date:'h:mm a'}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Bedroom:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.totalBedrooms}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.totalBedrooms}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Bathroom:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail.totalWashrooms}}</p>
+                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.totalWashrooms}}</p>
                         </div>
                         <div class="custom-margin" *ngIf="!isHost">
                             <h5 class="bold mb-1">{{'CancellationPolicy' | localization}}</h5>
@@ -105,7 +105,7 @@
                                 <li>
                                     <p>{{'CancellationDeductionPolicy4' | localization}}</p>
                                 </li>
-    
+
                             </ul>
                         </div>
                     </div>
