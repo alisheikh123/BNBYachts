@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
-import { utils } from 'src/app/shared/utility/utils';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 
@@ -26,7 +26,9 @@ export class ReservationDetailComponent implements OnInit {
   isPosted: boolean;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
-  constructor(private service: BookingService, public activatedRoute: ActivatedRoute, private route: Router, private modal: NgbModal, private toastr: ToastrService) { }
+  constructor(private service: BookingService
+    ,private bookingListService: BookingListingService, public activatedRoute: ActivatedRoute, private route: Router,
+    private modal: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -34,32 +36,19 @@ export class ReservationDetailComponent implements OnInit {
       this.bookingId = Number(res['id']);
     });
 
-    this.service.getBookingBoatDetail(this.bookingId).subscribe((res: any) => {
+    this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.booking = res;
-      res.forEach((elem: any) => {
         this.currentDate = new Date();
-        this.checkInDate = new Date(elem?.checkinDate);
-        this.checkOutDate = new Date(elem?.checkoutDate);
+        this.checkInDate = new Date(this.booking?.checkinDate);
+        this.checkOutDate = new Date(this.booking?.checkoutDate);
         this.totalDays = Math.ceil((this.checkOutDate - this.checkInDate) / 8.64e7) + 1;
-        this.service.getBoatInfo(elem.boatId).subscribe((boatdetail: any) => {
-          elem.boatDetail = boatdetail;
-          elem.TotalDays = this.totalDays;
-          elem.checkinDate = this.checkInDate;
-          elem.checkoutDate = this.checkOutDate;
+        this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
+          this.booking.boatDetail = boatdetail;
+          this.booking.TotalDays = this.totalDays;
+          this.booking.checkinDate = this.checkInDate;
+          this.booking.checkoutDate = this.checkOutDate;
           this.boatDetail = boatdetail;
-          // if(this.checkInDate<this.currentDate)
-          // {
-          //   this.isCurrentDateGreater=false;
-          // }
-          // if(this.checkInDate==this.currentDate){
-          //   this.isCurrentDateGreater=true;
-          // }
-          // if(this.checkInDate>=this.currentDate){
-          //   this.isCurrentDateGreater=true;
-          // }
-
         });
-      });
 
     });
     this.isReviewPosted();

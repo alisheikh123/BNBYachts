@@ -1,5 +1,5 @@
 import { LoaderComponent } from './shared/loader/component/loader/loader.component';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { MyProfileComponent } from './views/common/user-profile/my-profile/my-pr
 import { UpdateProfileComponent } from './views/common/user-profile/update-profile/update-profile.component';
 import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
 import { AddReviewModalComponent } from './views/common/add-review-modal/add-review-modal.component';
+import { TranslateService } from './core/translate.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AddReviewModalComponent } from './views/common/add-review-modal/add-rev
     TryHostingComponent,
     MyProfileComponent,
     UpdateProfileComponent,
-    AddReviewModalComponent,
+    AddReviewModalComponent
   ],
   imports: [
     BrowserModule,
@@ -70,8 +71,19 @@ import { AddReviewModalComponent } from './views/common/add-review-modal/add-rev
     },
     LoaderService,
     BookingService,
-    {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter}
+    {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter},
+    TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateFactory,
+      deps: [TranslateService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function setupTranslateFactory(service: TranslateService): Function {
+  return () => service.use('en');
+}

@@ -26,11 +26,9 @@ export class CharterDetailsComponent implements OnInit {
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
   dateScheduleIndex = 0;
-
-
   charterFilterDetails = {
     departureDate: new Date(),
-    adults: 0,
+    adults: 1,
     childrens: 0
   };
   popOverFilterData = {
@@ -48,9 +46,6 @@ export class CharterDetailsComponent implements OnInit {
       this.charterId = Number(res['id']);
     });
     this.getCharterDetailsById();
-    if (this.yachtParamService.getFilters()) {
-      this.charterFilterDetails = this.yachtParamService.getFilters();
-    }
   }
 
 
@@ -84,8 +79,35 @@ export class CharterDetailsComponent implements OnInit {
 
   reserveCharter() {
     this.isSubmitted = true;
+    if ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens) > 0) {
+      let bookingModel = {
+        charterId: this.charterId,
+        departureDate: this.charterDetails.departureDate,
+        noOfAdults: this.charterFilterDetails.adults,
+        noOfChildrens: this.charterFilterDetails.childrens,
+        hostId: this.charterDetails.boat.creatorId,
+        bookingStatus: 0
+      };
+      this.bookingService.charterBooking(bookingModel).subscribe(res => {
+        let bookingId = res?.data?.id;
+        if (res.returnStatus) {
+          let boatCalendar = {
+            isAvailable: false,
+            toDate: this.charterFilterDetails?.departureDate,
+            fromDate: this.charterFilterDetails?.departureDate,
+            boatEntityId: this.charterDetails?.boatId
+          }
+          this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
+            if (res) {
+              this.yachtParamService.setFilters(this.charterFilterDetails);
+              this.router.navigate(['/payments/charter-payments', this.charterDetails?.boat.id, bookingId], { relativeTo: this.activatedRoute });
+              this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
+            }
+          });
+        }
+      })
+    }
   }
-
   openPopover() {
     this.popOverFilterData.adults = this.charterFilterDetails.adults;
     this.popOverFilterData.childrens = this.charterFilterDetails.childrens;
@@ -101,8 +123,8 @@ export class CharterDetailsComponent implements OnInit {
     this.modal.open(this.templateRef, { centered: true, windowClass: 'custom-modal custom-small-modal' });
   }
 
-  onChangeDate(isIncrease:boolean) {
-    this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex -1;
+  onChangeDate(isIncrease: boolean) {
+    this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
     this.yachtSearchService.charterDetailsById(this.charterSchedule[this.dateScheduleIndex]?.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
     })

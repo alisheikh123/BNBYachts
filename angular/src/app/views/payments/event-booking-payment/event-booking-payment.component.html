@@ -1,0 +1,106 @@
+<div class="main-wrapper" *ngIf="!isPaymentFailed">
+    <div class="container section-padding payment-method-wrapper">
+        <div class="btn-back">
+            <a [routerLink]="['/boat-listing/event-details',eventId]"> <span class="material-icons arrow_back_ios">
+                    arrow_back_ios
+                </span></a>
+            <h2 class="bold">Book a Event</h2>
+        </div>
+        <div class="row m-0">
+            <div class="col-md-5 payment-method-left-box py-2">
+                <app-user-payment-methods></app-user-payment-methods>
+                <div>
+                    <p>By selecting the button below, iagree to the <a href="#" class="underline-blue-link">host's house
+                            rules. Airbnb's Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <div>
+
+                    <button (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
+                        Pay</button>
+                </div>
+                <div>
+                    <h6 class="medium-bold mb-3">Cancellation Policy</h6>
+                    <p>Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud. <a href="disclaimer.html"
+                            class="custom-btn underline-blue-link no-before-content p-0">Learn more</a></p>
+                </div>
+            </div>
+            <div class="col-md-7 py-2">
+                <div class="payment-main-wrap">
+                    <div class="payment-method-card-wrapper">
+                        <div class="payment-method-card">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="payment-method-img"
+                                        *ngFor="let item of (eventDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                        <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="payment-method-content">
+                                        <p class="px-2">{{eventDetails?.boat?.name}}</p>
+                                        <div class="custom-flex-start">
+                                            <p class="medium px-2">Event Name:</p>
+                                            <p>{{eventDetails?.title}}</p>
+                                        </div>
+                                        <div class="custom-flex-start">
+                                            <p class="medium px-2">Event Date:</p>
+                                            <p>{{eventDetails?.startDateTime | date}}</p>
+                                        </div>
+                                        <div class="custom-flex-start">
+                                            <p class="medium px-2">Event Time:</p>
+                                            <p>{{eventDetails?.startDateTime | date : 'h:mm a'}}</p>
+                                        </div>
+                                        <div class="custom-flex-start">
+                                            <p class="medium px-2">Event Type:</p>
+                                            <p>{{eventDetails?.eventType == 0 ? 'Adult':'Family'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row custom-margin">
+                            <div class="col-12">
+                                <h6 class="medium py-md-3">Price Details</h6>
+                                <div class="custom-flex-between">
+                                    <p>Quote Amount</p>
+                                    <p>${{ eventDetails?.amountPerPerson * (eventFilterDetails.adults +
+                                        eventFilterDetails.childrens) }}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Tax Fee</p>
+                                    <p>${{eventDetails?.boat?.taxFee}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Service Fee</p>
+                                    <p>$20.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Total(USD)</p>
+                                    <p>$ {{eventDetails?.amountPerPerson * (eventFilterDetails.adults +
+                                        eventFilterDetails.childrens) + eventDetails?.boat?.taxFee + 20}}.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end">
+
+                        <div class="col-12">
+                            <div class="custom-flex-start align-items-start">
+                                <img src="../../../../assets/images/reservation-img.png" alt="">
+                                <div class="ms-2">
+                                    <p class="medium">Your reservation won't be confirmed until host accepts your
+                                        request with in 24 hours</p>
+                                    <p>You won't be charged until then.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

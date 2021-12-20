@@ -1,0 +1,59 @@
+<div class="dropdown custom-dropdown dropdown-rounded pb-2">
+    <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li>
+            <a class="dropdown-item" (click)="filterServiceType(1)">Boatels</a>
+        </li>
+        <li>
+            <a class="dropdown-item" (click)="filterServiceType(2)">Charters</a>
+        </li>
+        <li>
+            <a class="dropdown-item" (click)="filterServiceType(3)">Events</a>
+        </li>
+    </ul>
+</div>
+<div class="custom-card req-user-card" *ngFor="let item of bookedServices; let i = index">
+    <div class="image-with-text custom-flex-between align-items-start">
+        <div class="image-with-text-inner">
+            <img src="../../../../assets/images/user-img.png" alt="" />
+            <div class="user-details">
+                <p class="medium">
+                    {{ item.userName }}
+                    <span class="small-text regular grey">Boat Name:{{ item.boatDetail?.name }}
+                    </span>
+                </p>
+                <ngb-rating [rate]="0"></ngb-rating>
+                <p class="small-text grey">
+                    Location : {{ item.boatDetail?.location }}
+                </p>
+                <p class="small-text grey">
+                    Guest: {{ item.noOfAdults + item.noOfChildrens }}
+                </p>
+            </div>
+        </div>
+        <div class="
+          right-content
+          custom-flex
+          flex-column
+          align-items-end
+        ">
+            <p class="small-text grey">
+                {{ item.checkinDate | date: "dd MMM/YYYY" }} -
+                {{ item.checkoutDate | date: "dd MMM/YYYY" }}
+            </p>
+            <div class="custom-flex mt-4">
+                <a [routerLink]="[
+              '/boat-listing/reservation-cancellation',
+              item.id
+            ]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="bookedServices?.length == 0">
+    <app-not-found-component></app-not-found-component>
+</div>
