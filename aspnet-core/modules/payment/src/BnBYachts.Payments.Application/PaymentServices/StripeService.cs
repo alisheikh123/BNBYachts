@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Payments.Shared.Interface;
+using BnBYachts.Payments.Shared.Requestable;
 using BnBYachts.Payments.Shared.Transferable;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,13 @@ namespace BnBYachts.Payments.PaymentServices
         {
             var data = await _paymentManager.GetCustomersCard(CurrentUser.Id);
             return data;
+        }
+        [HttpPost]
+        [Route("create-customer")]
+        public async Task<bool> CreateCustomer(StripeCustomerRequestable customerRequestable)
+        {
+            var result = await _paymentManager.CreateCustomer(customerRequestable);
+            return result;
         }
 
         [HttpPost]

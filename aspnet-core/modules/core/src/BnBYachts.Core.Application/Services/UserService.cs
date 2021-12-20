@@ -25,6 +25,13 @@ namespace BnBYachts.Core.Services
         {
             return await _appUserManager.GetLoggedInUserDetails(CurrentUser.Id);
         }
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetUserDetailsByUserName")]
+        public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
+        {
+            return await _appUserManager.GetUserDetailsByUserName(username);
+        }
 
         [HttpGet]
         [AllowAnonymous]

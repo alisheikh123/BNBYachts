@@ -4,7 +4,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
-import { utils } from 'src/app/shared/utility/utils';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 
@@ -26,8 +25,9 @@ export class ReservationDetailComponent implements OnInit {
   isCurrentDateGreater: any;
   isPosted: boolean;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
+  boatDetail: any;
   constructor(private service: BookingService
-    , private bookingListService: BookingListingService, public activatedRoute: ActivatedRoute, private route: Router,
+    ,private bookingListService: BookingListingService, public activatedRoute: ActivatedRoute, private route: Router,
     private modal: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -47,6 +47,7 @@ export class ReservationDetailComponent implements OnInit {
           this.booking.TotalDays = this.totalDays;
           this.booking.checkinDate = this.checkInDate;
           this.booking.checkoutDate = this.checkOutDate;
+          this.boatDetail = boatdetail;
         });
 
     });
@@ -80,8 +81,8 @@ export class ReservationDetailComponent implements OnInit {
     });
   }
   isBookingPassed(): boolean {
-    let parsedDate = Date.parse(this.checkOutDate);
-    let today = Date.parse(new Date().toISOString().slice(0, 10));
+    let parsedDate = Date.parse(this.boatDetail.checkoutTime);
+    let today = Date.parse(new Date().toISOString());
     return (today > parsedDate) ? true : false;
   }
 

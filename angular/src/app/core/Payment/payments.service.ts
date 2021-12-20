@@ -16,6 +16,10 @@ export class PaymentsService {
       catchError(this.handleError));
   }
 
+  createCustomer(userData: any) {
+    return this.http.post(this.paymentsApiUrl + '/create-customer',userData).pipe(
+      catchError(this.handleError));
+  }
 
   pay(data: any) {
     return this.http.post(this.paymentsApiUrl + '/pay-amount', data).pipe(catchError(this.handleError));
