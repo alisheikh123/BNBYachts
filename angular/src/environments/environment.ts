@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   BOAT_API_URL: 'https://localhost:44387',
-  CHARTER_API_URL: 'https://localhost:44387/api/app/charter',
   BOOKING_API_URL: 'https://localhost:44337',
   CORE_API_URL: 'https://localhost:44347',
   IDENTITY_API_URL: 'https://localhost:44311',
