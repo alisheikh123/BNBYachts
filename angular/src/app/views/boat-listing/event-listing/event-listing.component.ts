@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { WishlistsService } from 'src/app/core/wishlist/wishlist.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { environment } from 'src/environments/environment';
 
@@ -32,7 +34,7 @@ export class EventListingComponent implements OnInit {
   events: any[] = [];
   mapDetails: any;
   markers: any[] = [];
-  constructor(private yachtSearch: YachtSearchDataService, config: NgbRatingConfig) {
+  constructor(private yachtSearch: YachtSearchDataService, config: NgbRatingConfig,private wishlistService:WishlistsService,private toastr:ToastrService) {
     config.max = 5;
     config.readonly = true;
   }
@@ -46,6 +48,7 @@ export class EventListingComponent implements OnInit {
       lat: this.mapDetails?.latitude,
       lng: this.mapDetails?.longitude
     };
+    this.getUserWishlistBoats();
   }
   filterMarkers() {
     this.events.forEach((element: any) => {
@@ -65,6 +68,35 @@ export class EventListingComponent implements OnInit {
   openInfoWindow(marker: MapMarker, data: any) {
     this.mapInfoDetails = this.events.find(res => res.id == data?.charterId);
     this.infoWindow.open(marker);
+  }
+
+  addToWishList(boat: any) {
+    this.wishlistService.addToWishlist(boat?.id).subscribe((res: any) => {
+      if (res?.returnStatus) {
+        boat.isAddedToMyWishlist = true;
+        this.toastr.success("Boat added to wishlists", "Wishlist");
+      }
+    })
+  }
+  getUserWishlistBoats() {
+    this.wishlistService.getUserWishlists().subscribe((res: any) => {
+      let allUserWishlists = res?.data;
+      this.events.forEach(res => {
+        let findBoat = allUserWishlists.find((item: any) => item?.boatId == res?.boat.id);
+        if (findBoat != null) {
+          res.boat.isAddedToMyWishlist = true;
+          res.boat.wishlistId = findBoat.id;
+        }
+      })
+    });
+  }
+  removeToWishList(boat: any) {
+    this.wishlistService.removeToWishlist(boat?.wishlistId).subscribe((res: any) => {
+      if (res?.returnStatus) {
+        boat.isAddedToMyWishlist = false;
+        this.toastr.success("Boat removed from wishlists", "Wishlist");
+      }
+    })
   }
 
 }

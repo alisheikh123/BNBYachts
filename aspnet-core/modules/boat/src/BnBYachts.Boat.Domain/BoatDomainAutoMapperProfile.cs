@@ -3,6 +3,8 @@ using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
+using BnBYachts.Boat.Wishlist.Transferable;
+using BnBYachts.Boat.Wishlists;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
 using Volo.Abp.AutoMapper;
@@ -50,6 +52,7 @@ namespace BnBYachts.Boat
             CreateMap<BoatRuleEntity, BoatRuleDTO>();
             CreateMap<BoatLocationEntity, BoatFeatureDTO>();
             CreateMap<EventRequestable, EventEntity>();
+            CreateMap<WishlistEntity, WishlistTransferableDto>();
         }
     }
 }

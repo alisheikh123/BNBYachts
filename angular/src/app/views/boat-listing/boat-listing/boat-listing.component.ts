@@ -11,6 +11,8 @@ import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-d
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { WishlistsService } from 'src/app/core/wishlist/wishlist.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-boat-listing',
@@ -49,12 +51,15 @@ export class BoatListingComponent implements OnInit {
   minPrice: number = 0;
   maxPrice: number = 0;
   activeModal: any;
+  isLoggedIn = false;
 
   constructor(
     private yachtSearch: YachtSearchDataService,
     private yachtService: YachtSearchService,
     config: NgbRatingConfig,
-    private modal: NgbModal
+    private modal: NgbModal,
+    private wishlistService: WishlistsService,
+    private toastr: ToastrService
   ) {
     config.max = 5;
     config.readonly = true;
@@ -73,6 +78,10 @@ export class BoatListingComponent implements OnInit {
       lat: this.mapDetails?.latitude,
       lng: this.mapDetails?.longitude
     };
+    if (localStorage.getItem('userId') != null) {
+      this.isLoggedIn = true;
+      this.getUserWishlistBoats();
+    }
   }
 
   filterMarkers() {
@@ -106,7 +115,7 @@ export class BoatListingComponent implements OnInit {
   applyAdditionalFilters() {
     // get original unfiltered boats before applying filter
     this.boats = JSON.parse(localStorage.getItem('originalBoats') || '{}');
-  
+
     if (this.roomCount > 0) {
       this.indexToRemove = [];
       this.boats.forEach((boat: any, index) => {
@@ -132,26 +141,26 @@ export class BoatListingComponent implements OnInit {
       });
     }
     //for additional filters
-      this.boats.forEach((boat: any,index) => {
-        this.Array.forEach((elem: any) => {
-          var rep = boat.boatFeatures.filter((res: any) => res.offeredFeaturesId == elem);
-          if(rep.length == 0){
-            var res = this.boats.splice(index,1);
-          }
-        });
+    this.boats.forEach((boat: any, index) => {
+      this.Array.forEach((elem: any) => {
+        var rep = boat.boatFeatures.filter((res: any) => res.offeredFeaturesId == elem);
+        if (rep.length == 0) {
+          var res = this.boats.splice(index, 1);
+        }
+      });
     });
     this.activeModal.close();
   }
-  applyPriceFilter(minPrice:number,maxPrice:number){
-     // get original unfiltered boats before applying filter
-     this.boats = JSON.parse(localStorage.getItem('originalBoats') || '{}');
-     this.indexToRemove = [];    
-     this.boats.forEach((boat: any, index) => {
+  applyPriceFilter(minPrice: number, maxPrice: number) {
+    // get original unfiltered boats before applying filter
+    this.boats = JSON.parse(localStorage.getItem('originalBoats') || '{}');
+    this.indexToRemove = [];
+    this.boats.forEach((boat: any, index) => {
       if (boat.perDayCharges <= minPrice || boat.perDayCharges >= maxPrice) {
         this.indexToRemove.push(index);
         this.indexToRemove.sort((a, b) => b - a);
       }
-    });  
+    });
     this.indexToRemove.forEach((entry: any, index) => {
       this.boats.splice(entry, 1);
     });
@@ -162,7 +171,7 @@ export class BoatListingComponent implements OnInit {
     this.infoWindow.open(marker);
   }
   openModal(template: TemplateRef<any>) {
-    this.activeModal = this.modal.open(template, { ariaLabelledBy: 'modal-basic-title', centered: true,windowClass:'custom-modal custom-small-modal'});
+    this.activeModal = this.modal.open(template, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'custom-modal custom-small-modal' });
   }
   increment(input: string) {
     input == 'fromRoom' ? this.roomCount++ : this.bathroomCount++;
@@ -170,4 +179,34 @@ export class BoatListingComponent implements OnInit {
   decrement(input: string) {
     input == 'fromRoom' ? this.roomCount-- : this.bathroomCount--;
   }
+
+  addToWishList(boat: any) {
+    this.wishlistService.addToWishlist(boat?.id).subscribe((res: any) => {
+      if (res?.returnStatus) {
+        boat.isAddedToMyWishlist = true;
+        this.toastr.success("Boat added to wishlists", "Wishlist");
+      }
+    })
+  }
+  getUserWishlistBoats() {
+    this.wishlistService.getUserWishlists().subscribe((res: any) => {
+      let allUserWishlists = res?.data;
+      this.boats.forEach(res => {
+        let findBoat = allUserWishlists.find((item: any) => item.boatId == res.id);
+        if (findBoat != null) {
+          res.isAddedToMyWishlist = true;
+          res.wishlistId = findBoat.id;
+        }
+      })
+    });
+  }
+  removeToWishList(boat: any) {
+    this.wishlistService.removeToWishlist(boat?.wishlistId).subscribe((res: any) => {
+      if (res?.returnStatus) {
+        boat.isAddedToMyWishlist = false;
+        this.toastr.success("Boat removed from wishlists", "Wishlist");
+      }
+    })
+  }
+
 }

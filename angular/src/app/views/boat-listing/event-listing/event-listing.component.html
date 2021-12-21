@@ -24,18 +24,6 @@
                                 class="fa fa-search"></i>
                         </div>
                     </div>
-                    <div class="col-sm-4  py-2">
-                        <button class="wishlist-wrapper">
-                            <div class="custom-flex-between">
-                                <p class="small-text medium">Added to Wishlist</p>
-                                <div class="text-right">
-                                    <a href="javascript:void(0)" class="close-btn"></a>
-                                </div>
-
-                            </div>
-                            <p class="small-text grey">Midwayabad</p>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -62,8 +50,9 @@
                                         <div class="boatel-search-card-content-title">
                                             <a [routerLink]="['/boat-listing/event-details',item.id]"
                                                 class="underline-black-link p-0">{{item?.boat?.name}}</a>
-                                            <a href="javascript:void(0)" class="fav-btn"><i
-                                                    class="fa fa-heart-o"></i></a>
+                                                <a (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
+                                                ><i class="fa" [ngClass]="{'fa-heart-o': !item?.boat?.isAddedToMyWishlist , 'fa-heart':item?.boat?.isAddedToMyWishlist}"></i
+                                              ></a>
                                         </div>
                                         <p class="grey">{{item?.title}}</p>
                                         <p class="grey">Event Capacity:{{item?.guestCapacity}}</p>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using BnByachts.BackgroundWorker;
+using BnByachts.BackgroundWorker.Jobs;
 using BnBYachts.EventBusShared.Queue;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
@@ -27,6 +28,7 @@ namespace BnByachts.NotificationHub
             {
                 serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
                 serviceScope.ServiceProvider.GetService<MyLogWorker>().StartAsync().GetAwaiter();
+                serviceScope.ServiceProvider.GetService<BookingWorker>().StartAsync().GetAwaiter();
             }
             Console.WriteLine("Background Worker is Running");
             Console.WriteLine("Ctrl + C to Quit");
