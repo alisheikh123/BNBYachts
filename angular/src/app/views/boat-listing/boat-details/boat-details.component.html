@@ -375,12 +375,12 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 pt-2 text-center">
-                                <a href="#" class="custom-btn blue big-btn">Contact Host</a>
+                                <button  class="custom-btn blue big-btn">Contact Host</button>
                             </div>
                         </div>
                     </div>
-                    <div class="rating-wrapper section-padding">
-                        <div class="row"><app-list-reviews [boatId]=boatDetails.id></app-list-reviews></div>
+                    <div class="rating-wrapper section-padding" *ngIf="boatId > 0">
+                        <div class="row"><app-list-reviews [boatId]=boatId></app-list-reviews></div>
                     </div>
                 </div>
             </div>

@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class OnboardingService {
-  boatApiUrl: string = environment.BOAT_API_URL;
-  coreApiUrl: string = environment.CORE_API_URL;
+  boatApiUrl: string = environment.BOAT_API_URL+'/api';
+  coreApiUrl: string = environment.CORE_API_URL +'/api';
 
   constructor(private http: HttpClient) { }
 

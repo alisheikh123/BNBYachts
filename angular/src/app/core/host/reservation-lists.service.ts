@@ -16,8 +16,8 @@ export class ReservationListsService {
     return this.http.get(this.bookingApiUrl + '/booked-services?serviceType='+serviceType).pipe(
       catchError(this.errorService.handleError));
   }
-  getBoatelBookingRequests(Month?: string, Year?: string) {
-    return this.http.get(this.bookingApiUrl + '/bookings-requests?month=' + Month + '&year=' + Year).pipe(
+  getBoatelBookingRequests(serviceType:number,Month?: string, Year?: string) {
+    return this.http.get(this.bookingApiUrl + '/bookings-requests?month=' + Month + '&year=' + Year+'&serviceType='+serviceType).pipe(
       catchError(this.errorService.handleError));
   }
   getDroppedServices() {
@@ -25,8 +25,8 @@ export class ReservationListsService {
       catchError(this.errorService.handleError));
   }
 
-  changeStatus(bookingId: number, status: boolean) {
-    return this.http.put(this.bookingApiUrl + '/reservation-status/' + bookingId+'?isAccpeted='+status,null).pipe(
+  changeStatus(bookingId: number, status: boolean,reason:string) {
+    return this.http.put(this.bookingApiUrl + '/reservation-status/' + bookingId+'?isAccpeted='+status+'&rejectionReason='+reason,null).pipe(
       catchError(this.errorService.handleError));
   }
 

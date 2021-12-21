@@ -477,6 +477,52 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("Rules");
                 });
 
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BoatId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BoatId");
+
+                    b.ToTable("Wishlists");
+                });
+
             modelBuilder.Entity("BnBYachts.Boats.Charter.CharterEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -689,6 +735,17 @@ namespace BnBYachts.Boat.Migrations
                         .HasForeignKey("OfferedRuleId");
 
                     b.Navigation("OfferedRule");
+                });
+
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEntity", b =>
+                {
+                    b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
+                        .WithMany()
+                        .HasForeignKey("BoatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Boat");
                 });
 
             modelBuilder.Entity("BnBYachts.Boats.Charter.CharterEntity", b =>

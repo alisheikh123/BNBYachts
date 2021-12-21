@@ -36,18 +36,7 @@ namespace BnBYachts.Core.Services
         [HttpGet]
         [AllowAnonymous]
         [Route("api/GetUserDetailsById/{userId}")]
-        public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId)
-        {
-            try
-            {
-                return await _appUserManager.GetLoggedInUserDetails(userId);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
+        public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId) =>await _appUserManager.GetLoggedInUserDetails(userId);
 
         [HttpGet]
         [Route("api/AddHostRole")]
