@@ -12,6 +12,7 @@ import { YachtSubscriptionComponent } from './components/yacht-subscription/yach
 import { HomeRoutingModule } from './home-routing.module';
 import { NoFoundModalComponent } from './components/no-found-modal/no-found-modal.component';
 import { HostDashboardComponent } from './components/host-dashboard/host-dashboard.component';
+import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HostDashboardComponent } from './components/host-dashboard/host-dashboa
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    SharedPipesModule
   ],
   providers: [YachtSearchService],
   //bootstrap: [HomeComponent]

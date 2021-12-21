@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ReservationService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
-  boatApiUrl: string = environment.BOAT_API_URL;
+  boatApiUrl: string = environment.BOAT_API_URL+'/api';
   constructor(private http: HttpClient) { }
 
   updateBoatLocation(boatLocation: any) {

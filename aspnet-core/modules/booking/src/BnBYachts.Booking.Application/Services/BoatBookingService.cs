@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Booking.Booking.Requestable;
+using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Shared.BoatBooking.Interface;
 using BnBYachts.Shared.Model;
 using System.Threading.Tasks;
@@ -23,6 +24,12 @@ namespace BnBYachts.Booking.Services
         {
             await _hostBoatBookingManager.ModifyBoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
             return true;
+        }
+        public async Task<bool> BookingCancel(BookingCancellationRequestableDto data)
+        {
+            var isBookingCancel = await _hostBoatBookingManager.IsBookingCancel(data, CurrentUser.Id.ToString());
+            return isBookingCancel;
+
         }
     }
 }

@@ -15,7 +15,9 @@ namespace BnBYachts.Core
 #if DEBUG
                 .MinimumLevel.Debug()
 #else
+                .MinimumLevel.Debug()
                 .MinimumLevel.Information()
+                .MinimumLevel.Error()
 #endif
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
@@ -24,6 +26,7 @@ namespace BnBYachts.Core
 #if DEBUG
                 .WriteTo.Async(c => c.Console())
 #endif
+                .WriteTo.Async(c => c.Console())
                 .CreateLogger();
 
             try
@@ -53,7 +56,7 @@ namespace BnBYachts.Core
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(build =>
                 {
-                    build.AddJsonFile("appsettings.secrets.json", optional: true);
+                    build.AddJsonFile("appsettings.json", optional: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

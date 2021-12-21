@@ -121,6 +121,7 @@ services:
       - rabbitmq:rabbitmq
     depends_on:
       - rabbitmq
+
   bnb_idv_api:
     container_name: bnb_idv_api
     build:
@@ -181,6 +182,7 @@ services:
     container_name: proxyapp
     environment:
       "FILE_MANAGER_PATH": "/app/App_Data/FileManager"
+      
     volumes:
       - ../proxy/conf.d:/etc/nginx/conf.d
     depends_on:

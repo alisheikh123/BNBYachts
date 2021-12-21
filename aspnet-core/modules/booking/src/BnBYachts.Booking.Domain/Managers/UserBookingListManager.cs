@@ -33,7 +33,9 @@ namespace BnBYachts.Booking.Managers
         {
             if(filter == BookingResponseFilter.All)
             {
-                return _objectMapper.Map<ICollection<BoatelBookingEntity> ,ICollection <BoatelBookingTransferableDto>>(await _boatelBookingRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false));
+                return _objectMapper.Map<ICollection<BoatelBookingEntity> ,ICollection <BoatelBookingTransferableDto>>
+                    (await _boatelBookingRepository.GetListAsync(res => res.CreatorId == userId &&
+                (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.CheckinDate.Month.ToString() == month && res.CheckinDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
             }
             else if (filter == BookingResponseFilter.Upcomings)
             {

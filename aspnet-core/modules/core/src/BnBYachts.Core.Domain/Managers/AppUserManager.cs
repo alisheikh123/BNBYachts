@@ -68,9 +68,7 @@ namespace BnBYachts.Core.Managers
                     {
                         return _respone;
                     }
-
-                    if (false)
-                        await SendEmailToAskForEmailConfirmationAsync(user);
+                    await SendEmailToAskForEmailConfirmationAsync(user);
                     _respone.Message = "Account created successfully";
                 }
                 else
@@ -86,8 +84,6 @@ namespace BnBYachts.Core.Managers
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
-
-
             //string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
             string baseUrl = "http://52.207.14.110:8080/activate-account";//Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
             var queryParams = new Dictionary<string, string>()

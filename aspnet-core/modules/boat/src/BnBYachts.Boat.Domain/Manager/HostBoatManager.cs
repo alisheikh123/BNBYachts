@@ -186,7 +186,7 @@ namespace BnBYachts.Boat.Manager
                     await _boatRepository.EnsureCollectionLoadedAsync(evnt.Boat, x => x.BoatGalleries).ConfigureAwait(false);
                     if (param.EventDate.HasValue)
                     {
-                        if (evnt.StartDateTime.Date == param.EventDate.Value.Date)
+                        if ((evnt.StartDateTime.Date < param.EventDate.Value.Date && evnt.EndDateTime.Date > param.EventDate.Value) || (evnt.StartDateTime.Date == param.EventDate.Value.Date))
                         {
                             filterdEvents.Add(evnt);
                         }
