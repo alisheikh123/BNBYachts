@@ -25,6 +25,7 @@ import { BookingRequestsComponent } from './boatel-bookings/booking-requests/boo
 import { BookedServicesComponent } from './boatel-bookings/booked-services/booked-services.component';
 import { DroppedServicesComponent } from './boatel-bookings/dropped-services/dropped-services.component';
 import { CharterCreationComponentComponent } from './charter-creation-component/charter-creation-component.component';
+import { RejectionModalComponent } from './boatel-bookings/booking-requests/rejection-modal/rejection-modal.component';
 
 
 
@@ -45,7 +46,8 @@ BookingRequestsComponent,
 BookedServicesComponent,
 DroppedServicesComponent,
 BoatLoationSettingsComponent,
-CharterCreationComponentComponent
+CharterCreationComponentComponent,
+RejectionModalComponent
   ],
   imports: [
     HostRoutingModule,

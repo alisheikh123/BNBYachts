@@ -10,6 +10,6 @@ namespace BnBYachts.Booking.Booking
         Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookingsRequests(string month, string year, int serviceType);
         Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(int serviceType);
         Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetDroppedServices();
-        Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted);
+        Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted, string rejectionReason);
     }
 }

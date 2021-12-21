@@ -26,7 +26,10 @@
     <div class="image-with-text custom-flex-between align-items-start">
         <div class="image-with-text-inner">
             <img src="../../../../assets/images/user-img.png" alt="" />
-            <div class="user-details">
+            <div class="user-details" style="cursor: pointer;" [routerLink]="[
+            '/boat-listing/reservation-detail/',
+            item.id
+          ]">
                 <p class="medium">{{ item.userName }}</p>
                 <p class="small-text grey">{{ item.boatDetail?.name }}</p>
                 <ngb-rating [rate]="0"></ngb-rating>

@@ -54,7 +54,7 @@ export class BookingService {
   saveCancellation(model: any) {
     const data = JSON.stringify(model);
     const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<boolean>(this.bookingApiUrl + '/bookingcancel', data, {
+    return this.http.post<boolean>(this.bookingApiUrl + '/api/app/boat-booking/booking-cancel', data, {
       headers: headerOptions
     }).pipe(
       catchError(this.handleError));

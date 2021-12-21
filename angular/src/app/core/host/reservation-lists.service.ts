@@ -25,8 +25,8 @@ export class ReservationListsService {
       catchError(this.errorService.handleError));
   }
 
-  changeStatus(bookingId: number, status: boolean) {
-    return this.http.put(this.bookingApiUrl + '/reservation-status/' + bookingId+'?isAccpeted='+status,null).pipe(
+  changeStatus(bookingId: number, status: boolean,reason:string) {
+    return this.http.put(this.bookingApiUrl + '/reservation-status/' + bookingId+'?isAccpeted='+status+'&rejectionReason='+reason,null).pipe(
       catchError(this.errorService.handleError));
   }
 

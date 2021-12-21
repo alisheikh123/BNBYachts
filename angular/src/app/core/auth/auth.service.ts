@@ -60,7 +60,6 @@ export class AuthService {
   }
 
   confirmEmail(userName: any, token: any) {
-    debugger;
     return this.http.get<any>(this.apiCoreURl + "/api/confirm-email?username="+userName+"&token="+token);
   }
   resendEmail(userName:any){

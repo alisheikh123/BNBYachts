@@ -232,7 +232,7 @@ export class ReservationCancellationComponent implements OnInit {
     this.userId = data.userId;
     this.totalAmount = data.totalAmount;
     this.ReasonValue = this.Reason;
-    this.modal.open(template);
+    this.modal.open(template,{centered:true});
   }
   confirmCancel() {
     let bookingCancellationModel = {
@@ -252,7 +252,7 @@ export class ReservationCancellationComponent implements OnInit {
           this.service
             .getRefundable(
               bookingCancellationModel.BookingId,
-              bookingCancellationModel.RefundAmount
+              parseInt(bookingCancellationModel.RefundAmount)
             )
             .subscribe((res: any) => {
               if (res == true) {
