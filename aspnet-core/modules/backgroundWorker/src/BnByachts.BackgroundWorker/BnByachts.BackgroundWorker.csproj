@@ -29,8 +29,4 @@
 	  <ProjectReference Include="..\..\..\booking\src\BnBYachts.Booking.Domain.Shared\BnBYachts.Booking.Domain.Shared.csproj" />
 	  <ProjectReference Include="..\..\..\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Jobs\" />
-	</ItemGroup>
 </Project>
