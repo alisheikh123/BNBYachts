@@ -3,7 +3,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbDateAdapter, NgbDateNativeUTCAdapter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateNativeUTCAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from './shared/interceptors/http.interceptor';
 import { HeaderComponent } from './views/common/header/header.component';
@@ -23,6 +23,7 @@ import { UpdateProfileComponent } from './views/common/user-profile/update-profi
 import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
 import { AddReviewModalComponent } from './views/common/add-review-modal/add-review-modal.component';
 import { TranslateService } from './core/translate.service';
+import { NgbCustomDateParserFormatter } from './shared/formatters/datepicker-formatter';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { TranslateService } from './core/translate.service';
       useFactory: setupTranslateFactory,
       deps: [TranslateService],
       multi: true
-    }
+    },
+    { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter } 
   ],
   bootstrap: [AppComponent]
 })

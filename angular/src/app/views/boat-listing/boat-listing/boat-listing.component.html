@@ -100,12 +100,12 @@
                   </div>
                   <div class="col-sm-7">
                     <div class="boatel-search-card-content">
-                      <div class="boatel-search-card-content-title" *ngIf="isLoggedIn">
+                      <div class="boatel-search-card-content-title">
                         <a [routerLink]="[
                             '/boat-listing/boatel-details',
                             item.id
                           ]" class="underline-black-link p-0">{{ item.name }}</a>
-                        <a (click)="item.isAddedToMyWishlist ? removeToWishList(item): addToWishList(item)"
+                        <a *ngIf="isLoggedIn" (click)="item.isAddedToMyWishlist ? removeToWishList(item): addToWishList(item)"
                           class="fav-btn"><i class="fa"
                             [ngClass]="{'fa-heart-o': !item.isAddedToMyWishlist , 'fa-heart':item.isAddedToMyWishlist}"></i></a>
                       </div>

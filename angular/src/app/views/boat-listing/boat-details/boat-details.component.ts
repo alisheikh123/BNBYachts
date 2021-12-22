@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { UserDefaults } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
+import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-logged-in.component';
 
 @Component({
   selector: 'app-boat-details',
@@ -17,7 +19,7 @@ import { environment } from 'src/environments/environment';
 export class BoatDetailsComponent implements OnInit {
   bookingId: any;
 
-  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute) {
+  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute,private authService:AuthService,private modal:NgbModal) {
     config.max = 5;
     config.readonly = true;
   }
@@ -99,38 +101,43 @@ export class BoatDetailsComponent implements OnInit {
 
   reserveBoat() {
     this.isSubmitted = true;
-    if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
-      let bookingModel = {
-        creationTime: new Date(),
-        checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
-        checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
-        bookingStatus: 0,
-        paymentStatus: 0,
-        noOfAdults: this.boatFilterDetails.adults,
-        noOfChildrens: this.boatFilterDetails.childrens,
-        boatId: this.boatId,
-        hostId: this.boatDetails.creatorId,
-        reviews: null
-      };
-      this.bookingService.boatelBooking(bookingModel).subscribe(res => {
-        this.bookingId = res?.data?.id;
-        if (res.returnStatus) {
-          let boatCalendar = {
-            creationTime: new Date(),
-            isAvailable: false,
-            toDate: this.boatFilterDetails.checkoutDate,
-            fromDate: this.boatFilterDetails.checkinDate,
-            boatEntityId: this.boatId
-          }
-          this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
-            if (res) {
-              this.yachtParamService.setFilters(this.boatFilterDetails);
-              this.router.navigate(['/payments/boatel-payments', this.boatId, this.bookingId], { relativeTo: this.activatedRoute });
-              this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
+    if(this.authService.authenticated){
+      if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
+        let bookingModel = {
+          creationTime: new Date(),
+          checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
+          checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
+          bookingStatus: 0,
+          paymentStatus: 0,
+          noOfAdults: this.boatFilterDetails.adults,
+          noOfChildrens: this.boatFilterDetails.childrens,
+          boatId: this.boatId,
+          hostId: this.boatDetails.creatorId,
+          reviews: null
+        };
+        this.bookingService.boatelBooking(bookingModel).subscribe(res => {
+          this.bookingId = res?.data?.id;
+          if (res.returnStatus) {
+            let boatCalendar = {
+              creationTime: new Date(),
+              isAvailable: false,
+              toDate: this.boatFilterDetails.checkoutDate,
+              fromDate: this.boatFilterDetails.checkinDate,
+              boatEntityId: this.boatId
             }
-          });
-        }
-      })
+            this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
+              if (res) {
+                this.yachtParamService.setFilters(this.boatFilterDetails);
+                this.router.navigate(['/payments/boatel-payments', this.boatId, this.bookingId], { relativeTo: this.activatedRoute });
+                this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
+              }
+            });
+          }
+        })
+      }
+    }
+    else{
+      let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
     }
   }
   openPopover() {

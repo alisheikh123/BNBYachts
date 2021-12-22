@@ -92,10 +92,10 @@ export class HostOnboardingComponent implements OnInit {
     }
   }
   removeCapacity(isBedroom: boolean) {
-    if (isBedroom) {
+    if (isBedroom && this.hostOnBoardingForm.controls.totalBedrooms.value > 0) {
       this.hostOnBoardingForm.controls.totalBedrooms.setValue(this.hostOnBoardingForm.controls.totalBedrooms.value - 1);
     }
-    else {
+    else if(this.hostOnBoardingForm.controls.totalWashrooms.value > 0) {
       this.hostOnBoardingForm.controls.totalWashrooms.setValue(this.hostOnBoardingForm.controls.totalWashrooms.value - 1);
     }
   }
@@ -104,7 +104,9 @@ export class HostOnboardingComponent implements OnInit {
     this.hostOnBoardingForm.controls.boatelCapacity.setValue(this.hostOnBoardingForm.controls.boatelCapacity.value + 1);
   }
   removeGuests() {
-    this.hostOnBoardingForm.controls.boatelCapacity.setValue(this.hostOnBoardingForm.controls.boatelCapacity.value - 1);
+    if(this.hostOnBoardingForm.controls.boatelCapacity.value > 0){
+      this.hostOnBoardingForm.controls.boatelCapacity.setValue(this.hostOnBoardingForm.controls.boatelCapacity.value - 1);
+    }
   }
 
   choosBoatType(id: number) {
@@ -189,7 +191,7 @@ export class HostOnboardingComponent implements OnInit {
             this.onBoardingService.addHostRole().subscribe(res => {
               if (res == true) {
                 this.toastr.success("Host onboarding successfully.", "Boat");
-                this.router.navigate(['']);
+                this.router.navigate(['host/host-boat-listing']);
                 setTimeout(() => {
                   window.location.reload();
                 }, 3000);

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { EventTypes, ServiceTypes } from 'src/app/shared/enums/yacht-search.constant';
@@ -54,7 +54,10 @@ export class YachtSearchComponent implements OnInit {
   @ViewChild('popOver') public popover: NgbPopover;
 
 
-  constructor(private yachtService: YachtSearchService, private router: Router, private yachtSearchResults: YachtSearchDataService, private modal: NgbModal) { }
+  constructor(private yachtService: YachtSearchService, 
+    private router: Router, private yachtSearchResults: YachtSearchDataService,
+     private modal: NgbModal) { 
+     }
 
   ngOnInit(): void {
 
