@@ -32,13 +32,13 @@ namespace BnBYachts.Core
                 .WriteTo.Async(c => c.File("Logs/logs.txt"))
                 .Enrich.WithProperty("Application", "CoreService")
                 .Enrich.FromLogContext()
-                .WriteTo.Elasticsearch(
-                    new ElasticsearchSinkOptions(new Uri(configuration["ElasticSearch:Url"]))
-                    {
-                        AutoRegisterTemplate = true,
-                        AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6,
-                        IndexFormat = "msdemo-log-{0:yyyy.MM}"
-                    })
+                //.WriteTo.Elasticsearch(
+                //    new ElasticsearchSinkOptions(new Uri(configuration["ElasticSearch:Url"]))
+                //    {
+                //        AutoRegisterTemplate = true,
+                //        AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6,
+                //        IndexFormat = "msdemo-log-{0:yyyy.MM}"
+                //    })
                 .WriteTo.Async(c => c.Console())
                 .CreateLogger();
 
