@@ -83,7 +83,7 @@ namespace BnBYachts.Core
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(build =>
                 {
-                    build.AddJsonFile("appsettings.secret.json", optional: true);
+                    build.AddJsonFile("appsettings.secrets.json", optional: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

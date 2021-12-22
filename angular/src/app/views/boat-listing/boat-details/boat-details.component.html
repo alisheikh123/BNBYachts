@@ -98,6 +98,7 @@
                                                                         placeholder="Add date" name="dp"
                                                                         container="body"
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
+                                                                        (ngModelChange)="setMaxDate(boatFilterDetails.checkinDate)"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
                                                                 </div>
@@ -108,6 +109,7 @@
                                                                     <input
                                                                         placeholder="Add date" name="dp2"
                                                                         container="body"
+                                                                        [minDate] = "minDate"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
                                                                         (click)="d2.toggle()" ngbDatepicker
                                                                         #d2="ngbDatepicker">
@@ -150,7 +152,7 @@
                                                                         <label class="m-0 max-width-50">Adults</label>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults - 1;">-</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults > 0 ? popOverFilterData.adults - 1 : 0;">-</span>
                                                                             <input type="text"
                                                                                 [(ngModel)]="popOverFilterData.adults" />
                                                                             <span class="plus" style="cursor: pointer;"
@@ -172,7 +174,7 @@
                                                                       </div>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                                                (click)="popOverFilterData.childrens = popOverFilterData.childrens > 0 ? popOverFilterData.childrens -1 : 0;">-</span>
                                                                             <input type="text"
                                                                                 [(ngModel)]="popOverFilterData.childrens" />
                                                                             <span class="plus" style="cursor: pointer;"

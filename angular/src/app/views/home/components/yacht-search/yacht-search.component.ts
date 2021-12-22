@@ -22,6 +22,7 @@ export class YachtSearchComponent implements OnInit {
     adults: 0,
     childrens: 0
   };
+  minDate = {year: 0, month: 0, day: 0};
   charterSearchParam = {
     departureLoc: '',
     departureLatitude: 31.4697,
@@ -78,7 +79,13 @@ export class YachtSearchComponent implements OnInit {
       });
     }
   }
-
+  setMaxDate(item:any){
+    let date = new Date(item);
+    if(item != null){
+     date = new Date(item);
+      this.minDate = {year : date.getFullYear(),month:date.getMonth()+1,day:date.getDate()};
+    }
+  }
   //Address Change
   handleAddressChange(address: any) {
     this.boatelSearchParam.location = address.formatted_address;

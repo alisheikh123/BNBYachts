@@ -489,6 +489,7 @@
                                         <div class="custom-input-field">
                                             <label>Boatel Fee Per Night</label>
                                             <input type="number" class="custom-input" placeholder="$20000"
+                                            (keypress)="restrictNumeric($event)"
                                                 formControlName="perDayCharges">
                                         </div>
                                     </div>
@@ -496,6 +497,7 @@
                                         <div class="custom-input-field">
                                             <label>Tax</label>
                                             <input type="number" min="0" class="custom-input" formControlName="taxFee"
+                                            (keypress)="restrictNumeric($event)"
                                                 placeholder="Tax Fee">
                                         </div>
                                     </div>
@@ -544,6 +546,8 @@
                                         <span class="checkmark top-0"></span>
                                     </label>
                                     <div class="custom-flex-end py-5">
+                                        <button class="custom-btn outline-blue-clr me-4"
+                                        (click)="currentTab=currentTab-1;">Previous</button>
                                         <button class="custom-btn grey" [disabled]="!isAgree" (click)="submit()">Continue</button>
                                     </div>
                                 </div>
