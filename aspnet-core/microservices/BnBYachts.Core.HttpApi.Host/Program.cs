@@ -14,11 +14,11 @@ namespace BnBYachts.Core
         public static int Main(string[] args)
         {
 
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables()
-                .Build();
+            //var configuration = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json")
+            //    .AddEnvironmentVariables()
+            //    .Build();
 
             //Log.Logger = new LoggerConfiguration()
 
@@ -83,7 +83,7 @@ namespace BnBYachts.Core
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(build =>
                 {
-                    build.AddJsonFile("appsettings.json", optional: true);
+                    build.AddJsonFile("appsettings.secret.json", optional: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
