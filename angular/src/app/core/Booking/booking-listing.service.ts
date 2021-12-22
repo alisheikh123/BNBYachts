@@ -12,8 +12,8 @@ export class BookingListingService {
   bookingApiUrl: string = environment.BOOKING_API_URL + '/api/app/user-booking-list';
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
-  getBookings(filterType:number,month?: string, year?: string) {
-    return this.http.get(this.bookingApiUrl + '/boatel-bookings?filter=' + filterType + '&month=' + month + '&year=' + year).pipe(catchError(this.errorService.handleError));
+  getBookings(filterType:number,month?: string, year?: string,pageNo?: number, pageSize?: number) {
+    return this.http.get(this.bookingApiUrl + '/boatel-bookings?filter=' + filterType + '&month=' + month + '&year=' + year + '&pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
   }
   getBookingDetailbyId(BookingId: any) {
     return this.http.get(this.bookingApiUrl + '/boatel-booking/' + BookingId).pipe(catchError(this.errorService.handleError));

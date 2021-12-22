@@ -3,6 +3,7 @@ using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
+using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
         Task<bool> UpdateBoatLocation(BoatLocationRequestable boatDetails, Guid? userId);
         #endregion
         Task<bool> UpdateboatStatus(long boatId);
-        Task<ICollection<BoatDTO>> GetHostBoats(Guid? userId);
+        Task<EntityResponseListModel<BoatDTO>> GetHostBoats(Guid? userId,int pageNo,int pageSize);
         Task<ICollection<FeatureEntity>> GetDefaultFeatures();
     }
 }

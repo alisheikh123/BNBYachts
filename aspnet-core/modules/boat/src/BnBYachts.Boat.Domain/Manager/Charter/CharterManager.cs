@@ -3,6 +3,7 @@ using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Charter.Interface;
+using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -36,15 +37,19 @@ namespace BnBYachts.Boat.Manager.Charter
                 GetListAsync(x => x.BoatId == boatId && x.DepartureFromDate >= DateTime.Now.Date)
             .ConfigureAwait(false));
 
-        public async Task<ICollection<CharterDto>> GetCharters(Guid? userId)
+        public async Task<EntityResponseListModel<CharterDto>> GetCharters(Guid? userId, int pageNo, int pageSize)
         {
+            var response = new EntityResponseListModel<CharterDto>();
             var charters = await _charterRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
             foreach (var charter in charters)
             {
                 await _charterRepository.EnsurePropertyLoadedAsync(charter, res => res.Boat).ConfigureAwait(false);
                 await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, res => res.BoatGalleries).ConfigureAwait(false);
             }
-            return _objectMapper.Map<ICollection<CharterEntity>, ICollection<CharterDto>>(charters);
+           var hostCharterList =  _objectMapper.Map<List<CharterEntity>, List<CharterDto>>(charters);
+            response.TotalCount = hostCharterList.Count;
+            response.Data = await PagedList<CharterDto>.CreateAsync(hostCharterList,pageNo,pageSize);
+            return response;
         }
 
         public async Task<CharterDto> InsertCharter(CharterDto charterForm)

@@ -1,6 +1,7 @@
 ﻿using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Event.Transferables;
+using BnBYachts.Shared.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
@@ -13,6 +14,6 @@ namespace BnBYachts.Boat.Interfaces.Boat
         Task<bool> SaveEvent(EventRequestable boatEvent);
         Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId);
 
-        Task<ICollection<EventDTO>> GetEvents();
+        Task<EntityResponseListModel<EventDTO>> GetEvents(int page, int pageSize);
     }
 }
