@@ -31,14 +31,20 @@ export class BookingRequestsComponent implements OnInit {
     charter: 2,
     event: 3
   };
+  totalRecords: number = 0;
+  queryParams = {
+    page: 1,
+    pageSize: 5
+  };
 
   ngOnInit(): void {
     this.getReservations();
   }
 
   getReservations() {
-    this.reservationService.getBoatelBookingRequests(this.selectedServiceType, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
+    this.reservationService.getBoatelBookingRequests(this.selectedServiceType, this.selectedMonth, this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
       this.boatelBookings = res?.data;
+      this.totalRecords = res?.totalCount;
       if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
         this.boatelBookings.forEach((element: any) => {
           this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
@@ -97,6 +103,16 @@ export class BookingRequestsComponent implements OnInit {
   }
   clearData() {
     this.boatelBookings = null;
+  }
+
+  onPageChange(data: any) {
+    this.queryParams.page = data.page;
+    this.getReservations();
+  }
+  onPageSizeChange(data: any) {
+    this.queryParams.page = 1;
+    this.queryParams.pageSize = data.pageSize;
+    this.getReservations();
   }
 
 }

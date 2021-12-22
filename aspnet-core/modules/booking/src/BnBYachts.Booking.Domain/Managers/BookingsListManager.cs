@@ -32,57 +32,68 @@ namespace BnBYachts.Booking.Managers
             _charterBookingRepository = charterBookingRepository;
             _eventsBookingRepository = eventsBookingRepository;
         }
-        public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(Guid? userId, int serviceType)
+        public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(Guid? userId, int serviceType,int pageNo,int pageSize)
         {
             var response = new EntityResponseListModel<BookingRequestsRequestableDto>();
             if (serviceType == (int)BookingTypes.Boatel)
             {
-                response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsRequestableDto>>
+                var allBookings = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsRequestableDto>>
                 (await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
+                response.TotalCount = allBookings.Count;
+                response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, pageNo, pageSize).ConfigureAwait(false);
             }
             else if (serviceType == (int)BookingTypes.Charter)
             {
-                response.Data = _objectMapper.Map<List<CharterBookingEntity>, List<BookingRequestsRequestableDto>>
+                var allBookings = _objectMapper.Map<List<CharterBookingEntity>, List<BookingRequestsRequestableDto>>
                 (await _charterBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
+                response.TotalCount = allBookings.Count;
+                response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, pageNo, pageSize).ConfigureAwait(false);
             }
             else
             {
-                response.Data = _objectMapper.Map<List<EventBookingEntity>, List<BookingRequestsRequestableDto>>
+                var allBookings = _objectMapper.Map<List<EventBookingEntity>, List<BookingRequestsRequestableDto>>
                 (await _eventsBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
+                response.TotalCount = allBookings.Count;
+                response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, pageNo, pageSize).ConfigureAwait(false);
             }
             return response;
         }
-        public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookingsRequests(Guid? userId, string month, string year, int serviceType)
+        public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookingsRequests(Guid? userId, string month, string year, int serviceType, int pageNo, int pageSize)
         {
             var response = new EntityResponseListModel<BookingRequestsRequestableDto>();
             if (serviceType == (int)BookingTypes.Boatel)
             {
-                response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsRequestableDto>>
+                var allRequests = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsRequestableDto>>
                 (await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Pending
                 &&
                 (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.CheckinDate.Month.ToString() == month && res.CheckinDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+                response.TotalCount = allRequests.Count;
+                response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allRequests, pageNo, pageSize).ConfigureAwait(false);
             }
             else if (serviceType == (int)BookingTypes.Charter)
             {
-                response.Data = _objectMapper.Map<List<CharterBookingEntity>, List<BookingRequestsRequestableDto>>
+                var allRequests = _objectMapper.Map<List<CharterBookingEntity>, List<BookingRequestsRequestableDto>>
                 (await _charterBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Pending
                 &&
                 (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.DepartureDate.Month.ToString() == month && res.DepartureDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+                response.TotalCount = allRequests.Count;
+                response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allRequests, pageNo, pageSize).ConfigureAwait(false);
             }
             else
             {
-                response.Data = _objectMapper.Map<List<EventBookingEntity>, List<BookingRequestsRequestableDto>>
+                var allRequests = _objectMapper.Map<List<EventBookingEntity>, List<BookingRequestsRequestableDto>>
                 (await _eventsBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Pending
                 &&
                 (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.EventDate.Month.ToString() == month && res.EventDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+                response.TotalCount = allRequests.Count;
+                response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allRequests, pageNo, pageSize).ConfigureAwait(false);
             }
-
             return response;
         }
 

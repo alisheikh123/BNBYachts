@@ -66,3 +66,8 @@
 <div *ngIf="boatelBookings?.length == 0">
     <app-not-found-component></app-not-found-component>
   </div>
+
+  <div class="col-12 pt-2" *ngIf="boatelBookings?.length > 0">
+    <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+</div>

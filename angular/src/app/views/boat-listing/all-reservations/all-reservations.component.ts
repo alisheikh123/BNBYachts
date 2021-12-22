@@ -35,40 +35,16 @@ export class AllReservationsComponent implements OnInit {
   BOOKING_FILTER = BookingResponseFilter;
   selectedTab: number = this.BOOKING_FILTER.All;
   constructor(private fb: FormBuilder, private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
-    /* Rating Configuration*/
     config.max = 5;
     config.readonly = true;
-
   }
 
   ngOnInit(): void {
-    this.service.getBookings(this.BOOKING_FILTER.All, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
-      this.allBoolings = res;
-      this.selectedTab = this.BOOKING_FILTER.All;
-      this.statusFilter(this.selectedStatusFilter);
-      this.reservationForm = this.fb.group({
-        monthName: ['', [Validators.required]]
-      });
-    });
+    this.getReservations(this.BOOKING_FILTER.All);
   }
 
-  allReservation() {
-    this.service.getBookings(this.BOOKING_FILTER.All, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
-      this.allBoolings = res;
-      this.selectedTab = this.BOOKING_FILTER.All;
-      this.statusFilter(this.selectedStatusFilter);
-    });
-  }
-  upcomingReservation() {
-    this.service.getBookings(this.BOOKING_FILTER.Upcomings, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
-      this.allBoolings = res;
-      this.selectedTab = this.BOOKING_FILTER.Upcomings;
-      this.statusFilter(this.selectedStatusFilter);
-    });
-  }
-
-  pastReservation() {
-    this.service.getBookings(this.BOOKING_FILTER.Past, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
+  getReservations(tab: number) {
+    this.service.getBookings(tab, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
       this.allBoolings = res;
       this.statusFilter(this.selectedStatusFilter);
     });
@@ -79,7 +55,7 @@ export class AllReservationsComponent implements OnInit {
     let result = stringToSplit.split('-');
     this.selectedYear = result[0];
     this.selectedMonth = result[1];
-    (this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.upcomingReservation : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.pastReservation() : this.allReservation();
+    (this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.getReservations(this.BOOKING_FILTER.Upcomings) : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.getReservations(this.BOOKING_FILTER.Past) : this.getReservations(this.BOOKING_FILTER.All);
   }
 
   statusFilter(status: any) {
