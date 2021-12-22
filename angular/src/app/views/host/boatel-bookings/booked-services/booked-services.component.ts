@@ -11,9 +11,14 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 export class BookedServicesComponent implements OnInit {
   bookedServices: any;
   bookedServicesTypes = {
-    boatel :1,
-    charter:2,
-    event:3
+    boatel: 1,
+    charter: 2,
+    event: 3
+  };
+  totalRecords: number = 0;
+  queryParams = {
+    page: 1,
+    pageSize: 5
   };
   selectedServiceType: number = 1;
   constructor(config: NgbRatingConfig, private reservationService: ReservationListsService, private boatService: YachtSearchService) {
@@ -27,8 +32,9 @@ export class BookedServicesComponent implements OnInit {
 
 
   getBookedServices() {
-    this.reservationService.getBookedServices(this.selectedServiceType).subscribe((res:any) => {
+    this.reservationService.getBookedServices(this.selectedServiceType, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
       this.bookedServices = res?.data;
+      this.totalRecords = res?.totalCount
       this.bookedServices.forEach((element: any) => {
         this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
           element.boatDetail = boatdetail;
@@ -36,9 +42,19 @@ export class BookedServicesComponent implements OnInit {
       });
     })
   }
-  
+
   filterServiceType(serviceType: number) {
     this.selectedServiceType = serviceType;
+    this.getBookedServices();
+  }
+
+  onPageChange(data: any) {
+    this.queryParams.page = data.page;
+    this.getBookedServices();
+  }
+  onPageSizeChange(data: any) {
+    this.queryParams.page = 1;
+    this.queryParams.pageSize = data.pageSize;
     this.getBookedServices();
   }
 

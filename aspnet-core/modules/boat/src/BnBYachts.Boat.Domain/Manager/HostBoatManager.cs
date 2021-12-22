@@ -14,6 +14,7 @@ using BnBYachts.Boat.Shared.Helper;
 using BnBYachts.Events;
 using Volo.Abp.ObjectMapping;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Shared.Model;
 
 namespace BnBYachts.Boat.Manager
 {
@@ -343,14 +344,18 @@ namespace BnBYachts.Boat.Manager
             return distanceinMeter;
         }
 
-        public async Task<ICollection<BoatDTO>> GetHostBoats(Guid? userId)
+        public async Task<EntityResponseListModel<BoatDTO>> GetHostBoats(Guid? userId,int pageNo, int pageSize)
         {
+            var response = new EntityResponseListModel<BoatDTO>();
             var boats = await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false);
             foreach (var boat in boats)
             {
                 await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
             }
-            return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatDTO>>(boats);
+            var boatListing =  _objectMapper.Map<List<BoatEntity>, List<BoatDTO>>(boats);
+            response.TotalCount = boats.Count;
+            response.Data = await PagedList<BoatDTO>.CreateAsync(boatListing,pageNo,pageSize).ConfigureAwait(false);
+            return response;
         }
 
         #region Features

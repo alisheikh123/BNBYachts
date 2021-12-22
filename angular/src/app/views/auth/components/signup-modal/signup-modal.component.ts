@@ -20,6 +20,10 @@ export class SignupModalComponent implements OnInit {
   hasError: boolean;
   passwordValidator: string;
   passwordStrength: number;
+  passwordViewer = {
+    passwordFieldTextType : false,
+    confirmPasswordFieldTextType:false
+  };
 
   constructor(
     private modal: NgbModal,
@@ -30,7 +34,7 @@ export class SignupModalComponent implements OnInit {
     private toaster: ToastrService
   ) {
     this.passwordValidator =
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}$';
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{7,}$';
   }
 
   ngOnInit(): void {
@@ -108,12 +112,26 @@ export class SignupModalComponent implements OnInit {
   getToday(): string {
     return new Date().toISOString().split('T')[0]
  }
+
+ toggleFieldTextType(isPassword:boolean) {
+  isPassword ?  this.passwordViewer.passwordFieldTextType = !this.passwordViewer.passwordFieldTextType
+  : this.passwordViewer.confirmPasswordFieldTextType = !this.passwordViewer.confirmPasswordFieldTextType;
+}
+onPasswordChange() {
+  if (this.registrationForm.controls.Password.value == this.registrationForm.controls.confirmPassword.value) {
+    this.registrationForm.controls.confirmPassword.setErrors(null);
+  } else {
+    this.registrationForm.controls.confirmPassword.setErrors({ mismatch: true });
+  }
+}
+
 }
 export const passwordMatchingValidatior: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
   const password = control.get('Password');
   const confirmPassword = control.get('confirmPassword');
+  debugger;
 
   return password?.value === confirmPassword?.value
     ? null
