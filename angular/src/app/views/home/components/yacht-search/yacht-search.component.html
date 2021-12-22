@@ -109,13 +109,15 @@
                                     <div class="w-50">
                                         <label>Check-in</label>
                                         <input placeholder="Add date" name="dp" container="body"
-                                            [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle()"
+                                            [(ngModel)]="boatelSearchParam.checkinDate" (click)="d.toggle();"
+                                            (ngModelChange)="setMaxDate(boatelSearchParam.checkinDate)"
                                             ngbDatepicker #d="ngbDatepicker">
                                     </div>
                                     <div class="border-left-1 w-50">
                                         <label>Check-out</label>
                                         <input placeholder="Add date" name="dp2" container="body"
                                             [(ngModel)]="boatelSearchParam.checkoutDate" (click)="d2.toggle()"
+                                            [minDate]="minDate"
                                             ngbDatepicker #d2="ngbDatepicker">
                                     </div>
                                 </div>
@@ -146,7 +148,7 @@
                                                 <label class="m-0 max-width-50">{{popOverFilterData.adults > 1 ? 'Adults' :'Adult'}}</label>
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="popOverFilterData.adults = popOverFilterData.adults -1;">-</span>
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults > 0 ? popOverFilterData.adults -1 : 0;">-</span>
                                                     <input type="text" [(ngModel)]="popOverFilterData.adults" />
                                                     <span class="plus" style="cursor: pointer;"
                                                         (click)="popOverFilterData.adults = popOverFilterData.adults+1;">+</span>
@@ -167,7 +169,7 @@
 
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens > 0 ? popOverFilterData.childrens -1:0;">-</span>
                                                     <input type="text" [(ngModel)]="popOverFilterData.childrens" />
                                                     <span class="plus" style="cursor: pointer;"
                                                         (click)="popOverFilterData.childrens = popOverFilterData.childrens+1;">+</span>
@@ -253,7 +255,7 @@
                                                 <label class="m-0 max-width-50">{{popOverFilterData.adults > 1 ? 'Adults':'Adult'}}</label>
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="popOverFilterData.adults = popOverFilterData.adults -1;">-</span>
+                                                        (click)="popOverFilterData.adults = popOverFilterData.adults > 0 ? popOverFilterData.adults -1 : 0;">-</span>
                                                     <input type="text" [(ngModel)]="popOverFilterData.adults" />
                                                     <span class="plus" style="cursor: pointer;"
                                                         (click)="popOverFilterData.adults = popOverFilterData.adults+1;">+</span>
@@ -273,7 +275,7 @@
                                                 </div>
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                        (click)="popOverFilterData.childrens = popOverFilterData.childrens > 0 ? popOverFilterData.childrens -1 : 0;">-</span>
                                                     <input type="text" [(ngModel)]="popOverFilterData.childrens" />
                                                     <span class="plus" style="cursor: pointer;"
                                                         (click)="popOverFilterData.childrens = popOverFilterData.childrens+1;">+</span>
@@ -361,7 +363,7 @@
                                                 <label class="m-0 max-width-50">{{eventSearchParam.adults > 1 ? 'Adults':'Adult'}}</label>
                                                 <div class="custom-flex-start max-width-50">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="eventSearchParam.adults = eventSearchParam.adults -1;">-</span>
+                                                        (click)="eventSearchParam.adults = eventSearchParam.adults > 0 ? eventSearchParam.adults -1 : 0;">-</span>
                                                     <input type="text" [(ngModel)]="eventSearchParam.adults" />
                                                     <span class="plus" style="cursor: pointer;"
                                                         (click)="eventSearchParam.adults = eventSearchParam.adults+1;">+</span>
@@ -381,7 +383,7 @@
                                                 </div>
                                                 <div class="custom-flex-start">
                                                     <span class="minus" style="cursor: pointer;"
-                                                        (click)="eventSearchParam.childrens = eventSearchParam.childrens -1;">-</span>
+                                                        (click)="eventSearchParam.childrens = eventSearchParam.childrens > 0 ? eventSearchParam.childrens -1 : 0;">-</span>
                                                     <input type="text" [(ngModel)]="eventSearchParam.childrens" />
                                                     <span class="plus" style="cursor: pointer;"
                                                         (click)="eventSearchParam.childrens = eventSearchParam.childrens+1;">+</span>

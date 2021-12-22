@@ -40,6 +40,7 @@ export class BoatDetailsComponent implements OnInit {
     adults: 0,
     childrens: 0
   }
+  minDate = {year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()};
   boatHost: any;
   showMore: boolean = false;
   isSubmitted: boolean = false;
@@ -138,6 +139,13 @@ export class BoatDetailsComponent implements OnInit {
     }
     else{
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
+    }
+  }
+  setMaxDate(item:any){
+    let date = new Date(item);
+    if(item != null){
+     date = new Date(item);
+      this.minDate = {year : date.getFullYear(),month:date.getMonth()+1,day:date.getDate()};
     }
   }
   openPopover() {
