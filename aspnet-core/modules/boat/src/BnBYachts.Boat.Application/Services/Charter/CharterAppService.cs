@@ -6,6 +6,7 @@ using BnBYachts.Boat.Interfaces.Charter;
 using BnBYachts.Charter.Interface;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Shared.Model;
 
 namespace BnBYachts.Services.Charter
 {
@@ -25,7 +26,7 @@ namespace BnBYachts.Services.Charter
         public async Task<ICollection<CharterDto>> GetBookedCharters(int boatId)=> 
             await _charterManager.BookedCharter(boatId).ConfigureAwait(false);
 
-        public async Task<ICollection<CharterDto>> GetCharters() => await _charterManager.GetCharters(CurrentUser.Id).ConfigureAwait(false);
+        public async Task<EntityResponseListModel<CharterDto>> GetCharters(int pageNo, int pageSize) => await _charterManager.GetCharters(CurrentUser.Id,pageNo,pageSize).ConfigureAwait(false);
 
         public async Task<CharterDto> InsertCharters(CharterDto charterDto)=>
             await _charterManager.InsertCharter(charterDto).ConfigureAwait(false);
