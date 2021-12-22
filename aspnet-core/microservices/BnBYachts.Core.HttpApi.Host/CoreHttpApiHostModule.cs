@@ -5,14 +5,10 @@ using System.Linq;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BnBYachts.Core.EntityFrameworkCore;
-using BnBYachts.Core.MultiTenancy;
-using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
@@ -21,39 +17,32 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
-using Volo.Abp.VirtualFileSystem;
-using BnBYachts.EventBusShared;
 
 namespace BnBYachts.Core
 {
     [DependsOn(
         typeof(CoreHttpApiModule),
         typeof(AbpAutofacModule),
-        typeof(AbpCachingStackExchangeRedisModule),
         typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
         typeof(CoreApplicationModule),
         typeof(CoreEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule)
-        //typeof(EventBusSharedModule)
     )]
     public class CoreHttpApiHostModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
                 var configuration = context.Services.GetConfiguration();
-                var hostingEnvironment = context.Services.GetHostingEnvironment();
 
                 ConfigureConventionalControllers();
                 ConfigureAuthentication(context, configuration);
                 ConfigureLocalization();
                 ConfigureCache(configuration);
                 ConfigureVirtualFileSystem(context);
-                //  ConfigureRedis(context, configuration, hostingEnvironment);
                 ConfigureCors(context, configuration);
                 ConfigureSwaggerServices(context, configuration);
         }
@@ -87,7 +76,7 @@ namespace BnBYachts.Core
                 .AddJwtBearer(options =>
                 {
                     options.Authority = configuration["AuthServer:Authority"];
-                    options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+                    options.RequireHttpsMetadata = false;//Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                     options.Audience = "Core";
                 });
         }
@@ -132,20 +121,7 @@ namespace BnBYachts.Core
             });
         }
 
-        private void ConfigureRedis(
-            ServiceConfigurationContext context,
-            IConfiguration configuration,
-            IWebHostEnvironment hostingEnvironment)
-        {
-            if (!hostingEnvironment.IsDevelopment())
-            {
-                var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-                context.Services
-                    .AddDataProtection()
-                    .PersistKeysToStackExchangeRedis(redis, "Core-Protection-Keys");
-            }
-        }
-
+       
         private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
         {
             context.Services.AddCors(options =>
@@ -190,14 +166,7 @@ namespace BnBYachts.Core
             app.UseRouting();
             app.UseCors();
             app.UseAuthentication();
-
-            if (MultiTenancyConsts.IsEnabled)
-            {
-                app.UseMultiTenancy();
-            }
-
             app.UseAuthorization();
-
             app.UseSwagger();
             app.UseAbpSwaggerUI(options =>
             {

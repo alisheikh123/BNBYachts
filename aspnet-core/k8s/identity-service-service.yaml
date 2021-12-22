@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: application-idv-service
+spec:
+  selector:
+    app: application-idv-service
+  ports:
+  - protocol: TCP
+    port: 8089
+    targetPort: http

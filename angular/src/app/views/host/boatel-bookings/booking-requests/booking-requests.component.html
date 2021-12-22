@@ -6,18 +6,18 @@
     <div class="dropdown custom-dropdown dropdown-rounded">
         <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
             aria-expanded="false">
-            {{selectedServiceType}}
+            {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
             <i class="fa fa-caret-down"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
-                <a class="dropdown-item" (click)="filterServiceType('Boatels')">Boatels</a>
+                <a class="dropdown-item" (click)="filterServiceType(1)">Boatels</a>
             </li>
             <li>
-                <a class="dropdown-item" (click)="filterServiceType('Events')">Events</a>
+                <a class="dropdown-item" (click)="filterServiceType(2)">Charters</a>
             </li>
             <li>
-                <a class="dropdown-item" (click)="filterServiceType('Charters')">Charters</a>
+                <a class="dropdown-item" (click)="filterServiceType(3)">Events</a>
             </li>
         </ul>
     </div>
@@ -26,7 +26,10 @@
     <div class="image-with-text custom-flex-between align-items-start">
         <div class="image-with-text-inner">
             <img src="../../../../assets/images/user-img.png" alt="" />
-            <div class="user-details">
+            <div class="user-details" style="cursor: pointer;" [routerLink]="[
+            '/boat-listing/reservation-detail/',
+            item.id
+          ]">
                 <p class="medium">{{ item.userName }}</p>
                 <p class="small-text grey">{{ item.boatDetail?.name }}</p>
                 <ngb-rating [rate]="0"></ngb-rating>
@@ -63,3 +66,8 @@
 <div *ngIf="boatelBookings?.length == 0">
     <app-not-found-component></app-not-found-component>
   </div>
+
+  <div class="col-12 pt-2" *ngIf="boatelBookings?.length > 0">
+    <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+</div>

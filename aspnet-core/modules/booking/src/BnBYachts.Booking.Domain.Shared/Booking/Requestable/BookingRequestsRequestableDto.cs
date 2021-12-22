@@ -17,5 +17,7 @@ namespace BnBYachts.Booking.Booking.Requestable
         public BookingReviewRequestableDto Reviews { get; set; }
         public string HostId { get; set; }
         public string UserName { get; set; }
+        public int? CharterId { get; set; }
+        public int? EventId { get; set; }
     }
 }

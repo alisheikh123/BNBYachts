@@ -52,6 +52,7 @@ export class HeaderComponent implements OnInit {
         }
         const userId = localStorage.getItem('userId');
         if (userId != null) {
+          this.authService.authenticated = true;
           this.getUserDetails();
         }
       });
@@ -91,6 +92,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.oidcSecurityService.logoff();
+    this.authService.authenticated = false;
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');

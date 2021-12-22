@@ -7,9 +7,9 @@ namespace BnBYachts.Booking.Interfaces
 {
    public interface IBookingsListManager
     {
-        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookingsRequests(Guid? userId, string month, string year);
-        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(Guid? userId,int serviceType);
+        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookingsRequests(Guid? userId, string month, string year, int serviceType, int pageNo, int pageSize);
+        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(Guid? userId,int serviceType,int pageNo,int pageSize);
         Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetDroppedServices(Guid? userId);
-        Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted);
+        Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted, string rejectionReason);
     }
 }

@@ -15,16 +15,16 @@ export class AllHostBoatsService {
 
   constructor(private http:HttpClient,private errorService:ErrorService) { }
 
-  getAllBoats() {
-    return this.http.get(this.boatApiUrl +this.apiBoatPrefix+'/host-boats').pipe(catchError(this.errorService.handleError));
+  getAllBoats(pageNo: number, pageSize: number) {
+    return this.http.get(this.boatApiUrl +this.apiBoatPrefix+'/host-boats?pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
   }
 
-  getAllCharters() {
-    return this.http.get(this.boatApiUrl +this.apiCharterPrefix+'/charters').pipe(catchError(this.errorService.handleError));
+  getAllCharters(pageNo?:number,pageSize?:number) {
+    return this.http.get(this.boatApiUrl +this.apiCharterPrefix+'/charters?pageNo='+pageNo+'&pageSize='+pageSize).pipe(catchError(this.errorService.handleError));
   }
 
-  getAllEvents() {
-    return this.http.get(this.boatApiUrl +this.apiEventPrefix+'/events').pipe(catchError(this.errorService.handleError));
+  getAllEvents(page:number,pageSize:number) {
+    return this.http.get(this.boatApiUrl +this.apiEventPrefix+'/events?pageNo='+page+'&pageSize='+pageSize).pipe(catchError(this.errorService.handleError));
   }
 
   updateBoatStatus(boatId: number) {

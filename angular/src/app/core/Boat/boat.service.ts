@@ -14,7 +14,7 @@ export class BoatService {
   constructor(private http: HttpClient) { }
 
   getUserBoats() {
-    return this.http.get(this.apiCoreURl + "/host-boat-details").pipe(
+    return this.http.get(this.apiCoreURl + "/api/app/host-boat/host-boats").pipe(
       catchError(this.handleError));;
   }
    ///Exception handler

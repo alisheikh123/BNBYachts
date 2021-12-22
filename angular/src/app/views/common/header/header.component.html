@@ -56,24 +56,24 @@
                     </div>
                     <div class="center-content">
                         <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
-                            <a href="#" [routerLink]="['host-dashboard']" class="underline-link-blk active">
+                            <a [routerLink]="['host-dashboard']" class="underline-link-blk active">
                                 <span>
                                     Dashboard
                                 </span>
                             </a>
-                            <a href="#" class="underline-link-blk">
+                            <a class="underline-link-blk">
                                 <span>
 
                                     Service Provider
                                 </span>
                             </a>
-                            <a href="#" class="underline-link-blk">
+                            <a href="" class="underline-link-blk">
                                 <span>
 
                                     Inbox
                                 </span>
                             </a>
-                            <a href="#" class="underline-link-blk">
+                            <a href="" class="underline-link-blk">
                                 <span>
                                     Calender
                                 </span>
@@ -89,6 +89,15 @@
                                     Listing
                                 </span>
                             </a>
+                            <div class="dropdown custom-dropdown borderless-dropdown">
+                                <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                                      
+                                    Create
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                 <li><a class="dropdown-item" [routerLink]="['/host/charter-creation']">Charter</a></li>
+                                  <li><a class="dropdown-item" [routerLink]="['/host/event-creation']">Event</a></li>
+                                </ul>
+                              </div>
                         </ng-container>
                     </div>
                     <div class="right-content">
@@ -111,7 +120,7 @@
                                 <li><a class="dropdown-item" [routerLink]="['/boat-listing/all-reservations']" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
                                 <li><a class="dropdown-item" href="#">Messages</a></li>
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
-                                <li><a class="dropdown-item" href="#" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Help</a></li>

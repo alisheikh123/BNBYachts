@@ -1,4 +1,5 @@
-﻿using BnBYachts.Boats.Charter;
+﻿using BnBYachts.Boat.Wishlists;
+using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -61,6 +62,7 @@ namespace BnBYachts.Boat.EntityFrameworkCore
 
         //Event
         public DbSet<Events.EventEntity> Events { get; set; }
+        public DbSet<WishlistEntity> Wishlists{ get; set; }
 
 
 

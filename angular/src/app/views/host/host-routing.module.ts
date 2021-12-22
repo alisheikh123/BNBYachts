@@ -1,3 +1,4 @@
+import { CharterCreationComponentComponent } from './charter-creation-component/charter-creation-component.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoatelBookingsComponent } from './boatel-bookings/boatel-bookings.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
   },
   {
     path: "event-creation", component: EventCreationComponent
+  }
+  ,
+  {
+    path: "charter-creation", component: CharterCreationComponentComponent
   }
 ];
 

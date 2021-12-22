@@ -8,7 +8,6 @@ namespace BnBYachts.Core.Controllers
     {
         public ActionResult Index()
         {
-            Console.WriteLine("home");
             return Redirect("~/swagger");
         }
     }

@@ -7,9 +7,9 @@ namespace BnBYachts.Booking.Booking
 {
     public interface IBookingsListAppService:IApplicationService
     {
-        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookingsRequests(string month, string year);
-        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(int serviceType);
+        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookingsRequests(string month, string year, int serviceType, int pageNo, int pageSize);
+        Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(int serviceType,int pageNo,int pageSize);
         Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetDroppedServices();
-        Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted);
+        Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted, string rejectionReason);
     }
 }

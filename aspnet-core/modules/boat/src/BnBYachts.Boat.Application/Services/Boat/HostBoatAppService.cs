@@ -11,6 +11,7 @@ using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Shared.Model;
 
 namespace BnBYachts.Services.Boat
 {
@@ -22,23 +23,23 @@ namespace BnBYachts.Services.Boat
             _hostBoatManager = hostBoatManager;
         }
 
-        [Route("FilterBoatelBoats")]
+        [Route("api/FilterBoatelBoats")]
         [HttpPost]
         public async Task<ICollection<BoatEntity>> GetBoatelsByFilters(BoatelSearchFiltersRequestable parameters) => await _hostBoatManager.GetBoatelsByFilters(parameters);
 
-        [Route("BoatCalendarUpdate")]
+        [Route("api/BoatCalendarUpdate")]
         [HttpPost]
         public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar) => await _hostBoatManager.BoatCalendarUpdate(boatCalendar, CurrentUser.Id);
         
 
-        [Route("FilterChartersBoats")]
+        [Route("api/FilterChartersBoats")]
         [HttpPost]
         public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable parameters) 
         {
             var response = await _hostBoatManager.GetChartersByFilters(parameters);
             return response;
         }
-        [Route("boat-details/{boatId}")]
+        [Route("api/boat-details/{boatId}")]
         [HttpGet]
         public async Task<BoatEntity> GetBoatDetailsById(int boatId)
         {
@@ -46,7 +47,7 @@ namespace BnBYachts.Services.Boat
             return boat;
         }
 
-        [Route("FilterEventsBoats")]
+        [Route("api/FilterEventsBoats")]
         [HttpPost]
         public async Task<ICollection<EventEntity>> GetEventsByFilters(EventSearchRequestable parameters)
         {
@@ -54,14 +55,14 @@ namespace BnBYachts.Services.Boat
             return response;
         }
 
-        [Route("charter-details/{charterId}")]
+        [Route("api/charter-details/{charterId}")]
         [HttpGet]
         public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
         {
             var charter = await _hostBoatManager.GetCharterDetailsById(charterId);
             return charter;
         }
-        [Route("event-details/{eventId}")]
+        [Route("api/event-details/{eventId}")]
         [HttpGet]
         public async Task<EventDetailTransferable> GetEventDetailsById(int eventId)
         {
@@ -70,14 +71,14 @@ namespace BnBYachts.Services.Boat
         }
 
         #region Host On Boarding
-        [Route("GetHostOnBoardingLookup")]
+        [Route("api/GetHostOnBoardingLookup")]
         [HttpGet]
         public async Task<HostLookupTransferable> GetHostOnBoardingLookup()
         {
             var data = await _hostBoatManager.GetHostOnBoardingLookup(CurrentUser.Id);
             return data;
         }
-        [Route("add-host-boats")]
+        [Route("api/add-host-boats")]
         [HttpPost]
         public async Task<BoatAddResponseTransferable> AddHostBoats(HostBoatRequestable boatDetails)
         {
@@ -86,20 +87,20 @@ namespace BnBYachts.Services.Boat
         }
 
         [HttpPost]
-        [Route("update-location")]
+        [Route("api/update-location")]
         public async Task<bool> updateBoatLocation(BoatLocationRequestable boat)
         {
             return await _hostBoatManager.UpdateBoatLocation(boat,CurrentUser.Id);
         }
         #endregion
 
-        public async Task<ICollection<BoatDTO>> GetHostBoats()
+        public async Task<EntityResponseListModel<BoatDTO>> GetHostBoats(int pageNo, int pageSize)
         {
-            return await _hostBoatManager.GetHostBoats(CurrentUser.Id).ConfigureAwait(false);
+            return await _hostBoatManager.GetHostBoats(CurrentUser.Id, pageNo, pageSize).ConfigureAwait(false);
         }
 
         #region Features
-        [Route("get-default-features")]
+        [Route("api/get-default-features")]
         [HttpGet]
         public async Task<ICollection<FeatureEntity>> GetDefaultFeatures()
         {
@@ -107,7 +108,7 @@ namespace BnBYachts.Services.Boat
             return result;
         }
         #endregion
-        [Route("host-boat-status/{boatId}")]
+        [Route("api/host-boat-status/{boatId}")]
         [HttpGet]
         public async Task<bool> UpdateHostBoatStatus(long boatId)
         {

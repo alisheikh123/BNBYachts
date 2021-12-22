@@ -26,4 +26,9 @@
     <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="4.4.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Manager\NewFolder\" />
+    <Folder Include="Shared\NewFolder\" />
+  </ItemGroup>
+
 </Project>

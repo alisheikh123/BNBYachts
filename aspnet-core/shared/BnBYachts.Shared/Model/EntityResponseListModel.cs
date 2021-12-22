@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BnBYachts.Shared.Model
 {
-    public class EntityResponseListModel<T>
+    public class EntityResponseListModel<T>:ListingBaseModel
     {
         public bool ReturnStatus { get; set; }
         public List<String> ReturnMessage { get; set; }

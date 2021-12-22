@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-idv-service
+spec:
+  selector:
+    matchLabels:
+      app: application-idv-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: application-idv-service
+    spec:
+      containers:
+        - name: application-idv-service
+          image: "umardrazdotnet/core:latest"
+          ports:
+            - name: http
+              containerPort: 8089

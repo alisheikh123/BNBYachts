@@ -54,9 +54,8 @@ namespace BnBYachts.Core.Managers
 
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
-           
                 var _respone = new ResponseDto();
-                var user = new IdentityUser(userInput.Id, userInput.UserName, userInput.Email)
+                var user = new IdentityUser(userInput.Id, userInput.Email, userInput.Email)
                 {
                     Name = userInput.FirstName + " " + userInput.LastName
                 };
@@ -64,14 +63,12 @@ namespace BnBYachts.Core.Managers
                 var result = await _userManager.CreateAsync(user, userInput.Password);
                 if (result.Succeeded)
                 {
-                    var isRoleAssigned = await _userManager.AddToRolesAsync(user, userInput.RoleId);
+                    var isRoleAssigned = await _userManager.AddToRoleAsync(user, "USER");
                     if (!isRoleAssigned.Succeeded)
                     {
                         return _respone;
                     }
-
-                    if(false)
-                     await SendEmailToAskForEmailConfirmationAsync(user);
+                    await SendEmailToAskForEmailConfirmationAsync(user);
                     _respone.Message = "Account created successfully";
                 }
                 else
@@ -87,8 +84,8 @@ namespace BnBYachts.Core.Managers
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
-
-            string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
+            //string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
+            string baseUrl = "http://52.207.14.110:8080/activate-account";//Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },

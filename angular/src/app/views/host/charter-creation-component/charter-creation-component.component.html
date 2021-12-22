@@ -1,0 +1,237 @@
+<div class="your-boat banner-image">
+    <div class="bg-image-wrap no-hover noborder-radius image-before" style="background-image: url('assets/images/charter-bg.png');">
+      <div class="custom-flex-start white-text h-100">
+          <div class="container">
+            <h3 class="bold"> {{'ScheduleCharter' | localization}}</h3>
+            <p> {{'Lorem' | localization}}</p>
+          </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="section-padding host-on-board-steps">
+        <div class="container">
+        <div class="charter-info-tabs space-between-tabs">
+            <div class="custom-tabs-wrapper">
+                <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <button class="underline-link-blk small-text" type="button"
+                  (click)="currentTab = CHARTER_TABS.BoatSelection"
+                  [ngClass]="{'active': currentTab ==  CHARTER_TABS.BoatSelection}"><span
+                      class="active">1</span> {{'CharDes' | localization}}</button>
+              <button class="underline-link-blk small-text" type="button"
+                  (click)="currentTab =CHARTER_TABS.CharterDestination"
+                  [ngClass]="{'active': currentTab == CHARTER_TABS.CharterDestination}"><span
+                      [ngClass]="{'active': currentTab > CHARTER_TABS.CharterDestination}">2</span> {{'SchePay' | localization}}
+                  </button>
+              <button class="underline-link-blk small-text" type="button"
+                  (click)="currentTab = CHARTER_TABS.CharterRules"
+                  [ngClass]="{'active': currentTab == CHARTER_TABS.CharterRules}"><span
+                      [ngClass]="{'active': currentTab > CHARTER_TABS.CharterRules}">3</span>{{'charRule' | localization}}
+                  Options</button>
+                </div>
+                <div class="tab-content" id="v-pills-tabContent">
+                <form [formGroup]="charterCreationForm">
+                <div class="tab-pane"  [ngClass]="{'active': currentTab == CHARTER_TABS.BoatSelection}" *ngIf="currentTab == CHARTER_TABS.BoatSelection">
+                         <div class="row">
+                          <div class="col">
+                            <div class="custom-select-field" ngbDropdown #myDrop="ngbDropdown"  placement="bottom">
+                                <label>{{'BoatListing' | localization}}</label>
+                                <select formControlName="boatId" class="form-control" (change)="selectBoatName($event)">
+                                    <option value="0"> Choose boat name</option>
+                                    <option *ngFor="let item of boatlistOptions" value={{item.id}} >{{item.name}}</option>
+                                </select>
+                                <div *ngIf="charterForm.boatId.touched && charterForm.boatId.invalid">
+                                    <div *ngIf="charterForm.boatId.errors!.required" class="text-danger"> {{'boatReq' | localization}}</div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6 py-2">
+                            <div class="counter-input-wrapper">
+                                <label>{{'GuestCapacity' |localization }}</label>
+                              <div class="number">
+                                <div class="custom-flex-start">
+                                  <label>{{'Guests' | localization}}</label>
+                                  <div class="custom-flex-start">
+                                    <span class="minus" (click)="removeGuests()">-</span>
+                                <input type="text" formControlName="guestCapacity"/>
+                                <span class="plus" (click)="addGuests()">+</span>
+                                  </div>
+                                </div>
+
+                              </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6 py-2">
+                            <div class="custom-input-field">
+                                <label>{{'CharterDescription' | localization}}</label>
+                                <textarea class="custom-input" formControlName="description" rows="2"></textarea>
+                                <small class="text-danger" *ngIf="charterForm.description.touched && !charterForm.description.valid">Description is required.</small>
+                              </div>
+                          </div>
+                          <div class="col-sm-12">
+                              <div class="custom-flex-end">
+                                  <button class="custom-btn outline-blue-clr me-4"  (click)="currentTab = currentTab-1;">{{'Later' | localization}}</button>
+                                  <button class="custom-btn blue" id="save-bt"
+                                  [disabled]="charterForm.boatId.value == 0 || charterForm.guestCapacity.value == 0 || charterForm.description.value ==null"
+                                   (click)="currentTab = currentTab+1;" >{{'Continue' | localization}}  </button>
+
+                              </div>
+                          </div>
+
+                  </div>
+                </div>
+                <div class="tab-pane" [ngClass]="{'active': currentTab == CHARTER_TABS.CharterDestination}"
+                [hidden]="currentTab != CHARTER_TABS.CharterDestination">
+                    <div class="row">
+                        <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
+                            <label>{{'DepartingFrom'| localization}}</label>
+                            <input class="custom-input" formControlName="departingFrom"
+                                ngx-google-places-autocomplete
+                                (onAddressChange)="handleDepartingAddress($event)"
+                                placeholder="Bali Island">
+                                <small class="text-danger" *ngIf="charterForm.departingFrom.touched && !charterForm.departingFrom.valid">departing From is required.</small>
+                        </div>
+                    </div>
+                        <div class="col-md-6 py-2">
+                            <div class="custom-input-field">
+                                <label> {{'ToDestination'| localization}}</label>
+                                <input class="custom-input" formControlName="destination"
+                                    ngx-google-places-autocomplete
+                                    (onAddressChange)="handleDestinationAddress($event)"
+                                    placeholder="Qubarland">
+                                    <small class="text-danger" *ngIf="charterForm.destination.touched && !charterForm.destination.valid"> {{'DestReq'| localization}}</small>
+                            </div>
+                          </div>
+                          <div class="col-md-3 py-2">
+                            <div class="custom-select-field">
+                                <label> {{'DepartureDate'| localization}}</label>
+                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate" name="datetimepicker"  placeholder='Select Departure From' ></ejs-datetimepicker>
+
+                              </div>
+                          </div>
+                          <div class="col-md-3 py-2">
+                            <div class="custom-select-field">
+                                <label> {{'DepartureTo'| localization}}</label>
+                                <ejs-datetimepicker placeholder='Select Departure From' formControlName="departureToDate"></ejs-datetimepicker>
+
+                              </div>
+                          </div>
+                        <div class="col-md-6 py-2">
+                            <div class="row align-items-end">
+                                <div class="col-md-6">
+                                    <div class="custom-input-field">
+                                        <label> {{'CharterFee'| localization}}</label>
+                                        <input type="number" class="custom-input" placeholder="$20000"
+                                                formControlName="charterFee">
+                                      </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="custom-input-field">
+                                        <div class="custom-flex">
+                                            <div class="form-check">
+                                             <input  type="radio" class="form-check-input" [value]="true" formControlName="isFullBoatCharges">
+                                                 {{'PerPerson'| localization}}
+                                            </div>
+                                            <div class="form-check ms-5">
+                                                    <input  type="radio" class="form-check-input" [value]="false" formControlName="isFullBoatCharges">
+                                                 {{'EntireBoat'| localization}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 py-2">
+                            <div class="custom-input-field">
+                                <label> {{'roundtrip'| localization}}</label>
+                                <div class="custom-flex">
+
+                                    <div class="form-check">
+                                        <input  type="radio" class="form-check-input" [value]="true"   formControlName="isRoundTrip">
+                                           Yes
+                                       </div>
+                                       <div class="form-check ms-5">
+                                               <input  type="radio" class="form-check-input" [value]="false"formControlName="isRoundTrip" checked>
+                                           No
+                                       </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-md-6 py-2" *ngIf="charterCreationForm.value.isRoundTrip === true ">
+                                <div class="custom-select-field">
+                                    <label>Return Date {{'ReturnDate'| localization}}</label>
+                                    <ejs-datetimepicker formControlName="returnDate"></ejs-datetimepicker>
+                                  </div>
+                              </div>
+                            <div class="custom-flex-end">
+                                <button class="custom-btn outline-blue-clr me-4"
+                                (click)="currentTab = currentTab-1;"> {{'Later'| localization}}</button>
+                            <button class="custom-btn blue" id="save-bt"
+                            [disabled]="charterForm.departingFrom.value == null || charterForm.destination.value == null || charterForm.description.value ==null||
+                            charterForm.departureFromDate.value == null || charterForm.charterFee.value == 0  "
+                                (click)="currentTab = currentTab+1;"> {{'Continue'| localization}}</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" [ngClass]="{'active': currentTab == CHARTER_TABS.CharterRules}"
+                *ngIf="currentTab == CHARTER_TABS.CharterRules">
+                    <div class="charter-rules-wrap">
+                        <h5 class="bold">{{'charterRuleTitle' | localization}}</h5>
+                        <p class="small-text grey py-2"> {{'charterRulesdesc'| localization}}</p>
+
+                        <label class="custom-checkbox my-2">
+                            <input type="checkbox" [(ngModel)]="isAgree" [ngModelOptions]="{standalone: true}">
+                            <p class="small-text"> {{'AgreeToTerms'| localization}}</p>
+                            <span class="checkmark top-0"></span>
+                        </label>
+                          <div class="custom-flex-end py-3">
+                              <button class="custom-btn" [ngClass]="{'grey': !isAgree,'blue':isAgree}"
+                               type="submit" [disabled]="!charterCreationForm.valid" (click)="submit()"
+                                [disabled]="!isAgree" >{{'Save'| localization}}</button>
+                          </div>
+                    </div>
+
+                  </div>
+
+                </form>
+                </div>
+              </div>
+        </div>
+        </div>
+
+        <ng-template #chartercreationpopup>
+
+            <div class="modal-content">
+                <div class="modal-header no-border">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="custom-text-center">
+                        <div class="img-wrapper">
+                            <img src="assets/images/password-updated.png" alt="">
+                          </div>
+                        <h4 class="bold">{{'CharterCreated' | localization}}</h4>
+                        <p class="pt-2">{{charterForm.departingFrom.value}}</p>
+                        <p class="pt-2">{{charterForm.destination.value}}</p>
+
+                        <p class="py-2">{{charterForm.departureFromDate.value|  date:'dd-MMM-YYYY hh:mm a'}}</p>
+
+
+                        <div class="bottom-btn py-2">
+                          <button class="custom-btn blue big-btn" (click)="Redirect()" >{{'Home'| localization}}</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+        </ng-template>
+    </div>
+
+
+

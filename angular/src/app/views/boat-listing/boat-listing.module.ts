@@ -21,6 +21,7 @@ import { CharterDetailsComponent } from './charter-details/charter-details.compo
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { ListReviewsComponent } from '../common/list-reviews/list-reviews.component';
 import { NotFoundModule } from '../common/not-found-component/not-found.module';
+import { PaginationModule } from '../common/pagination/pagination.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { NotFoundModule } from '../common/not-found-component/not-found.module';
     CommonModule,
     SharedPipesModule,
     NgxStripeModule.forRoot(environment.stripeKey),
-    NotFoundModule
+    NotFoundModule,
+    PaginationModule
   ],
     providers: [YachtSearchService, BookingService]
 })

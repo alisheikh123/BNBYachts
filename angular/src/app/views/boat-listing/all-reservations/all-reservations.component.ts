@@ -18,7 +18,7 @@ export class AllReservationsComponent implements OnInit {
   month = [{ name: "chooose your month", Id: "0", selected: true }, { name: "January", Id: "1", }, { name: "February", Id: "2", }, { name: "March", Id: "3", }, { name: "April", Id: "4", }, { name: "May", Id: "5", }, { name: "June", Id: "6", }, { name: "July", Id: "7", }, { name: "August", Id: "8", }, { name: "September", Id: "9", }, { name: "October", Id: "10", }, { name: "November", Id: "11", }, { name: "December", Id: "12", },];
   monthName: any;
   booking: any;
-  allBoolings: any;
+  allBookings: any;
   monthSelect: any
   reservationForm: FormGroup;
   userId: string;
@@ -34,42 +34,24 @@ export class AllReservationsComponent implements OnInit {
   selectedStatusFilter: any = null;
   BOOKING_FILTER = BookingResponseFilter;
   selectedTab: number = this.BOOKING_FILTER.All;
+  queryParams = {
+    page: 1,
+    pageSize: 5
+  };
+  totalRecords: number = 0;
   constructor(private fb: FormBuilder, private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
-    /* Rating Configuration*/
     config.max = 5;
     config.readonly = true;
-
   }
 
   ngOnInit(): void {
-    this.service.getBookings(this.BOOKING_FILTER.All, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
-      this.allBoolings = res;
-      this.selectedTab = this.BOOKING_FILTER.All;
-      this.statusFilter(this.selectedStatusFilter);
-      this.reservationForm = this.fb.group({
-        monthName: ['', [Validators.required]]
-      });
-    });
+    this.getReservations(this.BOOKING_FILTER.All);
   }
 
-  allReservation() {
-    this.service.getBookings(this.BOOKING_FILTER.All, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
-      this.allBoolings = res;
-      this.selectedTab = this.BOOKING_FILTER.All;
-      this.statusFilter(this.selectedStatusFilter);
-    });
-  }
-  upcomingReservation() {
-    this.service.getBookings(this.BOOKING_FILTER.Upcomings, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
-      this.allBoolings = res;
-      this.selectedTab = this.BOOKING_FILTER.Upcomings;
-      this.statusFilter(this.selectedStatusFilter);
-    });
-  }
-
-  pastReservation() {
-    this.service.getBookings(this.BOOKING_FILTER.Past, this.selectedMonth, this.selectedYear).subscribe((res: any) => {
-      this.allBoolings = res;
+  getReservations(tab: number) {
+    this.service.getBookings(tab, this.selectedMonth, this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
+      this.allBookings = res?.data;
+      this.totalRecords = res?.totalCount;
       this.statusFilter(this.selectedStatusFilter);
     });
   }
@@ -79,16 +61,25 @@ export class AllReservationsComponent implements OnInit {
     let result = stringToSplit.split('-');
     this.selectedYear = result[0];
     this.selectedMonth = result[1];
-    (this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.upcomingReservation : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.pastReservation() : this.allReservation();
+    (this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.getReservations(this.BOOKING_FILTER.Upcomings) : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.getReservations(this.BOOKING_FILTER.Past) : this.getReservations(this.BOOKING_FILTER.All);
   }
 
   statusFilter(status: any) {
     this.selectedStatusFilter = status;
-    this.booking = status != null ? this.allBoolings.filter((res: any) => res.bookingStatus == status) : this.allBoolings;
+    this.booking = status != null ? this.allBookings.filter((res: any) => res.bookingStatus == status) : this.allBookings;
     this.booking.forEach((elem: any) => {
       this.boatService.boatDetailsById(elem.boatId).subscribe((boatdetail: any) => {
         elem.boatDetail = boatdetail;
       });
     });
+  }
+  onPageChange(data: any) {
+    this.queryParams.page = data.page;
+    this.getReservations(this.BOOKING_FILTER.All);
+  }
+  onPageSizeChange(data: any) {
+    this.queryParams.page = 1;
+    this.queryParams.pageSize = data.pageSize;
+    this.getReservations(this.BOOKING_FILTER.All);
   }
 }
