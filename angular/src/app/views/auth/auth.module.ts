@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { NotLoggedInComponent } from './components/not-logged-in/not-logged-in.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ActivateAccountComponent } from './components/activate-account/activate
       ForgotPasswordComponent,
       ResetPasswordComponent,
       ConfirmEmailComponent,
-      ActivateAccountComponent
+      ActivateAccountComponent,
+      NotLoggedInComponent
   ],
   providers: [
   AuthService

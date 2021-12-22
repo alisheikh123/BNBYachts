@@ -18,35 +18,27 @@
                     <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist"
                         aria-orientation="vertical">
                         <button class="underline-link-blk small-text" type="button"
-                            (click)="currentTab = ONBOARDING_TABS.BoatType"
                             [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatType}"><span
                                 class="active">1</span>Boat Type</button>
                         <button class="underline-link-blk small-text" type="button"
-                            (click)="currentTab = ONBOARDING_TABS.BoatFeatures"
                             [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatFeatures}"><span
                                 [ngClass]="{'active': currentTab > ONBOARDING_TABS.BoatFeatures}">2</span>Boat Features
                             & Description</button>
                         <button class="underline-link-blk small-text" type="button"
-                            (click)="currentTab = ONBOARDING_TABS.Rules"
                             [ngClass]="{'active': currentTab == ONBOARDING_TABS.Rules}"><span
                                 [ngClass]="{'active': currentTab > ONBOARDING_TABS.Rules}">3</span>Rules & Safety
                             Options</button>
                         <button class="underline-link-blk small-text" type="button"
-                            (click)="currentTab = ONBOARDING_TABS.Pictures"
                             [ngClass]="{'active': currentTab == ONBOARDING_TABS.Pictures}"><span
                                 [ngClass]="{'active': currentTab > ONBOARDING_TABS.Pictures}">4</span>Pictures</button>
                         <button class="underline-link-blk small-text" type="button"
-                            (click)="currentTab = ONBOARDING_TABS.BoatelServices"
                             [ngClass]="{'active': currentTab == ONBOARDING_TABS.BoatelServices}"><span
                                 [ngClass]="{'active': currentTab > ONBOARDING_TABS.BoatelServices}">5</span>Boatel
                             Services</button>
                         <button class="underline-link-blk small-text" type="button"
-                            (click)="currentTab = ONBOARDING_TABS.LocalRentalLaws"
                             [ngClass]="{'active': currentTab == ONBOARDING_TABS.LocalRentalLaws}"><span
                                 [ngClass]="{'active': currentTab > ONBOARDING_TABS.LocalRentalLaws}">6</span>Local
                             Rental Laws</button>
-
-
                     </div>
                     <div class="tab-content" id="v-pills-tabContent">
                         <form [formGroup]="hostOnBoardingForm">
@@ -55,7 +47,7 @@
                                 <div class="row">
                                     <div class="col-md-6 py-2">
                                         <div class="custom-select-field">
-                                            <label>Boat Listing</label>
+                                            <label>Boat Type*</label>
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown"
@@ -91,14 +83,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <small class="text-danger" *ngIf="">Please select boat type.</small>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 py-2">
                                         <div class="custom-flex-end">
-                                            <button class="custom-btn outline-blue-clr me-4"
-                                                (click)="currentTab = currentTab-1;">Later</button>
                                             <button class="custom-btn blue" id="save-bt"
+                                            [disabled]="hostForm.boatType.value == null"
                                                 (click)="currentTab = currentTab+1;">Continue</button>
                                         </div>
                                     </div>
@@ -110,18 +102,42 @@
                                 <div class="row">
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Title*</label>
+                                            <label>Boat Name*</label>
                                             <input class="custom-input" formControlName="name"
-                                                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+                                                placeholder="Boat Title">
                                                 <small class="text-danger" *ngIf="hostForm.name.touched && !hostForm.name.valid">Name is required.</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>About the boat*</label>
-                                            <input class="custom-input" formControlName="description"
-                                                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
-                                                <small class="text-danger" *ngIf="hostForm.description.touched && !hostForm.description.valid">Description is required.</small>
+                                            <label>Boat Length*</label>
+                                            <input type="number" class="custom-input" formControlName="length"
+                                                placeholder="50 ft" >
+                                                <small class="text-danger" *ngIf="hostForm.length.touched && !hostForm.length.valid">Length is required.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 py-2">
+                                        <div class="counter-input-wrapper">
+                                            <label>Bedrooms</label>
+                                            <div class="number">
+                                                <div class="custom-flex-start">
+                                                    <label>Bedrooms</label>
+                                                    <div class="custom-flex-start">
+                                                        <span class="minus" (click)="removeCapacity(true)">-</span>
+                                                        <input type="number" min="0" formControlName="totalBedrooms" />
+                                                        <span class="plus" (click)="addCapacity(true)">+</span>
+                                                    </div>
+                                                </div>
+                                                <div class="custom-flex-start ms-3">
+                                                    <label>Bathrooms</label>
+                                                    <div class="custom-flex-start">
+                                                        <span class="minus" (click)="removeCapacity(false)">-</span>
+                                                        <input type="number" min="0" formControlName="totalWashrooms" />
+                                                        <span class="plus" (click)="addCapacity(false)">+</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
@@ -134,15 +150,7 @@
                                                 <small class="text-danger" *ngIf="hostForm.location.touched && !hostForm.location.valid">Location is required.</small>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="custom-input-field">
-                                            <label>Boat Length*</label>
-                                            <input type="number" class="custom-input" formControlName="length"
-                                                placeholder="50 ft" >
-                                                <small class="text-danger" *ngIf="hostForm.length.touched && !hostForm.length.valid">Length is required.</small>
-                                        </div>
-                                    </div>
-
+                                 
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field ">
                                             <label>Let guests know what your boat offers</label>
@@ -186,34 +194,18 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
-                                        <div class="counter-input-wrapper">
-                                            <label>Bedrooms</label>
-                                            <div class="number">
-                                                <div class="custom-flex-start">
-                                                    <label>Bedrooms</label>
-                                                    <div class="custom-flex-start">
-                                                        <span class="minus" (click)="removeCapacity(true)">-</span>
-                                                        <input type="text" formControlName="totalBedrooms" />
-                                                        <span class="plus" (click)="addCapacity(true)">+</span>
-                                                    </div>
-                                                </div>
-                                                <div class="custom-flex-start ms-3">
-                                                    <label>Bathrooms</label>
-                                                    <div class="custom-flex-start">
-                                                        <span class="minus" (click)="removeCapacity(false)">-</span>
-                                                        <input type="text" formControlName="totalWashrooms" />
-                                                        <span class="plus" (click)="addCapacity(false)">+</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                        <div class="custom-input-field">
+                                            <label>Boat Description*</label>
+                                            <textarea class="custom-input" formControlName="description"
+                                                placeholder="Boat Description"></textarea>
+                                                <small class="text-danger" *ngIf="hostForm.description.touched && !hostForm.description.valid">Description is required.</small>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12 py-2">
                                         <div class="custom-flex-end">
                                             <button class="custom-btn outline-blue-clr me-4"
-                                                (click)="currentTab=currentTab-1;">Later</button>
+                                                (click)="currentTab=currentTab-1;">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
                                             [disabled]="!hostForm.name.valid"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
@@ -227,7 +219,7 @@
                                 <div class="row">
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field ">
-                                            <label>Let guests know what your boat offers</label>
+                                            <label>Additional Rules</label>
                                             <div class="custom-card">
                                                 <div class="row w-100">
                                                     <div class="col-sm-6 my-2" *ngFor="let item of (boatLookups.rules)">
@@ -250,7 +242,7 @@
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field ">
-                                            <label>Guests Favorites</label>
+                                            <label>Safety Options</label>
                                             <div class="custom-card">
                                                 <div class="row w-100">
                                                     <div class="col-sm-6 my-2"
@@ -275,7 +267,7 @@
                                     <div class="col-sm-12 py-2">
                                         <div class="custom-flex-end">
                                             <button class="custom-btn outline-blue-clr me-4"
-                                                (click)="currentTab=currentTab-1;">Later</button>
+                                                (click)="currentTab=currentTab-1;">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
 
@@ -439,7 +431,7 @@
                                                 <div class="col-sm-12 py-4">
                                                     <div class="custom-flex-end">
                                                         <button class="custom-btn outline-blue-clr me-4"
-                                                            (click)="currentTab=currentTab-1;">Later</button>
+                                                            (click)="currentTab=currentTab-1;">Previous</button>
                                                         <button class="custom-btn blue" id="save-btn"
                                                             (click)="currentTab=currentTab+1;">Continue</button>
                                                     </div>
@@ -470,10 +462,10 @@
                                             <label>Boatel Capacity</label>
                                             <div class="number">
                                                 <div class="custom-flex-start">
-                                                    <label>Guests</label>
+                                                    <label>{{hostForm.boatelCapacity.value > 1 ? 'Guests':'Guest'}}</label>
                                                     <div class="custom-flex-start">
                                                         <span class="minus" (click)="removeGuests()">-</span>
-                                                        <input type="text" formControlName="boatelCapacity" />
+                                                        <input type="number" min="0" formControlName="boatelCapacity" />
                                                         <span class="plus" (click)="addGuests()">+</span>
                                                     </div>
                                                 </div>
@@ -495,22 +487,22 @@
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Per day boatel fee charges</label>
+                                            <label>Boatel Fee Per Night</label>
                                             <input type="number" class="custom-input" placeholder="$20000"
                                                 formControlName="perDayCharges">
                                         </div>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>Tax Fee</label>
-                                            <input type="number" class="custom-input" formControlName="taxFee"
+                                            <label>Tax</label>
+                                            <input type="number" min="0" class="custom-input" formControlName="taxFee"
                                                 placeholder="Tax Fee">
                                         </div>
                                     </div>
                                     <div class="col-sm-12 py-2">
                                         <div class="custom-flex-end">
                                             <button class="custom-btn outline-blue-clr me-4"
-                                                (click)="currentTab=currentTab-1;">Later</button>
+                                                (click)="currentTab=currentTab-1;">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
 
