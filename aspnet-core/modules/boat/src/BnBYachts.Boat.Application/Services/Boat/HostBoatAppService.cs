@@ -11,6 +11,7 @@ using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Shared.Model;
 
 namespace BnBYachts.Services.Boat
 {
@@ -93,9 +94,9 @@ namespace BnBYachts.Services.Boat
         }
         #endregion
 
-        public async Task<ICollection<BoatDTO>> GetHostBoats()
+        public async Task<EntityResponseListModel<BoatDTO>> GetHostBoats(int pageNo, int pageSize)
         {
-            return await _hostBoatManager.GetHostBoats(CurrentUser.Id).ConfigureAwait(false);
+            return await _hostBoatManager.GetHostBoats(CurrentUser.Id, pageNo, pageSize).ConfigureAwait(false);
         }
 
         #region Features

@@ -3,6 +3,7 @@ using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Event.Transferables;
 using BnBYachts.Events;
+using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -52,15 +53,19 @@ namespace BnBYachts.Boat.Manager
             return boatBookedDates;
         }
 
-        public async Task<ICollection<EventDTO>> GetEvents(Guid? userId)
+        public async Task<EntityResponseListModel<EventDTO>> GetEvents(Guid? userId,int pageNo, int pageSize)
         {
+            var response = new EntityResponseListModel<EventDTO>();
             var events = await _eventRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
             foreach (var evnt in events)
             {
                 await _eventRepository.EnsurePropertyLoadedAsync(evnt, res => res.Boat).ConfigureAwait(false);
                 await _boatRepository.EnsureCollectionLoadedAsync(evnt.Boat, res => res.BoatGalleries).ConfigureAwait(false);
             }
-            return _objectMapper.Map<ICollection<EventEntity>,ICollection<EventDTO>>(events);
+            var hostEventList =  _objectMapper.Map<List<EventEntity>,List<EventDTO>>(events);
+            response.TotalCount = events.Count;
+            response.Data = await PagedList<EventDTO>.CreateAsync(hostEventList, pageNo, pageSize).ConfigureAwait(false);
+            return response;
         }
     }
 }

@@ -14,13 +14,23 @@ export class BoatListingComponent implements OnInit {
   hostBoats: any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   BOAT_TYPE = BoatTypesId;
+  totalRecords: number = 0;
+  queryParams = {
+    page: 1,
+    pageSize: 5
+  };
   @Input() showAllBoats: boolean = true;
   constructor(private service: AllHostBoatsService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
-    this.service.getAllBoats().subscribe((res: any) => {
-      this.hostBoats = this.showAllBoats ? res : res.filter((data: any) => data.isBoatelServicesOffered == true);
+    this.getHostBoats();
+
+  }
+  getHostBoats(){
+    this.service.getAllBoats(this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
+      this.hostBoats = this.showAllBoats ? res?.data : res?.data.filter((data: any) => data.isBoatelServicesOffered == true);
+      this.totalRecords = res?.totalCount;
     });
   }
 
@@ -29,5 +39,14 @@ export class BoatListingComponent implements OnInit {
       item.isActive = !item.isActive;
       this.toastr.success('Boat Status successfully Changed.', 'Success');
     });
+  }
+  onPageChange(data: any) {
+    this.queryParams.page = data.page;
+    this.getHostBoats();
+  }
+  onPageSizeChange(data: any) {
+    this.queryParams.page = 1;
+    this.queryParams.pageSize = data.pageSize;
+    this.getHostBoats();
   }
 }
