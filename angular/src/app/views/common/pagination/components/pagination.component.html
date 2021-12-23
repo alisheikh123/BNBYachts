@@ -1,9 +1,8 @@
 <div class="d-flex justify-content-between p-2">
     <ngb-pagination  [collectionSize]="totalRecords" (pageChange)="onPageChange()" [(page)]="paginationParam.page"
-        [pageSize]="paginationParam.pageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+        [pageSize]="paginationParam.pageSize" [maxSize]="3" [rotate]="true" [boundaryLinks]="true">
     </ngb-pagination>
-
-    <select class="custom-select" (change)="onPageSizeChange()" style="width: auto;border:1px solid #ccc;"
+    <select class="custom-select pr-5" (change)="onPageSizeChange()" style="width: auto;border:1px solid #ccc;margin-left: 780px;"
         name="paginationParam.pageSize" [(ngModel)]="paginationParam.pageSize">
         <option [ngValue]="1">1 items per page</option>
         <option [ngValue]="5">5 items per page</option>

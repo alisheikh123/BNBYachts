@@ -15,7 +15,7 @@ input[type="month"] {
 see "List of symbols" below if you want another, you could also try to add a font-awesome icon.. */
 input[type="month"]:after {
     font-family: "Font Awesome 5 Free";
-    font-weight: 900; 
+    font-weight: 900;
     content: "\f073";
     color: #555;
     padding: 0 5px;
@@ -55,3 +55,7 @@ input[type="month"]::-webkit-inner-spin-button {
     color: #122BA8;
     border-color: #122BA8;
  }
+ .justify-content-center {
+    display: flex !important;
+    justify-content: center !important;
+}

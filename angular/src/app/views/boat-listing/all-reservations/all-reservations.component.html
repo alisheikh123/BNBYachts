@@ -98,8 +98,12 @@
       </div>
     </div>
   </div>
-  <div class="col-12 pt-2" *ngIf="booking?.length > 0">
-      <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
-      (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
+  <div class="col-12 pt-2 justify-content-center" *ngIf="booking?.length > 0">
+
+        <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
+
+
+    </div>
+
   </div>
-</div>
