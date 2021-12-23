@@ -59,8 +59,7 @@ export class BoatListingComponent implements OnInit {
     config: NgbRatingConfig,
     private modal: NgbModal,
     private wishlistService: WishlistsService,
-    private toastr: ToastrService,
-    public activeModl:NgbActiveModal 
+    private toastr: ToastrService
   ) {
     config.max = 5;
     config.readonly = true;
@@ -209,6 +208,9 @@ export class BoatListingComponent implements OnInit {
         this.toastr.success("Boat removed from wishlists", "Wishlist");
       }
     })
+  }
+  closeModal(){
+    this.modal.dismissAll();
   }
 
 }

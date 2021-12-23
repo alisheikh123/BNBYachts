@@ -2,7 +2,7 @@
     <ngb-pagination  [collectionSize]="totalRecords" (pageChange)="onPageChange()" [(page)]="paginationParam.page"
         [pageSize]="paginationParam.pageSize" [maxSize]="3" [rotate]="true" [boundaryLinks]="true">
     </ngb-pagination>
-    <select class="custom-select pr-5" (change)="onPageSizeChange()" style="width: auto;border:1px solid #ccc;margin-left: 780px;"
+    <select class="custom-select pr-5" (change)="onPageSizeChange()" style="width: auto;border:1px solid #ccc;"
         name="paginationParam.pageSize" [(ngModel)]="paginationParam.pageSize">
         <option [ngValue]="1">1 items per page</option>
         <option [ngValue]="5">5 items per page</option>
