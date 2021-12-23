@@ -3,35 +3,10 @@
 @using Volo.Abp.Account.Localization
 @using Volo.Abp.Account.Settings
 @using Volo.Abp.Settings
-@*@model Volo.Abp.Account.Web.Pages.Account.LoginModel*@
 @model BnBYachts.Pages.Account.CustomLoginModel
 @inject IHtmlLocalizer<AccountResource> L
 @inject Volo.Abp.Settings.ISettingProvider SettingProvider
-@*<head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no  shrink-to-fit=no">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-              integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-              rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <title>BnB Yachets</title>
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet"
-              type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-        <link rel="stylesheet" href="sass/style-en.css">
-    </head>*@
-
-
-@* New Head *@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,9 +30,6 @@
     <link rel="stylesheet" href="sass/style-en.css">
     <link href="~/sass/style-en.css" rel="stylesheet" />
 </head>
-
-@* End Head *@
-
 <div class="card loginard" style="background-color: #ffffff">
     <div class="card-header" style="background-color: #ffffff">
         <div class="custom-text-center">
@@ -68,107 +40,55 @@
                     </div>
                 </div>
             </div>
-         
+
             <h4 class="bold text-center">@L["Login"]</h4>
         </div>
         <div class="card-body" style="background-color: #ffffff">
             @if (Model.EnableLocalLogin)
             {
-            <form method="post">
-                <div class="custom-input-field">
-                    <label asp-for="LoginInput.UserNameOrEmailAddress">Email</label>
-                    <input asp-for="LoginInput.UserNameOrEmailAddress" class="custom-input" />
+                <form method="post">
+                    <div class="custom-input-field">
+                        <label asp-for="LoginInput.UserNameOrEmailAddress">Email</label>
+                        <input asp-for="LoginInput.UserNameOrEmailAddress" class="custom-input" required />
+                    </div>
                     <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="fa fa-fw fa-eye field-icon toggle-password text-danger"></span>
-                </div>
-                @*<div class="custom-input-field pswd-field">
-            <label asp-for="LoginInput.Password"></label>
-            <div class="p-relative">
-                <input asp-for="LoginInput.Password" id="password-field" type="password" class="custom-input" name="password" value="12345" data-toggle="tooltip" data-html="true" title="Choosing a Password: <br /> Your Password Must Include:" />
-                <span asp-validation-for="LoginInput.Password" toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-
-
-            </div>
-        </div>*@
-
-                <div class="custom-input-field ">
-                    <label asp-for="LoginInput.Password"></label>
-                    <input asp-for="LoginInput.Password"  class="custom-input"  />
+                    <div class="custom-input-field ">
+                        <label asp-for="LoginInput.Password"></label>
+                        <input asp-for="LoginInput.Password" class="custom-input pwd" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" style="margin-top: 30px;" type="button"><i class="fa fa-fw fa-eye" id="eyeToggle"></i></button>
+                        </span>
+                    </div>
                     <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
-                </div>
+                    <div class="custom-flex-between py-4">
+                        <div class="left-content">
+                            <label class="custom-checkbox m-0">
+                                <input type="checkbox">
+                                <p class="small-text">Remember Me</p>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="right-content">
+                            <a href="@Model.BaseUrl" class="underline-blue-link small-text">Forgot Password?</a>
 
-                @*<div class="container py-4">*@
-                <!--<div class="row">
-        <div class="col-12">
-            <abp-row>
-                <div class="col-6">-->
-                @* <abp-column>*@
-
-                <!--<label class="custom-checkbox m-0">
-
-
-        <input type="checkbox">
-        <p class="small-text">Remember Me</p>
-        <span class="checkmark"></span>
-
-
-    </label>-->
-                @*</abp-column>*@
-                <!--</div>
-    <div class="col-6">-->
-                @* <abp-column>*@
-                @*<a href="@Url.Page("./ForgotPassword", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="underline-blue-link small-text" data-bs-toggle="modal" data-bs-target="#forget-psd-modal" data-bs-dismiss="modal">@L["ForgotPassword?"]</a>*@
-                @* </abp-column>*@
-                <!--</div>
-    </abp-row>-->
-                @*<div class="custom-flex-between py-2">
-            <abp-row>
-
-
-
-            </abp-row>
-        </div>*@
-                <!--</div>
-        </div>
-    </div>-->
-                <div class="custom-flex-between py-4">
-                    <div class="left-content">
-                        <label class="custom-checkbox m-0">
-                            <input type="checkbox">
-                            <p class="small-text">Remember Me</p>
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="right-content">
-                        <a href="http://44.197.69.129:8080/auth/forget-password" class="underline-blue-link small-text">Forgot Password?</a>
-                        @*<a href="@Url.Page("./ForgotPassword", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="underline-blue-link small-text" data-bs-toggle="modal" data-bs-target="#forget-psd-modal" data-bs-dismiss="modal">@L["ForgotPassword?"]</a>*@
-
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center">
-                            <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
-                            @*@if (Model.ShowCancelButton)
-                    {
-                        <abp-button type="submit" button-type="Secondary" formnovalidate="formnovalidate" name="Action" value="Cancel" class="btn-block btn-lg mt-3">@L["Cancel"]</abp-button>
-                    }*@
                         </div>
                     </div>
-                </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
 
-                <div class="text-center py-2">
-                    @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
-                    {
-                        @*<strong>
-                    @L["AreYouANewUser"]
-                    <a href="@Url.Page("./Register", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="text-decoration-none">@L["Register"]</a>
-                </strong>*@
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="text-center py-2">
+                        @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
+                        {
 
-
-                    }
-                </div>
-            </form>
+                        }
+                    </div>
+                </form>
             }
 
             @if (Model.VisibleExternalProviders.Any())
@@ -186,33 +106,66 @@
 
             @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
             {
-        <div class="alert alert-warning">
-            <strong>@L["InvalidLoginRequest"]</strong>
-            @L["ThereAreNoLoginSchemesConfiguredForThisClient"]
-            try to <a href="http://localhost:4200/">Login</a> Here
-            @*<p class="small-text light">Try to do Login? <a href="@Url.Page("./Login", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="underline-blue-link" data-bs-toggle="modal" data-bs-target="#signup-modal" data-bs-dismiss="modal">@L["Login"]</a></p>*@
+        <form method="post">
+            <div class="custom-input-field">
+                <label asp-for="LoginInput.UserNameOrEmailAddress">Email</label>
+                <input asp-for="LoginInput.UserNameOrEmailAddress" class="custom-input" required />
+            </div>
+            <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="fa fa-fw fa-eye field-icon toggle-password text-danger"></span>
+            <div class="custom-input-field ">
+                <label asp-for="LoginInput.Password"></label>
+                <input asp-for="LoginInput.Password" class="custom-input pwd" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" style="margin-top: 30px;" type="button"><i class="fa fa-fw fa-eye" id="eyeToggle"></i></button>
+                </span>
+            </div>
+            <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+            <label class="text text-danger">* You have entered an invalid username or password</label>
+            <div class="custom-flex-between py-4">
+                <div class="left-content">
+                    <label class="custom-checkbox m-0">
+                        <input type="checkbox">
+                        <p class="small-text">Remember Me</p>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
 
-        </div>
+                <div class="right-content">
+                    @* href="http://44.197.69.129:8080//auth/forget-password" *@
+                   <a href="#" >Forgot Password?</a>
+
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center py-2">
+                @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
+                {
+
+                }
+            </div>
+        </form>
 
             }
 
 
         </div>
-        </div>
-        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
+        integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="~/js/select.js"></script>
+<script src="~/js/custom.js"></script>
 
-
-
-
-
-
-
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
-                integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="~/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-        <script src="~/js/select.js"></script>
-        <script src="~/js/custom.js"></script>

@@ -70,7 +70,6 @@ export class ModifyReservationComponent implements OnInit {
       this.boatFilterDetails.checkoutDate = new Date(this.bookingModifyDetail?.checkoutDate);
       this.service.getBoatInfo(res?.boatId).subscribe((boatdetail: any) => {
         this.bookingModifyDetail.boatDetail = boatdetail;
-        console.log(this.bookingModifyDetail);
       });
 
     });
@@ -81,7 +80,6 @@ export class ModifyReservationComponent implements OnInit {
 
   calculateDays() {
     if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null) {
-debugger;
       var date1 = new Date(this.boatFilterDetails.checkinDate);
       var date2 = new Date(this.boatFilterDetails.checkoutDate);
       var Time = date2.getTime() - date1.getTime();
@@ -96,8 +94,7 @@ debugger;
 
   }
   changecheckoutDate(checkout: any) {
-    debugger;
-    let checkoutLatest = utils.formatDate(checkout);
+     let checkoutLatest = utils.formatDate(checkout);
     let currentcheckOutDate = utils.formatDate(this.bookingModifyDetail?.checkoutDate);
     if (currentcheckOutDate <= checkoutLatest) {
       this.perdayFee = 0;
@@ -147,10 +144,8 @@ debugger;
   }
 
   reserveBoat() {
-    debugger;
     this.isSubmitted = true;
     if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.bookingModifyDetail?.noOfAdults + this.bookingModifyDetail?.noOfChildrens) > 0) {
-      debugger;
       let userId = Guid.create();
       let bookingModel = {
         id: this.bookingModifyDetail?.id,
@@ -167,9 +162,7 @@ debugger;
         reviews: null
       };
       this.bookingService.modifyboatelBooking(bookingModel).subscribe(res => {
-        debugger;
         if (res) {
-          debugger;
           let boatCalendar = {
             creationTime: new Date(),
             creatorId: userId.toString(),
@@ -181,9 +174,7 @@ debugger;
             boatEntityId: this.bookingModifyDetail?.boatId
           }
           this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
-            debugger;
             if (res) {
-              debugger;
               this.yachtParamService.setFilters(this.boatFilterDetails);
               this.toastr.success('Boat reservation Successfully Modified.', 'Success');
               this.router.navigate(['/boat-listing/all-reservations'], { relativeTo: this.activatedRoute });
@@ -194,7 +185,7 @@ debugger;
       })
     }
     else {
-      console.log("Unable to Modify");
+      this.toastr.success('Unable to Modify the reservation', 'Success');
     }
   }
 

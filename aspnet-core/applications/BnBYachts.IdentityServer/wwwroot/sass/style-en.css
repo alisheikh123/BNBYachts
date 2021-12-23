@@ -376,6 +376,9 @@ header .center-content.active-mobile {
   }
 }
 
+#AbpPageAlertsAbpPageAlerts {
+    display: none;
+}
 header .center-content.active-mobile a {
   /* Landscape phones and down */
   /* Landscape phones and down */
