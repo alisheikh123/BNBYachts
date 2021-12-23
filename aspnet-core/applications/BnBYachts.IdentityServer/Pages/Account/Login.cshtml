@@ -73,13 +73,15 @@
 
                         </div>
                     </div>
-                    <div class="right-content">
-                        <a href="http://52.207.14.110:8080/auth/forget-password" class="underline-blue-link small-text">Forgot Password?</a>
-                        @*<a href="@Url.Page("./ForgotPassword", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})" class="underline-blue-link small-text" data-bs-toggle="modal" data-bs-target="#forget-psd-modal" data-bs-dismiss="modal">@L["ForgotPassword?"]</a>*@
-
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
 
                             </div>
-                       
+                        </div>
+                    </div>
+
                     <div class="text-center py-2">
                         @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
                         {
@@ -129,8 +131,8 @@
                 </div>
 
                 <div class="right-content">
-                    @* href="http://52.207.14.110/:8080//auth/forget-password" *@
-                    <a href="#">Forgot Password?</a>
+                    @ href="http://52.207.14.110/:8080/auth/forget-password" @
+                   <a href="#" >Forgot Password?</a>
 
                 </div>
             </div>
