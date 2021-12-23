@@ -160,7 +160,7 @@ export class BoatListingComponent implements OnInit {
         this.boats = Object.assign([], this.allBoats);//JSON.parse(localStorage.getItem('originalBoats') || '{}');
     this.indexToRemove = [];
     this.boats.forEach((boat: any, index) => {
-      if (boat.perDayCharges <= minPrice || boat.perDayCharges >= maxPrice) {
+      if (boat.perDayCharges < minPrice || boat.perDayCharges > maxPrice) {
         this.indexToRemove.push(index);
         this.indexToRemove.sort((a, b) => b - a);
       }
