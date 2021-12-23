@@ -137,6 +137,8 @@
                             <span class="checkmark top-0"></span>
                         </label>
                     </div>
+                    <ng-container *ngIf="boatEditForm.controls.isBoatelServicesOffered.value">
+
                     <div class="col-md-6 py-2">
                         <div class="custom-input-field">
                             <label>Availabilty</label>
@@ -185,6 +187,7 @@
                             <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
                         </div>
                     </div>
+                </ng-container>
                 </div>
             </form>
             <div class="row">
