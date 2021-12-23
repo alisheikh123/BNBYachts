@@ -137,6 +137,12 @@
                             <span class="checkmark top-0"></span>
                         </label>
                     </div>
+                    <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
+                            <label>Tax Fee</label>
+                            <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
+                        </div>
+                    </div>
                     <ng-container *ngIf="boatEditForm.controls.isBoatelServicesOffered.value">
 
                     <div class="col-md-6 py-2">
@@ -179,12 +185,6 @@
                             <label>Per day boatel fee charges</label>
                             <input type="number" class="custom-input" placeholder="$20000"
                                 formControlName="perDayCharges">
-                        </div>
-                    </div>
-                    <div class="col-md-6 py-2">
-                        <div class="custom-input-field">
-                            <label>Tax Fee</label>
-                            <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
                         </div>
                     </div>
                 </ng-container>

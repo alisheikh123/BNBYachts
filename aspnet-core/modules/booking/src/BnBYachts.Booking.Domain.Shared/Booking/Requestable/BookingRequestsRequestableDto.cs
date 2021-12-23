@@ -19,5 +19,7 @@ namespace BnBYachts.Booking.Booking.Requestable
         public string UserName { get; set; }
         public int? CharterId { get; set; }
         public int? EventId { get; set; }
+        public DateTime? EventDate { get; set; }
+        public string Title { get; set; }
     }
 }

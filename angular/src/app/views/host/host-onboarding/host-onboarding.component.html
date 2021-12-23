@@ -4,7 +4,7 @@
             style="background-image: url('../../../../assets/images/charter-bg.png');">
             <div class="custom-flex-start h-100">
                 <div class="container">
-                    <h3 class="bold">Host On Boarding</h3>
+                    <h3 class="bold">{{isHostOnboarding ? 'Host On Boarding' : 'Add New Boat'}}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
@@ -497,15 +497,15 @@
                                                 formControlName="perDayCharges">
                                         </div>
                                     </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="custom-input-field">
-                                            <label>Tax</label>
-                                            <input type="number" min="0" class="custom-input" formControlName="taxFee"
-                                            (keypress)="restrictNumeric($event)"
-                                                placeholder="Tax Fee">
-                                        </div>
-                                    </div>
                                 </ng-container>
+                                <div class="col-md-6 py-2">
+                                    <div class="custom-input-field">
+                                        <label>Tax</label>
+                                        <input type="number" min="0" class="custom-input" formControlName="taxFee"
+                                        (keypress)="restrictNumeric($event)"
+                                            placeholder="Tax Fee">
+                                    </div>
+                                </div>
                                     <div class="col-sm-12 py-2">
                                         <div class="custom-flex-end">
                                             <button class="custom-btn outline-blue-clr me-4"

@@ -150,7 +150,10 @@
                         <div class="col-sm-7">
                           <div class="boatel-search-card-content">
                             <div class="boatel-search-card-content-title">
-                              <a href="boatel-search-details.html" class="underline-black-link p-0">{{
+                              <a [routerLink]="[
+                              '/boat-listing/boatel-details',
+                              mapInfoDetails?.id
+                            ]" class="underline-black-link p-0">{{
                                 mapInfoDetails?.name }}</a>
                               <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
                             </div>
@@ -170,7 +173,10 @@
                               <p class="bold-span-text">
                                 <span>$ {{ mapInfoDetails?.perDayCharges }}</span>/ Night
                               </p>
-                              <a href="javascript:void(0)" class="fav-btn"><i class="fa fa-heart-o"></i></a>
+                              <button *ngIf="isLoggedIn" (click)="mapInfoDetails?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails): addToWishList(mapInfoDetails)" class="fav-btn"><i class="fa fa-heart-o"
+                                class="fa"
+                            [ngClass]="{'fa-heart-o': !mapInfoDetails?.isAddedToMyWishlist , 'fa-heart':mapInfoDetails?.isAddedToMyWishlist}"
+                                ></i></button>
                             </div>
                           </div>
                         </div>
@@ -309,7 +315,7 @@
   <ng-template #filterTemplate>
     <div class="modal-content">
       <div class="modal-header no-border">
-        <button type="button" class="btn-close"></button>
+        <button type="button" class="btn-close" (click)="activeModl.dismiss()"></button>
       </div>
       <div class="modal-body" style="font-size: 0.8em !important">
         <div class="custom-text-center">

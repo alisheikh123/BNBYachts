@@ -83,7 +83,7 @@
                                             <div class="col-sm-7">
                                                 <div class="boatel-search-card-content">
                                                     <div class="boatel-search-card-content-title">
-                                                        <a href="boatel-search-details.html"
+                                                        <a [routerLink]="['/boat-listing/charter-details',mapInfoDetails?.id]"
                                                             class="underline-black-link p-0">{{mapInfoDetails?.boat.name}}</a>
                                                         <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
                                                     </div>
@@ -101,8 +101,9 @@
                                                     <div class="pt-2 boatel-search-card-content-title">
                                                         <p class="bold-span-text"><span>$
                                                                 {{mapInfoDetails?.charterFee}}</span>/ {{mapInfoDetails?.isFullBoatCharges ? 'Boat':'Person'}}</p>
-                                                        <a href="javascript:void(0)" class="fav-btn"><i
-                                                                class="fa fa-heart-o"></i></a>
+                                                                <a (click)="mapInfoDetails?.boat?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails?.boat): addToWishList(mapInfoDetails?.boat)" class="fav-btn"
+                                                                ><i class="fa" [ngClass]="{'fa-heart-o': !mapInfoDetails?.boat?.isAddedToMyWishlist , 'fa-heart':mapInfoDetails?.boat?.isAddedToMyWishlist}"></i
+                                                              ></a>
                                                     </div>
                                                 </div>
                                             </div>
