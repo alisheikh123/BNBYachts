@@ -52,6 +52,8 @@ export class BoatListingComponent implements OnInit {
   maxPrice: number = 0;
   activeModal: any;
   isLoggedIn = false;
+  allBoats :any[]= [];
+  isFilterAdded :boolean = false;
 
   constructor(
     private yachtSearch: YachtSearchDataService,
@@ -67,7 +69,8 @@ export class BoatListingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.boats = this.yachtSearch.getBoats();
+    this.allBoats  = this.yachtSearch.getBoats();
+    this.boats = Object.assign([], this.allBoats);
     // save original befor befor applying additional filters in local storage
     this.mapDetails = this.yachtSearch.getFilters();
     this.getDefaultFeatures();
@@ -81,7 +84,6 @@ export class BoatListingComponent implements OnInit {
       this.isLoggedIn = true;
       this.getUserWishlistBoats();
     }
-    localStorage.setItem('originalBoats', JSON.stringify(this.boats));
   }
 
   filterMarkers() {
@@ -113,9 +115,9 @@ export class BoatListingComponent implements OnInit {
     }
   }
   applyAdditionalFilters() {
+    this.isFilterAdded = true;
     // get original unfiltered boats before applying filter
-    this.boats = JSON.parse(localStorage.getItem('originalBoats') || '{}');
-
+    this.boats = Object.assign([], this.allBoats);
     if (this.roomCount > 0) {
       this.indexToRemove = [];
       this.boats.forEach((boat: any, index) => {
@@ -151,9 +153,11 @@ export class BoatListingComponent implements OnInit {
     });
     this.activeModal.close();
   }
+
   applyPriceFilter(minPrice: number, maxPrice: number) {
+    this.isFilterAdded = true;
     // get original unfiltered boats before applying filter
-    this.boats = JSON.parse(localStorage.getItem('originalBoats') || '{}');
+        this.boats = Object.assign([], this.allBoats);//JSON.parse(localStorage.getItem('originalBoats') || '{}');
     this.indexToRemove = [];
     this.boats.forEach((boat: any, index) => {
       if (boat.perDayCharges <= minPrice || boat.perDayCharges >= maxPrice) {
@@ -165,6 +169,12 @@ export class BoatListingComponent implements OnInit {
       this.boats.splice(entry, 1);
     });
     this.activeModal.close();
+  }
+  reset(){
+    this.isFilterAdded = false; 
+    this.boats = Object.assign([], this.allBoats);
+    this.minPrice = 0;
+    this.maxPrice = 0;
   }
   openInfoWindow(marker: MapMarker, data: any) {
     this.mapInfoDetails = this.boats.find((res) => res.id == data?.boatId);
@@ -192,13 +202,13 @@ export class BoatListingComponent implements OnInit {
   getUserWishlistBoats() {
     this.wishlistService.getUserWishlists().subscribe((res: any) => {
       let allUserWishlists = res?.data;
-      this.boats.forEach(res => {
+      this.allBoats.forEach(res => {
         let findBoat = allUserWishlists.find((item: any) => item.boatId == res.id);
         if (findBoat != null) {
           res.isAddedToMyWishlist = true;
           res.wishlistId = findBoat.id;
         }
-      })
+      });
     });
   }
   removeToWishList(boat: any) {

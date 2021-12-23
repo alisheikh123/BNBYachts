@@ -13,8 +13,8 @@ export class BoatService {
   apiCoreURl = environment.BOAT_API_URL;
   constructor(private http: HttpClient) { }
 
-  getUserBoats() {
-    return this.http.get(this.apiCoreURl + "/api/app/host-boat/host-boats").pipe(
+  getUserBoats(pageNo:number,pageSize:number) {
+    return this.http.get(this.apiCoreURl + '/api/app/host-boat/host-boats?pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(
       catchError(this.handleError));;
   }
    ///Exception handler

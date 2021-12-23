@@ -40,7 +40,6 @@ export class BoatEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(res => {
       this.boatId = Number(res['id']);
     });
-    this.getBoatDetailsById();
     this.getLookupData();
     this.buildFormConfiguration();
   }
@@ -70,6 +69,7 @@ export class BoatEditComponent implements OnInit {
   getLookupData() {
     this.onBoardingService.getLookups().subscribe(res => {
       this.boatLookups = res;
+      this.getBoatDetailsById();
     })
   }
 
@@ -98,7 +98,9 @@ export class BoatEditComponent implements OnInit {
       this.boatGallery = res?.boatGalleries;
       this.boatFeatures = res?.boatFeatures;
       this.boatRules = res?.boatRules;
+      debugger; 
       res?.boatFeatures?.forEach((element: any) => {
+        debugger;
         var findIndex = this.boatLookups?.features?.findIndex((res: any) => res.id == element.offeredFeaturesId);
         if (findIndex >= 0) {
           this.boatLookups.features[findIndex].isChecked = true;
@@ -190,7 +192,9 @@ export class BoatEditComponent implements OnInit {
         let item = {
           fileName: fileData.name,
           fileData: reader.result,
-          fileType: fileData.type
+          fileType: fileData.type,
+          sortOrder:this.otherGalleryImages?.length,
+          isCoverPic: false
         }
         this.otherGalleryImages.push(item);
       }
@@ -200,6 +204,7 @@ export class BoatEditComponent implements OnInit {
   updateBoat() {
     if (this.boatEditForm.valid) {
       let data = this.boatEditForm.value;
+      this.boatGallery = [ ...this.boatGallery, ...this.otherGalleryImages];
       data.boatGallery = this.boatGallery;
       data.boatCalendar = this.boatCalendar;
       data.boatFeatures = this.boatLookups.features.filter((res: any) => res.isChecked == true);
