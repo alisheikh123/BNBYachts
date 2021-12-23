@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -46,6 +47,8 @@ namespace BnBYachts.Pages.Account
 
         public bool IsExternalLoginOnly => EnableLocalLogin == false && ExternalProviders?.Count() == 1;
         public string ExternalLoginScheme => IsExternalLoginOnly ? ExternalProviders?.SingleOrDefault()?.AuthenticationScheme : null;
+        //private readonly IConfiguration _configuration;
+
 
         //Optional IdentityServer services
         //public IIdentityServerInteractionService Interaction { get; set; }
@@ -54,19 +57,21 @@ namespace BnBYachts.Pages.Account
 
         protected IAuthenticationSchemeProvider _schemeProvider;
         protected AbpAccountOptions _accountOptions;
+        private readonly IConfiguration _configuration;
 
         public LoginModel(
             IAuthenticationSchemeProvider schemeProvider,
-            IOptions<AbpAccountOptions> accountOptions)
+            IOptions<AbpAccountOptions> accountOptions, IConfiguration configuration)
         {
             _schemeProvider = schemeProvider;
             _accountOptions = accountOptions.Value;
+            _configuration = configuration;
         }
 
         public virtual async Task<IActionResult> OnGetAsync()
         {
             LoginInput = new LoginInputModel();
-            this.BaseUrl = Environment.GetEnvironmentVariable("BNB_APP_CLIENT_URL", EnvironmentVariableTarget.Machine) + "/auth/forget-password";
+            this.BaseUrl = "";//_configuration.GetSection("BNB_APP_CLIENT_URL") + "/auth/forget-password";
             var schemes = await _schemeProvider.GetAllSchemesAsync();
 
             var providers = schemes
