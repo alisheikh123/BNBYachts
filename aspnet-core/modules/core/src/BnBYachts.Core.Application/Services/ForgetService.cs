@@ -30,7 +30,7 @@ namespace BnBYachts.Core.Services
 
         }
         [HttpGet]
-        [Route("forgot/{Email}")]
+        [Route("api/forgot/{Email}")]
         public async Task<bool> ForgotPassword(string Email)
         {
             ForgetPasswordVerifier forgetPasswordVerifier = new ForgetPasswordVerifier();
@@ -76,7 +76,7 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
-        [Route("verifyLink/{uniqueId}")]
+        [Route("api/verifyLink/{uniqueId}")]
         public async Task<string> VerifyLink(string uniqueId)
         {
             var userId = _Repository.Where(x => x.UniqueId == uniqueId).Select(x => x.UserId).FirstOrDefault();
@@ -84,7 +84,7 @@ namespace BnBYachts.Core.Services
 
         }
         [HttpGet]
-        [Route("reset/")]
+        [Route("api/reset/")]
         public async Task<bool> ResetPassword(string userId, string Password)
         {
             var resetpasswordUserInfo = await _userManager.FindByIdAsync(userId);

@@ -84,8 +84,8 @@ namespace BnBYachts.Boat.Manager
                 {
                     foreach (var boat in filterdBoats.ToArray())
                     {
-                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => (res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate) || (res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate) || (res.FromDate > parameters.CheckinDate && res.ToDate < parameters.CheckoutDate) || (res.FromDate == parameters.CheckinDate || res.ToDate == parameters.CheckoutDate) && !res.IsAvailable);
-                        if (findAvailability != null)
+                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => res. BoatEntityId == boat.Id && (res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate) || (res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate) || (res.FromDate > parameters.CheckinDate && res.ToDate < parameters.CheckoutDate) || (res.FromDate == parameters.CheckinDate || res.ToDate == parameters.CheckoutDate) && !res.IsAvailable);
+                        if (findAvailability == null)
                         {
                             filterdBoats.Remove(boat);
                         }

@@ -73,6 +73,7 @@ export class CharterListingComponent implements OnInit {
     this.wishlistService.addToWishlist(boat?.id).subscribe((res: any) => {
       if (res?.returnStatus) {
         boat.isAddedToMyWishlist = true;
+        boat.wishlistId = res?.data;
         this.toastr.success("Boat added to wishlists", "Wishlist");
       }
     })

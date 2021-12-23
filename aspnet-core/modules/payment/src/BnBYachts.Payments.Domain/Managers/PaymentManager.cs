@@ -22,6 +22,7 @@ namespace BnBYachts.Payments.Managers
             //             .SetBasePath(Directory.GetCurrentDirectory())
             //             .AddJsonFile("appsettings.json", optional: false).Build();
 
+            //StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("BNB_STRIPE_APIKEY", EnvironmentVariableTarget.Machine);//"sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             _userCardRepository = userCardRepository;
             _userPaymentDetailsRepository = userPaymentDetailsRepository;

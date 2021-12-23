@@ -50,9 +50,9 @@
                                         <div class="boatel-search-card-content-title">
                                             <a [routerLink]="['/boat-listing/event-details',item.id]"
                                                 class="underline-black-link p-0">{{item?.boat?.name}}</a>
-                                                <a (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
+                                                <button (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
                                                 ><i class="fa" [ngClass]="{'fa-heart-o': !item?.boat?.isAddedToMyWishlist , 'fa-heart':item?.boat?.isAddedToMyWishlist}"></i
-                                              ></a>
+                                              ></button>
                                         </div>
                                         <p class="grey">{{item?.title}}</p>
                                         <p class="grey">Event Capacity:{{item?.guestCapacity}}</p>
@@ -89,7 +89,7 @@
                                             <div class="col-sm-7">
                                                 <div class="boatel-search-card-content">
                                                     <div class="boatel-search-card-content-title">
-                                                        <a href="boatel-search-details.html"
+                                                        <a [routerLink]="['/boat-listing/event-details',mapInfoDetails?.id]"
                                                             class="underline-black-link p-0">{{mapInfoDetails?.boat.name}}</a>
                                                         <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
                                                     </div>
@@ -106,8 +106,9 @@
                                                     <div class="pt-2 boatel-search-card-content-title">
                                                         <p class="bold-span-text"><span>$
                                                                 {{mapInfoDetails?.amountPerPerson}}</span>/ Person</p>
-                                                        <a href="javascript:void(0)" class="fav-btn"><i
-                                                                class="fa fa-heart-o"></i></a>
+                                                <button (click)="mapInfoDetails?.boat?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails?.boat): addToWishList(mapInfoDetails?.boat)" class="fav-btn"
+                                                ><i class="fa" [ngClass]="{'fa-heart-o': !mapInfoDetails?.boat?.isAddedToMyWishlist , 'fa-heart':mapInfoDetails?.boat?.isAddedToMyWishlist}"></i
+                                              ></button>
                                                     </div>
                                                 </div>
                                             </div>

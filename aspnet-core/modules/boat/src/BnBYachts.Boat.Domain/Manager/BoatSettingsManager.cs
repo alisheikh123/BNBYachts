@@ -41,6 +41,8 @@ namespace BnBYachts.Boat.Manager
         {
             var boatEntity = await _boatRepository.FindAsync(res => res.Id == boatDetails.Id);
             _objectMapper.Map<HostBoatRequestable, BoatEntity>(boatDetails, boatEntity);
+            boatEntity.CreatorId = userId;
+            boatEntity.LastModifierId = userId;
             boatEntity.BoatCalendars = null;
             boatEntity.BoatFeatures = null;
             boatEntity.BoatRules = null;

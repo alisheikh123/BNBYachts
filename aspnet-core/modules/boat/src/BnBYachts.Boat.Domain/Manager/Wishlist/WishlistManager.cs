@@ -29,6 +29,7 @@ namespace BnBYachts.Boat.Manager.Wishlist
             var response = new EntityResponseModel();
             var result = await _wishlistRepository.InsertAsync(new WishlistEntity { BoatId = boatId, UserId = userId, CreatorId = userId, CreationTime = DateTime.Now }, true).ConfigureAwait(false);
             response.ReturnStatus = result.Id > 0 ? true : false;
+            response.Data = result.Id;
             return response;
         }
 

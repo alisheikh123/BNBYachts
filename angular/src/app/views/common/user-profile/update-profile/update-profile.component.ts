@@ -27,30 +27,30 @@ export class UpdateProfileComponent implements OnInit {
     this.userid = this.activatedRoute.snapshot.params["id"];
     this.getUserData();
     // initialize the form
-    this.initForm();
   }
 
   getUserData(){
     this.authService.getUserInfo().subscribe((res: any) => {
-      localStorage.setItem('userProfile',JSON.stringify(res));
+      debugger;
+      //localStorage.setItem('userProfile',JSON.stringify(res));
       this.userResponse = res;
+      this.initForm();
     });
   }
   initForm() {
-    var oldUser = JSON.parse(localStorage.getItem('userProfile') || '{}');
     this.profileForm = this.fb.group(
       {
         Name: [
-          oldUser.name,
+          this.userResponse.name,
           Validators.required,
         ],
         About: [
-          oldUser.about,
+          this.userResponse.about,
           Validators.required,
         ],
-        PhoneNumber: [oldUser.phoneNumber, Validators.compose([Validators.required])],
+        PhoneNumber: [this.userResponse.phoneNumber, Validators.compose([Validators.required])],
         Email: [
-          oldUser.email,
+          this.userResponse.email,
           Validators.compose([
             Validators.required,
             Validators.pattern( 

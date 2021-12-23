@@ -1,6 +1,7 @@
 import { ThisReceiver, ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { EventService } from 'src/app/core/Event/event.service';
@@ -14,7 +15,8 @@ import { EventCreationSuccessModalComponent } from './event-creation-success-mod
 })
 export class EventCreationComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private eventService: EventService, private toastr: ToastrService, private modal: NgbModal) { }
+  constructor(private fb: FormBuilder, private eventService: EventService, private toastr: ToastrService, 
+    private modal: NgbModal,private router:Router) { }
 
   eventCreationForm: FormGroup;
   boats: any;
@@ -77,8 +79,9 @@ export class EventCreationComponent implements OnInit {
       let data = this.eventCreationForm.value;
       this.eventService.saveEvent(data).subscribe(res => {
         if (res) {
-          let modal = this.modal.open(EventCreationSuccessModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
-          modal.componentInstance.data = this.eventCreationForm.value;
+          this.router.navigate(['/host/host-boat-listing']);
+          // let modal = this.modal.open(EventCreationSuccessModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
+          // modal.componentInstance.data = this.eventCreationForm.value;
         }
       })
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { BoatSettingsService } from 'src/app/core/Boat/boat-settings.service';
@@ -34,7 +34,7 @@ export class BoatEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder,
     private boatService: YachtSearchService, private modal: NgbModal,
     private onBoardingService: OnboardingService, private boatSettingsService: BoatSettingsService
-    , private toastr: ToastrService) { }
+    , private toastr: ToastrService,private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -207,6 +207,7 @@ export class BoatEditComponent implements OnInit {
       this.boatSettingsService.updateBoat(data).subscribe(res => {
         if (res) {
           this.toastr.success("Boat Updated successfully.", "Boat Update");
+          this.router.navigate(['/host/host-boat-listing']);
         }
       })
     }

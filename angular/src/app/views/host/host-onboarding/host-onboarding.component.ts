@@ -3,7 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AllHostBoatsService } from 'src/app/core/host/all-host-boats.service';
 import { OnboardingService } from 'src/app/core/host/onboarding.service';
+import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { BoatTypes, FeaturesTypes, OnBoardingTabs } from 'src/app/shared/enums/yacht-search.constant';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
@@ -35,11 +37,13 @@ export class HostOnboardingComponent implements OnInit {
     fromDate: new Date(),
     toDate: new Date(),
   };
+  isHostOnboarding:boolean = false;
+
   otherGalleryImages: any[] = [];
 
 
   constructor(private fb: FormBuilder, private onBoardingService: OnboardingService, private modal: NgbModal, private toastr: ToastrService
-    , private router: Router) {
+    , private router: Router,private boatService:AllHostBoatsService) {
   }
 
   ngOnInit(): void {
@@ -48,6 +52,7 @@ export class HostOnboardingComponent implements OnInit {
       this.boatTypesOptions.push({ "id": index, "name": element });
     });
     this.getLookupData();
+    this.isHostOnbaording();
     this.buildFormConfiguration();
   }
 
@@ -62,15 +67,21 @@ export class HostOnboardingComponent implements OnInit {
       totalBedrooms: [0, Validators.required],
       totalWashrooms: [0, Validators.required],
       isBoatelServicesOffered: [false],
-      boatelCapacity: [0, Validators.required],
-      boatelAvailabilityDays: [0, Validators.required],
-      checkinTime: [new Date(), Validators.required],
-      checkoutTime: [new Date(), Validators.required],
-      perDayCharges: [null, Validators.required],
+      boatelCapacity: [0],
+      boatelAvailabilityDays: [0],
+      checkinTime: [new Date()],
+      checkoutTime: [new Date()],
+      perDayCharges: [null],
       isActive: [true],
-      taxFee: [null, Validators.required],
+      taxFee: [null],
       boatType: [null, Validators.required],
     });
+  }
+
+  isHostOnbaording() {
+    this.boatService.getAllBoats(1, 10).subscribe((res: any) => {
+      this.isHostOnboarding = res?.totalCount > 0 ? false : true;
+    })
   }
 
   get hostForm() {
@@ -95,7 +106,7 @@ export class HostOnboardingComponent implements OnInit {
     if (isBedroom && this.hostOnBoardingForm.controls.totalBedrooms.value > 0) {
       this.hostOnBoardingForm.controls.totalBedrooms.setValue(this.hostOnBoardingForm.controls.totalBedrooms.value - 1);
     }
-    else if(this.hostOnBoardingForm.controls.totalWashrooms.value > 0) {
+    else if (this.hostOnBoardingForm.controls.totalWashrooms.value > 0) {
       this.hostOnBoardingForm.controls.totalWashrooms.setValue(this.hostOnBoardingForm.controls.totalWashrooms.value - 1);
     }
   }
@@ -104,7 +115,7 @@ export class HostOnboardingComponent implements OnInit {
     this.hostOnBoardingForm.controls.boatelCapacity.setValue(this.hostOnBoardingForm.controls.boatelCapacity.value + 1);
   }
   removeGuests() {
-    if(this.hostOnBoardingForm.controls.boatelCapacity.value > 0){
+    if (this.hostOnBoardingForm.controls.boatelCapacity.value > 0) {
       this.hostOnBoardingForm.controls.boatelCapacity.setValue(this.hostOnBoardingForm.controls.boatelCapacity.value - 1);
     }
   }
@@ -177,8 +188,15 @@ export class HostOnboardingComponent implements OnInit {
     }
   }
 
+  changeCalendar(item: any) {
+    this.boatCalendar.fromDate = item.startDate;
+    this.boatCalendar.toDate = item.endDate;
+
+  }
+
   submit() {
     if (this.isAgree) {
+      debugger;
       let data = this.hostOnBoardingForm.value;
       data.boatGallery = this.boatGallery;
       data.boatCalendar = this.boatCalendar;
@@ -208,22 +226,32 @@ export class HostOnboardingComponent implements OnInit {
     }
   }
 
-  public restrictNumeric(e:any) {
+  public restrictNumeric(e: any) {
     let input;
     if (e.metaKey || e.ctrlKey) {
       return true;
     }
     if (e.which === 32) {
-     return false;
+      return false;
     }
     if (e.which === 0) {
-     return true;
+      return true;
     }
     if (e.which < 33) {
       return true;
     }
     input = String.fromCharCode(e.which);
     return !!/[\d\s]/.test(input);
-   }
+  }
+
+  isValidCheckoutTime(){
+    if(this.boatCalendar.fromDate.getUTCDate() == this.boatCalendar.toDate.getUTCDate() 
+    && this.hostForm.checkinTime.value > this.hostForm.checkoutTime.value && this.hostForm.isBoatelServicesOffered){
+      return false;
+    } 
+    else{
+      return true;
+    }
+  }
 
 }

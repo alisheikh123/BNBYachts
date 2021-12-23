@@ -4,7 +4,7 @@
             style="background-image: url('../../../../assets/images/charter-bg.png');">
             <div class="custom-flex-start h-100">
                 <div class="container">
-                    <h3 class="bold">Host On Boarding</h3>
+                    <h3 class="bold">{{isHostOnboarding ? 'Host On Boarding' : 'Add New Boat'}}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
@@ -451,10 +451,13 @@
                                             <span class="checkmark top-0"></span>
                                         </label>
                                     </div>
+                                    <ng-container *ngIf="hostForm.isBoatelServicesOffered.value">
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
                                             <label>Availabilty</label>
-                                        </div><ejs-daterangepicker  placeholder='Select Availabilty' [startDate]='boatCalendar.fromDate' [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
+                                        </div><ejs-daterangepicker  placeholder='Select Availabilty'
+                                        (change)="changeCalendar($event)"
+                                        [startDate]='boatCalendar.fromDate' [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
 
                                     </div>
                                     <div class="col-md-6 py-2">
@@ -484,6 +487,7 @@
                                             <label>Check-Out Time</label>
                                             <ejs-timepicker formControlName="checkoutTime" name="timepicker" ></ejs-timepicker>
                                         </div>
+                                        <span class="text-danger" *ngIf="!isValidCheckoutTime()">Invalid checkout time.</span>
                                     </div>
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
@@ -493,19 +497,21 @@
                                                 formControlName="perDayCharges">
                                         </div>
                                     </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="custom-input-field">
-                                            <label>Tax</label>
-                                            <input type="number" min="0" class="custom-input" formControlName="taxFee"
-                                            (keypress)="restrictNumeric($event)"
-                                                placeholder="Tax Fee">
-                                        </div>
+                                </ng-container>
+                                <div class="col-md-6 py-2">
+                                    <div class="custom-input-field">
+                                        <label>Tax</label>
+                                        <input type="number" min="0" class="custom-input" formControlName="taxFee"
+                                        (keypress)="restrictNumeric($event)"
+                                            placeholder="Tax Fee">
                                     </div>
+                                </div>
                                     <div class="col-sm-12 py-2">
                                         <div class="custom-flex-end">
                                             <button class="custom-btn outline-blue-clr me-4"
                                                 (click)="currentTab=currentTab-1;">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
+                                            [disabled]="!isValidCheckoutTime()"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
 
                                         </div>

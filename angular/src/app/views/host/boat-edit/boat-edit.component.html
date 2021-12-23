@@ -139,6 +139,14 @@
                     </div>
                     <div class="col-md-6 py-2">
                         <div class="custom-input-field">
+                            <label>Tax Fee</label>
+                            <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
+                        </div>
+                    </div>
+                    <ng-container *ngIf="boatEditForm.controls.isBoatelServicesOffered.value">
+
+                    <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
                             <label>Availabilty</label>
                         </div>
                         <ejs-daterangepicker placeholder='Select Availabilty' [startDate]='boatCalendar.fromDate'
@@ -179,12 +187,7 @@
                                 formControlName="perDayCharges">
                         </div>
                     </div>
-                    <div class="col-md-6 py-2">
-                        <div class="custom-input-field">
-                            <label>Tax Fee</label>
-                            <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
-                        </div>
-                    </div>
+                </ng-container>
                 </div>
             </form>
             <div class="row">

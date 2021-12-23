@@ -16,13 +16,13 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
         public int TotalWashrooms { get; set; }
         public bool IsBoatelServicesOffered { get; set; }
         public int? BoatelCapacity { get; set; }
-        public int BoatelAvailabilityDays { get; set; }
+        public int? BoatelAvailabilityDays { get; set; }
         public int BoatType { get; set; }
         public DateTime CheckinTime { get; set; }
         public DateTime CheckoutTime { get; set; }
-        public int PerDayCharges { get; set; }
+        public int? PerDayCharges { get; set; }
         public bool IsActive { get; set; }
-        public int TaxFee { get; set; }
+        public int? TaxFee { get; set; }
         public Guid? CreatorId { get; set; }
         public ICollection<BoatGalleryRequestable> BoatGallery { get; set; }        
         public ICollection<BoatFeaturesRequestable> BoatFeatures { get; set; }
