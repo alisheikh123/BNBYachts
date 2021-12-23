@@ -71,7 +71,7 @@ namespace BnBYachts.Pages.Account
         public virtual async Task<IActionResult> OnGetAsync()
         {
             LoginInput = new LoginInputModel();
-            this.BaseUrl = _configuration.GetSection("BNB_APP_CLIENT_URL") + "/auth/forget-password";
+            this.BaseUrl = _configuration.GetValue<string>("BNB_APP_CLIENT_URL")+ "/auth/forget-password";
             var schemes = await _schemeProvider.GetAllSchemesAsync();
 
             var providers = schemes
