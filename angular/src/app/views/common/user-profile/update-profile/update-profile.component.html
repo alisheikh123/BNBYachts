@@ -32,7 +32,6 @@
               <form
                 [formGroup]="profileForm"
                 novalidate="novalidate"
-                (ngSubmit)="submit()"
               >
                 <div class="row">
                   <div class="col-lg-7">
@@ -112,10 +111,11 @@
   
                     <div class="py-2">
                       <div class="custom-flex-end">
-                        <button class="custom-btn grey">Cancel</button>
+                        <button class="custom-btn grey" [routerLink]="['/my-profile']">Cancel</button>
                         <button
                           class="custom-btn blue ms-3"
                           [disabled]="profileForm.invalid"
+                          (click)="submit()"
                           >Save</button>
                       </div>
                     </div>
