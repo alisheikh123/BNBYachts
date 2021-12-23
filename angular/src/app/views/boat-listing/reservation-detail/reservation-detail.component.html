@@ -106,23 +106,29 @@
         </div>
       </div>
 
-      <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="booking?.bookingStatus != BOOKING_STATUS.Rejected">
-        <div  *ngIf="booking?.bookingStatus == BOOKING_STATUS.Cancel">
-
-        </div>
-        <div  *ngIf="booking?.bookingStatus != BOOKING_STATUS.Cancel">
-          <div class="center-content">
-            <a [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
-              class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">Cancel Reservation</a>
-            <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
-              class="custom-btn btn-big blue me-sm-3">Modify Reservation</a>
-            <a (click)="addReview()" *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved' class="custom-btn btn-big blue">Add
-              Review</a>
+      <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
+        *ngIf="booking?.bookingStatus != BOOKING_STATUS.Rejected">
+        <div *ngIf="booking?.bookingStatus == BOOKING_STATUS.Cancel"></div>
+        <div *ngIf="checkedCheckinDate == today"></div>
+        <div *ngIf="booking?.bookingStatus != BOOKING_STATUS.Cancel">
+          <div *ngIf="checkedCheckinDate != today">
+            <div *ngIf="checkedCheckinDate > today">
+              <div class="center-content">
+                <a [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
+                  class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">Cancel Reservation</a>
+                <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
+                  class="custom-btn btn-big blue me-sm-3">Modify Reservation</a>
+                <a (click)="addReview()"
+                  *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
+                  class="custom-btn btn-big blue">Add
+                  Review</a>
+              </div>
+            </div>
           </div>
         </div>
 
 
-    </div>
+      </div>
 
 
       <app-list-reviews [bookingId]=bookingId></app-list-reviews>
