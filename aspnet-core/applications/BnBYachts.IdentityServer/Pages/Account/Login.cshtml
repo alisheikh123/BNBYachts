@@ -41,109 +41,107 @@
         <div class="card-body" style="background-color: #ffffff">
             @if (Model.EnableLocalLogin)
             {
-<form method="post">
-    <div class="custom-input-field">
-        <label asp-for="LoginInput.UserNameOrEmailAddress">Email</label>
-        <input asp-for="LoginInput.UserNameOrEmailAddress" class="custom-input" required />
-    </div>
-    <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="fa fa-fw fa-eye field-icon toggle-password text-danger"></span>
-    <div class="custom-input-field ">
-        <label asp-for="LoginInput.Password"></label>
-        <input asp-for="LoginInput.Password" class="custom-input pwd" />
-        <span class="input-group-btn">
-            <button class="btn btn-default" style="margin-top: 30px;" type="button"><i class="fa fa-fw fa-eye" id="eyeToggle"></i></button>
-        </span>
-    </div>
-    <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
-    <div class="custom-flex-between py-4">
-        <div class="left-content">
-            <label class="custom-checkbox m-0">
-                <input type="checkbox">
-                <p class="small-text">Remember Me</p>
-                <span class="checkmark"></span>
-            </label>
-        </div>
-        <div class="right-content">
-            <a href="@Model.BaseUrl" class="underline-blue-link small-text">Forgot Password?</a>
+                <form method="post">
+                    <div class="custom-input-field">
+                        <label asp-for="LoginInput.UserNameOrEmailAddress">Email</label>
+                        <input asp-for="LoginInput.UserNameOrEmailAddress" class="custom-input" required />
+                    </div>
+                    <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="fa fa-fw fa-eye field-icon toggle-password text-danger"></span>
+                    <div class="custom-input-field ">
+                        <label asp-for="LoginInput.Password"></label>
+                        <input asp-for="LoginInput.Password" class="custom-input pwd" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" style="margin-top: 30px;" type="button"><i class="fa fa-fw fa-eye" id="eyeToggle"></i></button>
+                        </span>
+                    </div>
+                    <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+                    <div class="custom-flex-between py-4">
+                        <div class="left-content">
+                            <label class="custom-checkbox m-0">
+                                <input type="checkbox">
+                                <p class="small-text">Remember Me</p>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="right-content">
+                            <a href="http://52.207.14.110:8080/auth/forget-password" class="underline-blue-link small-text">Forgot Password?</a>
 
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
 
-            </div>
-        </div>
-    </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="text-center py-2">
-        @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
-        {
+                    <div class="text-center py-2">
+                        @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
+                        {
 
-        }
-    </div>
-</form>            }
+                        }
+                    </div>
+                </form>     }
 
             @if (Model.VisibleExternalProviders.Any())
             {
-<div class="mt-2">
-    <h5>@L["OrLoginWith"]</h5>
-    <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
-        @foreach (var provider in Model.VisibleExternalProviders)
-        {
-<button type="submit" class="btn btn-primary m-1" name="provider" value="@provider.AuthenticationScheme" title="@L["LogInUsingYourProviderAccount", provider.DisplayName]">@provider.DisplayName</button>}
-    </form>
-</div>            }
+                <div class="mt-2">
+                    <h5>@L["OrLoginWith"]</h5>
+                    <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
+                        @foreach (var provider in Model.VisibleExternalProviders)
+                        {
+                            <button type="submit" class="btn btn-primary m-1" name="provider" value="@provider.AuthenticationScheme" title="@L["LogInUsingYourProviderAccount", provider.DisplayName]">@provider.DisplayName</button>}
+                    </form>
+                </div>      }
 
             @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
             {
-<form method="post">
-    <div class="custom-input-field">
-        <label asp-for="LoginInput.UserNameOrEmailAddress">Email</label>
-        <input asp-for="LoginInput.UserNameOrEmailAddress" class="custom-input" required />
-    </div>
-    <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="fa fa-fw fa-eye field-icon toggle-password text-danger"></span>
-    <div class="custom-input-field ">
-        <label asp-for="LoginInput.Password"></label>
-        <input asp-for="LoginInput.Password" class="custom-input pwd" />
-        <span class="input-group-btn">
-            <button class="btn btn-default" style="margin-top: 30px;" type="button"><i class="fa fa-fw fa-eye" id="eyeToggle"></i></button>
-        </span>
-    </div>
-    <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
-    <label class="text text-danger">* You have entered an invalid username or password</label>
-    <div class="custom-flex-between py-4">
-        <div class="left-content">
-            <label class="custom-checkbox m-0">
-                <input type="checkbox">
-                <p class="small-text">Remember Me</p>
-                <span class="checkmark"></span>
-            </label>
-        </div>
+                <form method="post">
+                    <div class="custom-input-field">
+                        <label asp-for="LoginInput.UserNameOrEmailAddress">Email</label>
+                        <input asp-for="LoginInput.UserNameOrEmailAddress" class="custom-input" required />
+                    </div>
+                    <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="fa fa-fw fa-eye field-icon toggle-password text-danger"></span>
+                    <div class="custom-input-field ">
+                        <label asp-for="LoginInput.Password"></label>
+                        <input asp-for="LoginInput.Password" class="custom-input pwd" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" style="margin-top: 30px;" type="button"><i class="fa fa-fw fa-eye" id="eyeToggle"></i></button>
+                        </span>
+                    </div>
+                    <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+                    <label class="text text-danger">* You have entered an invalid username or password</label>
+                    <div class="custom-flex-between py-4">
+                        <div class="left-content">
+                            <label class="custom-checkbox m-0">
+                                <input type="checkbox">
+                                <p class="small-text">Remember Me</p>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
 
-        @*<div class="right-content">
-            @ href="http://44.197.69.129:8080//auth/forget-password" @
-            <a href="#">Forgot Password?</a>
+                        <div class="right-content">
+                            <a href="http://52.207.14.110:8080/auth/forget-password" class="underline-blue-link small-text">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
 
-        </div>*@
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <abp-button type="submit" button-type="Primary" name="Action" value="Login" class="custom-btn blue big-btn text-center">@L["Login"]</abp-button>
+                            </div>
+                        </div>
+                    </div>
 
-            </div>
-        </div>
-    </div>
+                    <div class="text-center py-2">
+                        @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
+                        {
 
-    <div class="text-center py-2">
-        @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
-        {
-
-        }
-    </div>
-</form>            }
+                        }
+                    </div>
+                </form>     }
 
 
         </div>
@@ -156,4 +154,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script src="~/js/select.js"></script>
 <script src="~/js/custom.js"></script>
-
