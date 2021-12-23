@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { environment } from 'src/environments/environment';
@@ -59,7 +59,8 @@ export class BoatListingComponent implements OnInit {
     config: NgbRatingConfig,
     private modal: NgbModal,
     private wishlistService: WishlistsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public activeModl:NgbActiveModal 
   ) {
     config.max = 5;
     config.readonly = true;
@@ -69,7 +70,6 @@ export class BoatListingComponent implements OnInit {
   ngOnInit(): void {
     this.boats = this.yachtSearch.getBoats();
     // save original befor befor applying additional filters in local storage
-    localStorage.setItem('originalBoats', JSON.stringify(this.boats));
     this.mapDetails = this.yachtSearch.getFilters();
     this.getDefaultFeatures();
 
@@ -82,6 +82,7 @@ export class BoatListingComponent implements OnInit {
       this.isLoggedIn = true;
       this.getUserWishlistBoats();
     }
+    localStorage.setItem('originalBoats', JSON.stringify(this.boats));
   }
 
   filterMarkers() {
@@ -184,6 +185,7 @@ export class BoatListingComponent implements OnInit {
     this.wishlistService.addToWishlist(boat?.id).subscribe((res: any) => {
       if (res?.returnStatus) {
         boat.isAddedToMyWishlist = true;
+        boat.wishlistId = res?.data;
         this.toastr.success("Boat added to wishlists", "Wishlist");
       }
     })

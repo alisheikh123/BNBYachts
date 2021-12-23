@@ -11,8 +11,8 @@
             <p class="pt-2">{{data?.location}}</p>
             <p class="py-2">{{data?.startDateTime | date:'dd-MMM-YYYY hh:mm a'}}</p>
             <div class="bottom-btn py-2">
-                <button class="custom-btn blue big-btn" (click)="activeModal.dismiss()"
-                    data-bs-dismiss="modal">Continue</button>
+                <button class="custom-btn blue big-btn" 
+                [routerLink]="['/host/host-boat-listing']">Continue</button>
             </div>
         </div>
     </div>
