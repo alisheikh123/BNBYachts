@@ -105,9 +105,9 @@
                             '/boat-listing/boatel-details',
                             item.id
                           ]" class="underline-black-link p-0">{{ item.name }}</a>
-                        <a *ngIf="isLoggedIn" (click)="item.isAddedToMyWishlist ? removeToWishList(item): addToWishList(item)"
+                        <button *ngIf="isLoggedIn" (click)="item.isAddedToMyWishlist ? removeToWishList(item): addToWishList(item)"
                           class="fav-btn"><i class="fa"
-                            [ngClass]="{'fa-heart-o': !item.isAddedToMyWishlist , 'fa-heart':item.isAddedToMyWishlist}"></i></a>
+                            [ngClass]="{'fa-heart-o': !item.isAddedToMyWishlist , 'fa-heart':item.isAddedToMyWishlist}"></i></button>
                       </div>
                       <p class="grey">
                         {{ item.boatelCapacity }} Guests -

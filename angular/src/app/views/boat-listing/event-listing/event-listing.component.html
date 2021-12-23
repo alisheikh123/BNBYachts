@@ -50,9 +50,9 @@
                                         <div class="boatel-search-card-content-title">
                                             <a [routerLink]="['/boat-listing/event-details',item.id]"
                                                 class="underline-black-link p-0">{{item?.boat?.name}}</a>
-                                                <a (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
+                                                <button (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
                                                 ><i class="fa" [ngClass]="{'fa-heart-o': !item?.boat?.isAddedToMyWishlist , 'fa-heart':item?.boat?.isAddedToMyWishlist}"></i
-                                              ></a>
+                                              ></button>
                                         </div>
                                         <p class="grey">{{item?.title}}</p>
                                         <p class="grey">Event Capacity:{{item?.guestCapacity}}</p>

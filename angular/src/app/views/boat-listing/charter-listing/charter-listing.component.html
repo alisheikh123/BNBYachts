@@ -42,9 +42,9 @@
                                         <div class="boatel-search-card-content-title">
                                             <a [routerLink]="['/boat-listing/charter-details',item.id]"
                                                 class="underline-black-link p-0">{{item?.boat?.name}}</a>
-                                                <a (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
+                                                <button (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
                                                 ><i class="fa" [ngClass]="{'fa-heart-o': !item?.boat?.isAddedToMyWishlist , 'fa-heart':item?.boat?.isAddedToMyWishlist}"></i
-                                              ></a>
+                                              ></button>
                                         </div>
                                         <p class="grey">Boat Capacity:{{item?.guestCapacity}} Guests -
                                             Available:{{item?.guestCapacity}}</p>
@@ -101,9 +101,9 @@
                                                     <div class="pt-2 boatel-search-card-content-title">
                                                         <p class="bold-span-text"><span>$
                                                                 {{mapInfoDetails?.charterFee}}</span>/ {{mapInfoDetails?.isFullBoatCharges ? 'Boat':'Person'}}</p>
-                                                                <a (click)="mapInfoDetails?.boat?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails?.boat): addToWishList(mapInfoDetails?.boat)" class="fav-btn"
+                                                                <button (click)="mapInfoDetails?.boat?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails?.boat): addToWishList(mapInfoDetails?.boat)" class="fav-btn"
                                                                 ><i class="fa" [ngClass]="{'fa-heart-o': !mapInfoDetails?.boat?.isAddedToMyWishlist , 'fa-heart':mapInfoDetails?.boat?.isAddedToMyWishlist}"></i
-                                                              ></a>
+                                                              ></button>
                                                     </div>
                                                 </div>
                                             </div>
