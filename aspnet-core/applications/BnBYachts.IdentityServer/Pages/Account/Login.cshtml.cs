@@ -38,6 +38,7 @@ namespace BnBYachts.Pages.Account
         public LoginInputModel LoginInput { get; set; }
 
         public bool EnableLocalLogin { get; set; }
+        public string BaseUrl { get; set; }
 
         //TODO: Why there is an ExternalProviders if only the VisibleExternalProviders is used.
         public IEnumerable<ExternalProviderModel> ExternalProviders { get; set; }
@@ -65,7 +66,7 @@ namespace BnBYachts.Pages.Account
         public virtual async Task<IActionResult> OnGetAsync()
         {
             LoginInput = new LoginInputModel();
-
+            this.BaseUrl = Environment.GetEnvironmentVariable("BNB_APP_CLIENT_URL", EnvironmentVariableTarget.Machine) + "/auth/forget-password";
             var schemes = await _schemeProvider.GetAllSchemesAsync();
 
             var providers = schemes
@@ -83,7 +84,6 @@ namespace BnBYachts.Pages.Account
 
             if (IsExternalLoginOnly)
             {
-                //return await ExternalLogin(vm.ExternalLoginScheme, returnUrl);
                 throw new NotImplementedException();
             }
 
@@ -93,6 +93,7 @@ namespace BnBYachts.Pages.Account
         //[UnitOfWork] //TODO: Will be removed when we implement action filter
         public virtual async Task<IActionResult> OnPostAsync(string action)
         {
+            
             await CheckLocalLoginAsync();
 
             ValidateModel();

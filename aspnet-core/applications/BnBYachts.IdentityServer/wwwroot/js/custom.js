@@ -1,4 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    $("#eyeToggle").on('click', function () {
+        var $pwd = document.querySelector(".pwd");
+        const type = $pwd.getAttribute('type') === 'password' ? 'text' : 'password';
+        $pwd.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+  
 $('.select').jselect_search({
     searchable :false,
     on_top_edge : function(){
@@ -183,3 +191,4 @@ function showMe() {
      let rename = document.getElementById('add-card-btn').innerHTML="+ Add New Card";
   }
 }
+

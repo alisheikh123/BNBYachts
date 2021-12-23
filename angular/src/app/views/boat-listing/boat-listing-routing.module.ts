@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: "charter", component: CharterListingComponent
-  }, 
+  },
   {
     path: "events", component: EventListingComponent
   },
@@ -40,7 +40,7 @@ const routes: Routes = [
     path: "reservation-cancellation/:id", component: ReservationCancellationComponent
   },
   {
-    path: "modify-reservation/:id/:userId", component: ModifyReservationComponent
+    path: "modify-reservation/:id", component: ModifyReservationComponent
   }
 ];
 

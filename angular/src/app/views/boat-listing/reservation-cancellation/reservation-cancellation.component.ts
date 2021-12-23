@@ -235,6 +235,7 @@ export class ReservationCancellationComponent implements OnInit {
     this.modal.open(template,{centered:true});
   }
   confirmCancel() {
+    debugger;
     let bookingCancellationModel = {
       BookingId: this.bookingId,
       BookingType: this.bookingType,

@@ -56,7 +56,7 @@ export class SignupModalComponent implements OnInit {
           '',
           Validators.compose([
             Validators.required,
-            Validators.pattern( 
+            Validators.pattern(
               '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'
             ),
             Validators.minLength(3),
@@ -131,8 +131,6 @@ export const passwordMatchingValidatior: ValidatorFn = (
 ): ValidationErrors | null => {
   const password = control.get('Password');
   const confirmPassword = control.get('confirmPassword');
-  debugger;
-
   return password?.value === confirmPassword?.value
     ? null
     : { notmatched: true };
