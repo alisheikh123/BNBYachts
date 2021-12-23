@@ -100,7 +100,7 @@ export class CharterDetailsComponent implements OnInit {
           this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
             if (res) {
               this.yachtParamService.setFilters(this.charterFilterDetails);
-              this.router.navigate(['/payments/charter-payments', this.charterDetails?.boat.id, bookingId], { relativeTo: this.activatedRoute });
+              this.router.navigate(['/payments/charter-payments', this.charterId, bookingId], { relativeTo: this.activatedRoute });
               this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
             }
           });
