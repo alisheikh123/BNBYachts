@@ -47,14 +47,14 @@
                         <label for="floatingPassword">max price</label>
                       </div>
                     </div>
-                    <div>
+                    <!-- <div>
                       <a style="
                           float: left;
                           cursor: pointer;
                         " (click)="reset()">
                         Reset
                       </a>
-                    </div>
+                    </div> -->
                     <div>
                       <a class="custom-btn blue" style="
                           float: right;
@@ -378,7 +378,8 @@
               <div class="col-sm-6 py-2">
                 <label class="custom-checkbox my-4" *ngFor="let item of defaultFeatures; let i = index">
                   <div *ngIf="i % 2 == 0">
-                    <input type="checkbox" value="{{ item.id }}" (change)="toggleAdditionalFilters($event)" />
+                    <input type="checkbox" [(ngModel)]="item.isChecked"
+                    [ngModelOptions]="{standalone: true}" (change)="toggleAdditionalFilters($event,item)" />
                     <p class="small-text">{{ item.name }}</p>
                     <span class="checkmark"></span>
                   </div>
@@ -387,7 +388,8 @@
               <div class="col-sm-6 py-2">
                 <label class="custom-checkbox my-4" *ngFor="let item of defaultFeatures; let i = index">
                   <div *ngIf="i % 2 != 0">
-                    <input type="checkbox" value="{{ item.id }}" (change)="toggleAdditionalFilters($event)" />
+                    <input type="checkbox" [(ngModel)]="item.isChecked"
+                    [ngModelOptions]="{standalone: true}" (change)="toggleAdditionalFilters($event,item);" />
                     <p class="small-text">{{ item.name }}</p>
                     <span class="checkmark"></span>
                   </div>
