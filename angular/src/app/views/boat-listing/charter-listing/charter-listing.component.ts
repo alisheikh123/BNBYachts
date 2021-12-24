@@ -4,6 +4,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistsService } from 'src/app/core/wishlist/wishlist.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
+import { WishlistTypes } from 'src/app/shared/enums/wishlist.constants';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -38,6 +39,7 @@ export class CharterListingComponent implements OnInit {
     config.max = 5;
     config.readonly = true;
   }
+  WISHLIST_TYPES = WishlistTypes;
 
   ngOnInit(): void {
     this.charters = this.yachtSearch.getBoats();
@@ -69,32 +71,34 @@ export class CharterListingComponent implements OnInit {
     this.mapInfoDetails = this.charters.find(res => res.id == data?.charterId);
     this.infoWindow.open(marker);
   }
-  addToWishList(boat: any) {
-    this.wishlistService.addToWishlist(boat?.id).subscribe((res: any) => {
+  addToWishList(charter: any) {
+    this.wishlistService.addToWishlist(charter?.id,this.WISHLIST_TYPES.Charter).subscribe((res: any) => {
       if (res?.returnStatus) {
-        boat.isAddedToMyWishlist = true;
-        boat.wishlistId = res?.data;
-        this.toastr.success("Boat added to wishlists", "Wishlist");
+        charter.isAddedToMyWishlist = true;
+        charter.wishlistId = res?.data;
+        this.toastr.success("Charter added to wishlists", "Wishlist");
       }
     })
   }
   getUserWishlistBoats() {
-    this.wishlistService.getUserWishlists().subscribe((res: any) => {
+    this.wishlistService.getUserWishlists(this.WISHLIST_TYPES.Charter).subscribe((res: any) => {
       let allUserWishlists = res?.data;
-      this.charters.forEach(res => {
-        let findBoat = allUserWishlists.find((item: any) => item?.boatId == res?.boat.id);
-        if (findBoat != null) {
-          res.boat.isAddedToMyWishlist = true;
-          res.boat.wishlistId = findBoat.id;
-        }
-      })
+      if(allUserWishlists){
+        this.charters.forEach(res => {
+          let findCharter = allUserWishlists.find((item: any) => item?.charterId == res?.id);
+          if (findCharter != null) {
+            res.isAddedToMyWishlist = true;
+            res.wishlistId = findCharter.id;
+          }
+        })
+      }
     });
   }
-  removeToWishList(boat: any) {
-    this.wishlistService.removeToWishlist(boat?.wishlistId).subscribe((res: any) => {
+  removeToWishList(charter: any) {
+    this.wishlistService.removeToWishlist(charter?.wishlistId,this.WISHLIST_TYPES.Charter).subscribe((res: any) => {
       if (res?.returnStatus) {
-        boat.isAddedToMyWishlist = false;
-        this.toastr.success("Boat removed from wishlists", "Wishlist");
+        charter.isAddedToMyWishlist = false;
+        this.toastr.success("Charter removed from wishlists", "Wishlist");
       }
     })
   }

@@ -62,7 +62,9 @@ namespace BnBYachts.Boat.EntityFrameworkCore
 
         //Event
         public DbSet<Events.EventEntity> Events { get; set; }
-        public DbSet<WishlistEntity> Wishlists{ get; set; }
+        public DbSet<WishlistBoatEntity> WishlistBoats{ get; set; }
+        public DbSet<WishlistCharterEntity> WishlistCharters { get; set; }
+        public DbSet<WishlistEventEntity> WishlistEvents { get; set; }
 
 
 

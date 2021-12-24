@@ -4,6 +4,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistsService } from 'src/app/core/wishlist/wishlist.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
+import { WishlistTypes } from 'src/app/shared/enums/wishlist.constants';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -38,6 +39,7 @@ export class EventListingComponent implements OnInit {
     config.max = 5;
     config.readonly = true;
   }
+  WISHLIST_TYPES = WishlistTypes;
 
   ngOnInit(): void {
     this.events = this.yachtSearch.getBoats();
@@ -70,32 +72,32 @@ export class EventListingComponent implements OnInit {
     this.infoWindow.open(marker);
   }
 
-  addToWishList(boat: any) {
-    this.wishlistService.addToWishlist(boat?.id).subscribe((res: any) => {
+  addToWishList(event: any) {
+    this.wishlistService.addToWishlist(event?.id,this.WISHLIST_TYPES.Event).subscribe((res: any) => {
       if (res?.returnStatus) {
-        boat.isAddedToMyWishlist = true;
-        boat.wishlistId = res.data;
-        this.toastr.success("Boat added to wishlists", "Wishlist");
+        event.isAddedToMyWishlist = true;
+        event.wishlistId = res.data;
+        this.toastr.success("Event added to wishlists", "Wishlist");
       }
     })
   }
   getUserWishlistBoats() {
-    this.wishlistService.getUserWishlists().subscribe((res: any) => {
+    this.wishlistService.getUserWishlists(this.WISHLIST_TYPES.Event).subscribe((res: any) => {
       let allUserWishlists = res?.data;
       this.events.forEach(res => {
-        let findBoat = allUserWishlists.find((item: any) => item?.boatId == res?.boat.id);
-        if (findBoat != null) {
-          res.boat.isAddedToMyWishlist = true;
-          res.boat.wishlistId = findBoat.id;
+        let findEvent = allUserWishlists.find((item: any) => item?.eventId == res?.id);
+        if (findEvent != null) {
+          res.isAddedToMyWishlist = true;
+          res.wishlistId = findEvent.id;
         }
       })
     });
   }
-  removeToWishList(boat: any) {
-    this.wishlistService.removeToWishlist(boat?.wishlistId).subscribe((res: any) => {
+  removeToWishList(event: any) {
+    this.wishlistService.removeToWishlist(event?.wishlistId,this.WISHLIST_TYPES.Event).subscribe((res: any) => {
       if (res?.returnStatus) {
-        boat.isAddedToMyWishlist = false;
-        this.toastr.success("Boat removed from wishlists", "Wishlist");
+        event.isAddedToMyWishlist = false;
+        this.toastr.success("Event removed from wishlists", "Wishlist");
       }
     })
   }

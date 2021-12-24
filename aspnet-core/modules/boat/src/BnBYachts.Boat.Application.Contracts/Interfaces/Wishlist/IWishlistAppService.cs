@@ -9,8 +9,8 @@ namespace BnBYachts.Boat.Interfaces.Wishlist
 {
    public interface IWishlistAppService
     {
-        Task<EntityResponseModel> AddToWishlist(int boatId);
-        Task<EntityResponseListModel<WishlistTransferableDto>> GetUserWishlist();
-        Task<EntityResponseModel> RemoveToWishlist(int Id);
+        Task<EntityResponseModel> AddToWishlist(int boatId,int wishlistType);
+        Task<EntityResponseListModel<WishlistTransferableDto>> GetUserWishlist(int wishlistType);
+        Task<EntityResponseModel> RemoveToWishlist(int Id,int wishlistType);
     }
 }
