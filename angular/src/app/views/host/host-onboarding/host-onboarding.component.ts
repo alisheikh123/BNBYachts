@@ -149,6 +149,7 @@ export class HostOnboardingComponent implements OnInit {
   }
 
   onFileChoose(fileInput: any, index?: number) {
+    debugger;
     let fileData: File;
     fileData = <File>fileInput.target.files[0];
     var mimeType = fileData.type;
@@ -159,7 +160,8 @@ export class HostOnboardingComponent implements OnInit {
     reader.readAsDataURL(fileData);
     reader.onload = (_event) => {
       if (index != null) {
-        if (!this.boatGallery[index]) {
+        let findImage = this.boatGallery.find(res=>res.sortOrder == index);
+        if (!findImage) {
           let item = {
             fileName: fileData.name,
             fileData: reader.result,
@@ -170,9 +172,9 @@ export class HostOnboardingComponent implements OnInit {
           this.boatGallery.push(item);
         }
         else {
-          this.boatGallery[index]['fileName'] = fileData.name;
-          this.boatGallery[index]['fileData'] = reader.result;
-          this.boatGallery[index]['fileType'] = fileData.type;
+          findImage.fileName = fileData.name;
+          findImage.fileData = reader.result;
+          findImage.fileType = fileData.type;
         }
       }
       else {
