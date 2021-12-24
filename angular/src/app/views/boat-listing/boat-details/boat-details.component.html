@@ -17,8 +17,8 @@
                         <div class="gallery-images-small-wrapper">
                             <div class="row">
                                 <div class="col-sm-6 py-2"
-                                    *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : false)">
-                                    <div class="gallery-images-small custom-image-prev">
+                                    *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : false);let i = index;">
+                                    <div class="gallery-images-small custom-image-prev" *ngIf="i < 4">
                                         <img src="{{assetsUrl + item?.imagePath}}" alt="">
                                     </div>
                                 </div>
