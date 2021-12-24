@@ -44,7 +44,6 @@ export class BookingRequestsComponent implements OnInit {
   getReservations() {
     this.reservationService.getBoatelBookingRequests(this.selectedServiceType, this.selectedMonth, this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
       this.boatelBookings = res?.data;
-      console.log(res?.data)
       this.totalRecords = res?.totalCount;
       if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
         this.boatelBookings.forEach((element: any) => {

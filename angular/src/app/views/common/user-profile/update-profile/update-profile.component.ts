@@ -18,7 +18,7 @@ export class UpdateProfileComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,  
+    private fb: FormBuilder,
     private authService : AuthService  ,
     private toasterService : ToastrService
     ) { }
@@ -31,7 +31,6 @@ export class UpdateProfileComponent implements OnInit {
 
   getUserData(){
     this.authService.getUserInfo().subscribe((res: any) => {
-      debugger;
       //localStorage.setItem('userProfile',JSON.stringify(res));
       this.userResponse = res;
       this.initForm();
@@ -53,7 +52,7 @@ export class UpdateProfileComponent implements OnInit {
           this.userResponse.email,
           Validators.compose([
             Validators.required,
-            Validators.pattern( 
+            Validators.pattern(
               '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'
             ),
             Validators.minLength(3),

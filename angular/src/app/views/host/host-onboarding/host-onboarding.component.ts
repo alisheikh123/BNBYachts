@@ -196,7 +196,6 @@ export class HostOnboardingComponent implements OnInit {
 
   submit() {
     if (this.isAgree) {
-      debugger;
       let data = this.hostOnBoardingForm.value;
       data.boatGallery = this.boatGallery;
       data.boatCalendar = this.boatCalendar;
@@ -245,10 +244,10 @@ export class HostOnboardingComponent implements OnInit {
   }
 
   isValidCheckoutTime(){
-    if(this.boatCalendar.fromDate.getUTCDate() == this.boatCalendar.toDate.getUTCDate() 
+    if(this.boatCalendar.fromDate.getUTCDate() == this.boatCalendar.toDate.getUTCDate()
     && this.hostForm.checkinTime.value > this.hostForm.checkoutTime.value && this.hostForm.isBoatelServicesOffered){
       return false;
-    } 
+    }
     else{
       return true;
     }
