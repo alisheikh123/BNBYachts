@@ -44,6 +44,7 @@ export class BookingRequestsComponent implements OnInit {
   getReservations() {
     this.reservationService.getBoatelBookingRequests(this.selectedServiceType, this.selectedMonth, this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
       this.boatelBookings = res?.data;
+      debugger;
       this.totalRecords = res?.totalCount;
       if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
         this.boatelBookings.forEach((element: any) => {
@@ -63,6 +64,7 @@ export class BookingRequestsComponent implements OnInit {
         this.boatelBookings.forEach((element: any) => {
           this.boatService.eventDetailsById(element.eventId).subscribe((event: any) => {
             element.boatDetail = event?.eventDetails?.boat;
+            element.event = event?.eventDetails;
           });
         });
       }

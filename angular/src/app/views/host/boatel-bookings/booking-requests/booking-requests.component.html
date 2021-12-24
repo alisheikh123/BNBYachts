@@ -30,7 +30,7 @@
             '/boat-listing/reservation-detail/',
             item.id
           ]">
-          <p *ngIf="selectedServiceType == 3">{{item?.title}}</p>
+          <p *ngIf="selectedServiceType == 3">{{item?.event?.title}}</p>
                 <p class="medium">{{ item.userName }}</p>
                 <p class="small-text grey">{{ item.boatDetail?.name }}</p>
                 <ngb-rating [rate]="0"></ngb-rating>
@@ -53,7 +53,7 @@
                 {{ item.checkoutDate | date: "dd MMM/YYYY" }}
             </p>
             <p class="small-text grey" *ngIf="selectedServiceType == 3">
-                {{ item.eventDate | date: "dd MMM/YYYY" }}
+                {{ item?.event?.startDateTime | date: "dd MMM/YYYY" }}
             </p>
             <div class="custom-flex mt-4">
                 <button class="custom-btn grey" (click)="changeStatus(item, false, i)">
