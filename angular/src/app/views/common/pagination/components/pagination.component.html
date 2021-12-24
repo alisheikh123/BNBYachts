@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between p-2">
-    <ngb-pagination  [collectionSize]="totalRecords" (pageChange)="onPageChange()" [(page)]="paginationParam.page"
+    <ngb-pagination  [collectionSize]="totalRecords" (pageChange)="onPageChange($event)" [(page)]="paginationParam.page"
         [pageSize]="paginationParam.pageSize" [maxSize]="3" [rotate]="true" [boundaryLinks]="true">
     </ngb-pagination>
     <select class="custom-select pr-5" (change)="onPageSizeChange()" style="width: auto;border:1px solid #ccc;"

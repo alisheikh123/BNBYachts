@@ -22,15 +22,16 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo().subscribe(responseList => {
+      debugger;
       this.userResponse = responseList[0];
-      this.userBoats = responseList[1];
+      this.userBoats = responseList[1]?.data;
       this.loggedInUserRole = localStorage.getItem('userRole');
   });
   }
 
   public getUserInfo(): Observable<any[]> {
     let response1  = this.authService.getUserInfo();
-    let response2  = this.boatService.getUserBoats();
+    let response2  = this.boatService.getUserBoats(1,5);
     return forkJoin([response1 ,response2]);
   }
 }

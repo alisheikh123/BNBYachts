@@ -197,6 +197,7 @@ export class HostOnboardingComponent implements OnInit {
   submit() {
     if (this.isAgree) {
       let data = this.hostOnBoardingForm.value;
+      this.boatGallery = [ ...this.boatGallery, ...this.otherGalleryImages];
       data.boatGallery = this.boatGallery;
       data.boatCalendar = this.boatCalendar;
       data.boatFeatures = this.boatLookups.features.filter((res: any) => res.isChecked == true);
