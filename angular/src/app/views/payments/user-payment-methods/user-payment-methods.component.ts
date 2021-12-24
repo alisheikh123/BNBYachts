@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CreateTokenCardData, StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
+import { CreateTokenCardData, StripeCardElementChangeEvent, StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardComponent, StripeService } from 'ngx-stripe';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 
@@ -11,7 +11,7 @@ import { PaymentsService } from 'src/app/core/Payment/payments.service';
 export class UserPaymentMethodsComponent implements OnInit {
 
   userPaymentMethods:any;
-  paymentMethodId:string;
+  paymentMethodId = null;
   cardErrors: string;
   /////Stripe Region
   addCardDetails: boolean = false;
@@ -45,6 +45,7 @@ export class UserPaymentMethodsComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'en'
   };
+  cardError :boolean = true;
   constructor(private service:PaymentsService,private stripeService:StripeService) { }
 
   ngOnInit(): void {
@@ -56,7 +57,20 @@ export class UserPaymentMethodsComponent implements OnInit {
       this.paymentMethodId = (this.userPaymentMethods?.length > 0 ? this.userPaymentMethods[0].id : '');
     });
   }
-
+  onChange(ev: StripeCardElementChangeEvent) {
+    if (!ev.complete) {
+      this.cardError = true;
+    } else {
+      this.cardError = false;
+    }
+  }
+  addCard(){
+    this.addCardDetails = true;
+    this.paymentMethodId = null; 
+  }
+  changeMethod(){
+    this.addCardDetails = false;
+  }
   createToken() {
     return new Promise(resolve => {
       const data: CreateTokenCardData = {

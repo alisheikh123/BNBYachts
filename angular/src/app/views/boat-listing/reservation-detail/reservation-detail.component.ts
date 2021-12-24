@@ -29,6 +29,8 @@ export class ReservationDetailComponent implements OnInit {
   BOOKING_STATUS = BookingStatus;
   isHost: boolean = false;
   USER_ROLES = UserRoles;
+  today =new Date().toLocaleDateString();
+  checkedCheckinDate:any;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
   constructor(private service: BookingService
@@ -50,6 +52,7 @@ export class ReservationDetailComponent implements OnInit {
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.booking = res;
       this.currentDate = new Date();
+      this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
       this.totalDays = Math.ceil((this.checkOutDate - this.checkInDate) / 8.64e7) + 1;
@@ -88,7 +91,7 @@ export class ReservationDetailComponent implements OnInit {
     });
   }
   isBookingPassed(): boolean {
-    let parsedDate = Date.parse(this.boatDetail.checkoutTime);
+    let parsedDate = Date.parse(this.boatDetail?.checkoutTime);
     let today = Date.parse(new Date().toISOString());
     return (today > parsedDate) ? true : false;
   }

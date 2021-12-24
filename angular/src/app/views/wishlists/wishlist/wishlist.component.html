@@ -4,14 +4,33 @@
             <div class="custom-flex-between mb-3">
                 <h2 class="bold">Wishlist</h2>
             </div>
-            <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile"
+            <div class="dropdown custom-dropdown dropdown-rounded">
+                <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    {{selectedWishListType == 1 ? 'Boatels':selectedWishListType == 2? 'Charters':'Events'}}
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <a class="dropdown-item" (click)="filterWishlist(WISHLIST_TYPES.Boatel)">Boatels</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="filterWishlist(WISHLIST_TYPES.Charter)">Charters</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" (click)="filterWishlist(WISHLIST_TYPES.Event)">Events</a>
+                    </li>
+                </ul>
+            </div>
+            <ng-container *ngIf="selectedWishListType == WISHLIST_TYPES.Boatel">
+                <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile"
                 *ngFor="let item of wishLists;let i = index">
                 <div class="image-with-text custom-flex-between align-items-center">
                     <div class="image-with-text-inner">
                         <img *ngFor="let pic of (item?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)"
                             src="{{assetsUrl + pic?.imagePath}}">
                         <div class="user-details">
-                            <a class="bold py-2" [routerLink]="['../boat-listing/boatel-details',item?.boat.id]">{{item?.boat?.name}}</a>
+                            <a class="bold py-2" [routerLink]="['../boat-listing/boatel-details',item?.boat?.id]">{{item?.boat?.name}}</a>
                             <p class="py-1">{{item?.boat?.location}}</p>
                             <p>{{item?.boat?.totalBedrooms}} Beds - {{item?.boat?.totalWashrooms}} Bathroom</p>
                             <div class="small-stars grey-stars">
@@ -25,6 +44,55 @@
                     </div>
                 </div>
             </div>
+            </ng-container>
+            <ng-container *ngIf="selectedWishListType == WISHLIST_TYPES.Charter">
+                <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile"
+                *ngFor="let item of wishLists;let i = index">
+                <div class="image-with-text custom-flex-between align-items-center">
+                    <div class="image-with-text-inner">
+                        <img *ngFor="let pic of (item?.charter?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)"
+                            src="{{assetsUrl + pic?.imagePath}}">
+                        <div class="user-details">
+                            <a class="bold py-2" [routerLink]="['../boat-listing/charter-details',item?.charterId]">{{item?.charter?.boat?.name}}</a>
+                            <p class="py-1">{{item?.charter?.boat?.location}}</p>
+                            <p>{{item?.charter?.boat?.totalBedrooms}} Beds - {{item?.charter?.boat?.totalWashrooms}} Bathroom</p>
+                            <div class="small-stars grey-stars">
+                                <ngb-rating [rate]="0"></ngb-rating>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="right-content custom-flex flex-wrap">
+                        <button (click)="removeToWishlist(item?.id,i)" class="custom-btn grey">Remove</button>
+                    </div>
+                </div>
+            </div>
+            </ng-container>
+            <ng-container *ngIf="selectedWishListType == WISHLIST_TYPES.Event">
+                <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile"
+                *ngFor="let item of wishLists;let i = index">
+                <div class="image-with-text custom-flex-between align-items-center">
+                    <div class="image-with-text-inner">
+                        <img *ngFor="let pic of (item?.event?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)"
+                            src="{{assetsUrl + pic?.imagePath}}">
+                        <div class="user-details">
+                            <a class="bold py-2" [routerLink]="['../boat-listing/event-details',item?.eventId]">{{item?.event?.boat?.name}}</a>
+                            <p class="py-1">{{item?.event?.title}}</p>
+                            <p class="py-1">{{item?.event?.boat?.location}}</p>
+                            <p>{{item?.event?.boat?.totalBedrooms}} Beds - {{item?.event?.boat?.totalWashrooms}} Bathroom</p>
+                            <div class="small-stars grey-stars">
+                                <ngb-rating [rate]="0"></ngb-rating>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="right-content custom-flex flex-wrap">
+                        <button (click)="removeToWishlist(item?.id,i)" class="custom-btn grey">Remove</button>
+                    </div>
+                </div>
+            </div>
+            </ng-container>
+        
             <div *ngIf="wishLists?.length == 0">
                 <app-not-found-component></app-not-found-component>
             </div>

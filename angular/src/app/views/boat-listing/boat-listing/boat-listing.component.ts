@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WishlistsService } from 'src/app/core/wishlist/wishlist.service';
 import { ToastrService } from 'ngx-toastr';
+import { WishlistTypes } from 'src/app/shared/enums/wishlist.constants';
 
 @Component({
   selector: 'app-boat-listing',
@@ -54,6 +55,7 @@ export class BoatListingComponent implements OnInit {
   isLoggedIn = false;
   allBoats :any[]= [];
   isFilterAdded :boolean = false;
+  WISHLIST_TYPES = WishlistTypes;
 
   constructor(
     private yachtSearch: YachtSearchDataService,
@@ -195,7 +197,7 @@ export class BoatListingComponent implements OnInit {
   }
 
   addToWishList(boat: any) {
-    this.wishlistService.addToWishlist(boat?.id).subscribe((res: any) => {
+    this.wishlistService.addToWishlist(boat?.id,this.WISHLIST_TYPES.Boatel).subscribe((res: any) => {
       if (res?.returnStatus) {
         boat.isAddedToMyWishlist = true;
         boat.wishlistId = res?.data;
@@ -204,7 +206,7 @@ export class BoatListingComponent implements OnInit {
     })
   }
   getUserWishlistBoats() {
-    this.wishlistService.getUserWishlists().subscribe((res: any) => {
+    this.wishlistService.getUserWishlists(this.WISHLIST_TYPES.Boatel).subscribe((res: any) => {
       let allUserWishlists = res?.data;
       this.allBoats.forEach(res => {
         let findBoat = allUserWishlists.find((item: any) => item.boatId == res.id);
@@ -216,7 +218,7 @@ export class BoatListingComponent implements OnInit {
     });
   }
   removeToWishList(boat: any) {
-    this.wishlistService.removeToWishlist(boat?.wishlistId).subscribe((res: any) => {
+    this.wishlistService.removeToWishlist(boat?.wishlistId,this.WISHLIST_TYPES.Boatel).subscribe((res: any) => {
       if (res?.returnStatus) {
         boat.isAddedToMyWishlist = false;
         this.toastr.success("Boat removed from wishlists", "Wishlist");

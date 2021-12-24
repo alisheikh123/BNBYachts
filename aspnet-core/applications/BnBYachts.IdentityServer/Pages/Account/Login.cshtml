@@ -49,9 +49,9 @@
                     <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="fa fa-fw fa-eye field-icon toggle-password text-danger"></span>
                     <div class="custom-input-field ">
                         <label asp-for="LoginInput.Password"></label>
-                        <input asp-for="LoginInput.Password" class="custom-input pwd" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" style="margin-top: 30px;" type="button"><i class="fa fa-fw fa-eye" id="eyeToggle"></i></button>
+                        <input asp-for="LoginInput.Password" class="custom-input" id="password" />
+                        <span class="input-group-btn mt-3">
+                            <i id="eye" class="far fa-eye-slash" onclick="showHidePwd();"></i>
                         </span>
                     </div>
                     <span asp-validation-for="LoginInput.Password" class="text-danger"></span>

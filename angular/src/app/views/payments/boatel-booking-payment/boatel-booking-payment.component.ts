@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
@@ -29,6 +29,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
 
   constructor(public app: AppComponent,
+    private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute, private boatService: YachtSearchService,
     private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService) { }
 
@@ -39,6 +40,12 @@ export class BoatelBookingPaymentComponent implements OnInit {
     });
     this.boatFilterDetails = this.yachtParamService.getFilters();
     this.loadBoatDetails();
+  }
+  disablePayment(){
+    if(this.paymentMethodsComponent && (this.paymentMethodsComponent.paymentMethodId == null && this.paymentMethodsComponent.cardError == true)){
+      return true;
+    }
+    return false;
   }
 
   loadBoatDetails() {
@@ -58,6 +65,10 @@ export class BoatelBookingPaymentComponent implements OnInit {
     else {
       return 0;
     }
+  }
+  ngAfterViewInit() {
+    this.disablePayment();
+    this.cdr.detectChanges();
   }
   
   async confirmBooking() {

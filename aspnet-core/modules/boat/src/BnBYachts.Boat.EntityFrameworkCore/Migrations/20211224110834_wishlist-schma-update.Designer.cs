@@ -4,15 +4,17 @@ using BnBYachts.Boat.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace BnBYachts.Boat.Migrations
 {
     [DbContext(typeof(BoatDbContext))]
-    partial class BoatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211224110834_wishlist-schma-update")]
+    partial class wishlistschmaupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -477,7 +479,7 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("Rules");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistBoatEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistBoats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -523,7 +525,7 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("WishlistBoats");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistCharterEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistCharters", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -531,6 +533,9 @@ namespace BnBYachts.Boat.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CharterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ChartersId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -564,12 +569,12 @@ namespace BnBYachts.Boat.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharterId");
+                    b.HasIndex("ChartersId");
 
                     b.ToTable("WishlistCharters");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEventEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEvents", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -593,6 +598,9 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("EventsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
@@ -610,7 +618,7 @@ namespace BnBYachts.Boat.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+                    b.HasIndex("EventsId");
 
                     b.ToTable("WishlistEvents");
                 });
@@ -829,7 +837,7 @@ namespace BnBYachts.Boat.Migrations
                     b.Navigation("OfferedRule");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistBoatEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistBoats", b =>
                 {
                     b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()
@@ -840,26 +848,22 @@ namespace BnBYachts.Boat.Migrations
                     b.Navigation("Boat");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistCharterEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistCharters", b =>
                 {
-                    b.HasOne("BnBYachts.Boats.Charter.CharterEntity", "Charter")
+                    b.HasOne("BnBYachts.Boats.Charter.CharterEntity", "Charters")
                         .WithMany()
-                        .HasForeignKey("CharterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ChartersId");
 
-                    b.Navigation("Charter");
+                    b.Navigation("Charters");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEventEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEvents", b =>
                 {
-                    b.HasOne("BnBYachts.Events.EventEntity", "Event")
+                    b.HasOne("BnBYachts.Events.EventEntity", "Events")
                         .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EventsId");
 
-                    b.Navigation("Event");
+                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("BnBYachts.Boats.Charter.CharterEntity", b =>

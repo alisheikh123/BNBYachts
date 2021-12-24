@@ -17,7 +17,7 @@
                 </div>
                 <div>
 
-                    <button (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
+                    <button [disabled]="disablePayment()" (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
                         Pay</button>
                 </div>
                 <div>

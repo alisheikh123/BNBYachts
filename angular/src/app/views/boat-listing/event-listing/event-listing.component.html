@@ -50,8 +50,8 @@
                                         <div class="boatel-search-card-content-title">
                                             <a [routerLink]="['/boat-listing/event-details',item.id]"
                                                 class="underline-black-link p-0">{{item?.boat?.name}}</a>
-                                                <button (click)="item?.boat?.isAddedToMyWishlist ? removeToWishList(item?.boat): addToWishList(item?.boat)" class="fav-btn"
-                                                ><i class="fa" [ngClass]="{'fa-heart-o': !item?.boat?.isAddedToMyWishlist , 'fa-heart':item?.boat?.isAddedToMyWishlist}"></i
+                                                <button (click)="item?.isAddedToMyWishlist ? removeToWishList(item): addToWishList(item)" class="fav-btn"
+                                                ><i class="fa" [ngClass]="{'fa-heart-o': !item?.isAddedToMyWishlist , 'fa-heart':item?.isAddedToMyWishlist}"></i
                                               ></button>
                                         </div>
                                         <p class="grey">{{item?.title}}</p>
@@ -106,8 +106,8 @@
                                                     <div class="pt-2 boatel-search-card-content-title">
                                                         <p class="bold-span-text"><span>$
                                                                 {{mapInfoDetails?.amountPerPerson}}</span>/ Person</p>
-                                                <button (click)="mapInfoDetails?.boat?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails?.boat): addToWishList(mapInfoDetails?.boat)" class="fav-btn"
-                                                ><i class="fa" [ngClass]="{'fa-heart-o': !mapInfoDetails?.boat?.isAddedToMyWishlist , 'fa-heart':mapInfoDetails?.boat?.isAddedToMyWishlist}"></i
+                                                <button (click)="mapInfoDetails?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails): addToWishList(mapInfoDetails)" class="fav-btn"
+                                                ><i class="fa" [ngClass]="{'fa-heart-o': !mapInfoDetails?.isAddedToMyWishlist , 'fa-heart':mapInfoDetails?.isAddedToMyWishlist}"></i
                                               ></button>
                                                     </div>
                                                 </div>

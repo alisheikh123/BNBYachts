@@ -29,6 +29,7 @@ export class BoatListingComponent implements OnInit {
   }
   getHostBoats(){
     this.service.getAllBoats(this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
+      debugger;
       this.hostBoats = this.showAllBoats ? res?.data : res?.data.filter((data: any) => data.isBoatelServicesOffered == true);
       this.totalRecords = res?.totalCount;
     });

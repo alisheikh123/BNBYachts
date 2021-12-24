@@ -2,6 +2,7 @@
 <div class="form-check-radio" *ngFor="let item of userPaymentMethods">
     <input class="form-check-input" style="position: initial !important;" type="radio"
     [(ngModel)]="paymentMethodId"
+    (ngModelChange)="changeMethod()"
     [value]="item.id"
         name="flexRadioDefault" id="flexRadioDefault1">
     <label class="form-check-label" for="flexRadioDefault1">
@@ -15,10 +16,10 @@
         </div>
     </label>
 </div>
-<div><button *ngIf="!addCardDetails" class="underline-blue-link no-underline py-md-4" id="add-card-btn"
-        (click)="addCardDetails = !addCardDetails;"><i class="fa fa-plus me-2"></i>Add new Card</button>
+<div><button *ngIf="!addCardDetails || paymentMethodId" class="underline-blue-link no-underline py-md-4" id="add-card-btn"
+        (click)="addCard();"><i class="fa fa-plus me-2"></i>Add new Card</button>
 
-    <div *ngIf="addCardDetails">
+    <div *ngIf="addCardDetails && !paymentMethodId">
         <div class="add-card-details">
             <h6 class="select-payment-card py-2">Card Details</h6>
             <div>
@@ -39,6 +40,7 @@
                         <div class="col-md-12">
                             <div class="card-element">
                                 <ngx-stripe-card [options]="cardOptions"
+                                (change)="onChange($event)"
                                     [elementsOptions]="elementsOptions"></ngx-stripe-card>
                             </div>
                         </div>
