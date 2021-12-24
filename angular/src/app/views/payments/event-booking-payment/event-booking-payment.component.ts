@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from 'src/app/app.component';
@@ -30,6 +30,7 @@ export class EventBookingPaymentComponent implements OnInit {
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
 
   constructor(public app: AppComponent,
+    private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute, private boatService: YachtSearchService,
     private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService, private modal: NgbModal) { }
 
@@ -75,5 +76,16 @@ export class EventBookingPaymentComponent implements OnInit {
   retryPayment() {
     this.isBookingConfirmed = false;
     this.isPaymentFailed = false;
+  }
+  disablePayment(){
+    if(this.paymentMethodsComponent && (this.paymentMethodsComponent.paymentMethodId == null && this.paymentMethodsComponent.cardError == true)){
+      return true;
+    }
+    return false;
+  }
+
+  ngAfterViewInit() {
+    this.disablePayment();
+    this.cdr.detectChanges();
   }
 }
