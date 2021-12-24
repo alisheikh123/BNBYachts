@@ -1,25 +1,26 @@
 $(document).ready(function () {
-    $("#eyeToggle").on('click', function () {
-        var $pwd = document.querySelector(".pwd");
-        const type = $pwd.getAttribute('type') === 'password' ? 'text' : 'password';
-        $pwd.setAttribute('type', type);
-        this.classList.toggle('fa-eye-slash');
+    $('#eye').click(function () {
+        $('#password').attr('type', $('#password').is(':password') ? 'text' : 'password');
+        if ($('#password').attr('type') === 'password') {
+            $('#eye').removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+            $('#eye').removeClass('fa-eye-slash').addClass('fa-eye');
+        }
     });
-
   
-$('.select').jselect_search({
-    searchable :false,
-    on_top_edge : function(){
-      if( parseInt( $('#state').attr('data-pagination') ) > 1 ){
-        $('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )-1);
-      }
-    },
-    on_bottom_edge : function(){
-      if( parseInt( $('#state').attr('data-pagination') ) >= 1 ){
-        $('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )+1);
-      }
-    }
-  });
+//$('.select').jselect_search({
+//    searchable :false,
+//    on_top_edge : function(){
+//      if( parseInt( $('#state').attr('data-pagination') ) > 1 ){
+//        $('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )-1);
+//      }
+//    },
+//    on_bottom_edge : function(){
+//      if( parseInt( $('#state').attr('data-pagination') ) >= 1 ){
+//        $('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )+1);
+//      }
+//    }
+//  });
 $(".custom-select").click(function(){
     $(this).addClass("active");
   });
@@ -165,8 +166,8 @@ let minusBtn = document.getElementById("minus-btn");
 let count = document.getElementById("count");
 let plusBtn = document.getElementById("plus-btn");
 
-let countNum = 0;
-count.innerHTML = countNum;
+var countNum = 0;
+count.innerHTML == countNum;
 
 minusBtn.addEventListener("click", () => {
 	countNum -= 1;

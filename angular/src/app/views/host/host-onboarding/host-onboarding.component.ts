@@ -245,10 +245,10 @@ export class HostOnboardingComponent implements OnInit {
   }
 
   isValidCheckoutTime(){
-    if(this.boatCalendar.fromDate.getUTCDate() == this.boatCalendar.toDate.getUTCDate() 
+    if(this.boatCalendar.fromDate.getUTCDate() == this.boatCalendar.toDate.getUTCDate()
     && this.hostForm.checkinTime.value > this.hostForm.checkoutTime.value && this.hostForm.isBoatelServicesOffered){
       return false;
-    } 
+    }
     else{
       return true;
     }
