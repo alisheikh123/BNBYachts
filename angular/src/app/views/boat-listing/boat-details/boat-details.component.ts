@@ -143,6 +143,7 @@ export class BoatDetailsComponent implements OnInit {
   }
   setMaxDate(item:any){
     let date = new Date(item);
+    this.boatFilterDetails.checkoutDate = this.boatFilterDetails.checkinDate;
     if(item != null){
      date = new Date(item);
       this.minDate = {year : date.getFullYear(),month:date.getMonth()+1,day:date.getDate()};
