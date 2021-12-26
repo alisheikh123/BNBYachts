@@ -54,7 +54,6 @@ export class EventDetailsComponent implements OnInit {
 
   getEventDetailsById() {
     this.yachtSearchService.eventDetailsById(this.eventId).subscribe((res: any) => {
-      debugger;
       this.eventDetails = res.eventDetails;
       this.eventSchedule = res.eventSchedule;
       this.getHostDetails(this.eventDetails?.boat.creatorId);
