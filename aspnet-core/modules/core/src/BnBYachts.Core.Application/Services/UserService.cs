@@ -77,6 +77,8 @@ namespace BnBYachts.Core.Services
             var result = await _appUserManager.UpdateUserProfile(userInput);
             return result;
         }
+        [AllowAnonymous]
+        public async Task<bool> IsEmailExists(string email) => await _appUserManager.IsEmailExist(email).ConfigureAwait(false);
     }
 
 

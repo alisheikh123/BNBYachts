@@ -52,6 +52,12 @@ namespace BnBYachts.Core.Managers
             return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email);
         }
 
+        public async Task<bool> IsEmailExist(string email)
+        {
+            var user = await _repository.FindAsync(res => res.Email == email).ConfigureAwait(false);
+            return user != null ? true : false;
+        }
+
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
                 var _respone = new ResponseDto();

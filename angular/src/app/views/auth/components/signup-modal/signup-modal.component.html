@@ -44,6 +44,11 @@
                   message: 'Invalid Email',
                   control: registrationForm.controls['Email']
                 }"></ng-container>
+                <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                  validation: 'emailTaken',
+                  message: 'Email Already Exists.',
+                  control: registrationForm.controls['Email']
+                }"></ng-container>
 
                 </div>
                 <!-- custom tool tip -->
@@ -91,7 +96,7 @@
                 <div class="custom-input-field">
                   <label>Date of Birth </label>
                   <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-                    <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
+                    <input class="custom-input" type="date" formControlName="DOB" (keydown)="stopKeys($event)" [max]="getToday()">
                     <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                       validation: 'required',
                       message: 'Date of birth is required',

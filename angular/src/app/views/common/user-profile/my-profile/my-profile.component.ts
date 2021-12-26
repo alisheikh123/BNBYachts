@@ -22,7 +22,6 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo().subscribe(responseList => {
-      debugger;
       this.userResponse = responseList[0];
       this.userBoats = responseList[1]?.data;
       this.loggedInUserRole = localStorage.getItem('userRole');

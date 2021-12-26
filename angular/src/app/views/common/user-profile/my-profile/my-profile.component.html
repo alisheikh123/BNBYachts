@@ -10,14 +10,14 @@
                         
                     </div>
                   <p class="medium text-center py-2">Update profile photo</p>
-                  <h6 class="bold text-center p-0 pb-3">{{userResponse.name}}</h6>
+                  <h6 class="bold text-center p-0 pb-3">{{userResponse?.name}}</h6>
                 </div>
                 <div class="border-top"></div>
                 <div class="py-2">
                     <p class="medium text-center">Verification</p>
                     <p class="medium text-center py-2">
-                   <i *ngIf="userResponse.isPhoneConfirmed" class="fa fa-check pe-2"></i>
-                   <i *ngIf="!userResponse.isPhoneConfirmed" class="fa fa-times pe-2"></i> Number Verified</p>
+                   <i *ngIf="userResponse?.isPhoneConfirmed" class="fa fa-check pe-2"></i>
+                   <i *ngIf="!userResponse?.isPhoneConfirmed" class="fa fa-times pe-2"></i> Number Verified</p>
                 </div>
                </div>
            </div>
@@ -25,8 +25,8 @@
                <div class="user-details-info-wrapper">
                    <div class="custom-flex-between align-items-start">
                        <div class="user-details-info-wrapper-inner">
-                           <p class="bold">{{userResponse.name}}</p>
-                           <p class="grey py-2">{{userResponse.creationTime | date}}</p>
+                           <p class="bold">{{userResponse?.name}}</p>
+                           <p class="grey py-2">{{userResponse?.creationTime | date}}</p>
                         </div>
                         <div class="edit-btn-wrapper">
                             <a [routerLink]="['/update-profile',userResponse.id]" class="custom-btn grey"><i class="fa fa-pencil me-2"></i>Edit Profile</a>
@@ -34,7 +34,7 @@
                    </div>
                    <div class="py-2">
                        <p class="bold">About</p>
-                       <p class="regular py-2 medium-container line-clamp-3 text-left grey">{{userResponse.about}}.</p>
+                       <p class="regular py-2 medium-container line-clamp-3 text-left grey">{{userResponse?.about}}.</p>
                    </div>
                    <div class="py-2">
                        <p class="medium"><i class="fa fa-map-pin me-3"></i>Lives in Lahore</p>
