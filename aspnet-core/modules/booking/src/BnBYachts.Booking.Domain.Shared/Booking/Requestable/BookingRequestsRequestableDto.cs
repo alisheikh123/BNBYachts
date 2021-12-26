@@ -21,5 +21,6 @@ namespace BnBYachts.Booking.Booking.Requestable
         public int? EventId { get; set; }
         public DateTime? EventDate { get; set; }
         public string Title { get; set; }
+        public int? NoOfGuests { get; set; }
     }
 }

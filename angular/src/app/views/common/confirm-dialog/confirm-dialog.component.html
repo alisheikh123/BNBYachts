@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="modal-basic-title">{{title}}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="onActionClick(false)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body d-flex">
+    <p [innerHTML] ="message"></p>&nbsp;<span *ngIf="item" class="text-primary font-weight-bold">'{{item}}'</span><span *ngIf="item"> &nbsp;?</span>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="onActionClick(false)">Cancel</button>
+    <button type="button" ngbAutofocus class="btn btn-primary" (click)="onActionClick(true)">
+        Ok
+    </button>
+</div>
