@@ -28,7 +28,7 @@ export class AllHostBoatsService {
   }
 
   updateBoatStatus(boatId: number) {
-    return this.http.get(this.boatApiUrl + '/host-boat-status/' + boatId).pipe(catchError(this.errorService.handleError));
+    return this.http.get(this.boatApiUrl + '/api/host-boat-status/' + boatId).pipe(catchError(this.errorService.handleError));
   }
 
 }

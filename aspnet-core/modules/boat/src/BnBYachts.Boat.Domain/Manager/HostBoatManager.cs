@@ -65,7 +65,7 @@ namespace BnBYachts.Boat.Manager
             {
                 //parameters.Latitude = 31.5204;
                 //parameters.Longitude = 74.3587;
-                var getBoats = await _boatRepository.GetListAsync(res => res.IsBoatelServicesOffered == true);
+                var getBoats = await _boatRepository.GetListAsync(res => res.IsBoatelServicesOffered == true && res.IsActive == true);
 
                 var filterdBoats = new List<BoatEntity>();
                 foreach (var boat in getBoats)
