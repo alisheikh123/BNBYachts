@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class YachtSearchService {
   apiUrl: string = environment.BOAT_API_URL+'/api';
-  apiCoreURL: string = environment.CORE_API_URL;
+  apiCoreURL: string = environment.CORE_API_URL+'/api';
 
   constructor(private http: HttpClient) { }
 
