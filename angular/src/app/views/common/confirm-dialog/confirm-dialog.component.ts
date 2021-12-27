@@ -7,7 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent {
-  @Input() title: string = 'Are you sure?';
+  @Input() title: string = 'Confirmation';
   @Input() item: string = '';
   @Input() message: string = 'Are you sure want to delete ';
   @Input() type = 'delete';

@@ -75,7 +75,8 @@ export class BookingRequestsComponent implements OnInit {
   changeStatus(item: any, isAccepted: boolean, index: any) {
     // Get user against which booking has been approved/rejected
     if (isAccepted) {
-      let modal = this.modal.open(ConfirmDialogComponent,{centered:true});
+      let modal = this.modal.open(ConfirmDialogComponent,{centered:true,windowClass: 'custom-modal custom-small-modal' });
+      modal.componentInstance.message = 'Are your sure.You want to accept this reservation?'
       modal.componentInstance.onClose.subscribe((res:boolean)=>{
         if(res){
           this.reservationStatusChange(item, isAccepted, index, '');
@@ -85,7 +86,6 @@ export class BookingRequestsComponent implements OnInit {
           modal.dismiss();
         }
       })
-
     }
     else {
       let modal = this.modal.open(RejectionModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
