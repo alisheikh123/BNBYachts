@@ -112,7 +112,7 @@ export class BoatListingComponent implements OnInit {
     this.isFilterAdded = true;
     this.boats = Object.assign([], this.allBoats);
     if (this.bathroomCount + this.roomCount > 0) {
-      this.boats = this.boats.filter(res => res?.boat?.totalBedrooms >= this.bathroomCount && res?.boat?.totalWashrooms >= this.roomCount);
+      this.boats = this.boats.filter(res => res?.totalBedrooms >= this.roomCount && res?.totalWashrooms >= this.bathroomCount);
     }
     //for additional filters
     debugger;
