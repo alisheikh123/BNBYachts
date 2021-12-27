@@ -43,7 +43,6 @@ export class BoatListingComponent implements OnInit {
   mapDetails: any;
   markers: any[] = [];
   defaultFeatures: any;
-  Array: number[] = [];
   indexToRemove: number[] = [];
   isfrmChecked: boolean;
   unfilteredBoats: any[];
@@ -108,53 +107,25 @@ export class BoatListingComponent implements OnInit {
       this.defaultFeatures = res;
     });
   }
-  toggleAdditionalFilters(event: any,item:any) {
-    if (event.currentTarget.checked) {
-      this.Array.push(event.target.value);
-    } else {
-      let index = this.Array.indexOf(event.target.value);
-      this.Array.splice(index, 1);
-    }
-    item.isChecked = event.currentTarget.checked;    
-  }
+  
   applyAdditionalFilters() {
     this.isFilterAdded = true;
-    // get original unfiltered boats before applying filter
     this.boats = Object.assign([], this.allBoats);
-    if (this.roomCount > 0) {
-      this.indexToRemove = [];
-      this.boats.forEach((boat: any, index) => {
-        if (boat.totalBedrooms != this.roomCount) {
-          this.indexToRemove.push(index);
-          this.indexToRemove.sort((a, b) => b - a);
-        }
-      });
-      this.indexToRemove.forEach((entry: any, index) => {
-        this.boats.splice(entry, 1);
-      });
-    }
-    if (this.bathroomCount > 0) {
-      this.indexToRemove = [];
-      this.boats.forEach((boat: any, index) => {
-        if (boat.totalWashrooms != this.bathroomCount) {
-          this.indexToRemove.push(index);
-          this.indexToRemove.sort((a, b) => b - a);
-        }
-      });
-      this.indexToRemove.forEach((entry: any, index) => {
-        this.boats.splice(entry, 1);
-      });
+    if (this.bathroomCount + this.roomCount > 0) {
+      this.boats = this.boats.filter(res => res?.boat?.totalBedrooms >= this.bathroomCount && res?.boat?.totalWashrooms >= this.roomCount);
     }
     //for additional filters
+    debugger;
+    let selectedFeaturs = this.defaultFeatures.filter((res: any) => res?.isChecked == true);
     this.boats.forEach((boat: any, index) => {
-      this.Array.forEach((elem: any) => {
-        var rep = boat.boatFeatures.filter((res: any) => res.offeredFeaturesId == elem);
-        if (rep.length == 0) {
-          var res = this.boats.splice(index, 1);
+      selectedFeaturs.forEach((elem: any) => {
+        var find = boat?.boatFeatures.find((res: any) => res.offeredFeaturesId == elem.id);
+        if (!find) {
+          this.boats.splice(index, 1);
         }
       });
     });
-    this.activeModal.close();
+    this.modal.dismissAll();
   }
 
   applyPriceFilter(minPrice: number, maxPrice: number) {

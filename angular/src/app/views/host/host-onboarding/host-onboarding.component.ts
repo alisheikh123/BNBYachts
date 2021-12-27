@@ -149,7 +149,6 @@ export class HostOnboardingComponent implements OnInit {
   }
 
   onFileChoose(fileInput: any, index?: number) {
-    debugger;
     let fileData: File;
     fileData = <File>fileInput.target.files[0];
     var mimeType = fileData.type;

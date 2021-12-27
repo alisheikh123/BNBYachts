@@ -82,7 +82,7 @@ export class CharterDetailsComponent implements OnInit {
     if ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens) > 0) {
       let bookingModel = {
         charterId: this.charterId,
-        departureDate: this.charterDetails.departureDate,
+        departureDate: this.charterDetails.departureFromDate,
         noOfAdults: this.charterFilterDetails.adults,
         noOfChildrens: this.charterFilterDetails.childrens,
         hostId: this.charterDetails.boat.creatorId,

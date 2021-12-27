@@ -1,4 +1,4 @@
-﻿
+
 
 using System;
 using System.Collections.Generic;
@@ -52,6 +52,12 @@ namespace BnBYachts.Core.Managers
             return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email);
         }
 
+        public async Task<bool> IsEmailExist(string email)
+        {
+            var user = await _repository.FindAsync(res => res.Email == email).ConfigureAwait(false);
+            return user != null ? true : false;
+        }
+
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
                 var _respone = new ResponseDto();
@@ -85,7 +91,7 @@ namespace BnBYachts.Core.Managers
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
             //string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
-            string baseUrl = "http://52.207.14.110:8080/activate-account";
+            string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "/activate-account";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },

@@ -36,7 +36,7 @@ namespace BnBYachts.Booking.Managers
             _eventBookingRepository = eventBookingRepository;
         }
 
-        public async Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data, Guid? userId, string userName)
+        public async Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data, Guid? userId, string userName, string email)
         {
             var boatelEntity = _objectMapper.Map<BoatelBookingRequestableDto, BoatelBookingEntity>(data);
             boatelEntity.LastModifierId = boatelEntity.CreatorId = userId;
@@ -60,13 +60,14 @@ namespace BnBYachts.Booking.Managers
                 Data = response
             };
         }
-        public async Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data, Guid? userId, string email)
+        public async Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data, Guid? userId, string userName,string email)
         {
             var charterEntity = _objectMapper.Map<CharterBookingRequestableDto, CharterBookingEntity>(data);
             charterEntity.LastModifierId = charterEntity.CreatorId = userId;
             charterEntity.UserId = userId.ToString();
             charterEntity.BookingStatus = BookingStatus.Pending;
             charterEntity.PaymentStatus = PaymentStatus.Pending;
+            charterEntity.UserName = userName;
             var response = await _charterBookingRepository.InsertAsync(charterEntity, autoSave: true).ConfigureAwait(false);
             #region Send-Email
             string body = $"<h4> Your charter has been booked successfuly. Please wait for the host's approval. </h4>";
@@ -85,13 +86,14 @@ namespace BnBYachts.Booking.Managers
                 Data = response
             };
         }
-        public async Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data, Guid? userId, string email)
+        public async Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data, Guid? userId,string userName, string email)
         {
             var eventEntity = _objectMapper.Map<EventBookingRequestableDto, EventBookingEntity>(data);
             eventEntity.LastModifierId = eventEntity.CreatorId = userId;
             eventEntity.UserId = userId.ToString();
             eventEntity.BookingStatus = BookingStatus.Pending;
             eventEntity.PaymentStatus = PaymentStatus.Pending;
+            eventEntity.UserName = userName;
             var response = await _eventBookingRepository.InsertAsync(eventEntity, autoSave: true).ConfigureAwait(false);
             #region Send-Email
             string body = $"<h4> Your event has been booked successfuly. Please wait for the host's approval. </h4>";

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { ServiceType } from 'src/app/shared/enums/booking.constants';
+import { ConfirmDialogComponent } from 'src/app/views/common/confirm-dialog/confirm-dialog.component';
 import { environment } from 'src/environments/environment';
 import { RejectionModalComponent } from './rejection-modal/rejection-modal.component';
 
@@ -44,7 +45,6 @@ export class BookingRequestsComponent implements OnInit {
   getReservations() {
     this.reservationService.getBoatelBookingRequests(this.selectedServiceType, this.selectedMonth, this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
       this.boatelBookings = res?.data;
-      debugger;
       this.totalRecords = res?.totalCount;
       if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
         this.boatelBookings.forEach((element: any) => {
@@ -57,6 +57,7 @@ export class BookingRequestsComponent implements OnInit {
         this.boatelBookings.forEach((element: any) => {
           this.boatService.charterDetailsById(element.charterId).subscribe((charter: any) => {
             element.boatDetail = charter?.charterDetails?.boat;
+            element.charter =charter?.charterDetails; 
           });
         });
       }
@@ -74,7 +75,17 @@ export class BookingRequestsComponent implements OnInit {
   changeStatus(item: any, isAccepted: boolean, index: any) {
     // Get user against which booking has been approved/rejected
     if (isAccepted) {
-      this.reservationStatusChange(item, isAccepted, index, '');
+      let modal = this.modal.open(ConfirmDialogComponent,{centered:true,windowClass: 'custom-modal custom-small-modal' });
+      modal.componentInstance.message = 'Are your sure.You want to accept this reservation?'
+      modal.componentInstance.onClose.subscribe((res:boolean)=>{
+        if(res){
+          this.reservationStatusChange(item, isAccepted, index, '');
+          modal.dismiss();
+        }
+        else{
+          modal.dismiss();
+        }
+      })
     }
     else {
       let modal = this.modal.open(RejectionModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
@@ -87,7 +98,7 @@ export class BookingRequestsComponent implements OnInit {
   }
 
   reservationStatusChange(item: any, isAccepted: boolean, index: any, reason: string) {
-    this.reservationService.changeStatus(item.id, isAccepted, reason).subscribe(res => {
+    this.reservationService.changeStatus(item.id, isAccepted, reason,this.selectedServiceType).subscribe(res => {
       isAccepted ? this.toastr.success('Request accepted successfully.', 'Success') : this.toastr.success('Request rejected successfully.', 'Success');
       this.boatelBookings.splice(index, 1);
     });
