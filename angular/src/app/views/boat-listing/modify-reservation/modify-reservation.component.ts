@@ -45,6 +45,7 @@ export class ModifyReservationComponent implements OnInit {
   perdayFee: any;
   USER_DEFAULTS = UserDefaults;
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
+  minDate = {year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()};
   constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService,
     private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
     private activatedRoute: ActivatedRoute, private service: BookingService, private bookingListService: BookingListingService) {
@@ -64,51 +65,54 @@ export class ModifyReservationComponent implements OnInit {
 
   }
   getBookingDetail() {
+    debugger;
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
+      debugger
       this.bookingModifyDetail = res;
-      this.boatFilterDetails.checkinDate = new Date(this.bookingModifyDetail?.checkinDate);
-      this.boatFilterDetails.checkoutDate = new Date(this.bookingModifyDetail?.checkoutDate);
+      this.boatFilterDetails.checkinDate = this.addDays(new Date(this.bookingModifyDetail?.checkinDate),1);
+      this.boatFilterDetails.checkoutDate = this.addDays(new Date(this.bookingModifyDetail?.checkoutDate),1);
       this.service.getBoatInfo(res?.boatId).subscribe((boatdetail: any) => {
         this.bookingModifyDetail.boatDetail = boatdetail;
       });
 
     });
   }
+
   goBack() {
     this.router.navigate(['/boat-listing/all-reservations']);
   }
 
+  addDays(date: Date, days: number): Date {
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+
+
   calculateDays() {
     if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null) {
-      var date1 = new Date(this.boatFilterDetails.checkinDate);
-      var date2 = new Date(this.boatFilterDetails.checkoutDate);
+      var date1 = this.addDays(new Date(this.boatFilterDetails.checkinDate),1);
+      var date2 = this.addDays(new Date(this.boatFilterDetails.checkoutDate),1);
       var Time = date2.getTime() - date1.getTime();
-      var Days = Time / (1000 * 3600 * 24);
+      var Days = Math.floor(Time / (1000 * 3600 * 24));
       return Days < 0 ? 0 : Days + 1;
     }
     else {
-
       return 0;
-
     }
-
   }
   changecheckoutDate(checkout: any) {
-     let checkoutLatest = utils.formatDate(checkout);
+
+    let checkoutLatest = utils.formatDate(checkout);
     let currentcheckOutDate = utils.formatDate(this.bookingModifyDetail?.checkoutDate);
     if (currentcheckOutDate <= checkoutLatest) {
       this.perdayFee = 0;
     }
     if (currentcheckOutDate == checkoutLatest) {
       this.perdayFee = 0;
-
-
     }
     if (currentcheckOutDate > checkoutLatest) {
-
       this.perdayFee = this.oneNightCharges;
-
-
     }
 
   }
@@ -122,7 +126,14 @@ export class ModifyReservationComponent implements OnInit {
     return obj2;
 
   }
-
+  setMaxDate(item:any){
+    let date = new Date(item);
+    this.boatFilterDetails.checkoutDate = this.boatFilterDetails.checkinDate;
+    if(item != null){
+     date = new Date(item);
+      this.minDate = {year : date.getFullYear(),month:date.getMonth()+1,day:date.getDate()};
+    }
+  }
   getHostDetails(userId: string) {
     this.yachtSearchService.hostDetailsById(userId).subscribe(res => {
       this.boatHost = res;
@@ -144,6 +155,7 @@ export class ModifyReservationComponent implements OnInit {
   }
 
   reserveBoat() {
+    debugger;
     this.isSubmitted = true;
     if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.bookingModifyDetail?.noOfAdults + this.bookingModifyDetail?.noOfChildrens) > 0) {
       let userId = Guid.create();

@@ -97,10 +97,12 @@
                                                             <div class="">
                                                                 <div class="">
                                                                     <label>Check-in</label>
+                                                                    {{boatFilterDetails.checkinDate}}
                                                                     <input
                                                                         placeholder="Add date" name="dp"
                                                                         container="body"
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
+                                                                        (ngModelChange)="setMaxDate(boatFilterDetails.checkinDate)"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
 
@@ -110,9 +112,11 @@
                                                             <div class="border-left-1">
                                                                 <div class="">
                                                                     <label>Check-out</label>
+                                                                    {{boatFilterDetails.checkoutDate}}
                                                                     <input
                                                                         placeholder="Add date" name="dp2"
                                                                         container="body"
+                                                                        [minDate] = "minDate"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
                                                                         (ngModelChange)="changecheckoutDate($event)"
                                                                         (click)="d2.toggle()" ngbDatepicker
