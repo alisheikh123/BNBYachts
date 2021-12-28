@@ -1,13 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class BookingService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
-
+  bookingReview:string = '/api/app/review/if-review-already-posted/';
+  bookingCancellation:string = '/api/app/boat-booking/booking-cancellation-detail/';
   boatApiUrl: string = environment.BOAT_API_URL+'/api';
   paymentApiUrl: string = environment.PAYMENTS_API_URL;
   constructor(private http: HttpClient) { }
@@ -75,10 +76,10 @@ export class BookingService {
     return this.http.get(this.bookingApiUrl + '/api/app/review/boat-reviews/'+boatId).pipe(catchError(this.handleError));
   }
   isReviewPosted(bookingId:number) {
-    return this.http.get(this.bookingApiUrl + '/api/app/review/if-review-already-posted/'+bookingId).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl + this.bookingReview +bookingId).pipe(catchError(this.handleError));
   }
-  getBookingCancellationDetail(bookingId:number)
+  getBookingCancellationDetail(bookingId:number):Observable<object>
   {
-    return this.http.get(this.bookingApiUrl + '/api/app/boat-booking/booking-cancellation-detail/'+bookingId).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl +this.bookingCancellation+bookingId).pipe(catchError(this.handleError));
   }
 }

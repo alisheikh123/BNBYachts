@@ -186,8 +186,6 @@ namespace BnBYachts.Booking.Managers
            var response = await _boatelCanceRepository.GetListAsync(x => x.BookingId == bookingId && x.UserId == userId.ToString()).ConfigureAwait(false);
             return new EntityResponseModel()
             {
-                ReturnStatus = true,
-                Errors = null,
                 Data = response
             };
         }

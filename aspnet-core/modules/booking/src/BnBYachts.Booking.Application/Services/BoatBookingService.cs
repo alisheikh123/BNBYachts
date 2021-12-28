@@ -32,9 +32,8 @@ namespace BnBYachts.Booking.Services
 
         }
 
-        public async Task<EntityResponseModel> GetBookingCancellationDetail(long bookingId)
-        {
-           return await _hostBoatBookingManager.GetBookingCancellationDetail(bookingId, CurrentUser.Id);
-        }
+        public async Task<EntityResponseModel> GetBookingCancellationDetail(long bookingId)=>
+            await _hostBoatBookingManager.GetBookingCancellationDetail(bookingId, CurrentUser.Id);
+        
     }
 }

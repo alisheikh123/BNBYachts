@@ -60,5 +60,8 @@
   "ToDestination":"To Destination*",
   "DepartureTo":"Departure To",
   "Disclaimer":"Disclaimer",
-  "CharterDisclaimer":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed"
+  "CharterDisclaimer":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed",
+  "CancelReservation":"Cancel Reservation",
+  "ModifyReservation":"Modify Reservation",
+  "AddReview":"Add Review"
 }

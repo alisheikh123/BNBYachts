@@ -16,16 +16,5 @@ namespace BnBYachts.Booking.Shared.BoatBooking.Interface
         Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data, Guid? userId, string userName);
         Task<bool> IsBookingCancel(BookingCancellationRequestableDto data, string userId);
 
-
-        //Task<bool> ModifyBoatelBooking(BoatelBookingDto data, Guid? userId, string userName);
-        //Task<ICollection<BoatelBookingEntity>> UpcomingBoatelBookingDetail(string userId,string month, string year);
-        //Task<ICollection<BoatelBookingEntity>> BoatelBookingDetail(string userId);
-        //Task<ICollection<BoatelBookingEntity>> PastBoatelBookingDetail(string userId, string month, string year);
-
-        //Task<ICollection<BoatelBookingEntity>> BoatelBooking(int bookingId);
-        //Task<bool> IsBookingCancel(BookingCancellationDto data, string userId);
-        //Task<ICollection<BoatelBookingEntity>> GetMyBookings(string userId);
-        //Task<ICollection<BoatelBookingEntity>> UpcomingHostBoatelBookingDetail(string userId);
-
     }
 }
