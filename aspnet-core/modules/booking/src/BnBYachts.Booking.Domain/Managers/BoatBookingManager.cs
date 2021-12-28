@@ -181,6 +181,16 @@ namespace BnBYachts.Booking.Managers
             return false;
         }
 
+        public async Task<EntityResponseModel> GetBookingCancellationDetail(long bookingId, Guid? userId)
+        {
+           var response = await _boatelCanceRepository.GetListAsync(x => x.BookingId == bookingId && x.UserId == userId.ToString()).ConfigureAwait(false);
+            return new EntityResponseModel()
+            {
+                ReturnStatus = true,
+                Errors = null,
+                Data = response
+            };
+        }
     }
 }
 

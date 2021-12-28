@@ -95,6 +95,21 @@
               <p class="medium text-right py-1">{{(booking?.boatDetail?.perDayCharges * booking?.TotalDays) + 20 + 20 +
                 booking?.boatDetail?.taxFee}}.00 $</p>
             </div>
+            <div *ngIf="booking?.bookingStatus===BOOKING_STATUS.Cancel">
+            <div class="border-top my-3"></div>
+            <div *ngFor="let item of booking?.bookingCancelDetail">
+            <div class="custom-flex-between">
+                <p class="medium">Deducted Amount(USD)</p>
+                <p class="medium text-right py-1">
+                  {{item?.totalAmount - item?.refundAmount}}.00 $</p>
+            </div>
+
+            <div class="custom-flex-between">
+                <p class="medium">Refundable Amount(USD)</p>
+                <p class="medium text-right py-1">{{item?.refundAmount}}.00 $</p>
+            </div>
+          </div>
+          </div>
           </div>
         </div>
       </div>

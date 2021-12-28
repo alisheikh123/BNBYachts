@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class BookingService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
+
   boatApiUrl: string = environment.BOAT_API_URL+'/api';
   paymentApiUrl: string = environment.PAYMENTS_API_URL;
   constructor(private http: HttpClient) { }
@@ -75,5 +76,9 @@ export class BookingService {
   }
   isReviewPosted(bookingId:number) {
     return this.http.get(this.bookingApiUrl + '/api/app/review/if-review-already-posted/'+bookingId).pipe(catchError(this.handleError));
+  }
+  getBookingCancellationDetail(bookingId:number)
+  {
+    return this.http.get(this.bookingApiUrl + '/api/app/boat-booking/booking-cancellation-detail/'+bookingId).pipe(catchError(this.handleError));
   }
 }
