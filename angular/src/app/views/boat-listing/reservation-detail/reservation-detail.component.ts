@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -29,8 +30,10 @@ export class ReservationDetailComponent implements OnInit {
   BOOKING_STATUS = BookingStatus;
   isHost: boolean = false;
   USER_ROLES = UserRoles;
-  today =new Date().toLocaleDateString();
-  checkedCheckinDate:any;
+  today = new Date().toLocaleDateString();
+
+  checkedCheckinDate: any;
+  checkinTime: any;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
   constructor(private service: BookingService
@@ -62,6 +65,8 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkinDate = this.checkInDate;
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
+        this.checkinTime = this.booking?.boatDetail?.checkinTime;
+        console.log(this.booking)
       });
 
     });
@@ -104,7 +109,26 @@ export class ReservationDetailComponent implements OnInit {
       this.route.navigate(['boat-listing/all-reservations']);
     }
   }
+  isCheckinStarted(checkinDate: string, checkinTime: string) {
+    if (checkinDate != undefined && checkinTime != undefined) {
+      debugger;
+      if (moment(checkinDate).format("DD-MM-YYYY") == moment().format("DD-MM-YYYY")
+      &&moment(checkinTime).format("HH:mm") > moment().format("HH:mm")) {
+        return true;
+      }
+      if(moment(checkinDate).format("DD-MM-YYYY")>moment().format("DD-MM-YYYY"))
+      {
+       return true;
+      }
+      else {
+        return false;
+      }
+
+    }
+
+    return false;
+
+
+  }
 
 }
-
-

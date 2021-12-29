@@ -35,6 +35,7 @@
     "angular-oauth2-oidc": "^12.1.0",
     "bootstrap": "^5.0.2",
     "guid-typescript": "^1.0.9",
+    "moment": "^2.29.1",
     "ngx-daterange": "^1.0.44",
     "ngx-google-places-autocomplete": "^2.0.5",
     "ngx-stripe": "^12.5.0",

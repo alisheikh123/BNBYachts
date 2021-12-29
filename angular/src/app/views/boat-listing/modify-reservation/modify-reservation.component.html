@@ -27,8 +27,8 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="gallery-link-wrapper"><a href="#" class="underline-white-link">Gallery <span><i
-                            class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div> -->
+            <div class="gallery-link-wrapper"><a href="#" class="underline-white-link">Gallery <span><i
+                            class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
         </div>
     </div>
 
@@ -97,7 +97,6 @@
                                                             <div class="">
                                                                 <div class="">
                                                                     <label>Check-in</label>
-                                                                    {{boatFilterDetails.checkinDate}}
                                                                     <input
                                                                         placeholder="Add date" name="dp"
                                                                         container="body"
@@ -112,11 +111,11 @@
                                                             <div class="border-left-1">
                                                                 <div class="">
                                                                     <label>Check-out</label>
-                                                                    {{boatFilterDetails.checkoutDate}}
                                                                     <input
                                                                         placeholder="Add date" name="dp2"
                                                                         container="body"
                                                                         [minDate] = "minDate"
+                                                                        [maxDate] = "maxDate"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
                                                                         (ngModelChange)="changecheckoutDate($event)"
                                                                         (click)="d2.toggle()" ngbDatepicker
@@ -200,10 +199,10 @@
                                                 </ng-template>
                                                 <div class="total-amount-wrap">
                                                     <div class="total-amount-wrap-inner">
-                                                        <p>$ {{bookingModifyDetail?.boatDetail?.perDayCharges}} x {{calculateDays()}}
+                                                        <p>$ {{bookingModifyDetail?.boatDetail?.perDayCharges}} x {{Days}}
                                                             Nights
                                                         </p>
-                                                        <p>${{bookingModifyDetail?.boatDetail?.perDayCharges * calculateDays()}}.00</p>
+                                                        <p>${{bookingModifyDetail?.boatDetail?.perDayCharges * this.Days}}.00</p>
 
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
@@ -216,19 +215,25 @@
                                                         <p>$20.00</p>
 
                                                     </div>
-                                                    <div class="total-amount-wrap-inner">
-                                                        <p>Deducted Amount</p>
-                                                        <p>{{this.perdayFee || 0.00}}$</p>
 
-                                                    </div>
                                                     <div class="total-amount-wrap-inner bottom">
                                                         <p class="medium">Total(USD)</p>
                                                         <p class="medium">$ {{bookingModifyDetail?.boatDetail?.perDayCharges *
-                                                            calculateDays()+(this.perdayFee || 0) +
+                                                            this.Days+(this.perdayFee || 0) +
                                                             bookingModifyDetail?.boatDetail?.taxFee+ 20}}.00</p>
 
                                                     </div>
-                                                    <button class="custom-btn blue" (click)="reserveBoat()">Modify
+                                                    <div class="total-amount-wrap-inner">
+                                                        <p class="medium">Deducted Amount</p>
+                                                        <p class="medium">{{this.deductedAmount || 0.00}}$</p>
+
+                                                    </div>
+                                                    <div class="total-amount-wrap-inner">
+                                                        <p class="medium">Refundable Amount</p>
+                                                        <p class="medium">{{this.refundableAmount || 0.00}}$</p>
+
+                                                    </div>
+                                                    <button class="custom-btn blue" (click)="openModal(modifyPop)">Modify
                                                         Reservation</button>
                                                 </div>
                                             </div>
@@ -311,11 +316,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="offerings">
+                                    <div class="offerings">
                                         <p *ngFor="let item of featureFilter(false,false) | mySlice:3:6"><i
                                                 class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
                                         </p>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <button (click)="showMore = !showMore;" class="custom-btn outline-blue-clr my-2">Show
                                     {{showMore ? 'less' :'all'}}</button>
@@ -453,6 +458,44 @@
             </div>
         </div>
     </div>
+    <ng-template #modifyPop>
 
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">{{'ModificationPolicy' | localization}}</h4>
+                    <div class="py-2">
+                        <p class="small-text text-left">{{'ModificationDeductionOnPayments' | localization}}
+                        </p>
+                        <ul class="custom-ul">
+                            <li>
+                                <p>{{'ModificationDeductionPolicy1' | localization}}</p>
+                            </li>
+                            <li>
+                                <p>{{'ModificationDeductionPolicy2' | localization}}</p>
+                            </li>
+                            <li>
+                                <p>{{'CancellationDeductionPolicy3' | localization}}</p>
+                            </li>
+                            <li>
+                                <p>{{'CancellationDeductionPolicy4' | localization}}</p>
+                            </li>
+
+                        </ul>
+                        <p><strong>{{'ModificationConfirmation' | localization}}</strong></p>
+                    </div>
+                    <div class="py-4 text-center">
+                        <button (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
+                            data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#cancellation-confirmed">Cancel</button>&nbsp;
+                        <button class="custom-btn blue big-btn" (click)="reserveBoat()">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </div>
 <!-- </div> -->
