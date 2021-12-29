@@ -65,6 +65,8 @@
   "ModificationPolicy":"Modification Policy",
   "ModificationDeductionOnPayments":"Deduction on payments after modification will be as follows",
   "ModificationDeductionPolicy1":"If reservation is being Modified before 3 days of check-in time, 100% will refund.",
-  "ModificationDeductionPolicy2":"If reservation is being Modified 72 -24 hours before then 50% of one night charge will be deducted."
-
+  "ModificationDeductionPolicy2":"If reservation is being Modified 72 -24 hours before then 50% of one night charge will be deducted.",
+  "CancelReservation":"Cancel Reservation",
+  "ModifyReservation":"Modify Reservation",
+  "AddReview":"Add Review"
 }

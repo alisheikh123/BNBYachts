@@ -95,6 +95,19 @@
               <p class="medium text-right py-1">{{(booking?.boatDetail?.perDayCharges * booking?.TotalDays) + 20 + 20 +
                 booking?.boatDetail?.taxFee}}.00 $</p>
             </div>
+            <ng-container *ngIf="booking?.bookingStatus===BOOKING_STATUS.Cancel">
+            <ng-container *ngFor="let item of booking?.bookingCancelDetail">
+            <div class="custom-flex-between">
+                <p class="medium">Deducted Amount(USD)</p>
+                <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+            </div>
+
+            <div class="custom-flex-between">
+                <p class="medium">Refundable Amount(USD)</p>
+                <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
+            </div>
+          </ng-container>
+          </ng-container>
           </div>
         </div>
       </div>
@@ -115,13 +128,12 @@
             <!-- <div *ngIf="checkedCheckinDate > today"> -->
               <div class="center-content">
                 <a [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
-                  class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">Cancel Reservation</a>
+                  class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
                 <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
-                  class="custom-btn btn-big blue me-sm-3">Modify Reservation</a>
+                  class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
                 <a (click)="addReview()"
                   *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
-                  class="custom-btn btn-big blue">Add
-                  Review</a>
+                  class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
               </div>
             <!-- </div> -->
           </div>
