@@ -20,14 +20,27 @@
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
                   <label>First Name</label>
-                  <input type="text" class="custom-input" placeholder="First Name" name="firstname"
-                    formControlName="FirstName">
+                  <input type="text" class="custom-input" placeholder="First Name" name="firstname" formControlName="FirstName">
                   <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                  validation: 'required',
-                  message: 'First name is required',
-                  control: registrationForm.controls['FirstName']
+                    validation: 'required',
+                    message: 'First name is required',
+                    control: registrationForm.controls['FirstName']
                 }"></ng-container>
                 </div>
+              </div>
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class="custom-input-field">
+                  <label>Last Name</label>
+                  <input type="text" class="custom-input" name="lastname" formControlName="LastName" placeholder="Last Name">
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                validation: 'required',
+                                                message: 'Last name is required',
+                                                control: registrationForm.controls['LastName']
+                                              }"></ng-container>
+                </div>
+              </div>
+              <!-- email -->
+              <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
                   <label>Email</label>
                   <input type="email" class="custom-input" placeholder="Email Address" name="email"
@@ -44,9 +57,24 @@
                   message: 'Invalid Email',
                   control: registrationForm.controls['Email']
                 }"></ng-container>
-
                 </div>
-                <!-- custom tool tip -->
+              </div>
+              <!-- date of birth -->
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class="custom-input-field">
+                  <label>Date of Birth </label>
+                  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                    <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Date of birth is required',
+                      control: registrationForm.controls['DOB']
+                    }"></ng-container>
+                  </div>
+                </div>
+              </div>              
+              <!-- password -->
+              <div class="col-md-6 col-sm-12 py-2">
                 <div class=" custom-input-field">
                   <label>Password</label>
                   <div class="tooltip-wrapper">
@@ -75,30 +103,9 @@
                     control: registrationForm.controls['Password']
                   }"></ng-container>
                 </div>
-
               </div>
+              <!-- confirm password -->
               <div class="col-md-6 col-sm-12 py-2">
-                <div class="custom-input-field">
-                  <label>Last Name</label>
-                  <input type="text" class="custom-input" name="lastname" formControlName="LastName"
-                    placeholder="Last Name">
-                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                  validation: 'required',
-                  message: 'Last name is required',
-                  control: registrationForm.controls['LastName']
-                }"></ng-container>
-                </div>
-                <div class="custom-input-field">
-                  <label>Date of Birth </label>
-                  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-                    <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
-                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                      validation: 'required',
-                      message: 'Date of birth is required',
-                      control: registrationForm.controls['DOB']
-                    }"></ng-container>
-                  </div>
-                </div>
                 <div class="custom-input-field pswd-field">
                   <label>Confirm Password</label>
                   <div class="p-relative">
@@ -111,40 +118,39 @@
                       'fa-eye-slash': !passwordViewer.confirmPasswordFieldTextType,
                       'fa-eye': passwordViewer.confirmPasswordFieldTextType
                     }"></span>
-
+                  </div>
+                </div>
+                <span class="text-danger" *ngIf="registrationForm.controls['confirmPassword'].hasError('mismatch')">Password do not match.</span>
+              </div>                    
                     <!-- <ng-container *ngIf="
-                  registrationForm.controls['confirmPassword'].errors &&
-                  registrationForm.controls['confirmPassword'].errors.ConfirmPassword
-                ">
+                      registrationForm.controls['confirmPassword'].errors &&
+                      registrationForm.controls['confirmPassword'].errors.ConfirmPassword
+                      ">
                       <div class="fv-plugins-message-container">
                         <div class="fv-help-block">
                           'Passsword' and 'Confirm Password' didn't match.
                         </div>
                       </div>
                     </ng-container> -->
-                  </div>
-                </div>
-                <span class="text-danger" *ngIf="registrationForm.controls['confirmPassword'].hasError('mismatch')">Password do not match.</span>
-              </div>
-              <div class="col-sm-12 custom-margin text-right mobile-padding-btns">
-                <label class="custom-checkbox">
-                  <input type="checkbox" formControlName="agree" name="agree">
-                  <p class="small-text">I agree to BnBYacht's <a href="javascript:void(0)"
-                      class="underline-blue-link"> Terms of Service, disclaimer, and Privacy Policy.</a></p>
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="col-sm-12 py-2 pb-3 text-center">
-                <button type="submit" class="custom-btn blue big-btn"
-                  [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value">Continue</button>
-              </div>
-              <!-- <div class="col-sm-12 text-center">
+            </div>
+            <div class="col-sm-12 custom-margin text-right mobile-padding-btns">
+              <label class="custom-checkbox">
+                <input type="checkbox" formControlName="agree" name="agree">
+                <p class="small-text">I agree to BnBYacht's <a href="javascript:void(0)"
+                    class="underline-blue-link"> Terms of Service, disclaimer, and Privacy Policy.</a></p>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="col-sm-12 py-2 pb-3 text-center">
+              <button type="submit" class="custom-btn blue big-btn"
+                [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value">Continue</button>
+            </div>
+            <!-- <div class="col-sm-12 text-center">
               <p class="small-text light">Already have an Account? <a href="javascript:void(0)"  (click)="login()" class="underline-blue-link">Log in</a></p>
             </div> -->
-            </div>
-          </div>
+          </div><!-- form inner text -->              
         </div>
-      </div>
+      </div>        
     </form>
   </div>
 </div>
