@@ -129,17 +129,17 @@ export class ModifyReservationComponent implements OnInit {
     let noOfDays = utils.differenceWithoutAddition(checkoutLatestDateTime,checkoutCombindDateTime);
     if (hour > 72) {
       this.deductedAmount = 0;
-      this.refundableAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays;
+      this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
     }
     if (hour == 72 ||(hour < 72 && hour >= 24)) {
-      this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges *  this.totalDays /2;
+      this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges *  noOfDays /2 ;
 
-      this.refundableAmount =  this.deductedAmount - this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays;
+      this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
 
     }
     if (hour < 24) {
       this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges * 1;
-      this.refundableAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays;
+      this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
     }
 
   }
@@ -225,6 +225,7 @@ export class ModifyReservationComponent implements OnInit {
         userName: null,
         reviews: null
       };
+      console.log(bookingModel);
       this.bookingService.modifyboatelBooking(bookingModel).subscribe(res => {
         if (res) {
           let boatCalendar = {

@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\shared\BnBYachts.Shared\BnBYachts.Shared.csproj" />
+    <ProjectReference Include="..\..\..\boat\src\BnBYachts.Boat.Domain.Shared\BnBYachts.Boat.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

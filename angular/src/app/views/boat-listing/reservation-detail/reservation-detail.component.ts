@@ -31,7 +31,7 @@ export class ReservationDetailComponent implements OnInit {
   isHost: boolean = false;
   USER_ROLES = UserRoles;
   today = new Date().toLocaleDateString();
-
+  bookingStatus:any;
   checkedCheckinDate: any;
   checkinTime: any;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
@@ -157,9 +157,8 @@ export class ReservationDetailComponent implements OnInit {
     });
 
   }
-
-  }
-  isCheckinStarted(checkinDate: string, checkinTime: string) {
+  isCheckinStarted(checkinDate: string, checkinTime: string)
+  {
     if (checkinDate != undefined && checkinTime != undefined) {
       debugger;
       if (moment(checkinDate).format("DD-MM-YYYY") == moment().format("DD-MM-YYYY")
@@ -180,5 +179,8 @@ export class ReservationDetailComponent implements OnInit {
 
 
   }
+  }
 
-}
+
+
+
