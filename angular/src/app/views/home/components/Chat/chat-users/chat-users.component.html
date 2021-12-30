@@ -1,0 +1,40 @@
+<div class="bg-grey-light border-radius-5 p-2">
+  <div class="image-with-text">
+    <div class="image-with-text-inner small-img">
+      <img src="../../../../../../assets/images/user-img.png" alt="">
+      <div class="user-details">
+        <!-- <p class="medium">{{userInfo?.name}}</p> -->
+        <p> Sender Name</p>
+        <p class="small-text grey">Basic Information</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="search-wrapper custom-input-field">
+  <input type="text" class="custom-input border-radius-5" placeholder="Search" [(ngModel)]="searchText"><i
+    class="fa fa-search"></i>
+</div>
+
+<div class="users-wrap custom-card">
+  <div class="users-wrap-inner custom-flex-start">
+    <p>Users</p>
+  </div>
+  <div class="user-providers-list">
+    <a style="cursor: pointer !important;" *ngFor="let item of chatUsers | filter : searchText : 'fullName'"
+      (click)="getUserChat(item)" [ngClass]="{'active': isActive(item?.userId)}" class="image-with-text">
+      <div class="image-with-text-inner small-img">
+        <img src="../../../../../../assets/images/user-img.png" alt="">
+        <div class="user-details">
+          <p class="medium">{{item?.name}}</p>
+          <p class="small-text grey">{{item?.email}}</p>
+        </div>
+      </div>
+    </a>
+    <div *ngIf="(chatUsers | filter : searchText : 'fullName')?.length == 0">
+      <div class="text-center">
+        <img src="../../../../assets/images/no-user-found.jpg" />
+        <p>No users found</p>
+      </div>
+    </div>
+  </div>
+</div>

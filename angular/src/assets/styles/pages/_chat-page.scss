@@ -9,7 +9,7 @@
     }
     .chat-wrap-bg-blue{
         position: relative;
-        background-color: #F9FAFF;
+        background-color: $white-color;
         margin: 10px 0;
         padding: 30px 0 0;
         height: calc(100vh - 260px);
@@ -19,26 +19,13 @@
         // }
         .image-with-text{
             padding: 20px 0;
-            &:nth-child(even){
-                .image-with-text-inner {
-                    align-items: flex-end;
-                    
-                }
-            }
-            &:nth-child(odd){
-                .image-with-text-inner {
-                    align-items: flex-end;
-                    flex-direction: row-reverse;
-                    p{
-                        margin-left: auto;
-                        padding-right: 15px;
-                    }
-                }
-            }
             .user-details{
+                max-width: 500px;
+                width: auto !important;
                 p{
                     max-width: 650px;
-                  background-color: $white-color;
+                  background-color:$gray-400;
+                  color: $new-black-color;
                   padding: 10px;
                   border-radius: 5px;
                   border-bottom-left-radius: 0;
@@ -46,6 +33,7 @@
               }
               &.bg-blue-text{
                   .user-details{
+                      margin-right: 20px !important;
                     p{
                         background-color: $brand-color;
                         color: $white-color;

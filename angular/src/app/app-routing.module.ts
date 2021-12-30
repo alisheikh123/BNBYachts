@@ -7,6 +7,7 @@ import { ActivateAccountComponent } from './views/auth/components/activate-accou
 import { TryHostingComponent } from './views/common/try-hosting/try-hosting.component';
 import { MyProfileComponent } from './views/common/user-profile/my-profile/my-profile.component';
 import { UpdateProfileComponent } from './views/common/user-profile/update-profile/update-profile.component';
+import { ChatComponent } from './views/home/components/Chat/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,12 @@ const routes: Routes = [
   {
     path: 'wishlists',
     loadChildren: () => import('./views/wishlists/wishlists.module').then(m => m.WishListsModule)
+  },
+  {
+    path: "chat/:id", component: ChatComponent
+  },
+  {
+    path: "chat", component: ChatComponent
   }
 ];
 

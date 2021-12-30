@@ -24,6 +24,7 @@ import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
 import { AddReviewModalComponent } from './views/common/add-review-modal/add-review-modal.component';
 import { TranslateService } from './core/translate.service';
 import { NgbCustomDateParserFormatter } from './shared/formatters/datepicker-formatter';
+import { ChatService } from './core/chat/chat.service';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { NgbCustomDateParserFormatter } from './shared/formatters/datepicker-for
     },
     LoaderService,
     BookingService,
+    ChatService,
     {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter},
     TranslateService,
     {
@@ -80,7 +82,7 @@ import { NgbCustomDateParserFormatter } from './shared/formatters/datepicker-for
       deps: [TranslateService],
       multi: true
     },
-    { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter } 
+    { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter }
   ],
   bootstrap: [AppComponent]
 })

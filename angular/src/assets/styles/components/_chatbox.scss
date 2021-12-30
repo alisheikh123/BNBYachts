@@ -5,6 +5,7 @@
         padding: 5px;
         margin: 5px 0;
         @include custom-transition;
+       
         &::before{
             content: '';
             position: absolute;
@@ -32,6 +33,7 @@
         &:nth-child(odd){
             .image-with-text-inner {
                 .user-details{
+                
                     p{
                         margin-left: auto !important;
                     }

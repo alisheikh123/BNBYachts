@@ -14,6 +14,8 @@ import { textChangeRangeIsUnchanged } from 'typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { HubConnection,HubConnectionBuilder} from '@microsoft/signalr';
+import { ChatComponent } from '../../home/components/Chat/chat/chat.component';
 
 
 @Component({
@@ -28,6 +30,8 @@ export class HeaderComponent implements OnInit {
   // }
   // ,private oAuthService: OAuthService
   userDetails: any;
+  private _hubConnection!: HubConnection;
+  private readonly socketUrl = environment.CHAT_API_URL + '/chatsocket';
   canSwitchAccount: boolean = false;
   USER_ROLE = UserRoles;
   USER_DEFAULTS = UserDefaults;
@@ -37,6 +41,7 @@ export class HeaderComponent implements OnInit {
     byHost : false,
     byServiceProvider : false
   };
+  @ViewChild(ChatComponent) chatComponent: ChatComponent;
   constructor(public router: Router, public app: AppComponent, private toastr: ToastrService, private modal: NgbModal, private oidcSecurityService: OidcSecurityService, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -136,5 +141,4 @@ export class HeaderComponent implements OnInit {
       this.modal.dismissAll();
     }
   }
-
 }

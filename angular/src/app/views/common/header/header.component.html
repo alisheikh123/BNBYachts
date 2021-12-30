@@ -67,7 +67,7 @@
                                     Service Provider
                                 </span>
                             </a>
-                            <a href="" class="underline-link-blk">
+                            <a [routerLink]="['/chat']" class="underline-link-blk">
                                 <span>
 
                                     Inbox
@@ -119,7 +119,7 @@
                                     <p class="header-content small-text">{{userDetails?.name}}</p>
                                 </li>
                                 <li><a class="dropdown-item" [routerLink]="['/boat-listing/all-reservations']" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
-                                <li><a class="dropdown-item" href="#">Messages</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/chat']">Messages</a></li>
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>

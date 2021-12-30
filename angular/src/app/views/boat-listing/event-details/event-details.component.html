@@ -51,31 +51,31 @@
                                             <div class="col-xl-6 py-2">
                                                 <h6 class="bold">Event Details</h6>
                                                 <div class="tabs-inner-details-inner">
-                                                    <div class="custom-flex-start py-1">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Event Name:</p>
+                                                    <div class="custom-flex-start py-1 align-items-start depart-date-lg-view">
+                                                        <div class="custom-flex align-items-start mobile-width-100">
+                                                            <p class="medium min-width-text small-content">Event Name:</p>
                                                             <p class="min-width-text-small">
                                                                 {{eventDetails?.title}}</p>
                                                         </div>
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text-small">Event Capacity:</p>
-                                                            <p>{{eventDetails?.guestCapacity}} Guests</p>
+                                                        <div class="custom-flex align-items-start mobile-width-100">
+                                                            <p class="medium min-width-text small-content">Event Capacity:</p>
+                                                            <p class="min-width-text-small">{{eventDetails?.guestCapacity}} Guests</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Event Date:</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content">Event Date:</p>
                                                             <p class="min-width-text-small">
                                                                 {{eventDetails?.startDateTime | date:'dd-MMM-YYYY'}}</p>
                                                         </div>
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text-small">Remaining:</p>
-                                                            <p>{{eventDetails?.guestCapacity}}</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text  small-content">Remaining:</p>
+                                                            <p class="min-width-text-small">{{eventDetails?.guestCapacity}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Event type:</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content ">Event type:</p>
                                                             <p class="min-width-text-small">
                                                                 {{eventDetails?.eventType == 0 ? 'Adult':'Family'}}</p>
                                                         </div>
@@ -102,7 +102,7 @@
                                             <div class="col-xl-6 py-2">
                                                 <div class="row pb-2 m-0 check-in-out-wrap">
                                                     <div class="col-md-6 py-2">
-                                                        <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row"
+                                                        <div class="custom-date-month-view"
                                                             *ngIf="eventSchedule?.length > 0">
                                                             <span class="fas fa-chevron-left"
                                                                 (click)="onChangeDate(false)"
