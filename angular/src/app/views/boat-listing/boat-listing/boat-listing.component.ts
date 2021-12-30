@@ -107,7 +107,7 @@ export class BoatListingComponent implements OnInit {
       this.defaultFeatures = res;
     });
   }
-  
+
   applyAdditionalFilters() {
     this.isFilterAdded = true;
     this.boats = Object.assign([], this.allBoats);
@@ -144,12 +144,12 @@ export class BoatListingComponent implements OnInit {
     this.activeModal.close();
   }
   reset(){
-    this.isFilterAdded = false; 
+    this.isFilterAdded = false;
     this.boats = Object.assign([], this.allBoats);
     this.minPrice = 0;
     this.maxPrice = 0;
     this.defaultFeatures.forEach((element:any) => {
-      element.isChecked = false;      
+      element.isChecked = false;
     });
   }
   openInfoWindow(marker: MapMarker, data: any) {
