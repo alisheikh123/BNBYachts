@@ -11,5 +11,6 @@ namespace BnBYachts.Booking
         Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data);
         Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data);
         Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data);
+        Task<EntityResponseModel> GetBookingCancellationDetail(long bookingId);
     }
 }
