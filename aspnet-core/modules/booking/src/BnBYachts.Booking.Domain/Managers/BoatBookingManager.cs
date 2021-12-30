@@ -42,6 +42,8 @@ namespace BnBYachts.Booking.Managers
 
         public async Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data, Guid? userId, string userName, string email)
         {
+            data.CheckinDate = data.CheckinDate.Date;
+            data.CheckoutDate = data.CheckoutDate.Date;
             var boatelEntity = _objectMapper.Map<BoatelBookingRequestableDto, BoatelBookingEntity>(data);
             boatelEntity.LastModifierId = boatelEntity.CreatorId = userId;
             boatelEntity.UserId = userId.ToString();
