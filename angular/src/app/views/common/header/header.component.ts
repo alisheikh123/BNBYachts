@@ -112,14 +112,16 @@ export class HeaderComponent implements OnInit {
   switchRole() {
     if (this.app.loggedInUserRole == this.USER_ROLE.user) {
       this.app.loggedInUserRole = this.USER_ROLE.host;
+      this.router.navigate(['host-dashboard']);
       this.toastr.success('Account switched to host.', 'Success');
     }
     else {
       this.app.loggedInUserRole = this.USER_ROLE.user;
+      this.router.navigate(['']);
       this.toastr.success('Account switched to user.', 'Success');
     }
     localStorage.setItem('userRole', this.app.loggedInUserRole);
-    this.router.navigate(['']);
+    
   }
   earn() {
     if(this.isLoggedIn){

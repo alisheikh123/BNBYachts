@@ -3,9 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from 'src/app/app.component';
 import { AllHostBoatsService } from 'src/app/core/host/all-host-boats.service';
 import { OnboardingService } from 'src/app/core/host/onboarding.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { UserRoles } from 'src/app/shared/enums/user-roles';
 import { BoatTypes, FeaturesTypes, OnBoardingTabs } from 'src/app/shared/enums/yacht-search.constant';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
@@ -40,10 +42,18 @@ export class HostOnboardingComponent implements OnInit {
   isHostOnboarding:boolean = false;
 
   otherGalleryImages: any[] = [];
+  USER_ROLES=UserRoles;
 
 
-  constructor(private fb: FormBuilder, private onBoardingService: OnboardingService, private modal: NgbModal, private toastr: ToastrService
-    , private router: Router,private boatService:AllHostBoatsService) {
+  constructor(
+    private fb: FormBuilder,
+    private onBoardingService: OnboardingService, 
+    private modal: NgbModal, 
+    private toastr: ToastrService, 
+    private router: Router,
+    private boatService:AllHostBoatsService,
+    public app: AppComponent
+    ) {
   }
 
   ngOnInit(): void {
@@ -208,8 +218,10 @@ export class HostOnboardingComponent implements OnInit {
           if (res.isHostExists == false) {
             this.onBoardingService.addHostRole().subscribe(res => {
               if (res == true) {
-                this.toastr.success("Host onboarding successfully.", "Boat");
+                this.toastr.success("Host Onboarding Completed!", "Boat");
                 this.router.navigate(['host/host-boat-listing']);
+                this.app.loggedInUserRole = this.USER_ROLES.host;
+                localStorage.setItem('userRole', this.app.loggedInUserRole);
                 setTimeout(() => {
                   window.location.reload();
                 }, 3000);

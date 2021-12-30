@@ -7,7 +7,7 @@
       <div class="user-details">
         <p class="medium py-2">{{item?.name}}</p>
         <p class="">Listing Status:<span [ngClass]="{'text-success' : item?.isActive, 'text-danger':!item?.isActive}">
-            {{item?.isActive ? "Active":"Deactive"}} </span></p>
+            {{item?.isActive ? "Active":"Inactive"}} </span></p>
         <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht?
           "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power
           Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing
