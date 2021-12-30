@@ -124,8 +124,8 @@
         <div *ngIf="booking?.bookingStatus == BOOKING_STATUS.Cancel"></div>
         <div *ngIf="checkedCheckinDate == today"></div>
         <div *ngIf="booking?.bookingStatus != BOOKING_STATUS.Cancel">
-          <div *ngIf="checkedCheckinDate != today">
-            <div *ngIf="checkedCheckinDate > today">
+          <div *ngIf="isCheckinStarted(checkedCheckinDate,checkinTime)">
+            <!-- <div *ngIf="checkedCheckinDate > today"> -->
               <div class="center-content">
                 <a [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
@@ -135,7 +135,7 @@
                   *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
                   class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
               </div>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
 

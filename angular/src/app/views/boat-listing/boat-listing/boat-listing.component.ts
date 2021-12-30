@@ -107,7 +107,7 @@ export class BoatListingComponent implements OnInit {
       this.defaultFeatures = res;
     });
   }
-  
+
   applyAdditionalFilters() {
     this.isFilterAdded = true;
     this.boats = Object.assign([], this.allBoats);
@@ -115,7 +115,7 @@ export class BoatListingComponent implements OnInit {
       this.boats = this.boats.filter(res => res?.totalBedrooms >= this.roomCount && res?.totalWashrooms >= this.bathroomCount);
     }
     //for additional filters
-    debugger;
+
     let selectedFeaturs = this.defaultFeatures.filter((res: any) => res?.isChecked == true);
     this.boats.forEach((boat: any, index) => {
       selectedFeaturs.forEach((elem: any) => {
@@ -145,12 +145,12 @@ export class BoatListingComponent implements OnInit {
     this.activeModal.close();
   }
   reset(){
-    this.isFilterAdded = false; 
+    this.isFilterAdded = false;
     this.boats = Object.assign([], this.allBoats);
     this.minPrice = 0;
     this.maxPrice = 0;
     this.defaultFeatures.forEach((element:any) => {
-      element.isChecked = false;      
+      element.isChecked = false;
     });
   }
   openInfoWindow(marker: MapMarker, data: any) {

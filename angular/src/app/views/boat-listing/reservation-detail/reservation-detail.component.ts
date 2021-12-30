@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -30,8 +31,9 @@ export class ReservationDetailComponent implements OnInit {
   isHost: boolean = false;
   USER_ROLES = UserRoles;
   today = new Date().toLocaleDateString();
+  bookingStatus:any;
   checkedCheckinDate: any;
-  bookingStatus: number;
+  checkinTime: any;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
   constructor(private service: BookingService
@@ -49,7 +51,25 @@ export class ReservationDetailComponent implements OnInit {
     userRole == this.USER_ROLES.host
       ? (this.isHost = true)
       : (this.isHost = false);
-    this.isBookingStatusCancel(this.bookingId);
+    //
+
+    this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
+      this.booking = res;
+      this.currentDate = new Date();
+      this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
+      this.checkInDate = new Date(this.booking?.checkinDate);
+      this.checkOutDate = new Date(this.booking?.checkoutDate);
+      this.totalDays = Math.ceil((this.checkOutDate - this.checkInDate) / 8.64e7) + 1;
+      this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
+        this.booking.boatDetail = boatdetail;
+        this.booking.TotalDays = this.totalDays;
+        this.booking.checkinDate = this.checkInDate;
+        this.booking.checkoutDate = this.checkOutDate;
+        this.boatDetail = boatdetail;
+        this.checkinTime = this.booking?.boatDetail?.checkinTime;
+      });
+
+    });
     this.isReviewPosted();
   }
   addReview() {
@@ -136,8 +156,30 @@ export class ReservationDetailComponent implements OnInit {
     });
 
   }
+  isCheckinStarted(checkinDate: string, checkinTime: string)
+  {
+    if (checkinDate != undefined && checkinTime != undefined) {
+      debugger;
+      if (moment(checkinDate).format("DD-MM-YYYY") == moment().format("DD-MM-YYYY")
+      &&moment(checkinTime).format("HH:mm") > moment().format("HH:mm")) {
+        return true;
+      }
+      if(moment(checkinDate).format("DD-MM-YYYY")>moment().format("DD-MM-YYYY"))
+      {
+       return true;
+      }
+      else {
+        return false;
+      }
+
+    }
+
+    return false;
 
 
-}
+  }
+  }
+
+
 
 
