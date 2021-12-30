@@ -3,7 +3,9 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ActivatedRoute } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
 import { environment } from 'src/environments/environment';
@@ -18,15 +20,17 @@ export class ChatComponent implements OnInit {
   private _hubConnection!: HubConnection;
   private readonly socketUrl = environment.CHAT_API_URL + '/chatsocket';
   userInfo: any;
-  recieverInfo: any;
   userMessages: any;
   isChatLoaded: boolean = false;
+  recieverInfo:any;
   chat = {
     user: '',
     message: '',
     senderId: '',
     receiverId: '',
-    isSender: false
+    isSender: false,
+    blockedUser: false,
+    isBlockedByMe: false
   };
   @ViewChild('chatScrollContainer') private chatScrollContainer: ElementRef;
 
@@ -35,7 +39,9 @@ export class ChatComponent implements OnInit {
   constructor(
     private chatService: ChatService,
     private authService: AuthService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService,
+    public app:AppComponent
   ) {
     this.chat.receiverId = this.activatedRoute.snapshot.params['id'];
     this.chat.senderId = localStorage.getItem('userId')?.toString() || "";
@@ -44,8 +50,7 @@ export class ChatComponent implements OnInit {
     if (this.chat.receiverId) {
       this.getAllChats().subscribe(res => {
         this.isChatLoaded = true;
-        this.recieverInfo = res[0];
-        this.userMessages = res[1]?.chats;
+        this.userMessages = res[0]?.chats;
         setTimeout(() => { this.scrollToBottom(); }, 1);
       })
     }
@@ -55,19 +60,22 @@ export class ChatComponent implements OnInit {
   }
 
   getAllChats() {
-    let response1 = this.authService.getUserInfoById(this.chat.receiverId);
-    let response2 = this.chatService.getUserChat(this.chat.receiverId);
-    return forkJoin([response1, response2]);
+    let response1 = this.chatService.getUserChat(this.chat.receiverId);
+    return forkJoin([response1]);
   }
 
   getChat(user: any) {
     this.recieverInfo = user;
-    this.isChatLoaded = true;
+    debugger;
     this.chat.receiverId = user.userId;
     this.chatService
       .getUserChat(user.userId)
       .subscribe((res: any) => {
         this.userMessages = res?.chats;
+        this.chat.blockedUser = res?.isBlockedUser;
+        this.chat.isBlockedByMe = res?.isBlockedByMe;
+        this.app.unReadChatCount = this.app.unReadChatCount - user.unReadChatsCount;
+        user.unReadChatsCount = 0;
         setTimeout(() => { this.scrollToBottom(); }, 1);
       });
   }
@@ -101,6 +109,7 @@ export class ChatComponent implements OnInit {
     /////Calls when message is broadcast to the reciever...
     this._hubConnection.on('sendToUser', (res) => {
       this.userMessages.push(res);
+      this.app.unReadChatCount = this.app.unReadChatCount +1;
       setTimeout(() => { this.scrollToBottom(); }, 1);
     });
   }
@@ -112,9 +121,17 @@ export class ChatComponent implements OnInit {
   isReciever(recieverId: string, senderId: string) {
     return recieverId.toLowerCase() == senderId.toLowerCase();
   }
-  blockUser(user: any) {
-    this.chatService.blockUser(user.id).subscribe(res => {
-
+  changeStatus() {
+    this.chatService.changeStatus(this.chat.receiverId, !this.chat.blockedUser).subscribe(res => {
+      this.chat.blockedUser = !this.chat.blockedUser;
+      this.chat.isBlockedByMe = this.chat.blockedUser;
+      this.toastr.success("User blocked successfully", "Blocked");
+    })
+  }
+  archiveChat(isArchive:boolean) {
+    this.chatService.archiveChat(this.chat.receiverId,isArchive).subscribe(res => {
+      this.userMessages= this.userMessages.filter((res:any)=>res.receiverId != this.chat.receiverId && res.senderId != this.chat.senderId);
+      this.toastr.success("Chat Archived successfully", "Archived");
     })
   }
 }

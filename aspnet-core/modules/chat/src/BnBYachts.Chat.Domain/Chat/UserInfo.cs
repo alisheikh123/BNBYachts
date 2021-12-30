@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Domain.Entities.Auditing;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Chat.Chat
 {
@@ -9,5 +10,8 @@ namespace BnBYachts.Chat.Chat
         public string Name { get; set; }
         public string Email { get; set; }
         public string ImagePath { get; set; }
+        public virtual int? UnReadChatsCount { get; set; }
+        [NotMapped]
+        public bool IsArchivedUser { get; set; }
     }
 }

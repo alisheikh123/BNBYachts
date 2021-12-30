@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3 py-2">
-          <app-chat-users [recieverUser]="recieverInfo" [activeUserId]="chat.receiverId"
+          <app-chat-users  [activeUserId]="chat.receiverId"
             (onChangeUser)="getChat($event)"></app-chat-users>
         </div>
         <div class="col-md-6 py-2">
@@ -15,6 +15,16 @@
                   <p class="medium">{{recieverInfo?.name}}</p>
                   <p class="small-text grey">{{recieverInfo?.email}}</p>
                 </div>
+                <div class="dropdown custom-dropdown no-border">
+                  <button class="dropdown-btn dropdown-toggle no-border" type="button" id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-ellipsis-v"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><button class="dropdown-item" (click)="changeStatus()" *ngIf="chat.isBlockedByMe || !chat.blockedUser">{{chat.blockedUser ? 'Unblock':'Block'}}</button></li>
+                      <li><button class="dropdown-item" (click)="archiveChat(!recieverInfo?.isArchivedUser)">{{!recieverInfo?.isArchivedUser ? 'Archive Chat':'Unarchive chat'}}</button></li>
+                  </ul>
+              </div>
               </div>
             </div>
           </div>
@@ -34,7 +44,9 @@
                 </div>
               </div>
             </div>
-            <div class="message-box px-3">
+            <p class="text-center bold" *ngIf="chat.blockedUser">You cannot reply to this conversion...</p>
+
+            <div class="message-box px-3" *ngIf="!chat.blockedUser">
               <form>
                 <div class="form-floating custom-input-field">
                   <input type="text" name="message" class="custom-input big-input" [(ngModel)]="chat.message"

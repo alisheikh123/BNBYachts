@@ -15,12 +15,20 @@ export class ChatService {
   getUserChat(userId: string) {
     return this.http.get<any>(this.apiURl + '/user-chats/' + userId)
   }
-  getAllUsers() {
-    return this.http.get<any>(this.apiURl + '/users')
+  getAllUsers(hostId:any) {
+    return this.http.get<any>(this.apiURl + '/users/'+hostId)
   }
 
-  blockUser(blockedUserId: string) {
-    return this.http.get<any>(this.apiURl + '/block-user/' + blockedUserId)
+  changeStatus(blockedUserId: string,isBlock:boolean) {
+    return this.http.post<any>(this.apiURl + '/block-user/' + blockedUserId+'?isBlock='+isBlock,null)
+  }
+
+  archiveChat(archivedUserId:string,isArchive:boolean){
+    return this.http.post<any>(this.apiURl + '/archive-chats/'+archivedUserId+'?isArchive='+isArchive,null)
+  }
+
+  getUnreadCount(){
+    return this.http.get<number>(this.apiURl + '/un-read-chat-counts')
   }
 
 }

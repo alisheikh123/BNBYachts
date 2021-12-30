@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HubConnection,HubConnectionBuilder} from '@microsoft/signalr';
 import { ChatComponent } from '../../home/components/Chat/chat/chat.component';
+import { ChatService } from 'src/app/core/chat/chat.service';
 
 
 @Component({
@@ -42,7 +43,10 @@ export class HeaderComponent implements OnInit {
     byServiceProvider : false
   };
   @ViewChild(ChatComponent) chatComponent: ChatComponent;
-  constructor(public router: Router, public app: AppComponent, private toastr: ToastrService, private modal: NgbModal, private oidcSecurityService: OidcSecurityService, private authService: AuthService) { }
+  constructor(public router: Router, public app: AppComponent, 
+    private toastr: ToastrService, private modal: NgbModal, 
+    private oidcSecurityService: OidcSecurityService, 
+    private authService: AuthService,private chatService:ChatService) { }
 
   ngOnInit(): void {
     this.oidcSecurityService
@@ -59,6 +63,7 @@ export class HeaderComponent implements OnInit {
         if (userId != null) {
           this.authService.authenticated = true;
           this.getUserDetails();
+          this.getUnreadChatCount();
         }
       });
   }
@@ -84,6 +89,11 @@ export class HeaderComponent implements OnInit {
         }
         this.isLoggedIn = true;
       }
+    })
+  }
+  getUnreadChatCount() {
+    this.chatService.getUnreadCount().subscribe(res => {
+      this.app.unReadChatCount = res;
     })
   }
 

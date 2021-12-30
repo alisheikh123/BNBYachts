@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { reverse } from 'dns';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ChatService } from 'src/app/core/chat/chat.service';
 
 @Component({
@@ -9,40 +9,46 @@ import { ChatService } from 'src/app/core/chat/chat.service';
 })
 export class ChatUsersComponent implements OnInit {
   userId: string;
+  allChatUsers: any[] = [];
   chatUsers: any[] = [];
   searchText: string;
   @Input() activeUserId: string;
-  @Input() recieverUser: any;
   @Output() onChangeUser: EventEmitter<any> = new EventEmitter();
+  isArchivedChats: boolean = true;
+  hostId = null;
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private activatedRoute: ActivatedRoute) {
     this.userId = localStorage.getItem('userId') || ' ';
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(res => {
+      this.hostId = res['id'];
+    });
     this.getAllUsers();
   }
 
   getAllUsers() {
-    this.chatService.getAllUsers().subscribe((res) => {
-      this.chatUsers = [...new Map(res.map((item: any) =>
+    this.chatService.getAllUsers(this.hostId).subscribe((res) => {
+      this.allChatUsers = [...new Map(res.map((item: any) =>
         [item?.['userId'], item])).values()];
-      if (this.recieverUser) {
-        var find = this.chatUsers.find((res: any) => res?.userId.toLowerCase() == this.recieverUser?.id.toLowerCase());
-        if (!find) {
-          this.chatUsers.push({ userId: this.recieverUser.id, userName: this.recieverUser.userName, name: this.recieverUser.name, email: this.recieverUser.email });
-        }
-      }
-      else if (!this.recieverUser && this.chatUsers.length > 0) {
-        this.onChangeUser.emit(this.chatUsers[0]);
-      }
+      this.filterUsers();
     });
   }
+
   isActive(userId: string) {
     return userId?.toUpperCase() == this.activeUserId?.toUpperCase();
   }
   getUserChat(user: any) {
     this.activeUserId = user.userId;
     this.onChangeUser.emit(user);
+  }
+  filterUsers() {
+    this.isArchivedChats = !this.isArchivedChats;
+    let users = this.allChatUsers.filter(res => res.isArchivedUser == this.isArchivedChats);
+    this.chatUsers = Object.assign([], users);
+    if (this.chatUsers.length > 0) {
+      this.onChangeUser.emit(this.chatUsers[0]);
+    }
   }
 }

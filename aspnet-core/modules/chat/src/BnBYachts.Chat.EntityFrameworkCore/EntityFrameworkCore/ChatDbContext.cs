@@ -15,6 +15,7 @@ namespace BnBYachts.Chat.EntityFrameworkCore
         public DbSet<ChatRoom> ChatRooms{ get; set; }
         public DbSet<UserInfo> UserDetails{ get; set; }
         public DbSet<BlockedUsersEntity> BlockedUsers { get; set; }
+        public DbSet<ArchivedChatsEntity> ArchivedChats { get; set; }
         #endregion
         public ChatDbContext(DbContextOptions<ChatDbContext> options)
             : base(options)

@@ -17,20 +17,28 @@
 
 <div class="users-wrap custom-card">
   <div class="users-wrap-inner custom-flex-start">
-    <p>Users</p>
+    <div class="dropdown custom-dropdown">
+      <button class="dropdown-btn dropdown-toggle no-border" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{isArchivedChats ? 'Archived Chats':'Unarchived Chats'}}
+        <i class="fa fa-angle-down"></i>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><button class="dropdown-item" (click)="filterUsers()">{{!isArchivedChats ? 'Archived Chats':'Unarchived Chats'}}</button></li>
+      </ul>
+    </div> 
   </div>
   <div class="user-providers-list">
-    <a style="cursor: pointer !important;" *ngFor="let item of chatUsers | filter : searchText : 'fullName'"
+    <a style="cursor: pointer !important;" *ngFor="let item of chatUsers | filter : searchText : 'name'"
       (click)="getUserChat(item)" [ngClass]="{'active': isActive(item?.userId)}" class="image-with-text">
       <div class="image-with-text-inner small-img">
         <img src="../../../../../../assets/images/user-img.png" alt="">
         <div class="user-details">
-          <p class="medium">{{item?.name}}</p>
+          <p class="medium">{{item?.name}}<span class="pl-3 badge bg-blue" style="float:right;" *ngIf="item?.unReadChatsCount > 0">{{item?.unReadChatsCount}}</span></p>
           <p class="small-text grey">{{item?.email}}</p>
         </div>
       </div>
     </a>
-    <div *ngIf="(chatUsers | filter : searchText : 'fullName')?.length == 0">
+    <div *ngIf="(chatUsers | filter : searchText : 'name')?.length == 0">
       <div class="text-center">
         <img src="../../../../assets/images/no-user-found.jpg" />
         <p>No users found</p>

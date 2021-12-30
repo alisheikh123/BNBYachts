@@ -17,6 +17,7 @@ namespace BnBYachts.Chat.Transferables
     {
         public ICollection<ChatTransferable> Chats { get; set; }
         public bool IsBlockedUser { get; set; }
+        public bool IsBlockedByMe { get; set; }
         public ChatMessagesTransferable()
         {
             Chats = new HashSet<ChatTransferable>();
