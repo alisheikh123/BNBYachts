@@ -168,16 +168,6 @@ export class ModifyReservationComponent implements OnInit {
   }
 
   }
-  // toDate(dob: any) {
-  //   const [year, month, day] = dob.split('-');
-  //   const obj = {
-  //     year: parseInt(year), month: parseInt(month), day:
-  //       parseInt(day.split(' ')[0].trim())
-  //   };
-  //   let obj2 = JSON.stringify(obj);
-  //   return obj2;
-
-  // }
   setMaxDate(item:any){
     let date = new Date(item);
     this.boatFilterDetails.checkoutDate = this.boatFilterDetails.checkinDate;
