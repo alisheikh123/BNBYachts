@@ -118,10 +118,7 @@ namespace BnBYachts.Booking.Managers
         }
         public async Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data, Guid? userId, string userName)
         {
-            //BookingRefundableRequestableDto refundDto = new();
-
             var booking = await _boatelBookingRepository.GetAsync(data.Id);
-
             if (booking != null)
             {
                 booking.CheckinDate = data.CheckinDate.Date;

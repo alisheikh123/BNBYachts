@@ -95,7 +95,6 @@ export class ModifyReservationComponent implements OnInit {
       this.totalDays = Math.ceil(Time / (1000 * 60 * 60 * 24))+1;
       this.service.getBoatInfo(res?.boatId).subscribe((boatdetail: any) => {
         this.bookingModifyDetail.boatDetail = boatdetail;
-        console.log(boatdetail);
         this.checkinTime = this.bookingModifyDetail?.boatDetail?.checkinTime;
         this.checkoutTime = this.bookingModifyDetail?.boatDetail?.checkoutTime;
       });
@@ -169,16 +168,16 @@ export class ModifyReservationComponent implements OnInit {
   }
 
   }
-  toDate(dob: any) {
-    const [year, month, day] = dob.split('-');
-    const obj = {
-      year: parseInt(year), month: parseInt(month), day:
-        parseInt(day.split(' ')[0].trim())
-    };
-    let obj2 = JSON.stringify(obj);
-    return obj2;
+  // toDate(dob: any) {
+  //   const [year, month, day] = dob.split('-');
+  //   const obj = {
+  //     year: parseInt(year), month: parseInt(month), day:
+  //       parseInt(day.split(' ')[0].trim())
+  //   };
+  //   let obj2 = JSON.stringify(obj);
+  //   return obj2;
 
-  }
+  // }
   setMaxDate(item:any){
     let date = new Date(item);
     this.boatFilterDetails.checkoutDate = this.boatFilterDetails.checkinDate;
@@ -225,7 +224,6 @@ export class ModifyReservationComponent implements OnInit {
         userName: null,
         reviews: null
       };
-      console.log(bookingModel);
       this.bookingService.modifyboatelBooking(bookingModel).subscribe(res => {
         if (res) {
           let boatCalendar = {
