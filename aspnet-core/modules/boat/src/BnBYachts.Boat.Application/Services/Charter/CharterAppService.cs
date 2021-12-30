@@ -7,6 +7,7 @@ using BnBYachts.Charter.Interface;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Shared.Model;
+using BnBYachts.Boat.Shared.Boat.Requestable;
 
 namespace BnBYachts.Services.Charter
 {
@@ -31,6 +32,12 @@ namespace BnBYachts.Services.Charter
         public async Task<CharterDto> InsertCharters(CharterDto charterDto)=>
             await _charterManager.InsertCharter(charterDto).ConfigureAwait(false);
 
-      
+        public async Task<bool> UpdateCharter(ChartersMapperRequestable charterDetails)
+        {
+            var response = await _charterManager.UpdateCharter(charterDetails, CurrentUser.Id).ConfigureAwait(false);
+            return response;
+        }
+
+
     }
 }

@@ -7,6 +7,7 @@ namespace BnBYachts.Boat.Charter.Dto
 {
     public class CharterDto
     {
+        public int Id { get; set; }
         public bool IsRoundTrip { get; set; }
         public int GuestCapacity { get; set; }
         public string Description { get; set; }

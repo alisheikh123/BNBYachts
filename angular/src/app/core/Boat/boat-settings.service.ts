@@ -10,12 +10,13 @@ import { environment } from 'src/environments/environment';
 export class BoatSettingsService {
   apiBoat = environment.BOAT_API_URL;
   constructor(private http: HttpClient) { }
-   
+
   updateBoat(boat:any){
     return this.http.put(this.apiBoat + "/api/app/boat-settings/boat",boat).pipe(
       catchError(this.handleError));
   }
-  
+
+
   ///Exception handler
   handleError(error: any) {
     let errorMessage = '';

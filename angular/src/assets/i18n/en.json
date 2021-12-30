@@ -68,5 +68,7 @@
   "ModificationDeductionPolicy2":"If reservation is being Modified 72 -24 hours before then 50% of one night charge will be deducted.",
   "CancelReservation":"Cancel Reservation",
   "ModifyReservation":"Modify Reservation",
-  "AddReview":"Add Review"
+  "AddReview":"Add Review",
+  "EditCharter":"Edit Charter Feature",
+  "Cancel":"Cancel"
 }

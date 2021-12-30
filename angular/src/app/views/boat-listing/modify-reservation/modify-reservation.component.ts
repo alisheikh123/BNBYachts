@@ -131,7 +131,7 @@ export class ModifyReservationComponent implements OnInit {
       this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
     }
     if (hour == 72 ||(hour < 72 && hour >= 24)) {
-      this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges *  noOfDays /2 ;
+      this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges *  1 /2 ;
 
       this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
 
