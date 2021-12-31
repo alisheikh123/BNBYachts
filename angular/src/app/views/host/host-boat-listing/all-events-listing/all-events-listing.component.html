@@ -9,7 +9,7 @@
                 <p>{{item?.title}}</p>
                 <p class="">Listing Status:<span
                         [ngClass]="{'text-success' : item?.boat.isActive, 'text-danger':!item?.boat.isActive}">{{item?.boat?.isActive
-                        ? "Active":"Deactive"}}</span></p>
+                        ? "Active":"Inactive"}}</span></p>
                 <p class=" py-2">{{item?.boat?.boatType==BOAT_TYPE.Yacht?
                     "Yacht":item?.boat?.boatType==BOAT_TYPE.PowerBoat?"Power
                     Boat":item?.boat?.boatType==BOAT_TYPE.Pontoon?"Pontoon":item?.boat?.boatType==BOAT_TYPE.FishingBoat?"Fishing
@@ -17,8 +17,18 @@
                     Boat":item?.boat?.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
                 </p>
                 <p class=" ">{{item?.boat?.creationTime | date}}</p>
-            </div>
+            </div>                        
         </div>
+        <!-- edit-option -->
+            <a [routerLink]="['/host/event-edit',item.id]" class="custom-btn small-round grey"><svg id="edit_black_24dp"
+                width="23.965" height="23.965" viewBox="0 0 23.965 23.965">
+                <path id="Path_20708" data-name="Path 20708" d="M0,0H23.965V23.965H0Z" fill="none" />
+                <path id="Path_20709" data-name="Path 20709"
+                  d="M14.787,9.416l.98.98L6.112,20.052h-.98v-.98l9.655-9.656M18.623,3a1.067,1.067,0,0,0-.746.309l-1.95,1.95,4,4,1.95-1.95a1.061,1.061,0,0,0,0-1.5L19.38,3.309A1.047,1.047,0,0,0,18.623,3ZM14.787,6.4,3,18.187v4H7L18.783,10.4l-4-4Z"
+                  transform="translate(-0.609 -0.609)" fill="#777" />
+              </svg>
+            </a>
+        <!-- edit-option -->
     </div>
 </div>
 <div *ngIf="hostEvents?.length == 0">

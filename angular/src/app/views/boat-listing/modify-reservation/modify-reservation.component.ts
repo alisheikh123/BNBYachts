@@ -125,20 +125,21 @@ export class ModifyReservationComponent implements OnInit {
     let checkoutLatestDateTime = new Date(checkoutDateLat+ ' '+ checkOutTime);
     let remaingHours =Math.ceil(new Date(checkinCombindDateTime).valueOf() - new Date(currentCombindDateTime).valueOf()) / 36e5;
     let hour = this.float2int(remaingHours);
-    let noOfDays = utils.differenceWithoutAddition(checkoutLatestDateTime,checkoutCombindDateTime);
+    debugger;
+    let noOfDays = utils.differenceWithoutAddition(checkinCombindDateTime,checkoutLatestDateTime);
     if (hour > 72) {
       this.deductedAmount = 0;
-      this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
+      this.refundableAmount =   (this.bookingModifyDetail?.boatDetail?.perDayCharges * this.totalDays)-(this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays);
     }
     if (hour == 72 ||(hour < 72 && hour >= 24)) {
-      this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges *  noOfDays /2 ;
+      this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges /2 ;
 
-      this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
+      this.refundableAmount = (this.bookingModifyDetail?.boatDetail?.perDayCharges * this.totalDays)- (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
 
     }
     if (hour < 24) {
       this.deductedAmount = this.bookingModifyDetail?.boatDetail?.perDayCharges * 1;
-      this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
+      this.refundableAmount =  (this.bookingModifyDetail?.boatDetail?.perDayCharges * this.totalDays)-(this.bookingModifyDetail?.boatDetail?.perDayCharges * noOfDays)- this.deductedAmount;
     }
 
   }

@@ -29,6 +29,6 @@ export class utils {
         var startDate = moment(firstDate, 'DD-MM-YYYY'); 
         var EndDate = moment(secondDate, 'DD-MM-YYYY');
         var Days =  EndDate.diff(startDate, 'days');
-        return Days < 0 ? 0 : Days;
+        return Days < 0 ? 0 : Days+1;
       }
 }
