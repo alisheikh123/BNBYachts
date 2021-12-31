@@ -66,7 +66,6 @@ export class ChatComponent implements OnInit {
 
   getChat(user: any) {
     this.recieverInfo = user;
-    debugger;
     this.chat.receiverId = user.userId;
     this.chatService
       .getUserChat(user.userId)

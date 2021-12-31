@@ -159,7 +159,6 @@ export class ReservationDetailComponent implements OnInit {
   isCheckinStarted(checkinDate: string, checkinTime: string)
   {
     if (checkinDate != undefined && checkinTime != undefined) {
-      debugger;
       if (moment(checkinDate).format("DD-MM-YYYY") == moment().format("DD-MM-YYYY")
       &&moment(checkinTime).format("HH:mm") > moment().format("HH:mm")) {
         return true;
