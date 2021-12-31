@@ -1,8 +1,10 @@
 <div class="filter-wrap mb-3 custom-flex-between">
     <div class="dropdown custom-dropdown dropdown-rounded">
-        <button class="dropdown-toggle dropdownBTN btn btn-outline-primary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
             aria-expanded="false">
-            {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
+            <span style="float: left;">
+                {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
+            </span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
@@ -22,8 +24,11 @@
                 <div class="row">
                   <div class="col">
                     <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
-                      <button class="dropdownBTN btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>
-                        {{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</button>
+                      <button class="dropdownBTN btn" id="dropdownForm1" ngbDropdownToggle>
+                          <span style="float: left;">
+                            {{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}
+                          </span>
+                        </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownForm1">
                         <ejs-calendar #ejCalendar [value]='modelDate' 
                         (change)="applyDateFilter($event);myDrop.close()" 

@@ -14,12 +14,13 @@
             <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
               <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">
+                <span style="float: left;">
                 {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter ==
                 BOOKING_STATUS.Approved ? 'Approved':
                 selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected':selectedStatusFilter ==
                 BOOKING_STATUS.Cancel ? 'Cancel':selectedStatusFilter ==
                 BOOKING_STATUS.ChooseFilter ? 'Choose Status':'All'}}
-                <i class="fa fa-caret-down"></i>
+              </span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li (click)="statusFilter(null)">
@@ -44,8 +45,10 @@
             <div>
               <div class="dropdown custom-dropdown filters-wrap" ngbDropdown #myFilterDrop="ngbDropdown">
                 <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropDownFilter2" ngbDropdownToggle>
+                  <span style="float: left;">
                   {{this.selectedTabStatus == BOOKING_FILTER.All ? 
                     'All':this.selectedTabStatus == BOOKING_FILTER.Upcomings ? 'Upcomings':this.selectedTabStatus == BOOKING_FILTER.Past ? 'Past':'Choose Upcoming/Past'}}
+                  </span>
                 </button>
                 <div class="dropdown-menu"  ngbDropdownMenu aria-labelledby="dropDownFilter2">
                   <form>
@@ -93,10 +96,11 @@
           <div class="col-6">
             <div class="" style="float: right;">
               <div class="row">
-                <div class="col">
+                <div class="col dropdown custom-dropdown">
                   <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
-                    <button class="dropdownBTN btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>
-                      {{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</button>
+                    <button class="dropdownBTN dropdown-btn dropdown-toggle" id="dropdownForm1" ngbDropdownToggle>
+                      <span style="float: left;">{{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</span>
+                    </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownForm1">
                       <ejs-calendar #ejCalendar [value]='dateValue' 
                       (change)="applyDateFilter($event);myDrop.close()" 
