@@ -80,7 +80,8 @@ export class CharterCreationComponentComponent implements OnInit {
     this.charterCreationForm.controls.guestCapacity.setValue(this.charterCreationForm.controls.guestCapacity.value + 1);
   }
   removeGuests() {
-    this.charterCreationForm.controls.guestCapacity.setValue(this.charterCreationForm.controls.guestCapacity.value - 1);
+    let value = this.charterCreationForm.controls.guestCapacity.value;
+    value = value>0? this.charterCreationForm.controls.guestCapacity.setValue(value - 1):0;
   }
   handleDepartingAddress(address: any) {
     this.charterCreationForm.controls.departingFrom.setValue(address.formatted_address);

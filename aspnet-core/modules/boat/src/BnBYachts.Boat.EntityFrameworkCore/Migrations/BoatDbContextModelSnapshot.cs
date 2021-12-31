@@ -755,6 +755,9 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int>("GuestCapacity")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime");
