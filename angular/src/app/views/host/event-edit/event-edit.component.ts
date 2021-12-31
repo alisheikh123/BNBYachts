@@ -134,6 +134,10 @@ export class EventEditComponent implements OnInit {
       return this.submitted
   }
 
+  goBack() {
+    this.router.navigate(['/host/host-boat-listing']);
+  }
+
   updateEvent() {
     if (this.eventEditForm.valid && this.checkFormValidation()) {
       let data = this.eventEditForm.value;

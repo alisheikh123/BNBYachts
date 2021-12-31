@@ -8,30 +8,17 @@
                 <div class="row">
                     <div class="col-md-6 py-2">
                         <div class="custom-select-field">
-                            <label>{{'BoatListing' | localization}}</label>
-                            <!-- <select name="select" id="select" formControlName="boatId" 
-                            (change)="getBoatBookedDates()" 
-                            [ngClass]="{  'is-invalid':submitted && form.boatId.errors }"
-                            > -->
-                            <!-- <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
+                            <label>{{'BoatListing' | localization}}</label>                            
+                            <select name="select" id="select" formControlName="boatId"
+                            (change)="getBoatBookedDates()"
+                                [ngClass]="{  'is-invalid':submitted && form.boatId.errors }">
+                                <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
                                 <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
-                            </select> -->
-                            <!-- <small class="text-danger"
+                            </select>                                
+                            <small class="text-danger"
                                 *ngIf="((form.boatId.dirty && form.boatId.touched || submitted) && form.boatId.hasError('required'))">
                                 {{'vBoatIsRequired'|localization}}
-                            </small> -->
-                            <select name="select" id="select" formControlName="boatId"
-                                            (change)="getBoatBookedDates()"
-                                                [ngClass]="{  'is-invalid':submitted && form.boatId.errors }">
-                                                <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
-                                                <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
-                                            </select>
-                                
-                            <small class="text-danger"
-                                                *ngIf="((form.boatId.dirty && form.boatId.touched || submitted) && form.boatId.hasError('required'))">
-                                                {{'vBoatIsRequired'|localization}}
-                                            </small>
-                            
+                            </small>                            
                         </div>
                         <div class="custom-input-field">
                             <label>Event Title</label>
@@ -134,7 +121,7 @@
             </form>
             <div class="row">
                 <div class="custom-flex-end">
-                    <button class="custom-btn outline-blue-clr me-sm-2">Cancel</button>
+                    <button class="custom-btn outline-blue-clr me-sm-2" (click)="goBack()">Cancel</button>
                     <button class="custom-btn blue" (click)="updateEvent()">Save</button>    
                 </div>
             </div>
