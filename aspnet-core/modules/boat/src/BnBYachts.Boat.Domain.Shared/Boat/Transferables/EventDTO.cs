@@ -8,6 +8,7 @@ namespace BnBYachts.Boat.Boat.Transferables
 {
     public class EventDTO :ITransferable
     {
+        public int? Id { get; set; }
         public BoatDTO Boat { get; set; }
         public double LocationLat { get; set; }
         public double LocationLong { get; set; }

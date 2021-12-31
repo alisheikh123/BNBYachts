@@ -15,5 +15,7 @@ namespace BnBYachts.Boat.Interfaces.Boat
         Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId);
 
         Task<EntityResponseListModel<EventDTO>> GetEvents(int page, int pageSize);
+        Task<EntityResponseModel> GetEventById(int eventId);
+        Task<bool> UpdateEvent(EventRequestable updatedEvent);
     }
 }

@@ -25,5 +25,13 @@ namespace BnBYachts.Boat.Services.Boat
         public async Task<bool> SaveEvent(EventRequestable boatEvent) => await _eventManager.SaveEvent(boatEvent);
         public async Task<EntityResponseListModel<EventDTO>> GetEvents(int page, int pageSize) => await _eventManager.GetEvents(CurrentUser.Id,page,pageSize).ConfigureAwait(false);
 
+        public async Task<EntityResponseModel> GetEventById(int eventId)
+        {
+            return await _eventManager.GetEventById(eventId).ConfigureAwait(false);
+        }
+        public async Task<bool> UpdateEvent(EventRequestable updatedEvent)
+        {
+            return await _eventManager.UpdateEvent(updatedEvent, CurrentUser.Id);
+        }
     }
 }

@@ -26,8 +26,7 @@ export class AllEventsListingComponent implements OnInit {
   }
   getHostEvents(){
     this.service.getAllEvents(this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
-      this.hostEvents = [...new Map(res?.data.map((item:any) =>
-        [item['boatId'], item])).values()];
+      this.hostEvents = res?.data;        
         this.totalRecords = res?.totalCount;
     });
   }

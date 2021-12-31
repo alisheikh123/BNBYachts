@@ -7,6 +7,7 @@ namespace BnBYachts.Boat.Event.Requestable
 {
     public class EventRequestable
     {
+        public int? Id { get; set; }
         public double LocationLat { get; set; }
         public double LocationLong { get; set; }
         public string Location { get; set; }

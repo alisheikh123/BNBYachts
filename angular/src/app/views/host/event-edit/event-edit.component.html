@@ -1,0 +1,143 @@
+<div class="main-wrapper">
+    <div class="container">
+        <div class="listing-main-wrapper edit-boat section-padding">
+            <div class="custom-flex-between mb-3">
+                <h5 class="bold">Edit Event</h5>
+            </div>
+            <form [formGroup]="eventEditForm">
+                <div class="row">
+                    <div class="col-md-6 py-2">
+                        <div class="custom-select-field">
+                            <label>{{'BoatListing' | localization}}</label>
+                            <!-- <select name="select" id="select" formControlName="boatId" 
+                            (change)="getBoatBookedDates()" 
+                            [ngClass]="{  'is-invalid':submitted && form.boatId.errors }"
+                            > -->
+                            <!-- <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
+                                <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
+                            </select> -->
+                            <!-- <small class="text-danger"
+                                *ngIf="((form.boatId.dirty && form.boatId.touched || submitted) && form.boatId.hasError('required'))">
+                                {{'vBoatIsRequired'|localization}}
+                            </small> -->
+                            <select name="select" id="select" formControlName="boatId"
+                                            (change)="getBoatBookedDates()"
+                                                [ngClass]="{  'is-invalid':submitted && form.boatId.errors }">
+                                                <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
+                                                <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
+                                            </select>
+                                
+                            <small class="text-danger"
+                                                *ngIf="((form.boatId.dirty && form.boatId.touched || submitted) && form.boatId.hasError('required'))">
+                                                {{'vBoatIsRequired'|localization}}
+                                            </small>
+                            
+                        </div>
+                        <div class="custom-input-field">
+                            <label>Event Title</label>
+                            <input class="custom-input" placeholder="Enter Event Name" 
+                            [ngClass]="{  'is-invalid':submitted && form.title.errors }"
+                            formControlName="title">
+                            <small class="text-danger"
+                                *ngIf="((form.title.touched || submitted) && form.title.hasError('required'))">
+                                {{'vTitleRequired' | localization}}
+                            </small>
+                        </div>
+                        <div class="custom-input-field">
+                            <label>{{'EventType' | localization}}</label>
+                            <div class="custom-flex">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        formControlName="eventType" name="eventType" [value]="1"
+                                        id="flexRadioDefault1">
+                                    {{'Adult' | localization}}
+                                </div>
+                                <div class="form-check ms-5">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        formControlName="eventType" name="eventType" [value]="2"
+                                        id="flexRadioDefault1">
+                                    {{'Family' | localization}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-input-field">
+                            <label>{{'EventLocation'|localization}}</label>
+                            <input class="custom-input" placeholder="Enter event location"
+                                [ngClass]="{  'is-invalid':submitted && form.location.errors }"
+                                formControlName="location" ngx-google-places-autocomplete
+                                (onAddressChange)="handleEventLocationChange($event)">
+                            <small class="text-danger"
+                                *ngIf="((form.location.touched || submitted) && form.location.hasError('required'))">
+                                {{'vAddressRequired' | localization}}
+                            </small>
+                        </div>
+                        <div class="custom-input-field">
+                            <label>Description</label>
+                            <textarea class="custom-input" id="exampleFormControlTextarea1"
+                            [ngClass]="{  'is-invalid':submitted && form.description.errors }"
+                            formControlName="description" rows="4"></textarea>
+                            <small class="text-danger"
+                                *ngIf="((form.description.touched || submitted) && form.description.hasError('required'))">
+                                {{'vDescriptionRequired' | localization}}
+                            </small>
+                        </div>                            
+                        <div class="counter-input-wrapper">
+                            <label>{{'GuestCapacity' | localization}}</label>
+                            <div class="number">
+                                <div class="custom-flex-start">
+                                    <label>{{'Guests' | localization}}</label>
+                                    <div class="custom-flex-start">
+                                        <span class="minus" (click)="removeGuests()">-</span>
+                                        <input type="text" formControlName="guestCapacity" />
+                                        <span class="plus" (click)="addGuests()">+</span>
+                                    </div>
+                                    <small class="text-danger"
+                                        *ngIf="((form.guestCapacity.touched || submitted) && form.guestCapacity.hasError('required'))">
+                                        {{'vGuestRequired' | localization}}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="custom-select-field">
+                            <label>Start Date</label>
+                            <ejs-datetimepicker formControlName="startDateTime"
+                            (renderDayCell)='onRenderCell($event)'
+                                name="startDateTime">
+                            </ejs-datetimepicker>
+                            <small class="text-danger"
+                                *ngIf="((form.startDateTime.touched || submitted) && form.startDateTime.hasError('required'))">
+                                {{'vStartDateRequired' | localization}}
+                            </small>
+                        </div>
+                        <div class="custom-select-field">
+                            <label>End Date</label>
+                            <ejs-datetimepicker formControlName="endDateTime" name="endDateTime" (renderDayCell)='onRenderCell($event)'>
+                            </ejs-datetimepicker>
+                            <small class="text-danger"
+                                *ngIf="((form.endDateTime.touched || submitted) && form.endDateTime.hasError('required'))">
+                                {{'vEndDateRequired' | localization}}
+                            </small>
+                        </div>
+                        <div class="custom-input-field">
+                            <label>Amount Per Person</label>
+                            <input type="number" 
+                            class="custom-input" placeholder="Enter Amount"                                    
+                            [ngClass]="{  'is-invalid':submitted && form.amountPerPerson.errors }"
+                            formControlName="amountPerPerson">
+                            <small class="text-danger"
+                                *ngIf="((form.amountPerPerson.touched || submitted) && form.amountPerPerson.hasError('required'))">
+                                {{'vAmountREquired' | localization}}
+                            </small>
+                        </div>                        
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="custom-flex-end">
+                    <button class="custom-btn outline-blue-clr me-sm-2">Cancel</button>
+                    <button class="custom-btn blue" (click)="updateEvent()">Save</button>    
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

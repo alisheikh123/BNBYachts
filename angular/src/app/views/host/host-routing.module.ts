@@ -7,6 +7,7 @@ import { HostOnboardingComponent } from './host-onboarding/host-onboarding.compo
 import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.component';
 import { BoatEditComponent } from './boat-edit/boat-edit.component';
 import { EventCreationComponent } from './event-creation/event-creation.component';
+import { EventEditComponent } from './event-edit/event-edit.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,10 @@ const routes: Routes = [
   ,
   {
     path: "charter-creation", component: CharterCreationComponentComponent
-  }
+  },
+  {
+    path: "event-edit/:id", component: EventEditComponent
+  },
 ];
 
 @NgModule({
