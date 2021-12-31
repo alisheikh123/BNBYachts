@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AllHostBoatsService } from 'src/app/core/host/all-host-boats.service';
 import { BoatTypesId } from 'src/app/shared/enums/yacht-search.constant';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-all-charters-listing',
@@ -17,7 +18,7 @@ export class AllChartersListingComponent implements OnInit {
     pageSize: 5
   };
   totalRecords: number = 0;
-  constructor(private service:AllHostBoatsService) { }
+  constructor(private service:AllHostBoatsService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getHostCharters();
@@ -25,8 +26,7 @@ export class AllChartersListingComponent implements OnInit {
   }
   getHostCharters(){
     this.service.getAllCharters(this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
-      this.hostCharters = [...new Map(res?.data.map((item:any) =>
-        [item['boatId'], item])).values()];
+      this.hostCharters = res?.data;
         this.totalRecords = res?.totalCount;
     });
   }
@@ -39,4 +39,5 @@ export class AllChartersListingComponent implements OnInit {
     this.queryParams.pageSize = data.pageSize;
     this.getHostCharters();
   }
+
 }

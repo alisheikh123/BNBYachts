@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { BookingResponseFilter, BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -31,42 +32,48 @@ export class AllReservationsComponent implements OnInit {
   selectedMonth: string = "";
   modelDate = "";
   BOOKING_STATUS = BookingStatus;
-  selectedStatusFilter: any = null;
+  selectedStatusFilter: any = this.BOOKING_STATUS.ChooseFilter;
   BOOKING_FILTER = BookingResponseFilter;
-  selectedTab: number = this.BOOKING_FILTER.All;
+  selectedTab: number = this.BOOKING_FILTER.ChooseFilter;
+  selectedTabStatus: number = this.BOOKING_FILTER.ChooseFilter;
+  public dateValue: Object = new Date();
   queryParams = {
     page: 1,
     pageSize: 5
   };
   totalRecords: number = 0;
-  constructor(private fb: FormBuilder, private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
+  constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit(): void {
-    this.getReservations(this.BOOKING_FILTER.All);
+    this.getReservations();
   }
 
-  getReservations(tab: number) {
-    this.service.getBookings(tab, this.selectedMonth, this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
+  getReservations() {
+    this.selectedTabStatus = this.selectedTab;
+    let tab = this.selectedTab == this.BOOKING_FILTER.ChooseFilter ? this.BOOKING_FILTER.All : this.selectedTab;
+    this.service.getBookings(tab, this.selectedMonth,
+       this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
       this.allBookings = res?.data;
       this.totalRecords = res?.totalCount;
       this.statusFilter(this.selectedStatusFilter);
     });
   }
 
-  applyDateFilter() {
+  applyDateFilter(data:any) {
     const stringToSplit = this.modelDate;
     let result = stringToSplit.split('-');
-    this.selectedYear = result[0];
-    this.selectedMonth = result[1];
-    (this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.getReservations(this.BOOKING_FILTER.Upcomings) : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.getReservations(this.BOOKING_FILTER.Past) : this.getReservations(this.BOOKING_FILTER.All);
+    this.selectedYear = moment(data?.value).format("YYYY");
+    this.selectedMonth =  moment(data?.value).format("MM");
+    this.getReservations();
+    //(this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.getReservations() : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.getReservations(this.BOOKING_FILTER.Past) : this.getReservations(this.BOOKING_FILTER.All);
   }
 
   statusFilter(status: any) {
     this.selectedStatusFilter = status;
-    this.booking = status != null ? this.allBookings.filter((res: any) => res.bookingStatus == status) : this.allBookings;
+    this.booking = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.allBookings.filter((res: any) => res.bookingStatus == status) : this.allBookings;
     this.booking.forEach((elem: any) => {
       this.boatService.boatDetailsById(elem.boatId).subscribe((boatdetail: any) => {
         elem.boatDetail = boatdetail;
@@ -75,11 +82,11 @@ export class AllReservationsComponent implements OnInit {
   }
   onPageChange(data: any) {
     this.queryParams.page = data.page;
-    this.getReservations(this.BOOKING_FILTER.All);
+    this.getReservations();
   }
   onPageSizeChange(data: any) {
     this.queryParams.page = 1;
     this.queryParams.pageSize = data.pageSize;
-    this.getReservations(this.BOOKING_FILTER.All);
+    this.getReservations();
   }
 }

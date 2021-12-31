@@ -31,7 +31,7 @@ export class ReservationDetailComponent implements OnInit {
   isHost: boolean = false;
   USER_ROLES = UserRoles;
   today = new Date().toLocaleDateString();
-  bookingStatus:any;
+  bookingStatus: any;
   checkedCheckinDate: any;
   checkinTime: any;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
@@ -42,17 +42,13 @@ export class ReservationDetailComponent implements OnInit {
     private modal: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
     this.activatedRoute.params.subscribe(res => {
       this.bookingId = Number(res['id']);
     });
-    //Check if Host
     var userRole = localStorage.getItem('userRole');
     userRole == this.USER_ROLES.host
       ? (this.isHost = true)
       : (this.isHost = false);
-    //
-
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.booking = res;
       this.currentDate = new Date();
@@ -119,31 +115,30 @@ export class ReservationDetailComponent implements OnInit {
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
       this.totalDays = Math.ceil((this.checkOutDate - this.checkInDate) / 8.64e7) + 1;
-      if (this.bookingStatus != this.BOOKING_STATUS.Cancel)
-      {
+      if (this.bookingStatus != this.BOOKING_STATUS.Cancel) {
 
-          this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
+        this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
+          this.booking.boatDetail = boatdetail;
+          this.booking.TotalDays = this.totalDays;
+          this.booking.checkinDate = this.checkInDate;
+          this.booking.checkoutDate = this.checkOutDate;
+          this.boatDetail = boatdetail;
+        });
+
+
+      }
+      else {
+        this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
+          this.service.getBookingCancellationDetail(this.booking?.id).subscribe((bookingCancellationDetail: any) => {
             this.booking.boatDetail = boatdetail;
             this.booking.TotalDays = this.totalDays;
             this.booking.checkinDate = this.checkInDate;
             this.booking.checkoutDate = this.checkOutDate;
             this.boatDetail = boatdetail;
+            this.booking.bookingCancelDetail = bookingCancellationDetail?.data;
+
+
           });
-
-
-      }
-     else {
-        this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
-            this.service.getBookingCancellationDetail(this.booking?.id).subscribe((bookingCancellationDetail:any)=>{
-              this.booking.boatDetail = boatdetail;
-              this.booking.TotalDays = this.totalDays;
-              this.booking.checkinDate = this.checkInDate;
-              this.booking.checkoutDate = this.checkOutDate;
-              this.boatDetail = boatdetail;
-               this.booking.bookingCancelDetail = bookingCancellationDetail?.data;
-
-
-            });
 
         });
 
@@ -156,17 +151,17 @@ export class ReservationDetailComponent implements OnInit {
     });
 
   }
-  isCheckinStarted(checkinDate: string, checkinTime: string)
-  {
+  isCheckinStarted(checkinDate: Date, checkinTime: Date) {
+    let inDate = moment(checkinDate).format("DD-MM-YYYY");
+    let currentDate = moment().format("DD-MM-YYYY");
+    let inTime = moment(checkinTime).format("HH:mm");
+    let curretTime = moment().format("HH:mm");
     if (checkinDate != undefined && checkinTime != undefined) {
-      debugger;
-      if (moment(checkinDate).format("DD-MM-YYYY") == moment().format("DD-MM-YYYY")
-      &&moment(checkinTime).format("HH:mm") > moment().format("HH:mm")) {
+      if (inDate == currentDate && inTime > curretTime) {
         return true;
       }
-      if(moment(checkinDate).format("DD-MM-YYYY")>moment().format("DD-MM-YYYY"))
-      {
-       return true;
+      if (moment(checkinDate).isAfter(moment().format("YYYY-MM-DD"))) {
+        return true;
       }
       else {
         return false;
@@ -178,7 +173,7 @@ export class ReservationDetailComponent implements OnInit {
 
 
   }
-  }
+}
 
 
 

@@ -115,7 +115,6 @@ export class BoatListingComponent implements OnInit {
       this.boats = this.boats.filter(res => res?.totalBedrooms >= this.roomCount && res?.totalWashrooms >= this.bathroomCount);
     }
     //for additional filters
-
     let selectedFeaturs = this.defaultFeatures.filter((res: any) => res?.isChecked == true);
     this.boats.forEach((boat: any, index) => {
       selectedFeaturs.forEach((elem: any) => {

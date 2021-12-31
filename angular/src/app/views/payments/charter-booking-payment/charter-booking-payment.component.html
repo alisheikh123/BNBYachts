@@ -40,30 +40,30 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="payment-method-content">
-                                        <p class="px-2">{{charterDetails?.boat?.name}}</p>
-                                        <div class="custom-flex-start flex-mobile-column">
-                                            <div class="custom-flex-start">
-                                                <p class="medium px-2">Dept:</p>
-                                                <p>{{charterDetails?.departingFrom}}</p>
+                                        <h6 class="px-2 medium">{{charterDetails?.boat?.name}}</h6>
+                                        <div class="custom-flex-start flex-mobile-column w-100">
+                                            <div class="custom-flex-start  w-100 p-1">
+                                                <p class="medium px-2 w-50">Dept:</p>
+                                                <p class=" w-50">{{charterDetails?.departingFrom}}</p>
                                             </div>
-                                            <div class="custom-flex-start">
-                                                <p class="medium px-2">Destination:</p>
-                                                <p>{{charterDetails?.destination}}</p>
+                                            <div class="custom-flex-start  w-100 p-1">
+                                                <p class="medium px-2 w-50">Destination:</p>
+                                                <p class=" w-50">{{charterDetails?.destination}}</p>
                                             </div>
                                         </div>
-                                        <div class="custom-flex-start">
-                                            <p class="medium px-2">Dept Date & Time:</p>
-                                            <p>{{charterDetails?.departureFromDate | date}}</p>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Dept Date & Time:</p>
+                                            <p class=" w-50">{{charterDetails?.departureFromDate | date}}</p>
                                         </div>
-                                        <div class="custom-flex-start">
-                                            <p class="medium px-2">Arrival Date & Time:</p>
-                                            <p>{{charterDetails?.departureToDate | date}}</p>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Arrival Date & Time:</p>
+                                            <p class=" w-50">{{charterDetails?.departureToDate | date}}</p>
                                         </div>
                                         <ng-container *ngIf="charterDetails?.isRoundTrip">
-                                        <p class="px-2">Return Details</p>
-                                        <div class="custom-flex-start">
-                                            <p class="medium px-2">Dept Date & Time:</p>
-                                            <p>{{charterDetails?.returnDate | date}}</p>
+                                        <h6 class="py-4 px-2 pb-2 medium">Return Details</h6>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Dept Date & Time:</p>
+                                            <p class=" w-50">{{charterDetails?.returnDate | date}}</p>
                                         </div>
                                     </ng-container>
                                     </div>

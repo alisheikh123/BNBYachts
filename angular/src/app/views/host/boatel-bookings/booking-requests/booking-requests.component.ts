@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
@@ -21,7 +22,7 @@ export class BookingRequestsComponent implements OnInit {
   selectedServiceType: number = 1;
   SERVICE_TYPES = ServiceType;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
-  modelDate = "";
+  modelDate : Object = new Date();;
   constructor(private reservationService: ReservationListsService, private boatService: YachtSearchService,
     private toastr: ToastrService, config: NgbRatingConfig, private modal: NgbModal) {
     config.max = 5;
@@ -103,11 +104,9 @@ export class BookingRequestsComponent implements OnInit {
       this.boatelBookings.splice(index, 1);
     });
   }
-  applyDateFilter() {
-    const stringToSplit = this.modelDate;
-    let result = stringToSplit.split('-');
-    this.selectedYear = result[0];
-    this.selectedMonth = result[1];
+  applyDateFilter(data:any) {
+    this.selectedYear = moment(data?.value).format("YYYY");
+    this.selectedMonth =  moment(data?.value).format("MM");
     this.getReservations();
   }
   filterServiceType(serviceType: number) {

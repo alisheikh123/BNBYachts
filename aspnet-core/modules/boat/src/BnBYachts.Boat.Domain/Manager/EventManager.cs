@@ -29,7 +29,6 @@ namespace BnBYachts.Boat.Manager
         {
             var boats = await _boatRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
             return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatLookupTransferable>>(boats);
-
         }
 
         public async Task<bool> SaveEvent(EventRequestable boatEvent)

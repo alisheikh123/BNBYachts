@@ -1,135 +1,137 @@
 <!-- <div id="myModal" class="modal fade" role="dialog"> -->
 
-<div class="modal-content">
-  <div class="modal-header no-border">
-
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form class="form" [formGroup]="registrationForm" novalidate="novalidate" (ngSubmit)="submit()">
-      <div class="custom-modal-inner">
-        <div class="side-img-left">
-          <img src="../../../../../assets/images/signup-wrap.png" alt="">
-        </div>
-        <div class="modal-content-inner-text">
-          <h4 class="bold">Sign Up</h4>
-          <div class="form-text-inner">
-            <div class="row">
-              <div class="col-md-6 col-sm-12 py-2">
-                <div class="custom-input-field">
-                  <label>First Name</label>
-                  <input type="text" class="custom-input" placeholder="First Name" name="firstname"
-                    formControlName="FirstName">
-                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                  validation: 'required',
-                  message: 'First name is required',
-                  control: registrationForm.controls['FirstName']
-                }"></ng-container>
-                </div>
-                <div class="custom-input-field">
-                  <label>Email</label>
-                  <input type="email" class="custom-input" placeholder="Email Address" name="email"
-                    formControlName="Email" autocomplete="off">
-                  <!-- <p class="small-txt-error">Invalid email</p> -->
-                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                  validation: 'required',
-                  message: 'Email is required',
-                  control: registrationForm.controls['Email']
-                }"></ng-container>
-
-                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                  validation: 'pattern',
-                  message: 'Invalid Email',
-                  control: registrationForm.controls['Email']
-                }"></ng-container>
-                <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                  validation: 'emailTaken',
-                  message: 'Email Already Exists.',
-                  control: registrationForm.controls['Email']
-                }"></ng-container>
-
-                </div>
-                <!-- custom tool tip -->
-                <div class=" custom-input-field">
-                  <label>Password</label>
-                  <div class="tooltip-wrapper">
-                    <input id="password-field" [attr.type]="passwordViewer.passwordFieldTextType ? 'text':'password'" class="custom-input"
-                    (change)="onPasswordChange()" name="password"
-                      formControlName="Password">
-                    <span toggle="#password-field" (click)="toggleFieldTextType(true)" 
-                    class="fa fa-fw field-icon toggle-password" [ngClass]="{
-                      'fa-eye-slash': !passwordViewer.passwordFieldTextType,
-                      'fa-eye': passwordViewer.passwordFieldTextType
-                    }"></span>
-                    <div class="tooltip-dialogue">
-                      <p class="small-text bold">Choosing a password</p>
-                      <p class="small-text dark-grey">Your password must include</p>
-                      <ul>
-                        <li class="small-text">At Least 8 characters</li>
-                        <li class="small-text">Upper and lower case</li>
-                        <li class="small-text">Numbers</li>
-                        <li class="small-text">Special characters</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                    validation: 'pattern',
-                    message: 'Invalid Password',
-                    control: registrationForm.controls['Password']
-                  }"></ng-container>
-                </div>
-
-              </div>
-              <div class="col-md-6 col-sm-12 py-2">
-                <div class="custom-input-field">
-                  <label>Last Name</label>
-                  <input type="text" class="custom-input" name="lastname" formControlName="LastName"
-                    placeholder="Last Name">
-                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                  validation: 'required',
-                  message: 'Last name is required',
-                  control: registrationForm.controls['LastName']
-                }"></ng-container>
-                </div>
-                <div class="custom-input-field">
-                  <label>Date of Birth </label>
-                  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-                    <input class="custom-input" type="date" formControlName="DOB" (keydown)="stopKeys($event)" [max]="getToday()">
+  <div class="modal-content">
+    <div class="modal-header no-border">
+  
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="form" [formGroup]="registrationForm" novalidate="novalidate" (ngSubmit)="submit()">
+        <div class="custom-modal-inner">
+          <div class="side-img-left">
+            <img src="../../../../../assets/images/signup-wrap.png" alt="">
+          </div>
+          <div class="modal-content-inner-text">
+            <h4 class="bold">Sign Up</h4>
+            <div class="form-text-inner">
+              <div class="row">
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label>First Name</label>
+                    <input type="text" class="custom-input" placeholder="First Name" name="firstname" formControlName="FirstName">
                     <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                       validation: 'required',
-                      message: 'Date of birth is required',
-                      control: registrationForm.controls['DOB']
+                      message: 'First name is required',
+                      control: registrationForm.controls['FirstName']
+                  }"></ng-container>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label>Last Name</label>
+                    <input type="text" class="custom-input" name="lastname" formControlName="LastName" placeholder="Last Name">
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                  validation: 'required',
+                                                  message: 'Last name is required',
+                                                  control: registrationForm.controls['LastName']
+                                                }"></ng-container>
+                  </div>
+                </div>
+                <!-- email -->
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label>Email</label>
+                    <input type="email" class="custom-input" placeholder="Email Address" name="email"
+                      formControlName="Email" autocomplete="off">
+                    <!-- <p class="small-txt-error">Invalid email</p> -->
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'required',
+                    message: 'Email is required',
+                    control: registrationForm.controls['Email']
+                  }"></ng-container>
+  
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'pattern',
+                    message: 'Invalid Email',
+                    control: registrationForm.controls['Email']
+                  }"></ng-container>
+                  </div>
+                </div>
+                <!-- date of birth -->
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label>Date of Birth </label>
+                    <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                      <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Date of birth is required',
+                        control: registrationForm.controls['DOB']
+                      }"></ng-container>
+                    </div>
+                  </div>
+                </div>              
+                <!-- password -->
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class=" custom-input-field">
+                    <label>Password</label>
+                    <div class="tooltip-wrapper">
+                      <input id="password-field" [attr.type]="passwordViewer.passwordFieldTextType ? 'text':'password'" class="custom-input"
+                      (change)="onPasswordChange()" name="password"
+                        formControlName="Password">
+                      <span toggle="#password-field" (click)="toggleFieldTextType(true)" 
+                      class="fa fa-fw field-icon toggle-password" [ngClass]="{
+                        'fa-eye-slash': !passwordViewer.passwordFieldTextType,
+                        'fa-eye': passwordViewer.passwordFieldTextType
+                      }"></span>
+                      <div class="tooltip-dialogue">
+                        <p class="small-text bold">Choosing a password</p>
+                        <p class="small-text dark-grey">Your password must include</p>
+                        <ul>
+                          <li class="small-text">At Least 8 characters</li>
+                          <li class="small-text">Upper and lower case</li>
+                          <li class="small-text">Numbers</li>
+                          <li class="small-text">Special characters</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'pattern',
+                      message: 'Invalid Password',
+                      control: registrationForm.controls['Password']
                     }"></ng-container>
                   </div>
                 </div>
-                <div class="custom-input-field pswd-field">
-                  <label>Confirm Password</label>
-                  <div class="p-relative">
-                    <input id="password-fields" [attr.type]="passwordViewer.confirmPasswordFieldTextType == true ? 'text':'password'" 
-                    class="custom-input" name="confirmPassword"
-                    (change)="onPasswordChange()"
-                      formControlName="confirmPassword" autocomplete="off">
-                    <span toggle="#password-fields" (click)="toggleFieldTextType(false)" 
-                    class="fa fa-fw field-icon toggle-cnfrm-pswd" [ngClass]="{
-                      'fa-eye-slash': !passwordViewer.confirmPasswordFieldTextType,
-                      'fa-eye': passwordViewer.confirmPasswordFieldTextType
-                    }"></span>
-
-                    <!-- <ng-container *ngIf="
-                  registrationForm.controls['confirmPassword'].errors &&
-                  registrationForm.controls['confirmPassword'].errors.ConfirmPassword
-                ">
-                      <div class="fv-plugins-message-container">
-                        <div class="fv-help-block">
-                          'Passsword' and 'Confirm Password' didn't match.
-                        </div>
-                      </div>
-                    </ng-container> -->
+                <!-- confirm password -->
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field pswd-field">
+                    <label>Confirm Password</label>
+                    <div class="p-relative">
+                      <input id="password-fields" [attr.type]="passwordViewer.confirmPasswordFieldTextType == true ? 'text':'password'" 
+                      class="custom-input" name="confirmPassword"
+                      (change)="onPasswordChange()"
+                        formControlName="confirmPassword" autocomplete="off">
+                      <span toggle="#password-fields" (click)="toggleFieldTextType(false)" 
+                      class="fa fa-fw field-icon toggle-cnfrm-pswd" [ngClass]="{
+                        'fa-eye-slash': !passwordViewer.confirmPasswordFieldTextType,
+                        'fa-eye': passwordViewer.confirmPasswordFieldTextType
+                      }"></span>
+                    </div>
                   </div>
-                </div>
-                <span class="text-danger" *ngIf="registrationForm.controls['confirmPassword'].hasError('mismatch')">Password do not match.</span>
+                  <span class="text-danger" *ngIf="registrationForm.controls['confirmPassword'].hasError('mismatch')">Password do not match.</span>
+                </div>                    
+                      <!-- <ng-container *ngIf="
+                        registrationForm.controls['confirmPassword'].errors &&
+                        registrationForm.controls['confirmPassword'].errors.ConfirmPassword
+                        ">
+                        <div class="fv-plugins-message-container">
+                          <div class="fv-help-block">
+                            'Passsword' and 'Confirm Password' didn't match.
+                          </div>
+                        </div>
+                      </ng-container> -->
               </div>
               <div class="col-sm-12 custom-margin text-right mobile-padding-btns">
                 <label class="custom-checkbox">
@@ -144,22 +146,23 @@
                   [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value">Continue</button>
               </div>
               <!-- <div class="col-sm-12 text-center">
-              <p class="small-text light">Already have an Account? <a href="javascript:void(0)"  (click)="login()" class="underline-blue-link">Log in</a></p>
-            </div> -->
-            </div>
+                <p class="small-text light">Already have an Account? <a href="javascript:void(0)"  (click)="login()" class="underline-blue-link">Log in</a></p>
+              </div> -->
+            </div><!-- form inner text -->              
           </div>
+        </div>        
+      </form>
+    </div>
+  </div>
+  
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          {{ message }}
         </div>
       </div>
-    </form>
-  </div>
-</div>
-
-<ng-template #formError let-control="control" let-message="message" let-validation="validation">
-  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
-    <div class="fv-plugins-message-container">
-      <div class="fv-help-block">
-        {{ message }}
-      </div>
-    </div>
-  </ng-container>
-</ng-template>
+    </ng-container>
+  </ng-template>
+  
+  

@@ -1,3 +1,4 @@
+import { CharterEditComponent } from './charter-edit/charter-edit.component';
 import { CharterCreationComponentComponent } from './charter-creation-component/charter-creation-component.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -35,6 +36,9 @@ const routes: Routes = [
   ,
   {
     path: "charter-creation", component: CharterCreationComponentComponent
+  },
+  {
+    path: "charter-edit/:id", component: CharterEditComponent
   }
 ];
 
