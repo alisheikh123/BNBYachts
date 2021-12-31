@@ -35,11 +35,29 @@ export class BookedServicesComponent implements OnInit {
     this.reservationService.getBookedServices(this.selectedServiceType, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
       this.bookedServices = res?.data;
       this.totalRecords = res?.totalCount
-      this.bookedServices.forEach((element: any) => {
-        this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
-          element.boatDetail = boatdetail;
+      if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
+        this.bookedServices.forEach((element: any) => {
+          this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
+            element.boatDetail = boatdetail;
+          });
         });
-      });
+      }
+      else if (this.selectedServiceType == this.bookedServicesTypes.charter) {
+        this.bookedServices.forEach((element: any) => {
+          this.boatService.charterDetailsById(element.charterId).subscribe((charter: any) => {
+            element.boatDetail = charter?.charterDetails?.boat;
+            element.charter = charter?.charterDetails;
+          });
+        });
+      }
+      else {
+        this.bookedServices.forEach((element: any) => {
+          this.boatService.eventDetailsById(element.eventId).subscribe((event: any) => {
+            element.boatDetail = event?.eventDetails?.boat;
+            element.event = event?.eventDetails;
+          });
+        });
+      }
     })
   }
 

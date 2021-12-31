@@ -477,7 +477,7 @@ namespace BnBYachts.Boat.Migrations
                     b.ToTable("Rules");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistBoatEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -520,7 +520,99 @@ namespace BnBYachts.Boat.Migrations
 
                     b.HasIndex("BoatId");
 
-                    b.ToTable("Wishlists");
+                    b.ToTable("WishlistBoats");
+                });
+
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistCharterEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CharterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharterId");
+
+                    b.ToTable("WishlistCharters");
+                });
+
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEventEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("WishlistEvents");
                 });
 
             modelBuilder.Entity("BnBYachts.Boats.Charter.CharterEntity", b =>
@@ -737,7 +829,7 @@ namespace BnBYachts.Boat.Migrations
                     b.Navigation("OfferedRule");
                 });
 
-            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEntity", b =>
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistBoatEntity", b =>
                 {
                     b.HasOne("BnBYachts.Boat.BoatEntity", "Boat")
                         .WithMany()
@@ -746,6 +838,28 @@ namespace BnBYachts.Boat.Migrations
                         .IsRequired();
 
                     b.Navigation("Boat");
+                });
+
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistCharterEntity", b =>
+                {
+                    b.HasOne("BnBYachts.Boats.Charter.CharterEntity", "Charter")
+                        .WithMany()
+                        .HasForeignKey("CharterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Charter");
+                });
+
+            modelBuilder.Entity("BnBYachts.Boat.Wishlists.WishlistEventEntity", b =>
+                {
+                    b.HasOne("BnBYachts.Events.EventEntity", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("BnBYachts.Boats.Charter.CharterEntity", b =>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BnBYachts.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,10 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Boat.Wishlists
 {
-    public class WishlistEntity: AuditedAggregateRoot<int>, IBoatAggregate
+    public class WishlistEventEntity:AuditedAggregateRoot<int>, IBoatAggregate
     {
-        public virtual int BoatId { get; set; }
-        public BoatEntity Boat { get; set; }
+        public virtual int EventId { get; set; }
+        public EventEntity Event{ get; set; }
         public virtual Guid UserId { get; set; }
-
     }
 }

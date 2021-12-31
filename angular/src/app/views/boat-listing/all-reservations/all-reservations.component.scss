@@ -53,8 +53,10 @@ input[type="month"]::-webkit-inner-spin-button {
  }
  .dropdownBTN{
     color: #122BA8;
+    min-width: 210px;
     border-color: #122BA8;
  }
+
  .justify-content-center {
     display: flex !important;
     justify-content: center !important;

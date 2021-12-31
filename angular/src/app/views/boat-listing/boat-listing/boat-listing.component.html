@@ -379,7 +379,7 @@
                 <label class="custom-checkbox my-4" *ngFor="let item of defaultFeatures; let i = index">
                   <div *ngIf="i % 2 == 0">
                     <input type="checkbox" [(ngModel)]="item.isChecked"
-                    [ngModelOptions]="{standalone: true}" (change)="toggleAdditionalFilters($event,item)" />
+                    [ngModelOptions]="{standalone: true}" />
                     <p class="small-text">{{ item.name }}</p>
                     <span class="checkmark"></span>
                   </div>
@@ -389,7 +389,7 @@
                 <label class="custom-checkbox my-4" *ngFor="let item of defaultFeatures; let i = index">
                   <div *ngIf="i % 2 != 0">
                     <input type="checkbox" [(ngModel)]="item.isChecked"
-                    [ngModelOptions]="{standalone: true}" (change)="toggleAdditionalFilters($event,item);" />
+                    [ngModelOptions]="{standalone: true}" />
                     <p class="small-text">{{ item.name }}</p>
                     <span class="checkmark"></span>
                   </div>

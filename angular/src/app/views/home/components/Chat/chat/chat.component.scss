@@ -1,0 +1,26 @@
+.reciever-msg{
+    text-align: end !important;
+    align-items: flex-end;
+    .user-details {
+        width: auto !important;
+        max-width: 550px !important;
+    }
+    .reciver-msj{
+        flex-direction: row-reverse;
+    }
+    .image-with-text-inner {
+        align-items: flex-end;
+        flex-direction: row-reverse;
+        p{
+            margin-left: auto;
+            padding-right: 15px;
+        }
+    }
+}
+.sender-msg{
+    
+    .image-with-text-inner {
+        align-items: flex-end;
+        
+    }
+}

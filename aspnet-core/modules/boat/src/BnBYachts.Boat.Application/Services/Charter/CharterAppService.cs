@@ -30,7 +30,6 @@ namespace BnBYachts.Services.Charter
 
         public async Task<CharterDto> InsertCharters(CharterDto charterDto)=>
             await _charterManager.InsertCharter(charterDto).ConfigureAwait(false);
-
       
     }
 }

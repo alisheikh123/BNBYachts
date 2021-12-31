@@ -17,7 +17,7 @@
                 </div>
                 <div>
 
-                    <button (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
+                    <button [disabled]="disablePayment()" (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
                         Pay</button>
                 </div>
                 <div>
@@ -41,8 +41,8 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="payment-method-content">
-                                        <p class="px-2">{{boatDetails?.name}}</p>
-                                        <div class="custom-flex-start">
+                                        <p class="px-2 bold">{{boatDetails?.name}}</p>
+                                        <div class="custom-flex-start align-items-start">
                                             <p class="medium px-2">Location:</p>
                                             <p>{{boatDetails?.location}}</p>
                                         </div>

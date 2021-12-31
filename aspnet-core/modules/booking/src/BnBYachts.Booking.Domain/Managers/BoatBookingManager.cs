@@ -22,11 +22,13 @@ namespace BnBYachts.Booking.Managers
         private readonly IRepository<CharterBookingEntity, int> _charterBookingRepository;
         private readonly IRepository<EventBookingEntity, int> _eventBookingRepository;
         private readonly IRepository<BookingCancelEntity, int> _boatelCanceRepository;
+        private readonly IRepository<BookingRefundableEntity, int> _boatelRefundRepository;
+
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly IObjectMapper<BookingDomainModule> _objectMapper;
         public BoatBookingManager(IRepository<CharterBookingEntity, int> charterBookingRepository, IObjectMapper<BookingDomainModule> objectMapper,
             IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel, EventBusDispatcher eventBusDispatcher
-            , IRepository<EventBookingEntity, int> eventBookingRepository)
+            , IRepository<EventBookingEntity, int> eventBookingRepository, IRepository<BookingRefundableEntity, int> boatelRefundRepository)
         {
             _boatelBookingRepository = repository;
             _boatelCanceRepository = repositorycancel;
@@ -34,10 +36,14 @@ namespace BnBYachts.Booking.Managers
             _objectMapper = objectMapper;
             _charterBookingRepository = charterBookingRepository;
             _eventBookingRepository = eventBookingRepository;
+            _boatelRefundRepository = boatelRefundRepository;
+
         }
 
-        public async Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data, Guid? userId, string userName)
+        public async Task<EntityResponseModel> BoatelBooking(BoatelBookingRequestableDto data, Guid? userId, string userName, string email)
         {
+            data.CheckinDate = data.CheckinDate.Date;
+            data.CheckoutDate = data.CheckoutDate.Date;
             var boatelEntity = _objectMapper.Map<BoatelBookingRequestableDto, BoatelBookingEntity>(data);
             boatelEntity.LastModifierId = boatelEntity.CreatorId = userId;
             boatelEntity.UserId = userId.ToString();
@@ -60,13 +66,14 @@ namespace BnBYachts.Booking.Managers
                 Data = response
             };
         }
-        public async Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data, Guid? userId, string email)
+        public async Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data, Guid? userId, string userName,string email)
         {
             var charterEntity = _objectMapper.Map<CharterBookingRequestableDto, CharterBookingEntity>(data);
             charterEntity.LastModifierId = charterEntity.CreatorId = userId;
             charterEntity.UserId = userId.ToString();
             charterEntity.BookingStatus = BookingStatus.Pending;
             charterEntity.PaymentStatus = PaymentStatus.Pending;
+            charterEntity.UserName = userName;
             var response = await _charterBookingRepository.InsertAsync(charterEntity, autoSave: true).ConfigureAwait(false);
             #region Send-Email
             string body = $"<h4> Your charter has been booked successfuly. Please wait for the host's approval. </h4>";
@@ -85,13 +92,14 @@ namespace BnBYachts.Booking.Managers
                 Data = response
             };
         }
-        public async Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data, Guid? userId, string email)
+        public async Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data, Guid? userId,string userName, string email)
         {
             var eventEntity = _objectMapper.Map<EventBookingRequestableDto, EventBookingEntity>(data);
             eventEntity.LastModifierId = eventEntity.CreatorId = userId;
             eventEntity.UserId = userId.ToString();
             eventEntity.BookingStatus = BookingStatus.Pending;
             eventEntity.PaymentStatus = PaymentStatus.Pending;
+            eventEntity.UserName = userName;
             var response = await _eventBookingRepository.InsertAsync(eventEntity, autoSave: true).ConfigureAwait(false);
             #region Send-Email
             string body = $"<h4> Your event has been booked successfuly. Please wait for the host's approval. </h4>";
@@ -112,11 +120,10 @@ namespace BnBYachts.Booking.Managers
         }
         public async Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data, Guid? userId, string userName)
         {
-
             var booking = await _boatelBookingRepository.GetAsync(data.Id);
             if (booking != null)
             {
-                booking.CheckinDate = data.CheckinDate;
+                booking.CheckinDate = data.CheckinDate.Date;
                 booking.CheckoutDate = data.CheckoutDate;
                 booking.NoOfAdults = data.NoOfAdults;
                 booking.NoOfChildrens = data.NoOfChildrens;
@@ -124,6 +131,13 @@ namespace BnBYachts.Booking.Managers
                 booking.PaymentStatus = data.PaymentStatus;
                 booking.LastModificationTime = DateTime.Now;
                 booking.LastModifierId = userId;
+                //refundDto.BookingId = data.Id;
+                //refundDto.DeductedAmount = data.DeductedAmount;
+                //refundDto.isNotificationSent = true;
+                //refundDto.RefundableAmount = data.RefundableAmount;
+                //refundDto.UserId = userId;
+                //refundDto.TotalAmount = data.TotalAmount;
+                //await _boatelRefundRepository.InsertAsync(refundDto, true).ConfigureAwait(false);
                 return true;
             }
             else
@@ -179,6 +193,14 @@ namespace BnBYachts.Booking.Managers
             return false;
         }
 
+        public async Task<EntityResponseModel> GetBookingCancellationDetail(long bookingId, Guid? userId)
+        {
+           var response = await _boatelCanceRepository.GetListAsync(x => x.BookingId == bookingId && x.UserId == userId.ToString()).ConfigureAwait(false);
+            return new EntityResponseModel()
+            {
+                Data = response
+            };
+        }
     }
 }
 

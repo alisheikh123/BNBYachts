@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -34,6 +34,9 @@ export class AuthService {
 
   getUserInfo() {
     return this.http.get(this.apiCoreURl + "/api/GetLoggedInUserDetails");
+  }
+  getUserInfoById(id:string) {
+    return this.http.get(this.apiCoreURl + "/api/GetUserDetailsById/"+id);
   }
   getUserInfoByUserName(userName: string) {
     return this.http.get(this.apiCoreURl + "/api/GetUserDetailsByUserName?username=" + userName);
@@ -79,6 +82,12 @@ export class AuthService {
     this.isLoadingSubject.next(true);
     return this.http.put(this.apiCoreURl + "/api/Update-User-Profile/", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
+
+  isEmailExists(email:string) {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('X-Skip-Loader-Interceptor', 'true');
+    return this.http.post<boolean>(this.apiCoreURl + "/api/app/user/is-email-exists?email="+email,null,{headers:headers});
   }
 
 }

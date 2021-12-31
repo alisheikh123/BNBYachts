@@ -16,6 +16,9 @@ const routes: Routes = [
     path: "onboarding", component: HostOnboardingComponent
   },
   {
+    path: "boat-add", component: HostOnboardingComponent
+  },
+  {
     path: "host-boat-listing", component: HostBoatListingComponent
   }
   ,

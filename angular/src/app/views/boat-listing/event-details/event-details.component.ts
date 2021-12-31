@@ -125,6 +125,7 @@ export class EventDetailsComponent implements OnInit {
   onChangeDate(isIncrease: boolean) {
     this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
     this.yachtSearchService.eventDetailsById(this.eventSchedule[this.dateScheduleIndex]?.eventId).subscribe((res: any) => {
+      this.eventId = this.eventSchedule[this.dateScheduleIndex]?.eventId;
       this.eventDetails = res?.eventDetails;
     })
   }

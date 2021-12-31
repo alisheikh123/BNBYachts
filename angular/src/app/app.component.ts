@@ -9,6 +9,7 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 export class AppComponent{
   title = 'BnB Yacht';
   public loggedInUserRole: any = null;
+  public unReadChatCount: number = 0;
 
   constructor(private config: NgbDatepickerConfig){
     config.minDate = { year: new Date().getFullYear(), month: 

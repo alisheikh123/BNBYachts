@@ -81,6 +81,7 @@ export class YachtSearchComponent implements OnInit {
   }
   setMaxDate(item:any){
     let date = new Date(item);
+    this.boatelSearchParam.checkoutDate = null;
     if(item != null){
      date = new Date(item);
       this.minDate = {year : date.getFullYear(),month:date.getMonth()+1,day:date.getDate()};

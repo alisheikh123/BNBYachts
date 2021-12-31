@@ -31,22 +31,26 @@ namespace BnBYachts.Payments.Managers
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId)
         {
             var user = await _userCardRepository.FindAsync(res => res.UserId == userId.ToString()).ConfigureAwait(false);
-            var options = new PaymentMethodListOptions
+            if (user !=null)
             {
-                Customer = user.CustomerId,
-                Type = PaymentConstants.Card,
-            };
-            var service = new PaymentMethodService();
-            StripeList<PaymentMethod> paymentMethods = service.List(
-                options
-             );
+                var options = new PaymentMethodListOptions
+                {
+                    Customer = user.CustomerId,
+                    Type = PaymentConstants.Card,
+                };
+                var service = new PaymentMethodService();
+                StripeList<PaymentMethod> paymentMethods = service.List(
+                    options
+                 );
 
-            var userPaymentMethods = new List<UserPaymentMethodTransferable>();
-            foreach (var item in paymentMethods)
-            {
-                userPaymentMethods.Add(UserPaymentMethodTransferableFactory.Contruct(item.Id, item.BillingDetails.Name, item.Card.Last4, false, item.Card.Brand));
+                var userPaymentMethods = new List<UserPaymentMethodTransferable>();
+                foreach (var item in paymentMethods)
+                {
+                    userPaymentMethods.Add(UserPaymentMethodTransferableFactory.Contruct(item.Id, item.BillingDetails.Name, item.Card.Last4, false, item.Card.Brand));
+                }
+                return userPaymentMethods; 
             }
-            return userPaymentMethods;
+            return new List<UserPaymentMethodTransferable>();
         }
         public async Task<bool> CreateCustomer(StripeCustomerRequestable data)
         {

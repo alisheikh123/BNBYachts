@@ -105,17 +105,32 @@ namespace BnBYachts.Booking.Managers
             && res.BookingStatus == BookingStatus.Rejected).ConfigureAwait(false));
             return response;
         }
-        public async Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted,string rejectionReason)
+        public async Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted,string rejectionReason, int serviceType)
         {
-            var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
-            booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+            string userName = "";
+            if (serviceType == (int)BookingTypes.Boatel)
+            {
+                var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
+                userName = booking.UserName;
+                booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected; 
+            }
+            else if (serviceType == (int)BookingTypes.Charter)
+            {
+                var booking = await _charterBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
+                booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+            }
+            else
+            {
+                var booking = await _eventsBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
+                booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+            }
 
             #region Send-Email
-            string body = $"<h4> Your booking has been {booking.BookingStatus} due to {rejectionReason}.</h4>";
+            string body = $"<h4> Your booking has been {(isAccpeted ? "Accepted":"Rejected")} due to {rejectionReason}.</h4>";
             await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
-                To = booking.UserName,
-                Subject = "Email Confirmation",
+                To = userName,
+                Subject = "Booking Status",
                 Body = new StringBuilder().Append(body),
                 IsBodyHtml = true
             });

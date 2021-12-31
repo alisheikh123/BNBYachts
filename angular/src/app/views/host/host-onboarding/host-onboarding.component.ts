@@ -169,7 +169,8 @@ export class HostOnboardingComponent implements OnInit {
     reader.readAsDataURL(fileData);
     reader.onload = (_event) => {
       if (index != null) {
-        if (!this.boatGallery[index]) {
+        let findImage = this.boatGallery.find(res=>res.sortOrder == index);
+        if (!findImage) {
           let item = {
             fileName: fileData.name,
             fileData: reader.result,
@@ -180,9 +181,9 @@ export class HostOnboardingComponent implements OnInit {
           this.boatGallery.push(item);
         }
         else {
-          this.boatGallery[index]['fileName'] = fileData.name;
-          this.boatGallery[index]['fileData'] = reader.result;
-          this.boatGallery[index]['fileType'] = fileData.type;
+          findImage.fileName = fileData.name;
+          findImage.fileData = reader.result;
+          findImage.fileType = fileData.type;
         }
       }
       else {
@@ -257,10 +258,10 @@ export class HostOnboardingComponent implements OnInit {
   }
 
   isValidCheckoutTime(){
-    if(this.boatCalendar.fromDate.getUTCDate() == this.boatCalendar.toDate.getUTCDate() 
+    if(this.boatCalendar.fromDate.getUTCDate() == this.boatCalendar.toDate.getUTCDate()
     && this.hostForm.checkinTime.value > this.hostForm.checkoutTime.value && this.hostForm.isBoatelServicesOffered){
       return false;
-    } 
+    }
     else{
       return true;
     }

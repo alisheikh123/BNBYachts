@@ -6,6 +6,7 @@
             </div>
             <div class="user-details">
                 <p class="medium py-2">{{item?.boat?.name}}</p>
+                <p>{{item?.title}}</p>
                 <p class="">Listing Status:<span
                         [ngClass]="{'text-success' : item?.boat.isActive, 'text-danger':!item?.boat.isActive}">{{item?.boat?.isActive
                         ? "Active":"Inactive"}}</span></p>

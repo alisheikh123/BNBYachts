@@ -17,8 +17,8 @@
                         <div class="gallery-images-small-wrapper">
                             <div class="row">
                                 <div class="col-sm-6 py-2"
-                                    *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : false)">
-                                    <div class="gallery-images-small custom-image-prev">
+                                    *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : false);let i = index">
+                                    <div class="gallery-images-small custom-image-prev" *ngIf="i < 4">
                                         <img src="{{assetsUrl + item?.imagePath}}" alt="">
                                     </div>
                                 </div>
@@ -51,58 +51,58 @@
                                             <div class="col-xl-6 py-2">
                                                 <h6 class="bold">Charter Details</h6>
                                                 <div class="tabs-inner-details-inner">
-                                                    <div class="custom-flex-start py-1">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Departing From:</p>
+                                                    <div class="custom-flex-start py-1 align-items-start depart-date-lg-view">
+                                                        <div class="custom-flex align-items-start mobile-width-100" >
+                                                            <p class="medium min-width-text small-content">Departing From:</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.departingFrom}}</p>
                                                         </div>
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text-small">Destination:</p>
-                                                            <p>{{charterDetails?.destination}}</p>
+                                                        <div class="custom-flex align-items-start mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content align-items-start">Destination:</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.destination}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Boat Capacity:</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content">Boat Capacity:</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.guestCapacity}}</p>
                                                         </div>
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text-small">Seats Remaining:</p>
-                                                            <p>{{charterDetails?.guestCapacity}}</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content">Seats Remaining:</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.guestCapacity}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Round Trip:</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content">Round Trip:</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.isRoundTrip ? 'Yes':'No'}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Departure:</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content">Departure:</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.departureFromDate |
                                                                 date:'MMM-dd-YYYY'}}</p>
                                                         </div>
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text-small">Arrival:</p>
-                                                            <p>{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content">Arrival:</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <p class="medium min-width-text">Return Details:</p>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text">Departure:</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content">Departure:</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.returnDate | date:'MMM-dd-YYYY'}}</p>
                                                         </div>
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text-small">Arrival:</p>
-                                                            <p>{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content">Arrival:</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -130,7 +130,7 @@
                                             <div class="col-xl-6 py-2">
                                                 <div class="row pb-2 m-0 check-in-out-wrap">
                                                     <div class="col-md-6 py-2">
-                                                        <div class="custom-flex select custom-select select-search custom-input-label-inside flex-row"
+                                                        <div class="custom-date-month-view"
                                                             *ngIf="charterSchedule?.length > 0">
                                                             <span class="fas fa-chevron-left"
                                                                 (click)="onChangeDate(false)"

@@ -1,13 +1,8 @@
-<div class="filter-wrap mb-3 custom-flex-start">
-    <div class="calendar">
-        <input type="month" [(ngModel)]="modelDate" (ngModelChange)="applyDateFilter()" id="start"
-            placeholder="Year,Month" name="date">
-    </div>
+<div class="filter-wrap mb-3 custom-flex-between">
     <div class="dropdown custom-dropdown dropdown-rounded">
-        <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        <button class="dropdown-toggle dropdownBTN btn btn-outline-primary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
             aria-expanded="false">
             {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
-            <i class="fa fa-caret-down"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
@@ -21,6 +16,25 @@
             </li>
         </ul>
     </div>
+    <div>
+        <!-- <input type="month" [(ngModel)]="modelDate" (ngModelChange)="applyDateFilter()" id="start" -->
+            <div class="">
+                <div class="row">
+                  <div class="col">
+                    <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
+                      <button class="dropdownBTN btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>
+                        {{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                        <ejs-calendar #ejCalendar [value]='modelDate' 
+                        (change)="applyDateFilter($event);myDrop.close()" 
+                        start='Decade' depth='Year'></ejs-calendar>
+                        <div class="dropdown-divider"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    </div>
 </div>
 <div class="custom-card req-user-card custom-margin" *ngFor="let item of boatelBookings; let i = index">
     <div class="image-with-text custom-flex-between align-items-start">
@@ -30,8 +44,8 @@
             '/boat-listing/reservation-detail/',
             item.id
           ]">
-          <p *ngIf="selectedServiceType == 3">{{item?.title}}</p>
                 <p class="medium">{{ item.userName }}</p>
+                <p *ngIf="selectedServiceType == 3">{{item?.event?.title}}</p>
                 <p class="small-text grey">{{ item.boatDetail?.name }}</p>
                 <ngb-rating [rate]="0"></ngb-rating>
                 <p class="small-text grey">
@@ -53,13 +67,16 @@
                 {{ item.checkoutDate | date: "dd MMM/YYYY" }}
             </p>
             <p class="small-text grey" *ngIf="selectedServiceType == 3">
-                {{ item.eventDate | date: "dd MMM/YYYY" }}
+                {{ item?.event?.startDateTime | date: "dd MMM/YYYY" }}
+            </p>
+            <p class="small-text grey" *ngIf="selectedServiceType == 2">
+                {{ item?.charter?.departureFromDate | date }}
             </p>
             <div class="custom-flex mt-4">
                 <button class="custom-btn grey" (click)="changeStatus(item, false, i)">
                     Reject
                 </button>
-                <button class="custom-btn blue ml-2" (click)="changeStatus(item, true, i)">
+                <button class="custom-btn blue ms-2" (click)="changeStatus(item, true, i)">
                     Accept
                 </button>
             </div>

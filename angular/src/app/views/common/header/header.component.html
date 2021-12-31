@@ -67,12 +67,12 @@
                                     Service Provider
                                 </span>
                             </a>
-                            <a href="" class="underline-link-blk">
+                            <a [routerLink]="['/chat']" class="underline-link-blk">
                                 <span>
-
                                     Inbox
                                 </span>
-                            </a>
+                                <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
+                            </a>                                
                             <a href="" class="underline-link-blk">
                                 <span>
                                     Calender
@@ -94,7 +94,7 @@
                                     Create
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" [routerLink]="['/host/onboarding']">Boatel</a></li>
+                                    <li><a class="dropdown-item" [routerLink]="['/host/boat-add']">Boatel</a></li>
                                  <li><a class="dropdown-item" [routerLink]="['/host/charter-creation']">Charter</a></li>
                                   <li><a class="dropdown-item" [routerLink]="['/host/event-creation']">Event</a></li>
                                 </ul>
@@ -119,7 +119,7 @@
                                     <p class="header-content small-text">{{userDetails?.name}}</p>
                                 </li>
                                 <li><a class="dropdown-item" [routerLink]="['/boat-listing/all-reservations']" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
-                                <li><a class="dropdown-item" href="#">Messages</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/chat']">Messages<span style="float: right;" class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span></a></li>
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>

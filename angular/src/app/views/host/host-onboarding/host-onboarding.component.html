@@ -281,10 +281,10 @@
                                     <div class="image-gallery-bannner bg-none blck-color">
                                         <div class="image-gallery-head-content custom-flex-between">
                                             <div class="">
-                                                <p class="medium">Add atleat 5 photos</p>
+                                                <p class="medium">Add atleast 5 photos</p>
                                                 <!-- <p class="small-text light grey">Drag to reorder</p> -->
                                             </div>
-                                            <div class="avatar-edit">
+                                            <div class="avatar-edit" *ngIf="this.boatGallery?.length == 5 && otherGalleryImages.length < 5">
                                                 <input type="file"
                                                 style="display: none;"
                                                 id="addMoreImg"
@@ -433,6 +433,7 @@
                                                         <button class="custom-btn outline-blue-clr me-4"
                                                             (click)="currentTab=currentTab-1;">Previous</button>
                                                         <button class="custom-btn blue" id="save-btn"
+                                                        [disabled]="(boatGallery.length < 5)"
                                                             (click)="currentTab=currentTab+1;">Continue</button>
                                                     </div>
                                                 </div>

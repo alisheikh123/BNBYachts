@@ -1,0 +1,87 @@
+<div class="main-wrapper">
+  <section class="chat-wrapper-section section-padding">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 py-2">
+          <app-chat-users  [activeUserId]="chat.receiverId"
+            (onChangeUser)="getChat($event)"></app-chat-users>
+        </div>
+        <div class="col-md-6 py-2">
+          <div class="bg-grey-light border-radius-5 p-2">
+            <div class="image-with-text">
+              <div class="image-with-text-inner small-img">
+                <img src="../../../../../../assets/images/user-img.png" alt="">
+                <div class="user-details">
+                  <p class="medium">{{recieverInfo?.name}}</p>
+                  <p class="small-text grey">{{recieverInfo?.email}}</p>
+                </div>
+                <div class="dropdown custom-dropdown no-border">
+                  <button class="dropdown-btn dropdown-toggle no-border" type="button" id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-ellipsis-v"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><button class="dropdown-item" (click)="changeStatus()" *ngIf="chat.isBlockedByMe || !chat.blockedUser">{{chat.blockedUser ? 'Unblock':'Block'}}</button></li>
+                      <li><button class="dropdown-item" (click)="archiveChat(!recieverInfo?.isArchivedUser)">{{!recieverInfo?.isArchivedUser ? 'Archive Chat':'Unarchive chat'}}</button></li>
+                  </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="userMessages && chat.receiverId">
+          <div class="chat-wrap-bg-blue" #chatScrollContainer>
+            <!-- <div class="chat-separator">
+              <span>21 July</span>
+          </div> -->
+            <div class="image-with-text" *ngFor="let message of userMessages"
+              [ngClass]="{'bg-blue-text reciever-msg':isReciever(message.receiverId,chat.senderId)}">
+              <div class="image-with-text-inner small-img">
+                <div class="w-100 d-flex align-items-start justify-content-start reciver-msj">
+                <img src="../../../../../../assets/images/user-img.png" alt="">
+                <div class="user-details bg-grey-light">
+                  <p>{{message.message}}</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            <p class="text-center bold" *ngIf="chat.blockedUser">You cannot reply to this conversion...</p>
+
+            <div class="message-box px-3" *ngIf="!chat.blockedUser">
+              <form>
+                <div class="form-floating custom-input-field">
+                  <input type="text" name="message" class="custom-input big-input" [(ngModel)]="chat.message"
+                    placeholder="Type a message..." id="write-msg" placeholder="Type your message ...">
+                </div>
+                <div class="message-actions">
+                  <button (click)="send()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+          </ng-container>
+          <div *ngIf="!userMessages && !chat.receiverId">
+            <div class="text-center">
+              <img style="width: 300px;" src="../../../../assets/images/no-user-found.jpg" />
+              <p class="pb-2">No Chats found</p>
+              <button class="custom-btn blue big-btn"  [routerLink]="['']">Contact to host</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2" *ngIf="recieverInfo">
+          <div class="custom-card">
+            <div class="image-with-text ">
+              <div class="image-with-text-inner">
+                <img src="../../../../../../assets/images/user-img.png" alt="">
+              </div>
+              <p class="medium text-center">{{recieverInfo?.name}}</p>
+              <p class="small-text grey text-center">{{recieverInfo?.email}}</p>
+              <!-- <div class="custom-flex pt-5 pb-4">
+                <a href="create-contract.html" class="custom-btn blue big-btn">Create Contract</a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
