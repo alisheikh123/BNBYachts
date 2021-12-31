@@ -163,8 +163,15 @@ export class ReservationDetailComponent implements OnInit {
       if (moment(checkinDate).isAfter(moment().format("YYYY-MM-DD"))) {
         return true;
       }
+      else {
+        return false;
+      }
+
     }
+
     return false;
+
+
   }
 }
 

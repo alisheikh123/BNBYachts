@@ -22,6 +22,7 @@ import { EventDetailsComponent } from './event-details/event-details.component';
 import { ListReviewsComponent } from '../common/list-reviews/list-reviews.component';
 import { NotFoundModule } from '../common/not-found-component/not-found.module';
 import { PaginationModule } from '../common/pagination/pagination.module';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PaginationModule } from '../common/pagination/pagination.module';
     SharedPipesModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     NotFoundModule,
-    PaginationModule
+    PaginationModule,
+    CalendarModule 
   ],
     providers: [YachtSearchService, BookingService]
 })

@@ -1,13 +1,8 @@
-<div class="filter-wrap mb-3 custom-flex-start">
-    <div class="calendar">
-        <input type="month" [(ngModel)]="modelDate" (ngModelChange)="applyDateFilter()" id="start"
-            placeholder="Year,Month" name="date">
-    </div>
+<div class="filter-wrap mb-3 custom-flex-between">
     <div class="dropdown custom-dropdown dropdown-rounded">
-        <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        <button class="dropdown-toggle dropdownBTN btn btn-outline-primary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
             aria-expanded="false">
             {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
-            <i class="fa fa-caret-down"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
@@ -20,6 +15,25 @@
                 <a class="dropdown-item" (click)="filterServiceType(3)">Events</a>
             </li>
         </ul>
+    </div>
+    <div>
+        <!-- <input type="month" [(ngModel)]="modelDate" (ngModelChange)="applyDateFilter()" id="start" -->
+            <div class="">
+                <div class="row">
+                  <div class="col">
+                    <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
+                      <button class="dropdownBTN btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>
+                        {{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                        <ejs-calendar #ejCalendar [value]='modelDate' 
+                        (change)="applyDateFilter($event);myDrop.close()" 
+                        start='Decade' depth='Year'></ejs-calendar>
+                        <div class="dropdown-divider"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
     </div>
 </div>
 <div class="custom-card req-user-card custom-margin" *ngFor="let item of boatelBookings; let i = index">

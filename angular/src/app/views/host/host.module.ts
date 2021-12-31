@@ -65,7 +65,8 @@ CharterEditComponent
     DateRangePickerModule,
     DateTimePickerModule,
     NotFoundModule,
-    PaginationModule
+    PaginationModule,
+    CalendarModule
   ],
   providers: [YachtSearchService,ReservationService]
 })
