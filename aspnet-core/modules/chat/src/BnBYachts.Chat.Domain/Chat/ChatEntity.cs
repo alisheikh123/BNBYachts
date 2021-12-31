@@ -12,6 +12,6 @@ namespace BnBYachts.Chat.Chat
         public bool IsRead { get; set; }
         public DateTime ReadDate { get; set; }
         public DateTime SentDate { get; set; }
-        public  int UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

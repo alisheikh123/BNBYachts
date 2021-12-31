@@ -52,7 +52,6 @@ export class CharterEditComponent implements OnInit {
   getCharterDetailsById()
   {
     this.charterService.charterDetailsById(this.charterId).subscribe((res: any) => {
-      console.log(res?.charterDetails);
       this.boatCharterForm.setValue({
         id:res?.charterDetails?.id,
         description: res?.charterDetails?.description,
@@ -76,13 +75,6 @@ export class CharterEditComponent implements OnInit {
   }
 
 
-  selectBoatName(event: any)
-  {
-    let Id = event.target.value;
-    this.service.getSelectedBoatDetail(Id).subscribe((res:any)=>
-    {
-    })
-  }
   handleDepartingAddress(address: any) {
     this.boatCharterForm.controls.departingFrom.setValue(address.formatted_address);
     this.boatCharterForm.controls.departingLatitude.setValue(address.geometry.location.lat());
@@ -107,21 +99,13 @@ export class CharterEditComponent implements OnInit {
       })
     }
   }
-  removeCapacity(IsGuest: boolean) {
-    if (IsGuest) {
-      this.boatCharterForm.controls.guestCapacity.setValue(this.boatCharterForm.controls.guestCapacity.value - 1);
-    }
-    else {
-      this.boatCharterForm.controls.guestCapacity.setValue(this.boatCharterForm.controls.guestCapacity.value - 1);
-    }
+  removeCapacity() {
+    let value = this.boatCharterForm.controls.guestCapacity.value;
+    value = value>0? this.boatCharterForm.controls.guestCapacity.setValue(value - 1):0;
   }
-  addCapacity(IsGuest: boolean) {
-    if (IsGuest) {
-      this.boatCharterForm.controls.guestCapacity.setValue(this.boatCharterForm.controls.guestCapacity.value + 1);
-    }
-    else {
-      this.boatCharterForm.controls.guestCapacity.setValue(this.boatCharterForm.controls.guestCapacity.value + 1);
-    }
+  addCapacity() {
+    let value = this.boatCharterForm.controls.guestCapacity.value;
+    value = value>0? this.boatCharterForm.controls.guestCapacity.setValue(value + 1):0;
   }
 
 }

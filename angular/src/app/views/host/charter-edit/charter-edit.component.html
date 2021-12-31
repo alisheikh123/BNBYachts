@@ -10,7 +10,7 @@
                     <div class="col-md-6 py-2">
                         <div class="custom-input-field">
                             <label>{{'BoatListing' | localization}}</label>
-                            <select formControlName="boatId" class="form-control" (change)="selectBoatName($event)">
+                            <select formControlName="boatId" class="form-control">
                                 <option value="0"> Choose boat name</option>
                                 <option *ngFor="let item of boatlistOptions" value={{item.id}} >{{item.name}}</option>
                             </select>
@@ -21,9 +21,9 @@
                                 <div class="custom-flex-start">
                                     <label>{{'Guests' | localization}}</label>
                                     <div class="custom-flex-start">
-                                        <span class="minus" (click)="removeCapacity(true)">-</span>
+                                        <span class="minus" (click)="removeCapacity()">-</span>
                                         <input type="text" formControlName="guestCapacity" />
-                                        <span class="plus"(click)="addCapacity(true)" >+</span>
+                                        <span class="plus"(click)="addCapacity()" >+</span>
                                     </div>
                                 </div>
                             </div>

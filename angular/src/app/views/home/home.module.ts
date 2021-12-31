@@ -13,6 +13,9 @@ import { HomeRoutingModule } from './home-routing.module';
 import { NoFoundModalComponent } from './components/no-found-modal/no-found-modal.component';
 import { HostDashboardComponent } from './components/host-dashboard/host-dashboard.component';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
+import { ChatComponent } from './components/Chat/chat/chat.component';
+import { ChatUsersComponent } from './components/Chat/chat-users/chat-users.component';
+import { NotFoundModule } from '../common/not-found-component/not-found.module';
 
 
 @NgModule({
@@ -24,6 +27,8 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
     FeaturedCitiesComponent,
     NoFoundModalComponent,
     HostDashboardComponent,
+    ChatComponent,
+    ChatUsersComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -32,7 +37,8 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
     FormsModule,
     CommonModule,
     GooglePlaceModule,
-    SharedPipesModule
+    SharedPipesModule,
+    NotFoundModule
   ],
   providers: [YachtSearchService],
   //bootstrap: [HomeComponent]

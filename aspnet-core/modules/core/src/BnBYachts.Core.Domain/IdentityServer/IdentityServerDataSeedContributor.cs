@@ -65,7 +65,7 @@ namespace BnBYachts.Core.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "HostGateway" });
+            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "HostGateway", "Chat"});
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,7 +80,7 @@ namespace BnBYachts.Core.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "HostGateway" }, commonApiUserClaims);
+            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "HostGateway", "Chat" }, commonApiUserClaims);
         }
 
         private async Task<ApiResource> CreateApiResourceAsync(string[] item, IEnumerable<string> claims)
@@ -148,7 +148,8 @@ namespace BnBYachts.Core.IdentityServer
                 "Booking",
                 "Boat",
                 "BnBYachts",
-                "HostGateway"
+                "HostGateway",
+                "Chat"
 
             };
 
@@ -254,6 +255,22 @@ namespace BnBYachts.Core.IdentityServer
                     scopes: commonScopes,
                     grantTypes: new[] { "authorization_code" },
                     secret: configurationSection["gateway_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }
+            // Swagger Chat Client
+
+            var swaggerChatClientId = configurationSection["Chat_Swagger:ClientId"];
+            if (!swaggerChatClientId.IsNullOrWhiteSpace())
+            {
+                var swaggerRootUrl = configurationSection["Chat_Swagger:RootUrl"].TrimEnd('/');
+                await CreateClientAsync(
+                    name: swaggerChatClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["Chat_Swagger:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
