@@ -135,6 +135,7 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
         public double? ReturnLocationLat { get; set; }
         public double? ReturnLocationLng { get; set; }
         public Guid? CreatorId { get; set; }
+        public bool? IsActive { get; set; }
 
     }
     public class EventsMapperRequestable

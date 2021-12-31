@@ -676,6 +676,9 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int>("GuestCapacity")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsFullBoatCharges")
                         .HasColumnType("bit");
 
