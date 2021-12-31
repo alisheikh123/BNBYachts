@@ -1,6 +1,7 @@
 ﻿
 using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Charter.Dto;
+using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Charter.Interface;
 using BnBYachts.Shared.Model;
@@ -56,6 +57,18 @@ namespace BnBYachts.Boat.Manager.Charter
         {
            await _charterRepository.InsertAsync(_objectMapper.Map<CharterDto, CharterEntity>(charterForm),true).ConfigureAwait(false);
             return new CharterDto();
+        }
+        public async Task<bool> UpdateCharter(ChartersMapperRequestable charterDetails,Guid? userId)
+        {
+            var charterEntity = await _charterRepository.FindAsync(x => x.Id == charterDetails.Id).ConfigureAwait(false);
+            _objectMapper.Map<ChartersMapperRequestable,CharterEntity>(charterDetails, charterEntity);
+            if (charterEntity != null) 
+            {
+                charterEntity.CreatorId = userId;
+                await _charterRepository.UpdateAsync(charterEntity, autoSave: true).ConfigureAwait(false);
+                return true;
+            }
+            return false;
         }
 
 

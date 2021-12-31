@@ -116,6 +116,7 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
     }
     public class ChartersMapperRequestable
     {
+        public int? Id { get; set; }
         public int? BoatId { get; set; }
         public bool IsRoundTrip { get; set; }
         public int GuestCapacity { get; set; }

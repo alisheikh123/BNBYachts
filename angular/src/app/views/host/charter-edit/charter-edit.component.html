@@ -1,0 +1,131 @@
+<div class="main-wrapper">
+    <div class="container">
+        <div class="listing-main-wrapper edit-boat section-padding">
+            <div class="custom-flex-between mb-3">
+                <h5 class="bold">{{'EditCharter' | localization}}</h5>
+            </div>
+            <form [formGroup]="boatCharterForm">
+                <div class="row">
+                    <input formControlName="Id" hidden/>
+                    <div class="col-md-6 py-2">
+                        <div class="custom-input-field">
+                            <label>{{'BoatListing' | localization}}</label>
+                            <select formControlName="boatId" class="form-control">
+                                <option value="0"> Choose boat name</option>
+                                <option *ngFor="let item of boatlistOptions" value={{item.id}} >{{item.name}}</option>
+                            </select>
+                        </div>
+                        <div class="counter-input-wrapper">
+                            <label>{{'GuestCapacity' |localization }}</label>
+                            <div class="number">
+                                <div class="custom-flex-start">
+                                    <label>{{'Guests' | localization}}</label>
+                                    <div class="custom-flex-start">
+                                        <span class="minus" (click)="removeCapacity()">-</span>
+                                        <input type="text" formControlName="guestCapacity" />
+                                        <span class="plus"(click)="addCapacity()" >+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="custom-input-field">
+                            <label>{{'CharterDescription' | localization}}</label>
+                            <textarea class="custom-input" formControlName="description" rows="2"></textarea>
+                         <small class="text-danger" *ngIf="charterForm.description.touched && !charterForm.description.valid">Description is required.</small>
+                          </div>
+                          <div class="custom-input-field">
+                            <label>{{'DepartingFrom'| localization}}</label>
+                            <input class="custom-input" formControlName="departingFrom"
+                                ngx-google-places-autocomplete
+                                (onAddressChange)="handleDepartingAddress($event)"
+                                placeholder="Bali Island">
+                                <small class="text-danger" *ngIf="charterForm.departingFrom.touched && !charterForm.departingFrom.valid">departing From is required.</small>
+                        </div>
+                        <div class="custom-input-field">
+                            <label>{{'ToDestination'| localization}}</label>
+                            <input class="custom-input" formControlName="destination"
+                                ngx-google-places-autocomplete
+                                (onAddressChange)="handleDestinationAddress($event)"
+                                placeholder="Qubarland">
+                                <small class="text-danger" *ngIf="charterForm.destination.touched && !charterForm.destination.valid"> {{'DestReq'| localization}}</small>
+                        </div>
+                        <div class="col-md-4 py-2">
+                            <div class="custom-select-field">
+                                <label> {{'DepartureDate'| localization}}</label>
+                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate" name="datetimepicker"  placeholder='Select Departure From' ></ejs-datetimepicker>
+
+                              </div>
+                          </div>
+                          <div class="col-md-4 py-2">
+                            <div class="custom-select-field">
+                                <label> {{'DepartureTo'| localization}}</label>
+                                <ejs-datetimepicker placeholder='Select Departure From' formControlName="departureToDate"></ejs-datetimepicker>
+
+                              </div>
+                          </div>
+                          <div class="col-md-12 py-2">
+                            <div class="row align-items-end">
+                                <div class="col-md-6">
+                                    <div class="custom-input-field">
+                                        <label> {{'CharterFee'| localization}}</label>
+                                        <input type="number" class="custom-input" placeholder="$20000"
+                                                formControlName="charterFee">
+                                      </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="custom-input-field">
+                                        <div class="custom-flex">
+                                            <div class="form-check">
+                                             <input  type="radio" class="form-check-input" [value]="true" formControlName="isFullBoatCharges">
+                                                 {{'PerPerson'| localization}}
+                                            </div>
+                                            <div class="form-check ms-5">
+                                                    <input  type="radio" class="form-check-input" [value]="false" formControlName="isFullBoatCharges">
+                                                 {{'EntireBoat'| localization}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 py-2">
+                            <div class="custom-input-field">
+                                <label> {{'roundtrip'| localization}}</label>
+                                <div class="custom-flex">
+
+                                    <div class="form-check">
+                                        <input  type="radio" class="form-check-input" [value]="true"   formControlName="isRoundTrip">
+                                           Yes
+                                       </div>
+                                       <div class="form-check ms-5">
+                                               <input  type="radio" class="form-check-input" [value]="false"formControlName="isRoundTrip" checked>
+                                           No
+                                       </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-md-6 py-2" *ngIf="boatCharterForm.value.isRoundTrip === true ">
+                                <div class="custom-select-field">
+                                    <label>Return Date {{'ReturnDate'| localization}}</label>
+                                    <ejs-datetimepicker formControlName="returnDate"></ejs-datetimepicker>
+                                  </div>
+                              </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </form>
+            <div class="row">
+                <div class="custom-flex-end">
+                    <button class="custom-btn outline-blue-clr me-sm-2">{{'Cancel' | localization}}</button>
+                    <button class="custom-btn blue" (click)="updateCharter()">{{'Save' | localization}}</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
