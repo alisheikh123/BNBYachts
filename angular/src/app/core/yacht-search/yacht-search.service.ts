@@ -48,6 +48,10 @@ export class YachtSearchService {
     return this.http.get(this.apiUrl + '/get-default-features').pipe(
       catchError(this.handleError));
   }
+  updateCharter(boat:any){
+    return this.http.put(this.apiUrl + "/app/charter/charter",boat).pipe(
+      catchError(this.handleError));
+  }
 
   ///Exception handler
   handleError(error: any) {
