@@ -47,6 +47,7 @@ export class CharterEditComponent implements OnInit {
       departingFrom: [null, Validators.required],
       returnDate: [new Date()],
       boatId:[0,Validators.required],
+      isActive:[true]
     });
   }
   getCharterDetailsById()

@@ -15,7 +15,7 @@ import { EventCreationSuccessModalComponent } from './event-creation-success-mod
 })
 export class EventCreationComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private eventService: EventService, private toastr: ToastrService, 
+  constructor(private fb: FormBuilder, private eventService: EventService, private toastr: ToastrService,
     private modal: NgbModal,private router:Router) { }
 
   eventCreationForm: FormGroup;
@@ -43,7 +43,8 @@ export class EventCreationComponent implements OnInit {
       guestCapacity: [0, Validators.required],
       startDateTime: [null, Validators.required],
       endDateTime: [null, Validators.required],
-      amountPerPerson: [0, Validators.required]
+      amountPerPerson: [0, Validators.required],
+      isActive:[true]
     });
   }
 

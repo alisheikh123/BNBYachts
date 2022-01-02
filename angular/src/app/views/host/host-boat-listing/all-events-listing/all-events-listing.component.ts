@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AllHostBoatsService } from 'src/app/core/host/all-host-boats.service';
 import {BoatTypesId } from 'src/app/shared/enums/yacht-search.constant';
 import { environment } from 'src/environments/environment';
@@ -18,7 +19,7 @@ export class AllEventsListingComponent implements OnInit {
     pageSize: 5
   };
   totalRecords: number = 0;
-  constructor(private service:AllHostBoatsService) { }
+  constructor(private service:AllHostBoatsService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getHostEvents();
@@ -26,8 +27,7 @@ export class AllEventsListingComponent implements OnInit {
   }
   getHostEvents(){
     this.service.getAllEvents(this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
-      this.hostEvents = [...new Map(res?.data.map((item:any) =>
-        [item['boatId'], item])).values()];
+      this.hostEvents = res?.data;
         this.totalRecords = res?.totalCount;
     });
   }
@@ -40,5 +40,12 @@ export class AllEventsListingComponent implements OnInit {
     this.queryParams.pageSize = data.pageSize;
     this.getHostEvents();
   }
+  isEventActive(item:any){
+    this.service.updateEventIdStatus(item?.id).subscribe((res: any) => {
+      item.isActive = !item.isActive;
+      this.toastr.success('Event Status successfully Changed.', 'Success');
+    });
+  }
+
 
 }
