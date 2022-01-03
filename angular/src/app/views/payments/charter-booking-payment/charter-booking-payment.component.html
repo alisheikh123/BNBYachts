@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="row custom-margin">
-                            <div class="col-12">
+                            <div class="col-12" *ngIf="charterDetails?.isFullBoatCharges==false">
                                 <h6 class="medium py-md-3">Price Details</h6>
                                 <div class="custom-flex-between">
                                     <p>Quote Amount</p>
@@ -92,6 +92,25 @@
                                     <p>$ {{charterDetails?.isFullBoatCharges ? charterDetails?.charterFee :
                                         charterDetails?.charterFee * (charterFilterDetails.adults +
                                         charterFilterDetails.childrens) + charterDetails?.boat?.taxFee + 20}}.00</p>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="charterDetails?.isFullBoatCharges==true">
+                                <h6 class="medium py-md-3">Price Details</h6>
+                                <div class="custom-flex-between">
+                                    <p>Quote Amount</p>
+                                    <p>${{charterDetails?.charterFee}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Tax Fee</p>
+                                    <p>${{charterDetails?.boat?.taxFee}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Service Fee</p>
+                                    <p>$20.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Total(USD)</p>
+                                    <p class="medium">$ {{charterDetails?.charterFee  + charterDetails?.boat?.taxFee+ 20}}.00</p>
                                 </div>
                             </div>
                         </div>
