@@ -109,8 +109,5 @@ export class CharterEditComponent implements OnInit {
   addCapacity() {
     this.boatCharterForm.controls.guestCapacity.setValue(this.boatCharterForm.controls.guestCapacity.value + 1);
   }
-  goBack() {
-    this.router.navigate(['/host/host-boat-listing']);
-  }
-
+  
 }

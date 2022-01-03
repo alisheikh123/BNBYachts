@@ -71,7 +71,7 @@ namespace BnBYachts.Boat.Manager
         {
             var response = new EntityResponseModel();
             var targetEvent = await _eventRepository.GetAsync(res => res.Id == eventId).ConfigureAwait(false);
-            targetEvent.Boat = await _boatRepository.GetAsync(b => b.Id == targetEvent.BoatId).ConfigureAwait(false);
+            await _eventRepository.EnsurePropertyLoadedAsync(targetEvent, res => res.Boat).ConfigureAwait(false);
             response.Data = _objectMapper.Map<EventEntity, EventDTO>(targetEvent);
             return response;
         }

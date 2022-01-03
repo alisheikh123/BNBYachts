@@ -199,10 +199,6 @@ export class BoatEditComponent implements OnInit {
     }
   }
 
-  goBack() {
-    this.router.navigate(['/host/host-boat-listing']);
-  }
-
   updateBoat() {
     if (this.boatEditForm.valid) {
       let data = this.boatEditForm.value;

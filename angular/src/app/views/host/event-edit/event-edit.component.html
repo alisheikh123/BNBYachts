@@ -4,27 +4,25 @@
             <div class="custom-flex-between mb-3">
                 <h5 class="bold">Edit Event</h5>
             </div>
-            <form [formGroup]="eventEditForm">
+            <form [formGroup]="eventEditForm" *ngIf="eventEditForm">
                 <div class="row">
                     <div class="col-md-6 py-2">
                         <div class="custom-select-field">
-                            <label>{{'BoatListing' | localization}}</label>                            
-                            <select name="select" id="select" formControlName="boatId"
-                            (change)="getBoatBookedDates()"
+                            <label>{{'BoatListing' | localization}}</label>
+                            <select name="select" id="select" formControlName="boatId" (change)="getBoatBookedDates()"
                                 [ngClass]="{  'is-invalid':submitted && form.boatId.errors }">
                                 <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
                                 <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
-                            </select>                                
+                            </select>
                             <small class="text-danger"
                                 *ngIf="((form.boatId.dirty && form.boatId.touched || submitted) && form.boatId.hasError('required'))">
                                 {{'vBoatIsRequired'|localization}}
-                            </small>                            
+                            </small>
                         </div>
                         <div class="custom-input-field">
                             <label>{{'EventTitle' | localization}}</label>
-                            <input class="custom-input" placeholder="Enter Event Name" 
-                            [ngClass]="{  'is-invalid':submitted && form.title.errors }"
-                            formControlName="title">
+                            <input class="custom-input" placeholder="Enter Event Name"
+                                [ngClass]="{  'is-invalid':submitted && form.title.errors }" formControlName="title">
                             <small class="text-danger"
                                 *ngIf="((form.title.touched || submitted) && form.title.hasError('required'))">
                                 {{'vTitleRequired' | localization}}
@@ -35,14 +33,12 @@
                             <div class="custom-flex">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        formControlName="eventType" name="eventType" [value]="1"
-                                        id="flexRadioDefault1">
+                                        formControlName="eventType" name="eventType" [value]="1" id="flexRadioDefault1">
                                     {{'Adult' | localization}}
                                 </div>
                                 <div class="form-check ms-5">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        formControlName="eventType" name="eventType" [value]="2"
-                                        id="flexRadioDefault1">
+                                        formControlName="eventType" name="eventType" [value]="2" id="flexRadioDefault1">
                                     {{'Family' | localization}}
                                 </div>
                             </div>
@@ -61,13 +57,13 @@
                         <div class="custom-input-field">
                             <label>{{'EventDescription' | localization}}</label>
                             <textarea class="custom-input" id="exampleFormControlTextarea1"
-                            [ngClass]="{  'is-invalid':submitted && form.description.errors }"
-                            formControlName="description" rows="4"></textarea>
+                                [ngClass]="{  'is-invalid':submitted && form.description.errors }"
+                                formControlName="description" rows="4"></textarea>
                             <small class="text-danger"
                                 *ngIf="((form.description.touched || submitted) && form.description.hasError('required'))">
                                 {{'vDescriptionRequired' | localization}}
                             </small>
-                        </div>                            
+                        </div>
                         <div class="counter-input-wrapper">
                             <label>{{'GuestCapacity' | localization}}</label>
                             <div class="number">
@@ -84,11 +80,10 @@
                                     </small>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="custom-select-field">
                             <label>{{'StartDate' | localization}}</label>
-                            <ejs-datetimepicker formControlName="startDateTime"
-                            (renderDayCell)='onRenderCell($event)'
+                            <ejs-datetimepicker formControlName="startDateTime" (renderDayCell)='onRenderCell($event)'
                                 name="startDateTime">
                             </ejs-datetimepicker>
                             <small class="text-danger"
@@ -98,7 +93,8 @@
                         </div>
                         <div class="custom-select-field">
                             <label>{{'EndDate' | localization}}</label>
-                            <ejs-datetimepicker formControlName="endDateTime" name="endDateTime" (renderDayCell)='onRenderCell($event)'>
+                            <ejs-datetimepicker formControlName="endDateTime" name="endDateTime"
+                                (renderDayCell)='onRenderCell($event)'>
                             </ejs-datetimepicker>
                             <small class="text-danger"
                                 *ngIf="((form.endDateTime.touched || submitted) && form.endDateTime.hasError('required'))">
@@ -107,24 +103,24 @@
                         </div>
                         <div class="custom-input-field">
                             <label>{{'AmountPerPerson' | localization}}</label>
-                            <input type="number" 
-                            class="custom-input" placeholder="Enter Amount"                                    
-                            [ngClass]="{  'is-invalid':submitted && form.amountPerPerson.errors }"
-                            formControlName="amountPerPerson">
+                            <input type="number" class="custom-input" placeholder="Enter Amount"
+                                [ngClass]="{  'is-invalid':submitted && form.amountPerPerson.errors }"
+                                formControlName="amountPerPerson">
                             <small class="text-danger"
                                 *ngIf="((form.amountPerPerson.touched || submitted) && form.amountPerPerson.hasError('required'))">
                                 {{'vAmountREquired' | localization}}
                             </small>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </form>
             <div class="row">
                 <div class="custom-flex-end">
-                    <button class="custom-btn outline-blue-clr me-sm-2" (click)="goBack()">Cancel</button>
-                    <button class="custom-btn blue" (click)="updateEvent()">Save</button>    
+                    <button class="custom-btn outline-blue-clr me-sm-2"
+                        [routerLink]="['/host/host-boat-listing']">Cancel</button>
+                    <button class="custom-btn blue" (click)="updateEvent()">Save</button>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>

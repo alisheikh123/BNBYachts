@@ -11,6 +11,13 @@ import { EventService } from 'src/app/core/Event/event.service';
 })
 export class EventEditComponent implements OnInit {
 
+  eventId: number;
+  eventEditForm: FormGroup;
+  eventRes: any;
+  boatExistingEventDates :any;
+  boats: any[];
+  submitted: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -23,72 +30,49 @@ export class EventEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(res => {
       this.eventId = Number(res['id']);
     });
-    this.buildFormConfiguration();
-    this.getEvent();
     this.getBoats();
-  }
-
-  eventId: number;
-  eventLookup: any;
-  boatExistingEventDates :any;
-  eventEditForm: FormGroup;
-  boats: any[];
-  boatId: number;
-  submitted: boolean = false;
-
-  buildFormConfiguration() {
-    this.eventEditForm = this.fb.group({
-      id: [0],
-      locationLat: [],
-      locationLong: [],
-      location: [null, Validators.required],
-      title: [null, Validators.required],
-      description: [null, Validators.required],
-      guestCapacity: [1, Validators.required],
-      startDateTime: [new Date(), Validators.required],
-      endDateTime: [new Date(), Validators.required],
-      amountPerPerson: [0, Validators.required],
-      eventType: [0, Validators.required],
-      boatId: [null, Validators.required],
-      isActive:[true]
-    });
-  }
-
-  get form() { return this.eventEditForm.controls; }
-
-  getEvent(){
-    this.eventService.getEventById(this.eventId).subscribe((res:any) => {
-      this.eventEditForm.setValue({
-        id: this.eventId,
-        locationLat: res?.data.locationLat,
-        locationLong: res?.data.locationLong,
-        location: res?.data.location,
-        title: res?.data.title,
-        description: res?.data.description,
-        guestCapacity: res?.data.guestCapacity,
-        startDateTime: res?.data.startDateTime,
-        endDateTime: res?.data.endDateTime,
-        amountPerPerson: res?.data.amountPerPerson,
-        eventType: res?.data.eventType,
-        boatId: res?.data.boatId,
-        isActive:res?.data?.isActive
-      });
-      this.getBoatBookedDates();
-    })
-  }
-
-  getBoatBookedDates() {
-    if(this.form.boatId.value != null) {
-      this.eventService.getBoatBookedDates(this.form.boatId.value).subscribe((res:any) => {
-        this.boatExistingEventDates = res?.bookedDates;
-      })
-    }    
+    this.getEvent();
   }
 
   getBoats() {
     this.eventService.getBoats().subscribe((boatList:any) => {
-        this.boats = boatList
+      this.boats = boatList;
     })
+  }
+
+  getEvent(){  
+    this.eventService.getEventById(this.eventId).subscribe((res:any) => {
+      this.eventRes = res;
+      this.buildFormConfiguration()
+    });
+    this.getBoatBookedDates();
+  }
+
+  buildFormConfiguration() {
+    this.eventEditForm = this.fb.group({
+      id: [this.eventId],
+      boatId: [this.eventRes?.data.boatId, Validators.required],
+      locationLat: [this.eventRes?.data.locationLat],
+      locationLong: [this.eventRes?.data.locationLong],
+      location: [this.eventRes?.data.location, Validators.required],
+      title: [this.eventRes?.data.title, Validators.required],
+      description: [this.eventRes?.data.description, Validators.required],
+      guestCapacity: [this.eventRes?.data.guestCapacity, Validators.required],
+      startDateTime: [this.eventRes?.data.startDateTime, Validators.required],
+      endDateTime: [this.eventRes?.data.endDateTime, Validators.required],
+      amountPerPerson: [this.eventRes?.data.amountPerPerson, Validators.required],
+      eventType: [this.eventRes?.data.eventType, Validators.required],
+      isActive:[this.eventRes?.data.isActive]
+    });
+  }  
+
+  get form() { return this.eventEditForm.controls; }
+  getBoatBookedDates() {
+    if(this.eventRes?.data.boatId != null) {
+        this.eventService.getBoatBookedDates(this.eventRes?.data.boatId).subscribe((res:any) => {
+        this.boatExistingEventDates = res?.bookedDates;
+      })
+    }    
   }
   
   removeGuests() {
@@ -115,33 +99,10 @@ export class EventEditComponent implements OnInit {
       }  
     }
 
-  }
-
-  checkFormValidation() {
-    if(
-      (this.form.id.value != 0 || this.form.id.value != '') &&
-      (this.form.location.value != null || this.form.location.value != '') &&
-      (this.form.title.value != null || this.form.title.value != '') &&
-      (this.form.description.value != null || this.form.description.value != '') &&
-      (this.form.guestCapacity.value != null || this.form.guestCapacity.value != '') &&
-      (this.form.startDateTime.value != null || this.form.startDateTime.value != '') &&
-      (this.form.endDateTime.value != null || this.form.endDateTime.value != '') &&
-      (this.form.amountPerPerson.value != null || this.form.amountPerPerson.value != '') &&
-      (this.form.eventType.value != null || this.form.eventType.value != '') &&
-      (this.form.boatId.value != null || this.form.boatId.value != '')
-      )
-      {
-        this.submitted = true;
-      }
-      return this.submitted
-  }
-
-  goBack() {
-    this.router.navigate(['/host/host-boat-listing']);
-  }
+  }  
 
   updateEvent() {
-    if (this.eventEditForm.valid && this.checkFormValidation()) {
+    if (this.eventEditForm.valid) {
       let data = this.eventEditForm.value;
       this.eventService.updateEvent(data).subscribe(res => {
         if(res) {
@@ -149,7 +110,7 @@ export class EventEditComponent implements OnInit {
           this.router.navigate(['/host/host-boat-listing']);
        }
       })
-    }
-  }
+    }    
+  }  
 }
 
