@@ -35,7 +35,9 @@
     @else if $media == lp {
         @media (min-width: 1025px) and (max-width: 1645px) { @content; }
     }
-   
+    @else if $media == laptop-break {
+        @media (max-width: 1440px) { @content; }
+    }
     @else if $media == extra-small-laptop {
         @media  (max-width: 1200px) { @content; }
     }

@@ -17,8 +17,8 @@
                         <div class="gallery-images-small-wrapper">
                             <div class="row">
                                 <div class="col-sm-6 py-2"
-                                    *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : false)">
-                                    <div class="gallery-images-small custom-image-prev">
+                                    *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : false);let i = index;">
+                                    <div class="gallery-images-small custom-image-prev" *ngIf="i < 4">
                                         <img src="{{assetsUrl + item?.imagePath}}" alt="">
                                     </div>
                                 </div>
@@ -51,28 +51,28 @@
                                             <div class="col-xl-6 py-2">
                                                 <h6 class="bold">Boatel Details</h6>
                                                 <div class="tabs-inner-details-inner">
-                                                    <div class="custom-flex-start py-1">
+                                                    <div class="custom-flex-start py-1 align-items-start">
                                                         <p class="medium min-width-text">Location:</p>
                                                         <p>{{boatDetails?.location}}</p>
                                                     </div>
-                                                    <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex">
+                                                    <div class="custom-flex-start py-1 flex-mobile-column align-items-start">
+                                                        <div class="custom-flex mobile-width-100">
                                                             <p class="medium min-width-text">Bedrooms:</p>
                                                             <p class="min-width-text-small">
                                                                 {{boatDetails?.totalBedrooms}}</p>
                                                         </div>
-                                                        <div class="custom-flex">
-                                                            <p class="medium min-width-text-small">Bathrooms:</p>
-                                                            <p>{{boatDetails?.totalWashrooms}}</p>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text">Bathrooms:</p>
+                                                            <p class="min-width-text-small">{{boatDetails?.totalWashrooms}}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="custom-flex-start py-1">
+                                                    <div class="custom-flex-start py-1 align-items-start mobile-width-100">
                                                         <p class="medium min-width-text">Check In time:</p>
-                                                        <p>{{boatDetails?.checkinTime | date :'hh:mm a'}}</p>
+                                                        <p class="min-width-text-small">{{boatDetails?.checkinTime | date :'hh:mm a'}}</p>
                                                     </div>
-                                                    <div class="custom-flex-start py-1">
-                                                        <p class="medium min-width-text">Check Out time:</p>
-                                                        <p>{{boatDetails?.checkoutTime | date:'hh:mm a'}}</p>
+                                                    <div class="custom-flex-start py-1 align-items-start mobile-width-100">
+                                                        <p  class="medium min-width-text">Check Out time:</p>
+                                                        <p class="min-width-text-small">{{boatDetails?.checkoutTime | date:'hh:mm a'}}</p>
                                                     </div>
                                                 </div>
                                                 <h6 class="bold mt-3">Approval policy</h6>
@@ -379,7 +379,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 pt-2 text-center">
-                                <button  class="custom-btn blue big-btn">Contact Host</button>
+                                <a [routerLink]="['/chat',boatHost?.id]"  class="custom-btn blue big-btn">Contact Host</a>
                             </div>
                         </div>
                     </div>

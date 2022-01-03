@@ -27,6 +27,7 @@ import { DroppedServicesComponent } from './boatel-bookings/dropped-services/dro
 import { CharterCreationComponentComponent } from './charter-creation-component/charter-creation-component.component';
 import { RejectionModalComponent } from './boatel-bookings/booking-requests/rejection-modal/rejection-modal.component';
 import { PaginationModule } from '../common/pagination/pagination.module';
+import { CharterEditComponent } from './charter-edit/charter-edit.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 
 
@@ -50,6 +51,7 @@ DroppedServicesComponent,
 BoatLoationSettingsComponent,
 CharterCreationComponentComponent,
 RejectionModalComponent,
+CharterEditComponent,
 EventEditComponent
   ],
   imports: [
@@ -65,7 +67,8 @@ EventEditComponent
     DateRangePickerModule,
     DateTimePickerModule,
     NotFoundModule,
-    PaginationModule
+    PaginationModule,
+    CalendarModule
   ],
   providers: [YachtSearchService,ReservationService]
 })

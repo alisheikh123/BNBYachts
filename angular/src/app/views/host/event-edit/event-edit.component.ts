@@ -49,7 +49,8 @@ export class EventEditComponent implements OnInit {
       endDateTime: [new Date(), Validators.required],
       amountPerPerson: [0, Validators.required],
       eventType: [0, Validators.required],
-      boatId: [null, Validators.required]
+      boatId: [null, Validators.required],
+      isActive:[true]
     });
   }
 
@@ -69,7 +70,8 @@ export class EventEditComponent implements OnInit {
         endDateTime: res?.data.endDateTime,
         amountPerPerson: res?.data.amountPerPerson,
         eventType: res?.data.eventType,
-        boatId: res?.data.boatId
+        boatId: res?.data.boatId,
+        isActive:res?.data?.isActive
       });
       this.getBoatBookedDates();
     })

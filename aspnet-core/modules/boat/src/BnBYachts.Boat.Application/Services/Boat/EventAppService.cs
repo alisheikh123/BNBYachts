@@ -33,5 +33,8 @@ namespace BnBYachts.Boat.Services.Boat
         {
             return await _eventManager.UpdateEvent(updatedEvent, CurrentUser.Id);
         }
+        public async Task<bool> UpdateHostEventStatus(long eventId)=>await _eventManager.UpdateEventStatus(eventId).ConfigureAwait(false);
+            
+        
     }
 }

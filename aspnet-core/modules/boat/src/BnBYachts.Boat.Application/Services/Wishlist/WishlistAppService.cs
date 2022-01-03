@@ -20,9 +20,9 @@ namespace BnBYachts.Boat.Services.Wishlist
         {
             _manager = manager;  
         }
-        public async Task<EntityResponseModel> AddToWishlist(int boatId) => await _manager.AddToWishlist(boatId, CurrentUser.Id ?? Guid.NewGuid());
+        public async Task<EntityResponseModel> AddToWishlist(int id, int wishlistType ) => await _manager.AddToWishlist(id,wishlistType, CurrentUser.Id ?? Guid.NewGuid());
 
-        public async Task<EntityResponseListModel<WishlistTransferableDto>> GetUserWishlist() => await _manager.GetUserWishlist(CurrentUser.Id);
-        public async Task<EntityResponseModel> RemoveToWishlist(int id) => await _manager.RemoveToWishlist(id);
+        public async Task<EntityResponseListModel<WishlistTransferableDto>> GetUserWishlist(int wishlistType) => await _manager.GetUserWishlist(wishlistType,CurrentUser.Id);
+        public async Task<EntityResponseModel> RemoveToWishlist(int id,int wishlistType) => await _manager.RemoveToWishlist(id,wishlistType);
     }
 }

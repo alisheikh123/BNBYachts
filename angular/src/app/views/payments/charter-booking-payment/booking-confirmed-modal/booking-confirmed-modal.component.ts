@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,9 +9,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class BookingConfirmedModalComponent implements OnInit {
 
-  constructor(public activeModal:NgbActiveModal) { }
+  constructor(public activeModal:NgbActiveModal,private router:Router) { }
 
   ngOnInit(): void {
+  }
+  goToBookings(){
+    this.router.navigate(['boat-listing/all-reservations']);
+    this.activeModal.dismiss();
   }
 
 }

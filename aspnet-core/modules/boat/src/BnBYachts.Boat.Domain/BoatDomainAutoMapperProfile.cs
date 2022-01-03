@@ -52,11 +52,14 @@ namespace BnBYachts.Boat
             CreateMap<BoatRuleEntity, BoatRuleDTO>();
             CreateMap<BoatLocationEntity, BoatFeatureDTO>();
             CreateMap<EventRequestable, EventEntity>();
-            CreateMap<WishlistEntity, WishlistTransferableDto>();
+            CreateMap<WishlistBoatEntity, WishlistTransferableDto>();
+            CreateMap<WishlistCharterEntity, WishlistTransferableDto>();
+            CreateMap<WishlistEventEntity, WishlistTransferableDto>();
             CreateMap<HostBoatRequestable, BoatEntity>();
             CreateMap<BoatFeaturesRequestable, BoatFeatureEntity>();
             CreateMap<BoatRulesRequestable, BoatRuleEntity>();
             CreateMap<EventEntity,EventRequestable>();
+            CreateMap<EventEntity, EventRequestable>();
         }
     }
 }

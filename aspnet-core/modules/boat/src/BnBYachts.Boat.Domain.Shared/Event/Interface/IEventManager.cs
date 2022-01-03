@@ -17,5 +17,6 @@ namespace BnBYachts.Boat.Boat.Interfaces
         Task<EntityResponseListModel<EventDTO>> GetEvents(Guid? userId, int pageNo, int pageSize);
         Task<EntityResponseModel> GetEventById(int eventId);
         Task<bool> UpdateEvent(EventRequestable updatedEvent, Guid? userId);
+        Task<bool> UpdateEventStatus(long eventId);
     }
 }

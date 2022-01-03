@@ -65,7 +65,7 @@ namespace BnBYachts.Boat.Manager
             {
                 //parameters.Latitude = 31.5204;
                 //parameters.Longitude = 74.3587;
-                var getBoats = await _boatRepository.GetListAsync(res => res.IsBoatelServicesOffered == true);
+                var getBoats = await _boatRepository.GetListAsync(res => res.IsBoatelServicesOffered == true && res.IsActive == true);
 
                 var filterdBoats = new List<BoatEntity>();
                 foreach (var boat in getBoats)
@@ -137,6 +137,8 @@ namespace BnBYachts.Boat.Manager
                 {
                     await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
                     await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+                    await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatFeatures).ConfigureAwait(false);
+
                     filterdCharters.Add(charter);
                 }
             }
@@ -185,6 +187,7 @@ namespace BnBYachts.Boat.Manager
                 {
                     await _eventRepository.EnsurePropertyLoadedAsync(evnt, x => x.Boat).ConfigureAwait(false);
                     await _boatRepository.EnsureCollectionLoadedAsync(evnt.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+                    await _boatRepository.EnsureCollectionLoadedAsync(evnt.Boat, x => x.BoatFeatures).ConfigureAwait(false);
                     if (param.EventDate.HasValue)
                     {
                         if ((evnt.StartDateTime.Date < param.EventDate.Value.Date && evnt.EndDateTime.Date > param.EventDate.Value) || (evnt.StartDateTime.Date == param.EventDate.Value.Date))

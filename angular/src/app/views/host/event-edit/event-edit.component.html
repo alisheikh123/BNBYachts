@@ -21,7 +21,7 @@
                             </small>                            
                         </div>
                         <div class="custom-input-field">
-                            <label>Event Title</label>
+                            <label>{{'EventTitle' | localization}}</label>
                             <input class="custom-input" placeholder="Enter Event Name" 
                             [ngClass]="{  'is-invalid':submitted && form.title.errors }"
                             formControlName="title">
@@ -59,7 +59,7 @@
                             </small>
                         </div>
                         <div class="custom-input-field">
-                            <label>Description</label>
+                            <label>{{'EventDescription' | localization}}</label>
                             <textarea class="custom-input" id="exampleFormControlTextarea1"
                             [ngClass]="{  'is-invalid':submitted && form.description.errors }"
                             formControlName="description" rows="4"></textarea>
@@ -86,7 +86,7 @@
                             </div>
                         </div>                        
                         <div class="custom-select-field">
-                            <label>Start Date</label>
+                            <label>{{'StartDate' | localization}}</label>
                             <ejs-datetimepicker formControlName="startDateTime"
                             (renderDayCell)='onRenderCell($event)'
                                 name="startDateTime">
@@ -97,7 +97,7 @@
                             </small>
                         </div>
                         <div class="custom-select-field">
-                            <label>End Date</label>
+                            <label>{{'EndDate' | localization}}</label>
                             <ejs-datetimepicker formControlName="endDateTime" name="endDateTime" (renderDayCell)='onRenderCell($event)'>
                             </ejs-datetimepicker>
                             <small class="text-danger"
@@ -106,7 +106,7 @@
                             </small>
                         </div>
                         <div class="custom-input-field">
-                            <label>Amount Per Person</label>
+                            <label>{{'AmountPerPerson' | localization}}</label>
                             <input type="number" 
                             class="custom-input" placeholder="Enter Amount"                                    
                             [ngClass]="{  'is-invalid':submitted && form.amountPerPerson.errors }"

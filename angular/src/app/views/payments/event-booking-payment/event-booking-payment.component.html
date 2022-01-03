@@ -16,7 +16,7 @@
                 </div>
                 <div>
 
-                    <button (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
+                    <button [disabled]="disablePayment()" (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
                         Pay</button>
                 </div>
                 <div>
@@ -40,22 +40,22 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="payment-method-content">
-                                        <p class="px-2">{{eventDetails?.boat?.name}}</p>
-                                        <div class="custom-flex-start">
-                                            <p class="medium px-2">Event Name:</p>
-                                            <p>{{eventDetails?.title}}</p>
+                                        <h6 class="px-2 medium pb-3">{{eventDetails?.boat?.name}}</h6>
+                                        <div class="custom-flex-start align-items-start w-100 p-1">
+                                            <p class="medium px-2 w-50">Event Name:</p>
+                                            <p class="w-50">{{eventDetails?.title}}</p>
                                         </div>
-                                        <div class="custom-flex-start">
-                                            <p class="medium px-2">Event Date:</p>
-                                            <p>{{eventDetails?.startDateTime | date}}</p>
+                                        <div class="custom-flex-start  align-items-start w-100 p-1">
+                                            <p class="medium px-2 w-50">Event Date:</p>
+                                            <p class="w-50">{{eventDetails?.startDateTime | date}}</p>
                                         </div>
-                                        <div class="custom-flex-start">
-                                            <p class="medium px-2">Event Time:</p>
-                                            <p>{{eventDetails?.startDateTime | date : 'h:mm a'}}</p>
+                                        <div class="custom-flex-start  align-items-start w-100 p-1">
+                                            <p class="medium px-2 w-50">Event Time:</p>
+                                            <p class="w-50">{{eventDetails?.startDateTime | date : 'h:mm a'}}</p>
                                         </div>
-                                        <div class="custom-flex-start">
-                                            <p class="medium px-2">Event Type:</p>
-                                            <p>{{eventDetails?.eventType == 0 ? 'Adult':'Family'}}</p>
+                                        <div class="custom-flex-start  align-items-start w-100 p-1">
+                                            <p class="medium px-2 w-50">Event Type:</p>
+                                            <p class="w-50">{{eventDetails?.eventType == 0 ? 'Adult':'Family'}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -64,20 +64,20 @@
                         <div class="row custom-margin">
                             <div class="col-12">
                                 <h6 class="medium py-md-3">Price Details</h6>
-                                <div class="custom-flex-between">
+                                <div class="custom-flex-between p-1">
                                     <p>Quote Amount</p>
                                     <p>${{ eventDetails?.amountPerPerson * (eventFilterDetails.adults +
                                         eventFilterDetails.childrens) }}.00</p>
                                 </div>
-                                <div class="custom-flex-between">
+                                <div class="custom-flex-between p-1">
                                     <p>Tax Fee</p>
                                     <p>${{eventDetails?.boat?.taxFee}}.00</p>
                                 </div>
-                                <div class="custom-flex-between">
+                                <div class="custom-flex-between p-1">
                                     <p>Service Fee</p>
                                     <p>$20.00</p>
                                 </div>
-                                <div class="custom-flex-between">
+                                <div class="custom-flex-between p-1">
                                     <p>Total(USD)</p>
                                     <p>$ {{eventDetails?.amountPerPerson * (eventFilterDetails.adults +
                                         eventFilterDetails.childrens) + eventDetails?.boat?.taxFee + 20}}.00</p>

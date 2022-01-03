@@ -52,10 +52,29 @@ input[type="month"]::-webkit-inner-spin-button {
      cursor: pointer;
  }
  .dropdownBTN{
-    color: #122BA8;
-    border-color: #122BA8;
+    min-width: 210px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #777777;
+    border: 1px solid #777777;
+    box-shadow: none;
+    border-radius: 5px
  }
+
  .justify-content-center {
     display: flex !important;
     justify-content: center !important;
+}
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .3em;
+    vertical-align: middle;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-left: .3em solid transparent;
+    float: right;
+    margin-top: 8px;
 }

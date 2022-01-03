@@ -7,6 +7,7 @@ namespace BnBYachts.Boat.Charter.Dto
 {
     public class CharterDto
     {
+        public int Id { get; set; }
         public bool IsRoundTrip { get; set; }
         public int GuestCapacity { get; set; }
         public string Description { get; set; }
@@ -26,5 +27,6 @@ namespace BnBYachts.Boat.Charter.Dto
         public double? ReturnLocationLng { get; set; }
         public virtual int? BoatId { get; set; }
         public virtual BoatDTO Boat { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

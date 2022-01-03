@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
-import { AbstractControl,FormBuilder,FormGroup,ValidationErrors,ValidatorFn,Validators,} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators, } from '@angular/forms';
 import { throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -21,8 +21,8 @@ export class SignupModalComponent implements OnInit {
   passwordValidator: string;
   passwordStrength: number;
   passwordViewer = {
-    passwordFieldTextType : false,
-    confirmPasswordFieldTextType:false
+    passwordFieldTextType: false,
+    confirmPasswordFieldTextType: false
   };
 
   constructor(
@@ -61,6 +61,7 @@ export class SignupModalComponent implements OnInit {
             ),
             Validators.minLength(3),
             Validators.maxLength(320),
+            this.isEmailExistsValidator()
           ]),
         ],
         Password: [
@@ -80,6 +81,38 @@ export class SignupModalComponent implements OnInit {
     return this.registrationForm.controls;
   }
 
+  // isEmailExistsValidator(): ValidatorFn {
+  //   return (control: AbstractControl): ValidationErrors | null => {
+  //     if(control.valid){
+  //       this.authService.isEmailExists(control.value).subscribe(res => {
+  //         return res
+  //           ? null
+  //           : { emailTaken: true };
+  //       });
+  //     }
+  //     return null;
+  //   }
+  // }
+  public isEmailExistsValidator(): ValidatorFn {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const email = group;
+      if (email.value && email.valid) {
+        this.authService.isEmailExists(email.value).subscribe(res => {
+          if (res) {
+            email.setErrors({ emailTaken: true });
+          }
+          else {
+            if (email.hasError('emailTaken')) {
+              email.setErrors(null);
+            }
+          }
+        });
+      }
+      return null;
+    };
+  }
+
+
   submit() {
     this.hasError = false;
     var user = this.registrationForm.value;
@@ -89,17 +122,18 @@ export class SignupModalComponent implements OnInit {
         this.activeModal.dismiss();
         let modalRef = this.modal.open(ConfirmEmailComponent, {
           windowClass: 'custom-modal custom-small-modal',
+          centered: true
         });
         modalRef.componentInstance.username = user.Email;
       } else {
         this.hasError = true;
-        this.toaster.warning(response.message,'Sorry');
+        this.toaster.warning(response.message, 'Sorry');
       }
     },
-     (error) => {                              //Error callback
-      console.error('error caught in component')
-      this.hasError = true;
-    }
+      (error) => {                              //Error callback
+        console.error('error caught in component')
+        this.hasError = true;
+      }
     );
   }
 
@@ -111,19 +145,22 @@ export class SignupModalComponent implements OnInit {
   }
   getToday(): string {
     return new Date().toISOString().split('T')[0]
- }
-
- toggleFieldTextType(isPassword:boolean) {
-  isPassword ?  this.passwordViewer.passwordFieldTextType = !this.passwordViewer.passwordFieldTextType
-  : this.passwordViewer.confirmPasswordFieldTextType = !this.passwordViewer.confirmPasswordFieldTextType;
-}
-onPasswordChange() {
-  if (this.registrationForm.controls.Password.value == this.registrationForm.controls.confirmPassword.value) {
-    this.registrationForm.controls.confirmPassword.setErrors(null);
-  } else {
-    this.registrationForm.controls.confirmPassword.setErrors({ mismatch: true });
   }
-}
+
+  toggleFieldTextType(isPassword: boolean) {
+    isPassword ? this.passwordViewer.passwordFieldTextType = !this.passwordViewer.passwordFieldTextType
+      : this.passwordViewer.confirmPasswordFieldTextType = !this.passwordViewer.confirmPasswordFieldTextType;
+  }
+  onPasswordChange() {
+    if (this.registrationForm.controls.Password.value == this.registrationForm.controls.confirmPassword.value) {
+      this.registrationForm.controls.confirmPassword.setErrors(null);
+    } else {
+      this.registrationForm.controls.confirmPassword.setErrors({ mismatch: true });
+    }
+  }
+  stopKeys(e: any) {
+    e.preventDefault();
+  }
 
 }
 export const passwordMatchingValidatior: ValidatorFn = (
@@ -135,4 +172,5 @@ export const passwordMatchingValidatior: ValidatorFn = (
     ? null
     : { notmatched: true };
 };
+
 

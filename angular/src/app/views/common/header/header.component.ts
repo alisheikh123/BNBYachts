@@ -14,6 +14,9 @@ import { textChangeRangeIsUnchanged } from 'typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { HubConnection,HubConnectionBuilder} from '@microsoft/signalr';
+import { ChatComponent } from '../../home/components/Chat/chat/chat.component';
+import { ChatService } from 'src/app/core/chat/chat.service';
 
 
 @Component({
@@ -28,6 +31,8 @@ export class HeaderComponent implements OnInit {
   // }
   // ,private oAuthService: OAuthService
   userDetails: any;
+  private _hubConnection!: HubConnection;
+  private readonly socketUrl = environment.CHAT_API_URL + '/chatsocket';
   canSwitchAccount: boolean = false;
   USER_ROLE = UserRoles;
   USER_DEFAULTS = UserDefaults;
@@ -37,7 +42,11 @@ export class HeaderComponent implements OnInit {
     byHost : false,
     byServiceProvider : false
   };
-  constructor(public router: Router, public app: AppComponent, private toastr: ToastrService, private modal: NgbModal, private oidcSecurityService: OidcSecurityService, private authService: AuthService) { }
+  @ViewChild(ChatComponent) chatComponent: ChatComponent;
+  constructor(public router: Router, public app: AppComponent, 
+    private toastr: ToastrService, private modal: NgbModal, 
+    private oidcSecurityService: OidcSecurityService, 
+    private authService: AuthService,private chatService:ChatService) { }
 
   ngOnInit(): void {
     this.oidcSecurityService
@@ -54,6 +63,7 @@ export class HeaderComponent implements OnInit {
         if (userId != null) {
           this.authService.authenticated = true;
           this.getUserDetails();
+          //this.getUnreadChatCount();
         }
       });
   }
@@ -79,6 +89,11 @@ export class HeaderComponent implements OnInit {
         }
         this.isLoggedIn = true;
       }
+    })
+  }
+  getUnreadChatCount() {
+    this.chatService.getUnreadCount().subscribe(res => {
+      this.app.unReadChatCount = res;
     })
   }
 
@@ -138,5 +153,4 @@ export class HeaderComponent implements OnInit {
       this.modal.dismissAll();
     }
   }
-
 }

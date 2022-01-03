@@ -19,5 +19,6 @@ namespace BnBYachts.Boat.Event.Requestable
         public int AmountPerPerson { get; set; }
         public EventTypes EventType { get; set; }
         public virtual int? BoatId { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

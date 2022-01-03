@@ -854,22 +854,37 @@ button{
     .min-width-text{
       max-width: 200px;
       width: 100%;
+      min-width: 200px;
+      &.small-content{
+        min-width: 120px;
+      }
       @include breakpoint(laptop){
         min-width: 150px;
+        min-width: 200px;
       }
       @include breakpoint(xs){
         min-width: 150px;
+        min-width: 50%;
+        padding: 5px !important;
       }
     }
     .min-width-text-small{
       max-width: 200px;
+      min-width: 200px;
       width: 100%;
       padding: 0 5px;
+      word-break: break-word;
+      &.small-content{
+        min-width: 140px;
+      }
       @include breakpoint(laptop){
+        min-width: 150px;
         min-width: 150px;
       }
       @include breakpoint(xs){
         min-width: 150px;
+        min-width: 50%;
+        padding: 5px !important;
       }
     }
   }
@@ -1163,7 +1178,7 @@ button{
   max-width: 690px;
   margin-left: auto;
   @include breakpoint(laptop){
-    max-width: 540px;
+    max-width: 100%;
 }
 }
 .payment-method-card-wrapper{
@@ -1904,7 +1919,7 @@ img{
   }
   .no-img-inner{
     text-align: center;
-    height: 100%;
+    //height: 100%;
     img{
       margin-bottom: 15px;
     }
@@ -2135,4 +2150,52 @@ label{
     max-width: 470px;
     margin: 0 auto !important;
   }
+}
+.mobile-width-100{
+  @include breakpoint(xs){
+    width: 100% !important;
+  }
+}
+
+.depart-date-lg-view{
+  @include breakpoint(laptop-break){
+    flex-direction: column;
+  }
+  .min-width-text-small {
+    @include breakpoint(laptop-break){
+      padding: 0 !important ;
+      min-width: 120px;
+    }
+    &.small-content{
+      @include breakpoint(laptop-break){
+        min-width: 120px  !important;
+      }
+    }
+  }
+}
+
+.custom-date-month-view{
+  position: relative;
+  padding: 15.5px;
+  border: 1px solid $grey-border-clr;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .fas{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    &:hover{
+      cursor: pointer;
+    }
+    &.fa-chevron-right{
+      right: 20px;
+    }
+    &.fa-chevron-left{
+      left: 20px;
+    }
+  }
+
+  
 }

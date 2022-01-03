@@ -1,3 +1,4 @@
+import { CharterEditComponent } from './charter-edit/charter-edit.component';
 import { CharterCreationComponentComponent } from './charter-creation-component/charter-creation-component.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +16,9 @@ const routes: Routes = [
   },
   {
     path: "onboarding", component: HostOnboardingComponent
+  },
+  {
+    path: "boat-add", component: HostOnboardingComponent
   },
   {
     path: "host-boat-listing", component: HostBoatListingComponent
@@ -37,6 +41,9 @@ const routes: Routes = [
   {
     path: "event-edit/:id", component: EventEditComponent
   },
+  {
+    path: "charter-edit/:id", component: CharterEditComponent
+  }
 ];
 
 @NgModule({

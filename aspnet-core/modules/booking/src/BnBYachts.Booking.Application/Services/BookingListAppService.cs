@@ -28,7 +28,7 @@ namespace BnBYachts.Booking.Services
 
         public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetDroppedServices() => await _bookingManager.GetDroppedServices(CurrentUser.Id).ConfigureAwait(false);
 
-        public async Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted,string rejectionReason) => await _bookingManager.UpdateReservationStatus(bookingId, isAccpeted,rejectionReason).ConfigureAwait(false);
+        public async Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted,string rejectionReason, int serviceType) => await _bookingManager.UpdateReservationStatus(bookingId, isAccpeted,rejectionReason,serviceType).ConfigureAwait(false);
 
     }
 }

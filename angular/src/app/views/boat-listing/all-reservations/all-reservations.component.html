@@ -10,17 +10,17 @@
       </div>
       <div>
         <div class="row pb-4">
-          <div class="col-12">
-            <!-- <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
-              <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button> -->
+          <div class="col-3">
             <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
               <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">
+                <span style="float: left;">
                 {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter ==
                 BOOKING_STATUS.Approved ? 'Approved':
                 selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected':selectedStatusFilter ==
-                BOOKING_STATUS.Cancel ? 'Cancel':'All'}}
-                <i class="fa fa-caret-down"></i>
+                BOOKING_STATUS.Cancel ? 'Cancel':selectedStatusFilter ==
+                BOOKING_STATUS.ChooseFilter ? 'Choose Status':'All'}}
+              </span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li (click)="statusFilter(null)">
@@ -40,24 +40,83 @@
                 </li>
               </ul>
             </div>
-            <div class="btn-group btn-group-toggle pe-2" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedTab">
-              <label ngbButtonLabel class="btn-outline-primary">
-                <input [hidden]="true" ngbButton type="radio" (click)="getReservations(BOOKING_FILTER.All)" [value]="0">
-                All
-              </label>
-              <label ngbButtonLabel class="btn-outline-primary" (click)="getReservations(BOOKING_FILTER.Upcomings)">
-                <input [hidden]="true" ngbButton type="radio" [value]="1"> Upcoming
-              </label>
-              <label ngbButtonLabel class="btn-outline-primary" (click)="getReservations(BOOKING_FILTER.Past)">
-                <input [hidden]="true" ngbButton type="radio" [value]="2"> Past
-              </label>
-            </div>
-            <div class="filter-wrap mb-3 custom-flex-start" style="display: inline-block !important;">
-              <div class="calendar">
-                <input type="month" [(ngModel)]="modelDate" (ngModelChange)="applyDateFilter()" id="start"
-                  placeholder="Year,Month" name="date">
+          </div>
+          <div class="col-3">
+            <div>
+              <div class="dropdown custom-dropdown filters-wrap" ngbDropdown #myFilterDrop="ngbDropdown">
+                <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropDownFilter2" ngbDropdownToggle>
+                  <span style="float: left;">
+                  {{this.selectedTabStatus == BOOKING_FILTER.All ? 
+                    'All':this.selectedTabStatus == BOOKING_FILTER.Upcomings ? 'Upcomings':this.selectedTabStatus == BOOKING_FILTER.Past ? 'Past':'Choose Upcoming/Past'}}
+                  </span>
+                </button>
+                <div class="dropdown-menu"  ngbDropdownMenu aria-labelledby="dropDownFilter2">
+                  <form>
+                      <div class="row p-4">
+                          <div class="col-12">
+                              <div class="form-check">
+                                  <input type="radio" class="form-check-input" [value]="0" id="allCharter"
+                                      [(ngModel)]="selectedTab"
+                                      [ngModelOptions]="{standalone: true}">
+                                  <label for="allCharter">All</label>
+                              </div>
+                          </div>
+                          <div class="col-12">
+                              <div class="form-check">
+                                  <input type="radio" class="form-check-input" [value]="1" id="oneSide"
+                                      [(ngModel)]="selectedTab"
+                                      [ngModelOptions]="{standalone: true}">
+                                  <label for="oneSide">Upcomings</label>
+                              </div>
+                          </div>
+                          <div class="col-12">
+                              <div class="form-check">
+                                  <input type="radio" id="roundTrip" class="form-check-input" [value]="2"
+                                      [(ngModel)]="selectedTab"
+                                      [ngModelOptions]="{standalone: true}">
+                                  <label for="roundTrip">Past</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div>
+                          <a class="custom-btn blue" style="
+                          float: right;
+                          font-size: 12px;
+                          min-width: 76px !important;
+                          cursor: pointer;" (click)="getReservations();myFilterDrop.close()">
+                              Apply
+                          </a>
+                      </div>
+                  </form>
               </div>
-            </div>
+              </div>
+          </div>
+          </div>
+
+          <div class="col-6">
+            <div class="" style="float: right;">
+              <div class="row">
+                <div class="col dropdown custom-dropdown">
+                  <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
+                    <button class="dropdownBTN dropdown-btn dropdown-toggle" id="dropdownForm1" ngbDropdownToggle>
+                      <span style="float: left;">{{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                      <ejs-calendar #ejCalendar [value]='dateValue' 
+                      (change)="applyDateFilter($event);myDrop.close()" 
+                      start='Decade' depth='Year'></ejs-calendar>
+                      <div class="dropdown-divider"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-12">
+            <!-- <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
+              <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button> -->
+          
+       
           </div>
         </div>
         <div class="row">
