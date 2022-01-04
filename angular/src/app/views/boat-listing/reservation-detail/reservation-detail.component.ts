@@ -34,6 +34,7 @@ export class ReservationDetailComponent implements OnInit {
   bookingStatus: any;
   checkedCheckinDate: any;
   checkinTime: any;
+  checkoutTime:any;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
   constructor(private service: BookingService
@@ -62,7 +63,8 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkinDate = this.checkInDate;
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
-        this.checkinTime = this.booking?.boatDetail?.checkinTime;
+        this.checkinTime = boatdetail.checkinTime;
+        this.booking.checkoutTime = boatdetail.checkoutTime;
       });
 
     });
@@ -172,6 +174,28 @@ export class ReservationDetailComponent implements OnInit {
     return false;
 
 
+  }
+  isCheckoutTimeEnd(checkoutDate:Date,checkoutTime:Date){
+    debugger;
+    let outDate = moment(checkoutDate).format("DD-MM-YYYY");
+    let currentDate = moment().format("DD-MM-YYYY");
+    let outTime = moment(checkoutTime).format("HH:mm");
+    let curretTime = moment().format("HH:mm");
+    if (checkoutDate != undefined && checkoutTime != undefined) {
+      if (outDate == currentDate && curretTime > outTime) {
+        return true;
+      }
+      if (moment(checkoutDate).isAfter(moment().format("YYYY-MM-DD"))) {
+        return true;
+      }
+      else {
+        return false;
+      }
+
+    }
+    else{
+      return false;
+    }
   }
 }
 

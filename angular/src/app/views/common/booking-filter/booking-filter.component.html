@@ -1,0 +1,132 @@
+<!-- <div class="row pb-4">
+    <div class="col-3">
+      <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
+        <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter ==
+          BOOKING_STATUS.Approved ? 'Approved':
+          selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected':selectedStatusFilter ==
+          BOOKING_STATUS.Cancel ? 'Cancel':selectedStatusFilter ==
+          BOOKING_STATUS.ChooseFilter ? 'Choose Status':'All'}}
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li (click)="statusFilter(null)">
+            <a class="dropdown-item">All</a>
+          </li>
+          <li (click)="statusFilter(BOOKING_STATUS.Pending)">
+            <a class="dropdown-item">Pending</a>
+          </li>
+          <li (click)="statusFilter(BOOKING_STATUS.Approved)">
+            <a class="dropdown-item">Approved</a>
+          </li>
+          <li (click)="statusFilter(BOOKING_STATUS.Cancel)">
+            <a class="dropdown-item">Cancelled</a>
+          </li>
+          <li (click)="statusFilter(BOOKING_STATUS.Rejected)">
+            <a class="dropdown-item">Rejected</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
+      <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton2"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        {{selectedReservationStatus == RESERVATION_STATUS.Boatels ? 'Boatels':selectedReservationStatus ==
+        RESERVATION_STATUS.Charters? 'Charters':
+        selectedReservationStatus == RESERVATION_STATUS.Events ? 'Events':selectedReservationStatus ==
+        RESERVATION_STATUS.Boatels ? 'Choose Reservation Type':'All'}}
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+        <li (click)="reservationStatusFilter(null)">
+          <a class="dropdown-item">All</a>
+        </li>
+        <li (click)="reservationStatusFilter(RESERVATION_STATUS.Boatels)">
+          <a class="dropdown-item">Boatels</a>
+        </li>
+        <li (click)="reservationStatusFilter(RESERVATION_STATUS.Charters)">
+          <a class="dropdown-item">Charters</a>
+        </li>
+        <li (click)="reservationStatusFilter(RESERVATION_STATUS.Events)">
+          <a class="dropdown-item">Events</a>
+        </li>
+
+      </ul>
+    </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <div class="dropdown custom-dropdown filters-wrap" ngbDropdown #myFilterDrop="ngbDropdown">
+          <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropDownFilter2"
+            ngbDropdownToggle>
+            {{this.selectedTabStatus == BOOKING_FILTER.All ?
+            'All':this.selectedTabStatus == BOOKING_FILTER.Upcomings ? 'Upcomings':this.selectedTabStatus ==
+            BOOKING_FILTER.Past ? 'Past':'Choose Upcoming/Past'}}
+          </button>
+          <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropDownFilter2">
+            <form>
+              <div class="row p-4">
+                <div class="col-12">
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" [value]="0" id="allCharter"
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}">
+                    <label for="allCharter">All</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" [value]="1" id="oneSide"
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}">
+                    <label for="oneSide">Upcomings</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input type="radio" id="roundTrip" class="form-check-input" [value]="2"
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}">
+                    <label for="roundTrip">Past</label>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <!-- <a class="custom-btn blue" style="
+                    float: right;
+                    font-size: 12px;
+                    min-width: 76px !important;
+                    cursor: pointer;" (click)="getReservations();myFilterDrop.close()">
+                  Apply
+                </a> -->
+              <!-- </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> -->
+<!--
+    <div class="col-3">
+      <div class="" style="float: right;">
+        <div class="row">
+          <div class="col">
+            <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
+              <button class="dropdownBTN btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>
+                {{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                <ejs-calendar #ejCalendar [value]='dateValue' (change)="applyDateFilter($event);myDrop.close()"
+                  start='Decade' depth='Year'></ejs-calendar>
+                <div class="dropdown-divider"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12"> -->
+      <!-- <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
+        <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button> -->
+
+<!--
+    </div>
+  </div> -->
+  <h1>Hello</h1>

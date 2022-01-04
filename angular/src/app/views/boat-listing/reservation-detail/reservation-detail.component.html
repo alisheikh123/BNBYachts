@@ -131,16 +131,17 @@
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
                 <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
                   class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
-                <a (click)="addReview()"
-                  *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
-                  class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+
               </div>
             <!-- </div> -->
           </div>
         </div>
-
-
+         <!-- <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking.checkoutTime)"> -->
+        <a (click)="addReview()"
+        *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
+        class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
       </div>
+      <!-- </div> -->
 
 
       <app-list-reviews [bookingId]=bookingId></app-list-reviews>

@@ -25,6 +25,7 @@ import { AddReviewModalComponent } from './views/common/add-review-modal/add-rev
 import { TranslateService } from './core/translate.service';
 import { NgbCustomDateParserFormatter } from './shared/formatters/datepicker-formatter';
 import { ChatService } from './core/chat/chat.service';
+import { BookingFilterComponent } from './views/common/booking-filter/booking-filter.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ChatService } from './core/chat/chat.service';
     TryHostingComponent,
     MyProfileComponent,
     UpdateProfileComponent,
-    AddReviewModalComponent
+    AddReviewModalComponent,
+    BookingFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,7 @@ import { ChatService } from './core/chat/chat.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,
-     
+
       multi: true
     },
     LoaderService,

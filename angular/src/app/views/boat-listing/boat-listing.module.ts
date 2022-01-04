@@ -23,6 +23,9 @@ import { ListReviewsComponent } from '../common/list-reviews/list-reviews.compon
 import { NotFoundModule } from '../common/not-found-component/not-found.module';
 import { PaginationModule } from '../common/pagination/pagination.module';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { CharterReservationListingComponent } from './user-reservation-listing/charter-reservation-listing/charter-reservation-listing.component';
+import { EventReservationListingComponent } from './user-reservation-listing/event-reservation-listing/event-reservation-listing.component';
+import { BoatReservationListingComponent } from './user-reservation-listing/boat-reservation-listing/boat-reservation-listing.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,11 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
     EventListingComponent,
     CharterDetailsComponent,
     EventDetailsComponent,
-    ListReviewsComponent
+    ListReviewsComponent,
+    CharterReservationListingComponent,
+    EventReservationListingComponent,
+    BoatReservationListingComponent,
+
   ],
   imports: [
     BoatListingRoutingModule,
@@ -49,7 +56,7 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
     NgxStripeModule.forRoot(environment.stripeKey),
     NotFoundModule,
     PaginationModule,
-    CalendarModule 
+    CalendarModule
   ],
     providers: [YachtSearchService, BookingService]
 })

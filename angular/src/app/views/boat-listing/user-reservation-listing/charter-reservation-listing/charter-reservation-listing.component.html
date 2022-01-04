@@ -1,0 +1,43 @@
+<div class="col-12">
+    <div class="custom-card req-user-card" *ngFor="let item of userCharters">
+      <div [routerLink]="['/boat-listing/reservation-detail',item.id]">
+        <div class="image-with-text custom-flex-between align-items-start">
+          <div class="image-with-text-inner">
+            <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
+
+              <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+            </div>
+            <div class="user-details">
+              <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
+              <ngb-rating [rate]="0"></ngb-rating>
+              <p class="small-text grey ">Departure From : {{item?.charterDetail?.departingFrom}}</p>
+              <p class="small-text grey ">Destination :  {{item?.charterDetail?.destination}}</p>
+              <p class="small-text grey ">Guest: {{item.noOfAdults + item.noOfChildrens}}</p>
+            </div>
+          </div>
+          <div class="right-content custom-flex flex-column align-items-end">
+            <p class="small-text grey">{{item?.charterDetail?.departureFromDate | date}} - {{item?.charterDetail?.departureToDate | date}}</p>
+            <div class="custom-flex mt-4 mr-3">
+              <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' :
+                  ''}}</strong></span>
+              <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
+                  ''}}</strong></span>
+              <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
+                  ''}}</strong></span>
+              <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
+                  ''}}</strong></span>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div *ngIf="userCharters?.length == 0">
+    <app-not-found-component></app-not-found-component>
+</div>
+<div class="col-12 pt-2" *ngIf="userCharters?.length > 0">
+    <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
+</div>
