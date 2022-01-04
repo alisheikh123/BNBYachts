@@ -23,7 +23,7 @@
                                     <label>{{'Guests' | localization}}</label>
                                     <div class="custom-flex-start">
                                         <span class="minus" (click)="removeCapacity()">-</span>
-                                        <input type="text" formControlName="guestCapacity" />
+                                        <input type="text" formControlName="guestCapacity"/>
                                         <span class="plus"(click)="addCapacity()" >+</span>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
             </form>
             <div class="row">
                 <div class="custom-flex-end">
-                    <button class="custom-btn outline-blue-clr me-sm-2">{{'Cancel' | localization}}</button>
+                    <button class="custom-btn outline-blue-clr me-sm-2" [routerLink]="['/host/host-boat-listing']">{{'Cancel' | localization}}</button>
                     <button class="custom-btn blue" (click)="updateCharter()">{{'Save' | localization}}</button>
 
                 </div>

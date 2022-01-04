@@ -26,4 +26,17 @@ export class EventService {
     return this.http.post(this.boatApiUrl + '/api/app/event/save-event', eventData).pipe(
       catchError(this.errorService.handleError));
   }
+
+  getEventById(eventId: number) {
+    return this.http.get(this.boatApiUrl + '/api/app/event/event-by-id/' + eventId).pipe(
+      catchError(this.errorService.handleError)
+      );
+  }
+
+  updateEvent(updatedEvent: any) {
+    return this.http.put(this.boatApiUrl + '/api/app/event/event/', updatedEvent).pipe(
+      catchError(this.errorService.handleError)
+    );
+  }
+
 }

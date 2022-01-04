@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-activate-account',
   templateUrl: './activate-account.component.html',
@@ -18,7 +18,8 @@ export class ActivateAccountComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private paymentService: PaymentsService
+    private paymentService: PaymentsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +44,9 @@ export class ActivateAccountComponent implements OnInit {
           }
           this.paymentService.createCustomer(customerData).subscribe((res:any)=>{
           })
+          this.toastr.success(this.dynamicMessage, 'success',{
+            timeOut: 5000
+          });
         } else {
           this.dynamicMessage = 'Account activation failed.';
         }

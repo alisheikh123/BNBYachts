@@ -66,6 +66,25 @@ namespace BnBYachts.Boat.Manager
             response.Data = await PagedList<EventDTO>.CreateAsync(hostEventList, pageNo, pageSize).ConfigureAwait(false);
             return response;
         }
+
+        public async Task<EntityResponseModel> GetEventById(int eventId)
+        {
+            var response = new EntityResponseModel();
+            var targetEvent = await _eventRepository.GetAsync(res => res.Id == eventId).ConfigureAwait(false);
+            await _eventRepository.EnsurePropertyLoadedAsync(targetEvent, res => res.Boat).ConfigureAwait(false);
+            response.Data = _objectMapper.Map<EventEntity, EventDTO>(targetEvent);
+            return response;
+        }
+
+        public async Task<bool> UpdateEvent(EventRequestable updatedEvent, Guid? userId)
+        {
+            var targetEvent = await _eventRepository.FindAsync(res => res.Id == updatedEvent.Id);
+            targetEvent.LastModifierId = userId;
+            targetEvent.LastModificationTime = DateTime.Now;
+            _objectMapper.Map<EventRequestable, EventEntity>(updatedEvent, targetEvent);            
+            var response = await _eventRepository.UpdateAsync(targetEvent, autoSave: true).ConfigureAwait(false);
+            return true;
+        }
        public async Task<bool> UpdateEventStatus(long eventId)
         {
             var events = await _eventRepository.FindAsync(x => x.Id == eventId).ConfigureAwait(false);
