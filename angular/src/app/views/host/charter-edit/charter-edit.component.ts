@@ -70,6 +70,7 @@ export class CharterEditComponent implements OnInit {
         departingFrom: res?.charterDetails?.departingFrom,
         returnDate: res?.charterDetails?.returnDate,
         boatId:res?.charterDetails?.boatId,
+        isActive:res?.charterDetails?.isActive,
       });
 
     });

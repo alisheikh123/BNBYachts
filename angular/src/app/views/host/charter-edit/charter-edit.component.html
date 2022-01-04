@@ -6,7 +6,8 @@
             </div>
             <form [formGroup]="boatCharterForm">
                 <div class="row">
-                    <input formControlName="Id" hidden/>
+                    <input formControlName="id" hidden/>
+                    <input formControlName="isActive" hidden/>
                     <div class="col-md-6 py-2">
                         <div class="custom-input-field">
                             <label>{{'BoatListing' | localization}}</label>
