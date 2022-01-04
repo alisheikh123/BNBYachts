@@ -10,7 +10,7 @@ export const environment = {
     IDENTITY_API_URL: 'http://idv.bnb.techverxapps.com',
     PAYMENTS_API_URL: 'http://payment.bnb.techverxapps.com',
     S3BUCKET_URL:'https://bnbyachts.s3.amazonaws.com',
-    CHAT_API_URL:'https://localhost:44363',
+    CHAT_API_URL:'http://chat.bnb.techverxapps.com',
     stripeKey: "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f",
     Identity: {
       authority: "http://idv.bnb.techverxapps.com",

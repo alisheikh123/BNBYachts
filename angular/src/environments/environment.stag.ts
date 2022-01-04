@@ -11,7 +11,7 @@ export const environment = {
     IDENTITY_API_URL: 'http://52.207.14.110:21025',
     PAYMENTS_API_URL: 'http://52.207.14.110:21023',
     S3BUCKET_URL:'https://bnbyachts.s3.amazonaws.com',
-    CHAT_API_URL:'https://localhost:44363',
+    CHAT_API_URL:'http://52.207.14.110:21026',
     stripeKey: "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f",
     Identity: {
       authority: "http://52.207.14.110:21025",
