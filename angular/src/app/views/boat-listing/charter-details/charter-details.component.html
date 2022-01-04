@@ -231,7 +231,31 @@
                                                             </div>
                                                         </div>
                                                     </ng-template>
-                                                    <div class="total-amount-wrap custom-padding-top">
+                                                    <div class="total-amount-wrap custom-padding-top" *ngIf="charterDetails?.isFullBoatCharges==true">
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Entire Boat Charges</p>
+                                                            <p>${{charterDetails?.charterFee}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Tax</p>
+                                                            <p>${{charterDetails?.boat?.taxFee}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Service Fee</p>
+                                                            <p>$20.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner bottom">
+                                                            <p class="medium">Total(USD)</p>
+                                                            <p class="medium">$ {{charterDetails?.charterFee  + charterDetails?.boat?.taxFee+ 20}}.00</p>
+
+                                                        </div>
+                                                        <button class="custom-btn blue" (click)="reserveCharter()">Book
+                                                            Now</button>
+                                                    </div>
+                                                    <div class="total-amount-wrap custom-padding-top" *ngIf="charterDetails?.isFullBoatCharges==false">
                                                         <div class="total-amount-wrap-inner">
                                                             <p>$ {{charterDetails?.charterFee}} X
                                                                 {{charterFilterDetails.adults +
@@ -381,7 +405,7 @@
                                             dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut
                                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                        <a href="request-quote.html" class="custom-btn white">Get a quote</a>
+                                        <a [routerLink]="['/quote',charterDetails?.boatId]" class="custom-btn white">Get a quote</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6 py-2">

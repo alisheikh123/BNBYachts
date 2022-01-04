@@ -1,0 +1,151 @@
+<div class="main-wrapper">
+    <div class="banner-wrapper layer-bg small-banner banner-layer white-text"
+        style="background-image:url('../../../../../../assets/images/request-quote-bg.png')">
+        <div class="container">
+            <div class="row">
+                <div class="btn-back align-items-start">
+                    <a href="boatel-search-details.html" class="back-btn-circle white mt-2"><i
+                            class="fa fa-angle-left"></i></a>
+                    <div class="">
+                        <h2 class="bold">Request Quote</h2>
+                        <p class="py-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="request-quote-sec section-padding">
+        <div class="container">
+            <form [formGroup]="requestQuoteForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="custom-select-field">
+                            <label>Service Type</label>
+                            <select name="select" id="select" formControlName="serviceType">
+                                <option [ngValue]="SERVICE_TYPES.Charter">Charter</option>
+                                <option [ngValue]="SERVICE_TYPES.Event">Event</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Event">
+                        <div class="custom-input-field">
+                            <label>{{'EventType' | localization}}</label>
+                            <div class="custom-flex">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        formControlName="eventType" name="eventType" [value]="1"
+                                        id="flexRadioDefault1">
+                                    {{'Adult' | localization}}
+                                </div>
+                                <div class="form-check ms-5">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        formControlName="eventType" name="eventType" value="2"
+                                        id="flexRadioDefault1">
+                                    {{'Family' | localization}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Event">
+                        <div class="col-md-6 py-2">
+                            <div class="">
+                                <div class="">
+                                    <label>Event Date & Time</label>
+                                    <ejs-datetimepicker formControlName="eventDateTime"
+                                        name="startDateTime"></ejs-datetimepicker>
+                                </div>
+                                <small class="text-danger" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Event && formControl.eventDateTime.value ==null && isSubmitted">Event date time is required.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="counter-input-wrapper">
+                            <label>Guest Capacity</label>
+                            <div class="number">
+                                <div class="custom-flex-start">
+                                    <label>Guests</label>
+                                    <div class="custom-flex-start">
+                                        <span class="minus" (click)="removeGuests()">-</span>
+                                        <input type="text" formControlName="guestCapacity">
+                                        <span class="plus" (click)="addGuests()">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter">
+                        <div class="custom-input-field">
+                            <label>{{'DepartingFrom'| localization}}</label>
+                            <input class="custom-input" formControlName="departingFrom" ngx-google-places-autocomplete
+                            (onAddressChange)="handleAddressChange($event,true)"
+                                placeholder="Search Location">
+                         <small class="text-danger" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter && formControl.departingLatitude.value ==null && isSubmitted">Departing From is required.</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter">
+                        <div class="custom-input-field">
+                            <label> {{'ToDestination'| localization}}</label>
+                            <input class="custom-input" formControlName="destination" ngx-google-places-autocomplete
+                            (onAddressChange)="handleAddressChange($event,false)"
+                                placeholder="Search Location">
+                                <small class="text-danger" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter && formControl.destinationLatitude.value ==null && isSubmitted">Destination is required.</small>
+                            <!-- <small class="text-danger" *ngIf="charterForm.destination.touched && !charterForm.destination.valid"> {{'DestReq'| localization}}</small> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter">
+                        <div class="custom-select-field">
+                            <label>Departure Date</label>
+                            <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate"
+                                name="datetimepicker" placeholder='Select Departure From'></ejs-datetimepicker>
+                                <small class="text-danger" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter && formControl.departureFromDate.value ==null && isSubmitted">Departure Date is required.</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter">
+                        <div class="custom-select-field">
+                            <label>Arrival Date</label>
+                            <ejs-datetimepicker placeholder='Select Departure From' formControlName="departureToDate">
+                            </ejs-datetimepicker>
+                            <small class="text-danger" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter && formControl.departureToDate.value ==null && isSubmitted">Arrival Date is required.</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 py-2" *ngIf="formControl.serviceType.value==SERVICE_TYPES.Charter">
+                        <div class="custom-input-field">
+                            <label>Is it a round trip</label>
+                            <div class="custom-flex">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" [value]="true"
+                                        formControlName="isRoundTrip">
+                                    Yes
+                                </div>
+                                <div class="form-check ms-5">
+                                    <input type="radio" class="form-check-input" [value]="false"
+                                        formControlName="isRoundTrip" checked>
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 py-2" *ngIf="formControl.isRoundTrip.value === true ">
+                        <div class="custom-select-field">
+                            <label>Return Date</label>
+                            <ejs-datetimepicker formControlName="returnDate"></ejs-datetimepicker>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 py-2">
+                        <div class="custom-input-field">
+                            <label>Other Requirments</label>
+                            <textarea class="custom-input" id="exampleFormControlTextarea1" rows="4"
+                                formControlName="otherRequirments">Type</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="custom-flex-end">
+                            <button class="custom-btn outline-blue-clr me-4">Cancel</button>
+                            <button class="custom-btn blue" id="save-btn" (click)="sendQuote()">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>

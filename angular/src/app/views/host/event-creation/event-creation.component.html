@@ -148,7 +148,7 @@
                                     <div class="col-md-6 py-2">
                                         <div class="">
                                             <div class="">
-                                                <label>Start Date</label>
+                                                <label>{{'StartDate' | localization}}</label>
                                                 <ejs-datetimepicker formControlName="startDateTime"
                                                 (renderDayCell)='onRenderCell($event)'
                                                     name="startDateTime"></ejs-datetimepicker>
@@ -162,7 +162,7 @@
                                     <div class="col-md-6 py-2">
                                         <div class="">
                                             <div class="">
-                                                <label>End Date</label>
+                                                <label>{{'EndDate' | localization}}</label>
                                                 <ejs-datetimepicker formControlName="endDateTime" name="endDateTime" (renderDayCell)='onRenderCell($event)'>
                                                 </ejs-datetimepicker>
                                                 <small class="text-danger"
@@ -175,7 +175,7 @@
                                     <div class="col-md-6 py-2">
                                         <div class="">
                                             <div class="custom-input-field">
-                                                <label>Amount Per Person</label>
+                                                <label>{{'AmountPerPerson' | localization}}</label>
                                                 <input type="number" class="custom-input" placeholder="Enter Amount"
                                                     [ngClass]="{  'is-invalid':submitted && form.amountPerPerson.errors }"
                                                     formControlName="amountPerPerson">
