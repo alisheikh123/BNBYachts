@@ -2,7 +2,7 @@
 
 pipeline {
   agent {
-    label ('BnBYachts')
+    label ('bnb-onBuild')
   }
   options { timestamps () }
   stages {
