@@ -39,5 +39,11 @@ export class AllChartersListingComponent implements OnInit {
     this.queryParams.pageSize = data.pageSize;
     this.getHostCharters();
   }
+  isCharterActive(item: any) {
+    this.service.updateCharterStatus(item?.id).subscribe((res: any) => {
+      item.isActive = !item.isActive;
+      this.toastr.success('Charter Status successfully Changed.', 'Success');
+    });
+  }
 
 }

@@ -10,12 +10,12 @@
   },
   {
     "Id": "CE46906C-8C93-4DDF-85B3-064EFB8E8D61",
-    "UserName": "umer123",
-    "Name": "Umer Daraz",
-    "Email": "umar@techverx.com",
-    "PasswordHash": "1q2w3E",
+    "UserName": "umardraz",
+    "Name": "Umer Draz",
+    "Email": "umar.draz@techverx.com",
+    "PasswordHash": "1q2w3E*",
     "DOB": "2021-11-09T00:00:00",
-    "RoleName": [ "USER", "HOST" ]
+    "RoleName": [ "USER", "HOST", "ADMIN" ]
   },
 
   {

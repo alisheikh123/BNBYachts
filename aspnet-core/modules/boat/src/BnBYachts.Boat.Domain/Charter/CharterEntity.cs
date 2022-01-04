@@ -31,5 +31,6 @@ namespace BnBYachts.Boats.Charter
         public double? ReturnLocationLat{ get; set; }
         public double? ReturnLocationLng { get; set; }
         public virtual int? BoatId { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

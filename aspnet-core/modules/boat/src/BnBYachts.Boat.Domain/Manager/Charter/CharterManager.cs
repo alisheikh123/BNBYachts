@@ -71,6 +71,12 @@ namespace BnBYachts.Boat.Manager.Charter
             return false;
         }
 
+        public async Task<bool> UpdateCharterStatus(long charterId)
+        {
+            var charter = await _charterRepository.FindAsync(x => x.Id == charterId).ConfigureAwait(false);
+            charter.IsActive = !charter.IsActive;
+            return true;
 
+        }
     }
 }

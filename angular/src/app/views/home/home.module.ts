@@ -16,6 +16,9 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { ChatComponent } from './components/Chat/chat/chat.component';
 import { ChatUsersComponent } from './components/Chat/chat-users/chat-users.component';
 import { NotFoundModule } from '../common/not-found-component/not-found.module';
+import { CharterQuoteRequestComponent } from './components/QuoteRequest/charter-quote-request/charter-quote-request.component';
+import { EventQuoteRequestComponent } from './components/QuoteRequest/event-quote-request/event-quote-request.component';
+import { CalendarModule, DateRangePickerModule, DateTimePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { NotFoundModule } from '../common/not-found-component/not-found.module';
     NoFoundModalComponent,
     HostDashboardComponent,
     ChatComponent,
-    ChatUsersComponent
+    ChatUsersComponent,
+    CharterQuoteRequestComponent,
+    EventQuoteRequestComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -38,7 +43,11 @@ import { NotFoundModule } from '../common/not-found-component/not-found.module';
     CommonModule,
     GooglePlaceModule,
     SharedPipesModule,
-    NotFoundModule
+    NotFoundModule,
+    CalendarModule,
+    TimePickerModule ,
+    DateRangePickerModule,
+    DateTimePickerModule,
   ],
   providers: [YachtSearchService],
   //bootstrap: [HomeComponent]

@@ -1,7 +1,9 @@
 <div class="dropdown custom-dropdown dropdown-rounded pb-2">
-    <button class="dropdown-toggle dropdownBTN btn btn-outline-primary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+    <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
         aria-expanded="false">
-        {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
+        <span style="float: left;">
+            {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
+        </span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li>
@@ -51,13 +53,13 @@
             <p class="small-text grey" *ngIf="selectedServiceType == 2">
                 {{ item?.charter?.departureFromDate | date }}
             </p>
-          <div class="custom-flex mt-4">
-              <a [routerLink]="[
+            <div class="custom-flex mt-4">
+                <a [routerLink]="[
             '/boat-listing/reservation-cancellation',
             item.id
           ]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
-          </div>
-      </div>
+            </div>
+        </div>
     </div>
 </div>
 <div *ngIf="bookedServices?.length == 0">
