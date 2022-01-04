@@ -231,7 +231,31 @@
                                                             </div>
                                                         </div>
                                                     </ng-template>
-                                                    <div class="total-amount-wrap custom-padding-top">
+                                                    <div class="total-amount-wrap custom-padding-top" *ngIf="charterDetails?.isFullBoatCharges==true">
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Entire Boat Charges</p>
+                                                            <p>${{charterDetails?.charterFee}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Tax</p>
+                                                            <p>${{charterDetails?.boat?.taxFee}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>Service Fee</p>
+                                                            <p>$20.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner bottom">
+                                                            <p class="medium">Total(USD)</p>
+                                                            <p class="medium">$ {{charterDetails?.charterFee  + charterDetails?.boat?.taxFee+ 20}}.00</p>
+
+                                                        </div>
+                                                        <button class="custom-btn blue" (click)="reserveCharter()">Book
+                                                            Now</button>
+                                                    </div>
+                                                    <div class="total-amount-wrap custom-padding-top" *ngIf="charterDetails?.isFullBoatCharges==false">
                                                         <div class="total-amount-wrap-inner">
                                                             <p>$ {{charterDetails?.charterFee}} X
                                                                 {{charterFilterDetails.adults +

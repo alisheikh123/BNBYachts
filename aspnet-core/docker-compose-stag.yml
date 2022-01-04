@@ -51,6 +51,36 @@ services:
     depends_on:
       - rabbitmq
 
+  bnb_chat:
+    container_name: bnb_chat
+    build:
+      context: .
+      dockerfile: Chat.Dockerfile
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
+      "App:SelfUrl": ${BNB_IDENTITY_SELF_URL}
+      "App:ClientUrl": ${BNB_APP_CLIENT_URL}
+      "App:RedirectAllowedUrls": ${BNB_APP_REDIRECT_ALLOWED_URLS}
+      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
+    volumes:
+      - ./tmp-build/BNB/Bnbchat/logs:/app/Logs
+      - ./tmp-build/BNB/Bnbchat/.aspnet/https:/root/.aspnet/https:ro
+      - ./tmp-build/BNB/Bnbchat/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro  
+    links:
+      - rabbitmq:rabbitmq  
+    depends_on:
+      - rabbitmq    
+    ports:
+      - "21026:80"  
+
   bnb_booking_api:
     container_name: bnb_booking_api
     build:
@@ -213,6 +243,7 @@ services:
       - bnb_core_api
       - bnb_idv_api
       - bnb_client_portal
+      - bnb_chat
     links:
       - bnb_client_portal:bnb_client_portal
       - bnb_boat_api:bnb_boat_api
@@ -220,5 +251,6 @@ services:
       - bnb_payment_api:bnb_payment_api
       - bnb_core_api:bnb_core_api
       - bnb_idv_api:bnb_idv_api
+      - bnb_chat:bnb_chat
     ports:
       - "80:80"  
