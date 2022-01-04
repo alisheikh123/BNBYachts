@@ -238,29 +238,21 @@ cat build_info.md > aspnet-core/build_info.md
     IMAGE_TAG = "dev"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
-
     BOAT_IMAGE_NAME = 'bnb-boat'
-    BOAT_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
-
+    BOAT_URL = "${AWS_ECR_REPO}/${BOAT_IMAGE_NAME}"
     BOOKING_IMAGE_NAME = 'bnb-booking'
-    BOOKING_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
-
+    BOOKING_URL = "${AWS_ECR_REPO}/${BOOKING_IMAGE_NAME}"
     CHAT_IMAGE_NAME = 'bnb-chat'
-    CHAT_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
-
+    CHAT_URL = "${AWS_ECR_REPO}/${CHAT_IMAGE_NAME}"
     CORE_IMAGE_NAME = 'bnb-core'
-    CORE_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
-
+    CORE_URL = "${AWS_ECR_REPO}/${CORE_IMAGE_NAME}"
     IDV_IMAGE_NAME = 'idv-server'
     IDV_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
-
     NOTIFICATION_IMAGE_NAME = 'bnb-notification'
-    NOTIFICATION_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
-
+    NOTIFICATION_URL = "${AWS_ECR_REPO}/${NOTIFICATION_IMAGE_NAME}"
     PAYMENT_IMAGE_NAME = 'bnb-payment'
-    PAYMENT_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
-
+    PAYMENT_URL = "${AWS_ECR_REPO}/${PAYMENT_IMAGE_NAME}"
     CLIENT_PORTAL_IMAGE_NAME = 'bnb_client_portal'
-    CLIENT_PORTAL_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
+    CLIENT_PORTAL_URL = "${AWS_ECR_REPO}/${CLIENT_PORTAL_IMAGE_NAME}"
   }
 }
