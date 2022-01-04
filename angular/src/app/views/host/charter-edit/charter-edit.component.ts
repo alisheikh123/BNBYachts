@@ -33,7 +33,7 @@ export class CharterEditComponent implements OnInit {
     this.boatCharterForm = this.fb.group({
       id:[0],
       description: [null, Validators.required],
-      guestCapacity: [0, Validators.required],
+      guestCapacity: [1, Validators.required],
       departingLatitude: [],
       departingLongitude: [],
       destinationLatitude: [],
@@ -47,6 +47,7 @@ export class CharterEditComponent implements OnInit {
       departingFrom: [null, Validators.required],
       returnDate: [new Date()],
       boatId:[0,Validators.required],
+      isActive:[true]
     });
   }
   getCharterDetailsById()
@@ -69,6 +70,7 @@ export class CharterEditComponent implements OnInit {
         departingFrom: res?.charterDetails?.departingFrom,
         returnDate: res?.charterDetails?.returnDate,
         boatId:res?.charterDetails?.boatId,
+        isActive:res?.charterDetails?.isActive,
       });
 
     });
@@ -100,12 +102,12 @@ export class CharterEditComponent implements OnInit {
     }
   }
   removeCapacity() {
-    let value = this.boatCharterForm.controls.guestCapacity.value;
-    value = value>0? this.boatCharterForm.controls.guestCapacity.setValue(value - 1):0;
+    if(this.boatCharterForm.controls.guestCapacity.value > 1) {
+      this.boatCharterForm.controls.guestCapacity.setValue(this.boatCharterForm.controls.guestCapacity.value - 1);
+    }
   }
   addCapacity() {
-    let value = this.boatCharterForm.controls.guestCapacity.value;
-    value = value>0? this.boatCharterForm.controls.guestCapacity.setValue(value + 1):0;
+    this.boatCharterForm.controls.guestCapacity.setValue(this.boatCharterForm.controls.guestCapacity.value + 1);
   }
-
+  
 }

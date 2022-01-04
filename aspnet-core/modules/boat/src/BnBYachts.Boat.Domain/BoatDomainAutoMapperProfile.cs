@@ -58,7 +58,7 @@ namespace BnBYachts.Boat
             CreateMap<HostBoatRequestable, BoatEntity>();
             CreateMap<BoatFeaturesRequestable, BoatFeatureEntity>();
             CreateMap<BoatRulesRequestable, BoatRuleEntity>();
-            CreateMap<EventEntity, EventRequestable>();
+            CreateMap<EventEntity,EventRequestable>();
         }
     }
 }

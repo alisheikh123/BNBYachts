@@ -125,7 +125,6 @@ export class ModifyReservationComponent implements OnInit {
     let checkoutLatestDateTime = new Date(checkoutDateLat+ ' '+ checkOutTime);
     let remaingHours =Math.ceil(new Date(checkinCombindDateTime).valueOf() - new Date(currentCombindDateTime).valueOf()) / 36e5;
     let hour = this.float2int(remaingHours);
-    debugger;
     let noOfDays = utils.differenceWithoutAddition(checkinCombindDateTime,checkoutLatestDateTime);
     if (hour > 72) {
       this.deductedAmount = 0;

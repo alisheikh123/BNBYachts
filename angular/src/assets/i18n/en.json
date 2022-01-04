@@ -70,5 +70,8 @@
   "ModifyReservation":"Modify Reservation",
   "AddReview":"Add Review",
   "EditCharter":"Edit Charter Feature",
-  "Cancel":"Cancel"
+  "Cancel":"Cancel",
+  "StartDate":"Start Date",
+  "EndDate":"End Date",
+  "AmountPerPerson":"Amount Per Person"
 }
