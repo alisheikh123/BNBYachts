@@ -34,16 +34,16 @@ cat build_info.md > aspnet-core/build_info.md
       }
     }
 
-    // stage('Init AWS') {
-    //   steps {
-    //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-    //             accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-    //             credentialsId: '',
-    //             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-    //         sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ECR_REPO}"
-    //             }
-    //   }
-    // }
+    stage('Init AWS') {
+      steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                credentialsId: 'bnb_developer_aws',
+                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+            sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ECR_REPO}"
+                }
+      }
+    }
 
     stage('Phase-1') {
       parallel {
@@ -59,14 +59,14 @@ cat build_info.md > aspnet-core/build_info.md
                 }
               }
 
-              // stage('Publish') {
-              //   steps {
-              //     script{
-              //       sh "docker tag ${IDV_IMAGE_NAME}:${IMAGE_TAG} ${IDV_URL}:${IMAGE_TAG}"
-              //       sh "docker push ${IDV_URL}:${IMAGE_TAG}"
-              //     }
-              //   }
-              // }
+              stage('Publish') {
+                steps {
+                  script{
+                    sh "docker tag ${IDV_IMAGE_NAME}:${IMAGE_TAG} ${IDV_URL}:${IMAGE_TAG}"
+                    sh "docker push ${IDV_URL}:${IMAGE_TAG}"
+                  }
+                }
+              }
             }
           }
       }
@@ -74,12 +74,12 @@ cat build_info.md > aspnet-core/build_info.md
   }
 
   environment {
-    AWS_ACCOUNT_ID = ''
-    AWS_DEFAULT_REGION = 'us-east-2'
+    AWS_ACCOUNT_ID = '989660349111'
+    AWS_DEFAULT_REGION = 'us-east-1'
     IMAGE_TAG = "dev"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
-    IDV_IMAGE_NAME = 'idv'
+    IDV_IMAGE_NAME = 'idv-server'
     IDV_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
   }
 }

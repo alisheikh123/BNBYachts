@@ -124,9 +124,7 @@ services:
 
   bnb_idv_api:
     container_name: bnb_idv_api
-    build:
-      context: .
-      dockerfile: IDV.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/idv-server:dev
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
       "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
