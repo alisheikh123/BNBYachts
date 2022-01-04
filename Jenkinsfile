@@ -34,7 +34,6 @@ cat build_info.md > aspnet-core/build_info.md
       }
     }
 
-    //             credentialsId: '',
     stage('Init AWS') {
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
