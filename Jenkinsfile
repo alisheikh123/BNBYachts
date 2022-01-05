@@ -19,14 +19,18 @@ pipeline {
 echo GIT_BRANCH: ${GIT_BRANCH} >> build_info.md
 echo GIT_COMMIT: ${GIT_COMMIT} >> build_info.md
 echo GIT_AUTHOR_NAME: ${GIT_AUTHOR_NAME} >> build_info.md
-
 echo BUILD_URL: ${BUILD_URL} >> build_info.md
 echo NODE_NAME: ${NODE_NAME} >> build_info.md
 echo BUILD_TIME: ${IMAGE_BUILD_TIMESTAMP} >> build_info.md
 echo IMAGE_TAG: ${IMAGE_TAG} >> build_info.md
-
+echo Core_URL: ${Core_URL}:${IMAGE_TAG}  >> build_info.md
+echo Client_Portal_URL: ${Client_Portal_URL}:${IMAGE_TAG}  >> build_info.md
+echo Booking_URL: ${Booking_URL}:${IMAGE_TAG}  >> build_info.md
+echo Paymnet_URL: ${PAYMENT_URL}:${IMAGE_TAG}  >> build_info.md
+echo Boat_URL: ${Boat_URL}:${IMAGE_TAG}  >> build_info.md
+echo Chat_URL: ${Chat_URL}:${IMAGE_TAG}  >> build_info.md
 echo IDV_URL: ${IDV_URL}:${IMAGE_TAG}  >> build_info.md
-
+echo Notification_URL: ${notification}:${IMAGE_TAG}  >> build_info.md
 cat build_info.md > aspnet-core/build_info.md
 
 '''
@@ -47,8 +51,7 @@ cat build_info.md > aspnet-core/build_info.md
 
     stage('Phase-1') {
       parallel {
-
-
+        
       stage('Client-Portal') {
             stages {
               stage('Build') {
