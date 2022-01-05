@@ -109,7 +109,9 @@ namespace BnBYachts.Chat.Managers
                     && res.SenderId.ToLower() == result.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
                     var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
                     result.IsArchivedUser = findArchived != null;
-                        listUsers.Add(result);
+                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    result.IsBlocked = getBlockedUser != null;
+                    listUsers.Add(result);
                 }
             }
             foreach (var chat in listOfAllUsersInChats.DistinctBy(x => x.ReceiverId))
@@ -119,8 +121,10 @@ namespace BnBYachts.Chat.Managers
                 {
                     result.UnReadChatsCount = await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
                     && res.SenderId.ToLower() == result.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
-                    var findArchived = await _archivedChatRepository.FindAsync(res => res.ArchivedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
                     result.IsArchivedUser = findArchived != null;
+                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    result.IsBlocked = getBlockedUser != null;
                     listUsers.Add(result);
                 }
             }
