@@ -39,6 +39,7 @@ export class CharterDetailsComponent implements OnInit {
   showMore: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
+  charterCapcityValidation:any;
   @ViewChild('popOver') public popover: NgbPopover;
 
   ngOnInit(): void {
@@ -52,6 +53,7 @@ export class CharterDetailsComponent implements OnInit {
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
+      console.log(this.charterDetails);
       this.charterSchedule = res.charterSchedule;
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
@@ -116,7 +118,7 @@ export class CharterDetailsComponent implements OnInit {
   updateGuests() {
     this.charterFilterDetails.adults = this.popOverFilterData.adults;
     this.charterFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.popover.close();
+    this.charterCapcityValidation = this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity?"Please Enter Valid Guests":this.popover.close();
   }
 
   showAllFeatures() {

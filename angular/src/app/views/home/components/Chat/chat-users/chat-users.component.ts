@@ -14,8 +14,14 @@ export class ChatUsersComponent implements OnInit {
   searchText: string;
   @Input() activeUserId: string;
   @Output() onChangeUser: EventEmitter<any> = new EventEmitter();
-  isArchivedChats: boolean = true;
+  @Output() noUserAvailble: EventEmitter<any> = new EventEmitter();
+  activeChatFilter: number = 0;
   hostId = null;
+  chatFilter = {
+    all: 0,
+    archived: 1,
+    blocked: 2
+  }
 
   constructor(private chatService: ChatService, private activatedRoute: ActivatedRoute) {
     this.userId = localStorage.getItem('userId') || ' ';
@@ -32,7 +38,8 @@ export class ChatUsersComponent implements OnInit {
     this.chatService.getAllUsers(this.hostId).subscribe((res) => {
       this.allChatUsers = [...new Map(res.map((item: any) =>
         [item?.['userId'], item])).values()];
-      this.filterUsers();
+        this.allChatUsers.length > 0 ? this.noUserAvailble.emit(false):this.noUserAvailble.emit(true);
+      this.filterUsers(this.activeChatFilter);
     });
   }
 
@@ -43,10 +50,21 @@ export class ChatUsersComponent implements OnInit {
     this.activeUserId = user.userId;
     this.onChangeUser.emit(user);
   }
-  filterUsers() {
-    this.isArchivedChats = !this.isArchivedChats;
-    let users = this.allChatUsers.filter(res => res.isArchivedUser == this.isArchivedChats);
-    this.chatUsers = Object.assign([], users);
+  filterUsers(filter:any) {
+    this.activeChatFilter = filter;
+    let users = [];
+    if (this.activeChatFilter == this.chatFilter.archived) {
+      users = this.allChatUsers.filter(res => res.isArchivedUser == true);
+      this.chatUsers = Object.assign([], users);
+    }
+    else if (this.activeChatFilter == this.chatFilter.blocked) {
+      users = this.allChatUsers.filter(res => res.isBlocked == true);
+      this.chatUsers = Object.assign([], users);
+    }
+    else {
+      users = this.allChatUsers;
+      this.chatUsers = Object.assign([], users);
+    }
     if (this.chatUsers.length > 0) {
       this.onChangeUser.emit(this.chatUsers[0]);
     }

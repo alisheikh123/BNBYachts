@@ -7,16 +7,14 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+
   bnb_client_portal:
     container_name: bnb_client_portal
-    build:
-      context: ../angular
-      dockerfile: Angular.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/bnb_client_portal:dev
+
   bnb_boat_api:
     container_name: bnb_boat_api
-    build:
-      context: .
-      dockerfile: Boat.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/bnb-boat:dev
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
       "ConnectionStrings:Default": ${BNB_BOAT_API_CONNECTION_STRING}
@@ -42,9 +40,7 @@ services:
 
   bnb_booking_api:
     container_name: bnb_booking_api
-    build:
-      context: .
-      dockerfile: Booking.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/bnb-booking:dev
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
       "ConnectionStrings:Default": ${BNB_BOOKING_API_CONNECTION_STRING}
@@ -67,11 +63,10 @@ services:
       - rabbitmq:rabbitmq
     depends_on:
       - rabbitmq
+
   bnb_payment_api:
     container_name: bnb_payment_api
-    build:
-      context: .
-      dockerfile: Payment.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/bnb-payment:dev
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
       "ConnectionStrings:Default": ${BNB_Payment_API_CONNECTION_STRING}
@@ -94,11 +89,10 @@ services:
       - rabbitmq:rabbitmq
     depends_on:
       - rabbitmq
+
   bnb_core_api:
     container_name: bnb_core_api
-    build:
-      context: .
-      dockerfile: Core.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/bnb-core:dev
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
       "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
@@ -150,9 +144,7 @@ services:
 
   bnb_chat:
     container_name: bnb_chat
-    build:
-      context: .
-      dockerfile: Chat.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/bnb-chat:dev
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
       "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
@@ -179,9 +171,7 @@ services:
       
   bnb_notification_hub_engine:
     container_name: bnb_notification_hub_engine
-    build:
-      context: .
-      dockerfile: Notification.Dockerfile
+    image: 989660349111.dkr.ecr.us-east-1.amazonaws.com/bnb-notification:dev
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
       "RabbitMq:Host": ${BNB_MQ_HOST}
@@ -204,6 +194,7 @@ services:
       - rabbitmq:rabbitmq  
     depends_on:
       - rabbitmq  
+
   proxyapp:
     image: nginx:alpine
     container_name: proxyapp
