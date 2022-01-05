@@ -1,12 +1,13 @@
-<div class="main-wrapper">
+<div class="main-wrapper" >
   <section class="chat-wrapper-section section-padding">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-3 py-2">
+      <div class="row" >
+        <div class="col-md-3 py-2" *ngIf="!noChatsAvailble">
           <app-chat-users  [activeUserId]="chat.receiverId"
+          (noUserAvailble)="noUserAvailable($event)"
             (onChangeUser)="getChat($event)"></app-chat-users>
         </div>
-        <div class="col-md-6 py-2">
+        <div class="col-md-6 py-2" *ngIf="!noChatsAvailble">
           <div class="bg-grey-light border-radius-5 p-2">
             <div class="image-with-text">
               <div class="image-with-text-inner small-img">
@@ -22,7 +23,7 @@
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                       <li><button class="dropdown-item" (click)="changeStatus()" *ngIf="chat.isBlockedByMe || !chat.blockedUser">{{chat.blockedUser ? 'Unblock':'Block'}}</button></li>
-                      <li><button class="dropdown-item" (click)="archiveChat(!recieverInfo?.isArchivedUser)">{{!recieverInfo?.isArchivedUser ? 'Archive Chat':'Unarchive chat'}}</button></li>
+                      <li><button class="dropdown-item" (click)="archiveChat(recieverInfo)">{{!recieverInfo?.isArchivedUser ? 'Archive Chat':'Unarchive chat'}}</button></li>
                   </ul>
               </div>
               </div>
@@ -61,9 +62,7 @@
           </ng-container>
           <div *ngIf="!userMessages && !chat.receiverId">
             <div class="text-center">
-              <img style="width: 300px;" src="../../../../assets/images/no-user-found.jpg" />
               <p class="pb-2">No Chats found</p>
-              <button class="custom-btn blue big-btn"  [routerLink]="['']">Contact to host</button>
             </div>
           </div>
         </div>
@@ -85,3 +84,21 @@
     </div>
   </section>
 </div>
+
+<ng-template #noChatModal>
+  <div class="modal-content">
+    <div class="modal-header no-border">
+    </div>
+    <div class="modal-body">
+      <div class="custom-text-center">
+        <h4 class="bold text-center">No Chat Aailable</h4>
+        <div>
+        </div>
+        <div class="bottom-btn vertical-center text-center">
+          <button (click)="findHost()" class="custom-btn blue big-btn mt-3" data-bs-toggle="modal" data-bs-target="#noChatModal" data-bs-dismiss="modal">Find Host</button>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+</ng-template>
