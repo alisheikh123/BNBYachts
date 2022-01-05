@@ -26,6 +26,9 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { CharterReservationListingComponent } from './user-reservation-listing/charter-reservation-listing/charter-reservation-listing.component';
 import { EventReservationListingComponent } from './user-reservation-listing/event-reservation-listing/event-reservation-listing.component';
 import { BoatReservationListingComponent } from './user-reservation-listing/boat-reservation-listing/boat-reservation-listing.component';
+import { BookingFilterComponent } from './booking-filter/booking-filter.component';
+import { CharterReservationDetailComponent } from './charter-reservation-detail/charter-reservation-detail.component';
+import { EventReservationDetailComponent } from './event-reservation-detail/event-reservation-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { BoatReservationListingComponent } from './user-reservation-listing/boat
     CharterReservationListingComponent,
     EventReservationListingComponent,
     BoatReservationListingComponent,
+    BookingFilterComponent,
+    CharterReservationDetailComponent,
+    EventReservationDetailComponent
 
   ],
   imports: [

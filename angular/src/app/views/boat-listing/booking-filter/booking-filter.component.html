@@ -1,8 +1,8 @@
-<!-- <div class="row pb-4">
+ <div class="row pb-4">
     <div class="col-3">
       <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
         <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-          data-bs-toggle="dropdown" aria-expanded="false">
+          data-bs-toggle="dropdown" aria-expanded="false" #selectedItem>
           {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter ==
           BOOKING_STATUS.Approved ? 'Approved':
           selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected':selectedStatusFilter ==
@@ -11,25 +11,25 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li (click)="statusFilter(null)">
+          <li (click)="selectReservationStatus(BOOKING_STATUS.ChooseFilter)">
             <a class="dropdown-item">All</a>
           </li>
-          <li (click)="statusFilter(BOOKING_STATUS.Pending)">
+          <li (click)="selectReservationStatus(BOOKING_STATUS.Pending)">
             <a class="dropdown-item">Pending</a>
           </li>
-          <li (click)="statusFilter(BOOKING_STATUS.Approved)">
+          <li (click)="selectReservationStatus(BOOKING_STATUS.Approved)">
             <a class="dropdown-item">Approved</a>
           </li>
-          <li (click)="statusFilter(BOOKING_STATUS.Cancel)">
+          <li (click)="selectReservationStatus(BOOKING_STATUS.Cancel)">
             <a class="dropdown-item">Cancelled</a>
           </li>
-          <li (click)="statusFilter(BOOKING_STATUS.Rejected)">
+          <li (click)="selectReservationStatus(BOOKING_STATUS.Rejected)">
             <a class="dropdown-item">Rejected</a>
           </li>
         </ul>
       </div>
     </div>
-    <div class="col-3">
+    <!-- <div class="col-3">
       <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
       <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton2"
         data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,12 +55,12 @@
 
       </ul>
     </div>
-    </div>
+    </div> -->
     <div class="col-3">
       <div>
         <div class="dropdown custom-dropdown filters-wrap" ngbDropdown #myFilterDrop="ngbDropdown">
           <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropDownFilter2"
-            ngbDropdownToggle>
+            ngbDropdownToggle  #selectedReservationTimeItem>
             {{this.selectedTabStatus == BOOKING_FILTER.All ?
             'All':this.selectedTabStatus == BOOKING_FILTER.Upcomings ? 'Upcomings':this.selectedTabStatus ==
             BOOKING_FILTER.Past ? 'Past':'Choose Upcoming/Past'}}
@@ -71,21 +71,21 @@
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" class="form-check-input" [value]="0" id="allCharter"
-                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}">
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.All)">
                     <label for="allCharter">All</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" class="form-check-input" [value]="1" id="oneSide"
-                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}">
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Upcomings)">
                     <label for="oneSide">Upcomings</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" id="roundTrip" class="form-check-input" [value]="2"
-                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}">
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Past)">
                     <label for="roundTrip">Past</label>
                   </div>
                 </div>
@@ -98,13 +98,13 @@
                     cursor: pointer;" (click)="getReservations();myFilterDrop.close()">
                   Apply
                 </a> -->
-              <!-- </div>
+              </div>
             </form>
           </div>
         </div>
       </div>
-    </div> -->
-<!--
+    </div>
+
     <div class="col-3">
       <div class="" style="float: right;">
         <div class="row">
@@ -122,11 +122,4 @@
         </div>
       </div>
     </div>
-    <div class="col-12"> -->
-      <!-- <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
-        <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button> -->
-
-<!--
-    </div>
-  </div> -->
-  <h1>Hello</h1>
+  </div>

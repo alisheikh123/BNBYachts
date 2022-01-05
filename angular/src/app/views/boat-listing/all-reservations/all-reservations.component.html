@@ -9,7 +9,7 @@
           aria-selected="false"><strong>Booked Services</strong></button>
       </div>
       <div>
-
+      <app-booking-filter (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedTimeStatus($event)" ></app-booking-filter>
         <div>
           <div class="row">
             <div class="col-12">
@@ -34,10 +34,10 @@
 
       </div>
       <div  *ngIf="activeTab == 0">
-        <app-boat-reservation-listing></app-boat-reservation-listing>
+        <app-boat-reservation-listing [reservationStatusSelectedItem]="currentReservationStatus"></app-boat-reservation-listing>
         </div>
        <div  *ngIf="activeTab == 1">
-        <app-charter-reservation-listing></app-charter-reservation-listing>
+        <app-charter-reservation-listing  [reservationStatusSelectedItem]="currentReservationStatus" ></app-charter-reservation-listing>
         </div>
         <div *ngIf="activeTab == 2">
           <app-event-reservation-listing></app-event-reservation-listing>

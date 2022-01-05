@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +8,7 @@ import { BookingResponseFilter, BookingStatus, BookingType, ServiceType } from '
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import * as moment from 'moment';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 
 @Component({
   selector: 'app-boat-reservation-listing',
@@ -46,6 +47,8 @@ export class BoatReservationListingComponent implements OnInit {
   };
   activeTab = 0;
   totalRecords: number = 0;
+  @Input() reservationStatusSelectedItem:number;
+  @Input() reservationTimeSelectedItem:number;
   constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
@@ -55,19 +58,28 @@ export class BoatReservationListingComponent implements OnInit {
     this.getReservations();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    for (const propName in changes) {
+      const change = changes[propName];
+      let currentValue  = JSON.stringify(change.currentValue);
+      currentValue = currentValue==undefined?"0":JSON.stringify(change.currentValue);
+      this.statusFilter(Number(currentValue));
+    }
+
+  }
   getReservations() {
-    this.selectedTabStatus = this.selectedTab;
-    let tab = this.selectedTab == this.BOOKING_FILTER.ChooseFilter ? this.BOOKING_FILTER.All : this.selectedTab;
+    this.selectedTabStatus = this.reservationStatusSelectedItem;
+    let tab = this.reservationStatusSelectedItem == undefined ? this.BOOKING_FILTER.All : this.reservationStatusSelectedItem;
     let reservationTab = this.selectedReservationTab == this.RESERVATION_STATUS.Boatels ? this.RESERVATION_STATUS.Boatels : this.selectedReservationTab;
     this.service.getBookings(tab,reservationTab, this.selectedMonth,
        this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
       this.allBookings = res?.data;
       this.totalRecords = res?.totalCount;
-      this.statusFilter(this.selectedStatusFilter);
+      this.statusFilter(tab);
     });
   }
-  statusFilter(status: any) {
-    this.selectedStatusFilter = status;
+  statusFilter(status: Number) {
+    this.selectedStatusFilter = status==undefined?this.BOOKING_FILTER.All : status;
     this.booking = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.allBookings.filter((res: any) => res.bookingStatus == status) : this.allBookings;
     this.booking.forEach((elem: any) => {
       this.boatService.boatDetailsById(elem.boatId).subscribe((boatdetail: any) => {
