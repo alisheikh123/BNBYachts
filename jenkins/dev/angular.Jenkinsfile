@@ -50,7 +50,7 @@ cat build_info.md > aspnet-core/build_info.md
                 steps {
                   script {
                     sh "docker build -t ${CLIENT_PORTAL_IMAGE_NAME}:${IMAGE_TAG} \
-                      -f ../../angular/Angular.Dockerfile ../../angular "
+                      -f ../../angular/Angular.Dockerfile ./angular"
                   }
                 }
               }
