@@ -42,6 +42,7 @@ export class EventDetailsComponent implements OnInit {
   showMore: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
+  eventCapcityValidation:any;
   @ViewChild('popOver') public popover: NgbPopover;
 
   ngOnInit(): void {
@@ -119,7 +120,7 @@ export class EventDetailsComponent implements OnInit {
   updateGuests() {
     this.eventFilterDetails.adults = this.popOverFilterData.adults;
     this.eventFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.popover.close();
+    this.eventCapcityValidation = this.eventFilterDetails.adults + this.eventFilterDetails.childrens>this.eventDetails?.guestCapacity?"Please Enter Valid Guests":this.popover.close();
   }
 
   onChangeDate(isIncrease: boolean) {
