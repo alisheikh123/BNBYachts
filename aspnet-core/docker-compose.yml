@@ -157,7 +157,7 @@ services:
       dockerfile: Chat.Dockerfile
     environment:
       "ASPNETCORE_ENVIRONMENT": "Production"
-      "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
+      "ConnectionStrings:Default": ${BNB_Chat_API_CONNECTION_STRING}
       "App:SelfUrl": ${BNB_IDENTITY_SELF_URL}
       "App:ClientUrl": ${BNB_APP_CLIENT_URL}
       "App:RedirectAllowedUrls": ${BNB_APP_REDIRECT_ALLOWED_URLS}
