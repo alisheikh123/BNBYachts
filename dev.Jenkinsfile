@@ -30,7 +30,7 @@ echo Paymnet_URL: ${PAYMENT_URL}:${IMAGE_TAG}  >> build_info.md
 echo Boat_URL: ${Boat_URL}:${IMAGE_TAG}  >> build_info.md
 echo Chat_URL: ${Chat_URL}:${IMAGE_TAG}  >> build_info.md
 echo IDV_URL: ${IDV_URL}:${IMAGE_TAG}  >> build_info.md
-echo Notification_URL: ${Notification_URL}:${IMAGE_TAG}  >> build_info.md
+echo Notification_URL: ${notification}:${IMAGE_TAG}  >> build_info.md
 cat build_info.md > aspnet-core/build_info.md
 
 '''
