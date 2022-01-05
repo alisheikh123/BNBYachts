@@ -19,11 +19,13 @@
   <div class="users-wrap-inner custom-flex-start">
     <div class="dropdown custom-dropdown">
       <button class="dropdown-btn dropdown-toggle no-border" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        {{isArchivedChats ? 'Archived Chats':'Unarchived Chats'}}
+        {{activeChatFilter == chatFilter?.all ? 'All' : activeChatFilter == chatFilter?.archived ? 'Archived':'Blocked'}}
         <i class="fa fa-angle-down"></i>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><button class="dropdown-item" (click)="filterUsers()">{{!isArchivedChats ? 'Archived Chats':'Unarchived Chats'}}</button></li>
+        <li><button class="dropdown-item" (click)="filterUsers(chatFilter?.all)">All</button></li>
+        <li><button class="dropdown-item" (click)="filterUsers(chatFilter?.archived)">Archived</button></li>
+        <li><button class="dropdown-item" (click)="filterUsers(chatFilter?.blocked)">Blocked</button></li> 
       </ul>
     </div> 
   </div>
@@ -40,7 +42,6 @@
     </a>
     <div *ngIf="(chatUsers | filter : searchText : 'name')?.length == 0">
       <div class="text-center">
-        <img src="../../../../assets/images/no-user-found.jpg" />
         <p>No users found</p>
       </div>
     </div>
