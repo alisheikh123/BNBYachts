@@ -48,7 +48,6 @@ export class EventReservationListingComponent implements OnInit {
     this.booking.forEach((elem: any) => {
       this.boatService.eventDetailsById(elem.eventId).subscribe((eventdetail: any) => {
         elem.eventDetail = eventdetail?.eventDetails;
-        console.log(elem.eventDetail);
         this.boatService.boatDetailsById(elem.eventDetail?.boatId).subscribe((boatdetails:any)=>{
           elem.boatDetail = boatdetails;
         })

@@ -9,7 +9,7 @@
           <i class="fas fa-chevron-left" style="color:#122ba8"></i>
         </a>
 
-        <h2 class="bold">Reservation Details</h2>
+        <h2 class="bold">Boatel Reservation Details</h2>
       </div>
 
     </div>
@@ -114,7 +114,7 @@
       <div class="col-sm-4 py-2">
         <div class="character-info-img">
           <div *ngFor="let imgs of booking?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
-            <img src={{imgs.imagePath}} alt="">
+            <img src="{{assetsUrl+imgs.imagePath}}" alt="">
           </div>
         </div>
       </div>

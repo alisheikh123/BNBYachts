@@ -7,6 +7,7 @@ import { BookingListingService } from 'src/app/core/Booking/booking-listing.serv
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 
@@ -35,6 +36,7 @@ export class ReservationDetailComponent implements OnInit {
   checkedCheckinDate: any;
   checkinTime: any;
   checkoutTime:any;
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
   constructor(private service: BookingService
@@ -176,7 +178,6 @@ export class ReservationDetailComponent implements OnInit {
 
   }
   isCheckoutTimeEnd(checkoutDate:Date,checkoutTime:Date){
-    debugger;
     let outDate = moment(checkoutDate).format("DD-MM-YYYY");
     let currentDate = moment().format("DD-MM-YYYY");
     let outTime = moment(checkoutTime).format("HH:mm");

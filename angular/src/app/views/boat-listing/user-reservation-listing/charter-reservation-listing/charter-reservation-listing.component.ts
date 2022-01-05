@@ -35,7 +35,6 @@ export class CharterReservationListingComponent implements OnInit {
     this.getUserCharters();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    debugger;
     // for (const propName in changes) {
     //   const change = changes[propName];
       let currentValue = JSON.stringify(changes.currentValue);
@@ -51,7 +50,6 @@ export class CharterReservationListingComponent implements OnInit {
 
   }
   getUserCharters() {
-    debugger;
     this.selectedTab = this.selectedReservationTab;
     let tab = this.selectedTab == this.BOOKING_FILTER.ChooseFilter ? this.BOOKING_FILTER.All : this.selectedTab;
     this.service.getCharterBookings(tab, this.selectedTab, this.selectedMonth,
@@ -62,11 +60,9 @@ export class CharterReservationListingComponent implements OnInit {
       });
   }
   statusFilter(status: number) {
-    debugger;
     this.selectedStatusFilter = status == undefined ? this.BOOKING_STATUS.ChooseFilter : status;
     this.userCharters = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.userCharters.filter((res: any) => res.bookingStatus == this.selectedStatusFilter) : this.userCharters;
     this.userCharters.forEach((elem: any) => {
-      debugger;
       this.boatService.charterDetailsById(elem.charterId).subscribe((charterdetail: any) => {
         elem.charterDetail = charterdetail?.charterDetails;
         this.boatService.boatDetailsById(elem.charterDetail?.boatId).subscribe((boatdetails: any) => {

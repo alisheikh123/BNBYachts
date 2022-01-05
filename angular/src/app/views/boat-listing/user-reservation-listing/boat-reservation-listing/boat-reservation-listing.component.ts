@@ -89,7 +89,6 @@ export class BoatReservationListingComponent implements OnInit {
   }
   reservationStatusFilter(reserveStatus:any)
   {
-    debugger;
     this.selectedReservationStatus = reserveStatus;
     let tab = this.selectedTab == this.BOOKING_FILTER.ChooseFilter ? this.BOOKING_FILTER.All : this.selectedTab;
     if(reserveStatus==BookingType.Boatels)

@@ -60,6 +60,5 @@ export class AllReservationsComponent implements OnInit {
   }
   selectedTimeStatus(selectedItem:number)
   {
-    console.log(selectedItem);
   }
 }
