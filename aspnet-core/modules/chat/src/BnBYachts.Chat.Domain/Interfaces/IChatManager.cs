@@ -8,7 +8,7 @@ namespace BnBYachts.Chat.Domain.Shared.Interfaces
 {
     public interface IChatManager
     {
-        Task<ChatTransferable> SendMessage(ChatRequestable inputData);
+        Task InsertChat(ChatRequestable inputData);
         Task<ChatMessagesTransferable> GetUserChats(string senderId, string receiverId);
         Task<ICollection<ChatUserTransferable>> GetAllUsers(string hostId,string userId);
         Task BlockUser(string blockedUserId,string userId, bool isBlock);
