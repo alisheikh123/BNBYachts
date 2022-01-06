@@ -5,6 +5,7 @@ using BnBYachts.Chat.Requestables;
 using BnBYachts.Chat.Transferables;
 using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using NUglify.Helpers;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.ObjectMapping;
+using Volo.Abp.Uow;
 
 namespace BnBYachts.Chat.Managers
 {
@@ -24,11 +26,13 @@ namespace BnBYachts.Chat.Managers
         private readonly IObjectMapper<ChatDomainModule> _objectMapper;
         private readonly IRepository<BlockedUsersEntity, int> _blockedUserRepository;
         private readonly IRepository<ArchivedChatsEntity, int> _archivedChatRepository;
+        public ILogger<ChatManager> _logger { get; set; }
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public ChatManager(IHubContext<ChatHub> hubContext, IUserConnectionManager userConnectionManager,
             IRepository<ChatEntity, int> chatRepository, IObjectMapper<ChatDomainModule> objectMapper,
             IRepository<UserInfo, int> userInfoRepository, IRepository<BlockedUsersEntity, int> blockedUserRepository,
-            IRepository<ArchivedChatsEntity, int> archivedChatRepository)
+            IRepository<ArchivedChatsEntity, int> archivedChatRepository, ILogger<ChatManager> logger, IUnitOfWorkManager unitOfWorkManager)
         {
             _hubContext = hubContext;
             _userConnectionManager = userConnectionManager;
@@ -37,6 +41,8 @@ namespace BnBYachts.Chat.Managers
             _userInfoRepository = userInfoRepository;
             _blockedUserRepository = blockedUserRepository;
             _archivedChatRepository = archivedChatRepository;
+            _logger = logger;
+            _unitOfWorkManager = unitOfWorkManager;
         }
         public async Task InsertChat(ChatRequestable inputData)
         {
@@ -50,6 +56,7 @@ namespace BnBYachts.Chat.Managers
                 CreationTime = DateTime.Now
             };
             var response = await _chatRepository.InsertAsync(obj, autoSave: true);
+            _logger.LogInformation("Chat Insert Request : " + _unitOfWorkManager.Current.Id.ToString());
         }
 
         public async Task<ChatMessagesTransferable> GetUserChats(string senderId, string receiverId)

@@ -1,10 +1,13 @@
 ﻿//using BnBYachts.Chat.Interfaces;
 using BnBYachts.Chat.Domain.Shared.Interfaces;
+using BnBYachts.Chat.Managers;
 using BnBYachts.Chat.Requestables;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.SignalR;
+using Volo.Abp.Uow;
 
 namespace BnBYachts.Chat.Hubs
 {
@@ -12,10 +15,15 @@ namespace BnBYachts.Chat.Hubs
     {
         private readonly IUserConnectionManager _userConnectionManager;
         private readonly IChatManager _chatManager;
-        public ChatHub(IUserConnectionManager userConnectionManager, IChatManager chatManager)
+        public ILogger<ChatManager> _logger  { get; set; }
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+
+        public ChatHub(IUserConnectionManager userConnectionManager, IChatManager chatManager, ILogger<ChatManager> logger, IUnitOfWorkManager unitOfWorkManager)
         {
             _userConnectionManager = userConnectionManager;
             _chatManager = chatManager;
+            _logger = logger;
+            _unitOfWorkManager = unitOfWorkManager;
     }
         public string GetConnectionId()
         {
@@ -36,6 +44,7 @@ namespace BnBYachts.Chat.Hubs
             }
             //Saving into db
             await _chatManager.InsertChat(inputData).ConfigureAwait(false);
+            _logger.LogInformation("Chat Service Request : "+_unitOfWorkManager.Current.Id.ToString());
         }
         //Called when a connection with the hub is terminated.
         public async override Task OnDisconnectedAsync(Exception exception)

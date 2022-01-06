@@ -21,21 +21,6 @@ namespace BnBYachts.Chat
             {
                 options.AddMaps<ChatDomainModule>(validate: false);
             });
-
-            Configure<AbpSignalROptions>(options =>
-            {
-                options.Hubs.AddOrUpdate(
-                    typeof(ChatHub), 
-                    config => 
-        {
-            config.RoutePattern = "/signalr-hubs";
-            config.ConfigureActions.Add(hubOptions =>
-                        {
-                            hubOptions.LongPolling.PollTimeout = TimeSpan.FromSeconds(30);
-                        });
-        }
-                );
-            });
         }
     }
 }
