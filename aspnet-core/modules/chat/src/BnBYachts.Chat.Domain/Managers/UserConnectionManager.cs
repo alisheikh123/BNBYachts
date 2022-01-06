@@ -54,5 +54,6 @@ namespace BnBYachts.Chat.Managers
             }
             return conn;//
         }
+       
     }
 }

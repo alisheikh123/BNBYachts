@@ -38,38 +38,18 @@ namespace BnBYachts.Chat.Managers
             _blockedUserRepository = blockedUserRepository;
             _archivedChatRepository = archivedChatRepository;
         }
-        public async Task<ChatTransferable> SendMessage(ChatRequestable inputData)
+        public async Task InsertChat(ChatRequestable inputData)
         {
-            ChatEntity obj = new ChatEntity
+            var obj = new ChatEntity
             {
                 SenderId = inputData.SenderId,
                 ReceiverId = inputData.ReceiverId,
                 Message = inputData.Message,
-                UserId = 1,
                 ReadDate = DateTime.Now,
                 SentDate = DateTime.Now,
                 CreationTime = DateTime.Now
             };
             var response = await _chatRepository.InsertAsync(obj, autoSave: true);
-            inputData.MessageId = response.Id;
-
-            var connections = _userConnectionManager.GetUserConnections(inputData.ReceiverId);
-            if (connections is { Count: > 0 })
-            {
-                foreach (var connectionId in connections)
-                {
-                    await _hubContext.Clients.Client(connectionId).SendAsync("sendToUser", inputData);
-                }
-            }
-
-            var result = new ChatTransferable
-            {
-                Message = inputData.Message,
-                SenderId = inputData.SenderId.ToUpper(),
-                ReceiverId = inputData.ReceiverId.ToUpper(),
-                User = inputData.User.ToUpper()
-            };
-            return result;
         }
 
         public async Task<ChatMessagesTransferable> GetUserChats(string senderId, string receiverId)
