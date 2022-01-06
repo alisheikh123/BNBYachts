@@ -140,6 +140,7 @@
                                                         <small class="text-danger"
                                                             *ngIf="(boatFilterDetails.adults == 0 && boatFilterDetails.childrens == 0) && isSubmitted">Enter
                                                             guests deteils.</small>
+
                                                     </div>
                                                 </div>
 
@@ -171,6 +172,7 @@
                                                                       <div class="max-width-50">
                                                                         <label class="m-0">Children</label>
                                                                         <label class="grey small-txt m-0 extra-small-text">Ages 0-13</label>
+
                                                                       </div>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
@@ -185,8 +187,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-12 pt-2">
+                                                            <small class="text-danger">{{boatelCapcityValidation}}</small>
                                                           <div class="custom-flex-end">
                                                             <button class="custom-btn blue small-btn" (click)="updateGuests()">Done</button>
+
                                                           </div>
                                                         </div>
                                                     </div>
@@ -195,7 +199,7 @@
 
                                                 <div class="total-amount-wrap custom-padding-top">
                                                     <div class="total-amount-wrap-inner">
-                                                        <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} Night(s)  
+                                                        <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} Night(s)
                                                         </p>
                                                         <p>${{boatDetails?.perDayCharges * calculateDays()}}.00</p>
 
