@@ -1,16 +1,12 @@
 ﻿
-using BnBYachts.Chat.Hubs;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using Volo.Abp.AspNetCore.SignalR;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 
 namespace BnBYachts.Chat
 {
     [DependsOn(
-      typeof(AbpAutoMapperModule),
-    typeof(AbpAspNetCoreSignalRModule)
+      typeof(AbpAutoMapperModule)
   )]
     public class ChatDomainModule : AbpModule
     {
@@ -22,21 +18,6 @@ namespace BnBYachts.Chat
                 options.AddMaps<ChatDomainModule>(validate: false);
             });
 
-            Configure<AbpSignalROptions>(options =>
-            {
-                options.Hubs.AddOrUpdate(
-                    typeof(ChatHub), //Hub type
-                    config => //Additional configuration
-        {
-            config.RoutePattern = "/signalr-hubs"; //override the default route
-            config.ConfigureActions.Add(hubOptions =>
-                        {
-                            //Additional options
-                            hubOptions.LongPolling.PollTimeout = TimeSpan.FromSeconds(30);
-                        });
-        }
-                );
-            });
         }
     }
 }
