@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BnBYachts.Chat.EntityFrameworkCore;
+using BnBYachts.Chat.Hubs;
 using BnBYachts.Chat.MongoDB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -159,6 +160,7 @@ namespace BnBYachts.Chat
             app.UseAbpSerilogEnrichers();
             app.UseUnitOfWork();
             app.UseConfiguredEndpoints();
+            
         }
     }
 }
