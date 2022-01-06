@@ -21,6 +21,7 @@ import { ChatUsersComponent } from '../chat-users/chat-users.component';
 export class ChatComponent implements OnInit {
   private _hubConnection!: HubConnection;
   private readonly socketUrl = environment.CHAT_API_URL + '/signalr-hubs';
+  
   userInfo: any;
   userMessages: any = [];
   isChatLoaded: boolean = false;
