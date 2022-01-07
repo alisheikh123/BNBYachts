@@ -18,10 +18,10 @@ namespace BnBYachts.EventBusShared
             var configuration = context.Services.GetConfiguration();
             var configurations = new RabbitMqConfigurations
             {
-                Host = configuration["RabbitMq:Host"],
-                VirtualHost = configuration["RabbitMq:VirtualHost"],
-                UserName = configuration["RabbitMq:UserName"],
-                Password = configuration["RabbitMq:Password"]
+                Host = "rabbitmq://localhost",//configuration["RabbitMq:Host"],
+                VirtualHost = "/",//configuration["RabbitMq:VirtualHost"],
+                UserName = "guest",//configuration["RabbitMq:UserName"],
+                Password = "guest"//configuration["RabbitMq:Password"]
             };
             context.Services.AddMassTransit(mt =>
             {
