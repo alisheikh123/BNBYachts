@@ -25,8 +25,15 @@
     "@angular/platform-browser": "~12.1.0",
     "@angular/platform-browser-dynamic": "~12.1.0",
     "@angular/router": "~12.1.0",
+    "@aspnet/signalr": "^1.0.27",
     "@fortawesome/angular-fontawesome": "^0.9.0",
     "@fortawesome/fontawesome-free": "^5.12.1",
+    "@fullcalendar/angular": "^5.10.1",
+    "@fullcalendar/bootstrap": "^5.10.1",
+    "@fullcalendar/core": "^5.10.1",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/interaction": "^5.4.0",
+    "@microsoft/signalr": "^5.0.8",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@stripe/stripe-js": "^1.20.3",
     "@syncfusion/ej2-angular-calendars": "^19.3.55",
@@ -44,9 +51,7 @@
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.2.1",
     "tslib": "^2.2.0",
-    "zone.js": "~0.11.4",
-    "@aspnet/signalr": "^1.0.27",
-    "@microsoft/signalr": "^5.0.8"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.1.0",
