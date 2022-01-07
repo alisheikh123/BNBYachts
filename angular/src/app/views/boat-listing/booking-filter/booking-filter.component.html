@@ -1,7 +1,28 @@
  <div class="row pb-4">
+   <div class="col-3">
+    <div class="dropdown custom-dropdown dropdown-rounded">
+      <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <span style="float: left;">
+              {{selectedServiceType == 0 ? 'Boatels':selectedServiceType == 1? 'Charters':'Events'}}
+          </span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li>
+              <a class="dropdown-item" (click)="filterServiceType(0)">Boatels</a>
+          </li>
+          <li>
+              <a class="dropdown-item" (click)="filterServiceType(1)">Charters</a>
+          </li>
+          <li>
+              <a class="dropdown-item" (click)="filterServiceType(2)">Events</a>
+          </li>
+      </ul>
+  </div>
+   </div>
     <div class="col-3">
       <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
-        <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+        <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton2"
           data-bs-toggle="dropdown" aria-expanded="false" #selectedItem>
           {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter ==
           BOOKING_STATUS.Approved ? 'Approved':
@@ -29,33 +50,7 @@
         </ul>
       </div>
     </div>
-    <!-- <div class="col-3">
-      <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
-      <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton2"
-        data-bs-toggle="dropdown" aria-expanded="false">
-        {{selectedReservationStatus == RESERVATION_STATUS.Boatels ? 'Boatels':selectedReservationStatus ==
-        RESERVATION_STATUS.Charters? 'Charters':
-        selectedReservationStatus == RESERVATION_STATUS.Events ? 'Events':selectedReservationStatus ==
-        RESERVATION_STATUS.Boatels ? 'Choose Reservation Type':'All'}}
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-        <li (click)="reservationStatusFilter(null)">
-          <a class="dropdown-item">All</a>
-        </li>
-        <li (click)="reservationStatusFilter(RESERVATION_STATUS.Boatels)">
-          <a class="dropdown-item">Boatels</a>
-        </li>
-        <li (click)="reservationStatusFilter(RESERVATION_STATUS.Charters)">
-          <a class="dropdown-item">Charters</a>
-        </li>
-        <li (click)="reservationStatusFilter(RESERVATION_STATUS.Events)">
-          <a class="dropdown-item">Events</a>
-        </li>
 
-      </ul>
-    </div>
-    </div> -->
     <div class="col-3">
       <div>
         <div class="dropdown custom-dropdown filters-wrap" ngbDropdown #myFilterDrop="ngbDropdown">

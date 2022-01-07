@@ -9,45 +9,153 @@
           aria-selected="false"><strong>Booked Services</strong></button>
       </div>
       <div>
-      <app-booking-filter (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedTimeStatus($event)" ></app-booking-filter>
+      <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)"  ></app-booking-filter>
+      <!-- (bookingStatusFilter)="selectedbookingStatusFilter($event)" -->
         <div>
-          <div class="row">
-            <div class="col-12">
 
-                <button (click)="activeTab = 0" class="underline-link-blk px-4" [ngClass]="{'active':activeTab == 0 }">
-                    <span>
-                        Boatel
-                    </span>
-                </button>
-                <button (click)="activeTab = 1" class="underline-link-blk px-4" [ngClass]="{'active':activeTab == 1}">
-                    <span>
-                        Charters
-                    </span>
-                </button>
-                <button (click)="activeTab = 2" class="underline-link-blk px-4" [ngClass]="{'active':activeTab == 2}">
-                    <span>
-                        Events
-                    </span>
-                </button>
+      </div>
+      <div *ngIf="selectedServiceType==bookedServicesTypes.boatel">
+      <div class="row">
+        <div class="col-12">
+          <div class="custom-card req-user-card" *ngFor="let item of booking">
+            <div [routerLink]="['/boat-listing/reservation-detail',item.id]">
+              <div class="image-with-text custom-flex-between align-items-start">
+                <div class="image-with-text-inner">
+                  <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
+
+                    <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+                  </div>
+                  <div class="user-details">
+                    <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
+                    <ngb-rating [rate]="0"></ngb-rating>
+                    <p class="small-text grey ">{{'Location' | localization}} :{{item?.boatDetail?.location}} </p>
+                    <p class="small-text grey ">{{'Guest'| localization}}: {{item.noOfAdults + item.noOfChildrens}}</p>
+                  </div>
+                </div>
+                <div class="right-content custom-flex flex-column align-items-end">
+                  <p class="small-text grey">{{item.checkinDate | date}} - {{item.checkoutDate | date}}</p>
+                  <div class="custom-flex mt-4 mr-3">
+                    <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
+                        ''}}</strong></span>
+                  </div>
+
+                </div>
+              </div>
             </div>
-        </div>
-
-      </div>
-      <div  *ngIf="activeTab == 0">
-        <app-boat-reservation-listing [reservationStatusSelectedItem]="currentReservationStatus"></app-boat-reservation-listing>
-        </div>
-       <div  *ngIf="activeTab == 1">
-        <app-charter-reservation-listing  [reservationStatusSelectedItem]="currentReservationStatus" ></app-charter-reservation-listing>
-        </div>
-        <div *ngIf="activeTab == 2">
-          <app-event-reservation-listing></app-event-reservation-listing>
           </div>
+        </div>
+
+        <div class="col-12">
+          <div class="pt-2" *ngIf="booking?.length > 0">
+
+            <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams"
+              (pageChange)="onPageChange($event)" (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
 
 
-
-
-
+          </div>
+        </div>
       </div>
+      <div *ngIf="booking?.length == 0">
+        <app-not-found-component></app-not-found-component>
+      </div>
+    </div>
+      <div *ngIf="selectedServiceType==bookedServicesTypes.charter">
+      <div class="col-12">
+        <div class="custom-card req-user-card" *ngFor="let item of userCharters">
+          <div [routerLink]="['/boat-listing/charter-reservation-detail',item.charterId]">
+            <div class="image-with-text custom-flex-between align-items-start">
+              <div class="image-with-text-inner">
+                <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
+
+                  <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+                </div>
+                <div class="user-details">
+                  <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
+                  <ngb-rating [rate]="0"></ngb-rating>
+                  <p class="small-text grey ">{{'DepartureFrom'| localization}} {{item?.charterDetail?.departingFrom}}</p>
+                  <p class="small-text grey ">{{'Destination'| localization}}  {{item?.charterDetail?.destination}}</p>
+                  <p class="small-text grey ">{{'Guests'| localization}} {{item.noOfAdults + item.noOfChildrens}}</p>
+                </div>
+              </div>
+              <div class="right-content custom-flex flex-column align-items-end">
+                <p class="small-text grey">{{item?.charterDetail?.departureFromDate | date}} - {{item?.charterDetail?.departureToDate | date}}</p>
+                <div class="custom-flex mt-4 mr-3">
+                  <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
+                      ''}}</strong></span>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div *ngIf="userCharters?.length == 0">
+        <app-not-found-component></app-not-found-component>
+    </div>
+    <div class="col-12 pt-2" *ngIf="userCharters?.length > 0">
+        <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
+    </div>
+      </div>
+      <div *ngIf="selectedServiceType==bookedServicesTypes.event">
+        <div class="col-12">
+          <div class="custom-card req-user-card" *ngFor="let item of userEvents">
+            <div [routerLink]="['/boat-listing/event-reservation-detail',item.eventId]">
+              <div class="image-with-text custom-flex-between align-items-start">
+                <div class="image-with-text-inner">
+                  <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
+
+                    <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+                  </div>
+                  <div class="user-details">
+                    <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
+                    <ngb-rating [rate]="0"></ngb-rating>
+                    <p class="small-text grey ">{{"EventTitle" | localization}} {{item?.eventDetail?.title}}</p>
+                    <p class="small-text grey ">{{"EventLocation" | localization}} {{item?.eventDetail?.location}}</p>
+                    <p class="small-text grey ">{{"Guests" | localization}} {{item?.noOfGuests}}</p>
+                  </div>
+                </div>
+                <div class="right-content custom-flex flex-column align-items-end">
+                  <p class="small-text grey">{{item?.eventDetail?.startDateTime | date}} - {{item?.eventDetail?.startDateTime | date}}</p>
+                  <div class="custom-flex mt-4 mr-3">
+                    <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
+                        ''}}</strong></span>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div *ngIf="userEvents?.length == 0">
+          <app-not-found-component></app-not-found-component>
+      </div>
+      <div class="col-12 pt-2" *ngIf="userEvents?.length > 0">
+          <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+          (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
+      </div>
+      </div>
+
     </div>
   </div>
 

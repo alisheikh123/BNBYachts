@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { BookingResponseFilter, BookingStatus, BookingType } from 'src/app/shared/enums/booking.constants';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { Output, EventEmitter } from '@angular/core';
+import { Output } from '@angular/core';
 
 @Component({
   selector: 'app-booking-filter',
@@ -30,14 +30,18 @@ export class BookingFilterComponent implements OnInit {
    activeTab = 0;
    RESERVATION_STATUS = BookingType;
   selectedReservationStatus:any = BookingType.Boatels;
+  selectedServiceType: number = 0;
+  selectedReservationsStatus:number = BookingStatus.ChooseFilter;
   @Output() reservationStatus = new EventEmitter<number>();
   @Output() reservationTimeStatus = new EventEmitter<number>();
+  @Output() bookingType = new EventEmitter<number>();
    constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
   }
 
   ngOnInit(): void {
   }
   selectReservationStatus(value: number) {
+    this.selectedReservationsStatus = value;
     this.reservationStatus.emit(value);
   }
   selectReservationTimeStatus(value: number) {
@@ -100,6 +104,10 @@ export class BookingFilterComponent implements OnInit {
     this.selectedMonth =  moment(data?.value).format("MM");
     // this.getReservations();
     //(this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.getReservations() : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.getReservations(this.BOOKING_FILTER.Past) : this.getReservations(this.BOOKING_FILTER.All);
+  }
+  filterServiceType(serviceType: number) {
+    this.selectedServiceType = serviceType;
+    this.bookingType.emit(serviceType);
   }
 
 }

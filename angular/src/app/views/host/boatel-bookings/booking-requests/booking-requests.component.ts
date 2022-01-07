@@ -58,7 +58,7 @@ export class BookingRequestsComponent implements OnInit {
         this.boatelBookings.forEach((element: any) => {
           this.boatService.charterDetailsById(element.charterId).subscribe((charter: any) => {
             element.boatDetail = charter?.charterDetails?.boat;
-            element.charter =charter?.charterDetails; 
+            element.charter =charter?.charterDetails;
           });
         });
       }
@@ -105,6 +105,7 @@ export class BookingRequestsComponent implements OnInit {
     });
   }
   applyDateFilter(data:any) {
+    debugger;
     this.selectedYear = moment(data?.value).format("YYYY");
     this.selectedMonth =  moment(data?.value).format("MM");
     this.getReservations();

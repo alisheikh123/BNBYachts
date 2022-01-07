@@ -73,5 +73,28 @@
   "Cancel":"Cancel",
   "StartDate":"Start Date",
   "EndDate":"End Date",
-  "AmountPerPerson":"Amount Per Person"
+  "AmountPerPerson":"Amount Per Person",
+  "CharterReservationDetails":"Charter Reservation Details",
+  "Description":"Description",
+  "BoatName:":"Boat Name",
+  "DepartureFrom:":"Departure From:",
+  "DepartureTo:":"Departure To:",
+  "NoofGuest":"No of Guest:",
+  "DepartureFrom":"Departure From :",
+  "CheckInTime":"Check In Time:",
+  "Destination":"Destination :",
+  "CheckOutTime":"Check Out Time:",
+  "Bedroom":"Bedroom",
+  "Bathroom":"Bathroom:",
+  "PriceDetails":"Price Details",
+  "EntireBoatCharges":"Entire Boat Charges",
+  "ServiceFee":"Service Fee",
+  "Tax":"Tax",
+  "Total(USD)":"Total(USD)",
+  "DeductedAmount(USD)":"Deducted Amount(USD)",
+  "RefundableAmount(USD)":"Refundable Amount(USD)",
+  "more":"more",
+  "EventReservationDetails":"Event Reservation Details"
+
+
 }
