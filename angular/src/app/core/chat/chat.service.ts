@@ -8,9 +8,7 @@ export class ChatService {
   constructor(private http: HttpClient) { }
 
   broadcastMessage(msgDto: any) {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('X-Skip-Loader-Interceptor', 'true');
-    return this.http.post(this.apiURl + '/send-message', msgDto, { headers: headers });
+    return this.http.post(this.apiURl + '/quote', msgDto);
   }
   getUserChat(userId: string) {
     return this.http.get<any>(this.apiURl + '/user-chats/' + userId)
