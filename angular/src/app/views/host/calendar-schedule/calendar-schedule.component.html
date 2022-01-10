@@ -1,7 +1,7 @@
 <div class="container">
     <div class="section-padding">
         <div class="row">
-            <div class="custom-select-field">
+            <div class="">
                 <select name="select" id="select" class="custome-select" (change)="getBoatCalendar(boatId,1)"
                 [(ngModel)]="boatId">
                     <option [ngValue]="item.id" *ngFor="let item of boats" >{{item?.name}}</option>
@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <full-calendar style="height:20%" #calendar [options]="calendarOptions" >
+            <full-calendar #calendar [options]="calendarOptions" class="custom-calender" >
             </full-calendar> 
         </div>
     </div>

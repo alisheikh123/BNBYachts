@@ -18,4 +18,9 @@ export class CalendarService {
     return this.http.get(this.apiBoat + '/boat-calendar/'+boatId+'?month='+month).pipe(
       catchError(this.errorService.handleError));;
   }
+
+  getBoatelCalendar(boatId:number) {
+    return this.http.get(this.apiBoat + '/boatel-calendar/'+boatId).pipe(
+      catchError(this.errorService.handleError));;
+  }
 }

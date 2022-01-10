@@ -17,6 +17,7 @@ namespace BnBYachts.Boat.Manager.Calendar
     public class BoatCalendarManager : DomainService, IBoatCalendarManager
     {
         private readonly IRepository<BoatEntity, int> _boatRepository;
+        private readonly IRepository<BoatCalendarEntity, int> _boatelCalendarRepository;
         //Charters
         private readonly IRepository<CharterEntity, int> _charterRepository;
         private readonly IRepository<EventEntity, int> _eventRepository;
@@ -24,12 +25,14 @@ namespace BnBYachts.Boat.Manager.Calendar
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
 
         public BoatCalendarManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository,
-            IRepository<EventEntity, int> eventRepository, IObjectMapper<BoatDomainModule> objectMapper)
+            IRepository<EventEntity, int> eventRepository, IObjectMapper<BoatDomainModule> objectMapper,
+            IRepository<BoatCalendarEntity, int> boatelCalendarRepository)
         {
             _boatRepository = boatRepository;
             _charterRepository = charterRepository;
             _eventRepository= eventRepository;  
             _objectMapper = objectMapper;
+            _boatelCalendarRepository = boatelCalendarRepository;
         }
         public async Task<EntityResponseModel> GetBoatCalendar(Guid? hostId, int month, int boatId)
         {

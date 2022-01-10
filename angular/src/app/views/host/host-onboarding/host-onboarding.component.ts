@@ -33,6 +33,7 @@ export class HostOnboardingComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl(),
   });
+  minDate = new Date();
   isAgree: boolean = false;
   ///
   boatCalendar = {

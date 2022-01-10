@@ -5,26 +5,76 @@
   color: black;
 }
 
-.fc .fc-col-header-cell-cushion {
-  display: inline-block;
-  padding: 2px 4px;
-  color: blue;
-}
 
-.fc .fc-theme-standard td, .fc-theme-standard th {
+// ::ng-deep .fc-theme-standard td{
+//   border: none !important;
+// }
+
+// ::ng-deep .fc-theme-standard td{
+//   // border: none !important;
+//   padding: 15px !important;
+// }
+// ::ng-deep .fc-daygrid-day-frame{
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+//   margin: 5px;
+// }
+// ::ng-deep .fc-theme-standard td{
+//   padding: 15px !important;
+//   border: 1px solid black !important;
+// }
+::ng-deep .fc-theme-standard td a{
+  color: #777777 !important;
+}
+::ng-deep .fc-theme-standard th{
   border: none !important;
+  color: black !important;
+  text-align: left !important;
+  padding: 0 !important;
 }
-.fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number {
-  padding: 6px;
-  margin: 2px;
-  min-width:19px;
-  text-align: center;
+::ng-deep .fc-theme-standard th a{
+  // border: none !important;
+  color: black !important;
+  font-size: 12px;
+  font-weight: bold;
 
 }
 
-.fc-week .fc-day-top:hover .fc-day-number{
-  background-color: #ddd;
-  border-radius: 50% ;
-  color: #FFFFFF ;
-  transition: background-color 0.2s ;
+::ng-deep table {
+  border-spacing: 10px !important;
+  border: none !important;
+border-collapse: separate !important;
 }
+::ng-deep .fc-scrollgrid-section > td{
+  border: none !important;
+  padding: 0 !important;
+}
+::ng-deep .fc-scrollgrid-sync-table{
+  border-spacing: 10px !important;
+border-collapse: separate !important;
+}
+::ng-deep .fc-scrollgrid-sync-table td{
+  border-spacing: 10px !important;
+  border:1px solid  #F1F1F1 !important;
+  border-collapse: separate !important;
+  border-radius: 6px !important; 
+}
+::ng-deep .fc-scroller{
+  overflow: hidden !important;
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{
+  min-height: 0 !important;
+}
+::ng-deep .fc-daygrid-day-bottom:before{
+display: block !important;
+}
+::ng-deep .fc-daygrid-event-harness:before{
+  display: inherit !important;
+  content: inherit !important;
+  }
+  ::ng-deep .fc-toolbar-title{
+    font-size: 16px !important;
+  }
+// ::ng-deep .fc-daygrid-day-events{
+//   display: none !important;
+// }

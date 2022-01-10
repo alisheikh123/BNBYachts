@@ -80,6 +80,8 @@ namespace BnBYachts.Boat
             opt.MapFrom(source => (source.EndDateTime))).
             ForMember(x=>x.Name,opt=>opt.MapFrom(source=>(source.Title)))
             .ForMember(x => x.ServiceType, opt => opt.MapFrom(source => (ServiceType.Event)));
+            CreateMap<BoatCalendarEntity, CalendarTransferable>().ForMember(x => x.StartDate, opt => opt.MapFrom(source => (source.FromDate)))
+                .ForMember(x => x.EndDate, opt => opt.MapFrom(source => (source.ToDate)));
         }
     }
 }

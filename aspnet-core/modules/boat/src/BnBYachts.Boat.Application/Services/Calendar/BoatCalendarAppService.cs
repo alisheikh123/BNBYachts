@@ -10,7 +10,7 @@ using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Boat.Services.Calendar
 {
-    public class BoatCalendarAppService:ApplicationService
+    public class BoatCalendarAppService : ApplicationService
     {
         private readonly IBoatCalendarManager _manager;
         public BoatCalendarAppService(IBoatCalendarManager manager)
@@ -19,5 +19,6 @@ namespace BnBYachts.Boat.Services.Calendar
         }
         public async Task<EntityResponseModel> GetBoatCalendar(int boatId, int month)
         => await _manager.GetBoatCalendar(CurrentUser.Id, month, boatId).ConfigureAwait(false);
+
     }
 }

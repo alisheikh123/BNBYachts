@@ -106,14 +106,16 @@
                           <div class="col-md-3 py-2">
                             <div class="custom-select-field">
                                 <label> {{'DepartureDate'| localization}}</label>
-                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate" name="datetimepicker"  placeholder='Select Departure From' ></ejs-datetimepicker>
+                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate"
+                                [min]="minDate" name="datetimepicker"  placeholder='Select Departure From' ></ejs-datetimepicker>
 
                               </div>
                           </div>
                           <div class="col-md-3 py-2">
                             <div class="custom-select-field">
                                 <label> {{'DepartureTo'| localization}}</label>
-                                <ejs-datetimepicker placeholder='Select Departure From' formControlName="departureToDate"></ejs-datetimepicker>
+                                <ejs-datetimepicker placeholder='Select Departure From' 
+                                formControlName="departureToDate" [min]="minDate"></ejs-datetimepicker>
 
                               </div>
                           </div>

@@ -26,6 +26,8 @@ export class EventCreationComponent implements OnInit {
   isAgree: boolean = false;
   boatExistingEventDates :any;
   @ViewChild('createEventSuccessModal', { static: true }) templateRef: any;
+  minDate = new Date(); 
+
 
   ngOnInit(): void {
     this.buildFormConfiguration();

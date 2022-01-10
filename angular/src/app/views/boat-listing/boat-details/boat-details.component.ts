@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -9,6 +9,7 @@ import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-d
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { UserDefaults } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
+import { CalendarService } from '../../../core/calendar/calendar.service';
 import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-logged-in.component';
 
 @Component({
@@ -19,7 +20,11 @@ import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-lo
 export class BoatDetailsComponent implements OnInit {
   bookingId: any;
 
-  constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute,private authService:AuthService,private modal:NgbModal) {
+  constructor(config: NgbRatingConfig, private toastr: ToastrService,
+     private yachtSearchService: YachtSearchService, private router: Router,
+      private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
+       private activatedRoute: ActivatedRoute,private authService:AuthService,private modal:NgbModal
+       ,private calendarService:CalendarService) {
     config.max = 5;
     config.readonly = true;
   }
@@ -30,6 +35,8 @@ export class BoatDetailsComponent implements OnInit {
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
 
   guidId!: Guid;
+  minDate:any;
+  maxDate:any;
   boatFilterDetails = {
     checkinDate: new Date(),
     checkoutDate: new Date(),
@@ -40,7 +47,7 @@ export class BoatDetailsComponent implements OnInit {
     adults: 0,
     childrens: 0
   }
-  minDate = {year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate()};
+
   boatHost: any;
   showMore: boolean = false;
   isSubmitted: boolean = false;
@@ -57,8 +64,9 @@ export class BoatDetailsComponent implements OnInit {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
     if (this.boatFilterDetails.checkinDate == null && this.boatFilterDetails.checkoutDate == null) {
-      this.boatFilterDetails.checkinDate = new Date();
-      this.boatFilterDetails.checkoutDate = new Date();
+      debugger;
+      this.boatFilterDetails.checkinDate = this.minDate;//new Date();
+      this.boatFilterDetails.checkoutDate = this.maxDate;//new Date();
       this.boatFilterDetails.adults = 1;
     }
   }
@@ -77,6 +85,11 @@ export class BoatDetailsComponent implements OnInit {
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
+      let findCalendar = res?.boatCalendars.find((res:any)=>res.isAvailable == true);
+      this.boatFilterDetails.checkinDate =new Date(findCalendar.fromDate);
+      this.boatFilterDetails.checkoutDate =new Date(findCalendar.toDate);
+      this.minDate =  {year: new Date(findCalendar.fromDate).getFullYear(), month: new Date(findCalendar.fromDate).getMonth()+1, day: new Date(findCalendar.fromDate).getDate()};
+      this.maxDate =  {year: new Date(findCalendar.toDate).getFullYear(), month: new Date(findCalendar.toDate).getMonth()+1, day: new Date(findCalendar.toDate).getDate()};
       this.getHostDetails(this.boatDetails?.creatorId);
     })
   }

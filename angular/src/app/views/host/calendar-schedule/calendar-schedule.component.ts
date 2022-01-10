@@ -17,7 +17,7 @@ import { BoatServiceType } from 'src/app/shared/enums/boat-service-type';
 export class CalendarScheduleComponent implements OnInit {
 
   calendarOptions: CalendarOptions = {
-    themeSystem: 'journal',
+    themeSystem: 'bootstrap',
     initialView: 'dayGridMonth',
     //navLinkDayClick: this.handleDateClick.bind(this),
     events: [],
@@ -33,30 +33,6 @@ export class CalendarScheduleComponent implements OnInit {
     //   }
     // }
   };
-  rates = [{
-    date: '2021-10-04',
-    rate: 30
-  },
-  {
-    date: '2021-10-05',
-    rate: 30
-  }
-    ,
-  {
-    date: '2021-10-06',
-    rate: 30
-  }, {
-    date: '2021-10-07',
-    rate: 30
-  }
-    , {
-    date: '2021-10-08',
-    rate: 100
-  },
-  {
-    date: '2021-10-09',
-    rate: 200
-  }];
   boatCalendar: any;
   boats: any;
   boatId:number;
@@ -66,15 +42,6 @@ export class CalendarScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBoats();
-  }
-  handleDayRender(arg: any) {
-    let date = moment(arg.date).format("YYYY-MM-DD");
-    let dateRate = this.rates.find(res => res.date == date);
-    let elem = document.createElement('div');
-    elem.className = "d-flex justify-content-between pb-3";
-    elem.innerHTML = '<div><span class=badge badge-danger>' + (dateRate ? '$' + dateRate?.rate : '') + '</span></div><a class=pr-1>' + arg.dayNumberText + '</a>';
-    let arrayOfDomNodes = [elem]
-    return { domNodes: arrayOfDomNodes }
   }
 
   handleDateClick(arg: any) {
@@ -88,6 +55,7 @@ export class CalendarScheduleComponent implements OnInit {
     });
   }
   getBoatCalendar(boatId: number, month: number) {
+    this.boatId = boatId;
     this.calendarService.getBoatCalendar(boatId, month).subscribe((res:any) => {
       this.boatCalendar = [ ...res?.data.charters, ...res?.data.events];
       let event:any = [];
