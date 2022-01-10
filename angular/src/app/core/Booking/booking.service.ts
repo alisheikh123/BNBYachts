@@ -63,7 +63,7 @@ export class BookingService {
   }
 
   getRefundable(bookingId: number, refundAmount: number) {
-    return this.http.get(this.paymentApiUrl + '/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
+    return this.http.get(this.paymentApiUrl + '/api/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
   }
 
   addReview(review:any) {

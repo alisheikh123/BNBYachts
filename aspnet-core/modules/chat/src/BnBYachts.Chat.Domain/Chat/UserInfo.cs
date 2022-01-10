@@ -13,5 +13,7 @@ namespace BnBYachts.Chat.Chat
         public virtual int? UnReadChatsCount { get; set; }
         [NotMapped]
         public bool IsArchivedUser { get; set; }
+        [NotMapped]
+        public bool IsBlocked { get; set; }
     }
 }

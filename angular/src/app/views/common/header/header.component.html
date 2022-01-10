@@ -56,41 +56,56 @@
                     </div>
                     <div class="center-content">
                         <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
-                            <a [routerLink]="['host-dashboard']" class="underline-link-blk active">
-                                <span>
+                            <a [routerLink]="['host-dashboard']" class="underline-link-blk active">                                
+                                <span class="logo-wrapper">
+                                    <a class="logo-btn"><img src="../../../../assets/images/dashboard-icon.svg"
+                                        alt=""></a>
+                                    </span>
                                     Dashboard
-                                </span>
                             </a>
                             <a class="underline-link-blk">
-                                <span>
-
+                                <span class="logo-wrapper">
+                                    <a class="logo-btn"><img src="../../../../assets/images/provider-icon.svg"
+                                        alt=""></a>
+                                    </span>
                                     Service Provider
-                                </span>
                             </a>
                             <a [routerLink]="['/chat']" class="underline-link-blk">
-                                <span>
+                                <span class="logo-wrapper">
+                                    <a class="logo-btn"><img src="../../../../assets/images/inbox-icon.svg"
+                                        alt=""></a>
+                                    </span>
                                     Inbox
-                                </span>
                                 <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
                             </a>                                
                             <a href="" class="underline-link-blk">
-                                <span>
+                                <span class="logo-wrapper">
+                                    <a class="logo-btn"><img src="../../../../assets/images/calendar-icon.svg"
+                                        alt=""></a>
+                                    </span>
                                     Calender
-                                </span>
                             </a>
                             <a [routerLink]="['/host/my-bookings']" class="underline-link-blk">
-                                <span>
+                                <span class="logo-wrapper">
+                                    <a class="logo-btn"><img src="../../../../assets/images/reservation-icon.svg"
+                                        alt=""></a>
+                                    </span>
                                     Reservation
-                                </span>
                             </a>
 
                             <a [routerLink]="['/host/host-boat-listing']" class="underline-link-blk">
-                                <span>
+                                <span class="logo-wrapper">
+                                    <a class="logo-btn"><img src="../../../../assets/images/listing-icon.svg"
+                                        alt=""></a>
+                                    </span>
                                     Listing
-                                </span>
                             </a>
-                            <div class="dropdown custom-dropdown borderless-dropdown">
+                            <div class="dropdown custom-dropdown borderless-dropdown">                                
                                 <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                                      
+                                    <span class="logo-wrapper">
+                                        <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
+                                            alt=""></a>
+                                    </span>
                                     Create
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

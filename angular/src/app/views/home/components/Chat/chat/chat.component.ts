@@ -1,16 +1,18 @@
 import { ThisReceiver } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
+import { find } from 'rxjs/operators';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
 import { environment } from 'src/environments/environment';
 import { ChatUsersComponent } from '../chat-users/chat-users.component';
-import { IMessage } from './interfaces/IMessage';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -18,9 +20,10 @@ import { IMessage } from './interfaces/IMessage';
 })
 export class ChatComponent implements OnInit {
   private _hubConnection!: HubConnection;
-  private readonly socketUrl = environment.CHAT_API_URL + '/chatsocket';
+  private readonly socketUrl = environment.CHAT_API_URL + '/signalr-hubs/chat';
+
   userInfo: any;
-  userMessages: any;
+  userMessages: any = [];
   isChatLoaded: boolean = false;
   recieverInfo:any;
   chat = {
@@ -32,16 +35,20 @@ export class ChatComponent implements OnInit {
     blockedUser: false,
     isBlockedByMe: false
   };
+  noChatsAvailble = false;
   @ViewChild('chatScrollContainer') private chatScrollContainer: ElementRef;
+  @ViewChild('noChatModal', { static: true }) noChatModalTemplate: any;
 
   @ViewChild(ChatUsersComponent) chatUsersComponent: ChatUsersComponent;
 
   constructor(
     private chatService: ChatService,
     private authService: AuthService,
+    private router:Router,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
-    public app:AppComponent
+    public app:AppComponent,
+    public modal:NgbModal
   ) {
     this.chat.receiverId = this.activatedRoute.snapshot.params['id'];
     this.chat.senderId = localStorage.getItem('userId')?.toString() || "";
@@ -54,6 +61,7 @@ export class ChatComponent implements OnInit {
         setTimeout(() => { this.scrollToBottom(); }, 1);
       })
     }
+
     this.createConnection();
     this.startConnection();
     //this.chat.receiverId = this.chatUsersComponent.chatUsers?.length > 0 ? this.chatUsersComponent.chatUsers;
@@ -81,13 +89,12 @@ export class ChatComponent implements OnInit {
 
   send() {
     if (this.chat) {
-      this.chatService
-        .broadcastMessage(this.chat)
-        .subscribe((data: any) => {
-          this.chat.message = '';
-          this.userMessages.push(data);
-          setTimeout(() => { this.scrollToBottom(); }, 1);
-        });
+      this._hubConnection.invoke('SendMessage', this.chat).then(res => {
+        let chatResponse = JSON.parse(JSON.stringify(this.chat))
+        this.chat.message = '';
+        this.userMessages.push(chatResponse);
+        setTimeout(() => { this.scrollToBottom(); }, 1);
+      });
     }
   }
   ////Signal R methods for creating connection...
@@ -124,14 +131,32 @@ export class ChatComponent implements OnInit {
     this.chatService.changeStatus(this.chat.receiverId, !this.chat.blockedUser).subscribe(res => {
       this.chat.blockedUser = !this.chat.blockedUser;
       this.chat.isBlockedByMe = this.chat.blockedUser;
+      let index = this.chatUsersComponent.allChatUsers.findIndex(res=>res.userId == this.chat.receiverId);
+      this.chatUsersComponent.allChatUsers[index].isBlocked =  this.chat.blockedUser;
       this.toastr.success("User blocked successfully", "Blocked");
     })
   }
-  archiveChat(isArchive:boolean) {
-    this.chatService.archiveChat(this.chat.receiverId,isArchive).subscribe(res => {
-      this.userMessages= this.userMessages.filter((res:any)=>res.receiverId != this.chat.receiverId && res.senderId != this.chat.senderId);
+  archiveChat(recieverInfo:any) {
+    this.chatService.archiveChat(this.chat.receiverId,!recieverInfo?.isArchivedUser).subscribe(res => {
+      recieverInfo.isArchivedUser = !recieverInfo.isArchivedUser; 
+      let index = this.chatUsersComponent.allChatUsers.findIndex(res=>res.userId == this.chat.receiverId);
+      this.chatUsersComponent.allChatUsers[index].isArchivedUser =  recieverInfo?.isArchivedUser;
+      // this.userMessages= this.userMessages.filter((res:any)=>res.receiverId != this.chat.receiverId && res.senderId != this.chat.senderId);
       this.toastr.success("Chat Archived successfully", "Archived");
     })
   }
+  findHost(){
+    this.router.navigate(['']);
+    this.modal.dismissAll();
+  }
+
+  noUserAvailable(available:boolean) {
+    if(available!){
+      this.noChatsAvailble = true;
+      this.modal.open(this.noChatModalTemplate, { centered: true });      
+    }
+      this.noChatsAvailble = false;
+  }
+
 }
 

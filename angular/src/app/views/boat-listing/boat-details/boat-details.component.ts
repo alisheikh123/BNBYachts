@@ -45,6 +45,7 @@ export class BoatDetailsComponent implements OnInit {
   showMore: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
+  boatelCapcityValidation:any;
   @ViewChild('popOver') public popover: NgbPopover;
 
   ngOnInit(): void {
@@ -139,6 +140,7 @@ export class BoatDetailsComponent implements OnInit {
     }
     else{
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
+      
     }
   }
   setMaxDate(item:any){
@@ -157,6 +159,6 @@ export class BoatDetailsComponent implements OnInit {
   updateGuests() {
     this.boatFilterDetails.adults = this.popOverFilterData.adults;
     this.boatFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.popover.close();
+    this.boatelCapcityValidation = this.boatFilterDetails.adults + this.boatFilterDetails.childrens>this.boatDetails?.boatelCapacity?"Please Enter Valid Guests":this.popover.close();
   }
 }

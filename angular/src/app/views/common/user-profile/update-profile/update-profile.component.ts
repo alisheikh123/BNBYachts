@@ -20,7 +20,8 @@ export class UpdateProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private authService : AuthService  ,
-    private toasterService : ToastrService
+    private toasterService : ToastrService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -72,8 +73,9 @@ export class UpdateProfileComponent implements OnInit {
       var user = this.profileForm.value;
       this.authService.updateUserProfile(user).subscribe((result: any) => {
         if (result == true) {
-          this.toasterService.warning('Profile updated successfuly');
+          this.toasterService.success('Profile updated successfuly');
           this.getUserData();
+          this.router.navigateByUrl('/');
         } else {
           this.hasError = true;
           this.toasterService.warning('Sorry');

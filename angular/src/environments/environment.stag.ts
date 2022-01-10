@@ -18,7 +18,7 @@ export const environment = {
       redirectUrl: "http://52.207.14.110:8080",
       postLogoutRedirectUri: "http://52.207.14.110:8080",
       clientId: "BnBYachts_App",
-      scope: "openid Core Booking Boat Payments",
+      scope: "openid Core Booking Boat Payments Chat",
       responseType: 'code'
     }  
 };
