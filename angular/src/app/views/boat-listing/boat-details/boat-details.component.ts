@@ -140,6 +140,7 @@ export class BoatDetailsComponent implements OnInit {
     }
     else{
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
+      
     }
   }
   setMaxDate(item:any){

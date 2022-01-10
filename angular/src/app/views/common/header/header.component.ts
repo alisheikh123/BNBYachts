@@ -143,7 +143,7 @@ export class HeaderComponent implements OnInit {
       this.modal.open(this.templateRef, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'custom-modal custom-small-modal' });
     }
     else{
-      let modalRef = this.modal.open(SignupModalComponent,{ windowClass: 'custom-modal custom-large-modal'});
+      let modalRef = this.modal.open(SignupModalComponent,{ windowClass: 'custom-modal custom-large-modal', centered: true});
     }
   }
 
