@@ -1,47 +1,33 @@
 <div class="main-wrapper">
     <div class="reservation-page section-padding">
+      <!--  Boatel  -->
         <div class="container">
             <div class="row">
-             
+
             <div class="btn-back">
-              <a href="javascript:void(0)"> <span class="material-icons arrow_back_ios">
-                arrow_back_ios
-                  </span></a>
-              <h2 class="bold">Location</h2>
+              <a (click)="goBack()" style="border: 1px solid #122ba8;">
+                <i class="fas fa-chevron-left" style="color:#122ba8"></i>
+              </a>
+              <h2 class="bold">{{'BoatelLocation' | localization }}</h2>
           </div>
                 <div class="col-sm-6 ">
                     <div class="custom-select-field py-2">
-                        <label>Listing</label>
+                        <label> {{'Listing' | localization }}</label>
                         <select name="select" id="select">
                           <option value="" selected disabled>{{boatDetails?.name}}</option>
                         </select>
                       </div>
-                    <div class="custom-input-field">
-                        <input type="text" class="custom-input" placeholder="Current Location" value="{{boatDetails?.location}}" disabled />
-                      </div>
                       <div class="custom-input-field">
-                          <label>Next Location</label>
-                          <input type="text"
-                          ngx-google-places-autocomplete
-                          (onAddressChange)="handleAddressChange($event)"
-                          [(ngModel)]="boatLocation.location" class="custom-input"
-                          placeholder="Search Location">
-                      </div>
-                      <!-- <div class="custom-input-field">
-                      <input type="text" class="custom-input" placeholder="City">
+                        <label> {{'CurrentLocation' | localization }}</label>
+                        <input type="text"
+                        ngx-google-places-autocomplete
+                        (onAddressChange)="handleAddressChange($event)"
+                        [(ngModel)]="boatLocation.location" value="{{boatDetails?.location}}" class="custom-input"
+                        placeholder="Search Location">
                     </div>
-                    <div class="custom-input-field">
-                        <input type="text" class="custom-input" placeholder="State">
-                      </div>
-                      <div class="custom-input-field">
-                        <input type="text" class="custom-input" placeholder="Zip code">
-                      </div>
-                      <div class="custom-input-field">
-                        <input type="text" class="custom-input" placeholder="Country">
-                      </div> -->
                       <div class="custom-flex-end py-2">
-                        <button class="custom-btn grey">Cancel</button>
-                          <button class="custom-btn blue ms-2" (click)="updateLocation()">Save</button>
+                        <button class="custom-btn grey" (click)="goBack()">{{'Cancel' | localization }}</button>
+                          <button class="custom-btn blue ms-2" (click)="updateLocation()">{{'Save' | localization }}</button>
                       </div>
                 </div>
                 <div class="col-sm-6 py-2">
@@ -49,11 +35,13 @@
                         <google-map height="560px" width="600px" [options]="mapOptions" [center]="center" [zoom]="zoom">
                             <map-marker  [position]="locationMarker?.position"
                               [label]="locationMarker?.label" [title]="locationMarker?.title" [options]="locationMarker?.options">
-                            </map-marker> -->
+                            </map-marker>
                           </google-map>
                         </div>
                 </div>
             </div>
         </div>
+
+
     </div>
     </div>

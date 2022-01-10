@@ -18,5 +18,6 @@ namespace BnBYachts.Boat.Boat.Interfaces
         Task<EntityResponseModel> GetEventById(int eventId);
         Task<bool> UpdateEvent(EventRequestable updatedEvent, Guid? userId);
         Task<bool> UpdateEventStatus(long eventId);
+        Task<bool> UpdateEventLocation(EventLocationRequestable eventDetails, Guid? userId);
     }
 }

@@ -78,5 +78,19 @@ namespace BnBYachts.Boat.Manager.Charter
             return true;
 
         }
+        public async Task<bool> UpdateCharterLocation(CharterLocationRequestable charterDetails, Guid? userId)
+        {
+            var charter = await _charterRepository.FindAsync(res => res.Id == charterDetails.CharterId).ConfigureAwait(false);
+            charter.DepartingFrom = charterDetails.DepartureFromLocation;
+            charter.Destination = charterDetails.DestinationLocation;
+            charter.DepartingLatitude = charterDetails.DepartureLatitude;
+            charter.DepartingLongitude = charterDetails.DepartureLongitude;
+            charter.DestinationLatitude = charterDetails.DestinationLatitude;
+            charter.DestinationLatitude = charterDetails.DestinationLongitude;
+            charter.LastModifierId = userId;
+            charter.LastModificationTime = DateTime.Now;
+            return true;
+        }
+
     }
 }

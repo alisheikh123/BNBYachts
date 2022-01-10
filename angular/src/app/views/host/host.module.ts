@@ -29,6 +29,8 @@ import { RejectionModalComponent } from './boatel-bookings/booking-requests/reje
 import { PaginationModule } from '../common/pagination/pagination.module';
 import { CharterEditComponent } from './charter-edit/charter-edit.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
+import { CharterLocationSettingComponent } from './charter-location-setting/charter-location-setting.component';
+import { EventLocationSettingComponent } from './event-location-setting/event-location-setting.component';
 
 
 
@@ -52,7 +54,9 @@ BoatLoationSettingsComponent,
 CharterCreationComponentComponent,
 RejectionModalComponent,
 CharterEditComponent,
-EventEditComponent
+EventEditComponent,
+CharterLocationSettingComponent,
+EventLocationSettingComponent
   ],
   imports: [
     HostRoutingModule,

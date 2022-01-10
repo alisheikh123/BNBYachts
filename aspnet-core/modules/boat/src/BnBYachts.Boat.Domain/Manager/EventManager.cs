@@ -92,5 +92,15 @@ namespace BnBYachts.Boat.Manager
             return true;
 
         }
+        public async Task<bool> UpdateEventLocation(EventLocationRequestable eventDetails, Guid? userId)
+        {
+            var events = await _eventRepository.FindAsync(res => res.Id == eventDetails.EventId).ConfigureAwait(false);
+            events.Location = eventDetails.Location;
+            events.LocationLat = eventDetails.Latitude;
+            events.LocationLong = eventDetails.Longitude;
+            events.LastModifierId = userId;
+            events.LastModificationTime = DateTime.Now;
+            return true;
+        }
     }
 }

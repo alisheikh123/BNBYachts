@@ -21,7 +21,6 @@ export class CharterDetailsComponent implements OnInit {
   charterId: number;
   charterDetails: any;
   charterSchedule: any;
-  //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   @ViewChild('allFeaturesModal', { static: true }) templateRef: any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
@@ -53,7 +52,6 @@ export class CharterDetailsComponent implements OnInit {
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
-      console.log(this.charterDetails);
       this.charterSchedule = res.charterSchedule;
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
