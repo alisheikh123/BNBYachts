@@ -79,6 +79,7 @@
   "NextLocation":"Next Location",
   "BoatelLocation":"Boatel Location",
   "CharterLocation":"Charter Location",
-  "CurrentLocation":"Current Location"
+  "CurrentLocation":"Current Location",
+  "DepartureFrom":"Departure From"
 
 }
