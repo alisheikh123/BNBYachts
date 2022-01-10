@@ -27,25 +27,44 @@ export class BookingFilterComponent implements OnInit {
     page: 1,
     pageSize: 5
   };
+  reservationStatusType = {
+    reservationtype:0,
+    reserStatus:0
+  };
+  reservationTime = {
+    reservationtype:0,
+    reserTime:0
+  };
+  durationFilter = {
+    reservationtype:0,
+    year:"",
+    month:""
+  };
    activeTab = 0;
    RESERVATION_STATUS = BookingType;
   selectedReservationStatus:any = BookingType.Boatels;
   selectedServiceType: number = 0;
   selectedReservationsStatus:number = BookingStatus.ChooseFilter;
-  @Output() reservationStatus = new EventEmitter<number>();
-  @Output() reservationTimeStatus = new EventEmitter<number>();
+  @Output() reservationStatus = new EventEmitter<any>();
+  @Output() reservationTimeStatus = new EventEmitter<any>();
   @Output() bookingType = new EventEmitter<number>();
+  @Output() DurationFilter = new EventEmitter<any>();
    constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
   }
 
   ngOnInit(): void {
   }
   selectReservationStatus(value: number) {
-    this.selectedReservationsStatus = value;
-    this.reservationStatus.emit(value);
+    this.selectedStatusFilter = value;
+    this.reservationStatusType.reservationtype = this.selectedServiceType;
+    this.reservationStatusType.reserStatus = value;
+    this.reservationStatus.emit(this.reservationStatusType);
   }
   selectReservationTimeStatus(value: number) {
-    this.reservationTimeStatus.emit(value);
+    this.selectedTabStatus = value;
+    this.reservationTime.reservationtype = this.selectedServiceType;
+    this.reservationTime.reserTime = value;
+    this.reservationTimeStatus.emit(this.reservationTime);
   }
   statusFilter(status: any) {
     this.selectedStatusFilter = status;
@@ -102,12 +121,18 @@ export class BookingFilterComponent implements OnInit {
     let result = stringToSplit.split('-');
     this.selectedYear = moment(data?.value).format("YYYY");
     this.selectedMonth =  moment(data?.value).format("MM");
-    // this.getReservations();
-    //(this.selectedTab == this.BOOKING_FILTER.Upcomings) ? this.getReservations() : (this.selectedTab == this.BOOKING_FILTER.Past) ? this.getReservations(this.BOOKING_FILTER.Past) : this.getReservations(this.BOOKING_FILTER.All);
+    this.durationFilter.month = this.selectedMonth;
+    this.durationFilter.year = this.selectedYear;
+    this.durationFilter.reservationtype = this.selectedServiceType;
+    this.DurationFilter.emit(this.durationFilter);
+
   }
   filterServiceType(serviceType: number) {
     this.selectedServiceType = serviceType;
     this.bookingType.emit(serviceType);
   }
+  getReservations()
+  {
 
+  }
 }

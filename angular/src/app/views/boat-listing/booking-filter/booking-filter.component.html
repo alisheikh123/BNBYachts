@@ -3,49 +3,49 @@
     <div class="dropdown custom-dropdown dropdown-rounded">
       <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <span style="float: left;">
+          <span id="dropdown-align">
               {{selectedServiceType == 0 ? 'Boatels':selectedServiceType == 1? 'Charters':'Events'}}
           </span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li>
-              <a class="dropdown-item" (click)="filterServiceType(0)">Boatels</a>
+              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Boatels)">Boatels</a>
           </li>
           <li>
-              <a class="dropdown-item" (click)="filterServiceType(1)">Charters</a>
+              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Charters)">Charters</a>
           </li>
           <li>
-              <a class="dropdown-item" (click)="filterServiceType(2)">Events</a>
+              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Events)">Events</a>
           </li>
       </ul>
   </div>
    </div>
     <div class="col-3">
-      <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
-        <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton2"
-          data-bs-toggle="dropdown" aria-expanded="false" #selectedItem>
-          {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter ==
-          BOOKING_STATUS.Approved ? 'Approved':
-          selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected':selectedStatusFilter ==
-          BOOKING_STATUS.Cancel ? 'Cancel':selectedStatusFilter ==
-          BOOKING_STATUS.ChooseFilter ? 'Choose Status':'All'}}
-          <i class="fa fa-caret-down"></i>
+      <div class="dropdown custom-dropdown dropdown-rounded">
+        <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <span id="dropdown-align">
+            {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter == BOOKING_STATUS.Approved ? 'Approved'
+            :selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected'
+            :selectedStatusFilter ==BOOKING_STATUS.Cancel ? 'Cancel'
+            :selectedStatusFilter == BOOKING_STATUS.ChooseFilter ? 'All':'Choose Status'}}
+        </span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li (click)="selectReservationStatus(BOOKING_STATUS.ChooseFilter)">
-            <a class="dropdown-item">All</a>
+          <li>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.ChooseFilter)">All</a>
           </li>
-          <li (click)="selectReservationStatus(BOOKING_STATUS.Pending)">
-            <a class="dropdown-item">Pending</a>
+          <li >
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Pending)">Pending</a>
           </li>
-          <li (click)="selectReservationStatus(BOOKING_STATUS.Approved)">
-            <a class="dropdown-item">Approved</a>
+          <li>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Approved)">Approved</a>
           </li>
-          <li (click)="selectReservationStatus(BOOKING_STATUS.Cancel)">
-            <a class="dropdown-item">Cancelled</a>
+          <li>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Cancel)">Cancelled</a>
           </li>
-          <li (click)="selectReservationStatus(BOOKING_STATUS.Rejected)">
-            <a class="dropdown-item">Rejected</a>
+          <li>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Rejected)">Rejected</a>
           </li>
         </ul>
       </div>
@@ -56,9 +56,12 @@
         <div class="dropdown custom-dropdown filters-wrap" ngbDropdown #myFilterDrop="ngbDropdown">
           <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropDownFilter2"
             ngbDropdownToggle  #selectedReservationTimeItem>
-            {{this.selectedTabStatus == BOOKING_FILTER.All ?
-            'All':this.selectedTabStatus == BOOKING_FILTER.Upcomings ? 'Upcomings':this.selectedTabStatus ==
-            BOOKING_FILTER.Past ? 'Past':'Choose Upcoming/Past'}}
+
+            <span id="dropdown-align">
+              {{this.selectedTabStatus == BOOKING_FILTER.All ?
+                'All':this.selectedTabStatus == BOOKING_FILTER.Upcomings ? 'Upcomings':this.selectedTabStatus ==
+                BOOKING_FILTER.Past ? 'Past':'Choose Upcoming/Past'}}
+          </span>
           </button>
           <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropDownFilter2">
             <form>
@@ -66,33 +69,24 @@
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" class="form-check-input" [value]="0" id="allCharter"
-                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.All)">
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.All);myFilterDrop.close()">
                     <label for="allCharter">All</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" class="form-check-input" [value]="1" id="oneSide"
-                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Upcomings)">
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Upcomings);myFilterDrop.close()">
                     <label for="oneSide">Upcomings</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" id="roundTrip" class="form-check-input" [value]="2"
-                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Past)">
+                      [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Past);myFilterDrop.close()">
                     <label for="roundTrip">Past</label>
                   </div>
                 </div>
-              </div>
-              <div>
-                <!-- <a class="custom-btn blue" style="
-                    float: right;
-                    font-size: 12px;
-                    min-width: 76px !important;
-                    cursor: pointer;" (click)="getReservations();myFilterDrop.close()">
-                  Apply
-                </a> -->
               </div>
             </form>
           </div>
@@ -101,7 +95,7 @@
     </div>
 
     <div class="col-3">
-      <div class="" style="float: right;">
+      <div>
         <div class="row">
           <div class="col">
             <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">

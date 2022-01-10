@@ -9,7 +9,7 @@
           aria-selected="false"><strong>Booked Services</strong></button>
       </div>
       <div>
-      <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)"  ></app-booking-filter>
+      <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>
       <!-- (bookingStatusFilter)="selectedbookingStatusFilter($event)" -->
         <div>
 

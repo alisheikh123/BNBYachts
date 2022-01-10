@@ -105,7 +105,6 @@ export class BookingRequestsComponent implements OnInit {
     });
   }
   applyDateFilter(data:any) {
-    debugger;
     this.selectedYear = moment(data?.value).format("YYYY");
     this.selectedMonth =  moment(data?.value).format("MM");
     this.getReservations();

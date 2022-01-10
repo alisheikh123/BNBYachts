@@ -35,11 +35,11 @@ namespace BnBYachts.Booking.Managers
         public async Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetBoatelBookings(BookingResponseFilter filter, BookingType bookingType, Guid? userId, string month, string year, int pageNo, int pageSize)
         {
             var response = new EntityResponseListModel<BoatelBookingTransferableDto>();
-            if (bookingType == BookingType.Boatel || filter == BookingResponseFilter.All)
+            if (filter == BookingResponseFilter.All)
             {
                 var allBooking = _objectMapper.Map<List<BoatelBookingEntity>, List<BoatelBookingTransferableDto>>
                    (await _boatelBookingRepository.GetListAsync(res => res.CreatorId == userId &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.CheckinDate.Month.ToString() == month && res.CheckinDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.CheckinDate.Month == int.Parse(month) && res.CheckinDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<BoatelBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
 
@@ -48,7 +48,7 @@ namespace BnBYachts.Booking.Managers
             {
                 var allBooking = _objectMapper.Map<List<BoatelBookingEntity>, List<BoatelBookingTransferableDto>>(await _boatelBookingRepository.GetListAsync(x => x.CreatorId == userId &&
                x.CheckinDate > DateTime.Today &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.CheckinDate.Month.ToString() == month && x.CheckinDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.CheckinDate.Month == int.Parse(month) && x.CheckinDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<BoatelBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
             }
@@ -56,7 +56,7 @@ namespace BnBYachts.Booking.Managers
             {
                 var allBooking = _objectMapper.Map<List<BoatelBookingEntity>, List<BoatelBookingTransferableDto>>(await _boatelBookingRepository.GetListAsync(x => x.CreatorId == userId &&
                x.CheckinDate < DateTime.Today &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.CheckinDate.Month.ToString() == month && x.CheckinDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.CheckinDate.Month == int.Parse(month) && x.CheckinDate.Year== int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<BoatelBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
             }
@@ -67,7 +67,7 @@ namespace BnBYachts.Booking.Managers
         public async Task<EntityResponseListModel<CharterBookingTransferableDto>> GetCharterBookings(BookingResponseFilter filter, BookingType bookingType, Guid? userId, string month, string year, int pageNo, int pageSize)
         {
             var response = new EntityResponseListModel<CharterBookingTransferableDto>();
-            if (bookingType == BookingType.Charter || filter == BookingResponseFilter.All)
+            if (filter == BookingResponseFilter.All)
             {
                 var allBooking = _objectMapper.Map<List<CharterBookingEntity>, List<CharterBookingTransferableDto>>
                          (await _charterBookingRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false));
@@ -81,7 +81,7 @@ namespace BnBYachts.Booking.Managers
                 var allBooking = _objectMapper.Map<List<CharterBookingEntity>, List<CharterBookingTransferableDto>>
                     (await _charterBookingRepository.GetListAsync(x => x.CreatorId == userId &&
                x.DepartureDate > DateTime.Today &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.DepartureDate.Month.ToString() == month && x.DepartureDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.DepartureDate.Month == int.Parse(month) && x.DepartureDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<CharterBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
             }
@@ -89,7 +89,7 @@ namespace BnBYachts.Booking.Managers
             {
                 var allBooking = _objectMapper.Map<List<CharterBookingEntity>, List<CharterBookingTransferableDto>>(await _charterBookingRepository.GetListAsync(x => x.CreatorId == userId &&
                x.DepartureDate < DateTime.Today &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.DepartureDate.Month.ToString() == month && x.DepartureDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.DepartureDate.Month == int.Parse(month) && x.DepartureDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<CharterBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
             }
@@ -99,11 +99,11 @@ namespace BnBYachts.Booking.Managers
         public async Task<EntityResponseListModel<EventBookingTransferableDto>> GetEventBookings(BookingResponseFilter filter, BookingType bookingType, Guid? userId, string month, string year, int pageNo, int pageSize)
         {
             var response = new EntityResponseListModel<EventBookingTransferableDto>();
-            if (bookingType == BookingType.Event || filter == BookingResponseFilter.All)
+            if (filter == BookingResponseFilter.All)
             {
                 var allBooking = _objectMapper.Map<List<EventBookingEntity>, List<EventBookingTransferableDto>>
                    (await _eventBookingRepository.GetListAsync(res => res.CreatorId == userId &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.EventDate.Month.ToString() == month && res.EventDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.EventDate.Month == int.Parse(month) && res.EventDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<EventBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
 
@@ -113,7 +113,7 @@ namespace BnBYachts.Booking.Managers
                 var allBooking = _objectMapper.Map<List<EventBookingEntity>, List<EventBookingTransferableDto>>
                     (await _eventBookingRepository.GetListAsync(x => x.CreatorId == userId &&
                x.EventDate > DateTime.Today &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.EventDate.Month.ToString() == month && x.EventDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.EventDate.Month == int.Parse(month) && x.EventDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<EventBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
             }
@@ -122,7 +122,7 @@ namespace BnBYachts.Booking.Managers
                 var allBooking = _objectMapper.Map<List<EventBookingEntity>, List<EventBookingTransferableDto>>
                     (await _eventBookingRepository.GetListAsync(x => x.CreatorId == userId &&
                x.EventDate < DateTime.Today &&
-               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.EventDate.Month.ToString() == month && x.EventDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+               (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (x.EventDate.Month == int.Parse(month) && x.EventDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allBooking.Count;
                 response.Data = await PagedList<EventBookingTransferableDto>.CreateAsync(allBooking, pageNo, pageSize).ConfigureAwait(false);
             }

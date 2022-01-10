@@ -70,7 +70,7 @@ namespace BnBYachts.Booking.Managers
                 (await _boatelBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Pending
                 &&
-                (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.CheckinDate.Month.ToString() == month && res.CheckinDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+                (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.CheckinDate.Month == int.Parse(month) && res.CheckinDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allRequests.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allRequests, pageNo, pageSize).ConfigureAwait(false);
             }
@@ -80,7 +80,7 @@ namespace BnBYachts.Booking.Managers
                 (await _charterBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Pending
                 &&
-                (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.DepartureDate.Month.ToString() == month && res.DepartureDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+                (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.DepartureDate.Month == int.Parse(month) && res.DepartureDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allRequests.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allRequests, pageNo, pageSize).ConfigureAwait(false);
             }
@@ -90,7 +90,7 @@ namespace BnBYachts.Booking.Managers
                 (await _eventsBookingRepository.GetListAsync(res => res.HostId == userId.ToString()
                 && res.BookingStatus == BookingStatus.Pending
                 &&
-                (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.EventDate.Month.ToString() == month && res.EventDate.Year.ToString() == year) : (1 == 1))).ConfigureAwait(false));
+                (!string.IsNullOrEmpty(month) && !string.IsNullOrEmpty(year) ? (res.EventDate.Month == int.Parse(month) && res.EventDate.Year == int.Parse(year)) : (1 == 1))).ConfigureAwait(false));
                 response.TotalCount = allRequests.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allRequests, pageNo, pageSize).ConfigureAwait(false);
             }

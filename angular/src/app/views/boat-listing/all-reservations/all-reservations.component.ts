@@ -53,14 +53,13 @@ export class AllReservationsComponent implements OnInit {
   }
   getReservations() {
     if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
-      // get Reservation status like pending,approved
-      this.currentReservationStatus = this.currentReservationStatus==BookingStatus.ChooseFilter?BookingStatus.Pending:this.currentReservationStatus;
+      this.currentReservationStatus = this.currentReservationStatus==BookingStatus.ChooseFilter?BookingStatus.ChooseFilter:this.currentReservationStatus;
       let timeFilter = this.selectedBookingStatus==this.BOOKING_FILTER.ChooseFilter?this.BOOKING_FILTER.All:this.selectedBookingStatus;
       this.service.getBookings(timeFilter, this.selectedServiceType, this.selectedMonth,
         this.selectedYear, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
           this.allBookings = res?.data;
           this.totalRecords = res?.totalCount;
-          this.boatelStatusFilter(timeFilter);
+          this.boatelStatusFilter(this.currentReservationStatus);
         });
     }
     if (this.selectedServiceType == this.bookedServicesTypes.charter) {
@@ -69,17 +68,17 @@ export class AllReservationsComponent implements OnInit {
         this.selectedYear, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
           this.userCharters = res?.data;
           this.totalRecords = res?.totalCount;
-          this.charterStatusFilter(timeFilter);
+          this.charterStatusFilter(this.currentReservationStatus);
         });
+
     }
     if (this.selectedServiceType == this.bookedServicesTypes.event) {
-      debugger;
       let timeFilter = this.selectedBookingStatus==this.BOOKING_FILTER.ChooseFilter?this.BOOKING_FILTER.All:this.selectedBookingStatus;
       this.service.getEventBookings(timeFilter, this.selectedServiceType, this.selectedMonth,
         this.selectedYear, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
           this.userEvents = res?.data;
           this.totalRecords = res?.totalCount;
-          this.eventStatusFilter(timeFilter);
+          this.eventStatusFilter(this.currentReservationStatus);
         });
     }
 
@@ -105,8 +104,8 @@ export class AllReservationsComponent implements OnInit {
     });
   }
   eventStatusFilter(status: number) {
-    this.booking = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.userEvents.filter((res: any) => res.bookingStatus == status) : this.userEvents;
-    this.booking.forEach((elem: any) => {
+    this.userEvents = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.userEvents.filter((res: any) => res.bookingStatus == status) : this.userEvents;
+    this.userEvents.forEach((elem: any) => {
       this.boatService.eventDetailsById(elem.eventId).subscribe((eventdetail: any) => {
         elem.eventDetail = eventdetail?.eventDetails;
         this.boatService.boatDetailsById(elem.eventDetail?.boatId).subscribe((boatdetails:any)=>{
@@ -122,14 +121,7 @@ export class AllReservationsComponent implements OnInit {
     this.selectedMonth = moment(data?.value).format("MM");
 
   }
-  selectedReservationStatus(selectedItem: number) {
-    console.log(selectedItem);
-    this.currentReservationStatus = selectedItem;
-    this.getReservations();
-    // this.currentReservationStatus = selectedItem == undefined ? 0 : selectedItem;
-  }
   selectedbookingStatusFilter(selectedItem: number) {
-    debugger;
     this.selectedBookingStatus = selectedItem;
     this.getReservations();
   }
@@ -144,6 +136,25 @@ export class AllReservationsComponent implements OnInit {
   onPageSizeChange(data: any) {
     this.queryParams.page = 1;
     this.queryParams.pageSize = data.pageSize;
+    this.getReservations();
+  }
+  selectedReservationStatus(selectedItem:any) {
+    this.currentReservationStatus = selectedItem.reserStatus;
+    this.selectedServiceType = selectedItem.reservationtype;
+    this.getReservations();
+  }
+  selectedReservationTime(selectedTime:any)
+  {
+    this.selectedServiceType = selectedTime.reservationtype;
+    this.selectedBookingStatus = selectedTime.reserTime;
+    this.getReservations();
+
+  }
+  selectedDuration(selectedDuration:any)
+  {
+    this.selectedServiceType = selectedDuration.reservationtype;
+    this.selectedMonth = selectedDuration.month;
+    this.selectedYear = selectedDuration.year;
     this.getReservations();
   }
 }
