@@ -80,16 +80,25 @@ namespace BnBYachts.Boat.Manager.Charter
         }
         public async Task<bool> UpdateCharterLocation(CharterLocationRequestable charterDetails, Guid? userId)
         {
-            var charter = await _charterRepository.FindAsync(res => res.Id == charterDetails.CharterId).ConfigureAwait(false);
-            charter.DepartingFrom = charterDetails.DepartureFromLocation;
-            charter.Destination = charterDetails.DestinationLocation;
-            charter.DepartingLatitude = charterDetails.DepartureLatitude;
-            charter.DepartingLongitude = charterDetails.DepartureLongitude;
-            charter.DestinationLatitude = charterDetails.DestinationLatitude;
-            charter.DestinationLatitude = charterDetails.DestinationLongitude;
-            charter.LastModifierId = userId;
-            charter.LastModificationTime = DateTime.Now;
-            return true;
+            var charterEntity = await _charterRepository.FindAsync(res => res.Id == charterDetails.CharterId).ConfigureAwait(false);
+            _objectMapper.Map<CharterLocationRequestable, CharterEntity>(charterDetails, charterEntity);
+            if (charterEntity != null)
+            {
+                charterEntity.LastModifierId= userId;
+                charterEntity.LastModificationTime = DateTime.Now;
+                await _charterRepository.UpdateAsync(charterEntity, autoSave: true).ConfigureAwait(false);
+                return true;
+            }
+            return false;
+            //charter.DepartingFrom = charterDetails.DepartureFromLocation;
+            //charter.Destination = charterDetails.DestinationLocation;
+            //charter.DepartingLatitude = charterDetails.DepartureLatitude;
+            //charter.DepartingLongitude = charterDetails.DepartureLongitude;
+            //charter.DestinationLatitude = charterDetails.DestinationLatitude;
+            //charter.DestinationLatitude = charterDetails.DestinationLongitude;
+            //charter.LastModifierId = userId;
+            //charter.LastModificationTime = DateTime.Now;
+            //return true;
         }
 
     }
