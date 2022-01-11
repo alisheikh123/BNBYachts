@@ -54,8 +54,8 @@
             </div>
             <div class="character-info-wrapper  custom-flex">
                 <div class="custom-flex-start character-info py-2">
-                    <p class="medium description-fotmat">{{'CheckInTime' | localization}}</p>
-                    <p class="grey">{{charterBooking?.boat?.checkinTime | date:'h:mm a' }}</p>
+                    <p class="medium description-fotmat">{{'departingTime' | localization}}</p>
+                    <p class="grey">{{charterBooking?.departureFromDate | date:'h:mm a' }}</p>
                   </div>
                 <div class="custom-flex-start character-info py-2">
                     <p class="medium description-fotmat">{{'Destination' | localization}}</p>
@@ -64,8 +64,8 @@
             </div>
             <div class="character-info-wrapper  custom-flex">
                 <div class="custom-flex-start character-info py-2">
-                    <p class="medium description-fotmat">{{'CheckOutTime' | localization}}</p>
-                    <p class="grey">{{charterBooking?.boat?.checkoutTime | date:'h:mm a'}}</p>
+                    <p class="medium description-fotmat">{{'ReachTime' | localization}}</p>
+                    <p class="grey">{{charterBooking?.departureToDate | date:'h:mm a'}}</p>
                   </div>
               <div class="custom-flex-start character-info py-2">
                 <p class="medium description-fotmat">{{'Bedroom' | localization}}</p>

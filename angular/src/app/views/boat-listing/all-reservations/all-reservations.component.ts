@@ -45,7 +45,8 @@ export class AllReservationsComponent implements OnInit {
   userCharters: any;
   userEvents: any;
   constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
-
+    config.max = 5;
+    config.readonly = true;
   }
 
   ngOnInit(): void {

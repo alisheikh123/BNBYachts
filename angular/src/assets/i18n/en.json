@@ -94,7 +94,14 @@
   "DeductedAmount(USD)":"Deducted Amount(USD)",
   "RefundableAmount(USD)":"Refundable Amount(USD)",
   "more":"more",
-  "EventReservationDetails":"Event Reservation Details"
+  "EventReservationDetails":"Event Reservation Details",
+  "BoatelReservationDetails":"Boatel Reservation Details",
+  "CheckInDate":"Check In Date:",
+  "CheckOutDate":"Check Out Date:",
+  "Location":"Location",
+  "EventFee":"Event Fee",
+  "departingTime":"Departing Time",
+  "reachingTime":"Reach Time"
 
 
 }

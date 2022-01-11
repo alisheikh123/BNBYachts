@@ -23,21 +23,21 @@ namespace BnBYachts.Booking.Services
         public async Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetBoatelBookings(BookingResponseFilter filter, BookingType bookingType, string month, string year,int pageNo, int pageSize)
         {
             var res =  await _userListManager.GetBoatelBookings(filter, bookingType, CurrentUser.Id, month, year, pageNo, pageSize).ConfigureAwait(false);
-            _logger.LogInformation("");
+            _logger.LogInformation("Get Boatel Booking List");
             return res;
 
         }
         public async Task<EntityResponseListModel<CharterBookingTransferableDto>> GetCharterBookings(BookingResponseFilter filter, BookingType bookingType, string month, string year, int pageNo, int pageSize)
         {
             var res = await _userListManager.GetCharterBookings(filter, bookingType, CurrentUser.Id, month, year, pageNo, pageSize).ConfigureAwait(false);
-            _logger.LogInformation("");
+            _logger.LogInformation("Get Charter Booking List");
             return res;
 
         }
         public async Task<EntityResponseListModel<EventBookingTransferableDto>> GetEventBookings(BookingResponseFilter filter, BookingType bookingType, string month, string year, int pageNo, int pageSize)
         {
             var res = await _userListManager.GetEventBookings(filter, bookingType, CurrentUser.Id, month, year, pageNo, pageSize).ConfigureAwait(false);
-            _logger.LogInformation("");
+            _logger.LogInformation("Get Event Booking List");
             return res;
 
         }

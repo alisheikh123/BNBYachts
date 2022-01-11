@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -24,7 +25,7 @@ export class BookingRequestsComponent implements OnInit {
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   modelDate : Object = new Date();;
   constructor(private reservationService: ReservationListsService, private boatService: YachtSearchService,
-    private toastr: ToastrService, config: NgbRatingConfig, private modal: NgbModal) {
+    private toastr: ToastrService, config: NgbRatingConfig, private modal: NgbModal,private router:Router) {
     config.max = 5;
     config.readonly = true;
   }
@@ -125,6 +126,19 @@ export class BookingRequestsComponent implements OnInit {
     this.queryParams.page = 1;
     this.queryParams.pageSize = data.pageSize;
     this.getReservations();
+  }
+
+  goToDetail(item:any){
+    debugger;
+    if(this.selectedServiceType == this.bookedServicesTypes.event){
+      this.router.navigate(['/boat-listing/event-reservation-detail',item.eventId])
+    }
+    if(this.selectedServiceType == this.bookedServicesTypes.charter){
+      this.router.navigate(['/boat-listing/charter-reservation-detail',item.charterId])
+    }
+    if(this.selectedServiceType == this.bookedServicesTypes.boatel){
+      this.router.navigate(['/boat-listing/reservation-detail',item.id])
+    }
   }
 
 }
