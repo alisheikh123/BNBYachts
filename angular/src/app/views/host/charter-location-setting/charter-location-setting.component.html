@@ -21,7 +21,7 @@
                 <input type="text"
                 ngx-google-places-autocomplete
                 (onAddressChange)="handleCharterDepartFromAddressChange($event)"
-                [(ngModel)]="charterLocation.departureFromlocation" class="custom-input" value="{{charterDetails?.departingFrom}}"
+                [(ngModel)]="charterLocation.departingFrom" class="custom-input" value="{{charterDetails?.departingFrom}}"
                 placeholder="Search Location">
             </div>
               <div class="custom-input-field">
@@ -29,7 +29,7 @@
                   <input type="text"
                   ngx-google-places-autocomplete
                   (onAddressChange)="handleCharterDestinationAddressChange($event)"
-                  [(ngModel)]="charterLocation.destinationlocation" class="custom-input" value="{{charterDetails?.destination}}"
+                  [(ngModel)]="charterLocation.destination" class="custom-input" value="{{charterDetails?.destination}}"
                   placeholder="Search Location">
               </div>
               <div class="custom-flex-end py-2">

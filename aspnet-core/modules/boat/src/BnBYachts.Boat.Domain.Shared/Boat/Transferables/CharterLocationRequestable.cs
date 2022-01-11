@@ -8,11 +8,11 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
 {
     public class CharterLocationRequestable
     {
-        public int CharterId { get; set; }
-        public string DepartureFromLocation { get; set; }
-        public string DestinationLocation { get; set; }
-        public double DepartureLatitude { get; set; }
-        public double DepartureLongitude { get; set; }
+        public int Id { get; set; }
+        public string DepartingFrom  { get; set; }
+        public string Destination { get; set; }
+        public double DepartingLatitude { get; set; }
+        public double DepartingLongitude { get; set; }
         public double DestinationLatitude { get; set; }
         public double DestinationLongitude { get; set; }
     }

@@ -5,6 +5,7 @@ using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Charter.Interface;
 using BnBYachts.Shared.Model;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,12 +20,14 @@ namespace BnBYachts.Boat.Manager.Charter
         private readonly IRepository<BoatEntity, int> _boatRepository;
         private readonly IRepository<CharterEntity, int> _charterRepository;
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
+        private readonly ILogger<ICharterManager> _logger;
 
-        public CharterManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IObjectMapper<BoatDomainModule> objectMapper)
+        public CharterManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IObjectMapper<BoatDomainModule> objectMapper,ILogger<ICharterManager> logger)
         {
             _boatRepository = boatRepository;
             _charterRepository = charterRepository;
             _objectMapper = objectMapper;
+            _logger = logger;
 
         }
 
@@ -80,25 +83,17 @@ namespace BnBYachts.Boat.Manager.Charter
         }
         public async Task<bool> UpdateCharterLocation(CharterLocationRequestable charterDetails, Guid? userId)
         {
-            var charterEntity = await _charterRepository.FindAsync(res => res.Id == charterDetails.CharterId).ConfigureAwait(false);
+            var charterEntity = await _charterRepository.FindAsync(res => res.Id == charterDetails.Id).ConfigureAwait(false);
             _objectMapper.Map<CharterLocationRequestable, CharterEntity>(charterDetails, charterEntity);
             if (charterEntity != null)
             {
                 charterEntity.LastModifierId= userId;
                 charterEntity.LastModificationTime = DateTime.Now;
                 await _charterRepository.UpdateAsync(charterEntity, autoSave: true).ConfigureAwait(false);
+                _logger.LogInformation("Update the Location of Charter");
                 return true;
             }
             return false;
-            //charter.DepartingFrom = charterDetails.DepartureFromLocation;
-            //charter.Destination = charterDetails.DestinationLocation;
-            //charter.DepartingLatitude = charterDetails.DepartureLatitude;
-            //charter.DepartingLongitude = charterDetails.DepartureLongitude;
-            //charter.DestinationLatitude = charterDetails.DestinationLatitude;
-            //charter.DestinationLatitude = charterDetails.DestinationLongitude;
-            //charter.LastModifierId = userId;
-            //charter.LastModificationTime = DateTime.Now;
-            //return true;
         }
 
     }

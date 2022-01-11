@@ -35,13 +35,13 @@ export class CharterLocationSettingComponent implements OnInit {
   center!: google.maps.LatLngLiteral;
   charterDetails:any;
   charterLocation = {
-    charterId: 0,
-    departurelatitude: 0,
-    departurelongitude: 0,
-    destinationlatitude: 0,
-    destinationlongitude: 0,
-    departureFromlocation: '',
-    destinationlocation: ''
+    Id: 0,
+    departingLatitude: 0,
+    departingLongitude: 0,
+    destinationLatitude: 0,
+    destinationLongitude: 0,
+    departingFrom: '',
+    destination: ''
   }
   locationMarker: any;
   constructor(private activatedRoute: ActivatedRoute,
@@ -52,7 +52,7 @@ export class CharterLocationSettingComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.charterId = Number(res['id']);
-      this.charterLocation.charterId = this.charterId;
+      this.charterLocation.Id = this.charterId;
     });
     this.getCharterDetailsById();
     this.initMap();
@@ -60,6 +60,12 @@ export class CharterLocationSettingComponent implements OnInit {
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
+      this.charterLocation.departingFrom = this.charterDetails?.departingFrom;
+      this.charterLocation.departingLatitude = this.charterDetails?.departingLatitude;
+      this.charterLocation.departingLongitude = this.charterDetails?.departingLongitude;
+      this.charterLocation.destination = this.charterDetails?.destination;
+      this.charterLocation.destinationLatitude = this.charterDetails?.destinationLatitude;
+      this.charterLocation.destinationLongitude = this.charterDetails?.destinationLongitude;
       this.center = {
         lat: res?.departingLatitude,
         lng: res?.departingLongitude
@@ -85,28 +91,29 @@ export class CharterLocationSettingComponent implements OnInit {
 
 handleCharterDepartFromAddressChange(address: any)
 {
-  this.charterLocation.departureFromlocation = address.formatted_address;
-  this.charterLocation.departurelatitude = address.geometry.location.lat();
-  this.charterLocation.departurelongitude = address.geometry.location.lng();
+  this.charterLocation.departingFrom = address.formatted_address;
+  this.charterLocation.departingLatitude = address.geometry.location.lat();
+  this.charterLocation.departingLongitude = address.geometry.location.lng();
   this.center = {
-    lat: this.charterLocation?.departurelatitude,
-    lng: this.charterLocation.departurelongitude
+    lat: this.charterLocation?.departingLatitude,
+    lng: this.charterLocation.departingLongitude
   };
   this.addLocationMarker();
 }
 handleCharterDestinationAddressChange(address: any)
 {
-  this.charterLocation.destinationlocation = address.formatted_address;
-  this.charterLocation.destinationlatitude = address.geometry.location.lat();
-  this.charterLocation.destinationlongitude = address.geometry.location.lng();
+  this.charterLocation.destination = address.formatted_address;
+  this.charterLocation.destinationLatitude = address.geometry.location.lat();
+  this.charterLocation.destinationLongitude = address.geometry.location.lng();
   this.center = {
-    lat: this.charterLocation.destinationlatitude,
-    lng: this.charterLocation.destinationlongitude
+    lat: this.charterLocation.destinationLatitude,
+    lng: this.charterLocation.destinationLongitude
   };
   this.addLocationMarker();
 }
 
 updateCharterLocation() {
+
   this.service.updateCharterLocation(this.charterLocation).subscribe(res => {
     if (res) {
       this.toastr.success("Charter Location updated successfully", "Location");

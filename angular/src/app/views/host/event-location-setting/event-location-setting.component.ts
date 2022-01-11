@@ -29,9 +29,9 @@ eventId: number;
   secondcenter!: google.maps.LatLngLiteral;
   eventDetails:any;
   EventLocation = {
-    eventId: 0,
-    latitude: 0,
-    longitude: 0,
+    Id: 0,
+    locationLat: 0,
+    locationLong: 0,
     location: ''
   }
   locationMarker: any;
@@ -43,7 +43,7 @@ eventId: number;
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.eventId = Number(res['id']);
-      this.EventLocation.eventId = this.eventId;
+      this.EventLocation.Id = this.eventId;
     });
     this.getEventDetailsById();
   }
@@ -76,11 +76,11 @@ eventId: number;
 handleAddressChange(address: any)
 {
   this.EventLocation.location = address.formatted_address;
-  this.EventLocation.latitude = address.geometry.location.lat();
-  this.EventLocation.longitude = address.geometry.location.lng();
+  this.EventLocation.locationLat = address.geometry.location.lat();
+  this.EventLocation.locationLong = address.geometry.location.lng();
   this.center = {
-    lat: this.EventLocation?.latitude,
-    lng: this.EventLocation.longitude
+    lat: this.EventLocation?.locationLat,
+    lng: this.EventLocation.locationLong
   };
   this.addLocationMarker();
 }
