@@ -29,8 +29,15 @@ import { RejectionModalComponent } from './boatel-bookings/booking-requests/reje
 import { PaginationModule } from '../common/pagination/pagination.module';
 import { CharterEditComponent } from './charter-edit/charter-edit.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
+import { CalendarScheduleComponent } from './calendar-schedule/calendar-schedule.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 
-
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
 
 @NgModule({
   declarations: [
@@ -52,7 +59,8 @@ BoatLoationSettingsComponent,
 CharterCreationComponentComponent,
 RejectionModalComponent,
 CharterEditComponent,
-EventEditComponent
+EventEditComponent,
+CalendarScheduleComponent
   ],
   imports: [
     HostRoutingModule,
@@ -68,7 +76,8 @@ EventEditComponent
     DateTimePickerModule,
     NotFoundModule,
     PaginationModule,
-    CalendarModule
+    CalendarModule,
+    FullCalendarModule,
   ],
   providers: [YachtSearchService,ReservationService]
 })

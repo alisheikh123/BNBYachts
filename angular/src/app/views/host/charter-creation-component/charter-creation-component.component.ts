@@ -23,7 +23,7 @@ export class CharterCreationComponentComponent implements OnInit {
   currentTab = this.CHARTER_TABS.BoatSelection;
   boatlistOptions:any=[];
   isAgree: boolean = false;
-
+  minDate = new Date(); 
 
 
   ngOnInit(): void {

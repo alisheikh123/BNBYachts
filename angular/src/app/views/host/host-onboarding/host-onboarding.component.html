@@ -457,6 +457,7 @@
                                         <div class="custom-input-field">
                                             <label>Availabilty</label>
                                         </div><ejs-daterangepicker  placeholder='Select Availabilty'
+                                        [min]="minDate"
                                         (change)="changeCalendar($event)"
                                         [startDate]='boatCalendar.fromDate' [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
 
