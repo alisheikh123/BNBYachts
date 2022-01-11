@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { CalendarService } from 'src/app/core/calendar/calendar.service';
 import { EventService } from 'src/app/core/Event/event.service';
-import bootstrapPlugin from '@fullcalendar/bootstrap';
-import { Calendar ,CalendarOptions} from '@fullcalendar/core';
-import { ServiceType } from 'src/app/shared/enums/booking.constants';
+import { CalendarOptions} from '@fullcalendar/core';
 import { BoatServiceType } from 'src/app/shared/enums/boat-service-type';
-
 
 
 @Component({
@@ -44,14 +41,12 @@ export class CalendarScheduleComponent implements OnInit {
     this.getBoats();
   }
 
-  handleDateClick(arg: any) {
-    alert('date click! ' + arg.dateStr)
-  }
-
   getBoats() {
     this.service.getBoats().subscribe(res => {
-      this.boats = res;
-      this.getBoatCalendar(this.boats[0]?.id,1);
+      if(res){
+        this.boats = res;
+        this.getBoatCalendar(this.boats[0]?.id,1);
+      }
     });
   }
   getBoatCalendar(boatId: number, month: number) {
@@ -65,8 +60,7 @@ export class CalendarScheduleComponent implements OnInit {
           end: new Date(element.endDate),
           title: element.name,
           allDay: true,    
-         backgroundColor :"#091654", //element.serviceType === this.SERVICE_TYPES.Boatel ? 'red' 
-      //: (element.serviceType === this.SERVICE_TYPES.Charter ? '#091654' : 'black'),
+         backgroundColor :"#091654",
           draggable: true,
           resizable: {
             beforeStart: true,

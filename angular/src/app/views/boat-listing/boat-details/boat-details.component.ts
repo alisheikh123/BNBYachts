@@ -64,7 +64,6 @@ export class BoatDetailsComponent implements OnInit {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
     if (this.boatFilterDetails.checkinDate == null && this.boatFilterDetails.checkoutDate == null) {
-      debugger;
       this.boatFilterDetails.checkinDate = this.minDate;//new Date();
       this.boatFilterDetails.checkoutDate = this.maxDate;//new Date();
       this.boatFilterDetails.adults = 1;

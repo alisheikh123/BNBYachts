@@ -5,24 +5,6 @@
   color: black;
 }
 
-
-// ::ng-deep .fc-theme-standard td{
-//   border: none !important;
-// }
-
-// ::ng-deep .fc-theme-standard td{
-//   // border: none !important;
-//   padding: 15px !important;
-// }
-// ::ng-deep .fc-daygrid-day-frame{
-//   border: 1px solid #ccc;
-//   border-radius: 10px;
-//   margin: 5px;
-// }
-// ::ng-deep .fc-theme-standard td{
-//   padding: 15px !important;
-//   border: 1px solid black !important;
-// }
 ::ng-deep .fc-theme-standard td a{
   color: #777777 !important;
 }
@@ -33,7 +15,6 @@
   padding: 0 !important;
 }
 ::ng-deep .fc-theme-standard th a{
-  // border: none !important;
   color: black !important;
   font-size: 12px;
   font-weight: bold;
@@ -75,6 +56,3 @@ display: block !important;
   ::ng-deep .fc-toolbar-title{
     font-size: 16px !important;
   }
-// ::ng-deep .fc-daygrid-day-events{
-//   display: none !important;
-// }
