@@ -74,7 +74,8 @@ namespace BnBYachts.Boat.Manager
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatFeatures).ConfigureAwait(false);
                     double distance = GetDistanceInMeters(boat.Latitude, boat.Longitude, parameters.Latitude, parameters.Longitude);
-                    if (distance <= 500)
+                    var boatCalendar = boat.BoatCalendars.FirstOrDefault(res => res.BoatEntityId == boat.Id && res.IsAvailable);
+                    if (distance <= 500 && boatCalendar != null && boatCalendar.ToDate > DateTime.Now)
                     {
                         filterdBoats.Add(boat);
                     }
@@ -122,12 +123,13 @@ namespace BnBYachts.Boat.Manager
                 await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
             }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatLocations).ConfigureAwait(false);
+            await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
 
             return boat;
         }
         public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable param)
         {
-            var getCharters = await _charterRepository.GetListAsync();
+            var getCharters = await _charterRepository.GetListAsync(res=>res.DepartureFromDate >= DateTime.Now && res.IsActive == true);
             var filterdCharters = new List<CharterEntity>();
             foreach (var charter in getCharters)
             {
@@ -176,7 +178,7 @@ namespace BnBYachts.Boat.Manager
         }
         public async Task<ICollection<EventEntity>> GetEventsByFilters(EventSearchRequestable param)
         {
-            var getEvents = await _eventRepository.GetListAsync();
+            var getEvents = await _eventRepository.GetListAsync(res=>res.StartDateTime > DateTime.Now && res.IsActive == true);
 
 
             var filterdEvents = new List<EventEntity>();
