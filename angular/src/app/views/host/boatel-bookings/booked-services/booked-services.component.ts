@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
@@ -21,7 +22,7 @@ export class BookedServicesComponent implements OnInit {
     pageSize: 5
   };
   selectedServiceType: number = 1;
-  constructor(config: NgbRatingConfig, private reservationService: ReservationListsService, private boatService: YachtSearchService) {
+  constructor(config: NgbRatingConfig, private reservationService: ReservationListsService, private boatService: YachtSearchService,private router:Router) {
     config.max = 5;
     config.readonly = true;
   }
@@ -74,6 +75,18 @@ export class BookedServicesComponent implements OnInit {
     this.queryParams.page = 1;
     this.queryParams.pageSize = data.pageSize;
     this.getBookedServices();
+  }
+  goToDetail(item:any){
+    debugger;
+    if(this.selectedServiceType == this.bookedServicesTypes.event){
+      this.router.navigate(['/boat-listing/event-reservation-detail',item.eventId])
+    }
+    if(this.selectedServiceType == this.bookedServicesTypes.charter){
+      this.router.navigate(['/boat-listing/charter-reservation-detail',item.charterId])
+    }
+    if(this.selectedServiceType == this.bookedServicesTypes.boatel){
+      this.router.navigate(['/boat-listing/reservation-detail',item.id])
+    }
   }
 
 }

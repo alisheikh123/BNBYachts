@@ -69,10 +69,12 @@
                 {{ item.checkoutDate | date: "dd MMM/YYYY" }}
             </p>
             <p class="small-text grey" *ngIf="selectedServiceType == 3">
-                {{ item?.event?.startDateTime | date: "dd MMM/YYYY" }}
+                {{ item?.event?.startDateTime | date: "dd MMM/YYYY" }} -
+                {{ item?.event?.endDateTime | date: "dd MMM/YYYY" }}
             </p>
             <p class="small-text grey" *ngIf="selectedServiceType == 2">
-                {{ item?.charter?.departureFromDate | date }}
+                {{ item?.charter?.departureFromDate | date: "dd MMM/YYYY" }} -
+                {{ item?.charter?.departureToDate |  date: "dd MMM/YYYY" }}
             </p>
             <div class="custom-flex mt-4">
                 <button class="custom-btn grey" (click)="changeStatus(item, false, i)">
