@@ -16,6 +16,7 @@ namespace BnBYachts.Chat.Services
         {
             _chatManager = chatManager;
         }
+        public async Task InsertQuote(ChatRequestable chat) => await _chatManager.InsertChat(chat);
         public async Task<ChatMessagesTransferable> GetUserChats(string userId) => await _chatManager.GetUserChats(CurrentUser.Id.ToString(), userId);
         public async Task<ICollection<ChatUserTransferable>> GetAllUsers(string? hostId) => await _chatManager.GetAllUsers(hostId,CurrentUser.Id.ToString());
         public async Task BlockUser(string blockedUserId,bool isBlock) => await _chatManager.BlockUser(blockedUserId,CurrentUser.Id.ToString(),isBlock);
