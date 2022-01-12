@@ -55,7 +55,6 @@ export class CharterDetailsComponent implements OnInit {
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
-      console.log(this.charterDetails);
       this.charterSchedule = res.charterSchedule;
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
@@ -112,7 +111,7 @@ export class CharterDetailsComponent implements OnInit {
           }
         })
       }
-    }    
+    }
     else {
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
     }

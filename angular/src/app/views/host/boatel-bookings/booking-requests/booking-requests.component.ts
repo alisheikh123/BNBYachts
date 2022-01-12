@@ -129,7 +129,6 @@ export class BookingRequestsComponent implements OnInit {
   }
 
   goToDetail(item:any){
-    debugger;
     if(this.selectedServiceType == this.bookedServicesTypes.event){
       this.router.navigate(['/boat-listing/event-reservation-detail',item.eventId])
     }
