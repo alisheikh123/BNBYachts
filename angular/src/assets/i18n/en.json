@@ -101,7 +101,17 @@
   "Location":"Location",
   "EventFee":"Event Fee",
   "departingTime":"Departing Time",
-  "reachingTime":"Reach Time"
+  "ArrivalTime":"Arrival Time",
+  "Boatels":"Boatels",
+  "Charters":"Charters",
+  "Events":"Events",
+  "All":"All",
+  "Pending":"Pending",
+  "Approved":"Approved",
+  "Cancelled":"Cancelled",
+  "Rejected":"Rejected",
+  "Upcomings":"Upcomings",
+  "Past":"Past"
 
 
 }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using BnBYachts.Booking.Interfaces;
+using Volo.Abp.Uow;
+using BnBYachts.Booking.Booking.Requestable;
 
 namespace BnBYachts.Booking.Services
 {
@@ -14,30 +16,38 @@ namespace BnBYachts.Booking.Services
     {
         private readonly IUserBookingListManager _userListManager;
         private readonly ILogger<IUserBookingListManager> _logger;
-        public UserBookingListAppService(IUserBookingListManager userListManager,ILogger<IUserBookingListManager> logger)
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+        public UserBookingListAppService(IUserBookingListManager userListManager,ILogger<IUserBookingListManager> logger, IUnitOfWorkManager unitOfWorkManager)
         {
             _userListManager = userListManager;
             _logger = logger;
+            _unitOfWorkManager = unitOfWorkManager;
         }
 
-        public async Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetBoatelBookings(BookingResponseFilter filter, BookingType bookingType, string month, string year,int pageNo, int pageSize)
+        public async Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetBoatelBookings(EntityBookingParamsDto param)
         {
-            var res =  await _userListManager.GetBoatelBookings(filter, bookingType, CurrentUser.Id, month, year, pageNo, pageSize).ConfigureAwait(false);
-            _logger.LogInformation("Get Boatel Booking List");
+            param.userId = CurrentUser.Id;
+            var res =  await _userListManager.GetBoatelBookings(param).ConfigureAwait(false);
+            var logInfo = new { userId=param.userId,RequestId = _unitOfWorkManager.Current.Id };
+            _logger.LogInformation("Show all Boatel Reservation against this userId and Request  {@logInfo}", logInfo);
             return res;
 
         }
-        public async Task<EntityResponseListModel<CharterBookingTransferableDto>> GetCharterBookings(BookingResponseFilter filter, BookingType bookingType, string month, string year, int pageNo, int pageSize)
+        public async Task<EntityResponseListModel<CharterBookingTransferableDto>> GetCharterBookings(EntityBookingParamsDto param)
         {
-            var res = await _userListManager.GetCharterBookings(filter, bookingType, CurrentUser.Id, month, year, pageNo, pageSize).ConfigureAwait(false);
-            _logger.LogInformation("Get Charter Booking List");
+            param.userId = CurrentUser.Id;
+            var res = await _userListManager.GetCharterBookings(param).ConfigureAwait(false);
+            var logInfo = new { userId = param.userId, RequestId = _unitOfWorkManager.Current.Id };
+            _logger.LogInformation("Show all Charter Reservation against this userId and Request  {@logInfo}", logInfo);
             return res;
 
         }
-        public async Task<EntityResponseListModel<EventBookingTransferableDto>> GetEventBookings(BookingResponseFilter filter, BookingType bookingType, string month, string year, int pageNo, int pageSize)
+        public async Task<EntityResponseListModel<EventBookingTransferableDto>> GetEventBookings(EntityBookingParamsDto param)
         {
-            var res = await _userListManager.GetEventBookings(filter, bookingType, CurrentUser.Id, month, year, pageNo, pageSize).ConfigureAwait(false);
-            _logger.LogInformation("Get Event Booking List");
+            param.userId = CurrentUser.Id;
+            var res = await _userListManager.GetEventBookings(param).ConfigureAwait(false);
+            var logInfo = new { userId = param.userId, RequestId = _unitOfWorkManager.Current.Id };
+            _logger.LogInformation("Show all Event Reservation against this userId and Request {@logInfo}", logInfo);
             return res;
 
         }

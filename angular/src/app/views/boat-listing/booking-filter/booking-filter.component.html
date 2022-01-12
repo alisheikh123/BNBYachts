@@ -9,13 +9,13 @@
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li>
-              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Boatels)">Boatels</a>
+              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Boatels)">{{'Boatels' | localization}}</a>
           </li>
           <li>
-              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Charters)">Charters</a>
+              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Charters)">{{'Charters' | localization}}</a>
           </li>
           <li>
-              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Events)">Events</a>
+              <a class="dropdown-item" (click)="filterServiceType(RESERVATION_STATUS.Events)">{{'Events' | localization}}</a>
           </li>
       </ul>
   </div>
@@ -27,25 +27,25 @@
           <span id="dropdown-align">
             {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter == BOOKING_STATUS.Approved ? 'Approved'
             :selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected'
-            :selectedStatusFilter ==BOOKING_STATUS.Cancel ? 'Cancel'
+            :selectedStatusFilter ==BOOKING_STATUS.Cancel ? 'Cancelled'
             :selectedStatusFilter == BOOKING_STATUS.ChooseFilter ? 'All':'Choose Status'}}
         </span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li>
-            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.ChooseFilter)">All</a>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.ChooseFilter)">{{'All' | localization}}</a>
           </li>
           <li >
-            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Pending)">Pending</a>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Pending)">{{'Pending' | localization}}</a>
           </li>
           <li>
-            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Approved)">Approved</a>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Approved)"> {{'Approved' | localization}}</a>
           </li>
           <li>
-            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Cancel)">Cancelled</a>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Cancel)"> {{'Cancelled' | localization}}</a>
           </li>
           <li>
-            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Rejected)">Rejected</a>
+            <a class="dropdown-item" (click)="selectReservationStatus(BOOKING_STATUS.Rejected)"> {{'Rejected' | localization}}</a>
           </li>
         </ul>
       </div>
@@ -70,21 +70,21 @@
                   <div class="form-check">
                     <input type="radio" class="form-check-input" [value]="0" id="allCharter"
                       [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.All);myFilterDrop.close()">
-                    <label for="allCharter">All</label>
+                    <label for="allCharter">{{'All' | localization}}</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" class="form-check-input" [value]="1" id="oneSide"
                       [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Upcomings);myFilterDrop.close()">
-                    <label for="oneSide">Upcomings</label>
+                    <label for="oneSide">{{'Upcomings' | localization}}</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input type="radio" id="roundTrip" class="form-check-input" [value]="2"
                       [(ngModel)]="selectedTab" [ngModelOptions]="{standalone: true}" (click)="selectReservationTimeStatus(BOOKING_FILTER.Past);myFilterDrop.close()">
-                    <label for="roundTrip">Past</label>
+                    <label for="roundTrip">{{'Past' | localization}}</label>
                   </div>
                 </div>
               </div>

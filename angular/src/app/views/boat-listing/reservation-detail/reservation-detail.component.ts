@@ -160,22 +160,8 @@ export class ReservationDetailComponent implements OnInit {
     let currentDate = moment().format("DD-MM-YYYY");
     let inTime = moment(checkinTime).format("HH:mm");
     let curretTime = moment().format("HH:mm");
-    if (checkinDate != undefined && checkinTime != undefined) {
-      if (inDate == currentDate && inTime > curretTime) {
-        return true;
-      }
-      if (moment(checkinDate).isAfter(moment().format("YYYY-MM-DD"))) {
-        return true;
-      }
-      else {
-        return false;
-      }
-
-    }
-
-    return false;
-
-
+    if (checkinDate != undefined && checkinTime != undefined) {return (inDate == currentDate && inTime > curretTime)?true:(moment(checkinDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;}
+    else{return false;}
   }
   isCheckoutTimeEnd(checkoutDate:Date,checkoutTime:Date){
     let outDate = moment(checkoutDate).format("DD-MM-YYYY");
@@ -183,16 +169,7 @@ export class ReservationDetailComponent implements OnInit {
     let outTime = moment(checkoutTime).format("HH:mm");
     let curretTime = moment().format("HH:mm");
     if (checkoutDate != undefined && checkoutTime != undefined) {
-      if (outDate == currentDate && curretTime > outTime) {
-        return true;
-      }
-      if (moment(checkoutDate).isAfter(moment().format("YYYY-MM-DD"))) {
-        return true;
-      }
-      else {
-        return false;
-      }
-
+     return  (outDate == currentDate && curretTime > outTime) ?true:(moment(checkoutDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;
     }
     else{
       return false;

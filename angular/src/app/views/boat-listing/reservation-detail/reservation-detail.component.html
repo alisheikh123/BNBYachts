@@ -128,7 +128,6 @@
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
                 <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
                   class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
-
               </div>
             <!-- </div> -->
           </div>
@@ -139,8 +138,6 @@
         class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
       </div>
       <!-- </div> -->
-
-
       <app-list-reviews [bookingId]=bookingId></app-list-reviews>
     </div>
   </div>
