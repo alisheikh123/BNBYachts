@@ -1,3 +1,4 @@
+import { SelectedServiceType } from './../../../../shared/enums/booking.constants';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +23,7 @@ export class BookingRequestsComponent implements OnInit {
   @Input() boatelBookings: any = [];
   selectedServiceType: number = 1;
   SERVICE_TYPES = ServiceType;
+  SELECTED_SERVICE_TYPE = SelectedServiceType;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   modelDate : Object = new Date();;
   constructor(private reservationService: ReservationListsService, private boatService: YachtSearchService,

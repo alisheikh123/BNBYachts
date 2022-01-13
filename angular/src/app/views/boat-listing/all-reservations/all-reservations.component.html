@@ -10,10 +10,6 @@
       </div>
       <div>
       <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>
-      <!-- (bookingStatusFilter)="selectedbookingStatusFilter($event)" -->
-        <div>
-
-      </div>
       <div *ngIf="selectedServiceType==bookedServicesTypes.boatel">
       <div class="row">
         <div class="col-12">
@@ -22,7 +18,6 @@
               <div class="image-with-text custom-flex-between align-items-start">
                 <div class="image-with-text-inner">
                   <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
-
                     <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
                   </div>
                   <div class="user-details">
@@ -35,13 +30,13 @@
                 <div class="right-content custom-flex flex-column align-items-end">
                   <p class="small-text grey">{{item.checkinDate | date}} - {{item.checkoutDate | date}}</p>
                   <div class="custom-flex mt-4 mr-3">
-                    <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' :
+                    <span *ngIf="item.bookingStatus==BOOKING_STATUS.Pending"><strong>{{item.bookingStatus==BOOKING_STATUS.Pending ? 'Pending' :
                         ''}}</strong></span>
-                    <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
+                    <span *ngIf="item.bookingStatus==BOOKING_STATUS.Approved"><strong>{{item.bookingStatus==BOOKING_STATUS.Approved ? 'Approved' :
                         ''}}</strong></span>
-                    <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
+                    <span *ngIf="item.bookingStatus==BOOKING_STATUS.Rejected"><strong>{{item.bookingStatus==BOOKING_STATUS.Rejected ? 'Rejected' :
                         ''}}</strong></span>
-                    <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
+                    <span *ngIf="item.bookingStatus==BOOKING_STATUS.Cancel"><strong>{{item.bookingStatus==BOOKING_STATUS.Cancel ? 'Cancelled' :
                         ''}}</strong></span>
                   </div>
 
@@ -86,14 +81,14 @@
               <div class="right-content custom-flex flex-column align-items-end">
                 <p class="small-text grey">{{item?.charterDetail?.departureFromDate | date}} - {{item?.charterDetail?.departureToDate | date}}</p>
                 <div class="custom-flex mt-4 mr-3">
-                  <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' :
-                      ''}}</strong></span>
-                  <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
-                      ''}}</strong></span>
-                  <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
-                      ''}}</strong></span>
-                  <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
-                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==BOOKING_STATUS.Pending"><strong>{{item.bookingStatus==BOOKING_STATUS.Pending ? 'Pending' :
+                    ''}}</strong></span>
+                <span *ngIf="item.bookingStatus==BOOKING_STATUS.Approved"><strong>{{item.bookingStatus==BOOKING_STATUS.Approved ? 'Approved' :
+                    ''}}</strong></span>
+                <span *ngIf="item.bookingStatus==BOOKING_STATUS.Rejected"><strong>{{item.bookingStatus==BOOKING_STATUS.Rejected ? 'Rejected' :
+                    ''}}</strong></span>
+                <span *ngIf="item.bookingStatus==BOOKING_STATUS.Cancel"><strong>{{item.bookingStatus==BOOKING_STATUS.Cancel ? 'Cancelled' :
+                    ''}}</strong></span>
                 </div>
 
 
@@ -131,14 +126,14 @@
                 <div class="right-content custom-flex flex-column align-items-end">
                   <p class="small-text grey">{{item?.eventDetail?.startDateTime | date}} - {{item?.eventDetail?.endDateTime | date}}</p>
                   <div class="custom-flex mt-4 mr-3">
-                    <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' :
-                        ''}}</strong></span>
-                    <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
-                        ''}}</strong></span>
-                    <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
-                        ''}}</strong></span>
-                    <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
-                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==BOOKING_STATUS.Pending"><strong>{{item.bookingStatus==BOOKING_STATUS.Pending ? 'Pending' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==BOOKING_STATUS.Approved"><strong>{{item.bookingStatus==BOOKING_STATUS.Approved ? 'Approved' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==BOOKING_STATUS.Rejected"><strong>{{item.bookingStatus==BOOKING_STATUS.Rejected ? 'Rejected' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==BOOKING_STATUS.Cancel"><strong>{{item.bookingStatus==BOOKING_STATUS.Cancel ? 'Cancelled' :
+                      ''}}</strong></span>
                   </div>
 
 

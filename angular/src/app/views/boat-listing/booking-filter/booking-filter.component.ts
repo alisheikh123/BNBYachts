@@ -75,46 +75,13 @@ export class BookingFilterComponent implements OnInit {
       });
     });
   }
-  // reservationStatusFilter(reserveStatus:any)
-  // {
-  //   this.selectedReservationStatus = reserveStatus;
-  //   let tab = this.selectedTab == this.BOOKING_FILTER.ChooseFilter ? this.BOOKING_FILTER.All : this.selectedTab;
-  //   if(reserveStatus==BookingType.Boatels)
-  //   {
-  //     this.service.getBookings(tab,reserveStatus, this.selectedMonth,
-  //      this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
-  //       this.allBookings = res?.data;
-  //       this.totalRecords = res?.totalCount;
-  //     });
-  //   }
-  //   if(reserveStatus==BookingType.Charters)
-  //   {
-  //     this.service.getCharterBookings(tab,reserveStatus, this.selectedMonth,
-  //       this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
-  //        this.allBookings = res?.data;
-  //        this.totalRecords = res?.totalCount;
-  //      });
-  //   }
-  //   if(reserveStatus==BookingType.Events)
-  //   {
 
-  //     this.service.getEventBookings(tab,reserveStatus, this.selectedMonth,
-  //       this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
-  //        this.allBookings = res?.data;
-  //        this.totalRecords = res?.totalCount;
-  //      });
-  //   }
-
-
-  // }
   onPageChange(data: any) {
     this.queryParams.page = data.page;
-    // this.getReservations();
   }
   onPageSizeChange(data: any) {
     this.queryParams.page = 1;
     this.queryParams.pageSize = data.pageSize;
-    // this.getReservations();
   }
   applyDateFilter(data:any) {
     const stringToSplit = this.modelDate;
@@ -130,9 +97,5 @@ export class BookingFilterComponent implements OnInit {
   filterServiceType(serviceType: number) {
     this.selectedServiceType = serviceType;
     this.bookingType.emit(serviceType);
-  }
-  getReservations()
-  {
-
   }
 }

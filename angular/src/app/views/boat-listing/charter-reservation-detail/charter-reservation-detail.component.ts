@@ -49,7 +49,6 @@ export class CharterReservationDetailComponent implements OnInit {
       : (this.isHost = false);
     this.boatService.charterDetailsById(this.charterBookingId).subscribe((res: any) => {
       this.charterBooking = res?.charterDetails;
-      this.currentDate = new Date();
       this.checkedDepartureFromDate = new Date(this.charterBooking?.departureFromDate).toLocaleDateString();
       this.charterBooking.departingFromDate = new Date(this.charterBooking?.departureFromDate);
       this.charterBooking.departingToDate = new Date(this.charterBooking?.departureToDate);
@@ -91,52 +90,7 @@ export class CharterReservationDetailComponent implements OnInit {
   goBack() {
     this.isHost==true?this.route.navigate(['host/my-bookings']):this.route.navigate(['boat-listing/all-reservations']);
   }
-  // isBookingStatusCancel(bookingId: number) {
 
-  //   this.boatService.getBookingDetailbyId(bookingId).subscribe((res: any) => {
-  //     this.bookingStatus = res?.bookingStatus;
-  //     this.booking = res;
-  //     this.currentDate = new Date();
-  //     this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
-  //     this.checkInDate = new Date(this.booking?.checkinDate);
-  //     this.checkOutDate = new Date(this.booking?.checkoutDate);
-  //     this.totalDays = Math.ceil((this.checkOutDate - this.checkInDate) / 8.64e7) + 1;
-  //     if (this.bookingStatus != this.BOOKING_STATUS.Cancel) {
-
-  //       this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
-  //         this.booking.boatDetail = boatdetail;
-  //         this.booking.TotalDays = this.totalDays;
-  //         this.booking.checkinDate = this.checkInDate;
-  //         this.booking.checkoutDate = this.checkOutDate;
-  //         this.boatDetail = boatdetail;
-  //       });
-
-
-  //     }
-  //     else {
-  //       this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
-  //         this.service.getBookingCancellationDetail(this.booking?.id).subscribe((bookingCancellationDetail: any) => {
-  //           this.booking.boatDetail = boatdetail;
-  //           this.booking.TotalDays = this.totalDays;
-  //           this.booking.checkinDate = this.checkInDate;
-  //           this.booking.checkoutDate = this.checkOutDate;
-  //           this.boatDetail = boatdetail;
-  //           this.booking.bookingCancelDetail = bookingCancellationDetail?.data;
-
-
-  //         });
-
-  //       });
-
-
-
-
-
-  //     }
-
-  //   });
-
-  // }
   isDepartureFromStarted(departureFromDate: Date, checkinTime: Date) {
     let inDate = moment(departureFromDate).format("DD-MM-YYYY");
     let currentDate = moment().format("DD-MM-YYYY");

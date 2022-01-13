@@ -65,8 +65,6 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkinDate = this.checkInDate;
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
-        this.checkinTime = boatdetail.checkinTime;
-        this.booking.checkoutTime = boatdetail.checkoutTime;
       });
 
     });

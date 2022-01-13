@@ -12,14 +12,15 @@ export class BookingListingService {
   bookingApiUrl: string = environment.BOOKING_API_URL + '/api/app/user-booking-list';
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
-  getBookings(filterType:number,reservationfilterType:number,month?: string, year?: string,pageNo?: number, pageSize?: number) {
-    return this.http.get(this.bookingApiUrl + '/boatel-bookings?filter=' + filterType +'&bookingType='+ reservationfilterType + '&month=' + month + '&year=' + year + '&pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
+  getBookings(param:any) {
+    debugger;
+   return this.http.get(this.bookingApiUrl + '/boatel-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
   }
-  getCharterBookings(filterType:number,reservationfilterType:number,month?: string, year?: string,pageNo?: number, pageSize?: number) {
-    return this.http.get(this.bookingApiUrl + '/charter-bookings?filter=' + filterType +'&bookingType='+ reservationfilterType + '&month=' + month + '&year=' + year + '&pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
+  getCharterBookings(param:any) {
+    return this.http.get(this.bookingApiUrl + '/charter-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
   }
-  getEventBookings(filterType:number,reservationfilterType:number,month?: string, year?: string,pageNo?: number, pageSize?: number) {
-    return this.http.get(this.bookingApiUrl + '/event-bookings?filter=' + filterType +'&bookingType='+ reservationfilterType + '&month=' + month + '&year=' + year + '&pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
+  getEventBookings(param:any) {
+    return this.http.get(this.bookingApiUrl + '/event-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
   }
   getBookingDetailbyId(BookId: any) {
     return this.http.get(this.bookingApiUrl + '/boatel-booking/' + BookId).pipe(catchError(this.errorService.handleError));

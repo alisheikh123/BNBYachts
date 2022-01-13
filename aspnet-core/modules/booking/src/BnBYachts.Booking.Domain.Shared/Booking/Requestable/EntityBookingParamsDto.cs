@@ -9,13 +9,13 @@ namespace BnBYachts.Booking.Booking.Requestable
     public class EntityBookingParamsDto : IRequestable
     {
 
-        public BookingResponseFilter filter { get; set; }
-        public BookingType bookingType { get; set; }
-        public string month { get; set; }
-        public string year { get; set; }
-        public int pageNo { get; set; }
-        public int pageSize { get; set; }
-        public Guid? userId { get; set; }
+        public BookingResponseFilter Filter { get; set; }
+        public BookingType BookingType { get; set; }
+        public string Month { get; set; }
+        public string Year { get; set; }
+        public int PageNo { get; set; }
+        public int PageSize { get; set; }
+        public Guid? UserId { get; set; }
 
     }
 }

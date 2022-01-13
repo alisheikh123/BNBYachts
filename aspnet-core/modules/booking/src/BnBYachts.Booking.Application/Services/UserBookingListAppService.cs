@@ -26,27 +26,27 @@ namespace BnBYachts.Booking.Services
 
         public async Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetBoatelBookings(EntityBookingParamsDto param)
         {
-            param.userId = CurrentUser.Id;
+            param.UserId = CurrentUser.Id;
             var res =  await _userListManager.GetBoatelBookings(param).ConfigureAwait(false);
-            var logInfo = new { userId=param.userId,RequestId = _unitOfWorkManager.Current.Id };
+            var logInfo = new { userId=param.UserId,RequestId = _unitOfWorkManager.Current.Id };
             _logger.LogInformation("Show all Boatel Reservation against this userId and Request  {@logInfo}", logInfo);
             return res;
 
         }
         public async Task<EntityResponseListModel<CharterBookingTransferableDto>> GetCharterBookings(EntityBookingParamsDto param)
         {
-            param.userId = CurrentUser.Id;
+            param.UserId = CurrentUser.Id;
             var res = await _userListManager.GetCharterBookings(param).ConfigureAwait(false);
-            var logInfo = new { userId = param.userId, RequestId = _unitOfWorkManager.Current.Id };
+            var logInfo = new { userId = param.UserId, RequestId = _unitOfWorkManager.Current.Id };
             _logger.LogInformation("Show all Charter Reservation against this userId and Request  {@logInfo}", logInfo);
             return res;
 
         }
         public async Task<EntityResponseListModel<EventBookingTransferableDto>> GetEventBookings(EntityBookingParamsDto param)
         {
-            param.userId = CurrentUser.Id;
+            param.UserId = CurrentUser.Id;
             var res = await _userListManager.GetEventBookings(param).ConfigureAwait(false);
-            var logInfo = new { userId = param.userId, RequestId = _unitOfWorkManager.Current.Id };
+            var logInfo = new { userId = param.UserId, RequestId = _unitOfWorkManager.Current.Id };
             _logger.LogInformation("Show all Event Reservation against this userId and Request {@logInfo}", logInfo);
             return res;
 

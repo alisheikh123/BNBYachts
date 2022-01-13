@@ -28,7 +28,7 @@ export class AllReservationsComponent implements OnInit {
   selectedTabStatus: number = this.BOOKING_FILTER.ChooseFilter;
   public dateValue: Object = new Date();
   activeTab = 0;
-  currentReservationStatus: number;
+  currentReservationStatus: number= 0;
   selectedServiceType: number = 0;
   selectedBookingStatus:number=0;
   queryParams = {
@@ -42,6 +42,16 @@ export class AllReservationsComponent implements OnInit {
     charter: 1,
     event: 2
   };
+  getBookingObject =
+  {
+    filter:4,
+    bookingType:0,
+    month:"",
+    pageNo:0,
+    pageSize:0,
+    year:"",
+    userId:""
+  };
   userCharters: any;
   userEvents: any;
   constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
@@ -53,20 +63,16 @@ export class AllReservationsComponent implements OnInit {
     this.getReservations();
   }
   getReservations() {
+    let bookingObject = this.assignValuetoObject();
     if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
-      this.currentReservationStatus = this.currentReservationStatus==BookingStatus.ChooseFilter?BookingStatus.ChooseFilter:this.currentReservationStatus;
-      let timeFilter = this.selectedBookingStatus==this.BOOKING_FILTER.ChooseFilter?this.BOOKING_FILTER.All:this.selectedBookingStatus;
-      this.service.getBookings(timeFilter, this.selectedServiceType, this.selectedMonth,
-        this.selectedYear, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
+      this.service.getBookings(bookingObject).subscribe((res: any) => {
           this.allBookings = res?.data;
           this.totalRecords = res?.totalCount;
           this.boatelStatusFilter(this.currentReservationStatus);
         });
     }
     if (this.selectedServiceType == this.bookedServicesTypes.charter) {
-      let timeFilter = this.selectedBookingStatus==this.BOOKING_FILTER.ChooseFilter?this.BOOKING_FILTER.All:this.selectedBookingStatus;
-      this.service.getCharterBookings(timeFilter, this.selectedServiceType, this.selectedMonth,
-        this.selectedYear, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
+      this.service.getCharterBookings(bookingObject).subscribe((res: any) => {
           this.userCharters = res?.data;
           this.totalRecords = res?.totalCount;
           this.charterStatusFilter(this.currentReservationStatus);
@@ -74,9 +80,7 @@ export class AllReservationsComponent implements OnInit {
 
     }
     if (this.selectedServiceType == this.bookedServicesTypes.event) {
-      let timeFilter = this.selectedBookingStatus==this.BOOKING_FILTER.ChooseFilter?this.BOOKING_FILTER.All:this.selectedBookingStatus;
-      this.service.getEventBookings(timeFilter, this.selectedServiceType, this.selectedMonth,
-        this.selectedYear, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
+      this.service.getEventBookings(bookingObject).subscribe((res: any) => {
           this.userEvents = res?.data;
           this.totalRecords = res?.totalCount;
           this.eventStatusFilter(this.currentReservationStatus);
@@ -157,5 +161,16 @@ export class AllReservationsComponent implements OnInit {
     this.selectedMonth = selectedDuration.month;
     this.selectedYear = selectedDuration.year;
     this.getReservations();
+  }
+  assignValuetoObject()
+  {
+    this.currentReservationStatus = this.currentReservationStatus==BookingStatus.ChooseFilter?BookingStatus.ChooseFilter:this.currentReservationStatus;
+    this.getBookingObject.month = this.selectedMonth;
+    this.getBookingObject.year = this.selectedYear;
+    this.getBookingObject.pageNo = this.queryParams.page;
+    this.getBookingObject.pageSize =this.queryParams.pageSize;
+    this.getBookingObject.bookingType = this.selectedServiceType==this.bookedServicesTypes.boatel ?this.bookedServicesTypes.boatel:this.selectedServiceType;
+    this.getBookingObject.filter = this.selectedBookingStatus==this.BOOKING_FILTER.ChooseFilter?this.BOOKING_FILTER.All:this.selectedBookingStatus;
+    return this.getBookingObject;
   }
 }
