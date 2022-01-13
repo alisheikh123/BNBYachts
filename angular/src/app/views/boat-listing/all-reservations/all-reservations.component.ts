@@ -17,25 +17,29 @@ import * as moment from 'moment';
   providers: [NgbRatingConfig]
 })
 export class AllReservationsComponent implements OnInit {
+  public dateValue: Object = new Date();
   booking: any;
   allBookings: any;
-  selectedYear: string = "";
-  selectedMonth: string = "";
-  modelDate = "";
-  BOOKING_STATUS = BookingStatus;
-  selectedStatusFilter: any = this.BOOKING_STATUS.ChooseFilter;
-  BOOKING_FILTER = BookingResponseFilter;
-  selectedTabStatus: number = this.BOOKING_FILTER.ChooseFilter;
-  public dateValue: Object = new Date();
-  activeTab = 0;
-  currentReservationStatus: number= 0;
-  selectedServiceType: number = 0;
-  selectedBookingStatus:number=0;
+  userCharters: any;
+  userEvents: any;
+  listingFilter =
+  {
+    modelDate :"",
+    selectedYear: "",
+    selectedMonth:"",
+    BOOKING_STATUS:BookingStatus,
+    BOOKING_FILTER: BookingResponseFilter,
+    selectedStatusFilter: BookingStatus.ChooseFilter,
+    selectedTabStatus: BookingResponseFilter.ChooseFilter,
+    activeTab:0,
+    currentReservationStatus:4,
+    selectedServiceType:0,
+    selectedBookingStatus:0
+  };
   queryParams = {
     page: 1,
     pageSize: 5
   };
-  totalRecords: number = 0;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   bookedServicesTypes = {
     boatel: 0,
@@ -50,10 +54,9 @@ export class AllReservationsComponent implements OnInit {
     pageNo:0,
     pageSize:0,
     year:"",
-    userId:""
+    userId:"",
+    totalRecords:0
   };
-  userCharters: any;
-  userEvents: any;
   constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
     config.max = 5;
     config.readonly = true;
@@ -64,33 +67,33 @@ export class AllReservationsComponent implements OnInit {
   }
   getReservations() {
     let bookingObject = this.assignValuetoObject();
-    if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.boatel) {
       this.service.getBookings(bookingObject).subscribe((res: any) => {
           this.allBookings = res?.data;
-          this.totalRecords = res?.totalCount;
-          this.boatelStatusFilter(this.currentReservationStatus);
+          this.getBookingObject.totalRecords = res?.totalCount;
+          this.boatelStatusFilter(this.listingFilter.currentReservationStatus);
         });
     }
-    if (this.selectedServiceType == this.bookedServicesTypes.charter) {
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.charter) {
       this.service.getCharterBookings(bookingObject).subscribe((res: any) => {
           this.userCharters = res?.data;
-          this.totalRecords = res?.totalCount;
-          this.charterStatusFilter(this.currentReservationStatus);
+          this.getBookingObject.totalRecords = res?.totalCount;
+          this.charterStatusFilter(this.listingFilter.currentReservationStatus);
         });
 
     }
-    if (this.selectedServiceType == this.bookedServicesTypes.event) {
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.event) {
       this.service.getEventBookings(bookingObject).subscribe((res: any) => {
           this.userEvents = res?.data;
-          this.totalRecords = res?.totalCount;
-          this.eventStatusFilter(this.currentReservationStatus);
+          this.getBookingObject.totalRecords = res?.totalCount;
+          this.eventStatusFilter(this.listingFilter.currentReservationStatus);
         });
     }
 
 
   }
   boatelStatusFilter(status: Number) {
-    this.booking = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.allBookings.filter((res: any) => res.bookingStatus == status) : this.allBookings;
+    this.booking = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.allBookings.filter((res: any) => res.bookingStatus == status) : this.allBookings;
     this.booking.forEach((elem: any) => {
       this.boatService.boatDetailsById(elem.boatId).subscribe((boatdetail: any) => {
         elem.boatDetail = boatdetail;
@@ -98,7 +101,7 @@ export class AllReservationsComponent implements OnInit {
     });
   }
   charterStatusFilter(status: number) {
-    this.userCharters = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.userCharters.filter((res: any) => res.bookingStatus == status) : this.userCharters;
+    this.userCharters = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.userCharters.filter((res: any) => res.bookingStatus == status) : this.userCharters;
     this.userCharters.forEach((elem: any) => {
       this.boatService.charterDetailsById(elem.charterId).subscribe((charterdetail: any) => {
         elem.charterDetail = charterdetail?.charterDetails;
@@ -109,7 +112,7 @@ export class AllReservationsComponent implements OnInit {
     });
   }
   eventStatusFilter(status: number) {
-    this.userEvents = (status != null && status != this.BOOKING_STATUS.ChooseFilter) ? this.userEvents.filter((res: any) => res.bookingStatus == status) : this.userEvents;
+    this.userEvents = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.userEvents.filter((res: any) => res.bookingStatus == status) : this.userEvents;
     this.userEvents.forEach((elem: any) => {
       this.boatService.eventDetailsById(elem.eventId).subscribe((eventdetail: any) => {
         elem.eventDetail = eventdetail?.eventDetails;
@@ -120,18 +123,18 @@ export class AllReservationsComponent implements OnInit {
     });
   }
   applyDateFilter(data: any) {
-    const stringToSplit = this.modelDate;
+    const stringToSplit = this.listingFilter.modelDate;
     let result = stringToSplit.split('-');
-    this.selectedYear = moment(data?.value).format("YYYY");
-    this.selectedMonth = moment(data?.value).format("MM");
+    this.listingFilter.selectedYear = moment(data?.value).format("YYYY");
+    this.listingFilter.selectedMonth = moment(data?.value).format("MM");
 
   }
   selectedbookingStatusFilter(selectedItem: number) {
-    this.selectedBookingStatus = selectedItem;
+    this.listingFilter.selectedBookingStatus = selectedItem;
     this.getReservations();
   }
   filterServiceType(serviceType: number) {
-    this.selectedServiceType = serviceType;
+    this.listingFilter.selectedServiceType = serviceType;
     this.getReservations();
   }
   onPageChange(data: any) {
@@ -144,33 +147,33 @@ export class AllReservationsComponent implements OnInit {
     this.getReservations();
   }
   selectedReservationStatus(selectedItem:any) {
-    this.currentReservationStatus = selectedItem.reserStatus;
-    this.selectedServiceType = selectedItem.reservationtype;
+    this.listingFilter.currentReservationStatus = selectedItem.reserStatus;
+    this.listingFilter.selectedServiceType = selectedItem.reservationtype;
     this.getReservations();
   }
   selectedReservationTime(selectedTime:any)
   {
-    this.selectedServiceType = selectedTime.reservationtype;
-    this.selectedBookingStatus = selectedTime.reserTime;
+    this.listingFilter.selectedServiceType = selectedTime.reservationtype;
+    this.listingFilter.selectedBookingStatus = selectedTime.reserTime;
     this.getReservations();
 
   }
   selectedDuration(selectedDuration:any)
   {
-    this.selectedServiceType = selectedDuration.reservationtype;
-    this.selectedMonth = selectedDuration.month;
-    this.selectedYear = selectedDuration.year;
+    this.listingFilter.selectedServiceType = selectedDuration.reservationtype;
+    this.listingFilter.selectedMonth = selectedDuration.month;
+    this.listingFilter.selectedYear = selectedDuration.year;
     this.getReservations();
   }
   assignValuetoObject()
   {
-    this.currentReservationStatus = this.currentReservationStatus==BookingStatus.ChooseFilter?BookingStatus.ChooseFilter:this.currentReservationStatus;
-    this.getBookingObject.month = this.selectedMonth;
-    this.getBookingObject.year = this.selectedYear;
+    this.listingFilter.currentReservationStatus = this.listingFilter.currentReservationStatus==BookingStatus.ChooseFilter?BookingStatus.ChooseFilter:this.listingFilter.currentReservationStatus;
+    this.getBookingObject.month = this.listingFilter.selectedMonth;
+    this.getBookingObject.year = this.listingFilter.selectedYear;
     this.getBookingObject.pageNo = this.queryParams.page;
     this.getBookingObject.pageSize =this.queryParams.pageSize;
-    this.getBookingObject.bookingType = this.selectedServiceType==this.bookedServicesTypes.boatel ?this.bookedServicesTypes.boatel:this.selectedServiceType;
-    this.getBookingObject.filter = this.selectedBookingStatus==this.BOOKING_FILTER.ChooseFilter?this.BOOKING_FILTER.All:this.selectedBookingStatus;
+    this.getBookingObject.bookingType = this.listingFilter.selectedServiceType==this.bookedServicesTypes.boatel ?this.bookedServicesTypes.boatel:this.listingFilter.selectedServiceType;
+    this.getBookingObject.filter = this.listingFilter.selectedBookingStatus==this.listingFilter.BOOKING_FILTER.ChooseFilter?this.listingFilter.BOOKING_FILTER.All:this.listingFilter.selectedBookingStatus;
     return this.getBookingObject;
   }
 }

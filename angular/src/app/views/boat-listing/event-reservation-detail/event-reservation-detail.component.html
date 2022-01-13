@@ -53,7 +53,7 @@
             <div class="character-info-wrapper  custom-flex">
                   <div class="custom-flex-start character-info py-2">
                     <p class="medium description-fotmat">{{'EventType' | localization}}</p>
-                    <p class="grey">{{(eventBooking?.eventType)==EVENT_TYPE?"Adults":"Family"}}</p>
+                    <p class="grey">{{(eventBooking?.eventType)==filters.EVENT_TYPE?"Adults":"Family"}}</p>
                   </div>
                   <div class="custom-flex-start character-info py-2">
                     <p class="medium description-fotmat">{{'EventFee' | localization}}</p>
@@ -81,7 +81,7 @@
                   <p class="medium text-right py-1">{{(eventBooking?.amountPerPerson * eventBooking?.guestCapacity) + 20 +
                     eventBooking?.boat?.taxFee}}.00 $</p>
                 </div>
-                <ng-container *ngIf="eventBooking?.bookingStatus===BOOKING_STATUS.Cancel">
+                <ng-container *ngIf="eventBooking?.bookingStatus===filters.BOOKING_STATUS.Cancel">
                 <ng-container *ngFor="let item of eventBooking?.bookingCancelDetail">
                 <div class="custom-flex-between">
                     <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
@@ -106,10 +106,10 @@
         </div>
 
         <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
-          *ngIf="eventBooking?.bookingStatus != BOOKING_STATUS.Rejected">
-          <div *ngIf="eventBooking?.bookingStatus == BOOKING_STATUS.Cancel"></div>
-          <div *ngIf="checkedStartDate == today"></div>
-          <div *ngIf="eventBooking?.bookingStatus != BOOKING_STATUS.Cancel">
+          *ngIf="eventBooking?.bookingStatus != filters.BOOKING_STATUS.Rejected">
+          <div *ngIf="eventBooking?.bookingStatus == filters.BOOKING_STATUS.Cancel"></div>
+          <div *ngIf="filters.checkedStartDate == filters.today"></div>
+          <div *ngIf="eventBooking?.bookingStatus != filters.BOOKING_STATUS.Cancel">
             <!-- <div *ngIf="isEventStarted(checkedStartDate,checkinTimeValidation)"> -->
               <!-- <div *ngIf="checkedDepartureFromDate > today"> -->
                 <div class="center-content">
@@ -118,7 +118,7 @@
                   <button [routerLink]="['/boat-listing/modify-reservation',eventBooking?.id]"
                     class="custom-btn btn-big blue me-sm-3" >{{'ModifyReservation' | localization}}</button>
                     <a (click)="addReview()"
-                    *ngIf='!isPosted && isBookingPassed() && eventBooking?.bookingStatus == BOOKING_STATUS.Approved'
+                    *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
                     class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
                 </div>
               <!-- </div> -->
@@ -126,13 +126,13 @@
           </div>
            <div *ngIf="isEndDateEnded(eventBooking?.endDateTime,eventBooking?.boat?.checkoutTime)">
             <a (click)="addReview()"
-            *ngIf='!isPosted && isBookingPassed() && eventBooking?.bookingStatus == BOOKING_STATUS.Approved'
+            *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
             class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
         </div>
         <!-- </div> -->
 
 
-        <app-list-reviews [eventBookingId]=eventBookingId></app-list-reviews>
+        <app-list-reviews [eventBookingId]=eventReservation.eventBookingId></app-list-reviews>
       </div>
 
 

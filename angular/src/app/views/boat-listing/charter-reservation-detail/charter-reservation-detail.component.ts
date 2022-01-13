@@ -7,6 +7,7 @@ import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { ICharterReservation } from 'src/app/shared/interface/reservation';
 import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
@@ -17,21 +18,21 @@ import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.com
   styleUrls: ['./charter-reservation-detail.component.scss']
 })
 export class CharterReservationDetailComponent implements OnInit {
-  charterBookingId: number;
+  charterReservation: ICharterReservation =
+  {
+    checkoutTime: '',
+    charterBookingId: 0,
+    isPosted: false,
+    isHost: false
+  };
+  filters = {
+    BOOKING_STATUS: BookingStatus,
+    USER_ROLES: UserRoles,
+    today: new Date().toLocaleDateString(),
+    checkinTimeValidation: Date()
+  };
+  checkedDepartureFromDate:any;
   charterBooking: any;
-  currentDate: any;
-  hideCancellationbtn: boolean;
-  isHourslessthanones: any;
-  isCurrentDateGreater: any;
-  isPosted: boolean;
-  BOOKING_STATUS = BookingStatus;
-  isHost: boolean = false;
-  USER_ROLES = UserRoles;
-  today = new Date().toLocaleDateString();
-  bookingStatus: any;
-  checkedDepartureFromDate: any;
-  checkinTime: any;
-  checkoutTime:any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   constructor(private service: BookingService
@@ -41,19 +42,19 @@ export class CharterReservationDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
-      this.charterBookingId = Number(res['id']);
+      this.charterReservation.charterBookingId = Number(res['id']);
     });
     var userRole = localStorage.getItem('userRole');
-    userRole == this.USER_ROLES.host
-      ? (this.isHost = true)
-      : (this.isHost = false);
-    this.boatService.charterDetailsById(this.charterBookingId).subscribe((res: any) => {
+    userRole == this.filters.USER_ROLES.host
+      ? (this.charterReservation.isHost = true)
+      : (this.charterReservation.isHost = false);
+    this.boatService.charterDetailsById(this.charterReservation.charterBookingId).subscribe((res: any) => {
       this.charterBooking = res?.charterDetails;
       this.checkedDepartureFromDate = new Date(this.charterBooking?.departureFromDate).toLocaleDateString();
       let departingFromDate = moment(this.charterBooking?.departureFromDate, "YYYY-MM-DD");
       let departingToDate =   moment(this.charterBooking?.departureToDate, "YYYY-MM-DD");
        this.charterBooking.totalDays = departingToDate.diff(departingFromDate,'days') + 1;
-       this.checkoutTime = this.charterBooking?.boat?.checkoutTime;
+       this.charterReservation.checkoutTime = this.charterBooking?.boat?.checkoutTime;
 
     });
      this.isReviewPosted();
@@ -62,7 +63,7 @@ export class CharterReservationDetailComponent implements OnInit {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
       let review = {
         revieweeID: this.charterBooking?.boatId,
-        bookingId: this.charterBookingId,
+        bookingId: this.charterReservation.charterBookingId,
         reviewDescription: res.reviewText,
         ratings: res.ratingStars
       };
@@ -70,25 +71,25 @@ export class CharterReservationDetailComponent implements OnInit {
         if (res) {
           this.modal.dismissAll();
           this.toastr.success("Review Added Successfully", "Review");
-          this.isPosted = true;
+          this.charterReservation.isPosted = true;
           this.listReviewComponent.getReviews();
         }
       });
     });
   }
   isReviewPosted() {
-    this.service.isReviewPosted(this.charterBookingId).subscribe((res: any) => {
-      this.isPosted = res;
+    this.service.isReviewPosted(this.charterReservation.charterBookingId).subscribe((res: any) => {
+      this.charterReservation.isPosted = res;
     });
   }
   isBookingPassed(): boolean {
-    let parsedDate = Date.parse(this.checkoutTime);
+    let parsedDate = Date.parse(this.charterReservation.checkoutTime);
     let today = Date.parse(new Date().toISOString());
     return (today > parsedDate) ? true : false;
   }
 
   goBack() {
-    this.isHost==true?this.route.navigate(['host/my-bookings']):this.route.navigate(['boat-listing/all-reservations']);
+    this.charterReservation.isHost==true?this.route.navigate(['host/my-bookings']):this.route.navigate(['boat-listing/all-reservations']);
   }
 
   isDepartureFromStarted(departureFromDate: Date, checkinTime: Date) {
