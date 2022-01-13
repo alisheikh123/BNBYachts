@@ -78,12 +78,12 @@
                                     Inbox
                                 <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
                             </a>                                
-                            <a href="" class="underline-link-blk">
+                            <a [routerLink]="['/host/calendar']" class="underline-link-blk">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/calendar-icon.svg"
                                         alt=""></a>
                                     </span>
-                                    Calender
+                                    Calendar
                             </a>
                             <a [routerLink]="['/host/my-bookings']" class="underline-link-blk">
                                 <span class="logo-wrapper">

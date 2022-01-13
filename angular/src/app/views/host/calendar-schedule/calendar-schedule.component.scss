@@ -1,0 +1,58 @@
+.custome-select{
+  border: none;
+  font-weight: 600;
+  font-size: 30px;
+  color: black;
+}
+
+::ng-deep .fc-theme-standard td a{
+  color: #777777 !important;
+}
+::ng-deep .fc-theme-standard th{
+  border: none !important;
+  color: black !important;
+  text-align: left !important;
+  padding: 0 !important;
+}
+::ng-deep .fc-theme-standard th a{
+  color: black !important;
+  font-size: 12px;
+  font-weight: bold;
+
+}
+
+::ng-deep table {
+  border-spacing: 10px !important;
+  border: none !important;
+border-collapse: separate !important;
+}
+::ng-deep .fc-scrollgrid-section > td{
+  border: none !important;
+  padding: 0 !important;
+}
+::ng-deep .fc-scrollgrid-sync-table{
+  border-spacing: 10px !important;
+border-collapse: separate !important;
+}
+::ng-deep .fc-scrollgrid-sync-table td{
+  border-spacing: 10px !important;
+  border:1px solid  #F1F1F1 !important;
+  border-collapse: separate !important;
+  border-radius: 6px !important; 
+}
+::ng-deep .fc-scroller{
+  overflow: hidden !important;
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{
+  min-height: 0 !important;
+}
+::ng-deep .fc-daygrid-day-bottom:before{
+display: block !important;
+}
+::ng-deep .fc-daygrid-event-harness:before{
+  display: inherit !important;
+  content: inherit !important;
+  }
+  ::ng-deep .fc-toolbar-title{
+    font-size: 16px !important;
+  }

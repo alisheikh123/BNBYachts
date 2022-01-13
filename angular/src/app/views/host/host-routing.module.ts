@@ -11,6 +11,7 @@ import { HostBoatListingComponent } from './host-boat-listing/host-boat-listing.
 import { BoatEditComponent } from './boat-edit/boat-edit.component';
 import { EventCreationComponent } from './event-creation/event-creation.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
+import { CalendarScheduleComponent } from './calendar-schedule/calendar-schedule.component';
 
 const routes: Routes = [
   {
@@ -35,8 +36,7 @@ const routes: Routes = [
   },
   {
     path: "event-creation", component: EventCreationComponent
-  }
-  ,
+  },
   {
     path: "charter-creation", component: CharterCreationComponentComponent
   },
@@ -51,6 +51,9 @@ const routes: Routes = [
   },
   {
     path: "event-location/:id", component: EventLocationSettingComponent
+  },
+  {
+    path: "calendar", component:CalendarScheduleComponent
   }
 ];
 
