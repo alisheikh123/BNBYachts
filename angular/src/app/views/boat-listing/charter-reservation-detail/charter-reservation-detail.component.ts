@@ -50,9 +50,9 @@ export class CharterReservationDetailComponent implements OnInit {
     this.boatService.charterDetailsById(this.charterBookingId).subscribe((res: any) => {
       this.charterBooking = res?.charterDetails;
       this.checkedDepartureFromDate = new Date(this.charterBooking?.departureFromDate).toLocaleDateString();
-      this.charterBooking.departingFromDate = new Date(this.charterBooking?.departureFromDate);
-      this.charterBooking.departingToDate = new Date(this.charterBooking?.departureToDate);
-       this.charterBooking.totalDays = Math.ceil((this.charterBooking.departingToDate - this.charterBooking.departingFromDate) / 8.64e7) + 1;
+      let departingFromDate = moment(this.charterBooking?.departureFromDate, "YYYY-MM-DD");
+      let departingToDate =   moment(this.charterBooking?.departureToDate, "YYYY-MM-DD");
+       this.charterBooking.totalDays = departingToDate.diff(departingFromDate,'days') + 1;
        this.checkoutTime = this.charterBooking?.boat?.checkoutTime;
 
     });

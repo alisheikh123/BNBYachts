@@ -2,9 +2,9 @@
     <div class="container">
       <div class="row">
         <div class="btn-back">
-          <a (click)="goBack()" id="backLink">
+          <a class="backLink" (click)="goBack()" >
 
-            <i class="fas fa-chevron-left" id="leftIcon"></i>
+            <i class="fas fa-chevron-left leftIcon"></i>
           </a>
 
           <h2 class="bold">{{'EventReservationDetails' | localization}}</h2>
@@ -114,9 +114,9 @@
               <!-- <div *ngIf="checkedDepartureFromDate > today"> -->
                 <div class="center-content">
                   <button [routerLink]="['/boat-listing/reservation-cancellation',eventBooking?.id]"
-                    class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2" [disabled]="true" >{{'CancelReservation' | localization}}</button>
+                    class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
                   <button [routerLink]="['/boat-listing/modify-reservation',eventBooking?.id]"
-                    class="custom-btn btn-big blue me-sm-3" [disabled]="true" >{{'ModifyReservation' | localization}}</button>
+                    class="custom-btn btn-big blue me-sm-3" >{{'ModifyReservation' | localization}}</button>
                     <a (click)="addReview()"
                     *ngIf='!isPosted && isBookingPassed() && eventBooking?.bookingStatus == BOOKING_STATUS.Approved'
                     class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
