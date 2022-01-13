@@ -13,7 +13,6 @@ export class BookingListingService {
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
   getBookings(param:any) {
-    debugger;
    return this.http.get(this.bookingApiUrl + '/boatel-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
   }
   getCharterBookings(param:any) {
