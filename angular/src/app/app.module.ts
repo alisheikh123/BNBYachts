@@ -37,7 +37,6 @@ import { BookingFilterComponent } from './views/boat-listing/booking-filter/book
     MyProfileComponent,
     UpdateProfileComponent,
     AddReviewModalComponent,
-    BookingFilterComponent
   ],
   imports: [
     BrowserModule,

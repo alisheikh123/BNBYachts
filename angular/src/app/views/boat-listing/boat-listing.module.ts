@@ -58,6 +58,10 @@ import { EventReservationDetailComponent } from './event-reservation-detail/even
     PaginationModule,
     CalendarModule
   ],
-    providers: [YachtSearchService, BookingService]
+    providers: [YachtSearchService, BookingService],
+    exports: [BoatListingModule.rootComponent],
+    entryComponents: [BoatListingModule.rootComponent],
 })
-export class BoatListingModule { }
+export class BoatListingModule {
+  static rootComponent = BookingFilterComponent
+}

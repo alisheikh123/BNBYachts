@@ -34,6 +34,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { BookingFilterComponent } from '../boat-listing/booking-filter/booking-filter.component';
+import { BoatListingModule } from '../boat-listing/boat-listing.module';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -61,8 +62,7 @@ CharterCreationComponentComponent,
 RejectionModalComponent,
 CharterEditComponent,
 EventEditComponent,
-CalendarScheduleComponent,
-BookingFilterComponent
+CalendarScheduleComponent
   ],
   imports: [
     HostRoutingModule,
@@ -80,6 +80,7 @@ BookingFilterComponent
     PaginationModule,
     CalendarModule,
     FullCalendarModule,
+    BoatListingModule
   ],
   providers: [YachtSearchService,ReservationService]
 })
