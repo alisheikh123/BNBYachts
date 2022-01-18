@@ -83,7 +83,7 @@
 
                         }
                     </div>
-                </form>     }
+                </form>}
 
             @if (Model.VisibleExternalProviders.Any())
             {
@@ -94,7 +94,7 @@
                         {
                             <button type="submit" class="btn btn-primary m-1" name="provider" value="@provider.AuthenticationScheme" title="@L["LogInUsingYourProviderAccount", provider.DisplayName]">@provider.DisplayName</button>}
                     </form>
-                </div>      }
+                </div>}
 
             @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
             {
@@ -141,7 +141,7 @@
 
                         }
                     </div>
-                </form>     }
+                </form>}
 
 
         </div>
