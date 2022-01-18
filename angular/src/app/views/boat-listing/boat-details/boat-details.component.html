@@ -113,7 +113,6 @@
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
                                                                         [minDate] = "minDate"
                                                                         [maxDate]="maxDate"
-                                                                        [markDisabled]="isDisabled"
                                                                         (ngModelChange)="setMaxDate(boatFilterDetails.checkinDate)"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
