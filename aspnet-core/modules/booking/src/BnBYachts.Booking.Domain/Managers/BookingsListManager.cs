@@ -105,6 +105,15 @@ namespace BnBYachts.Booking.Managers
             && res.BookingStatus == BookingStatus.Rejected).ConfigureAwait(false));
             return response;
         }
+
+        public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetMyBookings(int boatId,Guid? userId)
+        {
+            var response = new EntityResponseListModel<BookingRequestsRequestableDto>();
+            response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsRequestableDto>>(
+                await _boatelBookingRepository.GetListAsync(res => res.BoatId == boatId && res.CreatorId == userId && res.BookingStatus != BookingStatus.Rejected).ConfigureAwait(false));
+            return response;
+        }
+
         public async Task<bool> UpdateReservationStatus(int bookingId, bool isAccpeted,string rejectionReason, int serviceType)
         {
             string userName = "";

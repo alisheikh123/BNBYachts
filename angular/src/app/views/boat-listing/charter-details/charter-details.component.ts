@@ -91,7 +91,8 @@ export class CharterDetailsComponent implements OnInit {
           noOfAdults: this.charterFilterDetails.adults,
           noOfChildrens: this.charterFilterDetails.childrens,
           hostId: this.charterDetails.boat.creatorId,
-          bookingStatus: 0
+          bookingStatus: 0,
+          boatId:this.charterDetails.boatId
         };
         this.bookingService.charterBooking(bookingModel).subscribe(res => {
           let bookingId = res?.data?.id;

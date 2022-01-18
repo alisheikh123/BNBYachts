@@ -9,7 +9,7 @@ namespace BnBYachts.Boat
     {
         public ChatDomainAutoMapperProfile()
         {
-            CreateMap<ChatEntity, ChatTransferable>();
+            CreateMap<ChatEntity, ChatTransferable>().ForMember(res=>res.SentTime,opt=>opt.MapFrom(res=>res.SentDate));
             CreateMap<UserInfo, ChatUserTransferable>();
         }
     }

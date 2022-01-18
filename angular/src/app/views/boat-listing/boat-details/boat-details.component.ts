@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbDatepickerConfig, NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateStruct, NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Guid } from 'guid-typescript';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -19,15 +20,6 @@ import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-lo
 })
 export class BoatDetailsComponent implements OnInit {
   bookingId: any;
-
-  constructor(config: NgbRatingConfig, private toastr: ToastrService,
-     private yachtSearchService: YachtSearchService, private router: Router,
-      private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
-       private activatedRoute: ActivatedRoute,private authService:AuthService,private modal:NgbModal
-       ,private calendarService:CalendarService) {
-    config.max = 5;
-    config.readonly = true;
-  }
   boatId: number;
   boatDetails: any;
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
@@ -53,7 +45,22 @@ export class BoatDetailsComponent implements OnInit {
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
   boatelCapcityValidation:any;
+  myBookings:any = [];
+  disabledDates: [
+    { year: 2020, month: 8, day: 13 },
+    { year: 2020, month: 8, day: 19 },
+    { year: 2022, month: 1, day: 25 }
+  ];
   @ViewChild('popOver') public popover: NgbPopover;
+
+  
+  constructor(config: NgbRatingConfig, private toastr: ToastrService,
+    private yachtSearchService: YachtSearchService, private router: Router,
+     private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
+      private activatedRoute: ActivatedRoute,private authService:AuthService,private modal:NgbModal) {
+   config.max = 5;
+   config.readonly = true;
+ }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -64,11 +71,15 @@ export class BoatDetailsComponent implements OnInit {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
     if (this.boatFilterDetails.checkinDate == null && this.boatFilterDetails.checkoutDate == null) {
-      debugger;
       this.boatFilterDetails.checkinDate = this.minDate;//new Date();
       this.boatFilterDetails.checkoutDate = this.maxDate;//new Date();
       this.boatFilterDetails.adults = 1;
     }
+    this.getMyBookings();
+  }
+  isDisabled(date: NgbDateStruct) {
+    const d = new Date(date.year, date.month - 1, date.day);
+    return this.myBookings.length > 0;
   }
   calculateDays() {
     if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null) {
@@ -97,6 +108,14 @@ export class BoatDetailsComponent implements OnInit {
   getHostDetails(userId: string) {
     this.yachtSearchService.hostDetailsById(userId).subscribe(res => {
       this.boatHost = res;
+    })
+  }
+
+  getMyBookings(){
+    this.bookingService.getmyBookings(this.boatId).subscribe((res:any)=>{
+      this.myBookings = res?.data;
+      console.log(this.myBookings);
+      debugger;
     })
   }
 

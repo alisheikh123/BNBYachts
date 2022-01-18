@@ -55,8 +55,8 @@ namespace BnBYachts.Booking.Managers
         public async Task<EntityResponseModel> GetBoatBookingCalendar(string hostId,int month, int boatId)
         {
             var getBoatelBookings = await _boatelBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId && res.CheckinDate.Month == month).ConfigureAwait(false);
-            var getCharterBookings = await _charterBookingRepository.GetListAsync(res => res.HostId == hostId  && res.DepartureDate.Month == month).ConfigureAwait(false);
-            var getEventsBooking = await _eventBookingRepository.GetListAsync(res => res.HostId == hostId && res.EventDate.Month == month).ConfigureAwait(false);
+            var getCharterBookings = await _charterBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId  && res.DepartureDate.Month == month).ConfigureAwait(false);
+            var getEventsBooking = await _eventBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId &&  res.EventDate.Month == month).ConfigureAwait(false);
             var response = new BookingCalendarTransferable();
             response.Boatels = _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<CalendarTransferable>>(getBoatelBookings);
             response.Charters = _objectMapper.Map<ICollection<CharterBookingEntity>, ICollection<CalendarTransferable>>(getCharterBookings);
