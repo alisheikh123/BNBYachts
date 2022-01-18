@@ -121,7 +121,7 @@ export class ChatComponent implements OnInit {
       });
     /////Calls when message is broadcast to the reciever...
     this._hubConnection.on('sendToUser', (res) => {
-      res.sentDate = moment().format("DD-MM-YYYY");
+      res.sentDate = moment().format("DD-MMM-YYYY");
       res.sentTime = moment();
       this.userMessages.push(res);
       this.app.unReadChatCount = this.app.unReadChatCount +1;
