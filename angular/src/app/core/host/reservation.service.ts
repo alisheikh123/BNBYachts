@@ -10,10 +10,20 @@ import { environment } from 'src/environments/environment';
 export class ReservationService {
   bookingApiUrl: string = environment.BOOKING_API_URL;
   boatApiUrl: string = environment.BOAT_API_URL+'/api';
+  charterApiUrl:string = this.boatApiUrl + '/app/charter/update-charter-location';
+  eventApiUrl:string = this.boatApiUrl + '/app/event/update-event-location';
   constructor(private http: HttpClient) { }
 
   updateBoatLocation(boatLocation: any) {
     return this.http.post(this.boatApiUrl + '/update-location', boatLocation).pipe(
+      catchError(this.handleError));
+  }
+  updateCharterLocation(charterLocation: any) {
+    return this.http.put(this.charterApiUrl, charterLocation).pipe(
+      catchError(this.handleError));
+  }
+  updateEventLocation(eventLocation: any) {
+    return this.http.put(this.eventApiUrl , eventLocation).pipe(
       catchError(this.handleError));
   }
 
