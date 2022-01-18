@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -54,6 +55,9 @@ export class CharterDetailsComponent implements OnInit {
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
+       this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
+       this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
+       this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
       this.charterSchedule = res.charterSchedule;
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
@@ -135,6 +139,9 @@ export class CharterDetailsComponent implements OnInit {
     this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
     this.yachtSearchService.charterDetailsById(this.charterSchedule[this.dateScheduleIndex]?.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
+      this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
+      this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
+      this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
     })
   }
 }

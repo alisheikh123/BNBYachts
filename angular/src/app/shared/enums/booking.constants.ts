@@ -21,9 +21,9 @@ export enum ServiceType {
   }
   export enum BookingType
   {
-    Boatels = 0,
-    Charters = 1,
-    Events = 2,
+    Boatels = 1,
+    Charters = 2,
+    Events = 3,
   }
   export enum SelectedServiceType
   {

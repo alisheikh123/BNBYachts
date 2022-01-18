@@ -23,7 +23,7 @@ export class CharterCreationComponentComponent implements OnInit {
   currentTab = this.CHARTER_TABS.BoatSelection;
   boatlistOptions:any=[];
   isAgree: boolean = false;
-  minDate = new Date(); 
+  minDate = new Date();
 
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class CharterCreationComponentComponent implements OnInit {
       destinationLatitude: [],
       destinationLongitude: [],
       destination: [null, Validators.required],
-      isFullBoatCharges: [true],
+      isFullBoatCharges: [false],
       charterFee: [0,Validators.required],
       departureFromDate: [new Date(), Validators.required],
       departureToDate: [new Date(),Validators.required],
