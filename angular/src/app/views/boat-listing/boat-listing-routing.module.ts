@@ -10,6 +10,8 @@ import { EventListingComponent } from './event-listing/event-listing.component';
 import { CharterListingComponent } from './charter-listing/charter-listing.component';
 import { CharterDetailsComponent } from './charter-details/charter-details.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { EventReservationDetailComponent } from './event-reservation-detail/event-reservation-detail.component';
+import { CharterReservationDetailComponent } from './charter-reservation-detail/charter-reservation-detail.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,12 @@ const routes: Routes = [
   },
   {
     path: "modify-reservation/:id", component: ModifyReservationComponent
+  },
+  {
+    path: "charter-reservation-detail/:id", component: CharterReservationDetailComponent
+  },
+  {
+    path: "event-reservation-detail/:id", component: EventReservationDetailComponent
   }
 ];
 

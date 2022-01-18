@@ -9,7 +9,6 @@ import { BoatServiceType } from 'src/app/shared/enums/boat-service-type';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 
 
-
 @Component({
   selector: 'app-calendar-schedule',
   templateUrl: './calendar-schedule.component.html',
@@ -40,10 +39,6 @@ export class CalendarScheduleComponent implements OnInit {
     this.getBoats();
   }
 
-  handleDateClick(arg: any) {
-    alert('date click! ' + arg.dateStr)
-  }
-
   getBoats() {
     this.service.getBoats().subscribe(res => {
       this.boats = res;
@@ -55,24 +50,6 @@ export class CalendarScheduleComponent implements OnInit {
     this.calendarService.getBoatCalendar(boatId, month).subscribe((res: any) => {
       this.getBoatBookingsCalendar();
       this.boatCalendar = [...res?.data.charters, ...res?.data.events];
-      debugger;
-      // let event:any = [];
-      // this.boatCalendar.forEach((element:any) => {
-      //   event.push({
-      //     start: new Date(element.startDate),
-      //     end: new Date(element.endDate),
-      //     title: element.name,
-      //     allDay: true,    
-      //    backgroundColor :"#091654", //element.serviceType === this.SERVICE_TYPES.Boatel ? 'red' 
-      // //: (element.serviceType === this.SERVICE_TYPES.Charter ? '#091654' : 'black'),
-      //     draggable: true,
-      //     resizable: {
-      //       beforeStart: true,
-      //       afterEnd: true,
-      //     }
-      //   });
-      // });
-      // this.calendarOptions.events = event;
     })
   }
 

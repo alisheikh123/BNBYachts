@@ -4,6 +4,7 @@ using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Event.Transferables;
 using BnBYachts.Events;
 using BnBYachts.Shared.Model;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,11 +19,13 @@ namespace BnBYachts.Boat.Manager
         private readonly IRepository<BoatEntity, int> _boatRepository;
         private readonly IRepository<EventEntity, int> _eventRepository;
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
-        public EventManager(IRepository<BoatEntity, int> boatRepository, IObjectMapper<BoatDomainModule> objectMapper, IRepository<EventEntity, int> eventRepository)
+        private readonly ILogger<IEventManager> _logger;
+        public EventManager(IRepository<BoatEntity, int> boatRepository, IObjectMapper<BoatDomainModule> objectMapper, IRepository<EventEntity, int> eventRepository, ILogger<IEventManager> logger)
         {
             _boatRepository = boatRepository;
             _objectMapper = objectMapper;
             _eventRepository = eventRepository;
+            _logger = logger;
         }
 
         public async Task<ICollection<BoatLookupTransferable>> GetBoats(Guid? userId)
@@ -91,6 +94,20 @@ namespace BnBYachts.Boat.Manager
             events.IsActive = !events.IsActive;
             return true;
 
+        }
+        public async Task<bool> UpdateEventLocation(EventLocationRequestable eventDetails, Guid? userId)
+        {
+            var eventEntity = await _eventRepository.FindAsync(res => res.Id == eventDetails.Id).ConfigureAwait(false);
+            _objectMapper.Map<EventLocationRequestable, EventEntity>(eventDetails, eventEntity);
+            if (eventEntity != null)
+            {
+                eventEntity.LastModifierId = userId;
+                eventEntity.LastModificationTime = DateTime.Now;
+                await _eventRepository.UpdateAsync(eventEntity, autoSave: true).ConfigureAwait(false);
+                _logger.LogInformation("Update the Location of Event");
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -1,6 +1,8 @@
 export enum ServiceType {
     Boatels = "Boatels",
-    Charters = "ChartersEvents"
+    Charters = "Charters",
+    Events = "Events",
+    ChooseFilter="Choose Filter"
   }
 
   export enum BookingStatus {
@@ -16,4 +18,16 @@ export enum ServiceType {
       Upcomings= 1,
       Past = 2,
       ChooseFilter=3
+  }
+  export enum BookingType
+  {
+    Boatels = 0,
+    Charters = 1,
+    Events = 2,
+  }
+  export enum SelectedServiceType
+  {
+    Boatels = 1,
+    Charters = 2,
+    Events = 3,
   }

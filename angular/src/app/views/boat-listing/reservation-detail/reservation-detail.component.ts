@@ -7,6 +7,7 @@ import { BookingListingService } from 'src/app/core/Booking/booking-listing.serv
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 
@@ -34,6 +35,8 @@ export class ReservationDetailComponent implements OnInit {
   bookingStatus: any;
   checkedCheckinDate: any;
   checkinTime: any;
+  checkoutTime:any;
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
   constructor(private service: BookingService
@@ -62,7 +65,6 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkinDate = this.checkInDate;
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
-        this.checkinTime = this.booking?.boatDetail?.checkinTime;
       });
 
     });
@@ -156,22 +158,20 @@ export class ReservationDetailComponent implements OnInit {
     let currentDate = moment().format("DD-MM-YYYY");
     let inTime = moment(checkinTime).format("HH:mm");
     let curretTime = moment().format("HH:mm");
-    if (checkinDate != undefined && checkinTime != undefined) {
-      if (inDate == currentDate && inTime > curretTime) {
-        return true;
-      }
-      if (moment(checkinDate).isAfter(moment().format("YYYY-MM-DD"))) {
-        return true;
-      }
-      else {
-        return false;
-      }
-
+    if (checkinDate != undefined && checkinTime != undefined) {return (inDate == currentDate && inTime > curretTime)?true:(moment(checkinDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;}
+    else{return false;}
+  }
+  isCheckoutTimeEnd(checkoutDate:Date,checkoutTime:Date){
+    let outDate = moment(checkoutDate).format("DD-MM-YYYY");
+    let currentDate = moment().format("DD-MM-YYYY");
+    let outTime = moment(checkoutTime).format("HH:mm");
+    let curretTime = moment().format("HH:mm");
+    if (checkoutDate != undefined && checkoutTime != undefined) {
+     return  (outDate == currentDate && curretTime > outTime) ?true:(moment(checkoutDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;
     }
-
-    return false;
-
-
+    else{
+      return false;
+    }
   }
 }
 
