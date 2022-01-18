@@ -43,7 +43,7 @@ export class BookingFilterComponent implements OnInit {
    activeTab = 0;
    RESERVATION_STATUS = BookingType;
   selectedReservationStatus:any = BookingType.Boatels;
-  selectedServiceType: number = 0;
+  selectedServiceType: number = 1;
   selectedReservationsStatus:number = BookingStatus.ChooseFilter;
   @Output() reservationStatus = new EventEmitter<any>();
   @Output() reservationTimeStatus = new EventEmitter<any>();

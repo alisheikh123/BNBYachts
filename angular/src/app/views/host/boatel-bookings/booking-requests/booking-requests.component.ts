@@ -22,9 +22,9 @@ export class BookingRequestsComponent implements OnInit {
   @Input() boatelBookings: any = [];
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   bookedServicesTypes = {
-    boatel: 0,
-    charter: 1,
-    event: 2
+    boatel: 1,
+    charter: 2,
+    event: 3
   };
   queryParams = {
     page: 1,
@@ -41,7 +41,7 @@ export class BookingRequestsComponent implements OnInit {
       selectedTabStatus: BookingResponseFilter.ChooseFilter,
       activeTab: 0,
       currentReservationStatus: 4,
-      selectedServiceType: 0,
+      selectedServiceType: 1,
       selectedBookingStatus: 0,
       totalRecords: 0,
       SELECTED_SERVICE_TYPE:SelectedServiceType

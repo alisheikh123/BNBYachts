@@ -15,9 +15,9 @@ export class BookedServicesComponent implements OnInit {
   eventServices: any;
   bookedServices: any;
   bookedServicesTypes = {
-    boatel: 0,
-    charter: 1,
-    event: 2
+    boatel: 1,
+    charter: 2,
+    event: 3
   };
   listingFilter =
     {
@@ -30,7 +30,7 @@ export class BookedServicesComponent implements OnInit {
       selectedTabStatus: BookingResponseFilter.ChooseFilter,
       activeTab: 0,
       currentReservationStatus: 4,
-      selectedServiceType: 0,
+      selectedServiceType: 1,
       selectedBookingStatus: 0,
       totalRecords: 0,
       SELECTED_SERVICE_TYPE: SelectedServiceType
@@ -60,33 +60,6 @@ export class BookedServicesComponent implements OnInit {
 
 
   getBookedServices() {
-    // this.reservationService.getBookedServices(this.listingFilter.selectedServiceType, this.queryParams.page, this.queryParams.pageSize).subscribe((res: any) => {
-    //   this.bookedServices = res?.data;
-    //   this.listingFilter.totalRecords = res?.totalCount
-    //   if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.boatel) {
-    //     this.bookedServices.forEach((element: any) => {
-    //       this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
-    //         element.boatDetail = boatdetail;
-    //       });
-    //     });
-    //   }
-    //   else if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.charter) {
-    //     this.bookedServices.forEach((element: any) => {
-    //       this.boatService.charterDetailsById(element.charterId).subscribe((charter: any) => {
-    //         element.boatDetail = charter?.charterDetails?.boat;
-    //         element.charter = charter?.charterDetails;
-    //       });
-    //     });
-    //   }
-    //   else {
-    //     this.bookedServices.forEach((element: any) => {
-    //       this.boatService.eventDetailsById(element.eventId).subscribe((event: any) => {
-    //         element.boatDetail = event?.eventDetails?.boat;
-    //         element.event = event?.eventDetails;
-    //       });
-    //     });
-    //   }
-    // })
     let bookingObject = this.assignValuetoObject();
     if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.boatel) {
       this.reservationService.getBookedServices(bookingObject).subscribe((res: any) => {
