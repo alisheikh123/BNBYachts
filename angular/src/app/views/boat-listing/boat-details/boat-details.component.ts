@@ -191,6 +191,6 @@ export class BoatDetailsComponent implements OnInit {
   updateGuests() {
     this.boatFilterDetails.adults = this.popOverFilterData.adults;
     this.boatFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.boatelCapcityValidation = this.boatFilterDetails.adults + this.boatFilterDetails.childrens>this.boatDetails?.boatelCapacity?"Please Enter Valid Guests":this.popover.close();
+    this.boatelCapcityValidation = (((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)>(this.boatDetails?.boatelCapacity)) || ((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)<1))?"Entered guest capacity is not available":this.popover.close();
   }
 }

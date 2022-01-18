@@ -170,7 +170,7 @@
                                                                         <label class="m-0 max-width-50">Adults</label>
                                                                         <div class="custom-flex-start max-width-50">
                                                                             <span class="minus" style="cursor: pointer;"
-                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults > 0 ? popOverFilterData.adults - 1 : 0;">-</span>
+                                                                                (click)="popOverFilterData.adults = popOverFilterData.adults > 0 ? popOverFilterData.adults - 1 : popOverFilterData.adults;">-</span>
                                                                             <input type="text"
                                                                                 [(ngModel)]="popOverFilterData.adults" />
                                                                             <span class="plus" style="cursor: pointer;"

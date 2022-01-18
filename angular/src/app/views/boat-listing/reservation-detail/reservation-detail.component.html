@@ -13,9 +13,21 @@
     <div class="row">
       <div class="col-sm-8 py-2">
         <div>
+          <h5 class="bold pb-1">Description</h5>
+          <div  *ngIf="((this.noOfWords<=20));else greaterThanLimitBlock">
+            <p class="small-text medium-container text-left grey"> {{showDescription().join(' ')}} </p>
+          </div>         
+          <ng-template #greaterThanLimitBlock>
+            <div *ngIf="this.showMore; else showLessBlock">
+              {{showDescription().join(' ')}}
+            </div>
+            <ng-template #showLessBlock>
+              {{(showDescription() | slice:0:21).join(' ')}}
+            </ng-template>
+            <button class="custom-btn underline-blue-link no-before-content p-0" (click)="showMoreToggle()">Show {{ this.showMore ? 'Less' : 'More...' }}</button>          
+          </ng-template>
           <h5 class="bold pb-1">{{"Description" | localization}}</h5>
           <p class="small-text medium-container text-left grey">{{booking?.boatDetail?.description }}</p>
-
         </div>
         <div class="">
           <div class="character-info-wrapper  custom-flex">
