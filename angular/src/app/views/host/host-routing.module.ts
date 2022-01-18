@@ -1,3 +1,5 @@
+import { EventLocationSettingComponent } from './event-location-setting/event-location-setting.component';
+import { CharterLocationSettingComponent } from './charter-location-setting/charter-location-setting.component';
 import { CharterEditComponent } from './charter-edit/charter-edit.component';
 import { CharterCreationComponentComponent } from './charter-creation-component/charter-creation-component.component';
 import { NgModule } from '@angular/core';
@@ -34,8 +36,7 @@ const routes: Routes = [
   },
   {
     path: "event-creation", component: EventCreationComponent
-  }
-  ,
+  },
   {
     path: "charter-creation", component: CharterCreationComponentComponent
   },
@@ -44,6 +45,12 @@ const routes: Routes = [
   },
   {
     path: "charter-edit/:id", component: CharterEditComponent
+  },
+  {
+    path: "charter-location/:id", component: CharterLocationSettingComponent
+  },
+  {
+    path: "event-location/:id", component: EventLocationSettingComponent
   },
   {
     path: "calendar", component:CalendarScheduleComponent

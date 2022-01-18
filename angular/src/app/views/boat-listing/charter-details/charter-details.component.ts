@@ -93,7 +93,8 @@ export class CharterDetailsComponent implements OnInit {
           noOfAdults: this.charterFilterDetails.adults,
           noOfChildrens: this.charterFilterDetails.childrens,
           hostId: this.charterDetails.boat.creatorId,
-          bookingStatus: 0
+          bookingStatus: 0,
+          boatId:this.charterDetails.boatId
         };
         this.bookingService.charterBooking(bookingModel).subscribe(res => {
           let bookingId = res?.data?.id;
@@ -127,7 +128,7 @@ export class CharterDetailsComponent implements OnInit {
   updateGuests() {
     this.charterFilterDetails.adults = this.popOverFilterData.adults;
     this.charterFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.charterCapcityValidation = this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity?"Please Enter Valid Guests":this.popover.close();
+    this.charterCapcityValidation = ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity)||(this.charterFilterDetails.adults + this.charterFilterDetails.childrens<1))?"Entered guest capacity is not available":this.popover.close();
   }
 
   showAllFeatures() {

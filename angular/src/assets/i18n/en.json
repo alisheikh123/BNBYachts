@@ -111,7 +111,12 @@
   "Cancelled":"Cancelled",
   "Rejected":"Rejected",
   "Upcomings":"Upcomings",
-  "Past":"Past"
-
-
+  "Past":"Past",
+  "Location":"Location",
+  "Listing":"Listing",
+  "NextLocation":"Next Location",
+  "BoatelLocation":"Boatel Location",
+  "CharterLocation":"Charter Location",
+  "CurrentLocation":"Current Location",
+  "DepartureFrom":"Departure From"
 }

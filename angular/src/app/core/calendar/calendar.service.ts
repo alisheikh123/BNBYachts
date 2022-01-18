@@ -12,6 +12,7 @@ import { ErrorService } from '../Error/error.service';
 export class CalendarService {
 
   apiBoat = environment.BOAT_API_URL+"/api/app/boat-calendar";
+  apiBooking = environment.BOOKING_API_URL+"/api/app/booking-calendar";
   constructor(private http: HttpClient,private errorService:ErrorService) { }
 
   getBoatCalendar(boatId:number,month:number) {
@@ -19,8 +20,13 @@ export class CalendarService {
       catchError(this.errorService.handleError));;
   }
 
-  getBoatelCalendar(boatId:number) {
-    return this.http.get(this.apiBoat + '/boatel-calendar/'+boatId).pipe(
+  getMyBookings(boatId:number,month:number) {
+    return this.http.get(this.apiBoat + '/boatel-bookings').pipe(
+      catchError(this.errorService.handleError));;
+  }
+
+  getBoatBookingsCalendar(boatId:number,month:number) {
+    return this.http.get(this.apiBooking + '/boat-booking-calendar/'+boatId+'?month='+month).pipe(
       catchError(this.errorService.handleError));;
   }
 }

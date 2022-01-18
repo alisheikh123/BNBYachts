@@ -59,6 +59,9 @@ namespace BnBYachts.Boat
             CreateMap<HostBoatRequestable, BoatEntity>();
             CreateMap<BoatFeaturesRequestable, BoatFeatureEntity>();
             CreateMap<BoatRulesRequestable, BoatRuleEntity>();
+            CreateMap<EventEntity,EventRequestable>();
+            CreateMap<CharterLocationRequestable, CharterEntity>();
+            CreateMap<EventLocationRequestable, EventEntity>();
             CreateMap<EventEntity, EventRequestable>();
             CreateMap<CharterEntity, CalendarTransferable>()
                 .ForMember(x => x.StartDate,

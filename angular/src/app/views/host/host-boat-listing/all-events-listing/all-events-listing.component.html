@@ -16,11 +16,11 @@
                     Boat":item?.boat?.boatType==BOAT_TYPE.SailBoat?"Sail
                     Boat":item?.boat?.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
                 </p>
-                <p class=" ">{{item?.boat?.creationTime | date}}</p>
+                <p class=" ">{{item?.creationTime | date}}</p>
             </div>
         </div>
         <div class="right-content custom-flex flex-wrap">
-        <a [routerLink]="['/host/boat-location',item.id]" class="custom-btn small-round grey" ngbTooltip="Location"><svg
+        <a [routerLink]="['/host/event-location',item.id]" class="custom-btn small-round grey" ngbTooltip="Location"><svg
             id="place_black_24dp_1_" data-name="place_black_24dp (1)" xmlns="http://www.w3.org/2000/svg" width="24"
             height="24" viewBox="0 0 24 24">
             <path id="Path_21117" data-name="Path 21117" d="M0,0H24V24H0Z" fill="none" />
@@ -43,7 +43,6 @@
               transform="translate(0.139 0.132)" fill="#777" />
           </svg>
         </a>
-        <a href="#" class="custom-btn grey" ngbTooltip="Setting" >Event setting</a>
             <a [routerLink]="['/host/event-edit',item.id]" class="custom-btn small-round grey" ngbTooltip="Edit"><svg id="edit_black_24dp"
                 width="23.965" height="23.965" viewBox="0 0 23.965 23.965">
                 <path id="Path_20708" data-name="Path 20708" d="M0,0H23.965V23.965H0Z" fill="none" />

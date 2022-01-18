@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using NUglify.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -78,6 +79,7 @@ namespace BnBYachts.Chat.Managers
         public async Task<ICollection<ChatUserTransferable>> GetAllUsers(string hostId,string userToCheck)
         {
             var listOfAllUsersInChats = await _chatRepository.GetListAsync(x => x.ReceiverId == userToCheck || x.SenderId == userToCheck).ConfigureAwait(false);
+            listOfAllUsersInChats = listOfAllUsersInChats.OrderByDescending(res => res.SentDate).ToList();
             ICollection<UserInfo> listUsers = new List<UserInfo>();
             if (hostId != "undefined")
             {
@@ -87,32 +89,29 @@ namespace BnBYachts.Chat.Managers
                     listUsers.Add(findUser);
                 }
             }
-            foreach (var chat in listOfAllUsersInChats.DistinctBy(x => x.SenderId))
+            foreach (var chat in listOfAllUsersInChats)
             {
-                var result = await _userInfoRepository.FindAsync(x => x.UserId == chat.SenderId).ConfigureAwait(false);
-                if(result.UserId.ToLower() != userToCheck.ToLower())
+                var senderUser = await _userInfoRepository.FirstOrDefaultAsync(x => x.UserId == chat.SenderId && x.UserId.ToLower() != userToCheck.ToLower()).ConfigureAwait(false);
+                var recieverUser = await _userInfoRepository.FirstOrDefaultAsync(x => x.UserId == chat.ReceiverId && x.UserId.ToLower() != userToCheck.ToLower()).ConfigureAwait(false);
+                if (senderUser!=null && !listUsers.Contains(senderUser))
                 {
-                    result.UnReadChatsCount=  await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
-                    && res.SenderId.ToLower() == result.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
-                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsArchivedUser = findArchived != null;
-                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsBlocked = getBlockedUser != null;
-                    listUsers.Add(result);
+                    senderUser.UnReadChatsCount=  await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
+                    && res.SenderId.ToLower() == senderUser.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
+                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == senderUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    senderUser.IsArchivedUser = findArchived != null;
+                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == senderUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    senderUser.IsBlocked = getBlockedUser != null;
+                    listUsers.Add(senderUser);
                 }
-            }
-            foreach (var chat in listOfAllUsersInChats.DistinctBy(x => x.ReceiverId))
-            {
-                var result = await _userInfoRepository.FindAsync(x => x.UserId == chat.ReceiverId).ConfigureAwait(false);
-                if (result.UserId.ToLower() != userToCheck.ToLower() && !(listUsers.Contains(result)))
+                if (recieverUser !=null && !listUsers.Contains(recieverUser))
                 {
-                    result.UnReadChatsCount = await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
-                    && res.SenderId.ToLower() == result.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
-                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsArchivedUser = findArchived != null;
-                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsBlocked = getBlockedUser != null;
-                    listUsers.Add(result);
+                    recieverUser.UnReadChatsCount = await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
+                    && res.SenderId.ToLower() == recieverUser.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
+                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == recieverUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    recieverUser.IsArchivedUser = findArchived != null;
+                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == recieverUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    recieverUser.IsBlocked = getBlockedUser != null;
+                    listUsers.Add(recieverUser);
                 }
             }
             return _objectMapper.Map<ICollection<UserInfo>, ICollection<ChatUserTransferable>>(listUsers);

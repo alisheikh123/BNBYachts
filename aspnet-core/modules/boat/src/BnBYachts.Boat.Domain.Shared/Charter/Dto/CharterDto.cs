@@ -28,5 +28,6 @@ namespace BnBYachts.Boat.Charter.Dto
         public virtual int? BoatId { get; set; }
         public virtual BoatDTO Boat { get; set; }
         public bool? IsActive { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }
