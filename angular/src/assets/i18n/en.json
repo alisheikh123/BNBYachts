@@ -73,5 +73,13 @@
   "Cancel":"Cancel",
   "StartDate":"Start Date",
   "EndDate":"End Date",
-  "AmountPerPerson":"Amount Per Person"
+  "AmountPerPerson":"Amount Per Person",
+  "Location":"Location",
+  "Listing":"Listing",
+  "NextLocation":"Next Location",
+  "BoatelLocation":"Boatel Location",
+  "CharterLocation":"Charter Location",
+  "CurrentLocation":"Current Location",
+  "DepartureFrom":"Departure From"
+
 }

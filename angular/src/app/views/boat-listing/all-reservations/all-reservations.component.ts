@@ -48,7 +48,7 @@ export class AllReservationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getReservations();
+  this.getReservations();
   }
 
   getReservations() {
