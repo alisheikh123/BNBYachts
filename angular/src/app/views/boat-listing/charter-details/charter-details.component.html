@@ -93,19 +93,21 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <p class="medium min-width-text">Return Details:</p>
-                                                    <div class="custom-flex-start py-1 flex-mobile-column">
-                                                        <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Departure:</p>
-                                                            <p class="min-width-text-small">
-                                                                {{charterDetails?.returnDate | date:'MMM-dd-YYYY'}}</p>
+                                                    <div *ngIf="charterDetails?.isRoundTrip">
+                                                        <p class="medium min-width-text">Return Details:</p>
+                                                        <div class="custom-flex-start py-1 flex-mobile-column">
+                                                            <div class="custom-flex mobile-width-100">
+                                                                <p class="medium min-width-text small-content">Departure:</p>
+                                                                <p class="min-width-text-small">
+                                                                    {{charterDetails?.returnDate | date:'MMM-dd-YYYY'}}</p>
+                                                            </div>
+                                                            <div class="custom-flex mobile-width-100">
+                                                                <p class="medium min-width-text-small small-content">Arrival:</p>
+                                                                <p class="min-width-text-small">{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                        <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text-small small-content">Arrival:</p>
-                                                            <p class="min-width-text-small">{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                                    </div>                                                    
                                                     <!-- <div class="custom-flex-start py-1">
                                                         <p class="medium min-width-text">Check In time:</p>
                                                         <p>{{boatDetails?.checkinTime | date :'hh:mm a'}}</p>
@@ -186,7 +188,7 @@
                                                                             <div class="custom-flex-start max-width-50">
                                                                                 <span class="minus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults - 1;">-</span>
+                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults>0?popOverFilterData.adults- 1: popOverFilterData.adults;">-</span>
                                                                                 <input type="text"
                                                                                     [(ngModel)]="popOverFilterData.adults" />
                                                                                 <span class="plus"
@@ -212,7 +214,7 @@
                                                                             <div class="custom-flex-start max-width-50">
                                                                                 <span class="minus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens -1;">-</span>
+                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens>0?popOverFilterData.childrens-1:popOverFilterData.childrens;">-</span>
                                                                                 <input type="text"
                                                                                     [(ngModel)]="popOverFilterData.childrens" />
                                                                                 <span class="plus"

@@ -122,7 +122,7 @@ namespace BnBYachts.Boat.Manager
                 await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
             }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatLocations).ConfigureAwait(false);
-
+            await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
             return boat;
         }
         public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable param)
@@ -143,8 +143,10 @@ namespace BnBYachts.Boat.Manager
                 }
             }
             ///guest Filters
-            return filterdCharters.WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
-        }
+            return (filterdCharters
+                .WhereIf(param.DepartureDate != null, res => res.DepartureFromDate.Date == param.DepartureDate)
+                .WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens)).ToList();
+        } 
         public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
         {
             var charter = await _charterRepository.GetAsync(b => b.Id == charterId, false).ConfigureAwait(false);

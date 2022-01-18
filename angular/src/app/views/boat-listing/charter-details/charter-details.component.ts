@@ -55,7 +55,6 @@ export class CharterDetailsComponent implements OnInit {
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
-      console.log(this.charterDetails);
       this.charterSchedule = res.charterSchedule;
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
@@ -125,7 +124,7 @@ export class CharterDetailsComponent implements OnInit {
   updateGuests() {
     this.charterFilterDetails.adults = this.popOverFilterData.adults;
     this.charterFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.charterCapcityValidation = this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity?"Please Enter Valid Guests":this.popover.close();
+    this.charterCapcityValidation = ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity)||(this.charterFilterDetails.adults + this.charterFilterDetails.childrens<1))?"Entered guest capacity is not available":this.popover.close();
   }
 
   showAllFeatures() {

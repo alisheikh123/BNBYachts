@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceTypes } from 'src/app/shared/enums/yacht-search.constant';
 
 
 @Component({
@@ -8,10 +9,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./no-found-modal.component.scss']
 })
 export class NoFoundModalComponent implements OnInit {
+  @Input() yachtType: ServiceTypes;
+  message: string[] = ['Boatel', 'Charter', 'Event'];
+  constructor(public activeModal:NgbActiveModal) {
 
-  constructor(public activeModal:NgbActiveModal) { }
+   }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -36,6 +36,10 @@ export class ReservationDetailComponent implements OnInit {
   checkinTime: any;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
+  description: any;
+  noOfWords: number;
+  showMore = false;
+
   constructor(private service: BookingService
     , private bookingListService: BookingListingService,
     public activatedRoute: ActivatedRoute, private route: Router,
@@ -63,10 +67,12 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
         this.checkinTime = this.booking?.boatDetail?.checkinTime;
+        this.tokenizeString();
       });
-
+      
     });
     this.isReviewPosted();
+    
   }
   addReview() {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
@@ -172,6 +178,16 @@ export class ReservationDetailComponent implements OnInit {
     return false;
 
 
+  }
+  tokenizeString() {
+    this.description = this.booking?.boatDetail?.description.split(" ");
+    this.noOfWords = this.description.length;
+  }
+  showDescription() {
+    return this.description;
+  }
+  showMoreToggle() {    
+    this.showMore = !this.showMore;
   }
 }
 

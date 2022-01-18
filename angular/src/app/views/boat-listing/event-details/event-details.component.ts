@@ -127,7 +127,7 @@ export class EventDetailsComponent implements OnInit {
   updateGuests() {
     this.eventFilterDetails.adults = this.popOverFilterData.adults;
     this.eventFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.eventCapcityValidation = this.eventFilterDetails.adults + this.eventFilterDetails.childrens>this.eventDetails?.guestCapacity?"Please Enter Valid Guests":this.popover.close();
+    this.eventCapcityValidation = (((this.eventFilterDetails.adults + this.eventFilterDetails.childrens)>this.eventDetails?.guestCapacity)||((this.eventFilterDetails.adults + this.eventFilterDetails.childrens)<1))?"Entered guest capacity is not available":this.popover.close();
   }
 
   onChangeDate(isIncrease: boolean) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDatepickerConfig, NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { EventTypes, ServiceTypes } from 'src/app/shared/enums/yacht-search.constant';
@@ -75,6 +76,7 @@ export class YachtSearchComponent implements OnInit {
         }
         else {
           let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true });
+          modalRef.componentInstance.yachtType = this.YachtTypes.boatel;
         }
       });
     }
@@ -133,6 +135,7 @@ export class YachtSearchComponent implements OnInit {
         }
         else {
           let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true });
+          modalRef.componentInstance.yachtType = this.YachtTypes.charter;
         }
       });
     }
@@ -160,6 +163,7 @@ export class YachtSearchComponent implements OnInit {
       }
       else {
         let modalRef = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true });
+        modalRef.componentInstance.yachtType = this.YachtTypes.event;
       }
     });
   }
