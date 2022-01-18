@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BoatService } from 'src/app/core/Boat/boat.service';
-import { Observable } from 'rxjs/Observable';
-import { forkJoin } from 'rxjs';  // RxJS 6 syntax
 import { environment } from 'src/environments/environment';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
 
@@ -21,16 +19,21 @@ export class MyProfileComponent implements OnInit {
   constructor(private authService : AuthService,private boatService : BoatService) { }
 
   ngOnInit(): void {
-    this.getUserInfo().subscribe(responseList => {
-      this.userResponse = responseList[0];
-      this.userBoats = responseList[1]?.data;
+
+    this.authService.getUserInfo().subscribe(res=>{
+      this.userResponse = res;
       this.loggedInUserRole = localStorage.getItem('userRole');
-  });
+      if(this.loggedInUserRole == this.USER_ROLE.host){
+        this.boatService.getUserBoats(1,5).subscribe(res=>{
+          this.userBoats = res;
+        })
+      }
+    })
   }
 
-  public getUserInfo(): Observable<any[]> {
-    let response1  = this.authService.getUserInfo();
-    let response2  = this.boatService.getUserBoats(1,5);
-    return forkJoin([response1 ,response2]);
-  }
+  // public getUserInfo(): Observable<any[]> {
+  //   let response1  = this.authService.getUserInfo();
+  //   let response2  = this.boatService.getUserBoats(1,5);
+  //   return forkJoin([response1 ,response2]);
+  // }
 }
