@@ -99,7 +99,6 @@ export class CalendarScheduleComponent implements OnInit {
     else if (data.serviceType == this.SERVICE_TYPES.Event) {
       this.boatService.eventDetailsById(data.id).subscribe((res:any) => {
         this.eventDetails = res.eventDetails;
-        debugger;
       })
     }
   }
