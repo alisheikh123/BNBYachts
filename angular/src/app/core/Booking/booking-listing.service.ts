@@ -12,11 +12,17 @@ export class BookingListingService {
   bookingApiUrl: string = environment.BOOKING_API_URL + '/api/app/user-booking-list';
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
-  getBookings(filterType:number,month?: string, year?: string,pageNo?: number, pageSize?: number) {
-    return this.http.get(this.bookingApiUrl + '/boatel-bookings?filter=' + filterType + '&month=' + month + '&year=' + year + '&pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
+  getBookings(param:any) {
+   return this.http.get(this.bookingApiUrl + '/boatel-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
   }
-  getBookingDetailbyId(BookingId: any) {
-    return this.http.get(this.bookingApiUrl + '/boatel-booking/' + BookingId).pipe(catchError(this.errorService.handleError));
+  getCharterBookings(param:any) {
+    return this.http.get(this.bookingApiUrl + '/charter-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
+  }
+  getEventBookings(param:any) {
+    return this.http.get(this.bookingApiUrl + '/event-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
+  }
+  getBookingDetailbyId(BookId: any) {
+    return this.http.get(this.bookingApiUrl + '/boatel-booking/' + BookId).pipe(catchError(this.errorService.handleError));
   }
   getHostBookings() {
     return this.http.get(this.bookingApiUrl + '/host-boatel-bookings').pipe(catchError(this.errorService.handleError));

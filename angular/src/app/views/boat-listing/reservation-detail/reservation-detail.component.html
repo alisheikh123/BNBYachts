@@ -2,28 +2,25 @@
   <div class="container">
     <div class="row">
       <div class="btn-back">
-        <a (click)="goBack()" style="border: 1px solid #122ba8;">
-          <!-- <i class="material-icons arrow_back_ios" >
-
-            </i> -->
-          <i class="fas fa-chevron-left" style="color:#122ba8"></i>
+        <a (click)="goBack()" class="backLink">
+          <i class="fas fa-chevron-left leftIcon"></i>
         </a>
 
-        <h2 class="bold">Reservation Details</h2>
+        <h2 class="bold">{{"BoatelReservationDetails" | localization}}</h2>
       </div>
 
     </div>
     <div class="row">
       <div class="col-sm-8 py-2">
         <div>
-          <h5 class="bold pb-1">Description</h5>
+          <h5 class="bold pb-1">{{"Description" | localization}}</h5>
           <p class="small-text medium-container text-left grey">{{booking?.boatDetail?.description }}</p>
-          <a class="custom-btn underline-blue-link no-before-content p-0">more.</a>
+
         </div>
         <div class="">
           <div class="character-info-wrapper  custom-flex">
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Boat Name:</p>
+              <p class="medium description-fotmat">{{'BoatName' | localization}}</p>
               <p class="grey">{{booking?.boatDetail?.name }}</p>
             </div>
             <div class="custom-flex-start character-info py-2">
@@ -35,41 +32,41 @@
           </div>
           <div class="character-info-wrapper  custom-flex">
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Check In Date:</p>
+              <p class="medium description-fotmat">{{"CheckInDate" | localization}}</p>
               <p class="grey">{{booking?.checkinDate | date}}</p>
             </div>
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Check Out Date:</p>
+              <p class="medium description-fotmat">{{"CheckOutDate" | localization}}</p>
               <p class="grey">{{booking?.checkoutDate | date}}</p>
             </div>
           </div>
           <div class="character-info-wrapper  custom-flex">
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">No of Guest:</p>
+              <p class="medium description-fotmat">{{"NoofGuest" | localization}}</p>
               <p class="grey"> {{booking?.noOfAdults + booking?.noOfChildrens}}</p>
             </div>
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Location :</p>
+              <p class="medium description-fotmat">{{"Location" | localization}}</p>
               <p class="grey">{{booking?.boatDetail?.location}}</p>
             </div>
           </div>
           <div class="character-info-wrapper  custom-flex">
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Check In Time:</p>
+              <p class="medium description-fotmat">{{"CheckInTime" | localization}}</p>
               <p class="grey">{{booking?.boatDetail?.checkinTime | date:'h:mm a' }}</p>
             </div>
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Check Out Time:</p>
+              <p class="medium description-fotmat">{{"CheckOutTime" | localization}}</p>
               <p class="grey">{{booking?.boatDetail?.checkoutTime | date:'h:mm a'}}</p>
             </div>
           </div>
           <div class="character-info-wrapper  custom-flex">
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Bedroom:</p>
+              <p class="medium description-fotmat">{{"Bedroom" | localization}}</p>
               <p class="grey">{{booking?.boatDetail?.totalBedrooms}}</p>
             </div>
             <div class="custom-flex-start character-info py-2">
-              <p class="medium description-fotmat">Bathroom:</p>
+              <p class="medium description-fotmat">{{"Bathroom" | localization}}</p>
               <p class="grey">{{booking?.boatDetail?.totalWashrooms}}</p>
             </div>
 
@@ -77,33 +74,33 @@
 
 
           <div class="price-detail py-4">
-            <h5 class="bold pt-3 pb-1">Price Details</h5>
+            <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
             <div class="custom-flex-between">
               <p class="medium">{{booking?.boatDetail?.perDayCharges}} x {{ booking?.TotalDays}} Night</p>
               <p class="medium text-right py-1">{{booking?.boatDetail?.perDayCharges * booking?.TotalDays }}.00 $</p>
             </div>
             <div class="custom-flex-between">
-              <p class="medium">Service Fee</p>
+              <p class="medium">{{"ServiceFee" | localization}}</p>
               <p class="medium text-right py-1">20.00 $</p>
             </div>
             <div class="custom-flex-between">
-              <p class="medium">Tax</p>
+              <p class="medium">{{"Tax" | localization}}</p>
               <p class="medium text-right py-1">{{booking?.boatDetail?.taxFee}}.00 $</p>
             </div>
             <div class="custom-flex-between">
-              <p class="medium">Total(USD)</p>
+              <p class="medium">{{"Total(USD)" | localization}}</p>
               <p class="medium text-right py-1">{{(booking?.boatDetail?.perDayCharges * booking?.TotalDays) + 20 + 20 +
                 booking?.boatDetail?.taxFee}}.00 $</p>
             </div>
             <ng-container *ngIf="booking?.bookingStatus===BOOKING_STATUS.Cancel">
             <ng-container *ngFor="let item of booking?.bookingCancelDetail">
             <div class="custom-flex-between">
-                <p class="medium">Deducted Amount(USD)</p>
+                <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
                 <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
             </div>
 
             <div class="custom-flex-between">
-                <p class="medium">Refundable Amount(USD)</p>
+                <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
                 <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
             </div>
           </ng-container>
@@ -114,7 +111,7 @@
       <div class="col-sm-4 py-2">
         <div class="character-info-img">
           <div *ngFor="let imgs of booking?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
-            <img src={{imgs.imagePath}} alt="">
+            <img src="{{assetsUrl+imgs.imagePath}}" alt="">
           </div>
         </div>
       </div>
@@ -124,25 +121,23 @@
         <div *ngIf="booking?.bookingStatus == BOOKING_STATUS.Cancel"></div>
         <div *ngIf="checkedCheckinDate == today"></div>
         <div *ngIf="booking?.bookingStatus != BOOKING_STATUS.Cancel">
-          <div *ngIf="isCheckinStarted(checkedCheckinDate,checkinTime)">
+          <div *ngIf="isCheckinStarted(checkedCheckinDate,booking?.boatDetail?.checkinTime)">
             <!-- <div *ngIf="checkedCheckinDate > today"> -->
               <div class="center-content">
                 <a [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
                 <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
                   class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
-                <a (click)="addReview()"
-                  *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
-                  class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
               </div>
             <!-- </div> -->
           </div>
         </div>
-
-
+         <!-- <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking?.boatDetail?.checkoutTime)"> -->
+        <a (click)="addReview()"
+        *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
+        class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
       </div>
-
-
+      <!-- </div> -->
       <app-list-reviews [bookingId]=bookingId></app-list-reviews>
     </div>
   </div>

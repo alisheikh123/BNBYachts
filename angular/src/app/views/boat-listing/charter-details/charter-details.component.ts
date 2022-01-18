@@ -110,7 +110,7 @@ export class CharterDetailsComponent implements OnInit {
           }
         })
       }
-    }    
+    }
     else {
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
     }
