@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
 
 @Component({
@@ -22,8 +24,9 @@ export class ChatUsersComponent implements OnInit {
     archived: 1,
     blocked: 2
   }
+  senderDetails:any;
 
-  constructor(private chatService: ChatService, private activatedRoute: ActivatedRoute) {
+  constructor(private chatService: ChatService, private activatedRoute: ActivatedRoute,private authService:AuthService) {
     this.userId = localStorage.getItem('userId') || ' ';
   }
 
@@ -32,6 +35,7 @@ export class ChatUsersComponent implements OnInit {
       this.hostId = res['id'];
     });
     this.getAllUsers();
+    this.getUserDetails();
   }
 
   getAllUsers() {
@@ -68,5 +72,10 @@ export class ChatUsersComponent implements OnInit {
     if (this.chatUsers.length > 0) {
       this.onChangeUser.emit(this.chatUsers[0]);
     }
+  }
+  getUserDetails() {
+    this.authService.getUserInfo().subscribe((res: any) => {
+      this.senderDetails = res;
+    })
   }
 }

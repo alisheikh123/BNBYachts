@@ -65,7 +65,7 @@ RejectionModalComponent,
 CharterEditComponent,
 EventEditComponent,
 CharterLocationSettingComponent,
-EventLocationSettingComponent
+EventLocationSettingComponent,
 CalendarScheduleComponent
   ],
   imports: [
