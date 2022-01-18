@@ -219,6 +219,9 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<string>("BankingDetailsId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("BoatId")
+                        .HasColumnType("int");
+
                     b.Property<int>("BookingStatus")
                         .HasColumnType("int");
 
@@ -340,6 +343,9 @@ namespace BnBYachts.Booking.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BankingDetailsId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BoatId")
                         .HasColumnType("int");
 
                     b.Property<int>("BookingStatus")

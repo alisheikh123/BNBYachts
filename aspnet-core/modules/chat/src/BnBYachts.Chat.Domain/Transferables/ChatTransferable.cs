@@ -12,6 +12,9 @@ namespace BnBYachts.Chat.Transferables
         public string ReceiverId { get; set; }
         public string User { get; set; }
         public string Message { get; set; }
+        public DateTime ReadDate { get; set; }
+        public DateTime SentDate { get; set; }
+        public DateTime SentTime { get; set; }
     }
     public class ChatMessagesTransferable
     {

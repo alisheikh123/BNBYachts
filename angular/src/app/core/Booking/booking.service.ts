@@ -82,4 +82,8 @@ export class BookingService {
   {
     return this.http.get(this.bookingApiUrl +this.bookingCancellation+bookingId).pipe(catchError(this.handleError));
   }
+
+  getmyBookings(boatId:number){
+    return this.http.get(this.bookingApiUrl +'/api/app/booking-list/my-bookings/'+boatId).pipe(catchError(this.handleError));
+  }
 }

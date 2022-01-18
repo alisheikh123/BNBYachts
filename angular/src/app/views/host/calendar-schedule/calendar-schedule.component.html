@@ -3,17 +3,79 @@
         <div class="row">
             <div class="">
                 <select name="select" id="select" class="custome-select" (change)="getBoatCalendar(boatId,1)"
-                [(ngModel)]="boatId">
-                    <option [ngValue]="item.id" *ngFor="let item of boats" >{{item?.name}}</option>
+                    [(ngModel)]="boatId">
+                    <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
                 </select>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <full-calendar #calendar [options]="calendarOptions" class="custom-calender" >
-            </full-calendar> 
+        <div class="row">
+            <div [ngClass]="{'col-12': !showEventDetails , 'col-8':showEventDetails}">
+                <full-calendar  #calendar [options]="calendarOptions" class="custom-calender"
+                    eventClick="getEventDetails($event)">
+                </full-calendar>
+            </div>
+            
+            <div class="col-4" *ngIf="showEventDetails">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="image-with-text">
+                                    <div class="image-with-text-inner small-img">
+                                        <img src="../../../../assets/images/user-img.png" alt="">
+                                        <div class="user-details">
+                                            <p class="medium">John Cena</p>
+                                            <p class="small-text grey">Event</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="serviceType == SERVICE_TYPES.Event">
+                                    <div class="ps-2 pt-4">
+                                        <p class="bold">Selected Dates</p>
+                                        <p>{{eventDetails?.startDateTime | date}}</p>
+                                        <p class="bold">Event</p>
+                                        <p>{{eventDetails?.title}}</p>
+                                        <p class="bold">Total Price</p>
+                                        <p>{{eventDetails?.amountPerPerson}} $</p>
+                                        <p class="bold">Time</p>
+                                        <p>{{eventDetails?.startDateTime | date : 'hh:mm a'}}</p>
+                                        <p class="bold">Note</p>
+                                        <p></p>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="serviceType == SERVICE_TYPES.Boatel">
+                                    <div class="ps-2 pt-4">
+                                        <p class="bold">Boat</p>
+                                        <p>{{eventDetails?.name}}</p>
+                                        <p class="bold">Total Price</p>
+                                        <p>{{eventDetails?.perDayCharges}} $</p>
+                                        <p class="bold">Check-in Time</p>
+                                        <p>{{eventDetails?.checkinTime | date : 'hh:mm a'}}</p>
+                                        <p class="bold">Check-out Time</p>
+                                        <p>{{eventDetails?.checkoutTime | date : 'hh:mm a'}}</p>
+                                        <p class="bold">Note</p>
+                                        <p></p>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="serviceType == SERVICE_TYPES.Charter">
+                                    <div class="ps-2 pt-4">
+                                        <p class="bold">Departure Date</p>
+                                        <p>{{eventDetails?.departureFromDate | date}}</p>
+                                        <p class="bold">Arrival Date</p>
+                                        <p>{{eventDetails?.departureToDate | date}}</p>
+                                        <p class="bold">Boat</p>
+                                        <p>{{eventDetails?.boat?.name}}</p>
+                                        <p class="bold">Total Price</p>
+                                        <p>{{eventDetails?.charterFee}} $</p>
+                                        <p class="bold">Note</p>
+                                        <p></p>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    
     </div>
 </div>

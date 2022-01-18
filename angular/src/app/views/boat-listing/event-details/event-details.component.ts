@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -92,7 +93,8 @@ export class EventDetailsComponent implements OnInit {
           eventDate: this.eventDetails.startDateTime,
           noOfGuests: this.eventFilterDetails.adults + this.eventFilterDetails.childrens,
           hostId: this.eventDetails.boat.creatorId,
-          bookingStatus: 0
+          bookingStatus: 0,
+          boatId:this.eventDetails.boatId
         };
         this.bookingService.eventBooking(bookingModel).subscribe(res => {
           let bookingId = res?.data?.id;
