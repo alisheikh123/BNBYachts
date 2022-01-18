@@ -15,6 +15,8 @@ export class ListReviewsComponent implements OnInit {
     private userService: AuthService
   ) {}
   @Input() bookingId: number;
+  @Input() charterBookingId: number;
+  @Input() eventBookingId: number;
   @Input() boatId: number;
 
   ngOnInit(): void {

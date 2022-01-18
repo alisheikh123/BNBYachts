@@ -23,7 +23,6 @@ export class CharterDetailsComponent implements OnInit {
   charterId: number;
   charterDetails: any;
   charterSchedule: any;
-  //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   @ViewChild('allFeaturesModal', { static: true }) templateRef: any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
@@ -111,7 +110,7 @@ export class CharterDetailsComponent implements OnInit {
           }
         })
       }
-    }    
+    }
     else {
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
     }

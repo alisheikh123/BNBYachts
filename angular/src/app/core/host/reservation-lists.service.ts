@@ -10,15 +10,33 @@ import { ErrorService } from '../Error/error.service';
 })
 export class ReservationListsService {
   bookingApiUrl: string = environment.BOOKING_API_URL + '/api/app/booking-list';
-
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
-  getBookedServices(serviceType: number, pageNo: number, pageSize: number) {
-    return this.http.get(this.bookingApiUrl + '/booked-services?serviceType=' + serviceType + '&pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(
+  getBookedServices(param:any) {
+    return this.http.get(this.bookingApiUrl + '/booked-services?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(
       catchError(this.errorService.handleError));
   }
-  getBoatelBookingRequests(serviceType: number, month: string, year: string, pageNo: number, pageSize: number) {
-    return this.http.get(this.bookingApiUrl + '/bookings-requests?month=' + month + '&year=' + year + '&serviceType=' + serviceType + '&pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(
+
+  getEventBookedServices(param:any) {
+    return this.http.get(this.bookingApiUrl + '/events-booked-services?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(
+      catchError(this.errorService.handleError));
+  }
+
+  getCharterBookedServices(param:any) {
+    return this.http.get(this.bookingApiUrl + '/charters-booked-services?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(
+      catchError(this.errorService.handleError));
+  }
+
+  getBoatelBookingRequests(param:any) {
+    return this.http.get(this.bookingApiUrl + '/bookings-requests?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(
+      catchError(this.errorService.handleError));
+  }
+  getCharterBookings(param:any) {
+    return this.http.get(this.bookingApiUrl + '/charters-requests?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(
+      catchError(this.errorService.handleError));
+  }
+  getEventBookings(param:any) {
+    return this.http.get(this.bookingApiUrl + '/events-requests?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(
       catchError(this.errorService.handleError));
   }
   getDroppedServices() {

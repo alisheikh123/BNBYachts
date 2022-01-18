@@ -1,3 +1,5 @@
+import { BookingResponseFilter, BookingStatus, SelectedServiceType } from './../../../../shared/enums/booking.constants';
+import { Router } from '@angular/router';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -15,75 +17,121 @@ import { RejectionModalComponent } from './rejection-modal/rejection-modal.compo
   styleUrls: ['./booking-requests.component.scss']
 })
 export class BookingRequestsComponent implements OnInit {
-  date: any;
-  selectedYear: string = "";
-  selectedMonth: string = "";
+  userCharters: any;
+  userEvents: any;
   @Input() boatelBookings: any = [];
-  selectedServiceType: number = 1;
-  SERVICE_TYPES = ServiceType;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
-  modelDate : Object = new Date();;
-  constructor(private reservationService: ReservationListsService, private boatService: YachtSearchService,
-    private toastr: ToastrService, config: NgbRatingConfig, private modal: NgbModal) {
-    config.max = 5;
-    config.readonly = true;
-  }
   bookedServicesTypes = {
-    boatel: 1,
-    charter: 2,
-    event: 3
+    boatel: 0,
+    charter: 1,
+    event: 2
   };
-  totalRecords: number = 0;
   queryParams = {
     page: 1,
     pageSize: 5
   };
+  listingFilter =
+    {
+      modelDate: "",
+      selectedYear: "",
+      selectedMonth: "",
+      BOOKING_STATUS: BookingStatus,
+      BOOKING_FILTER: BookingResponseFilter,
+      selectedStatusFilter: BookingStatus.ChooseFilter,
+      selectedTabStatus: BookingResponseFilter.ChooseFilter,
+      activeTab: 0,
+      currentReservationStatus: 4,
+      selectedServiceType: 0,
+      selectedBookingStatus: 0,
+      totalRecords: 0,
+      SELECTED_SERVICE_TYPE:SelectedServiceType
+    };
+  getBookingObject =
+    {
+      filter: 4,
+      bookingType: 0,
+      month: "",
+      pageNo: 0,
+      pageSize: 0,
+      year: "",
+      userId: "",
+    };
+  constructor(private reservationService: ReservationListsService, private boatService: YachtSearchService,
+    private toastr: ToastrService, config: NgbRatingConfig, private modal: NgbModal, private router: Router) {
+    config.max = 5;
+    config.readonly = true;
+  }
 
   ngOnInit(): void {
     this.getReservations();
   }
-
   getReservations() {
-    this.reservationService.getBoatelBookingRequests(this.selectedServiceType, this.selectedMonth, this.selectedYear,this.queryParams.page,this.queryParams.pageSize).subscribe((res: any) => {
-      this.boatelBookings = res?.data;
-      this.totalRecords = res?.totalCount;
-      if (this.selectedServiceType == this.bookedServicesTypes.boatel) {
-        this.boatelBookings.forEach((element: any) => {
-          this.boatService.boatDetailsById(element.boatId).subscribe((boatdetail: any) => {
-            element.boatDetail = boatdetail;
-          });
-        });
-      }
-      else if (this.selectedServiceType == this.bookedServicesTypes.charter) {
-        this.boatelBookings.forEach((element: any) => {
-          this.boatService.charterDetailsById(element.charterId).subscribe((charter: any) => {
-            element.boatDetail = charter?.charterDetails?.boat;
-            element.charter =charter?.charterDetails; 
-          });
-        });
-      }
-      else {
-        this.boatelBookings.forEach((element: any) => {
-          this.boatService.eventDetailsById(element.eventId).subscribe((event: any) => {
-            element.boatDetail = event?.eventDetails?.boat;
-            element.event = event?.eventDetails;
-          });
-        });
-      }
+    let bookingObject = this.assignValuetoObject();
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.boatel) {
+      this.reservationService.getBoatelBookingRequests(bookingObject).subscribe((res: any) => {
+        this.boatelBookings = res?.data;
+        this.listingFilter.totalRecords = res?.totalCount;
+        this.boatelStatusFilter(this.listingFilter.currentReservationStatus);
+      });
+    }
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.charter) {
+      this.reservationService.getCharterBookings(bookingObject).subscribe((res: any) => {
+        this.userCharters = res?.data;
+        this.listingFilter.totalRecords = res?.totalCount;
+        this.charterStatusFilter(this.listingFilter.currentReservationStatus);
+      });
 
-    })
+    }
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.event) {
+      this.reservationService.getEventBookings(bookingObject).subscribe((res: any) => {
+        this.userEvents = res?.data;
+        this.listingFilter.totalRecords = res?.totalCount;
+        this.eventStatusFilter(this.listingFilter.currentReservationStatus);
+      });
+    }
+
+
+  }
+  boatelStatusFilter(status: Number) {
+    this.boatelBookings = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.boatelBookings.filter((res: any) => res.bookingStatus == status) : this.boatelBookings;
+    this.boatelBookings.forEach((elem: any) => {
+      this.boatService.boatDetailsById(elem.boatId).subscribe((boatdetail: any) => {
+        elem.boatDetail = boatdetail;
+      });
+    });
+  }
+  charterStatusFilter(status: number) {
+    this.userCharters = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.userCharters.filter((res: any) => res.bookingStatus == status) : this.userCharters;
+    this.userCharters.forEach((elem: any) => {
+      this.boatService.charterDetailsById(elem.charterId).subscribe((charterdetail: any) => {
+        elem.charterDetail = charterdetail?.charterDetails;
+        this.boatService.boatDetailsById(elem.charterDetail?.boatId).subscribe((boatdetails: any) => {
+          elem.boatDetail = boatdetails;
+        })
+      });
+    });
+  }
+  eventStatusFilter(status: number) {
+    this.userEvents = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.userEvents.filter((res: any) => res.bookingStatus == status) : this.userEvents;
+    this.userEvents.forEach((elem: any) => {
+      this.boatService.eventDetailsById(elem.eventId).subscribe((eventdetail: any) => {
+        elem.eventDetail = eventdetail?.eventDetails;
+        this.boatService.boatDetailsById(elem.eventDetail?.boatId).subscribe((boatdetails: any) => {
+          elem.boatDetail = boatdetails;
+        })
+      });
+    });
   }
   changeStatus(item: any, isAccepted: boolean, index: any) {
-    // Get user against which booking has been approved/rejected
     if (isAccepted) {
-      let modal = this.modal.open(ConfirmDialogComponent,{centered:true,windowClass: 'custom-modal custom-small-modal' });
+      let modal = this.modal.open(ConfirmDialogComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
       modal.componentInstance.message = 'Are your sure.You want to accept this reservation?'
-      modal.componentInstance.onClose.subscribe((res:boolean)=>{
-        if(res){
+      modal.componentInstance.onClose.subscribe((res: boolean) => {
+        if (res) {
           this.reservationStatusChange(item, isAccepted, index, '');
           modal.dismiss();
         }
-        else{
+        else {
           modal.dismiss();
         }
       })
@@ -99,18 +147,18 @@ export class BookingRequestsComponent implements OnInit {
   }
 
   reservationStatusChange(item: any, isAccepted: boolean, index: any, reason: string) {
-    this.reservationService.changeStatus(item.id, isAccepted, reason,this.selectedServiceType).subscribe(res => {
+    this.reservationService.changeStatus(item.id, isAccepted, reason, this.listingFilter.selectedServiceType).subscribe(res => {
       isAccepted ? this.toastr.success('Request accepted successfully.', 'Success') : this.toastr.success('Request rejected successfully.', 'Success');
       this.boatelBookings.splice(index, 1);
     });
   }
-  applyDateFilter(data:any) {
-    this.selectedYear = moment(data?.value).format("YYYY");
-    this.selectedMonth =  moment(data?.value).format("MM");
+  applyDateFilter(data: any) {
+    this.listingFilter.selectedYear = moment(data?.value).format("YYYY");
+    this.listingFilter.selectedMonth = moment(data?.value).format("MM");
     this.getReservations();
   }
   filterServiceType(serviceType: number) {
-    this.selectedServiceType = serviceType;
+    this.listingFilter.selectedServiceType = serviceType;
     this.getReservations();
   }
   clearData() {
@@ -127,4 +175,42 @@ export class BookingRequestsComponent implements OnInit {
     this.getReservations();
   }
 
+  goToDetail(item: any) {
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.event) {
+      this.router.navigate(['/boat-listing/event-reservation-detail', item.eventId])
+    }
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.charter) {
+      this.router.navigate(['/boat-listing/charter-reservation-detail', item.charterId])
+    }
+    if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.boatel) {
+      this.router.navigate(['/boat-listing/reservation-detail', item.id])
+    }
+  }
+  selectedReservationStatus(selectedItem: any) {
+    this.listingFilter.currentReservationStatus = selectedItem.reserStatus;
+    this.listingFilter.selectedServiceType = selectedItem.reservationtype;
+    this.getReservations();
+  }
+  selectedReservationTime(selectedTime: any) {
+    this.listingFilter.selectedServiceType = selectedTime.reservationtype;
+    this.listingFilter.selectedBookingStatus = selectedTime.reserTime;
+    this.getReservations();
+
+  }
+  selectedDuration(selectedDuration: any) {
+    this.listingFilter.selectedServiceType = selectedDuration.reservationtype;
+    this.listingFilter.selectedMonth = selectedDuration.month;
+    this.listingFilter.selectedYear = selectedDuration.year;
+    this.getReservations();
+  }
+  assignValuetoObject() {
+    this.listingFilter.currentReservationStatus = this.listingFilter.currentReservationStatus == BookingStatus.ChooseFilter ? BookingStatus.ChooseFilter : this.listingFilter.currentReservationStatus;
+    this.getBookingObject.month = this.listingFilter.selectedMonth;
+    this.getBookingObject.year = this.listingFilter.selectedYear;
+    this.getBookingObject.pageNo = this.queryParams.page;
+    this.getBookingObject.pageSize = this.queryParams.pageSize;
+    this.getBookingObject.bookingType = this.listingFilter.selectedServiceType == this.bookedServicesTypes.boatel ? this.bookedServicesTypes.boatel : this.listingFilter.selectedServiceType;
+    this.getBookingObject.filter = this.listingFilter.selectedBookingStatus == this.listingFilter.BOOKING_FILTER.ChooseFilter ? this.listingFilter.BOOKING_FILTER.All : this.listingFilter.selectedBookingStatus;
+    return this.getBookingObject;
+  }
 }

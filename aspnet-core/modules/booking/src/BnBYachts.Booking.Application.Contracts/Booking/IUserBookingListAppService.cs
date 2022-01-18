@@ -1,4 +1,5 @@
-﻿using BnBYachts.Booking.Booking.Transferables;
+﻿using BnBYachts.Booking.Booking.Requestable;
+using BnBYachts.Booking.Booking.Transferables;
 using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ namespace BnBYachts.Booking.Booking
 {
     public interface IUserBookingListAppService:IApplicationService
     {
-        Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetBoatelBookings(BookingResponseFilter filter, string month, string year, int pageNo,int pageSize);
+        Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetBoatelBookings(EntityBookingParamsDto param);
+        Task<EntityResponseListModel<CharterBookingTransferableDto>> GetCharterBookings(EntityBookingParamsDto param);
+        Task<EntityResponseListModel<EventBookingTransferableDto>> GetEventBookings(EntityBookingParamsDto param);
         Task<BoatelBookingTransferableDto> GetBoatelBooking(int bookingId);
         Task<ICollection<BoatelBookingTransferableDto>> GetHostBoatelBookings();
     }

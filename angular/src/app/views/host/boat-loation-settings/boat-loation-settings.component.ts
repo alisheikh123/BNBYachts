@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow } from '@angular/google-maps';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReservationService } from 'src/app/core/host/reservation.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
@@ -35,7 +35,10 @@ export class BoatLoationSettingsComponent implements OnInit {
     location: ''
   }
   locationMarker: any;
-  constructor(private activatedRoute: ActivatedRoute, private yachtSearchService: YachtSearchService, private service: ReservationService, private toastr: ToastrService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private yachtSearchService: YachtSearchService,
+    private service: ReservationService,
+    private toastr: ToastrService, private route: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -57,7 +60,7 @@ export class BoatLoationSettingsComponent implements OnInit {
     })
   }
 
-  addLocationMarker(){
+  addLocationMarker() {
     this.locationMarker = {
       position: {
         lat: this.center?.lat,
@@ -81,10 +84,12 @@ export class BoatLoationSettingsComponent implements OnInit {
     this.addLocationMarker();
   }
 
+
   updateLocation() {
     this.service.updateBoatLocation(this.boatLocation).subscribe(res => {
       if (res) {
-        this.toastr.success("Location updated successfully", "Location");
+        this.toastr.success("Boatel Location updated successfully", "Location");
+        this.goBack();
       }
       else {
         this.toastr.error("something went wrong!", "Location");
@@ -92,5 +97,10 @@ export class BoatLoationSettingsComponent implements OnInit {
 
     })
   }
+
+  goBack() {
+    this.route.navigate(['host/host-boat-listing']);
+  }
+
 
 }
