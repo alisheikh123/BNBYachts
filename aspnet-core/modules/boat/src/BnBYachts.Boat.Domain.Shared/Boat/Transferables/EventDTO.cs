@@ -22,5 +22,6 @@ namespace BnBYachts.Boat.Boat.Transferables
         public EventTypes EventType { get; set; }
         public virtual int? BoatId { get; set; }
         public bool? IsActive { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }
