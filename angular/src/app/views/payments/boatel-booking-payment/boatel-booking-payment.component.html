@@ -2,30 +2,27 @@
     <div class="container section-padding payment-method-wrapper">
 
         <div class="btn-back">
-            <a [routerLink]="['/boat-listing/boatel-details',boatId]"> <span class="material-icons arrow_back_ios">
-                    arrow_back_ios
-                </span></a>
-            <h2 class="bold">Book a Boatel</h2>
+                <a [routerLink]="['/boat-listing/boatel-details',boatId]" class="backLink">
+                    <i class="fas fa-chevron-left leftIcon"></i>
+                  </a>
+            <h2 class="bold">{{'BookaBoatel' | localization}}</h2>
         </div>
         <div class="row m-0">
             <div class="col-md-5 payment-method-left-box py-2">
                <app-user-payment-methods></app-user-payment-methods>
                 <div>
-                    <p>By selecting the button below, iagree to the <a href="" class="underline-blue-link">host's house
-                            rules. Airbnb's Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>{{'selectingbtn' | localization}} <a href="" class="underline-blue-link">{{'lorem' | localization }}</a> {{'loremDesc' | localization}}</p>
                 </div>
                 <div>
 
-                    <button [disabled]="disablePayment()" (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
-                        Pay</button>
+                    <button [disabled]="disablePayment()" (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">
+                        {{'PayConfirmation' | localization}}
+                    </button>
                 </div>
                 <div>
-                    <h6 class="medium-bold mb-3">Cancellation Policy</h6>
-                    <p>Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud. <a href="disclaimer.html"
-                            class="custom-btn underline-blue-link no-before-content p-0">Learn more</a></p>
+                    <h6 class="medium-bold mb-3">{{'CancellationPolicy' | localization}}</h6>
+                    <p>{{'loremDesc' | localization}} <a href="disclaimer.html"
+                            class="custom-btn underline-blue-link no-before-content p-0">{{'Learnmore' | localization}}</a></p>
                 </div>
             </div>
             <div class="col-md-7 py-2">
@@ -43,46 +40,52 @@
                                     <div class="payment-method-content">
                                         <p class="px-2 bold">{{boatDetails?.name}}</p>
                                         <div class="custom-flex-start align-items-start">
-                                            <p class="medium px-2">Location:</p>
+                                            <p class="medium px-2">{{'Location' | localization}}:</p>
                                             <p>{{boatDetails?.location}}</p>
                                         </div>
                                         <div class="custom-flex-start flex-mobile-column">
                                             <div class="custom-flex-start">
-                                                <p class="medium px-2">Check In:</p>
+                                                <p class="medium px-2">{{'CheckInDate' | localization}}</p>
                                                 <p>{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p>
                                             </div>
+                                        </div>
+                                        <div class="custom-flex-start flex-mobile-column">
                                             <div class="custom-flex-start">
-                                                <p class="medium px-2">Check Out:</p>
+                                                <p class="medium px-2">{{'CheckOutDate' | localization}}</p>
                                                 <p>{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p>
                                             </div>
+                                            </div>
+
+                                        <div class="custom-flex-start">
+                                            <p class="medium px-2">{{'Bathroom' | localization}}</p>
+                                            <p>{{boatDetails?.totalBedrooms}}</p>
                                         </div>
                                         <div class="custom-flex-start">
-                                            <p class="medium px-2">Bathrooms</p>
-                                            <p>{{boatDetails?.totalBedrooms}}</p>
-                                            <p class="medium px-2">Bed Rooms</p>
+                                            <p class="medium px-2">{{'Bedroom' | localization}}:</p>
                                             <p>{{boatDetails?.totalWashrooms}}</p>
-                                        </div>
+                                            </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row custom-margin">
                             <div class="col-12">
-                                <h6 class="medium py-md-3">Price Details</h6>
+                                <h6 class="medium py-md-3">{{'PriceDetails' | localization}}</h6>
                                 <div class="custom-flex-between">
-                                    <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} Night</p>
+                                    <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} {{'Night' | localization}}</p>
                                     <p>${{boatDetails?.perDayCharges * calculateDays()}}.00</p>
                                 </div>
                                 <div class="custom-flex-between">
-                                    <p>Tax Fee</p>
+                                    <p>{{'TaxFee' | localization}}</p>
                                     <p>${{boatDetails?.taxFee}}.00</p>
                                 </div>
                                 <div class="custom-flex-between">
-                                    <p>Service Fee</p>
+                                    <p>{{'ServiceFee' | localization}}</p>
                                     <p>$20.00</p>
                                 </div>
                                 <div class="custom-flex-between">
-                                    <p>Total(USD)</p>
+                                    <p>{{'Total(USD)' | localization}}</p>
                                     <p>$ {{boatDetails?.perDayCharges *
                                         calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
                                 </div>
@@ -96,9 +99,8 @@
                             <div class="custom-flex-start align-items-start">
                                 <img src="../../../../assets/images/reservation-img.png" alt="">
                                 <div class="ms-2">
-                                    <p class="medium">Your reservation won't be confirmed until host accepts your
-                                        request with in 24 hours</p>
-                                    <p>You won't be charged until then.</p>
+                                    <p class="medium">{{'hostAcceptanceDescription' | localization}}</p>
+                                    <p>{{'chargeDes' |localization}}</p>
                                 </div>
                             </div>
                         </div>
@@ -116,9 +118,9 @@
                <div class="img-wrapper big-image">
                    <img src="../../../../assets/images/boat.png" alt="">
                </div>
-               <h2 class="medium">Booking Request Sent!</h2>
-               <p class="line-clamp-1 my-2 medium-container"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Learn more</p>
-               <a [routerLink]="['/boat-listing/all-reservations']" class="custom-btn blue big-btn my-2">Home</a>
+               <h2 class="medium">{{'bookingRequestSent' | localization}}</h2>
+               <p class="line-clamp-1 my-2 medium-container">{{'LoremDescription'| localization}} </p>
+               <a [routerLink]="['/boat-listing/all-reservations']" class="custom-btn blue big-btn my-2">{{'Home'| localization}}</a>
            </div>
            <div  class="col-md-6 py-2">
             <div class="payment-main-wrap">
@@ -126,17 +128,17 @@
 
                     <div class="row custom-margin">
                         <div class="col-12">
-                            <h6 class="medium py-md-3">Boatel Details</h6>
-                            <div class="custom-flex-between py-1"><p class="medium">Location:</p> <p class="grey">{{boatDetails?.location}}</p></div>
-                            <div class="custom-flex-between  py-1"><p class="medium">Bed Rooms:</p> <p class="grey">{{boatDetails?.totalBedrooms}}</p></div>
-                            <div class="custom-flex-between py-1"><p class="medium">Bathrooms:</p> <p class="grey">{{boatDetails?.totalWashrooms}}</p></div>
-                            <div class="custom-flex-between py-1"><p class="medium">Check In:</p> <p class="grey">{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p></div>
-                            <div class="custom-flex-between py-1"><p class="medium">Check Out:</p> <p class="grey">{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p></div>
-                            <div class="custom-flex-between py-1"><p class="medium">Total Nights:</p> <p class="grey">{{calculateDays()}} Nights</p></div>
+                            <h6 class="medium py-md-3">{{'BoatelDetails'| localization}}</h6>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'Location'| localization}}:</p> <p class="grey">{{boatDetails?.location}}</p></div>
+                            <div class="custom-flex-between  py-1"><p class="medium"> {{'Bedroom'| localization}}:</p> <p class="grey">{{boatDetails?.totalBedrooms}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'Bathroom'| localization}}:</p> <p class="grey">{{boatDetails?.totalWashrooms}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'CheckInDate'| localization}}:</p> <p class="grey">{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'CheckOutDate'| localization}}:</p> <p class="grey">{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'totalNights'| localization}}:</p> <p class="grey">{{calculateDays()}} Nights</p></div>
                             <div class="border-top my-3"></div>
-                            <div class="custom-flex-between py-1"><p class="medium">Total(USD):</p> <p class="grey">$ {{boatDetails?.perDayCharges * calculateDays() + boatDetails?.taxFee + 20 }}.00</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'Total(USD)'| localization}}:</p> <p class="grey">$ {{boatDetails?.perDayCharges * calculateDays() + boatDetails?.taxFee + 20 }}.00</p></div>
                             <div class="custom-flex py-2">
-                                <button class="custom-btn blue big-btn" [routerLink]="['/boat-listing/all-reservations']">Go to Reservation</button>
+                                <button class="custom-btn blue big-btn" [routerLink]="['/boat-listing/all-reservations']">{{'gotoReservation'| localization}}</button>
                             </div>
                         </div>
                     </div>
@@ -158,11 +160,10 @@
                </div>
             </div>
             <div class="custom-center-card-message py-sm-3 px-sm-5">
-                <h4 class="py-3 bold">Payment Failed</h4>
-                <p class="grey ">Payment could not process successfully
-                 Button 'Try Again'</p>
+                <h4 class="py-3 bold"> {{'PaymentFailed'| localization}}</h4>
+                <p class="grey "> {{'PaymentTryAgain'| localization}}</p>
             </div>
-            <div><button (click)="retryPayment()" class="custom-btn red big-btn mt-3">Try Again</button></div>
+            <div><button (click)="retryPayment()" class="custom-btn red big-btn mt-3"> {{'TryAgain'| localization}}</button></div>
         </div>
     </div>
     </div>
