@@ -59,9 +59,10 @@ import { EventReservationDetailComponent } from './event-reservation-detail/even
     CalendarModule
   ],
     providers: [YachtSearchService, BookingService],
-    exports: [BoatListingModule.rootComponent],
-    entryComponents: [BoatListingModule.rootComponent],
+    exports: [BoatListingModule.rootComponent,BoatListingModule.rootReviewComponent],
+    entryComponents: [BoatListingModule.rootComponent,BoatListingModule.rootReviewComponent],
 })
 export class BoatListingModule {
   static rootComponent = BookingFilterComponent
+  static rootReviewComponent = ListReviewsComponent
 }
