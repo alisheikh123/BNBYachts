@@ -60,6 +60,14 @@ namespace BnBYachts.Boat.Manager
                     await _boatGalleryRepo.InsertAsync(boatGallery).ConfigureAwait(false);
                 }
             }
+            // Calendar Removed
+            var boatCalendar = await _boatelCalendarRepo.GetListAsync(res => res.BoatEntityId == boatEntity.Id && res.IsAvailable==true).ConfigureAwait(false);
+            foreach (var c in boatCalendar)
+            {
+                c.FromDate = boatDetails.BoatCalendar.FromDate;
+                c.ToDate = boatDetails.BoatCalendar.ToDate;
+                await _boatelCalendarRepo.UpdateAsync(c,autoSave: true).ConfigureAwait(false);
+            }
             //Features Removed
             var boatAllFeatures = await _boatelFeatureRepo.GetListAsync(res => res.BoatEntityId == boatEntity.Id).ConfigureAwait(false);
             foreach (var f in boatAllFeatures)

@@ -83,7 +83,6 @@ export class BoatelBookingPaymentComponent implements OnInit {
       description: this.boatDetails.name + ' Booking Charges from ' + this.boatFilterDetails.checkinDate + " to " + this.boatFilterDetails.checkoutDate
     };
     this.paymentService.pay(model).subscribe(res => {
-      debugger;
       if (res) {
         this.isBookingConfirmed = true;
         this.isPaymentFailed = false;
