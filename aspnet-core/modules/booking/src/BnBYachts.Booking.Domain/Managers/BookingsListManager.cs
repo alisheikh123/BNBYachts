@@ -53,7 +53,7 @@ namespace BnBYachts.Booking.Managers
                 response.TotalCount = allBookings.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, param.PageNo, param.PageSize).ConfigureAwait(false);
             }
-            else
+            if (param.Filter == BookingResponseFilter.Past)
             {
                 var allBookings = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsRequestableDto>>
                 (await _boatelBookingRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
@@ -85,7 +85,7 @@ namespace BnBYachts.Booking.Managers
                 response.TotalCount = allBookings.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, param.PageNo, param.PageSize).ConfigureAwait(false);
             }
-            else
+            if (param.Filter == BookingResponseFilter.Past)
             {
                 var allBookings = _objectMapper.Map<List<CharterBookingEntity>, List<BookingRequestsRequestableDto>>
                   (await _charterBookingRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
