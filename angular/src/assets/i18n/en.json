@@ -159,7 +159,6 @@
   "ForgotPassword": "Forgot Password",
   "ConfirmEmailSendInstructions": "Confirm your email and we'll send the instructions.",
   "PasswordResetEmailMessage": "We have send a password reset email to your email address.You can Reset the password from there",
-  "Email*": "Email *",
   "vEmailDoesNotExist": "* The Email Does Not Exist!",
   "Send": "Send",
   "Login": "Login",
@@ -196,7 +195,7 @@
   "Charter": "Charter",
   "Search": "Search",
   "MoreFilters": "More Filters",
-  "NumberOfBedrooms": "Number of Bedrooms"
+  "NumberOfBedrooms": "Number of Bedrooms",
   "BookaBoatel":"Book a Boatel",
   "selectingbtn":"By selecting the button below, i agree to the",
   "lorem":"host's house rules. Airbnb's Lorem ipsum",
@@ -216,7 +215,6 @@
   "PaymentFailed":"Payment Failed",
   "PaymentTryAgain":"Payment could not process successfully Button 'Try Again'",
   "TryAgain":"Try Again",
-  "Charter":"Charter",
   "CharterDetails":"Charter Details",
   "DepartingFrom:":"Departing From:",
   "Destination:":"Destination:",
@@ -230,4 +228,5 @@
   "ReturnDetails:":"Return Details:",
   "ReturnDate:":"Return Date:",
   "ReturnTime":"Return Time:"
+
 }

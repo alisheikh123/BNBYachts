@@ -6,7 +6,7 @@
 
         <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
-          aria-selected="false"><strong>{{'BookedServices'}}</strong></button>
+          aria-selected="false"><strong>{{'BookedServices'|localization}}</strong></button>
       </div>
       <div>
       <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>

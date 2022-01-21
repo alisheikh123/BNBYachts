@@ -80,17 +80,12 @@
                                                 </div>
                                                 <h6 class="bold mt-3">{{'ApprovalPolicy' | localization}}</h6>
                                                 <div class="tabs-inner-details-inner">
-                                                    <div class="custom-flex-coumn" *ngIf="((this.noOfWords<=20));else greaterThanLimitBlock">
-                                                        <p>{{this.approvalPolicyArray.join(' ')}}</p>
+                                                    <div class="custom-flex-coumn" *ngIf="((this.approvalPolicyString.length<=20));else greaterThanLimitBlock">
+                                                        <p>{{this.approvalPolicyString}}</p>
                                                     </div>
                                                     <ng-template #greaterThanLimitBlock>
-                                                        <div *ngIf="this.readAll; else readLessBlock">
-                                                          {{this.approvalPolicyArray.join(' ')}}
-                                                        </div>
-                                                        <ng-template #readLessBlock>
-                                                          {{(this.approvalPolicyArray | slice:0:21).join(' ')}}
-                                                        </ng-template>
-                                                        <button class="custom-btn underline-blue-link no-before-content p-0" (click)="readAllToggle()">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
+                                                        {{(this.readAll?this.approvalPolicyString:this.approvalPolicyString|slice:0:21)}}
+                                                        <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.readAll = !this.readAll">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
                                                       </ng-template>
                                                 </div>
                                             </div>

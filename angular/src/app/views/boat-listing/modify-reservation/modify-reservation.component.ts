@@ -60,9 +60,7 @@ export class ModifyReservationComponent implements OnInit {
   checkoutTime:any;
   totalAmount:any;
   prevDays:number;
-  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
-  noOfWords: number;
-  approvalPolicyArray: any;
+  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";  
   constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService,
     private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
     private activatedRoute: ActivatedRoute, private service: BookingService, private bookingListService: BookingListingService,
@@ -80,8 +78,7 @@ export class ModifyReservationComponent implements OnInit {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
 
-    this.getBookingDetail();
-    this.tokenizeString();
+    this.getBookingDetail();    
   }
   getBookingDetail() {
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
@@ -263,13 +260,5 @@ export class ModifyReservationComponent implements OnInit {
   }
   cancelpopup() {
     this.modal.dismissAll();
-  }
-  tokenizeString() {
-    this.approvalPolicyArray = this.approvalPolicyString.split(" ");
-    this.noOfWords = this.approvalPolicyArray.length;
-  }
-  readAllToggle() {    
-    this.readAll = !this.readAll;
-  }
-
+  }  
 }

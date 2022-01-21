@@ -54,8 +54,6 @@ export class BoatDetailsComponent implements OnInit {
   ];
   @ViewChild('popOver') public popover: NgbPopover;
   approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
-  noOfWords: number;
-  approvalPolicyArray: any;
 
   constructor(config: NgbRatingConfig, private toastr: ToastrService,
     private yachtSearchService: YachtSearchService, private router: Router,
@@ -79,7 +77,6 @@ export class BoatDetailsComponent implements OnInit {
       this.boatFilterDetails.adults = 1;
     }
     this.getMyBookings();
-    this.tokenizeString();
   }
   isDisabled(date: NgbDateStruct) {
     const d = new Date(date.year, date.month - 1, date.day);
@@ -118,8 +115,6 @@ export class BoatDetailsComponent implements OnInit {
   getMyBookings(){
     this.bookingService.getmyBookings(this.boatId).subscribe((res:any)=>{
       this.myBookings = res?.data;
-      console.log(this.myBookings);
-      debugger;
     })
   }
 
@@ -196,12 +191,5 @@ export class BoatDetailsComponent implements OnInit {
     this.boatFilterDetails.adults = this.popOverFilterData.adults;
     this.boatFilterDetails.childrens = this.popOverFilterData.childrens;
     this.boatelCapcityValidation = (((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)>(this.boatDetails?.boatelCapacity)) || ((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)<1))?"Entered guest capacity is not available":this.popover.close();
-  }
-  tokenizeString() {
-    this.approvalPolicyArray = this.approvalPolicyString.split(" ");
-    this.noOfWords = this.approvalPolicyArray.length;
-  }
-  readAllToggle() {    
-    this.readAll = !this.readAll;
   }
 }
