@@ -14,12 +14,12 @@
           <img src="../../../../../assets/images/signup-wrap.png" alt="">
         </div>
         <div class="modal-content-inner-text">
-          <h4 class="bold">Sign Up</h4>
+          <h4 class="bold">{{'Signup'|localization}}</h4>
           <div class="form-text-inner">
             <div class="row">
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
-                  <label>First Name</label>
+                  <label>{{'FirstName'|localization}}</label>
                   <input type="text" class="custom-input" placeholder="First Name" name="firstname"
                     formControlName="FirstName">
                   <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
@@ -31,7 +31,7 @@
               </div>
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
-                  <label>Last Name</label>
+                  <label>{{'LastName'|localization}}</label>
                   <input type="text" class="custom-input" name="lastname" formControlName="LastName"
                     placeholder="Last Name">
                   <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
@@ -44,7 +44,7 @@
               <!-- email -->
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
-                  <label>Email</label>
+                  <label>{{'Email'|localization}}</label>
                   <input type="email" class="custom-input" placeholder="Email Address" name="email"
                     formControlName="Email" autocomplete="off">
                   <!-- <p class="small-txt-error">Invalid email</p> -->
@@ -69,7 +69,7 @@
               <!-- date of birth -->
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
-                  <label>Date of Birth </label>
+                  <label>{{'DateOfBirth'|localization}}</label>
                   <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
                     <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
                     <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
@@ -83,7 +83,7 @@
               <!-- password -->
               <div class="col-md-6 col-sm-12 py-2">
                 <div class=" custom-input-field">
-                  <label>Password</label>
+                  <label>{{'Password'|localization}}</label>
                   <div class="tooltip-wrapper">
                     <input id="password-field" [attr.type]="passwordViewer.passwordFieldTextType ? 'text':'password'"
                       class="custom-input" (change)="onPasswordChange()" name="password" formControlName="Password">
@@ -93,13 +93,13 @@
                         'fa-eye': passwordViewer.passwordFieldTextType
                       }"></span>
                     <div class="tooltip-dialogue">
-                      <p class="small-text bold">Choosing a password</p>
-                      <p class="small-text dark-grey">Your password must include</p>
+                      <p class="small-text bold">{{'tipChoosingAPassword'|localization}}</p>
+                      <p class="small-text dark-grey">{{'tipYourPasswordMustInclude'|localization}}</p>
                       <ul>
-                        <li class="small-text">At Least 8 characters</li>
-                        <li class="small-text">Upper and lower case</li>
-                        <li class="small-text">Numbers</li>
-                        <li class="small-text">Special characters</li>
+                        <li class="small-text">{{'tipAtLeast8Characters'|localization}}</li>
+                        <li class="small-text">{{'tipUpperAndLowerCase'|localization}}</li>
+                        <li class="small-text">{{'tipNumbers'|localization}}</li>
+                        <li class="small-text">{{'tipSpecialCharacters'|localization}}</li>
                       </ul>
                     </div>
                   </div>
@@ -113,7 +113,7 @@
               <!-- confirm password -->
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field pswd-field">
-                  <label>Confirm Password</label>
+                  <label>{{'ConfirmPassword'|localization}}</label>
                   <div class="p-relative">
                     <input id="password-fields"
                       [attr.type]="passwordViewer.confirmPasswordFieldTextType == true ? 'text':'password'"
@@ -127,8 +127,7 @@
                   </div>
                 </div>
                 <span class="text-danger"
-                  *ngIf="registrationForm.controls['confirmPassword'].hasError('mismatch')">Password do not
-                  match.</span>
+                  *ngIf="registrationForm.controls['confirmPassword'].hasError('mismatch')">{{'vPasswordDoNotMatch'| localization}}</span>
               </div>
               <!-- <ng-container *ngIf="
                         registrationForm.controls['confirmPassword'].errors &&
@@ -151,7 +150,7 @@
             </div>
             <div class="col-sm-12 py-2 pb-3 text-center">
               <button type="submit" class="custom-btn blue big-btn"
-                [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value">Continue</button>
+                [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value">{{'Continue'|localization}}</button>
             </div>
             <!-- <div class="col-sm-12 text-center">
                 <p class="small-text light">Already have an Account? <a href="javascript:void(0)"  (click)="login()" class="underline-blue-link">Log in</a></p>
@@ -172,4 +171,3 @@
     </div>
   </ng-container>
 </ng-template>
-

@@ -6,7 +6,7 @@
 
         <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
-          aria-selected="false"><strong>Booked Services</strong></button>
+          aria-selected="false"><strong>{{'BookedServices'}}</strong></button>
       </div>
       <div>
       <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>
@@ -75,7 +75,7 @@
                   <ngb-rating [rate]="0"></ngb-rating>
                   <p class="small-text grey ">{{'DepartureFrom'| localization}} {{item?.charterDetail?.departingFrom}}</p>
                   <p class="small-text grey ">{{'Destination'| localization}}  {{item?.charterDetail?.destination}}</p>
-                  <p class="small-text grey ">{{'Guests'| localization}} {{item.noOfAdults + item.noOfChildrens}}</p>
+                  <p class="small-text grey ">{{'Guests'| localization}}: {{item.noOfAdults + item.noOfChildrens}}</p>
                 </div>
               </div>
               <div class="right-content custom-flex flex-column align-items-end">
@@ -120,7 +120,7 @@
                     <ngb-rating [rate]="0"></ngb-rating>
                     <p class="small-text grey ">{{"EventTitle" | localization}} {{item?.eventDetail?.title}}</p>
                     <p class="small-text grey ">{{"EventLocation" | localization}} {{item?.eventDetail?.location}}</p>
-                    <p class="small-text grey ">{{"Guests" | localization}} {{item?.noOfGuests}}</p>
+                    <p class="small-text grey ">{{"Guests" | localization}}: {{item?.noOfGuests}}</p>
                   </div>
                 </div>
                 <div class="right-content custom-flex flex-column align-items-end">

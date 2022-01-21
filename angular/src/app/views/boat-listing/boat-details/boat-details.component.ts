@@ -42,6 +42,7 @@ export class BoatDetailsComponent implements OnInit {
 
   boatHost: any;
   showMore: boolean = false;
+  readAll: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
   boatelCapcityValidation:any;
@@ -52,8 +53,10 @@ export class BoatDetailsComponent implements OnInit {
     { year: 2022, month: 1, day: 25 }
   ];
   @ViewChild('popOver') public popover: NgbPopover;
+  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
+  noOfWords: number;
+  approvalPolicyArray: any;
 
-  
   constructor(config: NgbRatingConfig, private toastr: ToastrService,
     private yachtSearchService: YachtSearchService, private router: Router,
      private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
@@ -76,6 +79,7 @@ export class BoatDetailsComponent implements OnInit {
       this.boatFilterDetails.adults = 1;
     }
     this.getMyBookings();
+    this.tokenizeString();
   }
   isDisabled(date: NgbDateStruct) {
     const d = new Date(date.year, date.month - 1, date.day);
@@ -95,6 +99,7 @@ export class BoatDetailsComponent implements OnInit {
   }
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
+      debugger;
       this.boatDetails = res;
       let findCalendar = res?.boatCalendars.find((res:any)=>res.isAvailable == true);
       this.boatFilterDetails.checkinDate =new Date(findCalendar.fromDate);
@@ -114,8 +119,6 @@ export class BoatDetailsComponent implements OnInit {
   getMyBookings(){
     this.bookingService.getmyBookings(this.boatId).subscribe((res:any)=>{
       this.myBookings = res?.data;
-      console.log(this.myBookings);
-      debugger;
     })
   }
 
@@ -192,5 +195,12 @@ export class BoatDetailsComponent implements OnInit {
     this.boatFilterDetails.adults = this.popOverFilterData.adults;
     this.boatFilterDetails.childrens = this.popOverFilterData.childrens;
     this.boatelCapcityValidation = (((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)>(this.boatDetails?.boatelCapacity)) || ((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)<1))?"Entered guest capacity is not available":this.popover.close();
+  }
+  tokenizeString() {
+    this.approvalPolicyArray = this.approvalPolicyString.split(" ");
+    this.noOfWords = this.approvalPolicyArray.length;
+  }
+  readAllToggle() {    
+    this.readAll = !this.readAll;
   }
 }

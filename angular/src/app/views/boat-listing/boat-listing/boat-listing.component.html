@@ -5,30 +5,30 @@
         <div class="row">
           <div class="col-sm-4 py-2">
             <p class="small-text">
-              {{ boats?.length }} boatel available,
+              {{ boats?.length }} {{'smallBoatelAvailable'|localization}}
               {{ mapDetails?.checkinDate | date: "MMM d" }} -
               {{ mapDetails?.checkoutDate | date: "MMM d" }},
-              {{ mapDetails?.adults + mapDetails?.childrens }} guests
+              {{ mapDetails?.adults + mapDetails?.childrens }} {{'smallGuests'|localization}}
             </p>
             <h5 class="bold head-text">
-              Boatel in {{ this.mapDetails?.location }}
+              {{'headingBoatelIn'|localization}} {{ this.mapDetails?.location }}
             </h5>
             <div class="custom-filters">
               <div class="dropdown custom-dropdown filters-wrap">
                 <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false">
-                  Price Range
+                  {{'PriceRange'|localization}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="width: 400px; font-size: 13px">
                   <div style="margin: 10px; padding: 10px">
                     <span style="font-weight: bold; padding: 10px">
-                      Set the price range:</span>
+                      {{'Set the price range:'|localization}}</span>
 
                     <div style="display: flex">
                       <div class="form-floating">
                         <input type="number" class="form-control" id="minPrice" placeholder="min price"
                           [(ngModel)]="minPrice" />
-                        <label for="floatingPassword">min price</label>
+                        <label for="floatingPassword">{{'tipMinPrice'|localization}}</label>
                       </div>
                       <div style="
                           position: relative;
@@ -44,7 +44,7 @@
                       <div class="form-floating">
                         <input type="number" class="form-control" id="maxPrice" placeholder="max price"
                           [(ngModel)]="maxPrice" />
-                        <label for="floatingPassword">max price</label>
+                        <label for="floatingPassword">{{'tipMaxPrice'|localization}}</label>
                       </div>
                     </div>
                     <!-- <div>
@@ -62,7 +62,7 @@
                           min-width: 76px !important;
                           cursor: pointer;
                         " (click)="applyPriceFilter(minPrice, maxPrice)">
-                        Save
+                        {{'Save'|localization}}
                       </a>
                     </div>
                   </div>
@@ -71,11 +71,11 @@
               <div class="dropdown custom-dropdown filters-wrap">
                 <button class="dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false" (click)="openModal(filterTemplate)">
-                  More Filter
+                  {{'MoreFilter'|localization}}
                 </button>
               </div>
               <div class="dropdown custom-dropdown filters-wrap" *ngIf="isFilterAdded">
-                <button type="button" class="btn btn-link" (click)="reset()">Reset</button>
+                <button type="button" class="btn btn-link" (click)="reset()">{{'Reset'|localization}}</button>
               </div>
             </div>
           </div>
@@ -94,9 +94,8 @@
           <div class="row">
             <div class="col-sm-6 py-2">
               <p class="small-mini-text grey white-bg-card">
-                <span class="circle-icon"><i class="fa fa-info"></i></span>Given
-                List is based on distance from the selected location, covers 50
-                miles from the selected location.
+                <span class="circle-icon"><i class="fa fa-info"></i></span>
+                {{'tipBoatList'|localization}}
               </p>
               <div class="boatel-search-card" *ngFor="let item of boats">
                 <div class="row h-100">
@@ -121,9 +120,9 @@
                             [ngClass]="{'fa-heart-o': !item.isAddedToMyWishlist , 'fa-heart':item.isAddedToMyWishlist}"></i></button>
                       </div>
                       <p class="grey">
-                        {{ item.boatelCapacity }} Guests -
-                        {{ item.totalBedrooms }} Bed Rooms -
-                        {{ item.totalWashrooms }} Bathroom
+                        {{ item.boatelCapacity }} {{'Guests'|localization}} -
+                        {{ item.totalBedrooms }} {{'Bedrooms'|localization}} -
+                        {{ item.totalWashrooms }} {{'BathRoom'|localization}}
                       </p>
                       <div class="boatel-search-card-content-title">
                         <p class="grey">{{ item.location }}</p>
@@ -131,7 +130,7 @@
                       <div class="custom-flex-between">
                         <ngb-rating [rate]="0"></ngb-rating>
                         <p class="bold-span-text">
-                          <span>$ {{ item.perDayCharges }}</span>/ Night
+                          <span>$ {{ item.perDayCharges }}</span>{{'perNight'|localization}}
                         </p>
                       </div>
                     </div>
@@ -169,9 +168,9 @@
                               <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
                             </div>
                             <p class="grey">
-                              {{ mapInfoDetails?.boatelCapacity }} Guests -
-                              {{ mapInfoDetails?.totalBedrooms }} Bed Rooms -
-                              {{ mapInfoDetails?.totalWashrooms }} Bathroom
+                              {{ mapInfoDetails?.boatelCapacity }} {{'Guests'|localization}} -
+                              {{ mapInfoDetails?.totalBedrooms }} {{'Bedrooms'|localization}} -
+                              {{ mapInfoDetails?.totalWashrooms }} {{'BathRoom'|localization}}
                             </p>
                             <div class="boatel-search-card-content-title">
                               <p class="grey">{{ mapInfoDetails?.location }}</p>
@@ -182,7 +181,7 @@
                             </div>
                             <div class="pt-2 boatel-search-card-content-title">
                               <p class="bold-span-text">
-                                <span>$ {{ mapInfoDetails?.perDayCharges }}</span>/ Night
+                                <span>$ {{ mapInfoDetails?.perDayCharges }}</span>{{'perNight'|localization}}
                               </p>
                               <button *ngIf="isLoggedIn" (click)="mapInfoDetails?.isAddedToMyWishlist ? removeToWishList(mapInfoDetails): addToWishList(mapInfoDetails)" class="fav-btn"><i class="fa fa-heart-o"
                                 class="fa"
@@ -222,7 +221,7 @@
                       d="M-623.107-973.379l-.23-.355a8.591,8.591,0,0,1-1.376-4.032,1.221,1.221,0,0,1,.854-1.327c.368-.136.733-.279,1.107-.4a.283.283,0,0,0,.224-.328c-.008-1.017,0-2.035,0-3.052s.42-1.435,1.42-1.456c.052,0,.1-.008.175-.014v-2.008c-.373,0-.735,0-1.1,0-.316,0-.492-.148-.49-.4s.184-.4.5-.4q1.607,0,3.213,0h.319c0-.51-.013-.99,0-1.469a1.391,1.391,0,0,1,1.836-1.276,1.355,1.355,0,0,1,.961,1.253c.015.488,0,.977,0,1.492h3.431a1.938,1.938,0,0,1,.214,0,.4.4,0,0,1,.386.4.386.386,0,0,1-.414.395c-.383.007-.766,0-1.171,0v2.024c.123,0,.244,0,.364,0a1.184,1.184,0,0,1,1.221,1.191c.021.678.007,1.357.007,2.035,0,.437.007.875,0,1.312a.257.257,0,0,0,.2.29q.605.213,1.2.451a1.182,1.182,0,0,1,.784,1.287,8.669,8.669,0,0,1-1.52,4.257c-.025.036-.047.074-.09.144.089,0,.153,0,.217,0A1.487,1.487,0,0,1-609.8-973a.757.757,0,0,0,1.1.056.4.4,0,0,1,.572.046c.14.172.11.351-.09.533a1.5,1.5,0,0,1-2.044.039.721.721,0,0,0-1.131-.008,1.52,1.52,0,0,1-2.05-.008.711.711,0,0,0-1.051-.009,1.509,1.509,0,0,1-2.108-.007.706.706,0,0,0-1.031,0,1.5,1.5,0,0,1-2.085.017.76.76,0,0,0-1.084,0,1.511,1.511,0,0,1-2.027,0,.759.759,0,0,0-1.141,0,1.5,1.5,0,0,1-2,0,.4.4,0,0,1-.088-.588.392.392,0,0,1,.591-.031.731.731,0,0,0,1.038-.036A1.637,1.637,0,0,1-623.107-973.379Zm1.6.591c.08-.057.14-.094.194-.139a1.5,1.5,0,0,1,2.145,0,.749.749,0,0,0,1.042-.04,1.513,1.513,0,0,1,2.049-.007.728.728,0,0,0,1.112-.011,1.491,1.491,0,0,1,2.023-.017c.08.067.167.125.26.193a7.643,7.643,0,0,0,2.388-4.911c.048-.474.009-.518-.443-.682q-2.841-1.025-5.684-2.047c-.078-.028-.159-.049-.272-.083v.36q0,2.437,0,4.874a1.529,1.529,0,0,1-.021.319.359.359,0,0,1-.383.3.358.358,0,0,1-.382-.305,1.546,1.546,0,0,1-.02-.319q0-2.451,0-4.9v-.341l-1.1.4-4.9,1.775c-.374.136-.438.224-.4.611a7.917,7.917,0,0,0,.114.82A7.693,7.693,0,0,0-621.5-972.788Zm-.222-7.078c.117-.039.2-.065.281-.094,1.324-.477,2.651-.95,3.972-1.437a1.087,1.087,0,0,1,.8.006c1.3.482,2.612.951,3.919,1.424.086.031.174.058.286.1,0-1.113.006-2.183,0-3.253,0-.286-.169-.4-.521-.4h-8.195c-.414,0-.536.123-.538.547,0,.794,0,1.589,0,2.383Zm7.626-4.475v-1.993h-6v1.993Zm-2.406-2.821c0-.517.016-1.014-.006-1.509a.542.542,0,0,0-.552-.482.543.543,0,0,0-.608.446c-.03.511-.009,1.024-.009,1.546Z"
                       transform="translate(626.265 990.076)" fill="#122ba8" stroke="#122ba8" stroke-width="0.2" />
                   </svg>
-                  Boatel
+                  {{'Boatel'|localization}}
                 </button>
                 <button class="underline-link-blk small-text" id="v-pills-profile-tab" data-bs-toggle="pill"
                   data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
@@ -252,7 +251,7 @@
                         transform="translate(-124.586 -66.408)" fill="#acacac" />
                     </g>
                   </svg>
-                  Charter
+                  {{'Charter'|localization}}
                 </button>
                 <button class="underline-link-blk small-text" id="v-pills-settings-tab" data-bs-toggle="pill"
                   data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings"
@@ -286,7 +285,7 @@
                     </g>
                   </svg>
 
-                  Event
+                  {{'Event'|localization}}
                 </button>
               </div>
               <div class="tab-content" id="v-pills-tabContent">
@@ -330,10 +329,10 @@
       </div>
       <div class="modal-body" style="font-size: 0.8em !important">
         <div class="custom-text-center">
-          <h5 class="bold">More Filters</h5>
-          <h6 class="bold text-left">Bedrooms</h6>
+          <h5 class="bold">{{'MoreFilters'|localization}}</h5>
+          <h6 class="bold text-left">{{'Bedrooms'|localization}}</h6>
           <div class="custom-flex-between py-2">
-            <p>Number of Bedrooms</p>
+            <p>{{'NumberOfBedrooms'|localization}}</p>
             <div class="boatel-counter">
               <div class="center container">
                 <div class="counter-button">

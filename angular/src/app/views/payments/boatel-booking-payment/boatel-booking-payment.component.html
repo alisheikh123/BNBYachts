@@ -22,10 +22,18 @@
                 </div>
                 <div>
                     <h6 class="medium-bold mb-3">Cancellation Policy</h6>
-                    <p>Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud. <a href="disclaimer.html"
-                            class="custom-btn underline-blue-link no-before-content p-0">Learn more</a></p>
+                        <div *ngIf="((this.noOfWords<=20));else greaterThanLimitBlock">
+                            <p>{{this.cancellationPolicyArray.join(' ')}}</p>
+                        </div>
+                        <ng-template #greaterThanLimitBlock>
+                            <div *ngIf="this.readAll; else readLessBlock">
+                              {{this.cancellationPolicyArray.join(' ')}}
+                            </div>
+                            <ng-template #readLessBlock>
+                              {{(this.cancellationPolicyArray | slice:0:21).join(' ')}}
+                            </ng-template>
+                            <button class="custom-btn underline-blue-link no-before-content p-0" (click)="readAllToggle()">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
+                          </ng-template>                    
                 </div>
             </div>
             <div class="col-md-7 py-2">
