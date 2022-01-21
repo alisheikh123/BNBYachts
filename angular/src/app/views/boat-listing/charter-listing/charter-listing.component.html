@@ -215,11 +215,13 @@
                                                                 class="underline-black-link p-0">{{mapInfoDetails?.boat.name}}</a>
                                                             <!-- <a href="javascript:void(0)"  class="fav-btn"><i class="fa fa-heart-o"></i></a> -->
                                                         </div>
-                                                        <p class="grey">{{mapInfoDetails?.guestCapacity}} Guests -
-                                                            {{mapInfoDetails?.boat?.totalBedrooms}} Bed Rooms -
-                                                            {{mapInfoDetails?.boat?.totalWashrooms}} Bathroom</p>
+                                                        <p class="grey">Guests:{{mapInfoDetails?.guestCapacity}}<br>
+                                                            Departure From :{{mapInfoDetails?.departingFrom}} <br>
+                                                            Destination : {{mapInfoDetails?.destination}} <br>
+                                                            Round Tripe: {{mapInfoDetails?.isRoundTrip ? 'Yes':'No'}} <br>
+                                                           Departure Date: {{mapInfoDetails?.departureFromDate | date:'dd-MMM-YYYY' }}<br>
+                                                        </p>
                                                         <div class="boatel-search-card-content-title">
-                                                            <p class="grey">{{mapInfoDetails?.boat?.location}}</p>
 
                                                         </div>
                                                         <div class="custom-flex-between">

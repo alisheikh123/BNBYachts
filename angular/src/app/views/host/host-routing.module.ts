@@ -12,6 +12,7 @@ import { BoatEditComponent } from './boat-edit/boat-edit.component';
 import { EventCreationComponent } from './event-creation/event-creation.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { CalendarScheduleComponent } from './calendar-schedule/calendar-schedule.component';
+import { HostReservationCancellationComponent } from './host-reservation-cancellation/host-reservation-cancellation.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,9 @@ const routes: Routes = [
   },
   {
     path: "calendar", component:CalendarScheduleComponent
+  },
+  {
+    path: "host-reservation-cancellation/:id", component:HostReservationCancellationComponent
   }
 ];
 

@@ -41,7 +41,7 @@
                                 aria-orientation="vertical">
                                 <button class="underline-link-blk active" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-profile" type="button" role="tab"
-                                    aria-controls="v-pills-profile" aria-selected="false">Charter</button>
+                                    aria-controls="v-pills-profile" aria-selected="false">{{'Charter'| localization}}</button>
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -49,80 +49,80 @@
                                     <div class="tabs-inner-details">
                                         <div class="row">
                                             <div class="col-xl-6 py-2">
-                                                <h6 class="bold">Charter Details</h6>
+                                                <h6 class="bold">{{'CharterDetails'| localization}}</h6>
                                                 <div class="tabs-inner-details-inner">
                                                     <div class="custom-flex-start py-1 align-items-start depart-date-lg-view">
                                                         <div class="custom-flex align-items-start mobile-width-100" >
-                                                            <p class="medium min-width-text small-content">Departing From:</p>
+                                                            <p class="medium min-width-text small-content">{{'DepartingFrom:'| localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.departingFrom}}</p>
                                                         </div>
                                                         <div class="custom-flex align-items-start mobile-width-100">
-                                                            <p class="medium min-width-text-small small-content align-items-start">Destination:</p>
+                                                            <p class="medium min-width-text-small small-content align-items-start">{{'Destination:'| localization}}</p>
                                                             <p class="min-width-text-small">{{charterDetails?.destination}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Boat Capacity:</p>
+                                                            <p class="medium min-width-text small-content">{{'BoatCapacity:'| localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.guestCapacity}}</p>
                                                         </div>
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text-small small-content">Seats Remaining:</p>
+                                                            <p class="medium min-width-text-small small-content"> {{'SeatsRemaining:'| localization}}</p>
                                                             <p class="min-width-text-small">{{charterDetails?.guestCapacity}}</p>
                                                         </div>
                                                     </div>
 
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Departure:</p>
+                                                            <p class="medium min-width-text small-content"> {{'DepartureDate:'| localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.departureFromDate |
                                                                 date:'MMM-dd-YYYY'}}</p>
                                                         </div>
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text-small small-content">Arrival:</p>
+                                                            <p class="medium min-width-text-small small-content"> {{'ArrivalDate:'| localization}}</p>
                                                             <p class="min-width-text-small">{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Departure Time:</p>
+                                                            <p class="medium min-width-text small-content"> {{'DepartureTime:'| localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.DepartureTime}}</p>
                                                         </div>
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text-small small-content">Arrival Time:</p>
+                                                            <p class="medium min-width-text-small small-content">{{'ArrivalTime:'| localization}}</p>
                                                             <p class="min-width-text-small">{{charterDetails?.ArrivalTime}}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Round Trip:</p>
+                                                            <p class="medium min-width-text small-content">{{'RoundTrip:'| localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.isRoundTrip ? 'Yes':'No'}}</p>
                                                         </div>
                                                     </div>
                                                     <div *ngIf="charterDetails?.isRoundTrip==true">
-                                                    <p class="medium min-width-text">Return Details:</p>
+                                                    <p class="medium min-width-text"> {{'ReturnDetails:'| localization}}</p>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Departure:</p>
+                                                            <p class="medium min-width-text small-content"> {{'DepartureDate:'| localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}</p>
                                                         </div>
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text-small small-content">Return Date:</p>
+                                                            <p class="medium min-width-text-small small-content"> {{'ReturnDate:'| localization}}</p>
                                                             <p class="min-width-text-small">{{charterDetails?.returnDate | date:'MMM-dd-YYYY'}}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text-small small-content">Return Time:</p>
+                                                            <p class="medium min-width-text-small small-content"> {{'ReturnTime'| localization}}</p>
                                                             <p class="min-width-text-small">{{charterDetails?.ReturnTime}}
                                                             </p>
                                                         </div>
@@ -198,12 +198,12 @@
                                                                             <div class="custom-flex-start max-width-50">
                                                                                 <span class="minus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults>0?popOverFilterData.adults- 1: popOverFilterData.adults;">-</span>
+                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults>0?popOverFilterData.adults- 1: popOverFilterData.adults;">- {{''| localization}}</span>
                                                                                 <input type="text"
                                                                                     [(ngModel)]="popOverFilterData.adults" />
                                                                                 <span class="plus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+</span>
+                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+ {{''| localization}}</span>
                                                                             </div>
                                                                         </div>
 
@@ -409,7 +409,7 @@
                                             works
                                             , ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud</p>
+                                            nostrud {{''| localization}}</p>
                                         <p class="medium-container regular">Short description about the host Lorem ipsum
                                             dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
@@ -35,7 +35,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
   constructor(public app: AppComponent,
     private cdr: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute, private boatService: YachtSearchService,
-    private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService) { }
+    private yachtParamService: YachtSearchDataService, private paymentService: PaymentsService,private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -75,7 +75,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
     this.disablePayment();
     this.cdr.detectChanges();
   }
-  
+
   async confirmBooking() {
     var amount = this.calculateDays() * this.boatDetails.perDayCharges;
     var token = (this.paymentMethodsComponent.addCardDetails ? await this.paymentMethodsComponent.createToken() : null);
@@ -95,7 +95,9 @@ export class BoatelBookingPaymentComponent implements OnInit {
       else {
         this.isBookingConfirmed = false;
         this.isPaymentFailed = true;
+        this.router.navigate(["/boat-listing/all-reservations"]);
       }
+      this.router.navigate(["/boat-listing/all-reservations"]);
     })
   }
 

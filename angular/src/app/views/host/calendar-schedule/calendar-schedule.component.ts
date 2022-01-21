@@ -104,7 +104,6 @@ export class CalendarScheduleComponent implements OnInit {
   }
 
   getDayCell(day:any){
-    debugger;
     let date = day?.date;
     if(this.boatCalendar){
       let find = this.boatCalendar.find((res:any)=>res.startDate >= day.date && res.endDate <=day.date)

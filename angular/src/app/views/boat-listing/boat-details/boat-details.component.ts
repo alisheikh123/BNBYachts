@@ -99,7 +99,6 @@ export class BoatDetailsComponent implements OnInit {
   }
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
-      debugger;
       this.boatDetails = res;
       let findCalendar = res?.boatCalendars.find((res:any)=>res.isAvailable == true);
       this.boatFilterDetails.checkinDate =new Date(findCalendar.fromDate);
@@ -119,6 +118,8 @@ export class BoatDetailsComponent implements OnInit {
   getMyBookings(){
     this.bookingService.getmyBookings(this.boatId).subscribe((res:any)=>{
       this.myBookings = res?.data;
+      console.log(this.myBookings);
+      debugger;
     })
   }
 
@@ -175,7 +176,7 @@ export class BoatDetailsComponent implements OnInit {
     }
     else{
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
-      
+
     }
   }
   setMaxDate(item:any){
