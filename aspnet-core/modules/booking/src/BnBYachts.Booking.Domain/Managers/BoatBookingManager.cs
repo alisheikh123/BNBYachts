@@ -5,6 +5,7 @@ using BnBYachts.Booking.Shared.BoatBooking.Interface;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
 using System.Net.Mail;
@@ -23,12 +24,13 @@ namespace BnBYachts.Booking.Managers
         private readonly IRepository<EventBookingEntity, int> _eventBookingRepository;
         private readonly IRepository<BookingCancelEntity, int> _boatelCanceRepository;
         private readonly IRepository<BookingRefundableEntity, int> _boatelRefundRepository;
+        private readonly ILogger<IBoatBookingManager> _logger;
 
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly IObjectMapper<BookingDomainModule> _objectMapper;
         public BoatBookingManager(IRepository<CharterBookingEntity, int> charterBookingRepository, IObjectMapper<BookingDomainModule> objectMapper,
             IRepository<BoatelBookingEntity, int> repository, IRepository<BookingCancelEntity, int> repositorycancel, EventBusDispatcher eventBusDispatcher
-            , IRepository<EventBookingEntity, int> eventBookingRepository, IRepository<BookingRefundableEntity, int> boatelRefundRepository)
+            , IRepository<EventBookingEntity, int> eventBookingRepository, IRepository<BookingRefundableEntity, int> boatelRefundRepository, ILogger<IBoatBookingManager> logger)
         {
             _boatelBookingRepository = repository;
             _boatelCanceRepository = repositorycancel;
@@ -37,6 +39,7 @@ namespace BnBYachts.Booking.Managers
             _charterBookingRepository = charterBookingRepository;
             _eventBookingRepository = eventBookingRepository;
             _boatelRefundRepository = boatelRefundRepository;
+            _logger = logger;
 
         }
 
@@ -118,27 +121,15 @@ namespace BnBYachts.Booking.Managers
                 Data = response
             };
         }
-        public async Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data, Guid? userId, string userName)
+        public async Task ModifyBoatelBooking(BookingRequestsRequestableDto data, Guid? userId, string userName)
         {
-            var booking = await _boatelBookingRepository.GetAsync(data.Id);
-            if (booking != null)
-            {
-                booking.CheckinDate = data.CheckinDate.Date;
-                booking.CheckoutDate = data.CheckoutDate;
-                booking.CheckinTime = data.CheckinTime;
-                booking.CheckoutTime = data.CheckoutTime;
-                booking.NoOfAdults = data.NoOfAdults;
-                booking.NoOfChildrens = data.NoOfChildrens;
-                booking.BookingStatus = data.BookingStatus;
-                booking.PaymentStatus = data.PaymentStatus;
-                booking.LastModificationTime = DateTime.Now;
-                booking.LastModifierId = userId;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var bookingEntity = await _boatelBookingRepository.FindAsync(res => res.Id == data.Id).ConfigureAwait(false);
+            _objectMapper.Map<BookingRequestsRequestableDto, BoatelBookingEntity>(data, bookingEntity);
+            bookingEntity.CheckinDate = data.CheckinDate.Date;
+            bookingEntity.LastModificationTime = DateTime.Now;
+            bookingEntity.LastModifierId = userId;
+            await _boatelBookingRepository.UpdateAsync(bookingEntity, autoSave: true).ConfigureAwait(false);
+            _logger.LogInformation("Update the Boatel Booking");
         }
         public async Task<bool> IsBookingCancel(BookingCancellationRequestableDto data, string userId)
         {

@@ -62,7 +62,7 @@ export class ModifyReservationComponent implements OnInit {
   checkoutTime:any;
   totalAmount:any;
   prevDays:number;
-  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";  
+  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
   constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService,
     private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
     private activatedRoute: ActivatedRoute, private service: BookingService, private bookingListService: BookingListingService,
@@ -80,13 +80,13 @@ export class ModifyReservationComponent implements OnInit {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
 
-    this.getBookingDetail();    
+    this.getBookingDetail();
   }
   getBookingDetail() {
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.bookingModifyDetail = res;
-      this.boatFilterDetails.checkinDate = this.addDays(new Date(this.bookingModifyDetail?.checkinDate),1);
-      this.boatFilterDetails.checkoutDate = this.addDays(new Date(this.bookingModifyDetail?.checkoutDate),1);
+      this.boatFilterDetails.checkinDate = this.addDays(moment(this.bookingModifyDetail?.checkinDate).toDate(),1);
+      this.boatFilterDetails.checkoutDate = this.addDays(moment(this.bookingModifyDetail?.checkoutDate).toDate(),1);
       this.boatFilterDetails.checkinTime = this.bookingModifyDetail?.checkinTime;
       this.boatFilterDetails.checkoutTime = this.bookingModifyDetail?.checkoutTime;
       this.checkinDate = new Date(this.bookingModifyDetail?.checkinDate);
@@ -207,8 +207,8 @@ export class ModifyReservationComponent implements OnInit {
       let userId = Guid.create();
       let bookingModel = {
         id: this.bookingModifyDetail?.id,
-        checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
-        checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
+        checkinDate: moment(this.boatFilterDetails.checkinDate, 'YYYY-MM-DD'),//"2021-11-04T15:25:23.927Z",
+        checkoutDate: moment(this.boatFilterDetails.checkoutDate).toDate(),//"2021-11-04.927Z",
         checkinTime:this.boatFilterDetails.checkinTime,
         checkoutTime:this.boatFilterDetails.checkoutTime,
         bookingStatus: 0,
@@ -222,7 +222,6 @@ export class ModifyReservationComponent implements OnInit {
         reviews: null
       };
       this.bookingService.modifyboatelBooking(bookingModel).subscribe(res => {
-        if (res) {
           let boatCalendar = {
             creationTime: new Date(),
             creatorId: userId.toString(),
@@ -242,7 +241,7 @@ export class ModifyReservationComponent implements OnInit {
 
             }
           });
-        }
+
       })
     }
     else {
@@ -266,5 +265,5 @@ export class ModifyReservationComponent implements OnInit {
   }
   cancelpopup() {
     this.modal.dismissAll();
-  }  
+  }
 }
