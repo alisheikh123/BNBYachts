@@ -179,8 +179,7 @@
   "ConfirmPassword": "Confirm Password",
   "vPasswordDoNotMatch": "Password do not match.",
   "BookedServices": "Booked Services",
-  "smallBoatelAvailable": "boatel available,",
-  "smallGuests": "guests",
+  "BoatelAvailable": "boatel available",
   "headingBoatelIn": "Boatel in",
   "PriceRange": "Price Range",
   "tipSetThePriceRange": "Set the price range:",
@@ -227,6 +226,6 @@
   "RoundTrip:":"Round Trip:",
   "ReturnDetails:":"Return Details:",
   "ReturnDate:":"Return Date:",
-  "ReturnTime":"Return Time:"
-
+  "ReturnTime":"Return Time:",
+  "comma": ","
 }
