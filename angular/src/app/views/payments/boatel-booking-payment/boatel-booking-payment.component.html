@@ -20,9 +20,14 @@
                     </button>
                 </div>
                 <div>
-                    <h6 class="medium-bold mb-3">{{'CancellationPolicy' | localization}}</h6>
-                    <p>{{'loremDesc' | localization}} <a href="disclaimer.html"
-                            class="custom-btn underline-blue-link no-before-content p-0">{{'Learnmore' | localization}}</a></p>
+                    <h6 class="medium-bold mb-3">Cancellation Policy</h6>
+                        <div *ngIf="((this.cancellationPolicyString.length<=20));else greaterThanLimitBlock">
+                            <p>{{this.cancellationPolicyString}}</p>
+                        </div>
+                        <ng-template #greaterThanLimitBlock>
+                            {{ this.readAll ? (this.cancellationPolicyString):(this.cancellationPolicyString|slice:0:21) }}
+                            <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.readAll = !this.readAll">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
+                          </ng-template>
                 </div>
             </div>
             <div class="col-md-7 py-2">

@@ -43,10 +43,12 @@ export class EventDetailsComponent implements OnInit {
   }
   boatHost: any;
   showMore: boolean = false;
+  readAll: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
   eventCapcityValidation:any;
   @ViewChild('popOver') public popover: NgbPopover;
+  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -138,5 +140,5 @@ export class EventDetailsComponent implements OnInit {
       this.eventId = this.eventSchedule[this.dateScheduleIndex]?.eventId;
       this.eventDetails = res?.eventDetails;
     })
-  }
+  }  
 }
