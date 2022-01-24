@@ -125,19 +125,14 @@ namespace BnBYachts.Booking.Managers
             {
                 booking.CheckinDate = data.CheckinDate.Date;
                 booking.CheckoutDate = data.CheckoutDate;
+                booking.CheckinTime = data.CheckinTime;
+                booking.CheckoutTime = data.CheckoutTime;
                 booking.NoOfAdults = data.NoOfAdults;
                 booking.NoOfChildrens = data.NoOfChildrens;
                 booking.BookingStatus = data.BookingStatus;
                 booking.PaymentStatus = data.PaymentStatus;
                 booking.LastModificationTime = DateTime.Now;
                 booking.LastModifierId = userId;
-                //refundDto.BookingId = data.Id;
-                //refundDto.DeductedAmount = data.DeductedAmount;
-                //refundDto.isNotificationSent = true;
-                //refundDto.RefundableAmount = data.RefundableAmount;
-                //refundDto.UserId = userId;
-                //refundDto.TotalAmount = data.TotalAmount;
-                //await _boatelRefundRepository.InsertAsync(refundDto, true).ConfigureAwait(false);
                 return true;
             }
             else

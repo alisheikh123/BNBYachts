@@ -9,6 +9,8 @@ namespace BnBYachts.Booking.Booking.Requestable
         public int? Id { get; set; }
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }
+        public string CheckinTime { get; set; }
+        public string CheckoutTime { get; set; }
         public BookingStatus BookingStatus { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public int NoOfAdults { get; set; }

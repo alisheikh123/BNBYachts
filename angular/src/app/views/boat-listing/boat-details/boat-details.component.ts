@@ -32,6 +32,8 @@ export class BoatDetailsComponent implements OnInit {
   boatFilterDetails = {
     checkinDate: new Date(),
     checkoutDate: new Date(),
+    checkinTime:"",
+    checkoutTime:"",
     adults: 1,
     childrens: 0
   };
@@ -71,8 +73,8 @@ export class BoatDetailsComponent implements OnInit {
       this.boatFilterDetails = this.yachtParamService.getFilters();
     }
     if (this.boatFilterDetails.checkinDate == null && this.boatFilterDetails.checkoutDate == null) {
-      this.boatFilterDetails.checkinDate = this.minDate;//new Date();
-      this.boatFilterDetails.checkoutDate = this.maxDate;//new Date();
+      this.boatFilterDetails.checkinDate = this.minDate;
+      this.boatFilterDetails.checkoutDate = this.maxDate;
       this.boatFilterDetails.adults = 1;
     }
     this.getMyBookings();
@@ -99,6 +101,9 @@ export class BoatDetailsComponent implements OnInit {
       let findCalendar = res?.boatCalendars.find((res:any)=>res.isAvailable == true);
       this.boatFilterDetails.checkinDate =new Date(findCalendar.fromDate);
       this.boatFilterDetails.checkoutDate =new Date(findCalendar.toDate);
+      this.boatFilterDetails.checkoutDate =new Date(findCalendar.toDate);
+      this.boatFilterDetails.checkinTime =moment(this.boatDetails?.checkinTime).format("h:mm a");
+      this.boatFilterDetails.checkoutTime =moment(this.boatDetails?.checkoutTime).format("h:mm a");
       this.minDate =  {year: new Date(findCalendar.fromDate).getFullYear(), month: new Date(findCalendar.fromDate).getMonth()+1, day: new Date(findCalendar.fromDate).getDate()};
       this.maxDate =  {year: new Date(findCalendar.toDate).getFullYear(), month: new Date(findCalendar.toDate).getMonth()+1, day: new Date(findCalendar.toDate).getDate()};
       this.getHostDetails(this.boatDetails?.creatorId);
@@ -139,6 +144,8 @@ export class BoatDetailsComponent implements OnInit {
           creationTime: new Date(),
           checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
           checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
+          checkinTime:this.boatFilterDetails.checkinTime,
+          checkoutTime:this.boatFilterDetails.checkoutTime,
           bookingStatus: 0,
           paymentStatus: 0,
           noOfAdults: this.boatFilterDetails.adults,

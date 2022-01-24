@@ -33,6 +33,8 @@ export class ModifyReservationComponent implements OnInit {
   boatFilterDetails = {
     checkinDate: new Date(),
     checkoutDate: new Date(),
+    checkinTime: "",
+    checkoutTime:"",
     adults: 0,
     childrens: 0
   };
@@ -84,6 +86,8 @@ export class ModifyReservationComponent implements OnInit {
       this.bookingModifyDetail = res;
       this.boatFilterDetails.checkinDate = this.addDays(new Date(this.bookingModifyDetail?.checkinDate),1);
       this.boatFilterDetails.checkoutDate = this.addDays(new Date(this.bookingModifyDetail?.checkoutDate),1);
+      this.boatFilterDetails.checkinTime = this.bookingModifyDetail?.checkinTime;
+      this.boatFilterDetails.checkoutTime = this.bookingModifyDetail?.checkoutTime;
       this.checkinDate = new Date(this.bookingModifyDetail?.checkinDate);
       this.checkoutDate = new Date(this.bookingModifyDetail?.checkoutDate);
       this.Days = utils.differenceDates(this.checkinDate,this.checkoutDate);
@@ -204,6 +208,8 @@ export class ModifyReservationComponent implements OnInit {
         id: this.bookingModifyDetail?.id,
         checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
         checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
+        checkinTime:this.boatFilterDetails.checkinTime,
+        checkoutTime:this.boatFilterDetails.checkoutTime,
         bookingStatus: 0,
         paymentStatus: 0,
         noOfAdults: this.bookingModifyDetail?.noOfAdults,
