@@ -95,11 +95,11 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<int?>("BoatelCapacity")
                         .HasColumnType("int");
 
-                    b.Property<string>("CheckinTime")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CheckinTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("CheckoutTime")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CheckoutTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
