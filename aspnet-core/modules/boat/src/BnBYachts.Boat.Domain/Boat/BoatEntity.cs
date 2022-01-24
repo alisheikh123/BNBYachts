@@ -18,8 +18,8 @@ namespace BnBYachts.Boat
         public bool IsBoatelServicesOffered { get; set; }
         public int? BoatelCapacity { get; set; }
         public int BoatelAvailabilityDays { get; set; }
-        public DateTime CheckinTime { get; set; }
-        public DateTime CheckoutTime { get; set; }
+        public string CheckinTime { get; set; }
+        public string CheckoutTime { get; set; }
         public int PerDayCharges { get; set; }
         public bool IsActive { get; set; }
         public int TaxFee { get; set; }

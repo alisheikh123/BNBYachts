@@ -60,6 +60,19 @@
                                                 <p>{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p>
                                             </div>
                                             </div>
+                                        <div class="custom-flex-start flex-mobile-column">
+                                            <div class="custom-flex-start">
+                                                <p class="medium px-2">{{'CheckInTime' | localization}}</p>
+                                                <p>{{boatDetails?.checkinTime | date:'hh:mm a'}}</p>
+                                            </div>
+                                            </div>
+                                        <div class="custom-flex-start flex-mobile-column">
+                                            <div class="custom-flex-start">
+                                                <p class="medium px-2">{{'CheckOutTime' | localization}}</p>
+                                                <p>{{boatDetails?.checkoutTime | date:'hh:mm a'}}</p>
+                                            </div>
+                                            </div>
+
 
                                         <div class="custom-flex-start">
                                             <p class="medium px-2">{{'Bathroom' | localization}}</p>

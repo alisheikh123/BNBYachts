@@ -72,10 +72,10 @@ export class ReservationDetailComponent implements OnInit {
         this.checkinTime = this.booking?.boatDetail?.checkinTime;
         this.tokenizeString();
       });
-      
+
     });
     this.isReviewPosted();
-    
+
   }
   addReview() {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
@@ -187,7 +187,7 @@ export class ReservationDetailComponent implements OnInit {
   showDescription() {
     return this.description;
   }
-  showMoreToggle() {    
+  showMoreToggle() {
     this.showMore = !this.showMore;
   }
 }

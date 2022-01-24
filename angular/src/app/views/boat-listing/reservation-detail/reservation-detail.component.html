@@ -63,11 +63,11 @@
           <div class="character-info-wrapper  custom-flex">
             <div class="custom-flex-start character-info py-2">
               <p class="medium description-fotmat">{{"CheckInTime" | localization}}</p>
-              <p class="grey">{{booking?.boatDetail?.checkinTime | date:'h:mm a' }}</p>
+              <p class="grey">{{booking?.checkinTime }}</p>
             </div>
             <div class="custom-flex-start character-info py-2">
               <p class="medium description-fotmat">{{"CheckOutTime" | localization}}</p>
-              <p class="grey">{{booking?.boatDetail?.checkoutTime | date:'h:mm a'}}</p>
+              <p class="grey">{{booking?.checkoutTime}}</p>
             </div>
           </div>
           <div class="character-info-wrapper  custom-flex">

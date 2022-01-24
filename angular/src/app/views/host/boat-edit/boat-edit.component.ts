@@ -36,7 +36,7 @@ export class BoatEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder,
     private boatService: YachtSearchService, private modal: NgbModal,
     private onBoardingService: OnboardingService, private boatSettingsService: BoatSettingsService
-    , private toastr: ToastrService,private router:Router) { }
+    , private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -77,10 +77,10 @@ export class BoatEditComponent implements OnInit {
 
   getBoatDetailsById() {
     this.boatService.boatDetailsById(this.boatId).subscribe((res: any) => {
-      this.boatCalendar.fromDate = (res?.boatCalendars?.isAvailable==true) ? res?.boatCalendars?.fromDate:res?.boatCalendars[0]?.fromDate;
-      this.boatCalendar.toDate = (res?.boatCalendars?.isAvailable==true) ? res?.boatCalendars?.toDate:res?.boatCalendars[0]?.toDate;
+      this.boatCalendar.fromDate = (res?.boatCalendars?.isAvailable == true) ? res?.boatCalendars?.fromDate : res?.boatCalendars[0]?.fromDate;
+      this.boatCalendar.toDate = (res?.boatCalendars?.isAvailable == true) ? res?.boatCalendars?.toDate : res?.boatCalendars[0]?.toDate;
       this.boatEditForm.setValue({
-        id:this.boatId,
+        id: this.boatId,
         name: res?.name,
         description: res?.description,
         location: res?.location,
@@ -98,7 +98,6 @@ export class BoatEditComponent implements OnInit {
         isActive: res?.isActive,
         taxFee: res?.taxFee,
         boatType: res?.boatType
-
       });
       this.boatGallery = res?.boatGalleries;
       this.boatFeatures = res?.boatFeatures;
@@ -196,7 +195,7 @@ export class BoatEditComponent implements OnInit {
           fileName: fileData.name,
           fileData: reader.result,
           fileType: fileData.type,
-          sortOrder:this.otherGalleryImages?.length,
+          sortOrder: this.otherGalleryImages?.length,
           isCoverPic: false
         }
         this.otherGalleryImages.push(item);
@@ -207,7 +206,7 @@ export class BoatEditComponent implements OnInit {
   updateBoat() {
     if (this.boatEditForm.valid) {
       let data = this.boatEditForm.value;
-      this.boatGallery = [ ...this.boatGallery, ...this.otherGalleryImages];
+      this.boatGallery = [...this.boatGallery, ...this.otherGalleryImages];
       data.boatGallery = this.boatGallery;
       data.boatCalendar = this.boatCalendar;
       data.boatFeatures = this.boatLookups.features.filter((res: any) => res.isChecked == true);

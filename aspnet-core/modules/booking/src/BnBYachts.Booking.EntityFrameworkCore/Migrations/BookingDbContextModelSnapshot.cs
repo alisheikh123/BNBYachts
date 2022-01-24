@@ -37,8 +37,14 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<DateTime>("CheckinDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CheckinTime")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CheckoutDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CheckoutTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
