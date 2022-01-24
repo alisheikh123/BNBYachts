@@ -10,6 +10,7 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { FeaturesTypes } from 'src/app/shared/enums/yacht-search.constant';
 import { environment } from 'src/environments/environment';
 import { AddDialogComponent } from '../host-onboarding/add-dialog/add-dialog.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-boat-edit',
@@ -205,6 +206,8 @@ export class BoatEditComponent implements OnInit {
 
   updateBoat() {
     if (this.boatEditForm.valid) {
+      this.boatEditForm.controls.checkinTime.setValue(moment(this.boatEditForm.controls['checkinTime'].value).format());
+      this.boatEditForm.controls.checkoutTime.setValue(moment(this.boatEditForm.controls['checkoutTime'].value).format());
       let data = this.boatEditForm.value;
       this.boatGallery = [...this.boatGallery, ...this.otherGalleryImages];
       data.boatGallery = this.boatGallery;
