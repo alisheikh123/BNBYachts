@@ -47,6 +47,7 @@
                 <p [innerHtml]="message.message"></p>
                 <small class="chatTime">{{message.sentTime | date:'hh:mm a'}}</small>
               </div>
+              <div class="pe-2" *ngIf="!isReciever(message.receiverId,chat.senderId)"></div>
               <img src="../../../../../../assets/images/user-img.png" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
               </div>
             </div>
