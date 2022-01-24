@@ -2,75 +2,95 @@
     <div class="section-padding">
         <div class="row">
             <div class="">
-                <select name="select" id="select" class="custome-select" (change)="getBoatCalendar(boatId,1)"
+                <select name="select" id="select" class="custome-select" (change)="getBoatCalendar(boatId)"
                     [(ngModel)]="boatId">
                     <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
                 </select>
             </div>
         </div>
         <div class="row">
-            <div [ngClass]="{'col-12': !showEventDetails , 'col-8':showEventDetails}">
-                <full-calendar  #calendar [options]="calendarOptions" class="custom-calender"
+            <div class="col-12" *ngIf="!showEventDetails">
+                <full-calendar [deepChangeDetection]="true"
+                  #calendar [options]="calendarOptions" class="custom-calender"
                     eventClick="getEventDetails($event)">
                 </full-calendar>
             </div>
-            
+            <div class="col-8" *ngIf="showEventDetails">
+                <full-calendar [deepChangeDetection]="true"
+                  #calendar [options]="calendarOptions" class="custom-calender"
+                    eventClick="getEventDetails($event)">
+                </full-calendar>
+            </div>
             <div class="col-4" *ngIf="showEventDetails">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <div class="image-with-text">
-                                    <div class="image-with-text-inner small-img">
-                                        <img src="../../../../assets/images/user-img.png" alt="">
-                                        <div class="user-details">
-                                            <p class="medium">John Cena</p>
-                                            <p class="small-text grey">Event</p>
+                                <ng-container *ngIf="isBookingEvent">
+                                    <div class="image-with-text">
+                                        <div class="image-with-text-inner small-img" *ngIf="serviceType == SERVICE_TYPES.Boatel">
+                                            <img src="../../../../assets/images/user-img.png" alt="">
+                                            <div class="user-details">
+                                                <p class="medium">{{this.eventDetails.userInfo?.name}}</p>
+                                                <p class="small-text grey">Boatel</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <ng-container *ngIf="serviceType == SERVICE_TYPES.Event">
-                                    <div class="ps-2 pt-4">
-                                        <p class="bold">Selected Dates</p>
-                                        <p>{{eventDetails?.startDateTime | date}}</p>
-                                        <p class="bold">Event</p>
-                                        <p>{{eventDetails?.title}}</p>
-                                        <p class="bold">Total Price</p>
-                                        <p>{{eventDetails?.amountPerPerson}} $</p>
-                                        <p class="bold">Time</p>
-                                        <p>{{eventDetails?.startDateTime | date : 'hh:mm a'}}</p>
-                                        <p class="bold">Note</p>
-                                        <p></p>
+                                    <ng-container *ngIf="serviceType == SERVICE_TYPES.Boatel">
+                                        <div class="ps-2 pt-4">
+                                            <p class="bold">Boat</p>
+                                            <p>{{eventDetails?.name}}</p>
+                                            <p class="bold">Total Price</p>
+                                            <p>{{eventDetails?.perDayCharges}} $</p>
+                                            <p class="bold">Check-in Time</p>
+                                            <p>{{eventDetails?.checkinTime | date : 'hh:mm a'}}</p>
+                                            <p class="bold">Check-out Time</p>
+                                            <p>{{eventDetails?.checkoutTime | date : 'hh:mm a'}}</p>
+                                            <p class="bold">Note</p>
+                                            <p></p>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container>
+                                        <div class="ps-2 pt-4">
+                                            <p class="bold">Total Requests</p>
+                                            <p>{{serviceType == SERVICE_TYPES.Charter ? totalChartersRequest : totalEventRequest}}</p>
+                                            <p></p>
+                                        </div>
+                                    </ng-container>
+                                    <div class="text-center">
+                                        <div class="bottom-btn">
+                                            <button class="custom-btn blue big-btn" (click)="goToReservation()">Open Reservation</button>
+                                          </div>
                                     </div>
                                 </ng-container>
-                                <ng-container *ngIf="serviceType == SERVICE_TYPES.Boatel">
-                                    <div class="ps-2 pt-4">
-                                        <p class="bold">Boat</p>
-                                        <p>{{eventDetails?.name}}</p>
-                                        <p class="bold">Total Price</p>
-                                        <p>{{eventDetails?.perDayCharges}} $</p>
-                                        <p class="bold">Check-in Time</p>
-                                        <p>{{eventDetails?.checkinTime | date : 'hh:mm a'}}</p>
-                                        <p class="bold">Check-out Time</p>
-                                        <p>{{eventDetails?.checkoutTime | date : 'hh:mm a'}}</p>
-                                        <p class="bold">Note</p>
-                                        <p></p>
-                                    </div>
-                                </ng-container>
-                                <ng-container *ngIf="serviceType == SERVICE_TYPES.Charter">
-                                    <div class="ps-2 pt-4">
-                                        <p class="bold">Departure Date</p>
-                                        <p>{{eventDetails?.departureFromDate | date}}</p>
-                                        <p class="bold">Arrival Date</p>
-                                        <p>{{eventDetails?.departureToDate | date}}</p>
-                                        <p class="bold">Boat</p>
-                                        <p>{{eventDetails?.boat?.name}}</p>
-                                        <p class="bold">Total Price</p>
-                                        <p>{{eventDetails?.charterFee}} $</p>
-                                        <p class="bold">Note</p>
-                                        <p></p>
-                                    </div>
-                                </ng-container>
+                               <ng-container *ngIf="!isBookingEvent">
+                                   <h4>Selected Dates</h4>
+                                   <small>{{dayCalendar?.fromDate | date:"dd MMM"}}</small>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" [(ngModel)]="dayCalendar.isAvailable" [value]="true" id="allCharter">
+                                    <label for="allCharter">{{'Available' | localization}}</label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input type="radio" class="form-check-input" [(ngModel)]="dayCalendar.isAvailable" [value]="false" id="allCharter">
+                                    <label for="allCharter">{{'Blocked' | localization}}</label>
+                                  </div>
+                                  <div class="custom-input-field py-2 pt-4" *ngIf="dayCalendar.isAvailable">
+                                    <label>Nighty Price *</label>
+                                    <input type="number" class="custom-input" placeholder="Enter price" [(ngModel)]="dayCalendar.amount">
+                                  </div>
+                                  <div class="custom-input-field py-2 pt-4">
+                                    <label>Note *</label>
+                                    <button class="custom-btn small-btn ps-0" (click)="showNote = !showNote;"><small>+ Add Note</small></button>
+                                    <textarea *ngIf="showNote" type="text" class="custom-input" placeholder="Enter Notes" [(ngModel)]="dayCalendar.notes"></textarea>
+                                  </div>
+
+                                  <div class="text-center">
+                                    <div class="bottom-btn">
+                                        <button class="custom-btn blue small-btn" (click)="saveCalendar()">Save</button>                                      
+                                        <button class="custom-btn small-btn" (click)="showEventDetails = !showEventDetails;">Cancel</button>
+                                      </div>
+                                  </div>
+                               </ng-container>
                             </div>
                         </div>
                     </div>

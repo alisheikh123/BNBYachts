@@ -24,5 +24,6 @@ namespace BnBYachts.Boat.Boat.Transferables
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ServiceType ServiceType { get; set; }
+        public bool IsAvailable { get; set; }
     }
 }

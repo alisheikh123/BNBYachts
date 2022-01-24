@@ -41,12 +41,13 @@
             <div class="image-with-text" *ngFor="let message of msg.value"
             [ngClass]="{'bg-blue-text reciever-msg':isReciever(message.receiverId,chat.senderId)}">
             <div class="image-with-text-inner small-img">
-              <div class="w-100 d-flex align-items-start justify-content-start reciver-msj">
-              <img src="../../../../../../assets/images/user-img.png" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
+              <div class="w-100 d-flex align-items-start justify-content-end reciver-msj">
+       
               <div class="user-details">
                 <p [innerHtml]="message.message"></p>
-                <small>{{message.sentTime | date:'hh:mm a'}}</small>
+                <small class="chatTime">{{message.sentTime | date:'hh:mm a'}}</small>
               </div>
+              <img src="../../../../../../assets/images/user-img.png" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
               </div>
             </div>
           </div>
