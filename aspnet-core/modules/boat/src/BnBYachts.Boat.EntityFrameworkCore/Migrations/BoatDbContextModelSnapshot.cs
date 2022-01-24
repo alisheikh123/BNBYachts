@@ -28,6 +28,9 @@ namespace BnBYachts.Boat.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int?>("BoatEntityId")
                         .HasColumnType("int");
 
@@ -62,6 +65,9 @@ namespace BnBYachts.Boat.Migrations
                     b.Property<Guid?>("LastModifierId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ToDate")
                         .HasColumnType("datetime2");

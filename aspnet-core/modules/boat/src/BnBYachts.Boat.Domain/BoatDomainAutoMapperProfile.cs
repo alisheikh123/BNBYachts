@@ -1,6 +1,7 @@
 using AutoMapper;
 using BnBYachts.Boat.Boat.Enum;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Boat.Calendar;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
@@ -85,6 +86,8 @@ namespace BnBYachts.Boat
             .ForMember(x => x.ServiceType, opt => opt.MapFrom(source => (ServiceType.Event)));
             CreateMap<BoatCalendarEntity, CalendarTransferable>().ForMember(x => x.StartDate, opt => opt.MapFrom(source => (source.FromDate)))
                 .ForMember(x => x.EndDate, opt => opt.MapFrom(source => (source.ToDate)));
+            CreateMap<CalendarRequestableDto, BoatCalendarEntity>();
+            CreateMap<BoatCalendarEntity, CalendarRequestableDto>();
         }
     }
 }

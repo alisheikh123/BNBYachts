@@ -44,6 +44,7 @@ export class BoatDetailsComponent implements OnInit {
 
   boatHost: any;
   showMore: boolean = false;
+  readAll: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
   boatelCapcityValidation:any;
@@ -54,7 +55,7 @@ export class BoatDetailsComponent implements OnInit {
     { year: 2022, month: 1, day: 25 }
   ];
   @ViewChild('popOver') public popover: NgbPopover;
-
+  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
 
   constructor(config: NgbRatingConfig, private toastr: ToastrService,
     private yachtSearchService: YachtSearchService, private router: Router,

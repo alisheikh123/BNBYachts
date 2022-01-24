@@ -9,5 +9,7 @@ namespace BnBYachts.Boat
         public DateTime ToDate { get; set; }
         public DateTime FromDate { get; set; }
         public virtual int? BoatEntityId { get; set; }
+        public int Amount { get; set; }
+        public string Notes { get; set; }
     }
 }

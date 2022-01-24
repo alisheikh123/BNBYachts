@@ -1,6 +1,6 @@
 .reciever-msg{
     text-align: end !important;
-    align-items: flex-end;
+    align-items: flex-start;
     .user-details {
         width: auto !important;
         max-width: 550px !important;
@@ -27,4 +27,7 @@
 .chat-separator span{
     background:rgba(236, 235, 235, 0.3);
     font-weight: bold;
+}
+.chatTime{
+    font-size: 0.6em !important;
 }

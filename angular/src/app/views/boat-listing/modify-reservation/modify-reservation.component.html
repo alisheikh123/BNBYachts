@@ -78,16 +78,15 @@
                                                         <p>{{bookingModifyDetail?.checkoutTime }}</p>
                                                     </div>
                                                 </div>
-                                                <h6 class="bold mt-3">Approval policy</h6>
+                                                <h6 class="bold mt-3">{{'ApprovalPolicy' | localization}}</h6>
                                                 <div class="tabs-inner-details-inner">
-                                                    <div class="custom-flex-coumn">
-                                                        <p>Short description about the host Lorem ipsum dolor sit amet,
-                                                            consectetur adipiscing elit, sed do eiusmod tempor
-                                                            incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                            minim veniam, quis nostrud</p>
+                                                    <div class="custom-flex-coumn" *ngIf="((this.approvalPolicyString.length<=20));else greaterThanLimitBlock">
+                                                        <p>{{this.approvalPolicyString}}</p>
                                                     </div>
-                                                    <a href="javascript:void(0)"
-                                                        class="underline-blue-link py-2 no-underline">Read All</a>
+                                                    <ng-template #greaterThanLimitBlock>
+                                                        {{(this.readAll?this.approvalPolicyString:this.approvalPolicyString|slice:0:21)}}
+                                                        <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.readAll = !this.readAll">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
+                                                      </ng-template>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 py-2">
