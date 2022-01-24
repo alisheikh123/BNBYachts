@@ -1,3 +1,4 @@
+import { Calendar } from '@fullcalendar/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +25,7 @@ export class BoatEditComponent implements OnInit {
   boatCalendar = {
     fromDate: new Date(),
     toDate: new Date(),
+
   };
   boatFeatures: any;
   boatRules: any;
@@ -75,6 +77,8 @@ export class BoatEditComponent implements OnInit {
 
   getBoatDetailsById() {
     this.boatService.boatDetailsById(this.boatId).subscribe((res: any) => {
+      this.boatCalendar.fromDate = (res?.boatCalendars?.isAvailable==true) ? res?.boatCalendars?.fromDate:res?.boatCalendars[0]?.fromDate;
+      this.boatCalendar.toDate = (res?.boatCalendars?.isAvailable==true) ? res?.boatCalendars?.toDate:res?.boatCalendars[0]?.toDate;
       this.boatEditForm.setValue({
         id:this.boatId,
         name: res?.name,
@@ -94,6 +98,7 @@ export class BoatEditComponent implements OnInit {
         isActive: res?.isActive,
         taxFee: res?.taxFee,
         boatType: res?.boatType
+
       });
       this.boatGallery = res?.boatGalleries;
       this.boatFeatures = res?.boatFeatures;
@@ -214,6 +219,11 @@ export class BoatEditComponent implements OnInit {
         }
       })
     }
+  }
+  changeCalendar(item: any) {
+    this.boatCalendar.fromDate = item.startDate;
+    this.boatCalendar.toDate = item.endDate;
+
   }
 
 }

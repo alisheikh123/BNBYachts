@@ -53,7 +53,7 @@ export class BoatDetailsComponent implements OnInit {
   ];
   @ViewChild('popOver') public popover: NgbPopover;
 
-  
+
   constructor(config: NgbRatingConfig, private toastr: ToastrService,
     private yachtSearchService: YachtSearchService, private router: Router,
      private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
@@ -114,8 +114,6 @@ export class BoatDetailsComponent implements OnInit {
   getMyBookings(){
     this.bookingService.getmyBookings(this.boatId).subscribe((res:any)=>{
       this.myBookings = res?.data;
-      console.log(this.myBookings);
-      debugger;
     })
   }
 
@@ -172,7 +170,7 @@ export class BoatDetailsComponent implements OnInit {
     }
     else{
       let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
-      
+
     }
   }
   setMaxDate(item:any){
