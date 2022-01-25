@@ -9,13 +9,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12" *ngIf="!showEventDetails">
-                <full-calendar [deepChangeDetection]="true"
-                  #calendar [options]="calendarOptions" class="custom-calender"
-                    eventClick="getEventDetails($event)">
-                </full-calendar>
-            </div>
-            <div class="col-8" *ngIf="showEventDetails">
+            <div class="col-12" 
+            [ngClass]="{'col-12': !showEventDetails ,'col-8': showEventDetails}">
                 <full-calendar [deepChangeDetection]="true"
                   #calendar [options]="calendarOptions" class="custom-calender"
                     eventClick="getEventDetails($event)">

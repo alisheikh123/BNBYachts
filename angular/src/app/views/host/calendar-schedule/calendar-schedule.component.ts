@@ -23,7 +23,8 @@ export class CalendarScheduleComponent implements OnInit {
     events: [],
     eventClick: this.getEventDetails.bind(this),
     dateClick: this.getDayClick.bind(this),
-    datesSet:this.getMonth.bind(this)
+    datesSet: this.getMonth.bind(this),
+    height:550,
   };
   boatCalendar: any;
   boats: any;
@@ -46,20 +47,20 @@ export class CalendarScheduleComponent implements OnInit {
     id: 0,
     serviceType: 0
   };
-  totalChartersRequest:number = 0;
-  totalEventRequest:number = 0;
+  totalChartersRequest: number = 0;
+  totalEventRequest: number = 0;
   showNote: boolean = false;
-  activeMonth:number = Number(moment().format("MM"));
+  activeMonth: number = Number(moment().format("MM"));
   constructor(private service: EventService, private boatService: YachtSearchService,
-    private authService:AuthService,
+    private authService: AuthService,
     private calendarService: CalendarService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.getBoats();
   }
 
-  getMonth(calendar:any){
-    let date = moment(calendar.start).add(10,'days');
+  getMonth(calendar: any) {
+    let date = moment(calendar.start).add(10, 'days');
     this.activeMonth = Number(moment(date).format("MM"));
     this.getBoatCalendar(this.boatId);
   }
@@ -67,7 +68,7 @@ export class CalendarScheduleComponent implements OnInit {
   getBoats() {
     this.service.getBoats().subscribe(res => {
       this.boats = res;
-      let month =Number(moment().format("MM"));
+      let month = Number(moment().format("MM"));
       this.getBoatCalendar(this.boats[0]?.id);
     });
   }
@@ -80,10 +81,23 @@ export class CalendarScheduleComponent implements OnInit {
     })
   }
 
-  getBoatBookingsCalendar(month:number) {
+  getBoatBookingsCalendar(month: number) {
     this.calendarService.getBoatBookingsCalendar(this.boatId, month).subscribe((res: any) => {
-      this.bookingsCalendar = [...res?.data.boatels, ...res?.data.charters];
-      this.bookingsCalendar = [...this.bookingsCalendar, ...res?.data.events];
+      this.bookingsCalendar = res?.data.boatels;
+      let charterBookings = res?.data.charters;
+      charterBookings.forEach((element: any) => {
+        let find = this.bookingsCalendar.find((res: any) => res.id == element.id && res.serviceType == element.serviceType);
+        if (!find) {
+          this.bookingsCalendar.push(element);
+        }
+      });
+      let eventBookings = res?.data.events;
+      eventBookings.forEach((element: any) => {
+        let find = this.bookingsCalendar.find((res: any) => res.id == element.id && res.serviceType == element.serviceType);
+        if (!find) {
+          this.bookingsCalendar.push(element);
+        }
+      });
       this.totalChartersRequest = res?.data.charters.length;
       this.totalEventRequest = res?.data.events.length;
       this.bindEvents();
@@ -101,7 +115,7 @@ export class CalendarScheduleComponent implements OnInit {
         start: new Date(element.startDate),
         end: new Date(element.endDate),
         title: element.serviceType === this.SERVICE_TYPES.Boatel ? element.name
-        : (element.serviceType === this.SERVICE_TYPES.Charter ? this.totalChartersRequest + ' Requests' : this.totalEventRequest + ' Requests'),
+          : (element.serviceType === this.SERVICE_TYPES.Charter ? this.totalChartersRequest + ' Requests' : this.totalEventRequest + ' Requests'),
         allDay: true,
         backgroundColor: element.serviceType === this.SERVICE_TYPES.Boatel ? "#091654"
           : (element.serviceType === this.SERVICE_TYPES.Charter ? '#FFA500' : '#00FF00'),
@@ -117,7 +131,7 @@ export class CalendarScheduleComponent implements OnInit {
         eventId: element.id,
         serviceType: element.serviceType,
         isBooking: false,
-        title: '20$',
+        title: '',
         textColor: '#f000',
         start: new Date(element.startDate),
         end: new Date(element.endDate),
@@ -134,7 +148,7 @@ export class CalendarScheduleComponent implements OnInit {
       id: event.event._def.extendedProps.eventId,
       serviceType: event.event._def.extendedProps.serviceType,
       isBooking: event.event._def.extendedProps.isBooking,
-      userId:event.event._def.extendedProps.userId
+      userId: event.event._def.extendedProps.userId
     };
     this.isBookingEvent = data.isBooking;
     if (this.isBookingEvent) {
@@ -147,7 +161,7 @@ export class CalendarScheduleComponent implements OnInit {
       if (data.serviceType == this.SERVICE_TYPES.Boatel) {
         this.boatService.boatDetailsById(data.id).subscribe(res => {
           this.eventDetails = res;
-          this.authService.getUserInfoById(data.userId).subscribe(res=>{
+          this.authService.getUserInfoById(data.userId).subscribe(res => {
             this.eventDetails.userInfo = res;
           });
         })
@@ -159,13 +173,13 @@ export class CalendarScheduleComponent implements OnInit {
     this.dayCalendar.boatEntityId = this.boatId;
     this.calendarService.updateCalendar(this.dayCalendar).subscribe(res => {
       let event = {
-        startDate:this.dayCalendar.fromDate,
-        endDate:this.dayCalendar.toDate,
-        title:'Blocked DAy',
-        serviceType:this.SERVICE_TYPES.Boatel
+        startDate: this.dayCalendar.fromDate,
+        endDate: this.dayCalendar.toDate,
+        title: 'Blocked DAy',
+        serviceType: this.SERVICE_TYPES.Boatel
       }
       this.boatCalendar.push(event);
-      if(!this.dayCalendar.isAvailable){
+      if (!this.dayCalendar.isAvailable) {
         this.bookingsCalendar.push(event);
       }
       this.bindEvents();

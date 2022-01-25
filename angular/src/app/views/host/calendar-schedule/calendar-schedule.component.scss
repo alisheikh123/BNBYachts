@@ -1,7 +1,7 @@
 .custome-select{
   border: none;
-  font-weight: 600;
-  font-size: 30px;
+  font-weight: 400;
+  font-size: 20px;
   color: black;
 }
 
@@ -30,9 +30,6 @@
 //   border: none !important;
 //   padding: 0 !important;
 // }
-::ng-deep .fc-daygrid-day{
-  height: 2px !important;
-}
 // ::ng-deep .fc-scrollgrid-sync-table{
 //   border-spacing: 10px !important;
 // border-collapse: separate !important;
@@ -57,10 +54,16 @@
 //   display: inherit !important;
 //   content: inherit !important;
 //   }
-//   ::ng-deep .fc-toolbar-title{
-//     font-size: 16px !important;
-//   }
-
+  ::ng-deep .fc-toolbar-title{
+    font-size: 16px !important;
+  }
+  ::ng-deep .fc-header-toolbar {
+    margin-bottom: 0.5em !important;
+}
+::ng-deep .fc-button{
+  padding: 0.2em 0.45em !important;
+  text-transform: capitalize !important;
+}
 //   ::ng-deep .fc-view-harness{
 // height: 900px!important;
 //   }
