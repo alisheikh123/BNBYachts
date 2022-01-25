@@ -1,6 +1,6 @@
 <div class="custom-card req-user-card custom-margin p-0 custom-margin-bottom-mobile" *ngFor="let item of hostBoats">
   <div class="image-with-text custom-flex-between align-items-center">
-    <div class="image-with-text-inner">
+    <div class="image-with-text-inner big-image">
       <div *ngFor="let img of item.boatGalleries | filterBy : 'isCoverPic':true">
         <img src="{{assetsUrl + img.imagePath}}" alt="">
       </div>
