@@ -42,7 +42,7 @@ export class ReservationDetailComponent implements OnInit {
   description: any;
   noOfWords: number;
   showMore = false;
-
+  isUserHost:boolean;
   constructor(private service: BookingService
     , private bookingListService: BookingListingService,
     public activatedRoute: ActivatedRoute, private route: Router,
@@ -56,6 +56,7 @@ export class ReservationDetailComponent implements OnInit {
     userRole == this.USER_ROLES.host
       ? (this.isHost = true)
       : (this.isHost = false);
+    this.isUserHost = localStorage.getItem('userRole') ==  this.USER_ROLES.host? (this.isHost = true): (this.isHost = false);
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.booking = res;
       this.currentDate = new Date();
