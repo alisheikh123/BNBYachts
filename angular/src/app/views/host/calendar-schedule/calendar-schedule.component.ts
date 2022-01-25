@@ -73,7 +73,6 @@ export class CalendarScheduleComponent implements OnInit {
   }
   getBoatCalendar(boatId: number) {
     this.boatId = boatId;
-    debugger;
     this.calendarService.getBoatCalendar(boatId, this.activeMonth).subscribe((res: any) => {
       this.boatCalendar = [...res?.data.boatels, ...res?.data.charters];
       this.boatCalendar = [...this.boatCalendar, ...res?.data.events];
