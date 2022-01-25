@@ -90,9 +90,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
       else {
         this.isBookingConfirmed = false;
         this.isPaymentFailed = true;
-        this.router.navigate(["/boat-listing/all-reservations"]);
       }
-      this.router.navigate(["/boat-listing/all-reservations"]);
     })
   }
 

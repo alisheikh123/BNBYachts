@@ -110,6 +110,7 @@
                                                                     <input
                                                                         placeholder="Add date" name="dp"
                                                                         container="body"
+                                                                        [markDisabled]="markDisabled"
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
                                                                         [minDate] = "minDate"
                                                                         [maxDate]="maxDate"
