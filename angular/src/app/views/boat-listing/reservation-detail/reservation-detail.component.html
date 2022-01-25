@@ -136,8 +136,10 @@
               <div class="center-content">
                 <a [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
-                <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
+
+                <a *ngIf="!isUserHost" [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
                   class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
+
               </div>
             <!-- </div> -->
           </div>
