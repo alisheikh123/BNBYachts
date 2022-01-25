@@ -62,7 +62,7 @@ export class EventBookingPaymentComponent implements OnInit {
     };
     this.paymentService.pay(model).subscribe(res => {
       if (res) {
-        this.modal.open(BookingConfirmedModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true })
+        this.modal.open(BookingConfirmedModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true,backdrop:'static' })
         this.isBookingConfirmed = true;
         this.isPaymentFailed = false;
       }
