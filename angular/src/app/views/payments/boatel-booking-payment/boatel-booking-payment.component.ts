@@ -27,6 +27,8 @@ export class BoatelBookingPaymentComponent implements OnInit {
   isPaymentFailed: boolean = false;
   bookingId: any;
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
+  cancellationPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.";  
+  readAll: boolean = false;
 
   constructor(public app: AppComponent,
     private cdr: ChangeDetectorRef,
@@ -39,7 +41,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
       this.bookingId = Number(res['bookingid']);
     });
     this.boatFilterDetails = this.yachtParamService.getFilters();
-    this.loadBoatDetails();
+    this.loadBoatDetails();    
   }
   disablePayment(){
     if(this.paymentMethodsComponent && (this.paymentMethodsComponent.paymentMethodId == null && this.paymentMethodsComponent.cardError == true)){
@@ -97,5 +99,5 @@ export class BoatelBookingPaymentComponent implements OnInit {
   retryPayment() {
     this.isBookingConfirmed = false;
     this.isPaymentFailed = false;
-  }
+  }  
 }

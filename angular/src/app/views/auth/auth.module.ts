@@ -14,7 +14,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { NotLoggedInComponent } from './components/not-logged-in/not-logged-in.component';
-
+import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { NotLoggedInComponent } from './components/not-logged-in/not-logged-in.c
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    SharedPipesModule
   ],
   declarations: [
       LoginModalComponent,

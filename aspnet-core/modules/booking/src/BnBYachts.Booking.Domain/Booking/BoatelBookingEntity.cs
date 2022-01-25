@@ -7,6 +7,8 @@ namespace BnBYachts.Booking
     {
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }
+        public string CheckinTime { get; set; }
+        public string CheckoutTime { get; set; }
         public BookingStatus BookingStatus { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public int NoOfAdults { get; set; }
