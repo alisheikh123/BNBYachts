@@ -34,6 +34,7 @@ export class CharterReservationDetailComponent implements OnInit {
   checkedDepartureFromDate:any;
   charterBooking: any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
+  isUserHost:boolean;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   constructor(private service: BookingService
     ,private boatService: YachtSearchService,
@@ -48,6 +49,7 @@ export class CharterReservationDetailComponent implements OnInit {
     userRole == this.filters.USER_ROLES.host
       ? (this.charterReservation.isHost = true)
       : (this.charterReservation.isHost = false);
+      this.isUserHost = localStorage.getItem('userRole') ==  this.filters.USER_ROLES.host? (this.charterReservation.isHost = true): (this.charterReservation.isHost = false);
     this.boatService.charterDetailsById(this.charterReservation.charterBookingId).subscribe((res: any) => {
       this.charterBooking = res?.charterDetails;
       this.checkedDepartureFromDate = new Date(this.charterBooking?.departureFromDate).toLocaleDateString();
