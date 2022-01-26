@@ -45,15 +45,11 @@ export class CharterDetailsComponent implements OnInit {
   charterCapcityValidation:any;
   @ViewChild('popOver') public popover: NgbPopover;
   approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
-  noOfWords: number;
-  approvalPolicyArray: any;
-
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.charterId = Number(res['id']);
     });
     this.getCharterDetailsById();
-    this.tokenizeString();
   }
 
 
@@ -149,12 +145,5 @@ export class CharterDetailsComponent implements OnInit {
       this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
       this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
     })
-  }
-  tokenizeString() {
-    this.approvalPolicyArray = this.approvalPolicyString.split(" ");
-    this.noOfWords = this.approvalPolicyArray.length;
-  }
-  readAllToggle() {    
-    this.readAll = !this.readAll;
   }
 }
