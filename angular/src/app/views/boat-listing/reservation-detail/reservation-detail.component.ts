@@ -5,11 +5,14 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
+import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
+import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
+import { RejectionModalComponent } from '../../host/boatel-bookings/booking-requests/rejection-modal/rejection-modal.component';
 
 @Component({
   selector: 'app-reservation-detail',
@@ -43,10 +46,12 @@ export class ReservationDetailComponent implements OnInit {
   noOfWords: number;
   showMore = false;
   isUserHost:boolean;
+  cancelledBookingDetails:any;
   constructor(private service: BookingService
     , private bookingListService: BookingListingService,
     public activatedRoute: ActivatedRoute, private route: Router,
-    private modal: NgbModal, private toastr: ToastrService) { }
+    private modal: NgbModal, private toastr: ToastrService,
+    private reservationService: ReservationListsService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -71,8 +76,11 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
         this.checkinTime = this.booking?.boatDetail?.checkinTime;
-        this.tokenizeString();
+        //this.tokenizeString();
       });
+      if(this.booking.bookingStatus == this.BOOKING_STATUS.Cancel){
+        this.getRefundDetails();
+      }
 
     });
     this.isReviewPosted();
@@ -181,15 +189,53 @@ export class ReservationDetailComponent implements OnInit {
       return false;
     }
   }
-  tokenizeString() {
-    this.description = this.booking?.boatDetail?.description.split(" ");
-    this.noOfWords = this.description.length;
-  }
+  // tokenizeString() {
+  //   this.description = this.booking?.boatDetail?.description.split(" ");
+  //   this.noOfWords = this.description.length;
+  // }
   showDescription() {
     return this.description;
   }
   showMoreToggle() {
     this.showMore = !this.showMore;
+  }
+  changeStatus(isAccepted: boolean) {
+    if (isAccepted) {
+      let modal = this.modal.open(ConfirmDialogComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
+      modal.componentInstance.message = 'Are your sure.You want to accept this reservation?'
+      modal.componentInstance.onClose.subscribe((res: boolean) => {
+        if (res) {
+        this.reservationStatusChange(this.bookingId, isAccepted, '');
+          modal.dismiss();
+        }
+        else {
+          modal.dismiss();
+        }
+      })
+    }
+    else {
+      let modal = this.modal.open(RejectionModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
+      modal.componentInstance.onSave.subscribe((reason: string) => {
+        this.reservationStatusChange(this.bookingId, isAccepted, reason);
+        modal.dismiss();
+      })
+    }
+
+  }
+  reservationStatusChange(id: number, isAccepted: boolean, reason: string) {
+    this.reservationService.changeStatus(id, isAccepted, reason, 1).subscribe((res:any) => {
+      isAccepted ? this.toastr.success('Request accepted successfully.', 'Success') : this.toastr.success('Request rejected successfully.', 'Success');
+      this.route.navigate(['host/my-bookings']);
+    });
+  }
+
+  getRefundDetails(){
+    this.service.getBookingCancellationDetail(this.bookingId).subscribe((res:any)=>{
+      debugger;
+      if(res?.data?.length > 0){
+        this.cancelledBookingDetails = res?.data[0];
+      }
+    })
   }
 }
 
