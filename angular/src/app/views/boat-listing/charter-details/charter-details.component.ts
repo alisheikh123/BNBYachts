@@ -95,6 +95,7 @@ export class CharterDetailsComponent implements OnInit {
         let bookingModel = {
           charterId: this.charterId,
           departureDate: this.charterDetails.departureFromDate,
+          arrivalDate:this.charterDetails.departureToDate,
           noOfAdults: this.charterFilterDetails.adults,
           noOfChildrens: this.charterFilterDetails.childrens,
           hostId: this.charterDetails.boat.creatorId,
