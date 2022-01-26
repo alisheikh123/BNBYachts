@@ -20,10 +20,9 @@ namespace BnBYachts.Booking.Services
         public async Task<EntityResponseModel> CharterBooking(CharterBookingRequestableDto data) => await _hostBoatBookingManager.CharterBooking(data, CurrentUser.Id, CurrentUser.Name, CurrentUser.Email);
         public async Task<EntityResponseModel> EventBooking(EventBookingRequestableDto data) => await _hostBoatBookingManager.EventBooking(data, CurrentUser.Id, CurrentUser.Name, CurrentUser.Email);
 
-        public async Task<bool> ModifyBoatelBooking(BookingRequestsRequestableDto data)
+        public async Task ModifyBoatelBooking(BookingRequestsRequestableDto data)
         {
             await _hostBoatBookingManager.ModifyBoatelBooking(data, CurrentUser.Id, CurrentUser.Name);
-            return true;
         }
         public async Task<bool> BookingCancel(BookingCancellationRequestableDto data)
         {

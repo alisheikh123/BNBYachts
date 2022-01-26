@@ -74,8 +74,8 @@ namespace BnBYachts.Boat.Manager
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatFeatures).ConfigureAwait(false);
                     double distance = GetDistanceInMeters(boat.Latitude, boat.Longitude, parameters.Latitude, parameters.Longitude);
-                    var boatCalendar = boat.BoatCalendars.FirstOrDefault(res => res.BoatEntityId == boat.Id && res.IsAvailable);
-                    if (distance <= 500 && boatCalendar != null && boatCalendar.ToDate > DateTime.Now)
+                    var boatCalendar = boat.BoatCalendars.FirstOrDefault(res => res.BoatEntityId == boat.Id && res.IsAvailable && res.FromDate > DateTime.Now);
+                    if (distance <= 500 && boatCalendar != null)
                     {
                         filterdBoats.Add(boat);
                     }
@@ -85,7 +85,11 @@ namespace BnBYachts.Boat.Manager
                 {
                     foreach (var boat in filterdBoats.ToArray())
                     {
-                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => res. BoatEntityId == boat.Id && (res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate) || (res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate) || (res.FromDate > parameters.CheckinDate && res.ToDate < parameters.CheckoutDate) || (res.FromDate == parameters.CheckinDate || res.ToDate == parameters.CheckoutDate) && !res.IsAvailable);
+                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => res.BoatEntityId == boat.Id && 
+                        (res.FromDate > parameters.CheckinDate && res.ToDate < parameters.CheckinDate) 
+                        || (res.FromDate > parameters.CheckoutDate && res.ToDate < parameters.CheckoutDate) 
+                        || (res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckoutDate) 
+                        || (res.FromDate == parameters.CheckinDate || res.ToDate == parameters.CheckoutDate) && res.IsAvailable);
                         if (findAvailability == null)
                         {
                             filterdBoats.Remove(boat);

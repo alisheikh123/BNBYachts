@@ -4,13 +4,13 @@
     </div>
     <div class="modal-body">
         <div class="custom-text-center">
-          <h4 class="bold">Confirm email address</h4>
-          <p class="py-2">To verify your email, we've sent you a confirmation link. Click on that link to verify your account.</p>
+          <h4 class="bold">{{'ConfirmEmailAddress'|localization}}</h4>
+          <p class="py-2">{{'ConfirmEmailAddressMessage'|localization}}</p>
           <div class="img-wrapper">
             <img src="../../../../../assets/images/email.png" alt="">
           </div>
           <div class="bottom-btn">
-            <button class="custom-btn blue big-btn"  (click)="resendLink()">Resend Link</button>
+            <button class="custom-btn blue big-btn"  (click)="resendLink()">{{'ResendLink'|localization}}</button>
           </div>
         </div>
       </div>

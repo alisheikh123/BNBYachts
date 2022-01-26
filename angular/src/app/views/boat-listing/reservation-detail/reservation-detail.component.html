@@ -13,10 +13,10 @@
     <div class="row">
       <div class="col-sm-8 py-2">
         <div>
-          <h5 class="bold pb-1">Description</h5>
+          <h5 class="bold pb-1">{{"Description" | localization}}</h5>
           <div  *ngIf="((this.noOfWords<=20));else greaterThanLimitBlock">
             <p class="small-text medium-container text-left grey"> {{showDescription().join(' ')}} </p>
-          </div>         
+          </div>
           <ng-template #greaterThanLimitBlock>
             <div *ngIf="this.showMore; else showLessBlock">
               {{showDescription().join(' ')}}
@@ -24,10 +24,8 @@
             <ng-template #showLessBlock>
               {{(showDescription() | slice:0:21).join(' ')}}
             </ng-template>
-            <button class="custom-btn underline-blue-link no-before-content p-0" (click)="showMoreToggle()">Show {{ this.showMore ? 'Less' : 'More...' }}</button>          
+            <button class="custom-btn underline-blue-link no-before-content p-0" (click)="showMoreToggle()">Show {{ this.showMore ? 'Less' : 'More...' }}</button>
           </ng-template>
-          <h5 class="bold pb-1">{{"Description" | localization}}</h5>
-          <p class="small-text medium-container text-left grey">{{booking?.boatDetail?.description }}</p>
         </div>
         <div class="">
           <div class="character-info-wrapper  custom-flex">
@@ -65,11 +63,11 @@
           <div class="character-info-wrapper  custom-flex">
             <div class="custom-flex-start character-info py-2">
               <p class="medium description-fotmat">{{"CheckInTime" | localization}}</p>
-              <p class="grey">{{booking?.boatDetail?.checkinTime | date:'h:mm a' }}</p>
+              <p class="grey">{{booking?.checkinTime }}</p>
             </div>
             <div class="custom-flex-start character-info py-2">
               <p class="medium description-fotmat">{{"CheckOutTime" | localization}}</p>
-              <p class="grey">{{booking?.boatDetail?.checkoutTime | date:'h:mm a'}}</p>
+              <p class="grey">{{booking?.checkoutTime}}</p>
             </div>
           </div>
           <div class="character-info-wrapper  custom-flex">
@@ -136,18 +134,18 @@
           <div *ngIf="isCheckinStarted(checkedCheckinDate,booking?.boatDetail?.checkinTime)">
             <!-- <div *ngIf="checkedCheckinDate > today"> -->
               <div class="center-content">
-                <a [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
-                  class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
-                <a [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
-                  class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
+                <button [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
+                  class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
+                <button [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
+                  class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</button>
+                <button (click)="addReview()"
+                *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
+                class="custom-btn btn-big blue">{{'AddReview' | localization}}</button>
               </div>
             <!-- </div> -->
           </div>
         </div>
-         <!-- <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking?.boatDetail?.checkoutTime)"> -->
-        <a (click)="addReview()"
-        *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
-        class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+         <!-- <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking?.boatDetail?.checkoutTime)"> -->        
       </div>
       <!-- </div> -->
       <app-list-reviews [bookingId]=bookingId></app-list-reviews>
