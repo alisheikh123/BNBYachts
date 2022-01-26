@@ -249,19 +249,19 @@ export class ReservationCancellationComponent implements OnInit {
       .saveCancellation(bookingCancellationModel)
       .subscribe((res: any) => {
         if (res == true) {
-          this.service
-            .getRefundable(
-              bookingCancellationModel.BookingId,
-              parseInt(bookingCancellationModel.RefundAmount)
-            )
-            .subscribe((res: any) => {
-              if (res == true) {
+          //this.service
+           // .getRefundable(
+            //  bookingCancellationModel.BookingId,
+            //  parseInt(bookingCancellationModel.RefundAmount)
+           // )
+            //.subscribe((res: any) => {
+            //  if (res == true) {
                 this.modal.dismissAll();
                 this.modal.open(this.cancelledRef);
-              } else {
-                this.modal.open(this.bookingtemplate);
-              }
-            });
+              //} else {
+              //  this.modal.open(this.bookingtemplate);
+              //}
+            //});
         } else {
         }
       });

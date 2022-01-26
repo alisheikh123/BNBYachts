@@ -70,14 +70,8 @@ cat build_info.md > aspnet-core/build_info.md
     }
   }
 
-stage('Cleanup') {
-      steps {
-        sh """
-        docker system prune -a --volumes
-        """
-      }
-    }
-    
+
+
   environment {
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
