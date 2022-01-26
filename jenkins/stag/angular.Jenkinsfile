@@ -68,20 +68,14 @@ cat build_info.md > aspnet-core/build_info.md
       }
 
     }
+
+   
   }
 
-stage('Cleanup') {
-      steps {
-        sh """
-        docker system prune -a --volumes
-        """
-      }
-    }
-    
   environment {
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
-    IMAGE_TAG = "dev"
+    IMAGE_TAG = "stag"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
     CLIENT_PORTAL_IMAGE_NAME = 'bnb_client_portal'

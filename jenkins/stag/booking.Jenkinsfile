@@ -23,7 +23,7 @@ echo BUILD_URL: ${BUILD_URL} >> build_info.md
 echo NODE_NAME: ${NODE_NAME} >> build_info.md
 echo BUILD_TIME: ${IMAGE_BUILD_TIMESTAMP} >> build_info.md
 echo IMAGE_TAG: ${IMAGE_TAG} >> build_info.md
-echo Client_Portal_URL: ${Client_Portal_URL}:${IMAGE_TAG}  >> build_info.md
+echo Booking_URL: ${Booking_URL}:${IMAGE_TAG}  >> build_info.md
 cat build_info.md > aspnet-core/build_info.md
 
 '''
@@ -44,22 +44,21 @@ cat build_info.md > aspnet-core/build_info.md
 
     stage('Phase-1') {
       parallel {
-      stage('Client-Portal') {
+        stage('Booking-API') {
             stages {
               stage('Build') {
                 steps {
                   script {
-                    sh "docker build -t ${CLIENT_PORTAL_IMAGE_NAME}:${IMAGE_TAG} \
-                      -f angular/Angular.Dockerfile ./angular"
+                    sh "docker build -t ${BOOKING_IMAGE_NAME}:${IMAGE_TAG} \
+                      -f aspnet-core/Booking.Dockerfile ./aspnet-core "
                   }
                 }
               }
-
               stage('Publish') {
                 steps {
                   script{
-                    sh "docker tag ${CLIENT_PORTAL_IMAGE_NAME}:${IMAGE_TAG} ${CLIENT_PORTAL_URL}:${IMAGE_TAG}"
-                    sh "docker push ${CLIENT_PORTAL_URL}:${IMAGE_TAG}"
+                    sh "docker tag ${BOOKING_IMAGE_NAME}:${IMAGE_TAG} ${BOOKING_URL}:${IMAGE_TAG}"
+                    sh "docker push ${BOOKING_URL}:${IMAGE_TAG}"
                   }
                 }
               }
@@ -70,21 +69,13 @@ cat build_info.md > aspnet-core/build_info.md
     }
   }
 
-stage('Cleanup') {
-      steps {
-        sh """
-        docker system prune -a --volumes
-        """
-      }
-    }
-    
   environment {
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
-    IMAGE_TAG = "dev"
+    IMAGE_TAG = "stag"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
-    CLIENT_PORTAL_IMAGE_NAME = 'bnb_client_portal'
-    CLIENT_PORTAL_URL = "${AWS_ECR_REPO}/${CLIENT_PORTAL_IMAGE_NAME}"
+    BOOKING_IMAGE_NAME = 'bnb-booking'
+    BOOKING_URL = "${AWS_ECR_REPO}/${BOOKING_IMAGE_NAME}"
   }
 }
