@@ -97,18 +97,17 @@
               <p class="medium text-right py-1">{{(booking?.boatDetail?.perDayCharges * booking?.TotalDays) + 20 + 20 +
                 booking?.boatDetail?.taxFee}}.00 $</p>
             </div>
-            <ng-container *ngIf="booking?.bookingStatus===BOOKING_STATUS.Cancel">
-            <ng-container *ngFor="let item of booking?.bookingCancelDetail">
+            <pre>{{booking?.bookingCancelDetail | json}}</pre>
+            <ng-container *ngIf="booking?.bookingStatus==BOOKING_STATUS.Cancel">
             <div class="custom-flex-between">
                 <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
-                <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+                <p class="medium text-right py-1">{{cancelledBookingDetails?.totalAmount - cancelledBookingDetails?.refundAmount}}.00 $</p>
             </div>
 
             <div class="custom-flex-between">
                 <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
-                <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
+                <p class="medium text-right py-1" >{{cancelledBookingDetails?.refundAmount}}.00 $</p>
             </div>
-          </ng-container>
           </ng-container>
           </div>
         </div>
@@ -132,10 +131,17 @@
                 <button [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
                 <button [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
+                *ngIf="!isUserHost"
                   class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</button>
                 <button (click)="addReview()"
                 *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
                 class="custom-btn btn-big blue">{{'AddReview' | localization}}</button>
+                <button class="custom-btn grey" (click)="changeStatus(false)" *ngIf="booking?.bookingStatus == BOOKING_STATUS.Pending && isUserHost">
+                  Reject
+              </button>
+              <button class="custom-btn blue ms-2" (click)="changeStatus(true)" *ngIf="booking?.bookingStatus == BOOKING_STATUS.Pending && isUserHost">
+                  Accept
+              </button>
               </div>
             <!-- </div> -->
           </div>
