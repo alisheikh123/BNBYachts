@@ -35,7 +35,7 @@ import { ChatService } from './core/chat/chat.service';
     TryHostingComponent,
     MyProfileComponent,
     UpdateProfileComponent,
-    AddReviewModalComponent
+    AddReviewModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +68,7 @@ import { ChatService } from './core/chat/chat.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,
-     
+
       multi: true
     },
     LoaderService,

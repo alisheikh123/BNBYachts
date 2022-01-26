@@ -5,13 +5,16 @@ using BnBYachts.Chat.Requestables;
 using BnBYachts.Chat.Transferables;
 using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using NUglify.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.ObjectMapping;
+using Volo.Abp.Uow;
 
 namespace BnBYachts.Chat.Managers
 {
@@ -24,11 +27,13 @@ namespace BnBYachts.Chat.Managers
         private readonly IObjectMapper<ChatDomainModule> _objectMapper;
         private readonly IRepository<BlockedUsersEntity, int> _blockedUserRepository;
         private readonly IRepository<ArchivedChatsEntity, int> _archivedChatRepository;
+        public ILogger<ChatManager> _logger { get; set; }
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public ChatManager(IHubContext<ChatHub> hubContext, IUserConnectionManager userConnectionManager,
             IRepository<ChatEntity, int> chatRepository, IObjectMapper<ChatDomainModule> objectMapper,
             IRepository<UserInfo, int> userInfoRepository, IRepository<BlockedUsersEntity, int> blockedUserRepository,
-            IRepository<ArchivedChatsEntity, int> archivedChatRepository)
+            IRepository<ArchivedChatsEntity, int> archivedChatRepository, ILogger<ChatManager> logger, IUnitOfWorkManager unitOfWorkManager)
         {
             _hubContext = hubContext;
             _userConnectionManager = userConnectionManager;
@@ -37,39 +42,22 @@ namespace BnBYachts.Chat.Managers
             _userInfoRepository = userInfoRepository;
             _blockedUserRepository = blockedUserRepository;
             _archivedChatRepository = archivedChatRepository;
+            _logger = logger;
+            _unitOfWorkManager = unitOfWorkManager;
         }
-        public async Task<ChatTransferable> SendMessage(ChatRequestable inputData)
+        public async Task InsertChat(ChatRequestable inputData)
         {
-            ChatEntity obj = new ChatEntity
+            var obj = new ChatEntity
             {
                 SenderId = inputData.SenderId,
                 ReceiverId = inputData.ReceiverId,
                 Message = inputData.Message,
-                UserId = 1,
                 ReadDate = DateTime.Now,
                 SentDate = DateTime.Now,
                 CreationTime = DateTime.Now
             };
             var response = await _chatRepository.InsertAsync(obj, autoSave: true);
-            inputData.MessageId = response.Id;
-
-            var connections = _userConnectionManager.GetUserConnections(inputData.ReceiverId);
-            if (connections is { Count: > 0 })
-            {
-                foreach (var connectionId in connections)
-                {
-                    await _hubContext.Clients.Client(connectionId).SendAsync("sendToUser", inputData);
-                }
-            }
-
-            var result = new ChatTransferable
-            {
-                Message = inputData.Message,
-                SenderId = inputData.SenderId.ToUpper(),
-                ReceiverId = inputData.ReceiverId.ToUpper(),
-                User = inputData.User.ToUpper()
-            };
-            return result;
+            _logger.LogInformation("Chat Insert Request : " + _unitOfWorkManager.Current.Id.ToString());
         }
 
         public async Task<ChatMessagesTransferable> GetUserChats(string senderId, string receiverId)
@@ -91,6 +79,7 @@ namespace BnBYachts.Chat.Managers
         public async Task<ICollection<ChatUserTransferable>> GetAllUsers(string hostId,string userToCheck)
         {
             var listOfAllUsersInChats = await _chatRepository.GetListAsync(x => x.ReceiverId == userToCheck || x.SenderId == userToCheck).ConfigureAwait(false);
+            listOfAllUsersInChats = listOfAllUsersInChats.OrderByDescending(res => res.SentDate).ToList();
             ICollection<UserInfo> listUsers = new List<UserInfo>();
             if (hostId != "undefined")
             {
@@ -100,32 +89,29 @@ namespace BnBYachts.Chat.Managers
                     listUsers.Add(findUser);
                 }
             }
-            foreach (var chat in listOfAllUsersInChats.DistinctBy(x => x.SenderId))
+            foreach (var chat in listOfAllUsersInChats)
             {
-                var result = await _userInfoRepository.FindAsync(x => x.UserId == chat.SenderId).ConfigureAwait(false);
-                if(result.UserId.ToLower() != userToCheck.ToLower())
+                var senderUser = await _userInfoRepository.FirstOrDefaultAsync(x => x.UserId == chat.SenderId && x.UserId.ToLower() != userToCheck.ToLower()).ConfigureAwait(false);
+                var recieverUser = await _userInfoRepository.FirstOrDefaultAsync(x => x.UserId == chat.ReceiverId && x.UserId.ToLower() != userToCheck.ToLower()).ConfigureAwait(false);
+                if (senderUser!=null && !listUsers.Contains(senderUser))
                 {
-                    result.UnReadChatsCount=  await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
-                    && res.SenderId.ToLower() == result.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
-                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsArchivedUser = findArchived != null;
-                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsBlocked = getBlockedUser != null;
-                    listUsers.Add(result);
+                    senderUser.UnReadChatsCount=  await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
+                    && res.SenderId.ToLower() == senderUser.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
+                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == senderUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    senderUser.IsArchivedUser = findArchived != null;
+                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == senderUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    senderUser.IsBlocked = getBlockedUser != null;
+                    listUsers.Add(senderUser);
                 }
-            }
-            foreach (var chat in listOfAllUsersInChats.DistinctBy(x => x.ReceiverId))
-            {
-                var result = await _userInfoRepository.FindAsync(x => x.UserId == chat.ReceiverId).ConfigureAwait(false);
-                if (result.UserId.ToLower() != userToCheck.ToLower() && !(listUsers.Contains(result)))
+                if (recieverUser !=null && !listUsers.Contains(recieverUser))
                 {
-                    result.UnReadChatsCount = await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
-                    && res.SenderId.ToLower() == result.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
-                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsArchivedUser = findArchived != null;
-                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == result.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
-                    result.IsBlocked = getBlockedUser != null;
-                    listUsers.Add(result);
+                    recieverUser.UnReadChatsCount = await _chatRepository.CountAsync(res => res.ReceiverId.ToLower() == userToCheck.ToLower()
+                    && res.SenderId.ToLower() == recieverUser.UserId.ToLower() && res.IsRead == false).ConfigureAwait(false);
+                    var findArchived = await _archivedChatRepository.FirstOrDefaultAsync(res => res.ArchivedUserId.ToLower() == recieverUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    recieverUser.IsArchivedUser = findArchived != null;
+                    var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == recieverUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
+                    recieverUser.IsBlocked = getBlockedUser != null;
+                    listUsers.Add(recieverUser);
                 }
             }
             return _objectMapper.Map<ICollection<UserInfo>, ICollection<ChatUserTransferable>>(listUsers);

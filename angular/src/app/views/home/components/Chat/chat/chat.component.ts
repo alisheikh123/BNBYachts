@@ -20,7 +20,8 @@ import { ChatUsersComponent } from '../chat-users/chat-users.component';
 })
 export class ChatComponent implements OnInit {
   private _hubConnection!: HubConnection;
-  private readonly socketUrl = environment.CHAT_API_URL + '/chatsocket';
+  private readonly socketUrl = environment.CHAT_API_URL + '/signalr-hubs/chat';
+
   userInfo: any;
   userMessages: any = [];
   isChatLoaded: boolean = false;
@@ -30,6 +31,8 @@ export class ChatComponent implements OnInit {
     message: '',
     senderId: '',
     receiverId: '',
+    sentDate:moment(new Date()).format("DD-MMM-YYYY"),
+    sentTime:new Date(),
     isSender: false,
     blockedUser: false,
     isBlockedByMe: false
@@ -42,7 +45,6 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private chatService: ChatService,
-    private authService: AuthService,
     private router:Router,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
@@ -57,6 +59,9 @@ export class ChatComponent implements OnInit {
       this.getAllChats().subscribe(res => {
         this.isChatLoaded = true;
         this.userMessages = res[0]?.chats;
+        this.userMessages.forEach((element:any) => {
+          element.sentDate = moment(element.sentDate,"YYYY-MM-DD").format("DD-MMM-YYYY");
+        });
         setTimeout(() => { this.scrollToBottom(); }, 1);
       })
     }
@@ -78,6 +83,9 @@ export class ChatComponent implements OnInit {
       .getUserChat(user.userId)
       .subscribe((res: any) => {
         this.userMessages = res?.chats;
+        this.userMessages.forEach((element:any) => {
+          element.sentDate = moment(element.sentDate,"YYYY-MM-DD").format("DD-MMM-YYYY");
+        });
         this.chat.blockedUser = res?.isBlockedUser;
         this.chat.isBlockedByMe = res?.isBlockedByMe;
         this.app.unReadChatCount = this.app.unReadChatCount - user.unReadChatsCount;
@@ -88,13 +96,12 @@ export class ChatComponent implements OnInit {
 
   send() {
     if (this.chat) {
-      this.chatService
-        .broadcastMessage(this.chat)
-        .subscribe((data: any) => {
-          this.chat.message = '';
-          this.userMessages.push(data);
-          setTimeout(() => { this.scrollToBottom(); }, 1);
-        });
+      this._hubConnection.invoke('SendMessage', this.chat).then(res => {
+        let chatResponse = JSON.parse(JSON.stringify(this.chat))
+        this.chat.message = '';
+        this.userMessages.push(chatResponse);
+        setTimeout(() => { this.scrollToBottom(); }, 1);
+      });
     }
   }
   ////Signal R methods for creating connection...
@@ -114,6 +121,8 @@ export class ChatComponent implements OnInit {
       });
     /////Calls when message is broadcast to the reciever...
     this._hubConnection.on('sendToUser', (res) => {
+      res.sentDate = moment().format("DD-MMM-YYYY");
+      res.sentTime = moment();
       this.userMessages.push(res);
       this.app.unReadChatCount = this.app.unReadChatCount +1;
       setTimeout(() => { this.scrollToBottom(); }, 1);

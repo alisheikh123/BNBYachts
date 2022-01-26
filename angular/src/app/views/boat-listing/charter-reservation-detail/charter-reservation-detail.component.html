@@ -1,0 +1,192 @@
+<div class="reservation-page section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="btn-back">
+          <a (click)="goBack()" style="border: 1px solid #122ba8;">
+
+            <i class="fas fa-chevron-left" style="color:#122ba8"></i>
+          </a>
+
+          <h2 class="bold">{{'CharterReservationDetails' | localization}}</h2>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-8 py-2">
+          <div>
+            <h5 class="bold pb-1">{{'Description' | localization}}</h5>
+            <p class="small-text medium-container text-left grey">{{charterBooking?.boat?.description }}</p>
+            <a class="custom-btn underline-blue-link no-before-content p-0">{{'more' | localization}}.</a>
+          </div>
+          <div class="">
+            <div class="character-info-wrapper  custom-flex">
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">{{'BoatName' | localization}}</p>
+                <p class="grey">{{charterBooking?.boat?.name }}</p>
+              </div>
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat"></p>
+                <p class="grey">
+
+                </p>
+              </div>
+            </div>
+            <div class="character-info-wrapper  custom-flex">
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">{{'DepartureFrom' | localization}}</p>
+                <p class="grey">{{charterBooking?.departureFromDate | date}}</p>
+              </div>
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat"> {{'DepartureTo' | localization}}</p>
+                <p class="grey">{{charterBooking?.departureToDate | date}}</p>
+              </div>
+            </div>
+            <div class="character-info-wrapper  custom-flex">
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat"> {{'NoofGuest' | localization}}</p>
+                <p class="grey"> {{charterBooking?.guestCapacity}}</p>
+              </div>
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">Departure From :</p>
+                <p class="grey">{{charterBooking?.departingFrom}}</p>
+              </div>
+
+            </div>
+            <div class="character-info-wrapper  custom-flex">
+                <div class="custom-flex-start character-info py-2">
+                    <p class="medium description-fotmat">{{'departingTime' | localization}}</p>
+                    <p class="grey">{{charterBooking?.departureFromDate | date:'h:mm a' }}</p>
+                  </div>
+                <div class="custom-flex-start character-info py-2">
+                    <p class="medium description-fotmat">{{'Destination' | localization}}</p>
+                    <p class="grey">{{charterBooking?.destination}}</p>
+                  </div>
+            </div>
+            <div class="character-info-wrapper  custom-flex">
+                <div class="custom-flex-start character-info py-2">
+                    <p class="medium description-fotmat">{{'ArrivalTime' | localization}}</p>
+                    <p class="grey">{{charterBooking?.departureToDate | date:'h:mm a'}}</p>
+                  </div>
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">{{'Bedroom' | localization}}</p>
+                <p class="grey">{{charterBooking?.boat?.totalBedrooms}}</p>
+              </div>
+            </div>
+            <div class="character-info-wrapper  custom-flex">
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">{{'Bathroom' | localization}}</p>
+                <p class="grey">{{charterBooking?.boat?.totalWashrooms}}</p>
+              </div>
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">{{'CharterFee' | localization}}</p>
+                <p class="grey">{{charterBooking?.charterFee}}.00 $</p>
+              </div>
+            </div>
+            <div class="price-detail py-4" *ngIf="charterBooking?.isFullBoatCharges==true">
+              <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
+              <div class="custom-flex-between">
+                <p class="medium">{{"EntireBoatCharges" | localization}}</p>
+                <p class="medium text-right py-1">{{charterBooking?.charterFee}} $.00</p>
+              </div>
+
+              <div class="custom-flex-between">
+                <p class="medium">{{"ServiceFee" | localization}}</p>
+                <p class="medium text-right py-1">20.00 $</p>
+              </div>
+              <div class="custom-flex-between">
+                <p class="medium">{{"Tax" | localization}}</p>
+                <p class="medium text-right py-1">{{charterBooking?.boat?.taxFee}}.00 $</p>
+              </div>
+              <div class="custom-flex-between">
+                <p class="medium">{{"Total(USD)" | localization}}</p>
+                <p class="medium text-right py-1">{{(charterBooking?.charterFee) + 20 +
+                  charterBooking?.boat?.taxFee}}.00 $</p>
+              </div>
+              <ng-container *ngIf="charterBooking?.bookingStatus===filters.BOOKING_STATUS.Cancel">
+              <ng-container *ngFor="let item of charterBooking?.bookingCancelDetail">
+              <div class="custom-flex-between">
+                  <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
+                  <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+              </div>
+
+              <div class="custom-flex-between">
+                  <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
+                  <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
+              </div>
+            </ng-container>
+            </ng-container>
+            </div>
+            <div class="price-detail py-4" *ngIf="charterBooking?.isFullBoatCharges==false">
+                <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
+                <div class="custom-flex-between">
+                  <p class="medium">{{charterBooking?.boat?.perDayCharges}} x {{ charterBooking?.totalDays}} Night</p>
+                  <p class="medium text-right py-1">{{charterBooking?.boat?.perDayCharges * charterBooking?.totalDays }}.00 $</p>
+                </div>
+                <div class="custom-flex-between">
+                  <p class="medium">{{"ServiceFee" | localization}}</p>
+                  <p class="medium text-right py-1">20.00 $</p>
+                </div>
+                <div class="custom-flex-between">
+                  <p class="medium">{{"Tax" | localization}}</p>
+                  <p class="medium text-right py-1">{{charterBooking?.boat?.taxFee}}.00 $</p>
+                </div>
+                <div class="custom-flex-between">
+                  <p class="medium">{{"Total(USD)" | localization}}</p>
+                  <p class="medium text-right py-1">{{(charterBooking?.boat?.perDayCharges * charterBooking?.totalDays) + 20 +
+                    charterBooking?.boat?.taxFee}}.00 $</p>
+                </div>
+                <ng-container *ngIf="charterBooking?.bookingStatus===filters.BOOKING_STATUS.Cancel">
+                <ng-container *ngFor="let item of charterBooking?.bookingCancelDetail">
+                <div class="custom-flex-between">
+                    <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
+                    <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+                </div>
+
+                <div class="custom-flex-between">
+                    <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
+                    <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
+                </div>
+              </ng-container>
+              </ng-container>
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-4 py-2">
+          <div class="character-info-img">
+            <div *ngFor="let imgs of charterBooking?.boat?.boatGalleries | filterBy : 'isCoverPic':true">
+              <img src="{{assetsUrl + imgs?.imagePath}}" alt="">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
+          *ngIf="charterBooking?.bookingStatus != filters.BOOKING_STATUS.Rejected">
+          <div *ngIf="charterBooking?.bookingStatus == filters.BOOKING_STATUS.Cancel"></div>
+          <div *ngIf="checkedDepartureFromDate == filters.today"></div>
+          <div *ngIf="charterBooking?.bookingStatus != filters.BOOKING_STATUS.Cancel">
+            <div *ngIf="isDepartureFromStarted(checkedDepartureFromDate,charterBooking?.boat?.checkinTime)">
+              <!-- <div *ngIf="checkedDepartureFromDate > today"> -->
+                <div class="center-content">
+                  <a [routerLink]="['/boat-listing/reservation-cancellation',charterBooking?.id]"
+                    class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
+                  <a *ngIf="!isUserHost" [routerLink]="['/boat-listing/modify-reservation',charterBooking?.id]"
+                    class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
+                    <a (click)="addReview()"
+                    *ngIf='!charterReservation?.isPosted && isBookingPassed() && charterBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
+                    class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+                </div>
+              <!-- </div> -->
+            </div>
+          </div>
+           <div *ngIf="isDeparturetoTimeEnd(charterBooking?.departureToDate,charterBooking?.boat?.checkoutTime)">
+            <a (click)="addReview()"
+            *ngIf='!charterReservation?.isPosted && isBookingPassed() && charterBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
+            class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+        </div>
+        <!-- </div> -->
+
+
+        <app-list-reviews [charterBookingId]=charterReservation.charterBookingId></app-list-reviews>
+      </div>
+    </div>
+  </div>

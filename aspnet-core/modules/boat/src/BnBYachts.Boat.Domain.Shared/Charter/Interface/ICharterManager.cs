@@ -17,5 +17,6 @@ namespace BnBYachts.Charter.Interface
         Task<EntityResponseListModel<CharterDto>> GetCharters(Guid? userId,int pageNo,int pageSize);
         Task<bool> UpdateCharter(ChartersMapperRequestable charterDetails,Guid? userId);
         Task<bool> UpdateCharterStatus(long charterId);
+        Task<bool> UpdateCharterLocation(CharterLocationRequestable charterDetails, Guid? userId);
     }
 }

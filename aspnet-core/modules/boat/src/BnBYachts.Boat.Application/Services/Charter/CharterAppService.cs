@@ -40,5 +40,8 @@ namespace BnBYachts.Services.Charter
             var charterStatus = await _charterManager.UpdateCharterStatus(charterId).ConfigureAwait(false);
             return charterStatus;
         }
+        public async Task<bool> updateCharterLocation(CharterLocationRequestable charter)=>
+             await _charterManager.UpdateCharterLocation(charter, CurrentUser.Id);
+        
     }
 }

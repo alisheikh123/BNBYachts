@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -7,6 +7,7 @@ import { BookingListingService } from 'src/app/core/Booking/booking-listing.serv
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 
@@ -34,8 +35,14 @@ export class ReservationDetailComponent implements OnInit {
   bookingStatus: any;
   checkedCheckinDate: any;
   checkinTime: any;
+  checkoutTime:any;
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
+  description: any;
+  noOfWords: number;
+  showMore = false;
+  isUserHost:boolean;
   constructor(private service: BookingService
     , private bookingListService: BookingListingService,
     public activatedRoute: ActivatedRoute, private route: Router,
@@ -49,6 +56,7 @@ export class ReservationDetailComponent implements OnInit {
     userRole == this.USER_ROLES.host
       ? (this.isHost = true)
       : (this.isHost = false);
+    this.isUserHost = localStorage.getItem('userRole') ==  this.USER_ROLES.host? (this.isHost = true): (this.isHost = false);
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.booking = res;
       this.currentDate = new Date();
@@ -63,10 +71,12 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
         this.checkinTime = this.booking?.boatDetail?.checkinTime;
+        this.tokenizeString();
       });
 
     });
     this.isReviewPosted();
+
   }
   addReview() {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
@@ -156,22 +166,30 @@ export class ReservationDetailComponent implements OnInit {
     let currentDate = moment().format("DD-MM-YYYY");
     let inTime = moment(checkinTime).format("HH:mm");
     let curretTime = moment().format("HH:mm");
-    if (checkinDate != undefined && checkinTime != undefined) {
-      if (inDate == currentDate && inTime > curretTime) {
-        return true;
-      }
-      if (moment(checkinDate).isAfter(moment().format("YYYY-MM-DD"))) {
-        return true;
-      }
-      else {
-        return false;
-      }
-
+    if (checkinDate != undefined && checkinTime != undefined) {return (inDate == currentDate && inTime > curretTime)?true:(moment(checkinDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;}
+    else{return false;}
+  }
+  isCheckoutTimeEnd(checkoutDate:Date,checkoutTime:Date){
+    let outDate = moment(checkoutDate).format("DD-MM-YYYY");
+    let currentDate = moment().format("DD-MM-YYYY");
+    let outTime = moment(checkoutTime).format("HH:mm");
+    let curretTime = moment().format("HH:mm");
+    if (checkoutDate != undefined && checkoutTime != undefined) {
+     return  (outDate == currentDate && curretTime > outTime) ?true:(moment(checkoutDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;
     }
-
-    return false;
-
-
+    else{
+      return false;
+    }
+  }
+  tokenizeString() {
+    this.description = this.booking?.boatDetail?.description.split(" ");
+    this.noOfWords = this.description.length;
+  }
+  showDescription() {
+    return this.description;
+  }
+  showMoreToggle() {
+    this.showMore = !this.showMore;
   }
 }
 

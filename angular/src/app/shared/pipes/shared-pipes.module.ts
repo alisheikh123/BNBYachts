@@ -9,6 +9,7 @@ import { FileTypePipe } from './file-type-icon.pipe';
 import { MySlicePipe } from './my-slice.pipe';
 import { LocalizationPipe } from './localization.pipe';
 import { SearchFilterPipe } from './search.pipe';
+import { GroupByPipe } from './group-by.pipe';
 const pipes = [
   ExcerptPipe,
   GetValueByKeyPipe,
@@ -18,7 +19,8 @@ const pipes = [
   FileTypePipe,
   MySlicePipe,
   LocalizationPipe,
-  SearchFilterPipe
+  SearchFilterPipe,
+  GroupByPipe
 ];
 
 @NgModule({

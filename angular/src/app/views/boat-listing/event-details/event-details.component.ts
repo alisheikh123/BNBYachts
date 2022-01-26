@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { UserDefaults } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
+import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-logged-in.component';
 
 @Component({
   selector: 'app-event-details',
@@ -17,7 +20,7 @@ export class EventDetailsComponent implements OnInit {
 
   constructor(config: NgbRatingConfig, private toastr: ToastrService,
      private yachtSearchService: YachtSearchService,
-      private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute) {
+      private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute, private modal: NgbModal, private authService:AuthService) {
     config.max = 5;
     config.readonly = true;
   }
@@ -40,10 +43,12 @@ export class EventDetailsComponent implements OnInit {
   }
   boatHost: any;
   showMore: boolean = false;
+  readAll: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
   eventCapcityValidation:any;
   @ViewChild('popOver') public popover: NgbPopover;
+  approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -82,33 +87,39 @@ export class EventDetailsComponent implements OnInit {
   }
 
   reserveEvent() {
-    this.isSubmitted = true;
-    if ((this.eventFilterDetails.adults + this.eventFilterDetails.childrens) > 0) {
-      let bookingModel = {
-        eventId: this.eventId,
-        eventDate: this.eventDetails.startDateTime,
-        noOfGuests: this.eventFilterDetails.adults + this.eventFilterDetails.childrens,
-        hostId: this.eventDetails.boat.creatorId,
-        bookingStatus: 0
-      };
-      this.bookingService.eventBooking(bookingModel).subscribe(res => {
-        let bookingId = res?.data?.id;
-        if (res.returnStatus) {
-          let boatCalendar = {
-            isAvailable: false,
-            toDate: this.eventDetails?.eventDate,
-            fromDate: this.eventDetails?.eventDate,
-            boatEntityId: this.eventDetails?.boat?.id
-          }
-          this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
-            if (res) {
-              this.yachtParamService.setFilters(this.eventFilterDetails);
-              this.router.navigate(['/payments/event-payments', this.eventId, bookingId], { relativeTo: this.activatedRoute });
-              this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
+    this.isSubmitted = true;  
+    if(this.authService.authenticated) {
+      if ((this.eventFilterDetails.adults + this.eventFilterDetails.childrens) > 0) {
+        let bookingModel = {
+          eventId: this.eventId,
+          eventDate: this.eventDetails.startDateTime,
+          noOfGuests: this.eventFilterDetails.adults + this.eventFilterDetails.childrens,
+          hostId: this.eventDetails.boat.creatorId,
+          bookingStatus: 0,
+          boatId:this.eventDetails.boatId
+        };
+        this.bookingService.eventBooking(bookingModel).subscribe(res => {
+          let bookingId = res?.data?.id;
+          if (res.returnStatus) {
+            let boatCalendar = {
+              isAvailable: false,
+              toDate: this.eventDetails?.eventDate,
+              fromDate: this.eventDetails?.eventDate,
+              boatEntityId: this.eventDetails?.boat?.id
             }
-          });
-        }
-      })
+            this.yachtSearchService.updateCalendar(boatCalendar).subscribe(res => {
+              if (res) {
+                this.yachtParamService.setFilters(this.eventFilterDetails);
+                this.router.navigate(['/payments/event-payments', this.eventId, bookingId], { relativeTo: this.activatedRoute });
+                this.toastr.success('Calendar reserved, please proceed with payments.', 'Success');
+              }
+            });
+          }
+        })
+      }
+    }
+    else {
+      let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true});
     }
   }
 
@@ -120,7 +131,7 @@ export class EventDetailsComponent implements OnInit {
   updateGuests() {
     this.eventFilterDetails.adults = this.popOverFilterData.adults;
     this.eventFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.eventCapcityValidation = this.eventFilterDetails.adults + this.eventFilterDetails.childrens>this.eventDetails?.guestCapacity?"Please Enter Valid Guests":this.popover.close();
+    this.eventCapcityValidation = (((this.eventFilterDetails.adults + this.eventFilterDetails.childrens)>this.eventDetails?.guestCapacity)||((this.eventFilterDetails.adults + this.eventFilterDetails.childrens)<1))?"Entered guest capacity is not available":this.popover.close();
   }
 
   onChangeDate(isIncrease: boolean) {
@@ -129,5 +140,5 @@ export class EventDetailsComponent implements OnInit {
       this.eventId = this.eventSchedule[this.dateScheduleIndex]?.eventId;
       this.eventDetails = res?.eventDetails;
     })
-  }
+  }  
 }

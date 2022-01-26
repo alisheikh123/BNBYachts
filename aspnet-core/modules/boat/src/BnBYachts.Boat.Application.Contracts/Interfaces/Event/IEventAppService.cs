@@ -17,5 +17,6 @@ namespace BnBYachts.Boat.Interfaces.Boat
         Task<EntityResponseModel> GetEventById(int eventId);
         Task<bool> UpdateEvent(EventRequestable updatedEvent);
         Task<bool> UpdateHostEventStatus(long eventId);
+        Task<bool> updateEventLocation(EventLocationRequestable events);
     }
 }

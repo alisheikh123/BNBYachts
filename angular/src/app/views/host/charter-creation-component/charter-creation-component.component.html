@@ -106,14 +106,16 @@
                           <div class="col-md-3 py-2">
                             <div class="custom-select-field">
                                 <label> {{'DepartureDate'| localization}}</label>
-                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate" name="datetimepicker"  placeholder='Select Departure From' ></ejs-datetimepicker>
+                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate"
+                                [min]="minDate" name="datetimepicker"  placeholder='Select Departure From' ></ejs-datetimepicker>
 
                               </div>
                           </div>
                           <div class="col-md-3 py-2">
                             <div class="custom-select-field">
                                 <label> {{'DepartureTo'| localization}}</label>
-                                <ejs-datetimepicker placeholder='Select Departure From' formControlName="departureToDate"></ejs-datetimepicker>
+                                <ejs-datetimepicker placeholder='Select Departure From'
+                                formControlName="departureToDate" [min]="minDate"></ejs-datetimepicker>
 
                               </div>
                           </div>
@@ -130,11 +132,11 @@
                                     <div class="custom-input-field">
                                         <div class="custom-flex">
                                             <div class="form-check">
-                                             <input  type="radio" class="form-check-input" [value]="true" formControlName="isFullBoatCharges">
+                                             <input  type="radio" class="form-check-input" [value]="false" formControlName="isFullBoatCharges">
                                                  {{'PerPerson'| localization}}
                                             </div>
                                             <div class="form-check ms-5">
-                                                    <input  type="radio" class="form-check-input" [value]="false" formControlName="isFullBoatCharges">
+                                                    <input  type="radio" class="form-check-input" [value]="true" formControlName="isFullBoatCharges">
                                                  {{'EntireBoat'| localization}}
                                             </div>
                                         </div>
@@ -144,7 +146,7 @@
                         </div>
                         <div class="col-sm-6 py-2">
                             <div class="custom-input-field">
-                                <label> {{'roundtrip'| localization}}</label>
+                                <label> {{'RoundTrip'| localization}}</label>
                                 <div class="custom-flex">
 
                                     <div class="form-check">
@@ -161,7 +163,7 @@
                         <div class="col-sm-12">
                             <div class="col-md-6 py-2" *ngIf="charterCreationForm.value.isRoundTrip === true ">
                                 <div class="custom-select-field">
-                                    <label>Return Date {{'ReturnDate'| localization}}</label>
+                                    <label>{{'ReturnDate'| localization}}</label>
                                     <ejs-datetimepicker formControlName="returnDate"></ejs-datetimepicker>
                                   </div>
                               </div>

@@ -6,171 +6,153 @@
 
         <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
           data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
-          aria-selected="false"><strong>Booked Services</strong></button>
+          aria-selected="false"><strong>{{'BookedServices'|localization}}</strong></button>
       </div>
       <div>
-        <div class="row pb-4">
-          <div class="col-3">
-            <div class="dropdown custom-dropdown pe-2" style="display:inline-block;">
-              <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <span style="float: left;">
-                {{selectedStatusFilter == BOOKING_STATUS.Pending ? 'Pending':selectedStatusFilter ==
-                BOOKING_STATUS.Approved ? 'Approved':
-                selectedStatusFilter == BOOKING_STATUS.Rejected ? 'Rejected':selectedStatusFilter ==
-                BOOKING_STATUS.Cancel ? 'Cancel':selectedStatusFilter ==
-                BOOKING_STATUS.ChooseFilter ? 'Choose Status':'All'}}
-              </span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li (click)="statusFilter(null)">
-                  <a class="dropdown-item">All</a>
-                </li>
-                <li (click)="statusFilter(BOOKING_STATUS.Pending)">
-                  <a class="dropdown-item">Pending</a>
-                </li>
-                <li (click)="statusFilter(BOOKING_STATUS.Approved)">
-                  <a class="dropdown-item">Approved</a>
-                </li>
-                <li (click)="statusFilter(BOOKING_STATUS.Cancel)">
-                  <a class="dropdown-item">Cancelled</a>
-                </li>
-                <li (click)="statusFilter(BOOKING_STATUS.Rejected)">
-                  <a class="dropdown-item">Rejected</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-3">
-            <div>
-              <div class="dropdown custom-dropdown filters-wrap" ngbDropdown #myFilterDrop="ngbDropdown">
-                <button class="dropdownBTN dropdown-btn dropdown-toggle" type="button" id="dropDownFilter2" ngbDropdownToggle>
-                  <span style="float: left;">
-                  {{this.selectedTabStatus == BOOKING_FILTER.All ? 
-                    'All':this.selectedTabStatus == BOOKING_FILTER.Upcomings ? 'Upcomings':this.selectedTabStatus == BOOKING_FILTER.Past ? 'Past':'Choose Upcoming/Past'}}
-                  </span>
-                </button>
-                <div class="dropdown-menu"  ngbDropdownMenu aria-labelledby="dropDownFilter2">
-                  <form>
-                      <div class="row p-4">
-                          <div class="col-12">
-                              <div class="form-check">
-                                  <input type="radio" class="form-check-input" [value]="0" id="allCharter"
-                                      [(ngModel)]="selectedTab"
-                                      [ngModelOptions]="{standalone: true}">
-                                  <label for="allCharter">All</label>
-                              </div>
-                          </div>
-                          <div class="col-12">
-                              <div class="form-check">
-                                  <input type="radio" class="form-check-input" [value]="1" id="oneSide"
-                                      [(ngModel)]="selectedTab"
-                                      [ngModelOptions]="{standalone: true}">
-                                  <label for="oneSide">Upcomings</label>
-                              </div>
-                          </div>
-                          <div class="col-12">
-                              <div class="form-check">
-                                  <input type="radio" id="roundTrip" class="form-check-input" [value]="2"
-                                      [(ngModel)]="selectedTab"
-                                      [ngModelOptions]="{standalone: true}">
-                                  <label for="roundTrip">Past</label>
-                              </div>
-                          </div>
-                      </div>
-                      <div>
-                          <a class="custom-btn blue" style="
-                          float: right;
-                          font-size: 12px;
-                          min-width: 76px !important;
-                          cursor: pointer;" (click)="getReservations();myFilterDrop.close()">
-                              Apply
-                          </a>
-                      </div>
-                  </form>
-              </div>
-              </div>
-          </div>
-          </div>
-
-          <div class="col-6">
-            <div class="" style="float: right;">
-              <div class="row">
-                <div class="col dropdown custom-dropdown">
-                  <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
-                    <button class="dropdownBTN dropdown-btn dropdown-toggle" id="dropdownForm1" ngbDropdownToggle>
-                      <span style="float: left;">{{selectedMonth || 'Month'}}-{{selectedYear || 'Year'}}</span>
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-                      <ejs-calendar #ejCalendar [value]='dateValue' 
-                      (change)="applyDateFilter($event);myDrop.close()" 
-                      start='Decade' depth='Year'></ejs-calendar>
-                      <div class="dropdown-divider"></div>
-                    </div>
+      <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>
+      <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.boatel">
+      <div class="row">
+        <div class="col-12">
+          <div class="custom-card req-user-card" *ngFor="let item of booking">
+            <div [routerLink]="['/boat-listing/reservation-detail',item.id]">
+              <div class="image-with-text custom-flex-between align-items-start">
+                <div class="image-with-text-inner">
+                  <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
+                    <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+                  </div>
+                  <div class="user-details">
+                    <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
+                    <ngb-rating [rate]="0"></ngb-rating>
+                    <p class="small-text grey ">{{'Location' | localization}} :{{item?.boatDetail?.location}} </p>
+                    <p class="small-text grey ">{{'Guest'| localization}}: {{item.noOfAdults + item.noOfChildrens}}</p>
                   </div>
                 </div>
-              </div>
-          </div>
-          </div>
-          <div class="col-12">
-            <!-- <button class="btn btn-filter btn-sm" (click)="upcomingReservation()" >Upcoming</button>&nbsp;&nbsp;
-              <button class="btn btn-filter btn-sm" (click)="pastReservation()">Past</button> -->
-          
-       
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="custom-card req-user-card" *ngFor="let item of booking">
-              <div [routerLink]="['/boat-listing/reservation-detail',item.id]">
-                <div class="image-with-text custom-flex-between align-items-start">
-                  <div class="image-with-text-inner">
-                    <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
-    
-                      <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
-                    </div>
-                    <div class="user-details">
-                      <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
-                      <ngb-rating [rate]="0"></ngb-rating>
-                      <p class="small-text grey ">Location :{{item?.boatDetail?.location}} </p>
-                      <p class="small-text grey ">Guest: {{item.noOfAdults + item.noOfChildrens}}</p>
-                    </div>
+                <div class="right-content custom-flex flex-column align-items-end">
+                  <p class="small-text grey">{{item.checkinDate | date}} - {{item.checkoutDate | date}}</p>
+                  <div class="custom-flex mt-4 mr-3">
+                    <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Pending"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Pending ? 'Pending' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Approved"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Approved ? 'Approved' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Rejected"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Rejected ? 'Rejected' :
+                        ''}}</strong></span>
+                    <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Cancel"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Cancel ? 'Cancelled' :
+                        ''}}</strong></span>
                   </div>
-                  <div class="right-content custom-flex flex-column align-items-end">
-                    <p class="small-text grey">{{item.checkinDate | date}} - {{item.checkoutDate | date}}</p>
-                    <div class="custom-flex mt-4 mr-3">
-                      <span *ngIf="item.bookingStatus==0"><strong>{{item.bookingStatus==0 ? 'Pending' : ''}}</strong></span>
-                      <span *ngIf="item.bookingStatus==1"><strong>{{item.bookingStatus==1 ? 'Approved' :
-                          ''}}</strong></span>
-                      <span *ngIf="item.bookingStatus==2"><strong>{{item.bookingStatus==2 ? 'Rejected' :
-                          ''}}</strong></span>
-                      <span *ngIf="item.bookingStatus==3"><strong>{{item.bookingStatus==3 ? 'Cancelled' :
-                          ''}}</strong></span>
-                    </div>
-    
-    
-                  </div>
+
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-12">
-            <div class="pt-2" *ngIf="booking?.length > 0">
-
-              <app-pagination [totalRecords]="totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
-              (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
-      
-      
-          </div>
-          </div>
         </div>
-  
-        <div *ngIf="booking?.length == 0">
-          <app-not-found-component></app-not-found-component>
+
+        <div class="col-12">
+          <div class="pt-2" *ngIf="booking?.length > 0">
+
+            <app-pagination [totalRecords]="getBookingObject.totalRecords" [paginationParam]="queryParams"
+              (pageChange)="onPageChange($event)" (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+
+
+          </div>
         </div>
       </div>
+      <div *ngIf="booking?.length == 0">
+        <app-not-found-component></app-not-found-component>
+      </div>
+    </div>
+      <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.charter">
+      <div class="col-12">
+        <div class="custom-card req-user-card" *ngFor="let item of userCharters">
+          <div [routerLink]="['/boat-listing/charter-reservation-detail',item.charterId]">
+            <div class="image-with-text custom-flex-between align-items-start">
+              <div class="image-with-text-inner">
+                <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
+
+                  <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+                </div>
+                <div class="user-details">
+                  <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
+                  <ngb-rating [rate]="0"></ngb-rating>
+                  <p class="small-text grey ">{{'DepartureFrom'| localization}} {{item?.charterDetail?.departingFrom}}</p>
+                  <p class="small-text grey ">{{'Destination'| localization}}  {{item?.charterDetail?.destination}}</p>
+                  <p class="small-text grey ">{{'Guests'| localization}}: {{item.noOfAdults + item.noOfChildrens}}</p>
+                </div>
+              </div>
+              <div class="right-content custom-flex flex-column align-items-end">
+                <p class="small-text grey">{{item?.charterDetail?.departureFromDate | date}} - {{item?.charterDetail?.departureToDate | date}}</p>
+                <div class="custom-flex mt-4 mr-3">
+                  <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Pending"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Pending ? 'Pending' :
+                    ''}}</strong></span>
+                <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Approved"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Approved ? 'Approved' :
+                    ''}}</strong></span>
+                <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Rejected"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Rejected ? 'Rejected' :
+                    ''}}</strong></span>
+                <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Cancel"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Cancel ? 'Cancelled' :
+                    ''}}</strong></span>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div *ngIf="userCharters?.length == 0">
+        <app-not-found-component></app-not-found-component>
+    </div>
+    <div class="col-12 pt-2" *ngIf="userCharters?.length > 0">
+        <app-pagination [totalRecords]="getBookingObject.totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
+    </div>
+      </div>
+      <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.event">
+        <div class="col-12">
+          <div class="custom-card req-user-card" *ngFor="let item of userEvents">
+            <div [routerLink]="['/boat-listing/event-reservation-detail',item.eventId]">
+              <div class="image-with-text custom-flex-between align-items-start">
+                <div class="image-with-text-inner">
+                  <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">
+
+                    <img src="{{assetsUrl + imgs?.imagePath}}" class="card-img-top" alt="...">
+                  </div>
+                  <div class="user-details">
+                    <p class="medium">{{item?.boatDetail?.name}}<span class="small-text regular grey"> </span></p>
+                    <ngb-rating [rate]="0"></ngb-rating>
+                    <p class="small-text grey ">{{"EventTitle" | localization}} {{item?.eventDetail?.title}}</p>
+                    <p class="small-text grey ">{{"EventLocation" | localization}} {{item?.eventDetail?.location}}</p>
+                    <p class="small-text grey ">{{"Guests" | localization}}: {{item?.noOfGuests}}</p>
+                  </div>
+                </div>
+                <div class="right-content custom-flex flex-column align-items-end">
+                  <p class="small-text grey">{{item?.eventDetail?.startDateTime | date}} - {{item?.eventDetail?.endDateTime | date}}</p>
+                  <div class="custom-flex mt-4 mr-3">
+                    <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Pending"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Pending ? 'Pending' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Approved"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Approved ? 'Approved' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Rejected"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Rejected ? 'Rejected' :
+                      ''}}</strong></span>
+                  <span *ngIf="item.bookingStatus==listingFilter.BOOKING_STATUS.Cancel"><strong>{{item.bookingStatus==listingFilter.BOOKING_STATUS.Cancel ? 'Cancelled' :
+                      ''}}</strong></span>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div *ngIf="userEvents?.length == 0">
+          <app-not-found-component></app-not-found-component>
+      </div>
+      <div class="col-12 pt-2" *ngIf="userEvents?.length > 0">
+          <app-pagination [totalRecords]="getBookingObject.totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
+          (pageSizeChange)="onPageSizeChange($event)" ></app-pagination>
+      </div>
+      </div>
+
     </div>
   </div>
 
 
-  </div>
+</div>

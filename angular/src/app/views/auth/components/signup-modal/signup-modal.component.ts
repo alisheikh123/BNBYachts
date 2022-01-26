@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { ConfirmEmailComponent } from '../confirm-email/confirm-email.component';
 import { UserModel } from '../../model/UserModel';
 import { ToastrService } from 'ngx-toastr';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-signup-modal',
@@ -31,7 +32,8 @@ export class SignupModalComponent implements OnInit {
     public authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private oidcSecurityService: OidcSecurityService
   ) {
     this.passwordValidator =
       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{7,}$';
@@ -139,9 +141,10 @@ export class SignupModalComponent implements OnInit {
 
   login() {
     this.activeModal.dismiss();
-    let modalRef = this.modal.open(ConfirmEmailComponent, {
-      windowClass: 'custom-modal custom-small-modal',
-    });
+    this.oidcSecurityService.authorize();
+    // let modalRef = this.modal.open(ConfirmEmailComponent, {
+    //   windowClass: 'custom-modal custom-small-modal',
+    // });
   }
   getToday(): string {
     return new Date().toISOString().split('T')[0]

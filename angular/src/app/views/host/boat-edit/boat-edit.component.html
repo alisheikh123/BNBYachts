@@ -149,7 +149,9 @@
                         <div class="custom-input-field">
                             <label>Availabilty</label>
                         </div>
-                        <ejs-daterangepicker placeholder='Select Availabilty' [startDate]='boatCalendar.fromDate'
+                        <ejs-daterangepicker placeholder='Select Availabilty'
+                         (change)="changeCalendar($event)"
+                         [startDate]='boatCalendar.fromDate'
                             [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
                     </div>
                     <div class="col-md-6 py-2">

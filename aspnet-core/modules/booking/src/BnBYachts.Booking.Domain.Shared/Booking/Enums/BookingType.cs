@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,9 +7,9 @@ namespace BnBYachts.Booking.Booking
 {
     public enum BookingType
     {
-        Boatel = 0,
-        Charter = 1,
-        Event = 2
+        Boatel = 1,
+        Charter = 2,
+        Event = 3
     }
     public enum BookingResponseFilter
     {

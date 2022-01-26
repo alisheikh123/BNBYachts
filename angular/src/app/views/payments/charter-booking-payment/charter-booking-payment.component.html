@@ -1,9 +1,9 @@
 <div class="main-wrapper" *ngIf="!isPaymentFailed">
     <div class="container section-padding payment-method-wrapper">
         <div class="btn-back">
-            <a [routerLink]="['/boat-listing/charter-details',charterId]"> <span class="material-icons arrow_back_ios">
-                    arrow_back_ios
-                </span></a>
+                <a [routerLink]="['/boat-listing/charter-details',charterId]" class="backLink">
+                    <i class="fas fa-chevron-left leftIcon"></i>
+                  </a>
             <h2 class="bold">Book a Charter</h2>
         </div>
         <div class="row m-0">
@@ -43,27 +43,41 @@
                                         <h6 class="px-2 medium">{{charterDetails?.boat?.name}}</h6>
                                         <div class="custom-flex-start flex-mobile-column w-100">
                                             <div class="custom-flex-start  w-100 p-1">
-                                                <p class="medium px-2 w-50">Dept:</p>
+                                                <p class="medium px-2 w-50">Departure From:</p>
                                                 <p class=" w-50">{{charterDetails?.departingFrom}}</p>
                                             </div>
+                                            </div>
+                                            <div class="custom-flex-start flex-mobile-column w-100">
                                             <div class="custom-flex-start  w-100 p-1">
                                                 <p class="medium px-2 w-50">Destination:</p>
                                                 <p class=" w-50">{{charterDetails?.destination}}</p>
                                             </div>
                                         </div>
                                         <div class="custom-flex-start  w-100 p-1">
-                                            <p class="medium px-2 w-50">Dept Date & Time:</p>
+                                            <p class="medium px-2 w-50">Departure Date:</p>
                                             <p class=" w-50">{{charterDetails?.departureFromDate | date}}</p>
                                         </div>
                                         <div class="custom-flex-start  w-100 p-1">
-                                            <p class="medium px-2 w-50">Arrival Date & Time:</p>
+                                            <p class="medium px-2 w-50">Arrival Date:</p>
                                             <p class=" w-50">{{charterDetails?.departureToDate | date}}</p>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Departure Time:</p>
+                                            <p class=" w-50">{{charterDetails?.DepartureTime}}</p>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Arrival Time:</p>
+                                            <p class=" w-50">{{charterDetails?.ArrivalTime}}</p>
                                         </div>
                                         <ng-container *ngIf="charterDetails?.isRoundTrip">
                                         <h6 class="py-4 px-2 pb-2 medium">Return Details</h6>
                                         <div class="custom-flex-start  w-100 p-1">
-                                            <p class="medium px-2 w-50">Dept Date & Time:</p>
+                                            <p class="medium px-2 w-50">Return Date:</p>
                                             <p class=" w-50">{{charterDetails?.returnDate | date}}</p>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Return Time:</p>
+                                            <p class=" w-50">{{charterDetails?.ReturnTime }}</p>
                                         </div>
                                     </ng-container>
                                     </div>

@@ -34,17 +34,26 @@
             <!-- <div class="chat-separator">
               <span>21 July</span>
           </div> -->
-            <div class="image-with-text" *ngFor="let message of userMessages"
-              [ngClass]="{'bg-blue-text reciever-msg':isReciever(message.receiverId,chat.senderId)}">
-              <div class="image-with-text-inner small-img">
-                <div class="w-100 d-flex align-items-start justify-content-start reciver-msj">
-                <img src="../../../../../../assets/images/user-img.png" alt="">
-                <div class="user-details bg-grey-light">
-                  <p [innerHtml]="message.message"></p>
-                </div>
-                </div>
+          <ng-container *ngFor="let msg of userMessages | groupBy: 'sentDate'">
+            <div class="chat-separator">
+              <span class="small-text grey">{{msg.key}}</span>
+          </div>
+            <div class="image-with-text" *ngFor="let message of msg.value"
+            [ngClass]="{'bg-blue-text reciever-msg':isReciever(message.receiverId,chat.senderId)}">
+            <div class="image-with-text-inner small-img">
+              <div class="w-100 d-flex align-items-start justify-content-end reciver-msj">
+       
+              <div class="user-details">
+                <p [innerHtml]="message.message"></p>
+                <small class="chatTime">{{message.sentTime | date:'hh:mm a'}}</small>
+              </div>
+              <div class="pe-2" *ngIf="!isReciever(message.receiverId,chat.senderId)"></div>
+              <img src="../../../../../../assets/images/user-img.png" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
               </div>
             </div>
+          </div>
+          </ng-container>
+  
             <p class="text-center bold" *ngIf="chat.blockedUser">You cannot reply to this conversion...</p>
 
             <div class="message-box px-3" *ngIf="!chat.blockedUser">

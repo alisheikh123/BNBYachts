@@ -25,7 +25,30 @@ namespace BnBYachts.Booking
             CreateMap<CharterBookingRequestableDto, CharterBookingEntity>();
             CreateMap<BoatelBookingRequestableDto, BoatelBookingEntity>();
             CreateMap<EventBookingRequestableDto, EventBookingEntity>();
+            CreateMap<BookingRequestsRequestableDto, BoatelBookingEntity>();
             CreateMap<EventBookingEntity, BookingRequestsRequestableDto>();
+            CreateMap<BoatelBookingEntity, CalendarTransferable>().
+                 ForMember(res => res.Id, opt => opt.MapFrom(res => res.BoatId)).
+                 ForMember(res => res.BookingId, opt => opt.MapFrom(res => res.Id)).
+                 ForMember(res => res.StartDate, opt => opt.MapFrom(res => res.CheckinDate))
+                .ForMember(res => res.EndDate, opt => opt.MapFrom(res => res.CheckoutDate))
+                 .ForMember(res => res.Name, opt => opt.MapFrom(res => res.UserName + "- Boatel"))
+                 .ForMember(x => x.ServiceType, opt => opt.MapFrom(source => (BookingType.Boatel)));
+            CreateMap<CharterBookingEntity, CalendarTransferable>().
+                   ForMember(res => res.Id, opt => opt.MapFrom(res => res.CharterId)).
+                   ForMember(res => res.BookingId, opt => opt.MapFrom(res => res.Id))
+                 .ForMember(res => res.StartDate, opt => opt.MapFrom(res => res.DepartureDate))
+                .ForMember(res => res.EndDate, opt => opt.MapFrom(res => res.DepartureDate))
+                                            .ForMember(res => res.Name, opt => opt.MapFrom(res => res.UserName + "- Charter"))
+                                                                         .ForMember(x => x.ServiceType, opt => opt.MapFrom(source => (BookingType.Charter)));
+           CreateMap<EventBookingEntity, CalendarTransferable>().
+                                   ForMember(res => res.Id, opt => opt.MapFrom(res => res.EventId)).
+                                   ForMember(res => res.BookingId, opt => opt.MapFrom(res => res.Id))
+                .ForMember(res => res.StartDate, opt => opt.MapFrom(res => res.EventDate))
+                 .ForMember(res => res.EndDate, opt => opt.MapFrom(res => res.EventDate))
+                     .ForMember(res => res.Name, opt => opt.MapFrom(res => res.UserName + "- Event"))
+                     .ForMember(x => x.ServiceType, opt => opt.MapFrom(source => (BookingType.Event)));
+
         }
     }
 }

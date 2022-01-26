@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
@@ -47,6 +48,9 @@ export class CharterBookingPaymentComponent implements OnInit {
   loadCharterDetails() {
     this.boatService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
+      this.charterDetails.DepartureTime =  moment(this.charterDetails?.departureFromDate).format("hh:mm a")
+      this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
+      this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
     })
   }
 
@@ -63,7 +67,7 @@ export class CharterBookingPaymentComponent implements OnInit {
     };
     this.paymentService.pay(model).subscribe(res => {
       if (res) {
-        this.modal.open(BookingConfirmedModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true })
+        this.modal.open(BookingConfirmedModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true,backdrop:'static' })
         this.isBookingConfirmed = true;
         this.isPaymentFailed = false;
       }

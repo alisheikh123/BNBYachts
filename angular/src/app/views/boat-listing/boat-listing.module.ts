@@ -23,6 +23,9 @@ import { ListReviewsComponent } from '../common/list-reviews/list-reviews.compon
 import { NotFoundModule } from '../common/not-found-component/not-found.module';
 import { PaginationModule } from '../common/pagination/pagination.module';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { BookingFilterComponent } from './booking-filter/booking-filter.component';
+import { CharterReservationDetailComponent } from './charter-reservation-detail/charter-reservation-detail.component';
+import { EventReservationDetailComponent } from './event-reservation-detail/event-reservation-detail.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,11 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
     EventListingComponent,
     CharterDetailsComponent,
     EventDetailsComponent,
-    ListReviewsComponent
+    ListReviewsComponent,
+    BookingFilterComponent,
+    CharterReservationDetailComponent,
+    EventReservationDetailComponent
+
   ],
   imports: [
     BoatListingRoutingModule,
@@ -49,8 +56,13 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
     NgxStripeModule.forRoot(environment.stripeKey),
     NotFoundModule,
     PaginationModule,
-    CalendarModule 
+    CalendarModule
   ],
-    providers: [YachtSearchService, BookingService]
+    providers: [YachtSearchService, BookingService],
+    exports: [BoatListingModule.rootComponent,BoatListingModule.rootReviewComponent],
+    entryComponents: [BoatListingModule.rootComponent,BoatListingModule.rootReviewComponent],
 })
-export class BoatListingModule { }
+export class BoatListingModule {
+  static rootComponent = BookingFilterComponent
+  static rootReviewComponent = ListReviewsComponent
+}

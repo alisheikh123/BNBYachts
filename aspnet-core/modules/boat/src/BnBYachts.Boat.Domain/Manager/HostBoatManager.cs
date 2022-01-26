@@ -74,7 +74,8 @@ namespace BnBYachts.Boat.Manager
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
                     await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatFeatures).ConfigureAwait(false);
                     double distance = GetDistanceInMeters(boat.Latitude, boat.Longitude, parameters.Latitude, parameters.Longitude);
-                    if (distance <= 500)
+                    var boatCalendar = boat.BoatCalendars.FirstOrDefault(res => res.BoatEntityId == boat.Id && res.IsAvailable && res.FromDate > DateTime.Now);
+                    if (distance <= 500 && boatCalendar != null)
                     {
                         filterdBoats.Add(boat);
                     }
@@ -84,7 +85,11 @@ namespace BnBYachts.Boat.Manager
                 {
                     foreach (var boat in filterdBoats.ToArray())
                     {
-                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => res. BoatEntityId == boat.Id && (res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckinDate) || (res.FromDate < parameters.CheckoutDate && res.ToDate > parameters.CheckoutDate) || (res.FromDate > parameters.CheckinDate && res.ToDate < parameters.CheckoutDate) || (res.FromDate == parameters.CheckinDate || res.ToDate == parameters.CheckoutDate) && !res.IsAvailable);
+                        var findAvailability = boat.BoatCalendars.FirstOrDefault(res => res.BoatEntityId == boat.Id && 
+                        (res.FromDate > parameters.CheckinDate && res.ToDate < parameters.CheckinDate) 
+                        || (res.FromDate > parameters.CheckoutDate && res.ToDate < parameters.CheckoutDate) 
+                        || (res.FromDate < parameters.CheckinDate && res.ToDate > parameters.CheckoutDate) 
+                        || (res.FromDate == parameters.CheckinDate || res.ToDate == parameters.CheckoutDate) && res.IsAvailable);
                         if (findAvailability == null)
                         {
                             filterdBoats.Remove(boat);
@@ -122,12 +127,12 @@ namespace BnBYachts.Boat.Manager
                 await _boatelRulesRepo.EnsurePropertyLoadedAsync(rule, x => x.OfferedRule);
             }
             await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatLocations).ConfigureAwait(false);
-
+            await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatCalendars).ConfigureAwait(false);
             return boat;
         }
         public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable param)
         {
-            var getCharters = await _charterRepository.GetListAsync();
+            var getCharters = await _charterRepository.GetListAsync(res=>res.DepartureFromDate >= DateTime.Now && res.IsActive == true);
             var filterdCharters = new List<CharterEntity>();
             foreach (var charter in getCharters)
             {
@@ -143,8 +148,10 @@ namespace BnBYachts.Boat.Manager
                 }
             }
             ///guest Filters
-            return filterdCharters.WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens).ToList();
-        }
+            return (filterdCharters
+                .WhereIf(param.DepartureDate != null, res => res.DepartureFromDate.Date == param.DepartureDate)
+                .WhereIf(param.Adults > 0 || param.Childrens > 0, res => res.GuestCapacity > param.Adults + param.Childrens)).ToList();
+        } 
         public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
         {
             var charter = await _charterRepository.GetAsync(b => b.Id == charterId, false).ConfigureAwait(false);
@@ -176,7 +183,7 @@ namespace BnBYachts.Boat.Manager
         }
         public async Task<ICollection<EventEntity>> GetEventsByFilters(EventSearchRequestable param)
         {
-            var getEvents = await _eventRepository.GetListAsync();
+            var getEvents = await _eventRepository.GetListAsync(res=>res.StartDateTime > DateTime.Now && res.IsActive == true);
 
 
             var filterdEvents = new List<EventEntity>();

@@ -4,8 +4,8 @@
       <img src="../../../../../../assets/images/user-img.png" alt="">
       <div class="user-details">
         <!-- <p class="medium">{{userInfo?.name}}</p> -->
-        <p> Sender Name</p>
-        <p class="small-text grey">Basic Information</p>
+        <p> {{senderDetails?.name}}</p>
+        <p class="small-text grey">{{senderDetails?.about | slice:0:25}} <span *ngIf="senderDetails?.about.length > 25">...</span></p>
       </div>
     </div>
   </div>

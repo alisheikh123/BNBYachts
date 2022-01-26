@@ -33,6 +33,7 @@ export class HostOnboardingComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl(),
   });
+  minDate = new Date();
   isAgree: boolean = false;
   ///
   boatCalendar = {
@@ -68,8 +69,8 @@ export class HostOnboardingComponent implements OnInit {
 
   buildFormConfiguration() {
     this.hostOnBoardingForm = this.fb.group({
-      name: [null, Validators.required],
-      description: [null, Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
       location: [null, Validators.required],
       latitude: [],
       longitude: [],
@@ -267,4 +268,29 @@ export class HostOnboardingComponent implements OnInit {
     }
   }
 
+  step2Valid(){
+    if(this.hostForm.name.value == '' ||
+    this.hostForm.length.value <= 0 ||
+    this.hostForm.totalBedrooms.value <=0 ||
+    this.hostForm.totalWashrooms.value <=0 ||
+    this.hostForm.location.value == null ||
+    this.hostForm.description.value == ''){
+      return false;
+    }
+    return true;
+  }
+  step3Valid(){
+    let rules = this.boatLookups.rules.filter((res: any) => res.isChecked == true); 
+    let boatFeatures = this.boatLookups.features.filter((res: any) => res.isChecked == true && res.isSafetyFeature == true);
+    if(rules?.length > 0 && boatFeatures?.length > 0){
+      return true;
+    }
+    return false;
+  }
+step5Valid(){
+  if(this.hostForm.taxFee.value > 0){
+    return true;
+  }
+  return false;
+}
 }

@@ -70,6 +70,7 @@ namespace BnBYachts.Boat.Shared.Boat.Requestable
     }
     public class BoatCalendarRequestable
     {
+        public int? Id { get; set; }
         public bool IsAvailable { get; set; }
         public DateTime ToDate { get; set; }
         public DateTime FromDate { get; set; }

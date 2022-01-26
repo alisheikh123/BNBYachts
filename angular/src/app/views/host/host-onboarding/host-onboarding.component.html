@@ -207,7 +207,7 @@
                                             <button class="custom-btn outline-blue-clr me-4"
                                                 (click)="currentTab=currentTab-1;">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
-                                            [disabled]="!hostForm.name.valid"
+                                            [disabled]="!step2Valid()"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
 
                                         </div>
@@ -269,6 +269,7 @@
                                             <button class="custom-btn outline-blue-clr me-4"
                                                 (click)="currentTab=currentTab-1;">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
+                                            [disabled]="!step3Valid()"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
 
                                         </div>
@@ -457,6 +458,7 @@
                                         <div class="custom-input-field">
                                             <label>Availabilty</label>
                                         </div><ejs-daterangepicker  placeholder='Select Availabilty'
+                                        [min]="minDate"
                                         (change)="changeCalendar($event)"
                                         [startDate]='boatCalendar.fromDate' [endDate]='boatCalendar.toDate'></ejs-daterangepicker>
 
@@ -501,7 +503,7 @@
                                 </ng-container>
                                 <div class="col-md-6 py-2">
                                     <div class="custom-input-field">
-                                        <label>Tax</label>
+                                        <label>Tax*</label>
                                         <input type="number" min="0" class="custom-input" formControlName="taxFee"
                                         (keypress)="restrictNumeric($event)"
                                             placeholder="Tax Fee">
@@ -512,7 +514,7 @@
                                             <button class="custom-btn outline-blue-clr me-4"
                                                 (click)="currentTab=currentTab-1;">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
-                                            [disabled]="!isValidCheckoutTime()"
+                                            [disabled]="!isValidCheckoutTime() || !step5Valid()"
                                                 (click)="currentTab=currentTab+1;">Continue</button>
 
                                         </div>

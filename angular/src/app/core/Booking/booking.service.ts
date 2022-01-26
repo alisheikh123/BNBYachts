@@ -63,7 +63,7 @@ export class BookingService {
   }
 
   getRefundable(bookingId: number, refundAmount: number) {
-    return this.http.get(this.paymentApiUrl + '/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
+    return this.http.get(this.paymentApiUrl + '/api/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
   }
 
   addReview(review:any) {
@@ -81,5 +81,9 @@ export class BookingService {
   getBookingCancellationDetail(bookingId:number):Observable<object>
   {
     return this.http.get(this.bookingApiUrl +this.bookingCancellation+bookingId).pipe(catchError(this.handleError));
+  }
+
+  getmyBookings(boatId:number){
+    return this.http.get(this.bookingApiUrl +'/api/app/booking-list/my-bookings/'+boatId).pipe(catchError(this.handleError));
   }
 }

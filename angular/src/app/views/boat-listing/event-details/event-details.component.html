@@ -41,7 +41,7 @@
                                 aria-orientation="vertical">
                                 <button class="underline-link-blk active" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-profile" type="button" role="tab"
-                                    aria-controls="v-pills-profile" aria-selected="false">Event</button>
+                                    aria-controls="v-pills-profile" aria-selected="false">{{'Event'|localization}}</button>
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -49,54 +49,53 @@
                                     <div class="tabs-inner-details">
                                         <div class="row">
                                             <div class="col-xl-6 py-2">
-                                                <h6 class="bold">Event Details</h6>
+                                                <h6 class="bold">{{'EventDetails'|localization}}</h6>
                                                 <div class="tabs-inner-details-inner">
                                                     <div class="custom-flex-start py-1 align-items-start depart-date-lg-view">
                                                         <div class="custom-flex align-items-start mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Event Name:</p>
+                                                            <p class="medium min-width-text small-content">{{'EventName'|localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{eventDetails?.title}}</p>
                                                         </div>
                                                         <div class="custom-flex align-items-start mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Event Capacity:</p>
-                                                            <p class="min-width-text-small">{{eventDetails?.guestCapacity}} Guests</p>
+                                                            <p class="medium min-width-text small-content">{{'EventCapacity'|localization}}</p>
+                                                            <p class="min-width-text-small">{{eventDetails?.guestCapacity}} {{'Guests'|localization}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content">Event Date:</p>
+                                                            <p class="medium min-width-text small-content">{{'EventDate'|localization}}</p>
                                                             <p class="min-width-text-small">
                                                                 {{eventDetails?.startDateTime | date:'dd-MMM-YYYY'}}</p>
                                                         </div>
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text  small-content">Remaining:</p>
+                                                            <p class="medium min-width-text  small-content">{{'Remaining'|localization}}</p>
                                                             <p class="min-width-text-small">{{eventDetails?.guestCapacity}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
                                                         <div class="custom-flex mobile-width-100">
-                                                            <p class="medium min-width-text small-content ">Event type:</p>
+                                                            <p class="medium min-width-text small-content ">{{'EventType'|localization}}:</p>
                                                             <p class="min-width-text-small">
-                                                                {{eventDetails?.eventType == 0 ? 'Adult':'Family'}}</p>
+                                                                {{eventDetails?.eventType == 1 ? 'Adult':'Family'}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <h6 class="bold mt-3">Event description</h6>
+                                                <h6 class="bold mt-3">{{'EventDescription'|localization}}</h6>
                                                 <div class="tabs-inner-details-inner">
                                                     <div class="custom-flex-coumn">
                                                         <p>{{eventDetails?.description}}</p>
                                                     </div>
                                                 </div>
-                                                <h6 class="bold mt-3">Approval policy</h6>
+                                                <h6 class="bold mt-3">{{'ApprovalPolicy' | localization}}</h6>
                                                 <div class="tabs-inner-details-inner">
-                                                    <div class="custom-flex-coumn">
-                                                        <p>Short description about the host Lorem ipsum dolor sit amet,
-                                                            consectetur adipiscing elit, sed do eiusmod tempor
-                                                            incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                            minim veniam, quis nostrud</p>
+                                                    <div class="custom-flex-coumn" *ngIf="((this.approvalPolicyString.length<=20));else greaterThanLimitBlock">
+                                                        <p>{{this.approvalPolicyString}}</p>
                                                     </div>
-                                                    <a href="javascript:void(0)"
-                                                        class="underline-blue-link py-2 no-underline">Read All</a>
+                                                    <ng-template #greaterThanLimitBlock>                                                        
+                                                        {{(this.readAll?this.approvalPolicyString:this.approvalPolicyString|slice:0:21)}}
+                                                        <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.readAll = !this.readAll">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
+                                                      </ng-template>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 py-2">
@@ -132,21 +131,20 @@
                                                                 [ngbPopover]="popContent" placement="bottom"
                                                                 autoClose="outside" triggers="manual"
                                                                 #popOver="ngbPopover" (click)="openPopover()">
-                                                                <label>Guests</label>
+                                                                <label>{{'Guests'|localization}}</label>
 
                                                                 <div class="custom-flex w-100">
                                                                     <p class="counter-text-total">
                                                                         {{eventFilterDetails?.adults}}
-                                                                        Adult(s)</p>
+                                                                        {{'Adult(s)'|localization}}</p>
                                                                     <p class="counter-text-total">
                                                                         {{eventFilterDetails?.childrens}}
-                                                                        Children</p>
+                                                                        {{'Children'|localization}}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <small class="text-danger"
-                                                            *ngIf="(eventFilterDetails.adults == 0 && eventFilterDetails.childrens == 0) && isSubmitted">Enter
-                                                            guests deteils.</small>
+                                                            *ngIf="(eventFilterDetails.adults == 0 && eventFilterDetails.childrens == 0) && isSubmitted">{{'EnterGuestsDetails'|localization}}</small>
                                                     </div>
 
                                                     <ng-template #popContent>
@@ -156,7 +154,7 @@
                                                                     <div class="number border-0 p-0 w-100">
                                                                         <div class="custom-flex-start w-100">
                                                                             <label
-                                                                                class="m-0 max-width-50">Adults</label>
+                                                                                class="m-0 max-width-50">{{'Adults'|localization}}</label>
                                                                             <div class="custom-flex-start max-width-50">
                                                                                 <span class="minus"
                                                                                     style="cursor: pointer;"
@@ -178,10 +176,9 @@
                                                                         <div class="custom-flex-start w-100">
 
                                                                             <div class="max-width-50">
-                                                                                <label class="m-0">Children</label>
+                                                                                <label class="m-0">{{'Children'|localization}}</label>
                                                                                 <label
-                                                                                    class="grey small-txt m-0 extra-small-text">Ages
-                                                                                    0-13</label>
+                                                                                    class="grey small-txt m-0 extra-small-text">{{'Ages0-13'|localization}}</label>
                                                                             </div>
                                                                             <div class="custom-flex-start max-width-50">
                                                                                 <span class="minus"
@@ -201,7 +198,7 @@
                                                                 <small class="text-danger">{{eventCapcityValidation}}</small>
                                                                 <div class="custom-flex-end">
                                                                     <button class="custom-btn blue small-btn"
-                                                                        (click)="updateGuests()">Done</button>
+                                                                        (click)="updateGuests()">{{'Done'|localization}}</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -217,25 +214,24 @@
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner">
-                                                            <p>Tax</p>
+                                                            <p>{{'Tax'|localization}}</p>
                                                             <p>${{eventDetails?.boat?.taxFee}}.00</p>
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner">
-                                                            <p>Service Fee</p>
+                                                            <p>{{'ServiceFee'|localization}}</p>
                                                             <p>$20.00</p>
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner bottom">
-                                                            <p class="medium">Total(USD)</p>
+                                                            <p class="medium">{{'Total(USD)'|localization}}</p>
                                                             <p class="medium">$ {{eventDetails?.amountPerPerson *
                                                                 (eventFilterDetails.adults +
                                                                 eventFilterDetails.childrens) +
                                                                 eventDetails?.boat?.taxFee+ 20}}.00</p>
 
                                                         </div>
-                                                        <button class="custom-btn blue" (click)="reserveEvent()">Book
-                                                            Now</button>
+                                                        <button class="custom-btn blue" (click)="reserveEvent()">{{'BookNow'|localization}}</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -248,14 +244,14 @@
                         </div>
                     </div>
                     <div class="section-padding">
-                        <h5 class="bold">About the boat</h5>
+                        <h5 class="bold">{{'AboutTheBoat'|localization}}</h5>
                         <p class="max-width-content py-2">{{eventDetails?.boat?.description}}</p>
                     </div>
                     <div class="section-padding">
                         <div class="what-offers">
                             <div class="row" *ngIf="eventDetails?.boat?.boatFeatures">
                                 <div class="col-md-6">
-                                    <h5 class="bold">What this Boat offers</h5>
+                                    <h5 class="bold">{{'WhatThisBoatOffers'|localization}}</h5>
                                     <div class="custom-flex-start">
                                         <div class="offerings" style="width: 100%;">
                                             <div class="row">
@@ -278,7 +274,7 @@
                                         {{showMore ? 'less' :'all'}}</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <h5 class="bold">Favourites</h5>
+                                    <h5 class="bold">{{'Favourites'|localization}}</h5>
                                     <div class="custom-flex-start">
                                         <div class="offerings">
                                             <p *ngFor="let item of featureFilter(true,false) | mySlice:0:3"><i
@@ -299,7 +295,7 @@
                         <div class="what-offers">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h5 class="bold">Boat Rules</h5>
+                                    <h5 class="bold">{{'BoatRules'|localization}}</h5>
                                     <div class="custom-flex-start">
                                         <div class="offerings">
                                             <p *ngFor="let item of eventDetails?.boat?.boatRules"><i
@@ -311,7 +307,7 @@
 
                                 </div>
                                 <div class="col-md-6" *ngIf="eventDetails?.boat?.boatFeatures">
-                                    <h5 class="bold">Health & Safety</h5>
+                                    <h5 class="bold">{{'Health&Safety'|localization}}</h5>
                                     <div class="custom-flex-start">
                                         <div class="offerings">
                                             <p *ngFor="let item of featureFilter(false,true)"><i
@@ -329,7 +325,7 @@
                             <div class="row h-100 align-items-center">
                                 <div class="col-md-6">
                                     <div class="custom-flex-start white-text h-100">
-                                        <h2 class="bold">Ask for a Quote</h2>
+                                        <h2 class="bold">{{'AskForAQuote'|localization}}</h2>
                                         <p class="medium-container regular">Short description about the service how it
                                             works
                                             , ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -339,7 +335,7 @@
                                             dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                             incididunt ut
                                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                            <a [routerLink]="['/quote',eventDetails?.boatId]" class="custom-btn white">Get a quote</a>
+                                            <a [routerLink]="['/quote',eventDetails?.boatId]" class="custom-btn white">{{'GetAQuote'|localization}}</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6 py-2">
@@ -353,7 +349,7 @@
                                                         <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                             alt="...">
                                                         <div class="card-body bg-white">
-                                                            <p>Private Charter</p>
+                                                            <p>{{'PrivateCharter'|localization}}</p>
 
                                                         </div>
                                                     </div>
@@ -369,7 +365,7 @@
                                                         <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                             alt="...">
                                                         <div class="card-body bg-white">
-                                                            <p>Private Charter</p>
+                                                            <p>{{'PrivateCharter'|localization}}</p>
 
                                                         </div>
                                                     </div>
@@ -386,13 +382,13 @@
                         <div class="host-details-wrap">
                             <div class="row align-items-center">
                                 <div class="col-md-6 py-2 text-center-mobile">
-                                    <h5 class="bold">Hosted By</h5>
-                                    <p class="medium py-2">Name Host: {{boatHost?.name}}</p>
+                                    <h5 class="bold">{{'HostedBy'|localization}}</h5>
+                                    <p class="medium py-2">{{'NameHost'|localization}} {{boatHost?.name}}</p>
                                     <div class="address-details">
-                                        <p>Join Date: {{boatHost?.creationTime | date:'dd-MMM-YYYY'}}</p>
-                                        <p><i class="fa fa-check"></i> Identity Verified: Verified </p>
-                                        <p><i class="fa fa-star"></i> Response Rate: 0%</p>
-                                        <p>Response Time: 0 min</p>
+                                        <p>{{'JoinDate'|localization}} {{boatHost?.creationTime | date:'dd-MMM-YYYY'}}</p>
+                                        <p><i class="fa fa-check"></i> {{'IdentityVerified'|localization}} Verified </p>
+                                        <p><i class="fa fa-star"></i> {{'ResponseRate'|localization}} 0%</p>
+                                        <p>{{'ResponseTime'|localization}} 0 min</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6 py-2 text-center">
@@ -402,7 +398,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 pt-2 text-center">
-                                    <button class="custom-btn blue big-btn">Contact Host</button>
+                                    <button class="custom-btn blue big-btn">{{'ContactHost'|localization}}</button>
                                 </div>
                             </div>
                         </div>

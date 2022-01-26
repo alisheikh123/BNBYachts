@@ -18,6 +18,8 @@ namespace BnBYachts.Booking
             CreateMap<BookingReviewEntity, BookingReviewsTransferableDto>();
             CreateMap<CharterBookingEntity, Booking.Requestable.BookingRequestsRequestableDto>();
             CreateMap<EventBookingEntity, BookingReviewsTransferableDto>();
+            CreateMap<CharterBookingEntity, CharterBookingTransferableDto>();
+            CreateMap<EventBookingEntity, EventBookingTransferableDto>();
         }
     }
 }

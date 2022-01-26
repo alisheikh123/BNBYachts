@@ -185,3 +185,284 @@
 2021-12-09 18:55:12.837 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - - - 200 11960 application/javascript;+charset=utf-8 11.5806ms
 2021-12-09 18:55:14.302 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - -
 2021-12-09 18:55:14.492 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 190.5575ms
+2022-01-18 14:03:02.804 +05:00 [INF] Starting BnBYachts.Chat.HttpApi.Host.
+2022-01-18 14:03:07.214 +05:00 [INF] User profile is available. Using 'C:\Users\Dell\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-01-18 14:03:07.415 +05:00 [INF] Loaded ABP modules:
+2022-01-18 14:03:07.415 +05:00 [INF] - BnBYachts.Chat.ChatHttpApiHostModule
+2022-01-18 14:03:07.415 +05:00 [INF]   - BnBYachts.Chat.ChatHttpApiModule
+2022-01-18 14:03:07.415 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-01-18 14:03:07.415 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-01-18 14:03:07.415 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-01-18 14:03:07.415 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-01-18 14:03:07.415 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-01-18 14:03:07.415 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-01-18 14:03:07.415 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-01-18 14:03:07.415 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-01-18 14:03:07.415 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2022-01-18 14:03:07.415 +05:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2022-01-18 14:03:07.415 +05:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-01-18 14:03:07.415 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-01-18 14:03:07.415 +05:00 [INF]                     - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-01-18 14:03:07.415 +05:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-01-18 14:03:07.415 +05:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-01-18 14:03:07.415 +05:00 [INF]                 - Volo.Abp.Json.AbpJsonModule
+2022-01-18 14:03:07.415 +05:00 [INF]                   - Volo.Abp.Timing.AbpTimingModule
+2022-01-18 14:03:07.415 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationModule
+2022-01-18 14:03:07.415 +05:00 [INF]                       - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-01-18 14:03:07.415 +05:00 [INF]                       - Volo.Abp.Settings.AbpSettingsModule
+2022-01-18 14:03:07.415 +05:00 [INF]                         - Volo.Abp.Security.AbpSecurityModule
+2022-01-18 14:03:07.415 +05:00 [INF]                         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-01-18 14:03:07.415 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-01-18 14:03:07.415 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2022-01-18 14:03:07.415 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-01-18 14:03:07.415 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2022-01-18 14:03:07.415 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-01-18 14:03:07.415 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-01-18 14:03:07.415 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2022-01-18 14:03:07.415 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-01-18 14:03:07.415 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-01-18 14:03:07.415 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-01-18 14:03:07.416 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-01-18 14:03:07.416 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-01-18 14:03:07.416 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2022-01-18 14:03:07.416 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-01-18 14:03:07.416 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2022-01-18 14:03:07.416 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2022-01-18 14:03:07.416 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2022-01-18 14:03:07.416 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2022-01-18 14:03:07.416 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-01-18 14:03:07.416 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-01-18 14:03:07.416 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2022-01-18 14:03:07.416 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-01-18 14:03:07.416 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-01-18 14:03:07.416 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-01-18 14:03:07.416 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-01-18 14:03:07.416 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-01-18 14:03:07.416 +05:00 [INF]   - BnBYachts.Chat.ChatApplicationModule
+2022-01-18 14:03:07.416 +05:00 [INF]     - BnBYachts.Chat.ChatDomainModule
+2022-01-18 14:03:07.416 +05:00 [INF]       - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-01-18 14:03:07.416 +05:00 [INF]   - BnBYachts.Chat.EntityFrameworkCore.ChatEntityFrameworkCoreModule
+2022-01-18 14:03:07.416 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2022-01-18 14:03:07.416 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2022-01-18 14:03:07.416 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-01-18 14:03:07.416 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-01-18 14:03:08.629 +05:00 [INF] Initialized all ABP modules.
+2022-01-18 14:03:08.816 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-01-18 14:03:08.816 +05:00 [INF] Hosting environment: Development
+2022-01-18 14:03:08.816 +05:00 [INF] Content root path: D:\BNBYechet\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host
+2022-01-18 14:03:08.853 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/ - -
+2022-01-18 14:03:09.512 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-01-18 14:03:09.576 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Chat.Controllers.HomeController (BnBYachts.Chat.HttpApi.Host).
+2022-01-18 14:03:09.614 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2022-01-18 14:03:09.623 +05:00 [INF] Executed action BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) in 39.0087ms
+2022-01-18 14:03:09.623 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-01-18 14:03:09.656 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger - -
+2022-01-18 14:03:09.674 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/index.html - -
+2022-01-18 14:03:09.679 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/ - - - 302 - - 826.0173ms
+2022-01-18 14:03:09.679 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger - - - 301 - - 21.7738ms
+2022-01-18 14:03:09.806 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/index.html - - - 200 - text/html;charset=utf-8 132.1210ms
+2022-01-18 14:03:09.868 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/ui/abp.js - -
+2022-01-18 14:03:09.869 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/swagger-ui-standalone-preset.js - -
+2022-01-18 14:03:09.880 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/swagger-ui.css - -
+2022-01-18 14:03:09.885 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'N/A'
+2022-01-18 14:03:09.885 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/ui/abp.swagger.js - -
+2022-01-18 14:03:09.886 +05:00 [INF] Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'N/A'
+2022-01-18 14:03:09.887 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/ui/abp.js - - - 200 3025 application/javascript 18.8635ms
+2022-01-18 14:03:09.892 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/ui/abp.swagger.js - - - 200 1026 application/javascript 6.4131ms
+2022-01-18 14:03:09.909 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/swagger-ui-bundle.js - -
+2022-01-18 14:03:09.913 +05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-01-18 14:03:09.915 +05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-01-18 14:03:09.944 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/swagger-ui.css - - - 200 143410 text/css 63.4461ms
+2022-01-18 14:03:09.946 +05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-01-18 14:03:09.949 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/swagger-ui-standalone-preset.js - - - 200 336841 application/javascript 79.6617ms
+2022-01-18 14:03:09.977 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/swagger-ui-bundle.js - - - 200 1097461 application/javascript 68.0541ms
+2022-01-18 14:03:10.246 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - -
+2022-01-18 14:03:10.302 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/favicon-32x32.png - -
+2022-01-18 14:03:10.304 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-01-18 14:03:10.306 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/favicon-32x32.png - - - 200 628 image/png 3.7331ms
+2022-01-18 14:03:10.429 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 183.6825ms
+2022-01-18 16:26:09.491 +05:00 [INF] Starting BnBYachts.Chat.HttpApi.Host.
+2022-01-18 16:26:14.403 +05:00 [INF] User profile is available. Using 'C:\Users\Dell\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-01-18 16:26:14.562 +05:00 [INF] Loaded ABP modules:
+2022-01-18 16:26:14.562 +05:00 [INF] - BnBYachts.Chat.ChatHttpApiHostModule
+2022-01-18 16:26:14.562 +05:00 [INF]   - BnBYachts.Chat.ChatHttpApiModule
+2022-01-18 16:26:14.562 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-01-18 16:26:14.562 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-01-18 16:26:14.562 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-01-18 16:26:14.562 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-01-18 16:26:14.562 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-01-18 16:26:14.562 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-01-18 16:26:14.562 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-01-18 16:26:14.562 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2022-01-18 16:26:14.562 +05:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2022-01-18 16:26:14.562 +05:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-01-18 16:26:14.562 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-01-18 16:26:14.562 +05:00 [INF]                     - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-01-18 16:26:14.562 +05:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-01-18 16:26:14.562 +05:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-01-18 16:26:14.562 +05:00 [INF]                 - Volo.Abp.Json.AbpJsonModule
+2022-01-18 16:26:14.562 +05:00 [INF]                   - Volo.Abp.Timing.AbpTimingModule
+2022-01-18 16:26:14.562 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationModule
+2022-01-18 16:26:14.562 +05:00 [INF]                       - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-01-18 16:26:14.562 +05:00 [INF]                       - Volo.Abp.Settings.AbpSettingsModule
+2022-01-18 16:26:14.562 +05:00 [INF]                         - Volo.Abp.Security.AbpSecurityModule
+2022-01-18 16:26:14.562 +05:00 [INF]                         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-01-18 16:26:14.562 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2022-01-18 16:26:14.562 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-01-18 16:26:14.562 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-01-18 16:26:14.562 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-01-18 16:26:14.562 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-01-18 16:26:14.562 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-01-18 16:26:14.562 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2022-01-18 16:26:14.562 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-01-18 16:26:14.562 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2022-01-18 16:26:14.562 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2022-01-18 16:26:14.562 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2022-01-18 16:26:14.563 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2022-01-18 16:26:14.563 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-01-18 16:26:14.563 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-01-18 16:26:14.563 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2022-01-18 16:26:14.563 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-01-18 16:26:14.563 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-01-18 16:26:14.563 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-01-18 16:26:14.563 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-01-18 16:26:14.563 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-01-18 16:26:14.563 +05:00 [INF]   - BnBYachts.Chat.ChatApplicationModule
+2022-01-18 16:26:14.563 +05:00 [INF]     - BnBYachts.Chat.ChatDomainModule
+2022-01-18 16:26:14.563 +05:00 [INF]       - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-01-18 16:26:14.563 +05:00 [INF]       - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-01-18 16:26:14.563 +05:00 [INF]   - BnBYachts.Chat.EntityFrameworkCore.ChatEntityFrameworkCoreModule
+2022-01-18 16:26:14.563 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2022-01-18 16:26:14.563 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2022-01-18 16:26:14.563 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-01-18 16:26:14.563 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-01-18 16:26:15.297 +05:00 [INF] Initialized all ABP modules.
+2022-01-18 16:26:22.236 +05:00 [FTL] Application startup exception
+Autofac.Core.DependencyResolutionException: An exception was thrown while activating Microsoft.AspNetCore.Cors.Infrastructure.CorsService.
+ ---> Autofac.Core.DependencyResolutionException: An exception was thrown while invoking the constructor 'Void .ctor(Microsoft.Extensions.Options.IOptions`1[Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions], Microsoft.Extensions.Logging.ILoggerFactory)' on type 'CorsService'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at BnBYachts.Chat.ChatHttpApiHostModule.<>c__DisplayClass6_0.<ConfigureCors>b__1(CorsPolicyBuilder builder) in D:\BNBYechet\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host\ChatHttpApiHostModule.cs:line 107
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy(String name, Action`1 configurePolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddDefaultPolicy(Action`1 configurePolicy)
+   at BnBYachts.Chat.ChatHttpApiHostModule.<>c__DisplayClass6_0.<ConfigureCors>b__0(CorsOptions options) in D:\BNBYechet\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host\ChatHttpApiHostModule.cs:line 105
+   at Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure(String name, TOptions options)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.OptionsManager`1.<>c__DisplayClass5_0.<Get>b__0()
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.get_Value()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd(String name, Func`1 createOptions)
+   at Microsoft.Extensions.Options.OptionsManager`1.Get(String name)
+   at Microsoft.Extensions.Options.OptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsService..ctor(IOptions`1 options, ILoggerFactory loggerFactory)
+   at lambda_method374(Closure , Object[] )
+   at Autofac.Core.Activators.Reflection.BoundConstructor.Instantiate()
+   --- End of inner exception stack trace ---
+   at Autofac.Core.Activators.Reflection.BoundConstructor.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.<ConfigurePipeline>b__11_0(ResolveRequestContext ctxt, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.DelegateMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.DisposalTrackingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   --- End of inner exception stack trace ---
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.RegistrationPipelineInvokeMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.SharingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.CircularDependencyDetectorMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, ResolveRequest request)
+   at Autofac.Core.Resolving.ResolveOperation.ExecuteOperation(ResolveRequest request)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(ResolveRequest request)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(ResolveRequest request)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.ResolveOptional(IComponentContext context, Type serviceType, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.ResolveOptional(IComponentContext context, Type serviceType)
+   at Autofac.Extensions.DependencyInjection.AutofacServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass5_0.<UseMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at BnBYachts.Chat.Program.Main(String[] args) in D:\BNBYechet\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host\Program.cs:line 32
+2022-01-18 16:26:22.279 +05:00 [FTL] Host terminated unexpectedly!
+Autofac.Core.DependencyResolutionException: An exception was thrown while activating Microsoft.AspNetCore.Cors.Infrastructure.CorsService.
+ ---> Autofac.Core.DependencyResolutionException: An exception was thrown while invoking the constructor 'Void .ctor(Microsoft.Extensions.Options.IOptions`1[Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions], Microsoft.Extensions.Logging.ILoggerFactory)' on type 'CorsService'.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at BnBYachts.Chat.ChatHttpApiHostModule.<>c__DisplayClass6_0.<ConfigureCors>b__1(CorsPolicyBuilder builder) in D:\BNBYechet\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host\ChatHttpApiHostModule.cs:line 107
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy(String name, Action`1 configurePolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddDefaultPolicy(Action`1 configurePolicy)
+   at BnBYachts.Chat.ChatHttpApiHostModule.<>c__DisplayClass6_0.<ConfigureCors>b__0(CorsOptions options) in D:\BNBYechet\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host\ChatHttpApiHostModule.cs:line 105
+   at Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure(String name, TOptions options)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.OptionsManager`1.<>c__DisplayClass5_0.<Get>b__0()
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.get_Value()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd(String name, Func`1 createOptions)
+   at Microsoft.Extensions.Options.OptionsManager`1.Get(String name)
+   at Microsoft.Extensions.Options.OptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsService..ctor(IOptions`1 options, ILoggerFactory loggerFactory)
+   at lambda_method374(Closure , Object[] )
+   at Autofac.Core.Activators.Reflection.BoundConstructor.Instantiate()
+   --- End of inner exception stack trace ---
+   at Autofac.Core.Activators.Reflection.BoundConstructor.Instantiate()
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
+   at Autofac.Core.Activators.Reflection.ReflectionActivator.<ConfigurePipeline>b__11_0(ResolveRequestContext ctxt, Action`1 next)
+   at Autofac.Core.Resolving.Middleware.DelegateMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.DisposalTrackingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   --- End of inner exception stack trace ---
+   at Autofac.Core.Resolving.Middleware.ActivatorErrorHandlingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.RegistrationPipelineInvokeMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.SharingMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.Middleware.CircularDependencyDetectorMiddleware.Execute(ResolveRequestContext context, Action`1 next)
+   at Autofac.Core.Resolving.Pipeline.ResolvePipelineBuilder.<>c__DisplayClass14_0.<BuildPipeline>b__1(ResolveRequestContext ctxt)
+   at Autofac.Core.Pipeline.ResolvePipeline.Invoke(ResolveRequestContext ctxt)
+   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, ResolveRequest request)
+   at Autofac.Core.Resolving.ResolveOperation.ExecuteOperation(ResolveRequest request)
+   at Autofac.Core.Resolving.ResolveOperation.Execute(ResolveRequest request)
+   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(ResolveRequest request)
+   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
+   at Autofac.ResolutionExtensions.ResolveOptionalService(IComponentContext context, Service service, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.ResolveOptional(IComponentContext context, Type serviceType, IEnumerable`1 parameters)
+   at Autofac.ResolutionExtensions.ResolveOptional(IComponentContext context, Type serviceType)
+   at Autofac.Extensions.DependencyInjection.AutofacServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass5_0.<UseMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at BnBYachts.Chat.Program.Main(String[] args) in D:\BNBYechet\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host\Program.cs:line 32
