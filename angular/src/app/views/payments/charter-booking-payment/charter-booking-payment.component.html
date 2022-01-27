@@ -21,10 +21,13 @@
                 </div>
                 <div>
                     <h6 class="medium-bold mb-3">Cancellation Policy</h6>
-                    <p>Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud. <a href="disclaimer.html"
-                            class="custom-btn underline-blue-link no-before-content p-0">Learn more</a></p>
+                    <div *ngIf="this.cancellationPolicyString.length<=20; else GreaterThanLimitBlock">
+                        <p>{{this.cancellationPolicyString}}</p>
+                    </div>
+                    <ng-template #GreaterThanLimitBlock>
+                        {{this.readAll?(this.cancellationPolicyString):(this.cancellationPolicyString|slice:0:21)}}
+                        <button class="underline-blue-link py-2 no-underline" (click)="this.readAll=!this.readAll">{{this.readAll?'Read Less':'Read More...'}}</button>
+                    </ng-template>
                 </div>
             </div>
             <div class="col-md-7 py-2">

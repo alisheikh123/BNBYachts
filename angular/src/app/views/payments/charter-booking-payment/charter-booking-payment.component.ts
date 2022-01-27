@@ -30,6 +30,8 @@ export class CharterBookingPaymentComponent implements OnInit {
   bookingId: any;
   charterDetails: any;
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
+  cancellationPolicyString = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.";
+  readAll = false;
 
   constructor(public app: AppComponent,
     private cdr:ChangeDetectorRef,
