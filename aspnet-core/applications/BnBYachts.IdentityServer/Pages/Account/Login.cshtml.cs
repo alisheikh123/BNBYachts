@@ -10,7 +10,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using Volo.Abp;
 using Volo.Abp.Account.Settings;
 using Volo.Abp.Account.Web;
@@ -70,8 +72,7 @@ namespace BnBYachts.Pages.Account
 
         public virtual async Task<IActionResult> OnGetAsync()
         {
-            LoginInput = new LoginInputModel();
-            this.BaseUrl = _configuration.GetValue<string>("BNB_APP_CLIENT_URL")+ "/auth/forget-password";
+            this.BaseUrl = GetDomainUrl(ReturnUrl);
             var schemes = await _schemeProvider.GetAllSchemesAsync();
 
             var providers = schemes
@@ -254,8 +255,10 @@ namespace BnBYachts.Pages.Account
                 throw new UserFriendlyException(L["LocalLoginDisabledMessage"]);
             }
         }
+        private static string GetDomainUrl(string returnUrl) => HttpUtility.UrlDecode(returnUrl.Split("&").FirstOrDefault(x => x.Contains("redirect_uri")).Split("=")[1]) + "/auth/forget-password";
+        
 
-        public class LoginInputModel
+public class LoginInputModel
         {
             [Required]
             //[StringLength(IdentityUserConsts.MaxEmailLength)]
