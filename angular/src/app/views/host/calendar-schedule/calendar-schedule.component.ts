@@ -131,12 +131,12 @@ export class CalendarScheduleComponent implements OnInit {
         eventId: element.id,
         serviceType: element.serviceType,
         isBooking: false,
-        title: element.isAvailable ? element.name +' $':'',
+        title: element.startDate == element.endDate && element.isAvailable ? element.name +' $':'',
         textColor: '#f000',
         start: new Date(element.startDate),
         end: new Date(element.endDate),
         allDay: true,
-        backgroundColor: element?.isAvailable ? "#FFFFFF" : "#777777",
+        backgroundColor: element.startDate == element.endDate && element.isAvailable  ? "#FFFFFF" : "#777777",
         display: 'background'
       });
     });
