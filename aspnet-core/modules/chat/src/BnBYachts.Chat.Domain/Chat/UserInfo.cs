@@ -15,5 +15,7 @@ namespace BnBYachts.Chat.Chat
         public bool IsArchivedUser { get; set; }
         [NotMapped]
         public bool IsBlocked { get; set; }
+        [NotMapped]
+        public string LastMessage { get; set; }
     }
 }
