@@ -13,6 +13,7 @@ using BnBYachts.Core.Shared.Transferable;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -29,17 +30,18 @@ namespace BnBYachts.Core.Managers
         private readonly IdentityUserManager _userManager;
         private readonly IdentityRoleManager _roleManager;
         private readonly EventBusDispatcher _eventBusDispatcher;
-
+        private readonly IConfiguration _config;
         //private readonly IObjectMapper<CoreDomainModule> _objectMapper;
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
             IdentityUserManager userManager, IdentityRoleManager roleManager,
-            EventBusDispatcher eventBusDispatcher)
+            EventBusDispatcher eventBusDispatcher, IConfiguration config)
         {
             _repository = repository;
             _userManager = userManager;
             _roleManager = roleManager;
             _eventBusDispatcher = eventBusDispatcher;
+            _config = config;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
@@ -87,11 +89,12 @@ namespace BnBYachts.Core.Managers
 
         public async Task SendEmailToAskForEmailConfirmationAsync(IdentityUser user)
         {
+            var rootUrl = _config.GetSection("AppUrl:ClientUrl").Value;
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
             //string baseUrl = Environment.GetEnvironmentVariable("BNB_APP_SELF_URL", EnvironmentVariableTarget.Machine) + "activate-account";
-            string baseUrl = "http://52.207.14.110:8080/activate-account";
+            string baseUrl = rootUrl + "/activate-account";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },

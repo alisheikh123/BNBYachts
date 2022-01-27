@@ -24,7 +24,7 @@ export class CalendarScheduleComponent implements OnInit {
     eventClick: this.getEventDetails.bind(this),
     dateClick: this.getDayClick.bind(this),
     datesSet: this.getMonth.bind(this),
-    height:550,
+    //height:1100,
   };
   boatCalendar: any;
   boats: any;
@@ -131,12 +131,12 @@ export class CalendarScheduleComponent implements OnInit {
         eventId: element.id,
         serviceType: element.serviceType,
         isBooking: false,
-        title: '',
+        title: element.isAvailable ? element.name +' $':'',
         textColor: '#f000',
         start: new Date(element.startDate),
         end: new Date(element.endDate),
         allDay: true,
-        backgroundColor: "#777777",
+        backgroundColor: element?.isAvailable ? "#FFFFFF" : "#777777",
         display: 'background'
       });
     });
@@ -175,13 +175,13 @@ export class CalendarScheduleComponent implements OnInit {
       let event = {
         startDate: this.dayCalendar.fromDate,
         endDate: this.dayCalendar.toDate,
-        title: 'Blocked DAy',
-        serviceType: this.SERVICE_TYPES.Boatel
+        allDay: true,
+        display: 'background',
+        name: this.dayCalendar.isAvailable ? this.dayCalendar.amount:'Blocked DAy',
+        serviceType: this.SERVICE_TYPES.Boatel,
+        isAvailable:this.dayCalendar.isAvailable
       }
       this.boatCalendar.push(event);
-      if (!this.dayCalendar.isAvailable) {
-        this.bookingsCalendar.push(event);
-      }
       this.bindEvents();
       this.showEventDetails = false;
       this.toastr.success('Calendar Updated Successfully', 'Update')
@@ -203,11 +203,11 @@ export class CalendarScheduleComponent implements OnInit {
         moment(event.date).isBetween(moment(res.startDate), moment(res.endDate))
         || moment(res.startDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD')
         || moment(res.endDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD'));
-      let isAdded = this.boatCalendar.find((res: any) =>
-        moment(event.date).isBetween(moment(res.startDate), moment(res.endDate))
-        || moment(res.startDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD')
-        || moment(res.endDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD'));
-      if (isBooking == null && isAdded == null) {
+      // let isAdded = this.boatCalendar.find((res: any) =>
+      //   moment(event.date).isBetween(moment(res.startDate), moment(res.endDate))
+      //   || moment(res.startDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD')
+      //   || moment(res.endDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD'));
+      if (isBooking == null) {
         this.showEventDetails = true;
         this.calendarService.getDayCalendar(this.boatId, moment(this.dayCalendar.fromDate).format("YYYY-MM-DD")).subscribe((res: any) => {
           if (res.data != null) {

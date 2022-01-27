@@ -95,7 +95,7 @@ export class ChatComponent implements OnInit {
   }
 
   send() {
-    if (this.chat) {
+    if (this.chat.message != '') {
       this._hubConnection.invoke('SendMessage', this.chat).then(res => {
         let chatResponse = JSON.parse(JSON.stringify(this.chat))
         this.chat.message = '';

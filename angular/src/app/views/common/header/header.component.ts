@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
         if (userId != null) {
           this.authService.authenticated = true;
           this.getUserDetails();
-          //this.getUnreadChatCount();
+          this.getUnreadChatCount();
         }
       });
   }

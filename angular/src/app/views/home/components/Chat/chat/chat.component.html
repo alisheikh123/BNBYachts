@@ -31,9 +31,6 @@
           </div>
           <ng-container *ngIf="userMessages && chat.receiverId">
           <div class="chat-wrap-bg-blue" #chatScrollContainer>
-            <!-- <div class="chat-separator">
-              <span>21 July</span>
-          </div> -->
           <ng-container *ngFor="let msg of userMessages | groupBy: 'sentDate'">
             <div class="chat-separator">
               <span class="small-text grey">{{msg.key}}</span>
@@ -52,21 +49,22 @@
               </div>
             </div>
           </div>
-          </ng-container>
+          </ng-container> 
   
             <p class="text-center bold" *ngIf="chat.blockedUser">You cannot reply to this conversion...</p>
 
-            <div class="message-box px-3" *ngIf="!chat.blockedUser">
-              <form>
-                <div class="form-floating custom-input-field">
-                  <input type="text" name="message" class="custom-input big-input" [(ngModel)]="chat.message"
-                    placeholder="Type a message..." id="write-msg" placeholder="Type your message ...">
-                </div>
-                <div class="message-actions">
-                  <button (click)="send()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                </div>
-              </form>
-            </div>
+         
+          </div>
+          <div class="message-box px-3" *ngIf="!chat.blockedUser">
+            <form>
+              <div class="form-floating custom-input-field">
+                <input type="text" name="message" class="custom-input big-input" [(ngModel)]="chat.message"
+                  placeholder="Type a message..." id="write-msg" placeholder="Type your message ...">
+              </div>
+              <div class="message-actions">
+                <button (click)="send()" [disabled]="chat.message == ''"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+              </div>
+            </form>
           </div>
           </ng-container>
           <div *ngIf="!userMessages && !chat.receiverId">

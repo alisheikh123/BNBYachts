@@ -643,7 +643,13 @@ button{
     padding: 5px;
   }
   .text-right{
-    .close-btn{
+
+  }
+  .grey{
+    padding: 5px 0;
+  }
+}
+ .close-btn{
       width: 24px;
       height: 24px;
       border-radius: 50%;
@@ -669,12 +675,6 @@ button{
           background-color: $modal-close-btn;
       }
     }
-
-  }
-  .grey{
-    padding: 5px 0;
-  }
-}
 
 .boatel-search-card{
   @include custom-shadow-light;

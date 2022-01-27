@@ -42,8 +42,6 @@ export class ReservationDetailComponent implements OnInit {
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   boatDetail: any;
-  description: any;
-  noOfWords: number;
   showMore = false;
   isUserHost:boolean;
   cancelledBookingDetails:any;
@@ -76,7 +74,6 @@ export class ReservationDetailComponent implements OnInit {
         this.booking.checkoutDate = this.checkOutDate;
         this.boatDetail = boatdetail;
         this.checkinTime = this.booking?.boatDetail?.checkinTime;
-        //this.tokenizeString();
       });
       if(this.booking.bookingStatus == this.BOOKING_STATUS.Cancel){
         this.getRefundDetails();
@@ -188,16 +185,6 @@ export class ReservationDetailComponent implements OnInit {
     else{
       return false;
     }
-  }
-  // tokenizeString() {
-  //   this.description = this.booking?.boatDetail?.description.split(" ");
-  //   this.noOfWords = this.description.length;
-  // }
-  showDescription() {
-    return this.description;
-  }
-  showMoreToggle() {
-    this.showMore = !this.showMore;
   }
   changeStatus(isAccepted: boolean) {
     if (isAccepted) {

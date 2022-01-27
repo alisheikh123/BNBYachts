@@ -15,5 +15,6 @@ namespace BnBYachts.Chat.Transferables
         public virtual int? UnReadChatsCount { get; set; }
         public bool IsArchivedUser { get; set; }
         public bool IsBlocked { get; set; }
+        public string LastMessage { get; set; }
     }
 }
