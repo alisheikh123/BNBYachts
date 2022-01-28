@@ -5,68 +5,98 @@
   color: black;
 }
 
- ::ng-deep .fc-theme-standard td a{
+:host  ::ng-deep .fc-theme-standard td a{
    color: #777777 !important;
  }
-// ::ng-deep .fc-theme-standard th{
-//   border: none !important;
-//   color: black !important;
-//   text-align: left !important;
-//   padding: 0 !important;
-// }
-::ng-deep .fc-theme-standard th a{
+ :host ::ng-deep .fc-theme-standard th{
+  border: none !important;
+  color: black !important;
+  text-align: left !important;
+  padding: 0 !important;
+}
+:host ::ng-deep .fc-theme-standard th a{
   color: black !important;
   font-size: 12px;
   font-weight: bold;
-
 }
 
-// ::ng-deep table {
-//   border-spacing: 10px !important;
-//   border: none !important;
-// border-collapse: separate !important;
-// }
-// ::ng-deep .fc-scrollgrid-section > td{
-//   border: none !important;
-//   padding: 0 !important;
-// }
-// ::ng-deep .fc-scrollgrid-sync-table{
-//   border-spacing: 10px !important;
-// border-collapse: separate !important;
-// }
-// ::ng-deep .fc-scrollgrid-sync-table td{
-//   border-spacing: 10px !important;
-//   border:1px solid  #F1F1F1 !important;
-//   border-collapse: separate !important;
-//   border-radius: 6px !important; 
-// }
-// ::ng-deep .fc-scroller{
-//   overflow: hidden !important;
-// }
-// .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{
-//   min-height: 0 !important;
-//   height: 1000px;
-// }
+:host ::ng-deep table {
+  border-spacing: 10px !important;
+  border: none !important;
+border-collapse: separate !important;
+}
+:host ::ng-deep .fc-scrollgrid-section > td{
+  border: none !important;
+  padding: 0 !important;
+}
+:host ::ng-deep .fc-scrollgrid-sync-table{
+  border-spacing: 10px !important;
+border-collapse: separate !important;
+}
+:host ::ng-deep .fc-scrollgrid-sync-table td{
+  border-spacing: 10px !important;
+  border:1px solid  #F1F1F1 !important;
+  border-collapse: separate !important;
+  border-radius: 6px !important; 
+  height: 40px !important;
+}
+:host ::ng-deep .fc-scroller{
+  overflow: hidden !important;
+}
+
 // ::ng-deep .fc-daygrid-day-bottom:before{
 // display: block !important;
 // }
-// ::ng-deep .fc-daygrid-event-harness:before{
-//   display: inherit !important;
-//   content: inherit !important;
-//   }
-  ::ng-deep .fc-toolbar-title{
+:host ::ng-deep .fc-daygrid-event-harness:before{
+  display: none !important;
+  content: none !important;
+  }
+  :host   ::ng-deep .fc-daygrid-event-harness::after{
+    display: none !important;
+    content: none !important;
+    }
+    :host   ::ng-deep .fc-toolbar-title{
     font-size: 16px !important;
   }
-  ::ng-deep .fc-header-toolbar {
+  :host  ::ng-deep .fc-header-toolbar {
     margin-bottom: 0.5em !important;
 }
-::ng-deep .fc-button{
+:host ::ng-deep .fc-button{
   padding: 0.2em 0.45em !important;
   text-transform: capitalize !important;
 }
 //   ::ng-deep .fc-view-harness{
 // height: 900px!important;
 //   }
-::ng-deep .fc-event{
+:host ::ng-deep .fc-event{
   cursor: pointer !important;
+}
+
+:host ::ng-deep .fc-daygrid-day-events{
+  min-height: 0px !important;
+  max-height: 20px !important;
+}
+:host ::ng-deep .fc-daygrid-day-frame::before{
+  content:none !important;
+}
+:host ::ng-deep .fc-daygrid-day-events::before{
+  content: none !important;
+}
+:host ::ng-deep .fc-daygrid-day-events::after{
+  content: none !important;
+}
+:host ::ng-deep .fc-daygrid-day-frame::after{
+  content:none !important;
+}
+
+.image-text{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.no-user{
+  float: right !important;
+}
+.image-with-text-inner{
+  width: calc(100% - 24px);
 }

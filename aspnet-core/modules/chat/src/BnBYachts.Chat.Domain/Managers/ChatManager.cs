@@ -101,6 +101,8 @@ namespace BnBYachts.Chat.Managers
                     senderUser.IsArchivedUser = findArchived != null;
                     var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == senderUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
                     senderUser.IsBlocked = getBlockedUser != null;
+                    var chatList = await _chatRepository.GetListAsync(res=>res.SenderId == senderUser.UserId || res.ReceiverId == senderUser.UserId).ConfigureAwait(false);
+                    senderUser.LastMessage = chatList.LastOrDefault().Message;
                     listUsers.Add(senderUser);
                 }
                 if (recieverUser !=null && !listUsers.Contains(recieverUser))
@@ -111,6 +113,8 @@ namespace BnBYachts.Chat.Managers
                     recieverUser.IsArchivedUser = findArchived != null;
                     var getBlockedUser = await _blockedUserRepository.FirstOrDefaultAsync(res => res.BlockedUserId.ToLower() == recieverUser.UserId.ToLower() && res.UserId.ToLower() == userToCheck.ToLower()).ConfigureAwait(false);
                     recieverUser.IsBlocked = getBlockedUser != null;
+                    var chatList = await _chatRepository.GetListAsync(res => res.SenderId == recieverUser.UserId || res.ReceiverId == recieverUser.UserId).ConfigureAwait(false);
+                    recieverUser.LastMessage = chatList.LastOrDefault().Message;
                     listUsers.Add(recieverUser);
                 }
             }

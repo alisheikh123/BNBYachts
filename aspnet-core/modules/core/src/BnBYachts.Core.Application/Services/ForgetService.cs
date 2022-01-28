@@ -1,7 +1,7 @@
-﻿using AutoMapper.Configuration;
-using BnBYachts.Core.Data.Model.ForgetPassword;
+﻿using BnBYachts.Core.Data.Model.ForgetPassword;
 using BnBYachts.Core.Dto;
 using BnBYachts.Core.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace BnBYachts.Core.Services
 {
@@ -22,17 +23,19 @@ namespace BnBYachts.Core.Services
         
         private readonly IdentityUserManager _userManager;
         private readonly IRepository<ForgetPasswordVerifier, Guid> _Repository;
-        public ForgetService(IRepository<ForgetPasswordVerifier, Guid> repository, IdentityUserManager userManager)
+        private readonly IConfiguration _config;
+        public ForgetService(IRepository<ForgetPasswordVerifier, Guid> repository, IdentityUserManager userManager,IConfiguration config)
           : base(repository)
         {
             _userManager = userManager;
             _Repository = repository;
-
+            _config = config;
         }
         [HttpGet]
         [Route("api/forgot/{Email}")]
         public async Task<bool> ForgotPassword(string Email)
         {
+            var rootUrl = _config.GetSection("AppUrl:ClientUrl").Value;
             ForgetPasswordVerifier forgetPasswordVerifier = new ForgetPasswordVerifier();
             var user = await _userManager.FindByEmailAsync(Email).ConfigureAwait(false);
 
@@ -42,7 +45,7 @@ namespace BnBYachts.Core.Services
             {
                 Guid obj = Guid.NewGuid();
                 var uniqueId = obj.ToString();
-                string urlLink = "http://localhost:4200/auth/reset-password/" + uniqueId;
+                string urlLink = rootUrl+"/auth/reset-password/" + uniqueId;
                 forgetPasswordVerifier.UserId = user.Id.ToString();
                 forgetPasswordVerifier.UniqueId = uniqueId.ToString();
                 await _Repository.InsertAsync(forgetPasswordVerifier);
