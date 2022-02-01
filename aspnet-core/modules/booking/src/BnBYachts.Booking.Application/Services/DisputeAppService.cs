@@ -25,13 +25,9 @@ namespace BnBYachts.Booking.Services
         {
 
             await _manager.AddDispute(data).ConfigureAwait(false);
+            string emailContent = await _manager.GetEmailContent(1);
             string adminEmail = _config.GetSection("Emails:admin").Value.ToString();
-            var path = Directory.GetCurrentDirectory() + @"\wwwroot\templates";
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader(path + @"\dispute.html"))
-            {
-                body = reader.ReadToEnd();
-            }
+            string body = emailContent;
             body = body.Replace("{{message}}", data.Reason);
             await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
@@ -40,7 +36,6 @@ namespace BnBYachts.Booking.Services
                 Body = new StringBuilder().Append(body),
                 IsBodyHtml = true,
             });
-
         }
     }
 }

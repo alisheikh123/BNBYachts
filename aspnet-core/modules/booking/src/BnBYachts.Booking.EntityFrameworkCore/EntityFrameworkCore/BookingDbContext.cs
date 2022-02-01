@@ -24,6 +24,7 @@ namespace BnBYachts.Booking.EntityFrameworkCore
         public DbSet<BookingCancelEntity> BookingCancel { get; set; }
         public DbSet<BookingRefundableEntity> BookingRefundableEntity { get; set; }
         public DbSet<BookingDisputeEntity> BookingDisputes { get; set; }
+        public DbSet<BookingEmailsTemplates> BookingEmailsTemplates { get; set; }
         #endregion
 
         public BookingDbContext(DbContextOptions<BookingDbContext> options)

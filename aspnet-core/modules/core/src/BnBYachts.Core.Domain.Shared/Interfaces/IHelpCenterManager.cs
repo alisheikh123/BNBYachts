@@ -8,6 +8,7 @@ namespace BnBYachts.Core.Interfaces
 {
     public interface IHelpCenterManager
     {
+        Task<string> GetEmailContent(int templateId);
 
     }
 }
