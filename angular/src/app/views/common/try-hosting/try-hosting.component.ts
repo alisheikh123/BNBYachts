@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Carousel } from 'primeng/carousel';
 
 @Component({
   selector: 'app-try-hosting',
   templateUrl: './try-hosting.component.html',
+  styleUrls: ['./try-hosting.component.scss']
 })
 export class TryHostingComponent implements OnInit {
   boats: any[];
-  responsive: any[];
+  carouselSettings: any[];
   page: number;
   constructor() {    
-    this.responsive = [
+    this.carouselSettings = [
       {
         breakpoint: '1024px',
         numVisible: 3,
