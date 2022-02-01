@@ -227,5 +227,7 @@
   "ReturnDetails:":"Return Details:",
   "ReturnDate:":"Return Date:",
   "ReturnTime":"Return Time:",
-  "comma": ","
+  "comma": ",",
+  "commentor": "Lili John",
+  "comment": "Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 }
