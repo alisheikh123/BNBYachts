@@ -1,0 +1,54 @@
+<div class="main-wrapper">
+    <div class="banner-wrapper layer-bg small-banner banner-layer white-text"
+        style="background-image:url('../../../../../../assets/images/request-quote-bg.png')">
+        <div class="container">
+            <div class="row">
+                <div class="btn-back align-items-start">
+                    <div class="">
+                        <h2 class="bold">Help Center</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="custom-tabs-wrapper pt-3">
+            <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.AskUs}"
+                    (click)="currentTab = 1" type="button">
+                    Ask Us</button>
+                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.ContactUs}"
+                    (click)="currentTab = 2" type="button">
+                    Contact Us
+                </button>
+                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.FindUs}"
+                    (click)="currentTab = 3" type="button">
+                    Find Us
+                </button>
+                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.Dispute}"
+                    (click)="currentTab = 4" type="button">
+                    Dispute
+                </button>
+            </div>
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade" [ngClass]="{'show active': currentTab == navTabs.AskUs}"
+                    *ngIf="currentTab == navTabs.AskUs" id="v-pills-home" role="tabpanel"
+                    aria-labelledby="v-pills-home-tab">
+                    <app-ask-us></app-ask-us>
+                </div>
+                <div class="tab-pane fade" [ngClass]="{'show active': currentTab == navTabs.ContactUs}"
+                    *ngIf="currentTab == navTabs.ContactUs">
+                    <app-contact-us-form></app-contact-us-form>
+                </div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
+                    [ngClass]="{'show active': currentTab == navTabs.FindUs}" *ngIf="currentTab == navTabs.FindUs">
+                    <app-find-us></app-find-us>
+                </div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
+                    [ngClass]="{'show active': currentTab == navTabs.Dispute}" *ngIf="currentTab == navTabs.Dispute">
+                    <app-dispute-form></app-dispute-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

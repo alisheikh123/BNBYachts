@@ -26,8 +26,7 @@
                             data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
                             <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
                             data-bs-target="#signup-modal" (click)="signUp()"><span>Sign Up</span></a>
-                        <a href="javascript:void(0)" class="underline-link-blk"
-                            (click)="getUser()"><span>Help</span></a>
+                        <a [routerLink]="['/help-center']" class="underline-link-blk"><span>Help</span></a>
 
                     </div>
                 </div>
@@ -139,7 +138,7 @@
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Help</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/help-center']">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
                             </ul>

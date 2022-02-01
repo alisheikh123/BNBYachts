@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Booking.Booking;
+using BnBYachts.Booking.Disputes;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace BnBYachts.Booking.EntityFrameworkCore
         public DbSet<BookingReviewEntity> Reviews { get; set; }
         public DbSet<BookingCancelEntity> BookingCancel { get; set; }
         public DbSet<BookingRefundableEntity> BookingRefundableEntity { get; set; }
+        public DbSet<BookingDisputeEntity> BookingDisputes { get; set; }
         #endregion
 
         public BookingDbContext(DbContextOptions<BookingDbContext> options)

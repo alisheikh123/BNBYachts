@@ -23,7 +23,7 @@ export class CalendarScheduleComponent implements OnInit {
     events: [],
     eventClick: this.getEventDetails.bind(this),
     dateClick: this.getDayClick.bind(this),
-    datesSet: this.getMonth.bind(this),
+    datesSet: this.getMonth.bind(this)
     //height:1100,
   };
   boatCalendar: any;
@@ -118,7 +118,7 @@ export class CalendarScheduleComponent implements OnInit {
           : (element.serviceType === this.SERVICE_TYPES.Charter ? this.totalChartersRequest + ' Requests' : this.totalEventRequest + ' Requests'),
         allDay: true,
         backgroundColor: element.serviceType === this.SERVICE_TYPES.Boatel ? "#091654"
-          : (element.serviceType === this.SERVICE_TYPES.Charter ? '#FFA500' : '#00FF00'),
+          : (element.serviceType === this.SERVICE_TYPES.Charter ? 'rgb(199 130 5)' : 'rgb(151 19 141)'),
         draggable: true,
         resizable: {
           beforeStart: true,

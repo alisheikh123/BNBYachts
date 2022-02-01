@@ -14,11 +14,11 @@
       <div class="col-sm-8 py-2">
         <div>
           <h5 class="bold pb-1">{{"Description" | localization}}</h5>
-          <div  *ngIf="((booking?.boatDetail?.description.length<=20));else greaterThanLimitBlock">
+          <div  *ngIf="((booking?.boatDetail?.description.length<=100));else greaterThanLimitBlock">
             <p class="small-text medium-container text-left grey"> {{ booking?.boatDetail?.description }} </p>
           </div>
           <ng-template #greaterThanLimitBlock>
-            {{ this.showMore ? (booking?.boatDetail?.description) : (booking?.boatDetail?.description|slice:0:21) }}
+            {{ this.showMore ? (booking?.boatDetail?.description) : (booking?.boatDetail?.description|slice:0:100) }}
             <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.showMore = !this.showMore">{{ this.showMore ? 'Show Less' : 'Show More...' }}</button>
           </ng-template>
         </div>
