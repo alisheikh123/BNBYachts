@@ -66,6 +66,11 @@ pipeline {
           }
       }
     }
+     stage('Cleanup') {
+      steps {
+        sh "docker rmi ${BOAT_URL}:${IMAGE_TAG}"
+      }
+    }
   }
 
   environment {

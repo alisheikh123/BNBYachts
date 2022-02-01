@@ -11,79 +11,25 @@
             </div>
           </div>
           <div class="section-padding text-center">
-          <div class="container ">
-              <h3 class="medium text-center custom-margin mt-0">You can host anywhere</h3>
+          <div class="container">
               <div class="custom-sync-slider">
-              <div class="row self-boat-slider">
-                <div>
-                  <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url('../../../../assets/images/card-1.png');">
-                    <div class="custom-flex-start h-100 ">
+                <div class="row self-boat-slider">                  
+                  <p-carousel
+                  [value]="boats" [circular]="true" [showNavigators]="true" [numVisible]="4" [numScroll]="1" [responsiveOptions]="carouselSettings">
+                  <ng-template pTemplate="header">
+                    <h3 class="medium text-center custom-margin mt-0">You can host anywhere</h3>
+                  </ng-template>
+                  <ng-template let-boat pTemplate="item">
+                    <div class="slick-slide">
+                      <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url({{boat}});"></div>
                     </div>
-                  </div>
+                    <div class="row self-boat-slider-content text-center">
+                      <p class="line-clamp-1 text-center custom-margin medium">{{'comment'|localization}}</p>
+                      <p class="bold">{{'commentor'|localization}}</p>
+                    </div>
+                  </ng-template>
+                  </p-carousel>
                 </div>
-                <div>
-                    <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url('../../../../assets/images/card-1.png');">
-                      <div class="custom-flex-start h-100 ">
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url('../../../../assets/images/card-1.png');">
-                      <div class="custom-flex-start h-100 ">
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url('../../../../assets/images/card-1.png');">
-                      <div class="custom-flex-start h-100 ">
-                      </div>
-                    </div>
-                  </div>
-                <div>
-                  <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url('../../../../assets/images/corporate.png');">
-                    <div class="custom-flex-start h-100 ">
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url('../../../../assets/images/card-3.png');">
-                    <div class="custom-flex-start h-100 ">
-                    </div>
-                  </div>
-                </div>
-                <div>
-                    <div class="bg-image-wrap small-img bottom-center-btn" style="background-image: url('../../../../assets/images/card-3.png');">
-                      <div class="custom-flex-start h-100 ">
-                      </div>
-                    </div>
-                  </div>
-              </div>
-              <div class="row slider-nav self-boat-slider-content text-center">
-                  <div>
-                      <p class="line-clamp-1 text-center custom-margin medium">Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p class="bold">"Lili John"</p>
-                    </div>
-                  <div>
-                      <p class="line-clamp-1 text-center custom-margin medium">Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                      <p class="bold">"Lili John"</p>
-                    </div>
-                  <div>
-                      <p class="line-clamp-1 text-center custom-margin medium">Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                      <p class="bold">"Lili John"</p>
-                    </div>
-                  <div>
-                      <p class="line-clamp-1 text-center custom-margin medium">Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                      <p class="bold">"Lili John"</p>
-                    </div>
-                  <div>
-                      <p class="line-clamp-1 text-center custom-margin medium">Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                      <p class="bold">"Lili John"</p>
-                    </div>
-                  <div>
-                      <p class="line-clamp-1 text-center custom-margin medium">Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                      <p class="bold">"Lili John"</p>
-                    </div>
-              </div>
               </div>
               <div class="your-boat section-padding ">
                 <div class="bg-image-wrap no-hover" style="background-image: url('../../../../assets/images/your-boat-brown.png');">

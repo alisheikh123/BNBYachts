@@ -68,6 +68,11 @@ cat build_info.md > aspnet-core/build_info.md
       }
 
     }
+    stage('Cleanup') {
+      steps {
+        sh "docker rmi ${CLIENT_PORTAL_URL}:${IMAGE_TAG}"
+      }
+    }
   }
 
 

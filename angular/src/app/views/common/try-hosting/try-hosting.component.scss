@@ -1,0 +1,25 @@
+::ng-deep .p-carousel .p-carousel-content .p-element.p-link {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	background: #004FC4;
+	color:white;
+    font-size: 10px;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 999;
+  }
+  ::ng-deep .p-carousel .p-carousel-content .p-element.p-carousel-next{
+      right: 0px;
+  }
+  ::ng-deep .p-carousel .p-carousel-content .p-element.p-carousel-prev{
+    left: 0px;
+}
+  ::ng-deep .p-carousel-container{
+      position: relative;
+      padding: 0 20px;
+  }
