@@ -15,6 +15,7 @@ namespace BnBYachts.Boat
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
             services.AddApplication<BoatHttpApiHostModule>();
         }
 
