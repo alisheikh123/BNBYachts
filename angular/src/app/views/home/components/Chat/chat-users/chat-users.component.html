@@ -36,7 +36,7 @@
         <img src="../../../../../../assets/images/user-img.png" alt="">
         <div class="user-details">
           <p class="medium">{{item?.name}}<span class="pl-3 badge bg-blue" style="float:right;" *ngIf="item?.unReadChatsCount > 0">{{item?.unReadChatsCount}}</span></p>
-          <p class="small-text grey">{{item?.lastMessage | slice : 0:10}}</p>
+          <p class="small-text grey">{{item?.lastMessage | slice : 0:20}}</p>
         </div>
       </div>
     </a>

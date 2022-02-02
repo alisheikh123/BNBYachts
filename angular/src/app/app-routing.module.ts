@@ -49,6 +49,10 @@ const routes: Routes = [
   },
   {
     path: "chat", component: ChatComponent
+  },
+  {
+    path: 'help-center',
+    loadChildren: () => import('./views/help-center/help-center.module').then(m => m.HelpCenterModule)
   }
 ];
 

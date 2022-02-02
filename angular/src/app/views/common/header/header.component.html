@@ -2,12 +2,11 @@
     <ng-container *ngIf="!isLoggedIn">
         <div class="header-top-bar">
             <div class="header-bg-blue bg-blue white-text">
-                <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididun
+                <p class="small-text">Book Boat for Boatels,Charters,Events
                 </p>
             </div>
             <div class="header-grey-clr grey-clr">
-                <p class="small-text">laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p class="small-text">Contact us:bnbyachts@gmail.com</p>
             </div>
         </div>
         <div class="header-wrap">
@@ -26,8 +25,7 @@
                             data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
                             <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
                             data-bs-target="#signup-modal" (click)="signUp()"><span>Sign Up</span></a>
-                        <a href="javascript:void(0)" class="underline-link-blk"
-                            (click)="getUser()"><span>Help</span></a>
+                        <a [routerLink]="['/help-center']" class="underline-link-blk"><span>Help</span></a>
 
                     </div>
                 </div>
@@ -37,12 +35,11 @@
     <ng-container *ngIf="isLoggedIn">
         <div class="header-top-bar">
             <div class="header-bg-blue bg-blue white-text">
-                <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididun
+                <p class="small-text">Book Boats for Boatels,Charters,Events
                 </p>
             </div>
             <div class="header-grey-clr grey-clr">
-                <p class="small-text">laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p class="small-text">Contact us:bnbyachts@gmail.com</p>
             </div>
         </div>
         <div class="header-wrap">
@@ -56,21 +53,21 @@
                     </div>
                     <div class="center-content">
                         <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
-                            <a [routerLink]="['host-dashboard']" class="underline-link-blk active">                                
+                            <a [routerLink]="['host-dashboard']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Dashboard" [ngClass]="{'active':activeTab == HEADER_TABS.Dashboard}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/dashboard-icon.svg"
                                         alt=""></a>
                                     </span>
                                     Dashboard
                             </a>
-                            <a class="underline-link-blk">
+                            <a class="underline-link-blk" (click)="activeTab=HEADER_TABS.ServiceProvider" [ngClass]="{'active':activeTab == HEADER_TABS.ServiceProvider}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/provider-icon.svg"
                                         alt=""></a>
                                     </span>
                                     Service Provider
                             </a>
-                            <a [routerLink]="['/chat']" class="underline-link-blk">
+                            <a [routerLink]="['/chat']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Inbox" [ngClass]="{'active':activeTab == HEADER_TABS.Inbox}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/inbox-icon.svg"
                                         alt=""></a>
@@ -78,14 +75,14 @@
                                     Inbox
                                 <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
                             </a>                                
-                            <a [routerLink]="['/host/calendar']" class="underline-link-blk">
+                            <a [routerLink]="['/host/calendar']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Calendar" [ngClass]="{'active':activeTab == HEADER_TABS.Calendar}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/calendar-icon.svg"
                                         alt=""></a>
                                     </span>
                                     Calendar
                             </a>
-                            <a [routerLink]="['/host/my-bookings']" class="underline-link-blk">
+                            <a [routerLink]="['/host/my-bookings']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Reservation" [ngClass]="{'active':activeTab == HEADER_TABS.Reservation}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/reservation-icon.svg"
                                         alt=""></a>
@@ -93,7 +90,7 @@
                                     Reservation
                             </a>
 
-                            <a [routerLink]="['/host/host-boat-listing']" class="underline-link-blk">
+                            <a [routerLink]="['/host/host-boat-listing']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Listing" [ngClass]="{'active':activeTab == HEADER_TABS.Listing}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/listing-icon.svg"
                                         alt=""></a>
@@ -101,7 +98,7 @@
                                     Listing
                             </a>
                             <div class="dropdown custom-dropdown borderless-dropdown">                                
-                                <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                                      
+                                <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="logo-wrapper">
                                         <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
                                             alt=""></a>
@@ -139,7 +136,7 @@
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Help</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/help-center']">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
                             </ul>

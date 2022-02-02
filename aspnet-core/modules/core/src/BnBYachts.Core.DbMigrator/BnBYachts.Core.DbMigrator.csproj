@@ -11,7 +11,8 @@
     <None Remove="appsettings.json" />
     <Content Include="appsettings.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <None Remove="appsettings.secrets.json" />
     <Content Include="appsettings.secrets.json">

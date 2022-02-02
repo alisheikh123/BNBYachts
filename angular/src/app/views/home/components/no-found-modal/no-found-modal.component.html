@@ -8,8 +8,8 @@
             <div class="img-wrapper">
                 <img src="../../../../../assets/images/no-charter.png" alt="">
             </div>
-            <h4 class="bold">No {{message[yachtType-1]}} Available</h4>
-            <p class="py-2">There is no {{message[yachtType-1]}} available for this locations.</p>
+            <h4 class="bold">No {{yachtType ? message[yachtType-1] :'Boat'}} Available</h4>
+            <p class="py-2">There is no {{yachtType ? message[yachtType-1] :'Boat'}} available for this locations.</p>
             <div class="bottom-btn pt-2">
                 <button (click)="activeModal.dismiss()" class="custom-btn blue big-btn">Cancel</button>
             </div>

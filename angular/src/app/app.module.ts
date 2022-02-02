@@ -25,6 +25,7 @@ import { AddReviewModalComponent } from './views/common/add-review-modal/add-rev
 import { TranslateService } from './core/translate.service';
 import { NgbCustomDateParserFormatter } from './shared/formatters/datepicker-formatter';
 import { ChatService } from './core/chat/chat.service';
+import {CarouselModule} from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ChatService } from './core/chat/chat.service';
         logLevel: LogLevel.Debug,
       },
     }),
-    NgxStripeModule.forRoot(environment.stripeKey)
+    NgxStripeModule.forRoot(environment.stripeKey),
+    CarouselModule
   ],
   providers: [
     // OAuthService,
