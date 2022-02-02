@@ -3,6 +3,7 @@ using BnBYachts.Core.Interfaces;
 using BnBYachts.Core.Requestable;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
+using BnBYachts.Shared.Model;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -41,5 +42,8 @@ namespace BnBYachts.Core.Services.HelpCenter
 
             });
         }
+
+        public async Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions()
+            => await _manager.GetFrequentQuestions().ConfigureAwait(false);
     }
 }

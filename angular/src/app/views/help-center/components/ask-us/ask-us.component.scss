@@ -1,0 +1,41 @@
+:host ::ng-deep .card {
+    margin-bottom: 15px;
+    background: none !important;
+    border: 1px solid #ccc !important;
+    border-radius: 20px !important;
+  }
+
+  :host ::ng-deep .card-header {
+    background: none !important;
+    border: none !important;
+    padding: 0px !important;
+  }
+  :host ::ng-deep .card-header > button {
+    text-decoration: none !important;
+    color: black !important;
+    font-weight: 600 !important;
+    font-size: 10px !important;
+  }
+  
+  :host ::ng-deep .card .card-header.active > a > span {
+    color: #1d2124;
+  }
+  :host ::ng-deep .range-accordion .btn-link {
+    width: 100%;
+    text-decoration-line: none;
+}
+
+:host ::ng-deep .card-body{
+    font-size: 10px !important;
+    padding-top: 0px !important;
+}
+.cust-icon{
+    border: 1px solid #004FC4;
+    border-radius: 20px;
+    width: 18px;
+    color: #004FC4;
+}
+label{
+  font-weight: 600;
+  color: #413d39;
+}

@@ -1,1 +1,148 @@
-<p>ask-us works!</p>
+<section class="request-quote-sec section-padding card shadow  rounded">
+    <div class="container card-body">
+        <ngb-accordion #acc="ngbAccordion" class="range-accordion">
+            <ngb-panel id="toggle-booking">
+                <ng-template ngbPanelTitle>
+                    <div class="d-flex justify-content-between">
+                        <div class="" style="font-weight: bold; color: #1c2128;">Booking</div>
+                        <div class="cust-icon">
+                            <i class="fa" [ngClass]="{'fa-angle-up': acc.isExpanded('toggle-booking'), 
+                        'fa-angle-down': !acc.isExpanded('toggle-booking')}"></i>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template ngbPanelContent>
+                    <ngb-accordion #accInner="ngbAccordion" class="range-accordion">
+                        <ng-container *ngFor="let item of questions | filterBy : 'categoryId':QUESTION_CATEGORIES.Booking">
+                            <ngb-panel id="toggle-{{item?.id}}">
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                                        </div>
+                                        <div class="cust-icon">
+                                            <i class="fa" [ngClass]="{'fa-angle-up': accInner.isExpanded('toggle-'+item?.id), 
+                                        'fa-angle-down': !accInner.isExpanded('toggle-'+item?.id)}"></i>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    {{item?.answer}}
+                                </ng-template>
+                            </ngb-panel>
+                        </ng-container>
+                    </ngb-accordion>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+
+        <ngb-accordion #accSecond="ngbAccordion" class="range-accordion">
+            <ngb-panel id="toggle-travel">
+                <ng-template ngbPanelTitle>
+                    <div class="d-flex justify-content-between">
+                        <div class="" style="font-weight: bold; color: #1c2128;">Travel Information</div>
+                        <div class="cust-icon">
+                            <i class="fa" [ngClass]="{'fa-angle-up': accSecond.isExpanded('toggle-travel'), 
+                        'fa-angle-down': !accSecond.isExpanded('toggle-travel')}"></i>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <ngb-accordion #accInnerTwo="ngbAccordion" class="range-accordion">
+                        <ng-container *ngFor="let item of questions | filterBy : 'categoryId':QUESTION_CATEGORIES.TravelInformation">
+                            <ngb-panel id="toggle-{{item?.id}}">
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                                        </div>
+                                        <div class="cust-icon">
+                                            <i class="fa" [ngClass]="{'fa-angle-up': accInnerTwo.isExpanded('toggle-'+item?.id), 
+                                    'fa-angle-down': !accInnerTwo.isExpanded('toggle-'+item?.id)}"></i>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    {{item?.answer}}
+                                </ng-template>
+                            </ngb-panel>
+                        </ng-container>
+                    </ngb-accordion>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+
+        <ngb-accordion #accThid="ngbAccordion" class="range-accordion">
+            <ngb-panel id="toggle-onBoard">
+                <ng-template ngbPanelTitle>
+                    <div class="d-flex justify-content-between">
+                        <div class="" style="font-weight: bold; color: #1c2128;">On-Board Services</div>
+                        <div class="cust-icon">
+                            <i class="fa" [ngClass]="{'fa-angle-up': accThid.isExpanded('toggle-onBoard'), 
+                        'fa-angle-down': !accThid.isExpanded('toggle-onBoard')}"></i>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <ngb-accordion #accThirdInner="ngbAccordion" class="range-accordion">
+                        <ng-container *ngFor="let item of questions | filterBy : 'categoryId':QUESTION_CATEGORIES.OnBoardService">
+                            <ngb-panel id="toggle-{{item?.id}}">
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                                        </div>
+                                        <div class="cust-icon">
+                                            <i class="fa" [ngClass]="{'fa-angle-up': accThirdInner.isExpanded('toggle-'+item?.id), 
+                                    'fa-angle-down': !accThirdInner.isExpanded('toggle-'+item?.id)}"></i>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    {{item?.answer}}
+                                </ng-template>
+                            </ngb-panel>
+                        </ng-container>
+                    </ngb-accordion>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+    </div>
+</section>
+<div class="container">
+    <div class="row pb-4 pt-3">
+        <label>
+            Privilege Club Faqs
+        </label>
+        <div class="col-4">
+            <div class="search-wrapper custom-input-field"> 
+                <i class="fa fa-search"></i>
+                <input type="text" class="custom-input" placeholder="Search" [(ngModel)]="searchTerm"> 
+             </div>
+        </div>
+        <div class="col-4">
+            <button class="custom-btn blue" (click)="filterPrivilegeQuestion()">Search</button>
+        </div>
+    </div>
+    <ngb-accordion #accThirdInner="ngbAccordion" class="range-accordion">
+        <ng-container *ngFor="let item of filteredQuestions">
+            <ngb-panel id="toggle-{{item?.id}}">
+                <ng-template ngbPanelTitle>
+                    <div class="d-flex justify-content-between">
+                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                        </div>
+                        <div class="cust-icon">
+                            <i class="fa" [ngClass]="{'fa-angle-up': accThirdInner.isExpanded('toggle-'+item?.id), 
+                                'fa-angle-down': !accThirdInner.isExpanded('toggle-'+item?.id)}"></i>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    {{item?.answer}}
+                </ng-template>
+            </ngb-panel>
+        </ng-container>
+    </ngb-accordion>
+    <div class="">
+        <span *ngIf="filteredQuestions?.length == 0">No Questions Found</span>
+    </div>
+
+</div>

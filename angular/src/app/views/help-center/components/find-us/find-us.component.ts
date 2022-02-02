@@ -16,8 +16,12 @@ export class FindUsComponent implements OnInit {
     latitude: 0,
     longitude: 0
   };
-  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
-  boatsList: any;
+  officesLocations = [{
+    name: 'California, USA',
+    latitude: 36.778261,
+    longitude: -119.4179324
+  }];
+  officesList: any;
 
   mapOptions: google.maps.MapOptions = {
     clickableIcons: false,
@@ -45,24 +49,22 @@ export class FindUsComponent implements OnInit {
     this.searchParam.location = address.formatted_address;
     this.searchParam.latitude = address.geometry.location.lat();
     this.searchParam.longitude = address.geometry.location.lng();
-    this.service.findUsBoats(this.searchParam.latitude, this.searchParam.longitude).subscribe((res: any) => {
-      this.boatsList = res?.data;
-      if (this.boatsList?.length == 0) {
-        let modal = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true })
+    this.officesList = this.officesLocations.filter(res => res?.latitude == this.searchParam.latitude && res?.longitude == this.searchParam.longitude);
+    if (this.officesList?.length > 0) {
+      this.center = {
+        lat: this.searchParam.latitude,
+        lng: this.searchParam.longitude
       }
-      else {
-        this.center = {
-          lat: this.searchParam?.latitude,
-          lng: this.searchParam?.longitude
-        };
-        this.addMarkers();
-      }
-    })
+      this.addMarkers();
+    }
+    else {
+      let modal = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true })
+    }
   }
+
   addMarkers() {
-    this.boatsList.forEach((element: any) => {
+    this.officesList.forEach((element: any) => {
       let marker = {
-        boatId: element.id,
         position: {
           lat: element.latitude,
           lng: element.longitude,
@@ -73,9 +75,5 @@ export class FindUsComponent implements OnInit {
       };
       this.markers.push(marker);
     });
-  }
-  openInfoWindow(marker: MapMarker, data: any) {
-    this.mapInfoDetails = this.boatsList.find((res: any) => res.id == data?.boatId);
-    this.infoWindow.open(marker);
   }
 }
