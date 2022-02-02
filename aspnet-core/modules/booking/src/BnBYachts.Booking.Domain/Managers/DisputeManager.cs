@@ -13,10 +13,11 @@ namespace BnBYachts.Booking.Managers
         private readonly IRepository<BookingDisputeEntity, int> _repo;
         private readonly IRepository<BookingEmailsTemplates, int> _repoTemplates;
         private readonly IObjectMapper<BookingDomainModule> _objectMapper;
-        public DisputeManager(IRepository<BookingDisputeEntity, int> repo, IObjectMapper<BookingDomainModule> objectMapper)
+        public DisputeManager(IRepository<BookingDisputeEntity, int> repo, IObjectMapper<BookingDomainModule> objectMapper, IRepository<BookingEmailsTemplates, int> repoTemplates)
         {
             _repo = repo;
             _objectMapper = objectMapper;
+            _repoTemplates = repoTemplates;
         }
 
         public async Task AddDispute(DisputeRequestableDto data)
