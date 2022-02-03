@@ -9,7 +9,7 @@ namespace BnBYachts.Core.Interface
 {
     public interface IHelpCenterAppService
     {
-        Task ContactUS(ContactUsRequestableDto form);
+        Task<EntityResponseModel> ContactUS(ContactUsRequestableDto form);
         Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions();
     }
 }

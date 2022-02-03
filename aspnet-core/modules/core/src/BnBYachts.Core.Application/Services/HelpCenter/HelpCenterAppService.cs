@@ -5,10 +5,7 @@ using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using Microsoft.Extensions.Options;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
@@ -19,21 +16,21 @@ namespace BnBYachts.Core.Services.HelpCenter
     {
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly IHelpCenterManager _manager;
-        private readonly IConfiguration _config;
-        public HelpCenterAppService(EventBusDispatcher eventBusDispatcher, IConfiguration config, IHelpCenterManager manager)
+        private AdminConfigurations AdminConfigurations { get; set; }
+        public HelpCenterAppService(EventBusDispatcher eventBusDispatcher, IHelpCenterManager manager, IOptions<AdminConfigurations> adminConfigurations)
         {
             _eventBusDispatcher = eventBusDispatcher;
-            _config = config;
+            AdminConfigurations = adminConfigurations.Value;
             _manager = manager;
         }
-        public async Task ContactUS(ContactUsRequestableDto form)
+        public async Task<EntityResponseModel> ContactUS(ContactUsRequestableDto form)
         {
-            string adminEmail = _config.GetSection("Emails:admin").Value.ToString();
-            string body = await _manager.GetEmailContent(1).ConfigureAwait(false);
+            var email = await _manager.GetEmailContent(1).ConfigureAwait(false);
+            string body = email.Data.ToString();             
             body = body.Replace("{{firstName}}", form.FirstName).Replace("{{lastName}}", form.LastName).Replace("{{email}}", form.Email).Replace("{{message}}", form.Message);
             await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
-                To = adminEmail,
+                To = AdminConfigurations.Email,
                 Subject = "Help Center Contact Us",
                 Body = new StringBuilder().Append(body),
                 IsBodyHtml = true,
@@ -41,6 +38,10 @@ namespace BnBYachts.Core.Services.HelpCenter
                 FileAttachment = form.FileAttachment
 
             });
+            return new EntityResponseModel()
+            {
+                Errors = null
+            };
         }
 
         public async Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions()

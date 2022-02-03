@@ -25,10 +25,13 @@ namespace BnBYachts.Core.Managers
             _repoQuestions = repoQuestions;
             _objectMapper = objectMapper;
         }
-        public async Task<string> GetEmailContent(int templateId)
+        public async Task<EntityResponseModel> GetEmailContent(int templateId)
         {
             var emailRepo = await _repository.GetAsync(res => res.TemplateId == templateId).ConfigureAwait(false);
-            return emailRepo.EmailContent.ToString();
+            return new EntityResponseModel
+            {
+                Data = emailRepo.EmailContent
+            };
         }
 
         public async Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions()

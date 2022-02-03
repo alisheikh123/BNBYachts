@@ -4,7 +4,7 @@
             <ngb-panel id="toggle-booking">
                 <ng-template ngbPanelTitle>
                     <div class="d-flex justify-content-between">
-                        <div class="" style="font-weight: bold; color: #1c2128;">Booking</div>
+                        <div class="panel-title">Booking</div>
                         <div class="cust-icon">
                             <i class="fa" [ngClass]="{'fa-angle-up': acc.isExpanded('toggle-booking'), 
                         'fa-angle-down': !acc.isExpanded('toggle-booking')}"></i>
@@ -18,7 +18,7 @@
                             <ngb-panel id="toggle-{{item?.id}}">
                                 <ng-template ngbPanelTitle>
                                     <div class="d-flex justify-content-between">
-                                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                                        <div class="panel-title">{{item?.question}}
                                         </div>
                                         <div class="cust-icon">
                                             <i class="fa" [ngClass]="{'fa-angle-up': accInner.isExpanded('toggle-'+item?.id), 
@@ -40,7 +40,7 @@
             <ngb-panel id="toggle-travel">
                 <ng-template ngbPanelTitle>
                     <div class="d-flex justify-content-between">
-                        <div class="" style="font-weight: bold; color: #1c2128;">Travel Information</div>
+                        <div class="panel-title">Travel Information</div>
                         <div class="cust-icon">
                             <i class="fa" [ngClass]="{'fa-angle-up': accSecond.isExpanded('toggle-travel'), 
                         'fa-angle-down': !accSecond.isExpanded('toggle-travel')}"></i>
@@ -53,7 +53,7 @@
                             <ngb-panel id="toggle-{{item?.id}}">
                                 <ng-template ngbPanelTitle>
                                     <div class="d-flex justify-content-between">
-                                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                                        <div class="panel-title">{{item?.question}}
                                         </div>
                                         <div class="cust-icon">
                                             <i class="fa" [ngClass]="{'fa-angle-up': accInnerTwo.isExpanded('toggle-'+item?.id), 
@@ -75,7 +75,7 @@
             <ngb-panel id="toggle-onBoard">
                 <ng-template ngbPanelTitle>
                     <div class="d-flex justify-content-between">
-                        <div class="" style="font-weight: bold; color: #1c2128;">On-Board Services</div>
+                        <div class="panel-title">On-Board Services</div>
                         <div class="cust-icon">
                             <i class="fa" [ngClass]="{'fa-angle-up': accThid.isExpanded('toggle-onBoard'), 
                         'fa-angle-down': !accThid.isExpanded('toggle-onBoard')}"></i>
@@ -88,7 +88,7 @@
                             <ngb-panel id="toggle-{{item?.id}}">
                                 <ng-template ngbPanelTitle>
                                     <div class="d-flex justify-content-between">
-                                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                                        <div class="panel-title">{{item?.question}}
                                         </div>
                                         <div class="cust-icon">
                                             <i class="fa" [ngClass]="{'fa-angle-up': accThirdInner.isExpanded('toggle-'+item?.id), 
@@ -127,7 +127,7 @@
             <ngb-panel id="toggle-{{item?.id}}">
                 <ng-template ngbPanelTitle>
                     <div class="d-flex justify-content-between">
-                        <div class="" style="font-weight: bold; color: #1c2128;">{{item?.question}}
+                        <div class="panel-title">{{item?.question}}
                         </div>
                         <div class="cust-icon">
                             <i class="fa" [ngClass]="{'fa-angle-up': accThirdInner.isExpanded('toggle-'+item?.id), 

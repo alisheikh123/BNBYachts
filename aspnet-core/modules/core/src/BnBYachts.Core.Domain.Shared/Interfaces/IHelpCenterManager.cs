@@ -9,7 +9,7 @@ namespace BnBYachts.Core.Interfaces
 {
     public interface IHelpCenterManager
     {
-        Task<string> GetEmailContent(int templateId);
+        Task<EntityResponseModel> GetEmailContent(int templateId);
         Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions();
 
     }

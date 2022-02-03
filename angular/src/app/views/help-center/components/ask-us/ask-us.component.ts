@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HelpCenterService } from 'src/app/core/help-center/help-center.service';
 import { QuestionCategories } from 'src/app/shared/enums/question-category';
+import { IQuestions } from './interfaces/questions';
 
 @Component({
   selector: 'app-ask-us',
@@ -9,8 +10,8 @@ import { QuestionCategories } from 'src/app/shared/enums/question-category';
 })
 export class AskUsComponent implements OnInit {
 
-  questions: any;
-  filteredQuestions: any;
+  questions:IQuestions[];
+  filteredQuestions:IQuestions[];
   searchTerm = '';
   QUESTION_CATEGORIES = QuestionCategories;
   constructor(private service: HelpCenterService) { }
@@ -28,10 +29,10 @@ export class AskUsComponent implements OnInit {
 
   filterPrivilegeQuestion() {
     if (this.searchTerm == '') {
-      this.filteredQuestions = this.questions.filter((res: any) => res?.categoryId == this.QUESTION_CATEGORIES.PrivilegeFaq);
+      this.filteredQuestions = this.questions.filter((res: IQuestions) => res?.categoryId == this.QUESTION_CATEGORIES.PrivilegeFaq);
     }
     else {
-      this.filteredQuestions = this.questions.filter((res: any) => res?.categoryId == this.QUESTION_CATEGORIES.PrivilegeFaq && res?.question.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1)
+      this.filteredQuestions = this.questions.filter((res: IQuestions) => res?.categoryId == this.QUESTION_CATEGORIES.PrivilegeFaq && res?.question.toLowerCase().indexOf(this.searchTerm.toLowerCase()) !== -1)
     }
   }
 }

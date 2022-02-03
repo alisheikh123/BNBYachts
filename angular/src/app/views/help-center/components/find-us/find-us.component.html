@@ -14,13 +14,7 @@
             </div>
             <div class="col-sm-12 py-2" *ngIf="officesList?.length > 0">
                 <small class="customLbl">{{officesList?.length}} Search Results Found.</small>
-                <div class="iframe-wrapper">
-                  <google-map height="560px" width="100%" [options]="mapOptions" [center]="center" [zoom]="zoom">
-                    <map-marker #markerr="mapMarker" *ngFor="let marker of markers" [position]="marker.position"
-                    [label]="marker.label" [title]="marker.title" [options]="marker.options">
-                  </map-marker>
-                  </google-map>
-                </div>
+                <app-bnb-google-map *ngIf="officesList?.length > 0" [mapData]="officesList" [mapLocations]="searchParam"></app-bnb-google-map>
               </div>
         </div>
     </div>
