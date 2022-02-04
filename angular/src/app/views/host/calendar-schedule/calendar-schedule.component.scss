@@ -35,10 +35,11 @@ border-collapse: separate !important;
 }
 :host ::ng-deep .fc-scrollgrid-sync-table td{
   border-spacing: 10px !important;
-  border:1px solid  #F1F1F1 !important;
+  border:1px solid  #D9C1C1 !important;
   border-collapse: separate !important;
   border-radius: 6px !important; 
   height: 40px !important;
+  cursor: pointer !important;
 }
 :host ::ng-deep .fc-scroller{
   overflow: hidden !important;
@@ -99,4 +100,7 @@ border-collapse: separate !important;
 }
 .image-with-text-inner{
   width: calc(100% - 24px);
+}
+:host ::ng-deep .fc-event-title{
+  font-size: 12px !important;
 }

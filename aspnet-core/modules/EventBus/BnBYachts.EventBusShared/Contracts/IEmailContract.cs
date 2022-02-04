@@ -12,6 +12,8 @@ namespace BnBYachts.EventBusShared.Contracts
         public ICollection<string> Bcc { get; set; }
         public StringBuilder Body { get; set; }
         public bool IsBodyHtml { get; set; }
+        public string FileName { get; set; }
+        public string FileAttachment { get; set; }
 
     }
     public class EmailContract : IEmailContract
@@ -23,5 +25,7 @@ namespace BnBYachts.EventBusShared.Contracts
         public ICollection<string> Bcc { get; set; }
         public StringBuilder Body { get; set; }
         public bool IsBodyHtml { get; set; }
+        public string FileName { get; set; }
+        public string FileAttachment { get; set; }
     }
 }

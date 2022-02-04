@@ -8,23 +8,14 @@
                 <div class="row">
                     <div class="col-md-6 py-2">
                         <div class="custom-input-field">
-                            <label>Boat Title</label>
+                            <label>Boat Name</label>
                             <input class="custom-input" placeholder="Enter Boat Name" formControlName="name">
-                        </div>
-                        <div class="custom-input-field ">
-                            <label>About</label>
-                            <textarea class="custom-input" id="exampleFormControlTextarea1"
-                                formControlName="description" rows="4"></textarea>
-                        </div>
-                        <div class="custom-input-field">
-                            <label>Current Location</label>
-                            <input class="custom-input" placeholder="Enter Boat Address" formControlName="location"
-                                ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event)">
                         </div>
                         <div class="custom-input-field">
                             <label>Boat Length</label>
                             <input class="custom-input" placeholder="Enter Boat length" formControlName="length">
                         </div>
+                        
                         <div class="counter-input-wrapper">
                             <label>Bedrooms</label>
                             <div class="number">
@@ -47,6 +38,27 @@
                             </div>
 
                         </div>
+                        <div class="custom-input-field">
+                            <label>Current Location</label>
+                            <input class="custom-input" placeholder="Enter Boat Address" formControlName="location"
+                                ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event)">
+                        </div>
+                        <div class="custom-input-field ">
+                            <label>Let guests know what your boat offers</label>
+                            <div class="custom-card">
+                                <div class="row w-100">
+                                    <div class="col-sm-6 py-2" *ngFor="let item of (boatLookups?.rules)">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                [ngModelOptions]="{standalone: true}">
+                                            <p class="small-text">{{item?.name}}</p>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="custom-input-field ">
                             <label>Guests Favorites</label>
                             <div class="custom-card">
@@ -68,10 +80,15 @@
                             </div>
                         </div>
                         <div class="custom-input-field ">
-                            <label>Let guests know what your boat offers</label>
+                            <label>About</label>
+                            <textarea class="custom-input" id="exampleFormControlTextarea1"
+                                formControlName="description" rows="4"></textarea>
+                        </div>
+                        <div class="custom-input-field ">
+                            <label>Additional Rules</label>
                             <div class="custom-card">
                                 <div class="row w-100">
-                                    <div class="col-sm-6 py-2" *ngFor="let item of (boatLookups?.rules)">
+                                    <div class="col-sm-6 my-2" *ngFor="let item of (boatLookups.rules)">
                                         <label class="custom-checkbox">
                                             <input type="checkbox" [(ngModel)]="item.isChecked"
                                                 [ngModelOptions]="{standalone: true}">
@@ -79,10 +96,38 @@
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-
+                                    <div class="col-sm-12 py-2">
+                                        <button class="custom-blue-btn"
+                                            (click)="addNewOptions(FEATURES_TYPES.OtherRules)"><i
+                                                class="fa fa-plus"></i>Add
+                                            more</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="custom-input-field ">
+                            <label>Safety Options</label>
+                            <div class="custom-card">
+                                <div class="row w-100">
+                                    <div class="col-sm-6 my-2"
+                                        *ngFor="let item of ((boatLookups.features | filterBy : 'isSafetyFeature' : true) | filterBy : 'isGuestFavourite' : false )">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" [(ngModel)]="item.isChecked"
+                                                [ngModelOptions]="{standalone: true}">
+                                            <p class="small-text">{{item?.name}}</p>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12 py-2">
+                                        <button class="custom-blue-btn"
+                                            (click)="addNewOptions(FEATURES_TYPES.SafetyFeatures)"><i
+                                                class="fa fa-plus"></i>Add
+                                            more</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
                     </div>
                 </div>
                 <div class="row py-2">
@@ -139,14 +184,6 @@
                     </div>
                     <div class="col-md-6 py-2">
                         <div class="custom-input-field">
-                            <label>Tax Fee</label>
-                            <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
-                        </div>
-                    </div>
-                    <ng-container *ngIf="boatEditForm.controls.isBoatelServicesOffered.value">
-
-                    <div class="col-md-6 py-2">
-                        <div class="custom-input-field">
                             <label>Availabilty</label>
                         </div>
                         <ejs-daterangepicker placeholder='Select Availabilty'
@@ -182,14 +219,22 @@
                             <ejs-timepicker name="timepicker" formControlName="checkoutTime"></ejs-timepicker>
                         </div>
                     </div>
+                    <ng-container *ngIf="boatEditForm.controls.isBoatelServicesOffered.value">
+                        <div class="col-md-6 py-2">
+                            <div class="custom-input-field">
+                                <label>Boatel Fee Per Night</label>
+                                <input type="number" class="custom-input" placeholder="$20000"
+                                    formControlName="perDayCharges">
+                            </div>
+                        </div>
+                    </ng-container>
                     <div class="col-md-6 py-2">
                         <div class="custom-input-field">
-                            <label>Per day boatel fee charges</label>
-                            <input type="number" class="custom-input" placeholder="$20000"
-                                formControlName="perDayCharges">
+                            <label>Tax Fee</label>
+                            <input type="number" class="custom-input" placeholder="Tax Fee" formControlName="taxFee">
                         </div>
                     </div>
-                </ng-container>
+
                 </div>
             </form>
             <div class="row">

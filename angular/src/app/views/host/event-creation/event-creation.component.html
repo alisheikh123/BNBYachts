@@ -16,18 +16,19 @@
                 <div class="custom-tabs-wrapper">
                     <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist"
                         aria-orientation="vertical">
-                        <button class="underline-link-blk active" id="v-pills-home-tab" data-bs-toggle="pill"
+                        <button class="underline-link-blk" id="v-pills-home-tab"
+                        [ngClass]="{'active': currentTab == 1}" data-bs-toggle="pill"
                             (click)="currentTab = 1" data-bs-target="#v-pills-home" type="button" role="tab"
-                            aria-controls="v-pills-home" aria-selected="true"><span
-                                [ngClass]="{'active': currentTab == 1}">1</span>{{'EventDescription' | localization}}</button>
-                        <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
+                            aria-controls="v-pills-home" aria-selected="true"><span>1</span>{{'EventDescription' | localization}}</button>
+                        <button class="underline-link-blk"
+                        [ngClass]="{'active': currentTab == 2}" id="v-pills-profile-tab" data-bs-toggle="pill"
                             (click)="currentTab =2" data-bs-target="#v-pills-profile" type="button" role="tab"
-                            aria-controls="v-pills-profile" aria-selected="false"><span
-                                [ngClass]="{'active': currentTab == 2}">2</span>{{'SchedulingPayment' | localization}}</button>
+                            aria-controls="v-pills-profile" aria-selected="false"><span>2</span>{{'SchedulingPayment' | localization}}</button>
                         <button class="underline-link-blk" id="v-pills-settings-tab" data-bs-toggle="pill"
-                            (click)="currentTab = 3" data-bs-target="#v-pills-settings" type="button" role="tab"
-                            aria-controls="v-pills-settings" aria-selected="false"><span
-                                [ngClass]="{'active': currentTab == 3}">3</span>{{'EventRules' | localization}}</button>
+                            (click)="currentTab = 3" data-bs-target="#v-pills-settings" 
+                            [ngClass]="{'active': currentTab == 3}"
+                            type="button" role="tab"
+                            aria-controls="v-pills-settings" aria-selected="false"><span>3</span>{{'EventRules' | localization}}</button>
                     </div>
                     <form [formGroup]="eventCreationForm">
                         <div class="tab-content" id="v-pills-tabContent">
@@ -53,7 +54,7 @@
                                         <div class="">
                                             <div class="custom-input-field">
                                                 <label>{{'EventLocation'|localization}}</label>
-                                                <input class="custom-input" placeholder="Enter Boat Address"
+                                                <input class="custom-input" placeholder="Enter Location"
                                                     [ngClass]="{  'is-invalid':submitted && form.location.errors }"
                                                     formControlName="location" ngx-google-places-autocomplete
                                                     (onAddressChange)="handleAddressChange($event)">
@@ -134,7 +135,7 @@
                                     <div class="col-sm-12">
                                         <div class="custom-flex-end">
                                             <button class="custom-btn blue" id="save-bt"
-                                            [disabled]="form.boatId.value == null || form.title.value =='' || form.description.value =='' || form.location.value ==''"
+                                            [disabled]="form.boatId.value == null || form.title.value =='' || form.description.value =='' || form.location.value =='' || form.guestCapacity.value ==0"
                                                 (click)="currentTab = currentTab+1">Continue</button>
                                         </div>
                                     </div>
@@ -195,7 +196,7 @@
                                             <button class="custom-btn outline-blue-clr me-4"
                                                 (click)="currentTab = currentTab-1">Previous</button>
                                             <button class="custom-btn blue" id="save-btn"
-                                            [disabled]="form.amountPerPerson.value == 0 || form.endDateTime.value ==null || form.startDateTime.value ==null"
+                                            [disabled]="form.amountPerPerson.value ==null ||form.amountPerPerson.value == 0 || form.endDateTime.value ==null || form.startDateTime.value ==null"
                                                 (click)="currentTab = currentTab+1">Continue</button>
                                         </div>
                                     </div>

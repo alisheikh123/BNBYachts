@@ -8,6 +8,7 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { find } from 'rxjs/operators';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CalendarScheduleComponent implements OnInit {
     events: [],
     eventClick: this.getEventDetails.bind(this),
     dateClick: this.getDayClick.bind(this),
-    datesSet: this.getMonth.bind(this),
+    datesSet: this.getMonth.bind(this)
     //height:1100,
   };
   boatCalendar: any;
@@ -118,7 +119,7 @@ export class CalendarScheduleComponent implements OnInit {
           : (element.serviceType === this.SERVICE_TYPES.Charter ? this.totalChartersRequest + ' Requests' : this.totalEventRequest + ' Requests'),
         allDay: true,
         backgroundColor: element.serviceType === this.SERVICE_TYPES.Boatel ? "#091654"
-          : (element.serviceType === this.SERVICE_TYPES.Charter ? '#FFA500' : '#00FF00'),
+          : (element.serviceType === this.SERVICE_TYPES.Charter ? 'rgb(199 130 5)' : 'rgb(151 19 141)'),
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -180,6 +181,11 @@ export class CalendarScheduleComponent implements OnInit {
         name: this.dayCalendar.isAvailable ? this.dayCalendar.amount:'Blocked DAy',
         serviceType: this.SERVICE_TYPES.Boatel,
         isAvailable:this.dayCalendar.isAvailable
+      }
+      let findIndex = this.boatCalendar.findIndex((res:any)=>moment(res.startDate).format("DD-MM-YYYY") == moment(this.dayCalendar.fromDate).format("DD-MM-YYYY") && 
+      moment(res.endDate).format("DD-MM-YYYY") == moment(this.dayCalendar.toDate).format("DD-MM-YYYY"));
+      if(findIndex >= 0){
+        this.boatCalendar.splice(findIndex,1);
       }
       this.boatCalendar.push(event);
       this.bindEvents();

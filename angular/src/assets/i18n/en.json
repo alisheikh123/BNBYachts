@@ -9,7 +9,7 @@
   "EventCreation":"Event Creation",
   "EventCreationDescription":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "EventDescription":"Event Description",
-  "SchedulingPayment":"Scheduling & Payment",
+  "SchedulingPayment":"Scheduling & Fee",
   "EventRules":"Event Rules",
   "BoatListing":"Boat Listing",
   "Selecttheboat":"Select the boat",
@@ -73,7 +73,7 @@
   "Cancel":"Cancel",
   "StartDate":"Start Date",
   "EndDate":"End Date",
-  "AmountPerPerson":"Amount Per Person",
+  "AmountPerPerson":"Fee Per Person",
   "CharterReservationDetails":"Charter Reservation Details",
   "Description":"Description",
   "BoatName:":"Boat Name",
@@ -227,5 +227,7 @@
   "ReturnDetails:":"Return Details:",
   "ReturnDate:":"Return Date:",
   "ReturnTime":"Return Time:",
-  "comma": ","
+  "comma": ",",
+  "commentor": "Lili John",
+  "comment": "Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 }

@@ -218,7 +218,6 @@ export class ReservationDetailComponent implements OnInit {
 
   getRefundDetails(){
     this.service.getBookingCancellationDetail(this.bookingId).subscribe((res:any)=>{
-      debugger;
       if(res?.data?.length > 0){
         this.cancelledBookingDetails = res?.data[0];
       }

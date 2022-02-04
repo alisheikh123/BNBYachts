@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import { HubConnection,HubConnectionBuilder} from '@microsoft/signalr';
 import { ChatComponent } from '../../home/components/Chat/chat/chat.component';
 import { ChatService } from 'src/app/core/chat/chat.service';
+import { HeaderTabs } from 'src/app/shared/enums/header-tabs';
 
 
 @Component({
@@ -47,17 +48,18 @@ export class HeaderComponent implements OnInit {
     private toastr: ToastrService, private modal: NgbModal, 
     private oidcSecurityService: OidcSecurityService, 
     private authService: AuthService,private chatService:ChatService) { }
+    activeTab: number = 0;
+    HEADER_TABS = HeaderTabs;
 
   ngOnInit(): void {
     this.oidcSecurityService
       .checkAuth()
       .subscribe((res: any) => {
-        if (res.isAuthenticated) {
+                if (res.isAuthenticated) {
           if (res?.accessToken != null && res?.userData?.sub != null) {
             localStorage.setItem('accessToken', res?.accessToken);
             localStorage.setItem('userId', res?.userData?.sub);
           }
-
         }
         const userId = localStorage.getItem('userId');
         if (userId != null) {

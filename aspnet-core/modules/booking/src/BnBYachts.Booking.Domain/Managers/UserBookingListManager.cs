@@ -137,8 +137,15 @@ namespace BnBYachts.Booking.Managers
         => _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BoatelBookingTransferableDto>>
             (await _boatelBookingRepository.GetListAsync(res => res.HostId == hostId).ConfigureAwait(false));
 
-
-
-
+        public async Task<EntityResponseListModel<BookingsLookupDto>> GetMyBookings(Guid? userId)
+        {
+            var response = new EntityResponseListModel<BookingsLookupDto>();
+            response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingsLookupDto>>(await _boatelBookingRepository.GetListAsync(res => res.CreatorId == userId && res.BookingStatus == BookingStatus.Approved));
+            var charterBookings = _objectMapper.Map<List<CharterBookingEntity>, List<BookingsLookupDto>>(await _charterBookingRepository.GetListAsync(res => res.CreatorId == userId && res.BookingStatus == BookingStatus.Approved));
+            response.Data.AddRange(charterBookings);
+            var eventBookings = _objectMapper.Map<List<EventBookingEntity>, List<BookingsLookupDto>>(await _eventBookingRepository.GetListAsync(res => res.CreatorId == userId && res.BookingStatus == BookingStatus.Approved));
+            response.Data.AddRange(eventBookings);
+            return response;
+        }
     }
 }

@@ -16,5 +16,6 @@ namespace BnBYachts.Booking.Booking
         Task<EntityResponseListModel<EventBookingTransferableDto>> GetEventBookings(EntityBookingParamsDto param);
         Task<BoatelBookingTransferableDto> GetBoatelBooking(int bookingId);
         Task<ICollection<BoatelBookingTransferableDto>> GetHostBoatelBookings();
+        Task<EntityResponseListModel<BookingsLookupDto>> GetMyBookings();
     }
 }
