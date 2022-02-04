@@ -39,7 +39,6 @@ export class BnbGoogleMapComponent implements OnInit {
     this.addMarkers();
   }
   addMarkers() {
-    debugger;
     this.mapData.forEach((element: any) => {
       let marker = {
         position: {

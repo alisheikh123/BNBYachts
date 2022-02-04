@@ -15,8 +15,8 @@ export class FindUsComponent implements OnInit {
   };
   officesLocations = [{
     name: 'California, USA',
-    latitude: 36.778261,
-    longitude: -119.4179324
+    latitude: 33.6845673,
+    longitude: -117.8265049
   }];
   officesList: any;
   isSubmitted: boolean = false;

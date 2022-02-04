@@ -20,12 +20,33 @@
                             </small>
                         </div>
                         <div class="custom-input-field">
+                            <label>{{'EventLocation'|localization}}</label>
+                            <input class="custom-input" placeholder="Enter event location"
+                                [ngClass]="{  'is-invalid':submitted && form.location.errors }"
+                                formControlName="location" ngx-google-places-autocomplete
+                                (onAddressChange)="handleEventLocationChange($event)">
+                            <small class="text-danger"
+                                *ngIf="((form.location.touched || submitted) && form.location.hasError('required'))">
+                                {{'vAddressRequired' | localization}}
+                            </small>
+                        </div>
+                        <div class="custom-input-field">
                             <label>{{'EventTitle' | localization}}</label>
                             <input class="custom-input" placeholder="Enter Event Name"
                                 [ngClass]="{  'is-invalid':submitted && form.title.errors }" formControlName="title">
                             <small class="text-danger"
                                 *ngIf="((form.title.touched || submitted) && form.title.hasError('required'))">
                                 {{'vTitleRequired' | localization}}
+                            </small>
+                        </div>
+                        <div class="custom-input-field">
+                            <label>{{'EventDescription' | localization}}</label>
+                            <textarea class="custom-input" id="exampleFormControlTextarea1"
+                                [ngClass]="{  'is-invalid':submitted && form.description.errors }"
+                                formControlName="description" rows="4"></textarea>
+                            <small class="text-danger"
+                                *ngIf="((form.description.touched || submitted) && form.description.hasError('required'))">
+                                {{'vDescriptionRequired' | localization}}
                             </small>
                         </div>
                         <div class="custom-input-field">
@@ -43,27 +64,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="custom-input-field">
-                            <label>{{'EventLocation'|localization}}</label>
-                            <input class="custom-input" placeholder="Enter event location"
-                                [ngClass]="{  'is-invalid':submitted && form.location.errors }"
-                                formControlName="location" ngx-google-places-autocomplete
-                                (onAddressChange)="handleEventLocationChange($event)">
-                            <small class="text-danger"
-                                *ngIf="((form.location.touched || submitted) && form.location.hasError('required'))">
-                                {{'vAddressRequired' | localization}}
-                            </small>
-                        </div>
-                        <div class="custom-input-field">
-                            <label>{{'EventDescription' | localization}}</label>
-                            <textarea class="custom-input" id="exampleFormControlTextarea1"
-                                [ngClass]="{  'is-invalid':submitted && form.description.errors }"
-                                formControlName="description" rows="4"></textarea>
-                            <small class="text-danger"
-                                *ngIf="((form.description.touched || submitted) && form.description.hasError('required'))">
-                                {{'vDescriptionRequired' | localization}}
-                            </small>
-                        </div>
+
+              
                         <div class="counter-input-wrapper">
                             <label>{{'GuestCapacity' | localization}}</label>
                             <div class="number">
