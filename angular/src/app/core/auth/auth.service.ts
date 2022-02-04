@@ -89,5 +89,23 @@ export class AuthService {
     headers = headers.append('X-Skip-Loader-Interceptor', 'true');
     return this.http.post<boolean>(this.apiCoreURl + "/api/app/user/is-email-exists?email="+email,null,{headers:headers});
   }
+  sendMobileNumber(mobileVerification:any)
+  {
 
+    return this.http.post(this.apiCoreURl + "/api/app/on-boarding/generate-oTP", mobileVerification)
+    .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
+  verifyOTP(otpNumber:Number)
+  {
+    return this.http.get<any>(this.apiCoreURl + "/api/app/on-boarding/verify-oTP?otpNumber=" + otpNumber);
+  }
+  UploadProfileImage(file:any)
+  {
+    return this.http.post(this.apiCoreURl + "/api/app/on-boarding/upload-profile-image", file)
+    .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
+  IsIntialLoginStatus()
+  {
+    return this.http.get<any>(this.apiCoreURl +"/api/app/on-boarding/change-initial-login-status");
+  }
 }

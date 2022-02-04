@@ -20,6 +20,7 @@ using Volo.Abp.Caching;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
+using BnBYachts.Core.Shared.DTO;
 
 namespace BnBYachts.Core
 {
@@ -46,7 +47,6 @@ namespace BnBYachts.Core
                 ConfigureCors(context, configuration);
                 ConfigureSwaggerServices(context, configuration);
         }
-
         private void ConfigureCache(IConfiguration configuration)
         {
             Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Core:"; });

@@ -27,7 +27,6 @@ namespace BnBYachts.EventBusShared
             {
                 mt.AddBus(bs => Bus.Factory.CreateUsingRabbitMq(sbc =>
                 {
-
                     var queueHost = configurations.Host;
                     sbc.Host(new Uri(queueHost), "/", h =>
                     {
@@ -63,6 +62,7 @@ namespace BnBYachts.EventBusShared
             EndpointConvention.Map<IUserContract>(new Uri($"{queueHost}/{EventBusQueue.QUsersSeeder}"));
             EndpointConvention.Map<IEmailContract>(new Uri($"{queueHost}/{EventBusQueue.QEmailNotification}"));
             EndpointConvention.Map<IEmailContract>(new Uri($"{queueHost}/{EventBusQueue.QBackgroundWorker}"));
+            EndpointConvention.Map<IOTPContract>(new Uri($"{queueHost}/{EventBusQueue.QGenerateOTP}"));
         }
     }
 

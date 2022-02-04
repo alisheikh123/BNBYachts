@@ -56,7 +56,7 @@
                     </div>
                     <div class="center-content">
                         <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
-                            <a [routerLink]="['host-dashboard']" class="underline-link-blk active">                                
+                            <a [routerLink]="['host-dashboard']" class="underline-link-blk active">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/dashboard-icon.svg"
                                         alt=""></a>
@@ -77,7 +77,7 @@
                                     </span>
                                     Inbox
                                 <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
-                            </a>                                
+                            </a>
                             <a [routerLink]="['/host/calendar']" class="underline-link-blk">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/calendar-icon.svg"
@@ -100,8 +100,8 @@
                                     </span>
                                     Listing
                             </a>
-                            <div class="dropdown custom-dropdown borderless-dropdown">                                
-                                <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                                      
+                            <div class="dropdown custom-dropdown borderless-dropdown">
+                                <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="logo-wrapper">
                                         <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
                                             alt=""></a>

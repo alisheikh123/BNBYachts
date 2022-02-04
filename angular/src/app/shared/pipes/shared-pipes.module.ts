@@ -10,6 +10,7 @@ import { MySlicePipe } from './my-slice.pipe';
 import { LocalizationPipe } from './localization.pipe';
 import { SearchFilterPipe } from './search.pipe';
 import { GroupByPipe } from './group-by.pipe';
+import { FormatTimePipe } from './Format-Time.pip';
 const pipes = [
   ExcerptPipe,
   GetValueByKeyPipe,
@@ -20,7 +21,8 @@ const pipes = [
   MySlicePipe,
   LocalizationPipe,
   SearchFilterPipe,
-  GroupByPipe
+  GroupByPipe,
+  FormatTimePipe
 ];
 
 @NgModule({

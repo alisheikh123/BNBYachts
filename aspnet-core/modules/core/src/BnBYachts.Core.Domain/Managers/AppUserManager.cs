@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +12,12 @@ using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.Identity;
+using Volo.Abp.ObjectMapping;
 using Volo.Abp.Uow;
 
 namespace BnBYachts.Core.Managers
@@ -31,27 +31,33 @@ namespace BnBYachts.Core.Managers
         private readonly IdentityRoleManager _roleManager;
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly IConfiguration _config;
-        //private readonly IObjectMapper<CoreDomainModule> _objectMapper;
+        private readonly IObjectMapper<CoreDomainModule> _objectMapper;
+        private readonly ILogger<IAppUserManager> _logger;
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
             IdentityUserManager userManager, IdentityRoleManager roleManager,
-            EventBusDispatcher eventBusDispatcher, IConfiguration config)
+            EventBusDispatcher eventBusDispatcher, IConfiguration config,
+            IObjectMapper<CoreDomainModule> objectMapper, 
+            ILogger<IAppUserManager> logger
+            )
         {
             _repository = repository;
             _userManager = userManager;
             _roleManager = roleManager;
             _eventBusDispatcher = eventBusDispatcher;
             _config = config;
+            _objectMapper = objectMapper;
+            _logger = logger;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email);
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)));
         }
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             var user = await _repository.GetAsync(res => res.UserName == username).ConfigureAwait(false);
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email);
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)));
         }
 
         public async Task<bool> IsEmailExist(string email)
@@ -62,29 +68,30 @@ namespace BnBYachts.Core.Managers
 
         public async Task<ResponseDto> RegisterUser(UserRegisterTransferable userInput)
         {
-                var _respone = new ResponseDto();
-                var user = new IdentityUser(userInput.Id, userInput.Email, userInput.Email)
+            var _respone = new ResponseDto();
+            var user = new IdentityUser(userInput.Id, userInput.Email, userInput.Email)
+            {
+                Name = userInput.FirstName + " " + userInput.LastName
+            };
+            user.SetProperty(UserConstants.DOB, userInput.DOB);
+            user.SetProperty(UserConstants.IsInitialLogin, true);
+            var result = await _userManager.CreateAsync(user, userInput.Password);
+            if (result.Succeeded)
+            {
+                var isRoleAssigned = await _userManager.AddToRoleAsync(user, "USER");
+                if (!isRoleAssigned.Succeeded)
                 {
-                    Name = userInput.FirstName + " " + userInput.LastName
-                };
-                user.SetProperty(UserConstants.DOB, userInput.DOB);
-                var result = await _userManager.CreateAsync(user, userInput.Password);
-                if (result.Succeeded)
-                {
-                    var isRoleAssigned = await _userManager.AddToRoleAsync(user, "USER");
-                    if (!isRoleAssigned.Succeeded)
-                    {
-                        return _respone;
-                    }
-                    await SendEmailToAskForEmailConfirmationAsync(user);
-                    _respone.Message = "Account created successfully";
+                    return _respone;
                 }
-                else
-                {
-                    _respone.Message = result.Errors.ToList().FirstOrDefault()?.Description;
-                    _respone.Status = false;
-                }
-                return _respone;
+                await SendEmailToAskForEmailConfirmationAsync(user);
+                _respone.Message = "Account created successfully";
+            }
+            else
+            {
+                _respone.Message = result.Errors.ToList().FirstOrDefault()?.Description;
+                _respone.Status = false;
+            }
+            return _respone;
         }
 
         public async Task SendEmailToAskForEmailConfirmationAsync(IdentityUser user)
@@ -145,7 +152,7 @@ namespace BnBYachts.Core.Managers
             return true;
         }
 
-        public  async Task<ResponseDto> AddRoles(RolesTransferable userInput)
+        public async Task<ResponseDto> AddRoles(RolesTransferable userInput)
         {
             var _respone = new ResponseDto();
             var user = new IdentityRole(userInput.Id, userInput.NormalizedName)
@@ -154,10 +161,10 @@ namespace BnBYachts.Core.Managers
                 IsPublic = userInput.IsPublic,
                 IsStatic = userInput.IsStatic
             };
-            var isRoleCreated= await _roleManager.CreateAsync(user);
+            var isRoleCreated = await _roleManager.CreateAsync(user);
             if (isRoleCreated.Succeeded)
             {
-                    return _respone;
+                return _respone;
             }
             else
             {

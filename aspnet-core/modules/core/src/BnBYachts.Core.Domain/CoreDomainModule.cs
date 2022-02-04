@@ -14,6 +14,7 @@ using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.AutoMapper;
+using BnBYachts.Core.Shared.DTO;
 
 namespace BnBYachts.Core
 {
@@ -36,6 +37,7 @@ namespace BnBYachts.Core
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.AddAutoMapperObjectMapper<CoreDomainModule>();
+            Configure<AWSOptions>(context.Services.GetConfiguration().GetSection("AWSConfiguation"));
             Configure<AbpMultiTenancyOptions>(options =>
             {
                 options.IsEnabled = MultiTenancyConsts.IsEnabled;
