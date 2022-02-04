@@ -1,14 +1,5 @@
 <header>
     <ng-container *ngIf="!isLoggedIn">
-        <div class="header-top-bar">
-            <div class="header-bg-blue bg-blue white-text">
-                <p class="small-text">Book Boat for Boatels,Charters,Events
-                </p>
-            </div>
-            <div class="header-grey-clr grey-clr">
-                <p class="small-text">Contact us:bnbyachts@gmail.com</p>
-            </div>
-        </div>
         <div class="header-wrap">
             <div class="container">
                 <div class="custom-flex-between">
@@ -18,9 +9,6 @@
                         </div>
                     </div>
                     <div class="right-content">
-                        <a (click)="earn()" class="underline-link-blk active"><span>Earn with us</span></a>
-
-
                         <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
                             data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
                             <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
@@ -33,15 +21,6 @@
         </div>
     </ng-container>
     <ng-container *ngIf="isLoggedIn">
-        <div class="header-top-bar">
-            <div class="header-bg-blue bg-blue white-text">
-                <p class="small-text">Book Boats for Boatels,Charters,Events
-                </p>
-            </div>
-            <div class="header-grey-clr grey-clr">
-                <p class="small-text">Contact us:bnbyachts@gmail.com</p>
-            </div>
-        </div>
         <div class="header-wrap">
             <div class="container">
                 <div class="custom-flex-between">
@@ -154,7 +133,7 @@
         <div class="modal-body">
           <div class="custom-text-center">
             <h4 class="medium text-left mb-3">Earn With Us</h4>
-          <a [ngClass]="{'earn-active': selectedOption.byHost}" (click)="selectedOption.byServiceProvider = false;selectedOption.byHost = !selectedOption.byHost;" class="custom-card custom-flex-between card-right-img">
+          <a [ngClass]="{'earn-active': selectedOption.byHost}" (click)="selectedOption.byServiceProvider = false;selectedOption.byHost = !selectedOption.byHost;continueToEarn()" class="custom-card custom-flex-between card-right-img">
               <div class="card-right-img-inside">
                 <h6 class="medium p-0 text-start">Become a Host</h6>
                 <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
@@ -170,9 +149,6 @@
                 <img src="../../../../assets/images/service-provider.png" alt="">
 
                 </a>
-                <div class="custom-margin mb-0">
-                  <button class="custom-btn blue big-btn" (click)="continueToEarn()">Continue</button>
-                </div>
           </div>
         </div>
 

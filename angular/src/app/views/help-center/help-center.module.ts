@@ -13,6 +13,8 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
+import { AppModule } from 'src/app/app.module';
+import { AppGoogleMapModule } from '../common/bnb-google-map/app-google-map.module';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
     HelpCenterRoutingModule,
     GooglePlaceModule,
     GoogleMapsModule,
-    SharedPipesModule
+    SharedPipesModule,
+    AppGoogleMapModule
   ],
   providers: [HelpCenterService,YachtSearchService],
 })

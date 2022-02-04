@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HelpCenterService } from 'src/app/core/help-center/help-center.service';
 import { NoFoundModalComponent } from 'src/app/views/home/components/no-found-modal/no-found-modal.component';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-find-us',
@@ -16,26 +13,15 @@ export class FindUsComponent implements OnInit {
     latitude: 0,
     longitude: 0
   };
-  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
-  boatsList: any;
-
-  mapOptions: google.maps.MapOptions = {
-    clickableIcons: false,
-    disableDefaultUI: true,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    zoomControl: true,
-    scrollwheel: false,
-    disableDoubleClickZoom: true,
-    maxZoom: 15,
-    minZoom: 8,
-  };
-  markers: any[] = [];
-  zoom = 14;
-  center!: google.maps.LatLngLiteral;
+  officesLocations = [{
+    name: 'California, USA',
+    latitude: 33.6845673,
+    longitude: -117.8265049
+  }];
+  officesList: any;
   isSubmitted: boolean = false;
-  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   mapInfoDetails!: any;
-  constructor(private service: HelpCenterService, private modal: NgbModal) { }
+  constructor(private modal: NgbModal) { }
 
   ngOnInit(): void {
   }
@@ -45,37 +31,9 @@ export class FindUsComponent implements OnInit {
     this.searchParam.location = address.formatted_address;
     this.searchParam.latitude = address.geometry.location.lat();
     this.searchParam.longitude = address.geometry.location.lng();
-    this.service.findUsBoats(this.searchParam.latitude, this.searchParam.longitude).subscribe((res: any) => {
-      this.boatsList = res?.data;
-      if (this.boatsList?.length == 0) {
-        let modal = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true })
-      }
-      else {
-        this.center = {
-          lat: this.searchParam?.latitude,
-          lng: this.searchParam?.longitude
-        };
-        this.addMarkers();
-      }
-    })
-  }
-  addMarkers() {
-    this.boatsList.forEach((element: any) => {
-      let marker = {
-        boatId: element.id,
-        position: {
-          lat: element.latitude,
-          lng: element.longitude,
-        },
-        draggable: false,
-        title: element.name,
-        options: { animation: google.maps.Animation.DROP },
-      };
-      this.markers.push(marker);
-    });
-  }
-  openInfoWindow(marker: MapMarker, data: any) {
-    this.mapInfoDetails = this.boatsList.find((res: any) => res.id == data?.boatId);
-    this.infoWindow.open(marker);
+    this.officesList = this.officesLocations.filter(res => res?.latitude == this.searchParam.latitude && res?.longitude == this.searchParam.longitude);
+    if (this.officesList?.length == 0) {
+      let modal = this.modal.open(NoFoundModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true })
+    }
   }
 }

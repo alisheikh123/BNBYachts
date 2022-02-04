@@ -1,7 +1,7 @@
 <div class="container">
     <div class="listing-main-wrapper section-padding">
         <div class="custom-flex-between mb-3">
-            <h2 class="bold">My Boats</h2>
+            <h2 class="bold">Listing</h2>
             <a [routerLink]="['/host/boat-add']" class="custom-btn grey">Add New</a>
         </div>
         <div class="row">
@@ -9,7 +9,7 @@
                 <button (click)="activeTab = 0" class="underline-link-blk px-4"
                     [ngClass]="{'active':activeTab == 0,'text-primary':activeTab == 0 }">
                     <span>
-                        All
+                        All Boats
                     </span>
                 </button>
                 <button (click)="activeTab = 1" class="underline-link-blk px-4" [ngClass]="{'active':activeTab == 1 }">

@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Core.Requestable;
+using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ namespace BnBYachts.Core.Interface
 {
     public interface IHelpCenterAppService
     {
-        Task ContactUS(ContactUsRequestableDto form);
+        Task<EntityResponseModel> ContactUS(ContactUsRequestableDto form);
+        Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions();
     }
 }

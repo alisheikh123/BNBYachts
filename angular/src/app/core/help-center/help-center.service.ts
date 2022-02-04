@@ -27,4 +27,8 @@ export class HelpCenterService {
   findUsBoats(latitude:number,longitude:number){
     return this.http.post(this.apiFindUsURl + 'find-us-boats?latitude='+latitude+'&longitude='+longitude,null).pipe(catchError(this.errorService.handleError));  
   }
+
+  getQuestions(){
+    return this.http.get(this.apiURl+ 'frequent-questions').pipe(catchError(this.errorService.handleError));  
+  }
 }

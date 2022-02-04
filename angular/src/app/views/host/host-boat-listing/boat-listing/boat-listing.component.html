@@ -9,12 +9,13 @@
         <p class="">Listing Status:<span
           [ngClass]="{'text-success' : item?.isActive, 'text-danger':!item?.isActive}">
             {{item?.isActive ? "Active":"Inactive"}} </span></p>
-        <p class=" py-2">{{item.boatType==BOAT_TYPE.Yacht?
+        <p class=" py-2" *ngIf="showAllBoats">{{item.boatType==BOAT_TYPE.Yacht?
           "Yacht":item.boatType==BOAT_TYPE.PowerBoat?"Power
           Boat":item.boatType==BOAT_TYPE.Pontoon?"Pontoon":item.boatType==BOAT_TYPE.FishingBoat?"Fishing
           Boat":item.boatType==BOAT_TYPE.SailBoat?"Sail Boat":item.boatType==BOAT_TYPE.HouseBoat?"House Boat":""}}
         </p>
-        <p class=" ">{{item.creationTime | date}}</p>
+        <p class=" ">{{item.location}}</p>
+        <p *ngIf="!showAllBoats">{{item.checkinTime | date:'hh mm a'}} - {{item.checkoutTime | date:'hh mm a'}}</p>
       </div>
     </div>
     <div class="right-content custom-flex flex-wrap">
@@ -26,7 +27,7 @@
             d="M12,12a2,2,0,1,1,2-2A2.006,2.006,0,0,1,12,12Zm6-1.8a6,6,0,1,0-12,0c0,2.34,1.95,5.44,6,9.14C16.05,15.64,18,12.54,18,10.2ZM12,2a7.955,7.955,0,0,1,8,8.2q0,4.98-8,11.8Q4.005,15.175,4,10.2A7.955,7.955,0,0,1,12,2Z"
             fill="#777" />
         </svg></a>
-      <a href="#" class="custom-btn small-round grey" ngbTooltip="Calendar"><svg id="edit_calendar_black_24dp" width="26" height="26"
+      <a [routerLink]="['/host/calendar']" class="custom-btn small-round grey" ngbTooltip="Calendar"><svg id="edit_calendar_black_24dp" width="26" height="26"
           viewBox="0 0 26 26">
           <rect id="Rectangle_3106" data-name="Rectangle 3106" width="26" height="26" fill="none" />
           <path id="Path_21012" data-name="Path 21012"
