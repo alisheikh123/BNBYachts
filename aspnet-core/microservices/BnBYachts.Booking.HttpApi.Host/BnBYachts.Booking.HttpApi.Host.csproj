@@ -36,4 +36,8 @@
     <ProjectReference Include="..\..\modules\booking\src\BnBYachts.Booking.HttpApi\BnBYachts.Booking.HttpApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

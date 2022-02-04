@@ -28,6 +28,7 @@ import { ChatService } from './core/chat/chat.service';
 import { OnBoardingModalComponent } from './views/common/on-boarding-modal/on-boarding-modal.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { OnBoardingProfileModalComponent } from './views/common/on-boarding-profile-modal/on-boarding-profile-modal.component';
+import {CarouselModule} from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { OnBoardingProfileModalComponent } from './views/common/on-boarding-prof
       },
     }),
     NgxStripeModule.forRoot(environment.stripeKey),
-    NgOtpInputModule
+    NgOtpInputModule,
+    CarouselModule
   ],
   providers: [
     // OAuthService,

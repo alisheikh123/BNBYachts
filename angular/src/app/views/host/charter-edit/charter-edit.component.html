@@ -44,7 +44,7 @@
                                 <small class="text-danger" *ngIf="charterForm.departingFrom.touched && !charterForm.departingFrom.valid">departing From is required.</small>
                         </div>
                         <div class="custom-input-field">
-                            <label>{{'ToDestination'| localization}}</label>
+                            <label>{{'Destination'| localization}}</label>
                             <input class="custom-input" formControlName="destination"
                                 ngx-google-places-autocomplete
                                 (onAddressChange)="handleDestinationAddress($event)"

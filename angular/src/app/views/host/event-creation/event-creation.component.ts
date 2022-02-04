@@ -68,7 +68,9 @@ export class EventCreationComponent implements OnInit {
   }
 
   removeGuests() {
-    this.eventCreationForm.controls.guestCapacity.setValue(this.eventCreationForm.controls.guestCapacity.value - 1);
+    if(this.eventCreationForm.controls.guestCapacity.value !=0 ){
+      this.eventCreationForm.controls.guestCapacity.setValue(this.eventCreationForm.controls.guestCapacity.value - 1);
+    }
   }
 
   handleAddressChange(address: any) {

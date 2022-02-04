@@ -1,0 +1,45 @@
+<section class="request-quote-sec section-padding card shadow  rounded">
+    <div class="container card-body">
+        <form [formGroup]="disputeForm">
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="custom-select-field" placement="bottom">
+                            <label>Dispute</label>
+                            <select class="form-control" formControlName="bookingId"
+                                [ngClass]="{ 'is-invalid': isSubmitted && f.bookingId.errors }">
+                                <option [ngValue]="null">Choose Reservation</option>
+                                <option [ngValue]="item.id" *ngFor="let item of bookings">{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="custom-select-field" placement="bottom">
+                            <label>Choose from any of reasons</label>
+                            <select class="form-control" formControlName="reasonId"
+                                [ngClass]="{ 'is-invalid': isSubmitted && f.reasonId.errors }">
+                                <option [ngValue]="null">Choose Reason Type</option>
+                                <option [ngValue]="item.id" *ngFor="let item of reasons">{{item?.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="custom-input-field">
+                        <label>Reason:*</label>
+                        <textarea class="custom-input" name="message" cols="3" formControlName="reason"
+                            [ngClass]="{ 'is-invalid': isSubmitted && f.reason.errors }" rows="5"
+                            placeholder="Reason"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12 pt-2">
+                    <div class="custom-flex-end">
+                        <button class="custom-btn blue" id="save-btn" (click)="submit()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -14,6 +14,8 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using BnBYachts.Core.Data.Model;
+using BnBYachts.Core.Data.Entities;
 
 namespace BnBYachts.Core.EntityFrameworkCore
 {
@@ -47,6 +49,9 @@ namespace BnBYachts.Core.EntityFrameworkCore
         public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
         public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
         public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+        public DbSet<CoreEmailTemplatesEntity> CoreEmailTemplates { get; set; }
+
+        public DbSet<FrequentQuestionEntity> FrequentQuestions { get; set; }
 
         // Tenant Management
         public DbSet<Tenant> Tenants { get; set; }

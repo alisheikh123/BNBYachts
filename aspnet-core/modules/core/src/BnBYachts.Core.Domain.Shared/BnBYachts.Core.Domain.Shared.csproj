@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\BnBYachts.Shared\BnBYachts.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Interface\" />
   </ItemGroup>
 

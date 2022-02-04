@@ -57,5 +57,7 @@ namespace BnBYachts.Booking.Services
 
         public async Task<ICollection<BoatelBookingTransferableDto>> GetHostBoatelBookings()
         => await _userListManager.GetHostBoatelBookings(CurrentUser.Id.ToString()).ConfigureAwait(false);
+
+        public async Task<EntityResponseListModel<BookingsLookupDto>> GetMyBookings() => await _userListManager.GetMyBookings(CurrentUser.Id).ConfigureAwait(false);
     }
 }

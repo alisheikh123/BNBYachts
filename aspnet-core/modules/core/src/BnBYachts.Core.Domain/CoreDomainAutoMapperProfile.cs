@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
+using BnBYachts.Core.Data.Entities;
+using BnBYachts.Core.Requestable;
 using BnBYachts.Core.Data.Model.VerifyPhoneNumber;
 using BnBYachts.Core.Requestable;
 using BnBYachts.Core.Shared.Requestable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Identity;
 
 namespace BnBYachts.Core
@@ -21,6 +18,7 @@ namespace BnBYachts.Core
             CreateMap<OTPVerifierEntity, UserMobileVerificationRequestable>().
                 ForMember(source => source.Phone, destination => destination.MapFrom(source => source.PhoneNumber));
 
+            CreateMap<FrequentQuestionEntity, FrequentQuestionsDto>();
         }
     }
 }

@@ -5,6 +5,7 @@ using MimeKit;
 using System;
 using System.Threading.Tasks;
 using BnByachts.NotificationHub.Configuration;
+using System.IO;
 
 namespace BnByachts.NotificationHub.Services
 {
@@ -16,7 +17,7 @@ namespace BnByachts.NotificationHub.Services
             SmtpSettings = smtpSettings.Value;
         }
         [Obsolete]
-        public async Task SendEmailAsync(string email, string subject, string body, bool IsBodyHtml)
+        public async Task SendEmailAsync(string email, string subject, string body, bool IsBodyHtml, string? attachment = null, string? fileName = null)
         {
             try
             {
@@ -28,6 +29,16 @@ namespace BnByachts.NotificationHub.Services
                 {
                     Text = body
                 };
+                var builder = new BodyBuilder { HtmlBody = message.Body.ToString() };
+                if (attachment != null)
+                {
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        byte[] bytes = Convert.FromBase64String(attachment);
+                        builder.Attachments.Add(fileName,bytes);
+                    }
+                }
+                message.Body = builder.ToMessageBody();
                 using var client = new SmtpClient();
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
                 await client.ConnectAsync(SmtpSettings.Server, Convert.ToInt32(SmtpSettings.Port), SecureSocketOptions.StartTls);
