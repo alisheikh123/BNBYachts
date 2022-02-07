@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BnByachts.BackgroundWorker": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
