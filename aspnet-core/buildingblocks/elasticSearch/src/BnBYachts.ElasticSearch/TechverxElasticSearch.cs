@@ -110,23 +110,35 @@ namespace BnBYachts.ElasticSearch
         /// <returns></returns>
         public virtual async Task AddOrUpdateAsync<T, TKey>(string indexName, T model) where T : EntityDto<TKey>
         {
-            var exits = EsClient.DocumentExists(DocumentPath<T>.Id(new Id(model)), dd => dd.Index(indexName));
-
-            if (exits.Exists)
+            var exits = await EsClient.DocumentExistsAsync(DocumentPath<T>.Id(new Id(model)), dd => dd.Index(indexName));
+            switch (exits.Exists)
             {
-                var result = await EsClient.UpdateAsync(DocumentPath<T>.Id(new Id(model)),
-                    ss => ss.Index(indexName).Doc(model).RetryOnConflict(3));
+                case true:
+                {
+                    var result = await EsClient.UpdateAsync(DocumentPath<T>.Id(new Id(model)),
+                        ss => ss.Index(indexName).Doc(model).RetryOnConflict(3));
 
-                if (result.ServerError == null) return;
-                throw new ElasticSearchException($"Update Document failed at index{indexName} :" +
-                                                 result.ServerError.Error.Reason);
-            }
-            else
-            {
-                var result = await EsClient.IndexAsync<T>(model, ss => ss.Index(indexName));
-                if (result.ServerError == null) return;
-                throw new ElasticSearchException($"Insert Docuemnt failed at index {indexName} :" +
-                                                 result.ServerError.Error.Reason);
+                    switch (result.ServerError)
+                    {
+                        case null:
+                            return;
+                        default:
+                            throw new ElasticSearchException($"Update Document failed at index{indexName} :" +
+                                                             result.ServerError.Error.Reason);
+                    }
+                }
+                default:
+                {
+                    var result = await EsClient.IndexAsync<T>(model, ss => ss.Index(indexName));
+                    switch (result.ServerError)
+                    {
+                        case null:
+                            return;
+                        default:
+                            throw new ElasticSearchException($"Insert Document failed at index {indexName} :" +
+                                                             result.ServerError.Error.Reason);
+                    }
+                }
             }
         }
 
