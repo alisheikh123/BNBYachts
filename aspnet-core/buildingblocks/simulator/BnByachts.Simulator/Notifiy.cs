@@ -7,30 +7,55 @@ using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using BnByachts.Simulator.socket;
 using Volo.Abp.DependencyInjection;
+using BnBYachts.ElasticSearch;
+using Nest;
+using Volo.Abp.Application.Dtos;
 
 namespace BnByachts.Simulator
 {
    public class Notifiy : ITransientDependency
-    {
+   {
 
-        private readonly EventBusDispatcher _eventBusDispatcher;
-
-        public Notifiy(EventBusDispatcher eventBusDispatcher)
+       private readonly ITechverxElasticSearch _techverxElasticSearch;
+        public Notifiy(ITechverxElasticSearch techverxElasticSearch)
         {
-            _eventBusDispatcher = eventBusDispatcher;
+            _techverxElasticSearch = techverxElasticSearch;
         }
+
+        //private readonly EventBusDispatcher _eventBusDispatcher;
+
+        //public Notifiy(EventBusDispatcher eventBusDispatcher)
+        //{
+        //    _eventBusDispatcher = eventBusDispatcher;
+        //}
         public void pushEmail()
         {
+           // var response=_techverxElasticSearch.CrateIndexAsync("test1").GetAwaiter();
 
-            new SignalRClient().SendMessage();
-            //Console.WriteLine("email sending");
+           var response1= _techverxElasticSearch.AddOrUpdateAsync<temp, int>("test1", new temp
+            {
+                Id = 3,
+                Name = "testing"
 
-            //_ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
-            //{
-            //    To = "umar.draz@techverx.com",
-            //    Subject = "test",
-            //    Body = new StringBuilder().Append("test")
-            //});
+            }).GetAwaiter();
+           var searchDescriptor = new SearchDescriptor<temp>()
+               .From(0)
+               .Size(20);
+
+            var res=_techverxElasticSearch.SearchAsync<temp, int>("test1", searchDescriptor, 0,10).GetAwaiter().GetResult();
+           //Console.WriteLine("email sending");
+
+           //_ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+           //{
+           //    To = "umar.draz@techverx.com",
+           //    Subject = "test",
+           //    Body = new StringBuilder().Append("test")
+           //});
         }
     }
+
+   public class temp: EntityDto<int>
+    {
+       public string Name  { get; set; }
+   }
 }

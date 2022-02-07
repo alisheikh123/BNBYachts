@@ -26,6 +26,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\modules\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
+	  <ProjectReference Include="..\..\elasticSearch\src\BnBYachts.ElasticSearch\BnBYachts.ElasticSearch.csproj" />
 	</ItemGroup>
 
 </Project>

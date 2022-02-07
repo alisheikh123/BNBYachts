@@ -14,19 +14,23 @@
     <div class="container">
         <div class="custom-tabs-wrapper pt-3">
             <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.AskUs}"
+                <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.AskUs}"
                     (click)="currentTab = 1" type="button">
+                    <i class="fa fa-question" aria-hidden="true"></i>
                     Ask Us</button>
-                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.ContactUs}"
+                <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.ContactUs}"
                     (click)="currentTab = 2" type="button">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
                     Contact Us
                 </button>
-                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.FindUs}"
+                <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.FindUs}"
                     (click)="currentTab = 3" type="button">
+                    <i class="fa fa-search" aria-hidden="true"></i>
                     Find Us
                 </button>
-                <button class="underline-link-blk small-text" [ngClass]="{'active': currentTab == navTabs.Dispute}"
+                <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.Dispute}"
                     (click)="currentTab = 4" type="button">
+                    <i class="fa fa-user-times" aria-hidden="true"></i>
                     Dispute
                 </button>
             </div>

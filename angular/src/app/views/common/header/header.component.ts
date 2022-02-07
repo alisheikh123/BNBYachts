@@ -55,12 +55,11 @@ export class HeaderComponent implements OnInit {
     this.oidcSecurityService
       .checkAuth()
       .subscribe((res: any) => {
-        if (res.isAuthenticated) {
+                if (res.isAuthenticated) {
           if (res?.accessToken != null && res?.userData?.sub != null) {
             localStorage.setItem('accessToken', res?.accessToken);
             localStorage.setItem('userId', res?.userData?.sub);
           }
-
         }
         const userId = localStorage.getItem('userId');
         if (userId != null) {
