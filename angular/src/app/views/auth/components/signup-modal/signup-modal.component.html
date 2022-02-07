@@ -69,7 +69,7 @@
               <!-- date of birth -->
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
-                  <label class="label-withtooltip"><span>{{'DateOfBirth'|localization}}</span> <div class="tooltip-wrapper"><span class="circle-icon"><i class="fa fa-info"></i></span><div class="tooltip-dialogue"><p class="small-mini-text grey white-bg-card">To sign up, users must be at least 18. Your birthday won't be shared with other people who use BnBYachts.</p></div></div></label>
+                  <label class="label-withtooltip"><span>{{'DateOfBirth'|localization}}</span> <div class="tooltip-wrapper"><span class="circle-icon"><i class="fa fa-info"></i></span><div class="tooltip-dialogue"><p class="small-mini-text grey white-bg-card">{{"AgeLimitMessage" | localization}}</p></div></div></label>
                     <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
                       <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
                       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{

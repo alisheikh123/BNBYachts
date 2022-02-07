@@ -3,7 +3,7 @@ import { ForgotPasswordComponent } from './../../auth/components/forgot-password
 
 import { OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../../auth/components/login-modal/login-modal.component';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
