@@ -29,7 +29,16 @@ export class DisputeFormComponent implements OnInit {
   {
     id: this.DISUPUTE_REASONS.ServiceIssue,
     name: "Service Issues",
-  }]
+  },
+  {
+    id: this.DISUPUTE_REASONS.ChangeDatesOrGuests,
+    name: "Change dates or guests"
+  },
+  {
+    id: this.DISUPUTE_REASONS.Other,
+    name: "Other"
+  }
+]
   constructor(private fb: FormBuilder, private service: HelpCenterService, private boatService: YachtSearchService, private toastr: ToastrService) { }
 
   ngOnInit(): void {

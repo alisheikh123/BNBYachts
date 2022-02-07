@@ -57,7 +57,7 @@
   "CharterFee":"Charter Fee",
   "DepartureDate":"Departure Date",
   "DestReq":"destination is required.",
-  "ToDestination":"To Destination*",
+  "ToDestination":"Destination*",
   "DepartureTo":"Departure To",
   "Disclaimer":"Disclaimer",
   "CharterDisclaimer":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus consequat ultrices nec sed",
@@ -157,7 +157,7 @@
   "ResendLink": "Resend Link",
   "ConfirmEmailAddressMessage": "To verify your email, we've sent you a confirmation link. Click on that link to verify your account.",
   "ForgotPassword": "Forgot Password",
-  "ConfirmEmailSendInstructions": "Confirm your email and we'll send the instructions.",
+  "ConfirmEmailSendInstructions": "Enter the email address associated with your account, and we'll send the instructions to reset your password.",
   "PasswordResetEmailMessage": "We have send a password reset email to your email address.You can Reset the password from there",
   "vEmailDoesNotExist": "* The Email Does Not Exist!",
   "Send": "Send",
@@ -177,7 +177,7 @@
   "tipChoosingAPassword": "Choosing a password",
   "tipYourPasswordMustInclude": "Your password must include",
   "ConfirmPassword": "Confirm Password",
-  "vPasswordDoNotMatch": "Password do not match.",
+  "vPasswordDoNotMatch": "Passwords do not match.",
   "BookedServices": "Booked Services",
   "BoatelAvailable": "boatel available",
   "headingBoatelIn": "Boatel in",
@@ -229,5 +229,6 @@
   "ReturnTime":"Return Time:",
   "comma": ",",
   "commentor": "Lili John",
-  "comment": "Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  "comment": "Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "ArrivalDate": "Arrival Date"
 }
