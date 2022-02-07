@@ -6,10 +6,11 @@ using BnBYachts.Core;
 using BnBYachts.Core.Requestable;
 using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.Http;
+using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Core.Interface
 {
-    public interface IOnBoardingService
+    public interface IOnBoardingService: IApplicationService
     {
         Task GenerateOTP(UserMobileVerificationRequestable mobileVerification);
         Task<EntityResponseModel> VerifyOTP(long otpNumber);

@@ -20,7 +20,6 @@ using Volo.Abp.Caching;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
-using BnBYachts.Core.Shared.DTO;
 
 namespace BnBYachts.Core
 {

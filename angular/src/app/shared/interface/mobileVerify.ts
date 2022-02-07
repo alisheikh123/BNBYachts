@@ -1,4 +1,4 @@
 export interface MobileVerification {
-    userId: any
-    phone: any
+    userId: string
+    phone: string
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BnBYachts.Core.Shared.DTO
+namespace BnBYachts.Core.Dto
 {
    public class S3ResponseDTO
     {

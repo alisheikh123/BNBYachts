@@ -6,7 +6,7 @@
                <div class="custom-card user-info-wrap">
                 <div class="image-with-text">
                     <div class="image-with-text-inner big-image">
-                        <img src="../../../../assets/images/chat-avatar.png" alt="">
+                        <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
 
                     </div>
                   <p class="medium text-center py-2">{{"Updateprofilephoto" | localization}}</p>
@@ -65,7 +65,7 @@
                           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <div class="image-with-text">
                                 <div class="image-with-text-inner">
-                                    <img src="../../../../assets/images/user-img.png" alt="">
+                                    <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                     <div class="user-details">
                                         <p class="medium">Elijah</p>
                                         <p class="small-stars">
@@ -85,7 +85,7 @@
                           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <div class="image-with-text">
                                 <div class="image-with-text-inner">
-                                    <img src="../../../../assets/images/user-img.png" alt="">
+                                    <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                     <div class="user-details">
                                         <p class="medium">Elijah</p>
                                         <p class="small-stars">
@@ -103,7 +103,7 @@
 
                             <div class="image-with-text">
                                 <div class="image-with-text-inner">
-                                    <img src="../../../../assets/images/user-img.png" alt="">
+                                    <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                     <div class="user-details">
                                         <p class="medium">Elijah</p>
                                         <p class="small-stars">

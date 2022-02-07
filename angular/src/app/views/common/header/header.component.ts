@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   USER_ROLE = UserRoles;
   USER_DEFAULTS = UserDefaults;
   assetsUrl = environment.CORE_API_URL + '/user-profiles/';
-  id:string = "1";
+  assetUrlS3 = environment.S3BUCKET_URL + '/profilePicture/';
   @ViewChild('earnwithus', { static: true }) templateRef: any;
   selectedOption = {
     byHost : false,
@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
           localStorage.setItem('userRole', this.app.loggedInUserRole);
         }
         this.isLoggedIn = true;
-        this.onBoardingModal(this.userDetails?.isInitialLogin);
+        this.onBoardingModal();
 
     })
   }
@@ -151,9 +151,9 @@ export class HeaderComponent implements OnInit {
       this.modal.dismissAll();
     }
   }
-  onBoardingModal(isInitialLogin:boolean)
+  onBoardingModal()
   {
-    if(isInitialLogin==true)
+    if(this.userDetails?.isInitialLogin==true)
     {
      this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
     }

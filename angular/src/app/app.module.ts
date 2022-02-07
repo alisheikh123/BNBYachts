@@ -29,6 +29,9 @@ import { OnBoardingModalComponent } from './views/common/on-boarding-modal/on-bo
 import { NgOtpInputModule } from 'ng-otp-input';
 import { OnBoardingProfileModalComponent } from './views/common/on-boarding-profile-modal/on-boarding-profile-modal.component';
 import {CarouselModule} from 'primeng/carousel';
+import { OnBoardingVerifyOtpComponent } from './views/common/on-boarding-verify-otp/on-boarding-verify-otp.component';
+import { OnBoardingSuccessfullyVerifiedComponent } from './views/common/on-boarding-successfully-verified/on-boarding-successfully-verified.component';
+import { OnboardingWelcomeComponent } from './views/common/onboarding-welcome/onboarding-welcome.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import {CarouselModule} from 'primeng/carousel';
     UpdateProfileComponent,
     AddReviewModalComponent,
     OnBoardingModalComponent,
-    OnBoardingProfileModalComponent
+    OnBoardingProfileModalComponent,
+    OnBoardingVerifyOtpComponent,
+    OnBoardingSuccessfullyVerifiedComponent,
+    OnboardingWelcomeComponent
   ],
   imports: [
     BrowserModule,

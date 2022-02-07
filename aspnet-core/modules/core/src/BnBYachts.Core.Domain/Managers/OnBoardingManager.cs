@@ -1,8 +1,6 @@
 ﻿using BnBYachts.Core.Data.Model.VerifyPhoneNumber;
-using BnBYachts.Core.Dto;
 using BnBYachts.Core.Requestable;
 using BnBYachts.Core.Shared;
-using BnBYachts.Core.Shared.Helper;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
@@ -20,20 +18,18 @@ using Volo.Abp.Uow;
 
 namespace BnBYachts.Core.Managers
 {
-   public class OnBoardingManager : DomainService, IOnBoardingManager
+    public class OnBoardingManager : DomainService, IOnBoardingManager
     {
         private readonly IRepository<IdentityUser, Guid> _repository;
         private readonly IRepository<OTPVerifierEntity> _repositoryOTPEntity;
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
         private readonly ILogger<IOnBoardingManager> _logger;
-        private readonly IS3FileService _s3FileService;
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         public OnBoardingManager(IRepository<IdentityUser, Guid> repository,
             IRepository<OTPVerifierEntity> repositoryOTPEntity,
             IObjectMapper<CoreDomainModule> objectMapper,
             ILogger<IOnBoardingManager> logger,
-            IS3FileService s3FileService,
             EventBusDispatcher eventBusDispatcher,
             IUnitOfWorkManager unitOfWorkManager)
         {
@@ -41,7 +37,6 @@ namespace BnBYachts.Core.Managers
             _repositoryOTPEntity = repositoryOTPEntity;
             _objectMapper = objectMapper;
             _logger = logger;
-            _s3FileService = s3FileService;
             _eventBusDispatcher = eventBusDispatcher;
             _unitOfWorkManager = unitOfWorkManager;
         }
@@ -52,20 +47,12 @@ namespace BnBYachts.Core.Managers
             {
                 var random = new Random();
                 mobileVerification.OtpCode = (random.Next(100000, 999999)).ToString();
-                try
+                await _eventBusDispatcher.Publish<IOTPContract>(new OTPContract
                 {
-                    await _eventBusDispatcher.Publish<IOTPContract>(new OTPContract
-                    {
-                        PhoneNumber = mobileVerification.Phone,
-                        OTPCode = mobileVerification.OtpCode
-                    });
-
-                }
-                catch (Exception ex)
-                {
-
-                    throw;
-                }
+                    PhoneNumber = mobileVerification.Phone,
+                    OTPCode = mobileVerification.OtpCode
+                });
+                _logger.LogInformation("Generate OTP and send the otp code to user mobile number against this user Id:" + _unitOfWorkManager.Current.Id.ToString());
                 await _repositoryOTPEntity.InsertAsync(_objectMapper.Map<UserMobileVerificationRequestable, OTPVerifierEntity>(mobileVerification), true);
 
             }
@@ -93,15 +80,13 @@ namespace BnBYachts.Core.Managers
         public async Task UploadProfileImage(IFormFile file, string userId)
         {
             var userEntity = await _repository.FindAsync(res => res.Id == Guid.Parse(userId)).ConfigureAwait(false);
-            if (userEntity!=null)
+            if (userEntity != null)
             {
-
-                await _s3FileService.UploadFileToAWSAsync(file, "profilePicture", "");
-                userEntity.SetProperty(UserConstants.ImagePath,file.FileName,true);
+                userEntity.SetProperty(UserConstants.ImagePath, file.FileName, true);
                 await _repository.UpdateAsync(userEntity, autoSave: true).ConfigureAwait(false);
                 _logger.LogInformation("Successfully Update the Profile Picture of:" + _unitOfWorkManager.Current.Id.ToString());
             }
-            
+
         }
         public async Task ChangeInitialLoginStatus(string userId)
         {
@@ -115,6 +100,6 @@ namespace BnBYachts.Core.Managers
         }
 
 
-     
+
     }
 }

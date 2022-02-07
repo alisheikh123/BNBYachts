@@ -22,9 +22,8 @@ export class BoatDetailsComponent implements OnInit {
   bookingId: any;
   boatId: number;
   boatDetails: any;
-  //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
-  assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
+  assetsCoreUrl = environment.S3BUCKET_URL + '/profilePicture/';
 
   guidId!: Guid;
   minDate:any;

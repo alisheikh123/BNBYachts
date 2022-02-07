@@ -33,12 +33,14 @@ namespace BnBYachts.Core.Managers
         private readonly IConfiguration _config;
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
         private readonly ILogger<IAppUserManager> _logger;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public AppUserManager(IRepository<IdentityUser, Guid> repository,
             IdentityUserManager userManager, IdentityRoleManager roleManager,
             EventBusDispatcher eventBusDispatcher, IConfiguration config,
             IObjectMapper<CoreDomainModule> objectMapper, 
-            ILogger<IAppUserManager> logger
+            ILogger<IAppUserManager> logger,
+            IUnitOfWorkManager unitOfWorkManager
             )
         {
             _repository = repository;
@@ -48,15 +50,18 @@ namespace BnBYachts.Core.Managers
             _config = config;
             _objectMapper = objectMapper;
             _logger = logger;
+            _unitOfWorkManager = unitOfWorkManager;
         }
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
+            _logger.LogInformation("Get user detail against user Id : " + _unitOfWorkManager.Current.Id.ToString());
             return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)));
         }
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             var user = await _repository.GetAsync(res => res.UserName == username).ConfigureAwait(false);
+            _logger.LogInformation("Get user detail against user name : " + _unitOfWorkManager.Current.Id.ToString());
             return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)));
         }
 

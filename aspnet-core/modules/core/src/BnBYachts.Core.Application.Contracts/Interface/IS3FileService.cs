@@ -1,4 +1,5 @@
-﻿using BnBYachts.Core.Shared.DTO;
+﻿
+using BnBYachts.Core.Dto;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BnBYachts.Core.Shared.Interface
+namespace BnBYachts.Core.Interface
 {
     public interface IS3FileService
     {

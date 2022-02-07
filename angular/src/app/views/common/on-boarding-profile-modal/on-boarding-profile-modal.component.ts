@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { UserDefaults } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
+import { OnboardingWelcomeComponent } from '../onboarding-welcome/onboarding-welcome.component';
 
 @Component({
   selector: 'app-on-boarding-profile-modal',
@@ -16,7 +17,7 @@ export class OnBoardingProfileModalComponent implements OnInit {
   USER_DEFAULTS = UserDefaults;
   uploadPictureForm: FormGroup;
   userDetails: any;
-  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
+  assetsUrl = environment.S3BUCKET_URL + '/profilePicture/';
   @ViewChild('welcome', { static: true }) welcome: any;
   constructor(public fb: FormBuilder, private service: AuthService, private toastr: ToastrService, private modalService: NgbModal) { }
 
@@ -46,7 +47,7 @@ export class OnBoardingProfileModalComponent implements OnInit {
       formData.append('file', this.uploadPictureForm.get('profile')!.value);
       this.service.UploadProfileImage(formData).subscribe((res: any) => {
         this.modalService.dismissAll();
-        this.modalService.open(this.welcome, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' });
+        this.modalService.open(OnboardingWelcomeComponent, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' });
       });
     }
 }
@@ -54,10 +55,7 @@ DismissAll() {
   this.modalService.dismissAll();
   this.service.IsIntialLoginStatus().subscribe(res=>{});
 }
-exploreBoats()
-{
-  this.modalService.dismissAll();
-}
+
 }
 
 

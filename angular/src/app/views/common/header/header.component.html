@@ -53,7 +53,7 @@
                                     </span>
                                     Inbox
                                 <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
-                            </a>                                
+                            </a>
                             <a [routerLink]="['/host/calendar']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Calendar" [ngClass]="{'active':activeTab == HEADER_TABS.Calendar}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/calendar-icon.svg"
@@ -76,7 +76,7 @@
                                     </span>
                                     Listing
                             </a>
-                            <div class="dropdown custom-dropdown borderless-dropdown">                                
+                            <div class="dropdown custom-dropdown borderless-dropdown">
                                 <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="logo-wrapper">
                                         <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
@@ -102,7 +102,7 @@
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
                                 id="dropdownMenuButton1">
-                                <img src="{{assetsUrl + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
+                                <img src="{{assetUrlS3 + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
                             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">

@@ -1,13 +1,13 @@
-﻿using BnBYachts.Core.Shared.DTO;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon;
-using BnBYachts.Core.Shared.Interface;
 using Volo.Abp.Domain.Services;
 using Microsoft.Extensions.Options;
+using BnBYachts.Core.Dto;
+using BnBYachts.Core.Interface;
 
-namespace BnBYachts.Core.Shared.Helper
+namespace BnBYachts.Core.Services.HelpingService
 {
    public class S3FileService: DomainService,IS3FileService
     {
@@ -18,9 +18,6 @@ namespace BnBYachts.Core.Shared.Helper
         }
         public async Task<S3ResponseDTO> UploadFileToAWSAsync(IFormFile myfile, string subFolder = "", string childFolder = "")
         {
-
-            try
-            {
                 var s3Client = new AmazonS3Client(_awsSettings.AWSAccessKey, _awsSettings.AWSSecretKey, RegionEndpoint.USEast1);
                 var bucketName = _awsSettings.AWSBucketName;
                 var keyName = _awsSettings.AWSDefaultFolder;
@@ -38,15 +35,15 @@ namespace BnBYachts.Core.Shared.Helper
                 }
                 keyName = keyName + "/" + myfile.FileName;
                 var fs = myfile.OpenReadStream();
+                
                 var request = new Amazon.S3.Model.PutObjectRequest
                 {
                     BucketName = bucketName,
                     Key = keyName,
                     InputStream =fs,
-                    ContentType = "image/png",
+                    ContentType = myfile.ContentType,
                     CannedACL = S3CannedACL.PublicRead
                 };
-                //myfile.ContentType
                 var response = await s3Client.PutObjectAsync(request);
                 return new S3ResponseDTO
                 {
@@ -54,12 +51,6 @@ namespace BnBYachts.Core.Shared.Helper
                     BucketName = bucketName,
                     KeyName = myfile.FileName
                 };
-            }
-            catch (System.Exception ex)
-            {
-
-                throw;
-            }
         }
     }
 }

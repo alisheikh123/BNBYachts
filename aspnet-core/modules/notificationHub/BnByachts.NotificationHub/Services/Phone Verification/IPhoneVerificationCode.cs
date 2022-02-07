@@ -7,7 +7,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace BnByachts.NotificationHub.Services.Phone_Verification
 {
-    public interface IPhoneVerificationCode : ITransientDependency
+    public interface IPhoneVerificationCode
     {
         Task SendOTPAsync(string phoneNumber, string otpCode);
     }

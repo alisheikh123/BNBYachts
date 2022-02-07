@@ -91,16 +91,16 @@ export class AuthService {
   }
   sendMobileNumber(mobileVerification:any)
   {
-
     return this.http.post(this.apiCoreURl + "/api/app/on-boarding/generate-oTP", mobileVerification)
     .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
   verifyOTP(otpNumber:Number)
   {
-    return this.http.get<any>(this.apiCoreURl + "/api/app/on-boarding/verify-oTP?otpNumber=" + otpNumber);
+    return this.http.get(this.apiCoreURl + "/api/app/on-boarding/verify-oTP?otpNumber=" + otpNumber);
   }
   UploadProfileImage(file:any)
   {
+    debugger;
     return this.http.post(this.apiCoreURl + "/api/app/on-boarding/upload-profile-image", file)
     .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
