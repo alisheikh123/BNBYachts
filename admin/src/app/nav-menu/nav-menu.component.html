@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent" >
+  <div class="container-fluid">
+    <div class="navbar-wrapper">
+      <div class="d-lg-none d-md-block">
+        <img src="assets\images\bnb.png" style="width: 65px; height: 100%;">
+      </div>
+       <div class="navbar-toggle" style="padding-right:10px;">
+        <button type="button" class="navbar-toggler">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div> 
+      <div style="text-align:center;cursor: pointer; display:none;" >
+      </div>
+    </div>
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="topNavBarCollapse">
+      <ul class="navbar-nav container-fluid">
+        <li class="col-6 col-md-auto " style="margin-left: auto;">
+          <div>
+          </div>
+        </li>
+        <li class="nav-item btn-rotate dropdown col" placement="bottom-left" style="text-align: right;max-width: 53px;">
+        </li>
+        <li class="col-1">
+          <a class="dropdown-toggle text-dark" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="assets/images/users.png" class="rounded-circle z-depth-0" style="width: 65px;"
+                 alt="avatar image">
+            <span class="d-lg-none d-md-block" style="padding-left:20px;">currentUser</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right col" aria-labelledby="dropdown04">
+            <div class="dropdown-divider"></div>
+            <a class="nav-link text-dark" (click)="logout()" style="color: #000;" >Logout </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

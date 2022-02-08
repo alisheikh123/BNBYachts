@@ -1,0 +1,57 @@
+<div class="container">
+<h4 id="tableLabel">Dispute Queries</h4>
+<accordion [isAnimated]="true">
+  <accordion-group [isOpen]="false" style="padding-bottom:1rem;" id="accordionFilter">
+    <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+      <div class="text-left">
+        Filter
+      </div>
+    </button>
+    &nbsp;
+    <div class="input-group" >
+      <input [(ngModel)]='searchTerm' id="searchTerm" type="text" class="form-control col-6" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+    </div>
+    &nbsp;
+    <div class="input-group">
+      <button (click)="filter(false)" id="filter" class="btn kpBtnGreen" type="button">
+        &nbsp;Filter</button>
+      &nbsp; &nbsp; <button (click)="filter(true)" *ngIf="searchTerm" id="filter" class="btn kpBtnYellow" type="button">
+        &nbsp;Reset</button>
+    </div>
+  </accordion-group>
+</accordion> 
+
+  <table sortable-table class='table'>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Booking Type</th>
+        <th>Dispute Reason</th>
+        <th>Status</th>
+        <th>Complain Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dispute;  index as i">
+        <td>{{i + 1}}</td>
+        <td id="name">{{ item.bookingType }}</td>
+        <td id="email">{{item.disputeReason}}</td>
+        <td id="phoneNumber">{{item.status}}</td>
+        <td id="creationTime">{{ item.creationTime | date : 'medium'}}</td>
+        <td>
+          <button class="btn btn-primary">view</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end" >
+    <pagination  id="pagination"  [boundaryLinks]="true"  [totalItems]="totalItems"
+    [itemsPerPage]="pageSize"
+    [(ngModel)]="pageNumber"
+    [maxSize] = 10
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 
+  </pagination>
+  </div>
+</div>
