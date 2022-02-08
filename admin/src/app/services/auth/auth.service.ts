@@ -5,9 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStoreService } from 'src/app/services/local-store.service';
 import { environment } from 'src/environments/environment';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   apiCoreURl = environment.CORE_API_URL;
   isLoading$: Observable<boolean>;

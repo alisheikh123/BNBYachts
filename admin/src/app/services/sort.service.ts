@@ -3,9 +3,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class SortService {
   constructor() { }

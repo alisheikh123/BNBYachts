@@ -4,9 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ErrorService } from '../error.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DisputeService {
   BOOKING_API_URL = environment.BOOKING_API_URL;
   constructor(private http: HttpClient, private errorService: ErrorService) {

@@ -1,3 +1,5 @@
+import { SortService } from './services/sort.service';
+import { LocalStoreService } from 'src/app/services/local-store.service';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/user.service';
 import { AuthAppModule } from './site/auth/auth.module';
@@ -81,6 +83,9 @@ export let AppInjector: Injector;
       useClass: HttpConfigInterceptor,
       multi: true
     },
+    LocalStoreService,
+    SortService,
+    UserService,
     ErrorService,
     DisputeService,
     RoutesGuard,

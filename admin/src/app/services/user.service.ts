@@ -4,9 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserService {
   CORE_API_URL = environment.CORE_API_URL;
   constructor(private http: HttpClient, private errorService: ErrorService) {
