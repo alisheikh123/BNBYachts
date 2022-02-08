@@ -60,6 +60,8 @@ namespace BnBYachts.Booking
                 .ForMember(x => x.BookingTypeId, opt => opt.MapFrom(source => source.EventId));
             CreateMap<DisputeRequestableDto, BookingDisputeEntity>()
                 .ForMember(res=>res.DisputeReason,opt=>opt.MapFrom(res=>res.ReasonId));
+            CreateMap<BookingDisputeEntity, DisputeTransferable>();
+
         }
     }
 }

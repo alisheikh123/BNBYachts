@@ -1,7 +1,5 @@
 import { DisputeService } from './../../services/site/dispute.service';
-import { Pagination } from './../../models/pagination';
 import { Component, OnInit } from '@angular/core';
-import 'bootstrap/dist/js/bootstrap.bundle';
 import { AppComponent } from '../../app.component';
 
 @Component({
@@ -17,7 +15,6 @@ export class DisputeListingComponent implements OnInit {
   public pageSize: any;
   public totalItems: any;
   public searchTerm! : string;
-
   constructor(public app: AppComponent, private disputeService: DisputeService) {
   }
   ngOnInit(): void {

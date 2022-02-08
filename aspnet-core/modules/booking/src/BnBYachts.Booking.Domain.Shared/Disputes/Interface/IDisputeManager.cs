@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using BnBYachts.Shared.Model;
+using System.Threading.Tasks;
 
 namespace BnBYachts.Booking.Disputes.Interface
 {
@@ -6,5 +7,7 @@ namespace BnBYachts.Booking.Disputes.Interface
     {
         Task AddDispute(DisputeRequestableDto data);
         Task<string> GetEmailContent(int templateId);
+        Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination);
+
     }
 }

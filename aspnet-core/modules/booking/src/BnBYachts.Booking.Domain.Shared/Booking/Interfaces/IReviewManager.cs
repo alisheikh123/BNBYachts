@@ -12,6 +12,6 @@ namespace BnBYachts.Booking.Interfaces
         Task<bool> AddReview(BookingReviewRequestable review);
         Task<ICollection<ReviewTransferable>> GetBookingReviews(int bookingId);
         Task<bool> IsReviewAlreadyPosted(string userId,int bookingId);
-        Task<ICollection<ReviewTransferable>> GetBoatReviews(int boatId);
+        Task<ICollection<ReviewTransferable>> GetBoatReviews(int boatId, int reviewSorting);
     }
 }

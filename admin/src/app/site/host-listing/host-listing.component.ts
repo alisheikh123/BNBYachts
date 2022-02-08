@@ -1,7 +1,5 @@
-import { Pagination } from './../../models/pagination';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import 'bootstrap/dist/js/bootstrap.bundle';
 import { AppComponent } from '../../app.component';
 
 @Component({

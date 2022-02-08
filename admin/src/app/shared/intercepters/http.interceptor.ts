@@ -17,7 +17,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (token) {
             request = this.addToken(request, token);
         }
-             this.onStart();
+            //  this.onStart();
             return next.handle(request)
                 .pipe(
                     tap(
@@ -30,7 +30,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                         () => {
                             this.pendingRequests--;
                             if (this.pendingRequests == 0) {
-                                this.onEnd();
+                                // this.onEnd();
                             }
                         }
                     )

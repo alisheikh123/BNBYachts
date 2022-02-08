@@ -1,7 +1,5 @@
-import { Pagination } from './../../models/pagination';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import 'bootstrap/dist/js/bootstrap.bundle';
 import { AppComponent } from '../../app.component';
 
 @Component({
@@ -40,7 +38,7 @@ export class UserListingComponent implements OnInit {
       this.pagination.pageNumber = res.pageNumber;
       this.pagination.pageSize = res.pageSize;
       this.pagination.totalItems = res.totalCount;
-    }, error => console.error(error));
+    });
   }
   pageChanged(event: any): void {
     this.pageNumber = event.page;

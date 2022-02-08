@@ -2,6 +2,7 @@
 using BnBYachts.Booking.Disputes.Interface;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
+using BnBYachts.Shared.Model;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Text;
@@ -37,6 +38,8 @@ namespace BnBYachts.Booking.Services
                 IsBodyHtml = true,
             });
         }
+        public async Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination) => await _manager.GetDisputeList(SearchText, pagination);
+
     }
 }
 

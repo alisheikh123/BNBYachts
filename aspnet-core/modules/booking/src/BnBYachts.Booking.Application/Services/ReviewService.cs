@@ -22,7 +22,7 @@ namespace BnBYachts.Booking.Services
 
         public async Task<ICollection<ReviewTransferable>> GetReviews(int revieweeId, bool isAllReview) => await _reviewManager.GetReviews(revieweeId, isAllReview, CurrentUser.Id.ToString());
         public async Task<ICollection<ReviewTransferable>> GetBookingReviews(int bookingId) => await _reviewManager.GetBookingReviews(bookingId);
-        public async Task<ICollection<ReviewTransferable>> GetBoatReviews(int boatId) => await _reviewManager.GetBoatReviews(boatId);
+        public async Task<ICollection<ReviewTransferable>> GetBoatReviews(int boatId, int reviewSorting) => await _reviewManager.GetBoatReviews(boatId, reviewSorting);
         public async Task<bool> GetIfReviewAlreadyPosted(int bookingId) => await _reviewManager.IsReviewAlreadyPosted(CurrentUser.Id.ToString(), bookingId);
     }
 }
