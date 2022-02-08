@@ -169,7 +169,7 @@
                 <div class="center-content">
                   <a [routerLink]="['/boat-listing/reservation-cancellation',charterBooking?.id]"
                     class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
-                  <a *ngIf="!isUserHost" [routerLink]="['/boat-listing/modify-reservation',charterBooking?.id]"
+                  <a *ngIf="!isUserHost && !charterBooking?.isFullBoatCharges==true" [routerLink]="['/boat-listing/modify-reservation',charterBooking?.id]"
                     class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
                     <a (click)="addReview()"
                     *ngIf='!charterReservation?.isPosted && isBookingPassed() && charterBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
