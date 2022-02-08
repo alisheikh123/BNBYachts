@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
     .subscribe((res: any) => {
               if (res.isAuthenticated) {
         if (res?.accessToken != null && res?.userData?.sub != null) {
-          localStorage.setItem('accessToken', res?.accessToken);
           localStorage.setItem('userId', res?.userData?.sub);
           this.router.navigate(['/home']);
         }
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit {
       else {
         this.userDetails = res;
         if (res?.roles?.length > 1) {
-          this.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.admin.toLowerCase()).roleId;
+          this.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.ADMIN.toLowerCase()).roleId;
         }
         if (localStorage.getItem('userRole')) {
           this.loggedInUserRole = localStorage.getItem('userRole');

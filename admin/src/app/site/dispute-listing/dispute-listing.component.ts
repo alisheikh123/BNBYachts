@@ -8,7 +8,6 @@ import { AppComponent } from '../../app.component';
 })
 
 export class DisputeListingComponent implements OnInit {
-  pagination : any;
   public dispute!: any[];
   public roleName!: string;
   public pageNumber: any = 1;
@@ -23,7 +22,6 @@ export class DisputeListingComponent implements OnInit {
   filter(reset: boolean) {
     if (reset) {
       this.searchTerm = "";
-      this.pagination = null;
     }
 
     var searchModel = {

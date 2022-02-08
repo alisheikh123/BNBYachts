@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
+import { UserRoles } from 'src/app/shared/enums/userRoles';
 
 @Component({
   selector: 'app-host-listing',
@@ -8,13 +9,12 @@ import { AppComponent } from '../../app.component';
 })
 
 export class HostListingComponent implements OnInit {
-  pagination : any;
   public user!: any[];
-  public roleName!: string;
-  public pageNumber: any;
-  public pageSize: any;
+  Roles = UserRoles;
+  public pageNumber!: number;
+  public pageSize!: number;
   public searchTerm! : string;
-  public totalItems: any;
+  public totalItems!: number;
 
   constructor(public app: AppComponent, private userService: UserService) {
   }
@@ -22,19 +22,17 @@ export class HostListingComponent implements OnInit {
     this.filter(false);
   }
   filter(reset: boolean) {
-    this.roleName = "HOST";
     if (reset) {
       this.searchTerm = "";
-      this.pagination = null;
     }
 
     var searchModel = {
       searchTerm: (this.searchTerm != undefined) ? this.searchTerm : "" ,
-      pageNumber: (this.pagination != null) ? this.pagination.pageNumber : 1,
-      pagesize: (this.pagination != null) ? this.pagination.pageSize : 10,
+      pageNumber: (this.pageNumber != null) ? this.pageNumber : 1,
+      pagesize: (this.pageSize != null) ? this.pageSize : 10,
     };
 
-    this.userService.getBoatsUser(this.roleName,searchModel).subscribe((res: any)  => {
+    this.userService.getBoatsUser(this.Roles.HOST,searchModel).subscribe((res: any)  => {
       this.user = res.data;
       this.pageNumber = res.pageNumber;
       this.pageSize = res.pageSize;
@@ -43,7 +41,7 @@ export class HostListingComponent implements OnInit {
   }
 
   pageChanged(event: any): void {
-    this.pagination.pageNumber = event.page;
+    this.pageNumber = event.page;
     this.filter(false);
   }
 }

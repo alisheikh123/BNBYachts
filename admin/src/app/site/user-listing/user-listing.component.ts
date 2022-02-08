@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../../app.component';
+import { UserRoles } from 'src/app/shared/enums/userRoles';
 
 @Component({
   selector: 'app-user-listing',
@@ -8,12 +9,11 @@ import { AppComponent } from '../../app.component';
 })
 
 export class UserListingComponent implements OnInit {
-  pagination! : any;
+  Roles = UserRoles;
   public user!: any[];
-  public roleName!: string;
-  public pageNumber: any;
-  public pageSize: any;
-  public totalItems: any;
+  public pageNumber!: number;
+  public pageSize!: number;
+  public totalItems!: number;
   public searchTerm! : string;
 
   constructor(public app: AppComponent, private userService: UserService) {
@@ -22,22 +22,21 @@ export class UserListingComponent implements OnInit {
     this.filter(false);
   }
   filter(reset: boolean) {
-    this.roleName = "USER";
     if (reset) {
       this.searchTerm = "";
     }
 
     var searchModel = {
       searchTerm: (this.searchTerm != undefined) ? this.searchTerm : "" ,
-      pageNumber: (this.pagination != null) ? this.pagination.pageNumber : 1,
-      pagesize: (this.pagination != null) ? this.pagination.pageSize : 10,
+      pageNumber: (this.pageNumber != null) ? this.pageNumber : 1,
+      pagesize: (this.pageSize != null) ? this.pageSize : 10,
     };
 
-    this.userService.getBoatsUser(this.roleName,searchModel).subscribe((res: any)  => {
+    this.userService.getBoatsUser(this.Roles.USER,searchModel).subscribe((res: any)  => {
       this.user = res.data;
-      this.pagination.pageNumber = res.pageNumber;
-      this.pagination.pageSize = res.pageSize;
-      this.pagination.totalItems = res.totalCount;
+      this.pageNumber = res.pageNumber;
+      this.pageSize = res.pageSize;
+      this.totalItems = res.totalCount;
     });
   }
   pageChanged(event: any): void {

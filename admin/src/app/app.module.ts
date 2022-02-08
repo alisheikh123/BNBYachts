@@ -27,9 +27,7 @@ import { SortableColumnComponent } from './controls/sortable-column/sortable-col
 import { SideNavMenuComponent } from './site/side-nav-menu/side-nav-menu.component';
 import { PublicLayoutComponent } from './site/public-layout/public-layout.component';
 import { PrivateLayoutComponent } from './site/private-layout/private-layout.component';
-import { TranslateService } from './services/translate.service';
 import { RoutesGuard } from './routes.guard';
-// import { PaginationComponent } from './common/pagination/components/pagination.component';
 import {AuthModule, LogLevel} from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './shared/intercepters/http.interceptor';
@@ -37,7 +35,6 @@ import { HttpConfigInterceptor } from './shared/intercepters/http.interceptor';
 export let AppInjector: Injector;
 @NgModule({
   declarations: [
-    // PaginationComponent,
     UserListingComponent,
     HostListingComponent,
     DisputeListingComponent,
@@ -84,13 +81,6 @@ export let AppInjector: Injector;
       useClass: HttpConfigInterceptor,
       multi: true
     },
-    TranslateService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: setupTranslateFactory,
-      deps: [TranslateService],
-      multi: true
-    },
     ErrorService,
     DisputeService,
     RoutesGuard,
@@ -101,9 +91,4 @@ export let AppInjector: Injector;
 })
 export class AppModule {
 
-}
-
-export function setupTranslateFactory(service: TranslateService): Function {
-  let lang = localStorage.getItem('defaultLanguage');
-  return () => service.use(lang || 'en');
 }

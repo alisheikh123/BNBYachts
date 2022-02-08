@@ -26,7 +26,7 @@ export class AuthService {
     }
   }
   loggedIn() {
-    if (!localStorage.getItem('accessToken'))
+    if (!this.oidcSecurityService.getAccessToken())
       return false;
     else
       return true;

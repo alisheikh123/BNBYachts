@@ -4,6 +4,8 @@ import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { totalUsers } from 'src/app/shared/interfaces/totalUsers';
+import { UserRoles } from 'src/app/shared/enums/userRoles';
 @Component({
   selector: 'app-home-dashboard',
   templateUrl: './home-dashboard.component.html',
@@ -11,24 +13,20 @@ import { AppComponent } from 'src/app/app.component';
 })
 
 export class HomeDashboardComponent implements OnInit{
-  totalUser: any;
-  disputes : any;
-  hostRole! : string;
-  userRole! : string;
-  searchTerm!: any;
+  totalUser! : totalUsers;
+  Roles = UserRoles;
+  searchTerm!: string;
   pagination!: Pagination;
   userDetails: any;
-  isLoggedIn: boolean | any;
+  isLoggedIn!: boolean;
   constructor(private userService : UserService,private disputeService : DisputeService, public router: Router, public app: AppComponent){
   }
 
   ngOnInit(): void {
-    this.hostRole = "HOST",
-    this.userRole = "USER",
-    this.getTotalUser(this.userRole ,this.hostRole);
+    this.getTotalUser(this.Roles.USER,this.Roles.HOST);
     this.getDisputeList();
   }
-  getTotalUser(userRole:any, hostRole:any ){
+  getTotalUser(userRole : string, hostRole : string ){
     this.userService.getTotalUsers(userRole,hostRole).subscribe((res: any) => {
       this.totalUser = res;
     })
@@ -40,7 +38,7 @@ export class HomeDashboardComponent implements OnInit{
       pageSize: (this.pagination != null) ? this.pagination.pageSize : 10,
     };
     this.disputeService.getDisputeList(searchModel).subscribe((res: any) => {
-      this.disputes = res?.totalCount;
+      this.totalUser.disputes = res?.totalCount;
     })
   }
 }

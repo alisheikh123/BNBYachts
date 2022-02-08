@@ -1,3 +1,4 @@
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Injectable } from "@angular/core";
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -11,9 +12,9 @@ import { LoaderService } from "../loader/services/loader.service";
 export class HttpConfigInterceptor implements HttpInterceptor {
     private pendingRequests: number = 0;
     headers: any;
-    constructor(private loader: LoaderService, private router: Router) { }
+    constructor(private loader: LoaderService, private router: Router, private oidcSecurityService : OidcSecurityService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let token = localStorage.getItem('accessToken');
+        let token = this.oidcSecurityService.getAccessToken();
         if (token) {
             request = this.addToken(request, token);
         }
