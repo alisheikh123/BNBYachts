@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { addMs } from '@fullcalendar/core';
 import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
@@ -47,6 +49,9 @@ export class EventDetailsComponent implements OnInit {
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
   eventCapcityValidation:any;
+  booking = {
+    amount :0
+  };
   @ViewChild('popOver') public popover: NgbPopover;
   approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
 
@@ -61,7 +66,9 @@ export class EventDetailsComponent implements OnInit {
   getEventDetailsById() {
     this.yachtSearchService.eventDetailsById(this.eventId).subscribe((res: any) => {
       this.eventDetails = res.eventDetails;
+      debugger;
       this.eventSchedule = res.eventSchedule;
+      this.calculatePricing();
       this.getHostDetails(this.eventDetails?.boat.creatorId);
     })
   }
@@ -132,6 +139,7 @@ export class EventDetailsComponent implements OnInit {
     this.eventFilterDetails.adults = this.popOverFilterData.adults;
     this.eventFilterDetails.childrens = this.popOverFilterData.childrens;
     this.eventCapcityValidation = (((this.eventFilterDetails.adults + this.eventFilterDetails.childrens)>this.eventDetails?.guestCapacity)||((this.eventFilterDetails.adults + this.eventFilterDetails.childrens)<1))?"Entered guest capacity is not available":this.popover.close();
+    this.calculatePricing();
   }
 
   onChangeDate(isIncrease: boolean) {
@@ -141,4 +149,20 @@ export class EventDetailsComponent implements OnInit {
       this.eventDetails = res?.eventDetails;
     })
   }  
+  
+  calculatePricing() {
+    if ((this.eventFilterDetails?.adults + this.eventFilterDetails?.childrens) > 0  && this.eventDetails != null) {
+        let findCalendar = this.eventDetails?.boat.boatCalendars.find((element: any) =>
+          moment(element.fromDate).format("DD-MM-YYYY") == moment(this.eventDetails?.startDateTime).format("DD-MM-YYYY") &&
+          moment(element.toDate).format("DD-MM-YYYY") == moment(this.eventDetails?.startDateTime).format("DD-MM-YYYY")
+           && element.isAvailable
+        );
+        if (findCalendar) {
+          this.booking.amount = findCalendar.amount;
+        }
+        else {
+          this.booking.amount = this.eventDetails?.amountPerPerson;
+        }
+      }
+    }
 }

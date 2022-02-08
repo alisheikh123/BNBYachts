@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
@@ -30,6 +31,9 @@ export class EventBookingPaymentComponent implements OnInit {
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
   cancellationPolicyString = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.";
   readAll = false;
+  booking = {
+    amount :0
+  };
 
   constructor(public app: AppComponent,
     private cdr: ChangeDetectorRef,
@@ -48,11 +52,12 @@ export class EventBookingPaymentComponent implements OnInit {
   loadEventDetails() {
     this.boatService.eventDetailsById(this.eventId).subscribe((res: any) => {
       this.eventDetails = res?.eventDetails;
+      this.calculatePricing();
     })
   }
 
   async confirmBooking() {
-    var amount =this.eventDetails?.amountPerPerson * (this.eventFilterDetails.adults + this.eventFilterDetails.childrens);
+    var amount =this.booking.amount * (this.eventFilterDetails.adults + this.eventFilterDetails.childrens);
     var token = (this.paymentMethodsComponent.addCardDetails ? await this.paymentMethodsComponent.createToken() : null);
     let model = {
       paymentId: this.paymentMethodsComponent.paymentMethodId,
@@ -90,4 +95,19 @@ export class EventBookingPaymentComponent implements OnInit {
     this.disablePayment();
     this.cdr.detectChanges();
   }
+  calculatePricing() {
+    if ((this.eventFilterDetails?.adults + this.eventFilterDetails?.childrens) > 0  && this.eventDetails != null) {
+        let findCalendar = this.eventDetails?.boat.boatCalendars.find((element: any) =>
+          moment(element.fromDate).format("DD-MM-YYYY") == moment(this.eventDetails?.startDateTime).format("DD-MM-YYYY") &&
+          moment(element.toDate).format("DD-MM-YYYY") == moment(this.eventDetails?.startDateTime).format("DD-MM-YYYY")
+           && element.isAvailable
+        );
+        if (findCalendar) {
+          this.booking.amount = findCalendar.amount;
+        }
+        else {
+          this.booking.amount = this.eventDetails?.amountPerPerson;
+        }
+      }
+    }
 }
