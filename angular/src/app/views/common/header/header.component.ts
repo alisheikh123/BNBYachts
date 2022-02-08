@@ -3,7 +3,7 @@ import { ForgotPasswordComponent } from './../../auth/components/forgot-password
 
 import { OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../../auth/components/login-modal/login-modal.component';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
   };
   @ViewChild(ChatComponent) chatComponent: ChatComponent;
   constructor(public router: Router, public app: AppComponent, 
-    private toastr: ToastrService, private modal: NgbModal, 
+    private toastr: ToastrService, private modal: NgbModal,
     private oidcSecurityService: OidcSecurityService, 
     private authService: AuthService,private chatService:ChatService) { }
     activeTab: number = 0;
@@ -151,8 +151,8 @@ export class HeaderComponent implements OnInit {
 
   continueToEarn() {
     if(this.selectedOption.byHost){
-      this.router.navigate(['try-hosting']);
       this.modal.dismissAll();
+      this.router.navigate(['try-hosting']);
     }
   }
 }

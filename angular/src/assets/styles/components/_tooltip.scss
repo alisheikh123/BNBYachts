@@ -101,3 +101,39 @@
       margin-left: 10px;
     }
   }
+
+  .label-withtooltip{
+    width:100%  !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    > span{
+      min-width: 90px;
+      margin-right: 10px;
+    }
+     span{
+      position: relative !important;
+      top: unset !important;
+      left: unset !important;
+      right: unset !important;
+      transform: unset !important;
+    }
+    .tooltip-wrapper{
+      width: 17px !important;
+      .tooltip-dialogue{
+        min-width: 180px !important;
+        min-height: 100px !important;
+        left: -10px !important;
+        top: 30px !important;
+        padding: 10px !important;
+        &::after{
+          left: 10px !important;
+          top: -10px !important;
+          right:unset !important;
+        }
+        .small-mini-text{
+          margin: 0 !important;
+        }
+      }
+    }
+  }
