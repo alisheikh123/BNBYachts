@@ -27,7 +27,6 @@ const routes: Routes =[
     component: PrivateLayoutComponent,
     canActivate: [RoutesGuard],
     children: [
-      //{ path: 'loading', component: BlankLandingScreenComponent },
       { path: 'home', component: HomeDashboardComponent },
       { path: 'users', component: UserListingComponent },
       { path: 'host', component: HostListingComponent },

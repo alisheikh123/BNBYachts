@@ -21,7 +21,6 @@ import { LoadingIconComponent } from './controls/loading-icon/loading-icon.compo
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 
-// import { RoutesGuard } from './routes.guard';
 import { SortableTableDirective } from './directives/sortable-table.directive';
 import { NumericOnlyDirective } from './directives/numeric-only.directive';
 import { SortableColumnComponent } from './controls/sortable-column/sortable-column.component';
@@ -30,7 +29,7 @@ import { PublicLayoutComponent } from './site/public-layout/public-layout.compon
 import { PrivateLayoutComponent } from './site/private-layout/private-layout.component';
 import { TranslateService } from './services/translate.service';
 import { RoutesGuard } from './routes.guard';
-import { PaginationComponent } from './common/pagination/components/pagination.component';
+// import { PaginationComponent } from './common/pagination/components/pagination.component';
 import {AuthModule, LogLevel} from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './shared/intercepters/http.interceptor';
@@ -38,7 +37,7 @@ import { HttpConfigInterceptor } from './shared/intercepters/http.interceptor';
 export let AppInjector: Injector;
 @NgModule({
   declarations: [
-    PaginationComponent,
+    // PaginationComponent,
     UserListingComponent,
     HostListingComponent,
     DisputeListingComponent,
