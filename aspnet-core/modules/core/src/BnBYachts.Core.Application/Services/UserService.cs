@@ -3,6 +3,7 @@ using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Transferable;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace BnBYachts.Core.Services
         [HttpGet]
         [AllowAnonymous]
         [Route("api/GetUserDetailsById/{userId}")]
-        public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId) =>await _appUserManager.GetLoggedInUserDetails(userId);
+        public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId) => await _appUserManager.GetLoggedInUserDetails(userId);
 
         [HttpGet]
         [Route("api/AddHostRole")]
@@ -79,6 +80,9 @@ namespace BnBYachts.Core.Services
         }
         [AllowAnonymous]
         public async Task<bool> IsEmailExists(string email) => await _appUserManager.IsEmailExist(email).ConfigureAwait(false);
+     
+
+
     }
 
 

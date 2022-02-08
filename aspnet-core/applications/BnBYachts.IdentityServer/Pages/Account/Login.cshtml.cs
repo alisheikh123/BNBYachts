@@ -72,7 +72,10 @@ namespace BnBYachts.Pages.Account
 
         public virtual async Task<IActionResult> OnGetAsync()
         {
-            this.BaseUrl = GetDomainUrl(ReturnUrl);
+            if (ReturnUrl!=null)
+            {
+                this.BaseUrl = GetDomainUrl(ReturnUrl);
+            }
             var schemes = await _schemeProvider.GetAllSchemesAsync();
 
             var providers = schemes

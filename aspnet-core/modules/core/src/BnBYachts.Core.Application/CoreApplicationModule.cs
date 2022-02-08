@@ -1,4 +1,6 @@
-﻿using BnBYachts.Core.Requestable;
+
+using BnBYachts.Core.Dto;
+using BnBYachts.Core.Requestable;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
@@ -26,6 +28,7 @@ namespace BnBYachts.Core
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.Configure<AdminConfigurations>(context.Services.GetConfiguration().GetSection("AdminConfigurations"));
+            Configure<AWSOptions>(context.Services.GetConfiguration().GetSection("AWSConfiguation"));
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<CoreApplicationModule>();

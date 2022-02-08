@@ -15,13 +15,14 @@ namespace BnBYachts.Core.Shared.Transferable
         public string PhoneNumber { get; set; }
         public bool IsPhoneConfirmed { get; set; }
         public string Email { get; set; }
+        public bool IsInitialLogin { get; set; }
 
 
         internal UserDetailsTransferable()
         {
         }
 
-        internal UserDetailsTransferable(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email)
+        internal UserDetailsTransferable(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool initialLogin)
         {
             Id = userId;
             Name = fullName;
@@ -32,14 +33,15 @@ namespace BnBYachts.Core.Shared.Transferable
             PhoneNumber = phoneNumber;
             IsPhoneConfirmed = isPhoneConfirmed;
             Email = email;
+            IsInitialLogin = initialLogin;
 
         }
     }
     public static class UserFactory
     {
-        public static UserDetailsTransferable Contruct(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email)
+        public static UserDetailsTransferable Contruct(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool IsInitialLogin)
         {
-            return new UserDetailsTransferable(userId, fullName, imagePath, userRoles, creationTime, about, phoneNumber, isPhoneConfirmed, email);
+            return new UserDetailsTransferable(userId, fullName, imagePath, userRoles, creationTime, about, phoneNumber, isPhoneConfirmed, email, IsInitialLogin);
         }
     }
 }

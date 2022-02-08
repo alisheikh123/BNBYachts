@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using BnBYachts.Core.MultiTenancy;
 using BnBYachts.EventBusShared;
 using Volo.Abp.AuditLogging;
