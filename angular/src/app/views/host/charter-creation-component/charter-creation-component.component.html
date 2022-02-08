@@ -113,7 +113,7 @@
                           </div>
                           <div class="col-md-3 py-2">
                             <div class="custom-select-field">
-                                <label> {{'DepartureTo'| localization}}</label>
+                                <label> {{'ArrivalDate'| localization}}</label>
                                 <ejs-datetimepicker placeholder='Select Departure From'
                                 formControlName="departureToDate" [min]="minDate"></ejs-datetimepicker>
 
@@ -126,6 +126,7 @@
                                         <label> {{'CharterFee'| localization}}</label>
                                         <input type="number" class="custom-input" placeholder="$20000"
                                                 formControlName="charterFee">
+                                                <small class="text-danger" *ngIf="charterForm.charterFee.touched && !charterForm.charterFee.valid">Charter Fee is required.</small>
                                       </div>
                                 </div>
                                 <div class="col-md-6">
@@ -172,7 +173,7 @@
                                 (click)="currentTab = currentTab-1;"> {{'Later'| localization}}</button>
                             <button class="custom-btn blue" id="save-bt"
                             [disabled]="charterForm.departingFrom.value == null || charterForm.destination.value == null || charterForm.description.value ==null||
-                            charterForm.departureFromDate.value == null || charterForm.charterFee.value == 0  "
+                            charterForm.departureFromDate.value == null || charterForm.charterFee.value <= 0  "
                                 (click)="currentTab = currentTab+1;"> {{'Continue'| localization}}</button>
 
                             </div>
