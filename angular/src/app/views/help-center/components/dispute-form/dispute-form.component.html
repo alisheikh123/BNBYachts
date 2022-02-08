@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="custom-select-field" placement="bottom">
-                            <label>Choose from any of reasons</label>
+                            <label>{{"Reason"|localization}}</label>
                             <select class="form-control" formControlName="reasonId"
                                 [ngClass]="{ 'is-invalid': isSubmitted && f.reasonId.errors }">
                                 <option [ngValue]="null">Choose Reason Type</option>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="custom-input-field">
-                        <label>Reason:*</label>
+                        <label>{{"PleaseProvideDetails"|localization}}:*</label>
                         <textarea class="custom-input" name="message" cols="3" formControlName="reason"
                             [ngClass]="{ 'is-invalid': isSubmitted && f.reason.errors }" rows="5"
                             placeholder="Reason"></textarea>

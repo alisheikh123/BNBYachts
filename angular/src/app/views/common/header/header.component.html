@@ -129,6 +129,8 @@
 </header>
 <ng-template #earnwithus>
      <div class="modal-content">
+        <div class="modal-header no-border">
+        </div>
 
         <div class="modal-body">
           <div class="custom-text-center">
@@ -140,17 +142,15 @@
                 </div>
               <img src="../../../../assets/images/host-img-small.png" alt="">
 
-              </a>
-              <a [ngClass]="{'earn-active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider" class="custom-card custom-flex-between card-right-img mt-3">
+            </a>
+              <a [ngClass]="{'earn-active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider;continueToEarn()" class="custom-card custom-flex-between card-right-img mt-3">
                 <div class="card-right-img-inside">
                   <h6 class="medium p-0 text-start">Service Provider</h6>
                   <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
                   </div>
                 <img src="../../../../assets/images/service-provider.png" alt="">
-
-                </a>
+                </a>                
           </div>
         </div>
-
       </div>
 </ng-template>
