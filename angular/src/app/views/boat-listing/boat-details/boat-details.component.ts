@@ -4,6 +4,7 @@ import { NgbDate, NgbDateStruct, NgbModal, NgbPopover, NgbRatingConfig } from '@
 import { Guid } from 'guid-typescript';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { find } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
@@ -19,6 +20,10 @@ import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-lo
   styleUrls: ['./boat-details.component.scss']
 })
 export class BoatDetailsComponent implements OnInit {
+  booking = {
+    amount :0,
+    days:0
+  };
   bookingId: any;
   boatId: number;
   boatDetails: any;
@@ -27,13 +32,13 @@ export class BoatDetailsComponent implements OnInit {
   assetsCoreUrl = environment.CORE_API_URL + '/user-profiles/';
 
   guidId!: Guid;
-  minDate:any;
-  maxDate:any;
+  minDate: any;
+  maxDate: any;
   boatFilterDetails = {
     checkinDate: new Date(),
     checkoutDate: new Date(),
-    checkinTime:"",
-    checkoutTime:"",
+    checkinTime: "",
+    checkoutTime: "",
     adults: 1,
     childrens: 0
   };
@@ -47,23 +52,18 @@ export class BoatDetailsComponent implements OnInit {
   readAll: boolean = false;
   isSubmitted: boolean = false;
   USER_DEFAULTS = UserDefaults;
-  boatelCapcityValidation:any;
-  myBookings:any = [];
-  disabledDates: [
-    { year: 2020, month: 8, day: 13 },
-    { year: 2020, month: 8, day: 19 },
-    { year: 2022, month: 1, day: 25 }
-  ];
+  boatelCapcityValidation: any;
+  myBookings: any = [];
   @ViewChild('popOver') public popover: NgbPopover;
   approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
 
   constructor(config: NgbRatingConfig, private toastr: ToastrService,
     private yachtSearchService: YachtSearchService, private router: Router,
-     private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
-      private activatedRoute: ActivatedRoute,private authService:AuthService,private modal:NgbModal) {
-   config.max = 5;
-   config.readonly = true;
- }
+    private bookingService: BookingService, private yachtParamService: YachtSearchDataService,
+    private activatedRoute: ActivatedRoute, private authService: AuthService, private modal: NgbModal) {
+    config.max = 5;
+    config.readonly = true;
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -84,30 +84,20 @@ export class BoatDetailsComponent implements OnInit {
     const d = new Date(date.year, date.month - 1, date.day);
     return this.myBookings.length > 0;
   }
-  calculateDays() {
-    if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null) {
-      var date1 = new Date(this.boatFilterDetails.checkinDate);
-      var date2 = new Date(this.boatFilterDetails.checkoutDate);
-      var Time = date2.getTime() - date1.getTime();
-      var Days = Math.floor(Time / (1000 * 3600 * 24));
-      return Days < 0 ? 0 : Days + 1;
-    }
-    else {
-      return 0;
-    }
-  }
+  
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
-      let findCalendar = res?.boatCalendars.find((res:any)=>res.isAvailable == true);
-      this.boatFilterDetails.checkinDate =new Date(findCalendar.fromDate);
-      this.boatFilterDetails.checkoutDate =new Date(findCalendar.toDate);
-      this.boatFilterDetails.checkoutDate =new Date(findCalendar.toDate);
-      this.boatFilterDetails.checkinTime =moment(this.boatDetails?.checkinTime).format("h:mm a");
-      this.boatFilterDetails.checkoutTime =moment(this.boatDetails?.checkoutTime).format("h:mm a");
-      this.minDate =  {year: new Date(findCalendar.fromDate).getFullYear(), month: new Date(findCalendar.fromDate).getMonth()+1, day: new Date(findCalendar.fromDate).getDate()};
-      this.maxDate =  {year: new Date(findCalendar.toDate).getFullYear(), month: new Date(findCalendar.toDate).getMonth()+1, day: new Date(findCalendar.toDate).getDate()};
+      let findCalendar = res?.boatCalendars.find((res: any) => res.isAvailable == true);
+      this.boatFilterDetails.checkinDate = new Date(findCalendar.fromDate);
+      this.boatFilterDetails.checkoutDate = new Date(findCalendar.toDate);
+      this.boatFilterDetails.checkoutDate = new Date(findCalendar.toDate);
+      this.boatFilterDetails.checkinTime = moment(this.boatDetails?.checkinTime).format("h:mm a");
+      this.boatFilterDetails.checkoutTime = moment(this.boatDetails?.checkoutTime).format("h:mm a");
+      this.minDate = { year: new Date(findCalendar.fromDate).getFullYear(), month: new Date(findCalendar.fromDate).getMonth() + 1, day: new Date(findCalendar.fromDate).getDate() };
+      this.maxDate = { year: new Date(findCalendar.toDate).getFullYear(), month: new Date(findCalendar.toDate).getMonth() + 1, day: new Date(findCalendar.toDate).getDate() };
       this.getHostDetails(this.boatDetails?.creatorId);
+      this.calculatePricing();
     })
   }
 
@@ -117,8 +107,8 @@ export class BoatDetailsComponent implements OnInit {
     })
   }
 
-  getMyBookings(){
-    this.bookingService.getmyBookings(this.boatId).subscribe((res:any)=>{
+  getMyBookings() {
+    this.bookingService.getmyBookings(this.boatId).subscribe((res: any) => {
       this.myBookings = res?.data;
     })
   }
@@ -139,14 +129,14 @@ export class BoatDetailsComponent implements OnInit {
 
   reserveBoat() {
     this.isSubmitted = true;
-    if(this.authService.authenticated){
+    if (this.authService.authenticated) {
       if (this.boatFilterDetails.checkinDate && this.boatFilterDetails.checkoutDate && (this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > 0) {
         let bookingModel = {
           creationTime: new Date(),
           checkinDate: this.boatFilterDetails.checkinDate,//"2021-11-04T15:25:23.927Z",
           checkoutDate: this.boatFilterDetails.checkoutDate,//"2021-11-04T15:25:23.927Z",
-          checkinTime:this.boatFilterDetails.checkinTime,
-          checkoutTime:this.boatFilterDetails.checkoutTime,
+          checkinTime: this.boatFilterDetails.checkinTime,
+          checkoutTime: this.boatFilterDetails.checkoutTime,
           bookingStatus: 0,
           paymentStatus: 0,
           noOfAdults: this.boatFilterDetails.adults,
@@ -176,17 +166,17 @@ export class BoatDetailsComponent implements OnInit {
         })
       }
     }
-    else{
-      let modal = this.modal.open(NotLoggedInComponent,{windowClass: 'custom-modal custom-small-modal',centered:true})
+    else {
+      let modal = this.modal.open(NotLoggedInComponent, { windowClass: 'custom-modal custom-small-modal', centered: true })
 
     }
   }
-  setMaxDate(item:any){
+  setMaxDate(item: any) {
     let date = new Date(item);
     this.boatFilterDetails.checkoutDate = this.boatFilterDetails.checkinDate;
-    if(item != null){
-     date = new Date(item);
-      this.minDate = {year : date.getFullYear(),month:date.getMonth()+1,day:date.getDate()};
+    if (item != null) {
+      date = new Date(item);
+      this.minDate = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
     }
   }
   openPopover() {
@@ -197,6 +187,28 @@ export class BoatDetailsComponent implements OnInit {
   updateGuests() {
     this.boatFilterDetails.adults = this.popOverFilterData.adults;
     this.boatFilterDetails.childrens = this.popOverFilterData.childrens;
-    this.boatelCapcityValidation = (((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)>(this.boatDetails?.boatelCapacity)) || ((this.boatFilterDetails.adults + this.boatFilterDetails.childrens)<1))?"Entered guest capacity is not available":this.popover.close();
+    this.boatelCapcityValidation = (((this.boatFilterDetails.adults + this.boatFilterDetails.childrens) > (this.boatDetails?.boatelCapacity)) || ((this.boatFilterDetails.adults + this.boatFilterDetails.childrens) < 1)) ? "Entered guest capacity is not available" : this.popover.close();
+  }
+
+  calculatePricing() {
+    let price = 0;
+    if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null && this.boatDetails != null) {
+      var checkinDate = moment(this.boatFilterDetails.checkinDate).format("DD-MM-YYYY");
+      var checkoutDate = moment(this.boatFilterDetails.checkoutDate).format("DD-MM-YYYY");
+      for (var i = checkinDate; i <= checkoutDate; i = moment(i, "DD-MM-YYYY").add(1, 'days').format("DD-MM-YYYY")) {
+        let findCalendar = this.boatDetails.boatCalendars.find((element: any) =>
+          moment(element.fromDate).format("DD-MM-YYYY") == i &&
+          moment(element.toDate).format("DD-MM-YYYY") == i && element.isAvailable
+        );
+        if (findCalendar) {
+          price = price + findCalendar.amount;
+        }
+        else {
+          price = price + this.boatDetails.perDayCharges
+        }
+      }
+      this.booking.days = moment(checkoutDate,"DD-MM-YYYY").diff(moment(checkinDate,"DD-MM-YYYY"),'days')+1;
+    }
+    this.booking.amount = price;
   }
 }

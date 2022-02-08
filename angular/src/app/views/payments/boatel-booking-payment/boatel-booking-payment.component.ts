@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
@@ -22,6 +23,10 @@ export class BoatelBookingPaymentComponent implements OnInit {
     checkoutDate: '',
     adults: 0,
     childrens: 0
+  };
+  booking = {
+    amount :0,
+    days:0
   };
   isBookingConfirmed: boolean = false;
   isPaymentFailed: boolean = false;
@@ -53,28 +58,39 @@ export class BoatelBookingPaymentComponent implements OnInit {
   loadBoatDetails() {
     this.boatService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
+      this.calculatePricing();
     })
   }
 
-  calculateDays() {
-    if (this.boatFilterDetails.checkinDate != '' && this.boatFilterDetails.checkoutDate != '') {
-      var date1 = new Date(this.boatFilterDetails.checkinDate);
-      var date2 = new Date(this.boatFilterDetails.checkoutDate);
-      var Time = date2.getTime() - date1.getTime();
-      var Days = Math.floor(Time / (1000 * 3600 * 24));
-      return Days < 0 ? 0 : Days + 1;
+  calculatePricing() {
+    let price = 0;
+    if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null && this.boatDetails != null) {
+      var checkinDate = moment(this.boatFilterDetails.checkinDate).format("DD-MM-YYYY");
+      var checkoutDate = moment(this.boatFilterDetails.checkoutDate).format("DD-MM-YYYY");
+      for (var i = checkinDate; i <= checkoutDate; i = moment(i, "DD-MM-YYYY").add(1, 'days').format("DD-MM-YYYY")) {
+        let findCalendar = this.boatDetails.boatCalendars.find((element: any) =>
+          moment(element.fromDate).format("DD-MM-YYYY") == i &&
+          moment(element.toDate).format("DD-MM-YYYY") == i && element.isAvailable
+        );
+        if (findCalendar) {
+          price = price + findCalendar.amount;
+        }
+        else {
+          price = price + this.boatDetails.perDayCharges
+        }
+      }
+      this.booking.days = moment(checkoutDate,"DD-MM-YYYY").diff(moment(checkinDate,"DD-MM-YYYY"),'days')+1;
     }
-    else {
-      return 0;
-    }
+    this.booking.amount = price;
   }
+  
   ngAfterViewInit() {
     this.disablePayment();
     this.cdr.detectChanges();
   }
 
   async confirmBooking() {
-    var amount = this.calculateDays() * this.boatDetails.perDayCharges;
+    var amount = this.booking.amount;
     var token = (this.paymentMethodsComponent.addCardDetails ? await this.paymentMethodsComponent.createToken() : null);
     let model = {
       paymentId: this.paymentMethodsComponent.paymentMethodId,

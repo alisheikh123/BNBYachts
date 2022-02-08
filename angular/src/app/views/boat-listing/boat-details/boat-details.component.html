@@ -112,7 +112,7 @@
                                                                         [(ngModel)]="boatFilterDetails.checkinDate"
                                                                         [minDate] = "minDate"
                                                                         [maxDate]="maxDate"
-                                                                        (ngModelChange)="setMaxDate(boatFilterDetails.checkinDate)"
+                                                                        (ngModelChange)="setMaxDate(boatFilterDetails.checkinDate);calculatePricing();"
                                                                         (click)="d.toggle()" ngbDatepicker
                                                                         #d="ngbDatepicker">
                                                                 </div>
@@ -126,6 +126,7 @@
                                                                         [minDate] = "minDate"
                                                                         [maxDate]="maxDate"
                                                                         [(ngModel)]="boatFilterDetails.checkoutDate"
+                                                                        (ngModelChange)="calculatePricing();"
                                                                         (click)="d2.toggle()" ngbDatepicker
                                                                         #d2="ngbDatepicker">
                                                                 </div>
@@ -214,9 +215,9 @@
 
                                                 <div class="total-amount-wrap custom-padding-top">
                                                     <div class="total-amount-wrap-inner">
-                                                        <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} Night(s)
+                                                        <p>$ {{boatDetails?.perDayCharges}} x {{booking?.days}} Night(s)
                                                         </p>
-                                                        <p>${{boatDetails?.perDayCharges * calculateDays()}}.00</p>
+                                                        <p>${{booking?.amount}}.00</p>
 
                                                     </div>
                                                     <div class="total-amount-wrap-inner">
@@ -231,8 +232,7 @@
                                                     </div>
                                                     <div class="total-amount-wrap-inner bottom">
                                                         <p class="medium">Total(USD)</p>
-                                                        <p class="medium">$ {{boatDetails?.perDayCharges *
-                                                            calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
+                                                        <p class="medium">$ {{booking?.amount + boatDetails?.taxFee+ 20}}.00</p>
 
                                                     </div>
                                                     <button class="custom-btn blue" (click)="reserveBoat()">Book
