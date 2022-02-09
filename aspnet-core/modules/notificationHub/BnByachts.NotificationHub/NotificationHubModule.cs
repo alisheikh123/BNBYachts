@@ -21,11 +21,16 @@ namespace BnByachts.NotificationHub
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.Configure<SmtpSettings>(context.Services.GetConfiguration().GetSection("Settings"));
+            context.Services.Configure<OTPMessageSetting>(context.Services.GetConfiguration().GetSection("OTPSetting"));
             context.Services.AddMassTransit(mt =>
             {
                 mt.AddConsumer<EmailConsumer>().Endpoint(e =>
                 {
                     e.Name = EventBusQueue.QEmailNotification;
+                });
+                mt.AddConsumer<OTPConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QGenerateOTP;
                 });
             });
         }

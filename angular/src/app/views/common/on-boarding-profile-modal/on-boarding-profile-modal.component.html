@@ -1,0 +1,33 @@
+    <div class="modal-content">
+        <div class="modal-header no-border">
+        </div>
+        <div class="modal-body">
+            <div class="custom-text-center">
+
+                <h4 class="bold">{{'ProfilePhototxt' | localization}}</h4>
+                <form [formGroup]="uploadPictureForm">
+                    <div class="custom-image-uploader-wrapper">
+
+                        <img [src]="(imageSrc || assetsUrl + USER_DEFAULTS.avatar)" class="previewDimention">
+                        <div class="form-group">
+                                <input type="file" name="profile"  style="display: none;"
+                                id="uploadImage" (change)="onFileChange($event)" accept=".png, .jpg, .jpeg"/>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="bottom-btn py-2 pt-5">
+                    <label for="uploadImage"
+                     class="small-text"><span class="custom-btn blue big-btn">{{'UploadPhoto'|
+                localization}}</span></label>
+                </div>
+                <div class="py-5 text-center">
+                    <button class="later" (click)="DismissAll()">{{'DoLater' | localization}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+  
