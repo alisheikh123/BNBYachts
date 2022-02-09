@@ -1,0 +1,77 @@
+.cardBorder{
+    border-radius: 10px;
+}
+.homeDashboard{
+    background-color:rgba(0,0,0,.05);
+    border-radius: 10px;
+}
+.DashboardCard{
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+    align-self: center;
+    margin: 10px 10px;
+}
+.Card{
+    padding: 0px 0px 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.CardStyle{
+    position: absolute; 
+    text-align: center; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+}
+.CardBackground{
+    background-color: rgba(77,157,224,.6);
+    border-radius: 50%;
+    padding: 10%; 
+    height: 100%; 
+    width: 100%;
+}
+.CardImage{
+    height: 100%; 
+    width: 100%;
+}
+.CardTextHeader{
+    flex: 0 0 41.6666666667%; 
+    max-width: 41.6666666667%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    -webkit-margin-start: auto; 
+    margin-inline-start: auto;
+}
+.CardTextBody{
+    height: 30px;
+}
+.CardText{
+    position: relative; 
+    height: 30px; 
+    padding: 0px; 
+    margin: 0px; 
+    margin-top: 30px; 
+    border-width: 0px;
+}
+.CardUserHeader{
+    display:flex; 
+    font-size: 2.5em; 
+    line-height: 1; 
+    text-align: end; 
+    color: black
+}
+.CardUserBody{
+    text-align:center;
+}
+.CardUser{
+    display:flex; 
+    font-size: 1.5em; 
+    line-height: 1; 
+    text-align: center;
+    margin-top: 20px; 
+    color: black
+}

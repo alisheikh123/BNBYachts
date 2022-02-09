@@ -29,7 +29,9 @@ a {
   transform: translate(50%, 17%);
   color: #000;
 }
-
+.accordianStyle{
+  padding-bottom:1rem;
+}
 .pageHeader {
   margin-left: 6rem;
   top: 50%;

@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="navbar-wrapper">
       <div class="d-lg-none d-md-block">
-        <img src="assets\images\bnb.png" style="width: 65px; height: 100%;">
+        <img src="assets\images\bnb.png" class="imageStyle">
       </div>
        <div class="navbar-toggle" style="padding-right:10px;">
         <button type="button" class="navbar-toggler">
@@ -22,21 +22,21 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="topNavBarCollapse">
       <ul class="navbar-nav container-fluid">
-        <li class="col-6 col-md-auto " style="margin-left: auto;">
+        <li class="col-6 col-md-auto listMargin">
           <div>
           </div>
         </li>
-        <li class="nav-item btn-rotate dropdown col" placement="bottom-left" style="text-align: right;max-width: 53px;">
+        <li class="nav-item btn-rotate dropdown col listNav" placement="bottom-left">
         </li>
         <li class="col-1">
           <a class="dropdown-toggle text-dark" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="assets/images/users.png" class="rounded-circle z-depth-0" style="width: 65px;"
+            <img src="assets/images/users.png" class="rounded-circle z-depth-0 imageSize"
                  alt="avatar image">
-            <span class="d-lg-none d-md-block" style="padding-left:20px;">currentUser</span>
+            <span class="d-lg-none d-md-block userPadding">currentUser</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right col" aria-labelledby="dropdown04">
             <div class="dropdown-divider"></div>
-            <a class="nav-link text-dark" (click)="logout()" style="color: #000;" >Logout </a>
+            <a class="nav-link text-dark textColor" (click)="logout()" > Logout </a>
           </div>
         </li>
       </ul>

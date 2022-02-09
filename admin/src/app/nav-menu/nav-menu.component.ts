@@ -14,6 +14,6 @@ export class NavMenuComponent implements OnInit {
     
   }
   logout(){
-    this.service.logoff();
+     this.service.logoff();
   }
 }

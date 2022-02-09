@@ -1,7 +1,9 @@
-import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { AppComponent } from '../../app.component';
+import { AppComponent } from 'src/app/app.component';
+import { UserService } from 'src/app/services/user.service';
 import { UserRoles } from 'src/app/shared/enums/userRoles';
+import { BoatUser } from 'src/app/shared/interfaces/BoatUser';
+import { PaginationSettingsEnum } from 'src/app/shared/pagination/PaginationSettingsEnum';
 
 @Component({
   selector: 'app-host-listing',
@@ -9,13 +11,13 @@ import { UserRoles } from 'src/app/shared/enums/userRoles';
 })
 
 export class HostListingComponent implements OnInit {
-  public user!: any[];
+  user!: BoatUser[];
   Roles = UserRoles;
   public pageNumber!: number;
   public pageSize!: number;
   public searchTerm! : string;
   public totalItems!: number;
-
+  pagination = PaginationSettingsEnum;
   constructor(public app: AppComponent, private userService: UserService) {
   }
   ngOnInit(): void {
@@ -28,8 +30,8 @@ export class HostListingComponent implements OnInit {
 
     var searchModel = {
       searchTerm: (this.searchTerm != undefined) ? this.searchTerm : "" ,
-      pageNumber: (this.pageNumber != null) ? this.pageNumber : 1,
-      pagesize: (this.pageSize != null) ? this.pageSize : 10,
+      pageNumber: (this.pageNumber != null) ? this.pageNumber : this.pagination.pageNumber,
+      pagesize: (this.pageSize != null) ? this.pageSize : this.pagination.pageSize,
     };
 
     this.userService.getBoatsUser(this.Roles.HOST,searchModel).subscribe((res: any)  => {

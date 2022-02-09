@@ -1,26 +1,26 @@
 <h1 id="tableLabel">Dashboard</h1>
 <div class="col-lg-12 container">
 <div class="row">
-  <div class="col-sm-4" style="border-radius: 10px;">
-    <a class="nav-link" href="/users">
-    <div class="homeDashboardCard" style="background-color:rgba(0,0,0,.05);border-radius: 10px;">
+  <div class="col-sm-4 cardBorder">
+    <a class="nav-link" [routerLink]="['/users']" routerLinkActive="sideNavActive" >
+    <div class="homeDashboardCard homeDashboard">
       <div class="row no-gutters">
-        <div class="col-2 col-md-3 col-lg-4 col-xl-3" style="flex: 0 0 33.3333333333%; max-width: 33.3333333333%; align-self: center;margin: 10px 10px;">
-          <div style="padding: 0px 0px 100%;display: block; overflow: hidden; position: relative; width: 100%;">
-            <div style="position: absolute; text-align: center; top: 0; bottom: 0; left: 0; right: 0;">
-              <div style="background-color: rgba(77,157,224,.6); border-radius: 50%; padding: 10%; height: 100%; width: 100%;">
-                <img src="../../../assets/images/users.png" style="height: 100%; width: 100%;">
+        <div class="col-2 col-md-3 col-lg-4 col-xl-3 DashboardCard">
+          <div class="Card">
+            <div class="CardStyle">
+              <div class="CardBackground">
+                <img src="../../../assets/images/users.png" class="CardImage">
               </div>
             </div>
           </div>
         </div>
-        <div class="stat-trend col-4 col-md-4 col-lg-5 col-xl-3 offset-1" style="flex: 0 0 41.6666666667%; max-width: 41.6666666667%; display: flex; flex-direction: column; justify-content: space-between; -webkit-margin-start: auto; margin-inline-start: auto;">
-          <div style="height: 30px;">
-            <div style="position: relative; height: 30px; padding: 0px; margin: 0px; margin-top: 30px; border-width: 0px;">
-              <span style="display:flex; font-size: 2.5em; line-height: 1; text-align: end; color: black">Users</span>
+        <div class="stat-trend col-4 col-md-4 col-lg-5 col-xl-3 offset-1 CardTextHeader">
+          <div class="CardTextBody">
+            <div class="CardText">
+              <span class="CardUserHeader">User</span>
             </div>
-            <div style="text-align:center;">
-              <span style="display:flex; font-size: 1.5em; line-height: 1; text-align: center;margin-top: 20px; color: black">{{ totalUser.users }}</span>
+            <div class="CardUserBody">
+              <span class="CardUser">{{ totalUser.users }}</span>
             </div>
           </div>
         </div>
@@ -28,26 +28,26 @@
     </div>
   </a>
   </div>
-  <div class="col-sm-4" style="border-radius: 10px;">
-    <a class="nav-link" href="/host">
-    <div class="homeDashboardCard" style="background-color:rgba(0,0,0,.05);border-radius: 10px;">
+  <div class="col-sm-4 cardBorder">
+    <a class="nav-link" [routerLink]="['/host']" routerLinkActive="sideNavActive" >
+    <div class="homeDashboardCard homeDashboard">
       <div class="row no-gutters">
-        <div class="col-2 col-md-3 col-lg-4 col-xl-3" style="flex: 0 0 33.3333333333%; max-width: 33.3333333333%; align-self: center;margin: 10px 10px;">
-          <div style="padding: 0px 0px 100%;display: block; overflow: hidden; position: relative; width: 100%;">
-            <div style="position: absolute; text-align: center; top: 0; bottom: 0; left: 0; right: 0;">
-              <div style="background-color: rgba(77,157,224,.6); border-radius: 50%; padding: 10%; height: 100%; width: 100%;">
-                <img src="../../../assets/images/Host.png" style="height: 100%; width: 100%;">
+        <div class="col-2 col-md-3 col-lg-4 col-xl-3 DashboardCard">
+          <div class="Card">
+            <div class="CardStyle">
+              <div class="CardBackground">
+                <img src="../../../assets/images/Host.png" class="CardImage">
               </div>
             </div>
           </div>
         </div>
-        <div class="stat-trend col-4 col-md-4 col-lg-5 col-xl-3 offset-1" style="flex: 0 0 41.6666666667%; max-width: 41.6666666667%; display: flex; flex-direction: column; justify-content: space-between; -webkit-margin-start: auto; margin-inline-start: auto;">
-          <div style="height: 30px;">
-            <div style="position: relative; height: 30px; padding: 0px; margin: 0px; margin-top: 30px; border-width: 0px;">
-              <span style="display:flex; font-size: 2.5em; line-height: 1; text-align: end; color:black;">Host</span>
+        <div class="stat-trend col-4 col-md-4 col-lg-5 col-xl-3 offset-1 CardTextHeader">
+          <div class="CardTextBody">
+            <div class="CardText">
+              <span class="CardUserHeader">Host</span>
             </div>
-            <div style="text-align:center;">
-              <span style="display:flex; font-size: 1.5em; line-height: 1; text-align: center;margin-top: 20px; color: black">{{ totalUser.hosts}}</span>
+            <div class="CardUserBody">
+              <span class="CardUser">{{ totalUser.hosts }}</span>
             </div>
           </div>
         </div>
@@ -55,32 +55,32 @@
     </div>
   </a>
   </div>
-  <div class="col-sm-4" style="border-radius: 10px;">
-    <a class="nav-link" href="/dispute">
-      <div class="homeDashboardCard" style="background-color:rgba(0,0,0,.05);border-radius: 10px;">
+  <div class="col-sm-4 cardBorder">
+    <a class="nav-link" [routerLink]="['/dispute']" routerLinkActive="sideNavActive" >
+    <div class="homeDashboardCard homeDashboard">
       <div class="row no-gutters">
-        <div class="col-2 col-md-3 col-lg-4 col-xl-3" style="flex: 0 0 33.3333333333%; max-width: 33.3333333333%; align-self: center;margin: 10px 10px;">
-          <div style="padding: 0px 0px 100%;display: block; overflow: hidden; position: relative; width: 100%;">
-            <div style="position: absolute; text-align: center; top: 0; bottom: 0; left: 0; right: 0;">
-              <div style="background-color: rgba(77,157,224,.6); border-radius: 50%; padding: 10%; height: 100%; width: 100%;">
-                <img src="../../../assets/images/dispute.png" style="height: 100%; width: 100%;">
+        <div class="col-2 col-md-3 col-lg-4 col-xl-3 DashboardCard">
+          <div class="Card">
+            <div class="CardStyle">
+              <div class="CardBackground">
+                <img src="../../../assets/images/dispute.png" class="CardImage">
               </div>
             </div>
           </div>
         </div>
-        <div class="stat-trend col-4 col-md-4 col-lg-5 col-xl-3 offset-1" style="flex: 0 0 41.6666666667%; max-width: 41.6666666667%; display: flex; flex-direction: column; justify-content: space-between; -webkit-margin-start: auto; margin-inline-start: auto;">
-          <div style="height: 30px;">
-            <div style="position: relative; height: 30px; padding: 0px; margin: 0px; margin-top: 30px; border-width: 0px;">
-              <span style="display:flex; font-size: 2.5em; line-height: 1; text-align: end; color: black">Dispute</span>
+        <div class="stat-trend col-4 col-md-4 col-lg-5 col-xl-3 offset-1 CardTextHeader">
+          <div class="CardTextBody">
+            <div class="CardText">
+              <span class="CardUserHeader">Dispute</span>
             </div>
-            <div style="text-align:center;">
-              <span style="display:flex; font-size: 1.5em; line-height: 1; text-align: center;margin-top: 20px; color: black">{{ totalUser.disputes }}</span>
+            <div class="CardUserBody">
+              <span class="CardUser">{{ totalUser.disputes }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </a>
+  </a>
   </div>
 </div>
 </div>

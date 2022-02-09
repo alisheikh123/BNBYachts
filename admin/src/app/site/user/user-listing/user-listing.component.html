@@ -1,28 +1,25 @@
 <div class="container">
-<h4 id="tableLabel">Boat Hosts</h4>
-<accordion [isAnimated]="true">
-  <accordion-group [isOpen]="false" style="padding-bottom:1rem;" id="accordionFilter">
+<h4 id="tableLabel">Users</h4>
+ <accordion [isAnimated]="true">
+  <accordion-group [isOpen]="false" class="accordianStyle" id="accordionFilter">
     <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
       <div class="text-left">
         Filter
-
       </div>
     </button>
-    &nbsp;
     <div class="input-group" >
-      <input [(ngModel)]='searchTerm' id="searchTerm" type="text" class="form-control col-6" placeholder="Search " aria-label="Search" aria-describedby="basic-addon2">
+      <input [(ngModel)]='searchTerm' id="searchTerm" type="text" class="form-control col-6" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
     </div>
-    &nbsp;
     <div class="input-group">
       <button (click)="filter(false)" id="filter" class="btn kpBtnGreen" type="button">
-        &nbsp;Filter</button>
-      &nbsp; &nbsp; <button (click)="filter(true)" *ngIf="searchTerm" id="filter" class="btn kpBtnYellow" type="button">
-        &nbsp;Reset</button>
+        Filter  </button>
+       <button (click)="filter(true)" *ngIf="searchTerm" id="filter" class="btn kpBtnYellow" type="button">
+         Reset</button>
     </div>
   </accordion-group>
-</accordion> 
+</accordion>  
 
-  <table class='table table-striped' aria-labelledby="tableLabel">
+  <table class='table'>
     <thead>
       <tr>
         <th>SNo #</th>
@@ -47,7 +44,6 @@
   <div class="d-flex justify-content-end" >
     <pagination  id="pagination"  [boundaryLinks]="true"  [totalItems]="totalItems"
     [itemsPerPage]="pageSize"
-    [maxSize]="10"
     [(ngModel)]="pageNumber"
     (pageChanged)="pageChanged($event)"
     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 

@@ -1,28 +1,21 @@
+import { HomeDashboardComponent } from './reports/home-dashboard/home-dashboard.component';
+import { DisputeModule } from './site/dispute/dispute.module';
+import { UserModule } from './site/user/user.module';
+import { HostModule } from './site/host/host.module';
 import { SortService } from './services/sort.service';
 import { LocalStoreService } from 'src/app/services/local-store.service';
 import { AppRoutingModule } from './app-routing.module';
-import { UserService } from './services/user.service';
 import { AuthAppModule } from './site/auth/auth.module';
-import { DisputeListingComponent } from './site/dispute-listing/dispute-listing.component';
-import { DisputeService } from './services/site/dispute.service';
-import { HostListingComponent } from './site/host-listing/host-listing.component';
 import { ErrorService } from './services/error.service';
-import { UserListingComponent } from './site/user-listing/user-listing.component';
-import { HomeDashboardComponent } from './reports/home-dashboard/home-dashboard.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ToggleModule } from '../app/controls/toggle/toggle.module';
 import { AppComponent } from './app.component';
 import { LoadingIconComponent } from './controls/loading-icon/loading-icon.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-
-
 import { SortableTableDirective } from './directives/sortable-table.directive';
 import { NumericOnlyDirective } from './directives/numeric-only.directive';
 import { SortableColumnComponent } from './controls/sortable-column/sortable-column.component';
@@ -37,10 +30,8 @@ import { HttpConfigInterceptor } from './shared/intercepters/http.interceptor';
 export let AppInjector: Injector;
 @NgModule({
   declarations: [
-    UserListingComponent,
-    HostListingComponent,
-    DisputeListingComponent,
     AppComponent,
+    HomeDashboardComponent,
     PublicLayoutComponent,
     PrivateLayoutComponent,
     LoadingIconComponent,
@@ -53,16 +44,16 @@ export let AppInjector: Injector;
   imports: [
     BrowserModule,
     CommonModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    ToggleModule,
-    AuthAppModule,
-    AccordionModule.forRoot(),
-    PaginationModule.forRoot(),
     HttpClientModule,
+    HttpClientModule,
+    ToggleModule,
     AppRoutingModule,
+    AuthAppModule,
+    HostModule,
+    UserModule,
+    DisputeModule,
     AuthModule.forRoot({
       config: {
         authority: environment.Identity.authority,
@@ -85,9 +76,7 @@ export let AppInjector: Injector;
     },
     LocalStoreService,
     SortService,
-    UserService,
     ErrorService,
-    DisputeService,
     RoutesGuard,
     AppComponent
   ],

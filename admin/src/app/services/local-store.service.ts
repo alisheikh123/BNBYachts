@@ -6,13 +6,13 @@ export class LocalStoreService {
   private ls = window.localStorage;
   constructor() { }
 
-  public setItem(key:any, value:any) {
+  public setItem(key:string, value:string) {
     value = JSON.stringify(value);
     this.ls.setItem(key, value);
     return true;
   }
 
-  public getItem(key:any) {
+  public getItem(key:string) {
     const value = this.ls.getItem(key);
     try {
       return JSON.parse(value || '');

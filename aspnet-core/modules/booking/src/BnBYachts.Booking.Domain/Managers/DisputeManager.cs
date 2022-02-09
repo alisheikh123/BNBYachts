@@ -28,8 +28,7 @@ namespace BnBYachts.Booking.Managers
         public async Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination)
         {
             var response = new EntityResponseListModel<DisputeTransferable>();
-            var dispute = await _repo.GetListAsync().ConfigureAwait(false);
-            var disputes = _objectMapper.Map<List<BookingDisputeEntity>, PagedList<DisputeTransferable>>(dispute);
+            var disputes = _objectMapper.Map<List<BookingDisputeEntity>, PagedList<DisputeTransferable>>(await _repo.GetListAsync().ConfigureAwait(false));
             response.TotalCount = disputes.Count();
             response.Data = await PagedList<DisputeTransferable>.CreateAsync(disputes, pagination.CurrentPage, pagination.ItemsPerPage);
             if (!string.IsNullOrWhiteSpace(SearchText))

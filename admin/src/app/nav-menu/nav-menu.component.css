@@ -1,0 +1,19 @@
+.listMargin{
+    margin-left: auto;
+}
+.listNav{
+    text-align: right;max-width: 53px;
+}
+.imageSize{
+    width: 65px
+}
+.imageStyle{
+    width: 65px;
+    height: 100%;
+}
+.userPadding{
+    padding-left:20px
+}
+.textColor{
+    color: #000;
+}

@@ -11,7 +11,7 @@ export class AuthService {
   isLoading$: Observable<boolean>;
   isLoadingSubject: BehaviorSubject<boolean>;
   authenticated: boolean = false;
-  isLoggedIn: boolean | any;
+  isLoggedIn!: boolean;
   constructor(private http: HttpClient, public oidcSecurityService: OidcSecurityService, private store: LocalStoreService, private router: Router) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();

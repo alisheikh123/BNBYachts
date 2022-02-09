@@ -1,3 +1,4 @@
+import { AppComponent } from 'src/app/app.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Injectable } from "@angular/core";
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from "@angular/common/http";
@@ -6,19 +7,17 @@ import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { LoaderService } from "../loader/services/loader.service";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     private pendingRequests: number = 0;
     headers: any;
-    constructor(private loader: LoaderService, private router: Router, private oidcSecurityService : OidcSecurityService) { }
+    constructor(private loader: LoaderService, private router: Router, private oidcSecurityService : OidcSecurityService, private app : AppComponent) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let token = this.oidcSecurityService.getAccessToken();
+        let token = this.app.getToken();
         if (token) {
             request = this.addToken(request, token);
         }
-            //  this.onStart();
+           this.onStart();
             return next.handle(request)
                 .pipe(
                     tap(

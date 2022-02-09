@@ -25,6 +25,7 @@
     "bootstrap": "^4.4.1",
     "angular-auth-oidc-client": "^12.0.3",
     "@ng-select/ng-select": "^4.0.4",
+    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "jquery": "^3.4.1",
     "@types/recurly__recurly-js": "^4.16.0",
     "angular-cc-library": "^2.1.2",

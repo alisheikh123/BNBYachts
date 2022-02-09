@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { Reviews } from 'src/app/shared/interface/reviews';
 
 @Component({
   selector: 'app-list-reviews',
@@ -8,8 +9,8 @@ import { AuthService } from 'src/app/core/auth/auth.service';
   styleUrls: ['./list-reviews.component.scss'],
 })
 export class ListReviewsComponent implements OnInit {
-  reviews: any;
-  ClientReview : any;
+  reviews: Reviews[];
+  ClientReview : string;
   reviewSorting: number;
   reviewProgress = {
     fiveStars:0,

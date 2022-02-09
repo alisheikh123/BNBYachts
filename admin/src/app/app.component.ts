@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
     .checkAuth()
     .subscribe((res: any) => {
               if (res.isAuthenticated) {
+                this.router.navigate(['/home']);
         if (res?.accessToken != null && res?.userData?.sub != null) {
           localStorage.setItem('userId', res?.userData?.sub);
-          this.router.navigate(['/home']);
         }
       }
       const userId = localStorage.getItem('userId');
@@ -52,4 +52,8 @@ export class AppComponent implements OnInit {
       }
     })
   }
+  getToken(){
+    return this.oidcSecurityService.getAccessToken();
+  }
+
 }
