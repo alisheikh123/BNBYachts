@@ -12,10 +12,11 @@ namespace BnBYachts.Core.Interface
 {
     public interface IOnBoardingService: IApplicationService
     {
-        Task GenerateOTP(UserMobileVerificationRequestable mobileVerification);
+        Task<EntityResponseModel> GenerateOTP(UserMobileVerificationRequestable mobileVerification);
         Task<EntityResponseModel> VerifyOTP(long otpNumber);
         Task UploadProfileImage(IFormFile file);
         Task ChangeInitialLoginStatus();
+        Task ExpireOTP();
 
     }
 }

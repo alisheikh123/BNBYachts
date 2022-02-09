@@ -255,5 +255,6 @@
   "Explore":"Explore",
   "comma": ",",
   "commentor": "Lili John",
-  "comment": "Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  "comment": "Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "ExpireOTPMessage":"* Your OTP is Expired Please Generate New OTP By Resend Button"
 }

@@ -100,12 +100,15 @@ export class AuthService {
   }
   UploadProfileImage(file:any)
   {
-    debugger;
     return this.http.post(this.apiCoreURl + "/api/app/on-boarding/upload-profile-image", file)
     .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
   IsIntialLoginStatus()
   {
     return this.http.get<any>(this.apiCoreURl +"/api/app/on-boarding/change-initial-login-status");
+  }
+  expireOTP()
+  {
+    return this.http.get<any>(this.apiCoreURl +"/api/app/on-boarding/expire-oTP");
   }
 }

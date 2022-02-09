@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -40,8 +43,9 @@ namespace BnBYachts.Core.Managers
             _eventBusDispatcher = eventBusDispatcher;
             _unitOfWorkManager = unitOfWorkManager;
         }
-        public async Task GenerateOTP(UserMobileVerificationRequestable mobileVerification)
+        public async Task<EntityResponseModel> GenerateOTP(UserMobileVerificationRequestable mobileVerification)
         {
+            var response = new EntityResponseModel();
             var IsUser = await _repository.GetAsync(res => res.Id == Guid.Parse(mobileVerification.UserId)).ConfigureAwait(false);
             if (IsUser != null)
             {
@@ -54,8 +58,10 @@ namespace BnBYachts.Core.Managers
                 });
                 _logger.LogInformation("Generate OTP and send the otp code to user mobile number against this user Id:" + _unitOfWorkManager.Current.Id.ToString());
                 await _repositoryOTPEntity.InsertAsync(_objectMapper.Map<UserMobileVerificationRequestable, OTPVerifierEntity>(mobileVerification), true);
-
+                response.Data = DateTime.Now;
+                return response;
             }
+            return response;
         }
 
         public async Task<EntityResponseModel> VerifyOTP(long otpNumber, string userId)
@@ -99,7 +105,11 @@ namespace BnBYachts.Core.Managers
             }
         }
 
-
-
+        public async Task ExpireOTP(string userId)
+        {
+            var otpVerifierEntity = await _repositoryOTPEntity.FindAsync(x => x.UserId == userId).ConfigureAwait(false);
+            await _repositoryOTPEntity.DeleteAsync(otpVerifierEntity, autoSave:true).ConfigureAwait(false);
+            _logger.LogInformation("Expired OTP Code Deleted against this user Id:" + _unitOfWorkManager.Current.Id.ToString());
+        }
     }
 }

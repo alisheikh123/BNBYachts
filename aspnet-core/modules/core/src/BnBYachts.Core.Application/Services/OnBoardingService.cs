@@ -20,10 +20,10 @@ namespace BnBYachts.Core.Services
             _onbordingManager = onbordingManager;
             _s3Service = s3Service;
         }
-        public async Task GenerateOTP(UserMobileVerificationRequestable mobileVerification)
+        public async Task<EntityResponseModel> GenerateOTP(UserMobileVerificationRequestable mobileVerification)
         {
             mobileVerification.UserId = CurrentUser.Id.ToString();
-            await _onbordingManager.GenerateOTP(mobileVerification);
+            return await _onbordingManager.GenerateOTP(mobileVerification);
         }
         [HttpGet]
         public async Task<EntityResponseModel> VerifyOTP(long otpNumber)
@@ -40,6 +40,11 @@ namespace BnBYachts.Core.Services
         public async  Task ChangeInitialLoginStatus()
         {
             await _onbordingManager.ChangeInitialLoginStatus(CurrentUser.Id.ToString());
+        }
+        [HttpGet]
+        public async  Task ExpireOTP()
+        {
+            await _onbordingManager.ExpireOTP(CurrentUser.Id.ToString());
         }
     }
 }
