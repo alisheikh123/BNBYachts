@@ -46,7 +46,6 @@ namespace BnBYachts.Core
                 ConfigureCors(context, configuration);
                 ConfigureSwaggerServices(context, configuration);
         }
-
         private void ConfigureCache(IConfiguration configuration)
         {
             Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Core:"; });

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BoatService } from 'src/app/core/Boat/boat.service';
 import { environment } from 'src/environments/environment';
-import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
+import { OnBoardingModalComponent } from '../../on-boarding-modal/on-boarding-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-my-profile',
@@ -13,13 +15,14 @@ export class MyProfileComponent implements OnInit {
   userResponse: any;
   userBoats: any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
+  assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
   USER_ROLE = UserRoles;
+  USER_DEFAULTS = UserDefaults;
   loggedInUserRole: string | null;
 
-  constructor(private authService : AuthService,private boatService : BoatService) { }
+  constructor(private authService : AuthService,private boatService : BoatService,private modal:NgbModal) { }
 
   ngOnInit(): void {
-
     this.authService.getUserInfo().subscribe(res=>{
       this.userResponse = res;
       this.loggedInUserRole = localStorage.getItem('userRole');
@@ -30,10 +33,8 @@ export class MyProfileComponent implements OnInit {
       }
     })
   }
-
-  // public getUserInfo(): Observable<any[]> {
-  //   let response1  = this.authService.getUserInfo();
-  //   let response2  = this.boatService.getUserBoats(1,5);
-  //   return forkJoin([response1 ,response2]);
-  // }
+  verifyPhoneNumber()
+  {
+    this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
+  }
 }

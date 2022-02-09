@@ -68,8 +68,7 @@ EventEditComponent,
 CharterLocationSettingComponent,
 EventLocationSettingComponent,
 CalendarScheduleComponent,
-HostReservationCancellationComponent,
-
+HostReservationCancellationComponent
   ],
   imports: [
     HostRoutingModule,
