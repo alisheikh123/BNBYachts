@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BnBYachts.ElasticSearch.Bkworker": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

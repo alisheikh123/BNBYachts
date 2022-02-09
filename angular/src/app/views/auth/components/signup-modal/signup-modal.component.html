@@ -69,15 +69,15 @@
               <!-- date of birth -->
               <div class="col-md-6 col-sm-12 py-2">
                 <div class="custom-input-field">
-                  <label>{{'DateOfBirth'|localization}}</label>
-                  <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-                    <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
-                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-                        validation: 'required',
-                        message: 'Date of birth is required',
-                        control: registrationForm.controls['DOB']
-                      }"></ng-container>
-                  </div>
+                  <label class="label-withtooltip"><span>{{'DateOfBirth'|localization}}</span> <div class="tooltip-wrapper"><span class="circle-icon"><i class="fa fa-info"></i></span><div class="tooltip-dialogue"><p class="small-mini-text grey white-bg-card">{{"AgeLimitMessage" | localization}}</p></div></div></label>
+                    <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                      <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'required',
+                          message: 'Date of birth is required',
+                          control: registrationForm.controls['DOB']
+                        }"></ng-container>
+                    </div>              
                 </div>
               </div>
               <!-- password -->
@@ -143,8 +143,7 @@
             <div class="col-sm-12 custom-margin text-right mobile-padding-btns">
               <label class="custom-checkbox">
                 <input type="checkbox" formControlName="agree" name="agree">
-                <p class="small-text">I agree to BnBYacht's <a href="javascript:void(0)" class="underline-blue-link">
-                    Terms of Service, disclaimer, and Privacy Policy.</a></p>
+                <p class="small-text">I agree to BnBYacht's <a href="javascript:void(0)" class="underline-blue-link">Terms of Service</a>, <a href="javascript:void(0)" class="underline-blue-link">Disclaimer</a> and acknowledge the <a href="javascript:void(0)" class="underline-blue-link">Privacy Policy</a>.</p>
                 <span class="checkmark"></span>
               </label>
             </div>

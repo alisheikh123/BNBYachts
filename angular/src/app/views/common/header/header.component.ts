@@ -1,6 +1,7 @@
 import { ForgotPasswordComponent } from './../../auth/components/forgot-password/forgot-password.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from '../../auth/components/login-modal/login-modal.component';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -41,9 +42,9 @@ export class HeaderComponent implements OnInit {
     byServiceProvider : false
   };
   @ViewChild(ChatComponent) chatComponent: ChatComponent;
-  constructor(public router: Router, public app: AppComponent,
+  constructor(public router: Router, public app: AppComponent, 
     private toastr: ToastrService, private modal: NgbModal,
-    private oidcSecurityService: OidcSecurityService,
+    private oidcSecurityService: OidcSecurityService, 
     private authService: AuthService,private chatService:ChatService) { }
     activeTab: number = 0;
     HEADER_TABS = HeaderTabs;
@@ -147,8 +148,8 @@ export class HeaderComponent implements OnInit {
 
   continueToEarn() {
     if(this.selectedOption.byHost){
-      this.router.navigate(['try-hosting']);
       this.modal.dismissAll();
+      this.router.navigate(['try-hosting']);
     }
   }
   onBoardingModal()

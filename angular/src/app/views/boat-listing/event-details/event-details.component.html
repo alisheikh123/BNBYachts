@@ -205,10 +205,10 @@
                                                     </ng-template>
                                                     <div class="total-amount-wrap custom-padding-top">
                                                         <div class="total-amount-wrap-inner">
-                                                            <p>$ {{eventDetails?.amountPerPerson}} X
+                                                            <p>$ {{booking.amount}} X
                                                                 {{eventFilterDetails.adults +
                                                                 eventFilterDetails.childrens}} </p>
-                                                            <p>${{eventDetails?.amountPerPerson *
+                                                            <p>$ {{booking.amount *
                                                                 (eventFilterDetails.adults +
                                                                 eventFilterDetails.childrens)}}.00</p>
 
@@ -225,7 +225,7 @@
                                                         </div>
                                                         <div class="total-amount-wrap-inner bottom">
                                                             <p class="medium">{{'Total(USD)'|localization}}</p>
-                                                            <p class="medium">$ {{eventDetails?.amountPerPerson *
+                                                            <p class="medium">$ {{booking.amount *
                                                                 (eventFilterDetails.adults +
                                                                 eventFilterDetails.childrens) +
                                                                 eventDetails?.boat?.taxFee+ 20}}.00</p>
