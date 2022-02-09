@@ -5,6 +5,9 @@ import { HomeDashboardComponent } from './reports/home-dashboard/home-dashboard.
 import { RoutesGuard } from './routes.guard';
 import { PrivateLayoutComponent } from './site/private-layout/private-layout.component';
 import { PublicLayoutComponent } from './site/public-layout/public-layout.component';
+import { UserListingComponent } from './site/user-listing/user-listing.component';
+import { HostListingComponent } from './site/host-listing/host-listing.component';
+import { DisputeListingComponent } from './site/dispute-listing/dispute-listing.component';
 
 const routes: Routes =[
   {
@@ -16,10 +19,6 @@ const routes: Routes =[
     component: PublicLayoutComponent,
     children: [
       {path:'loginadmin' , component : LoginModalComponent}
-      // {
-      //   path: 'loginadmin',
-      //   loadChildren: () => import('./site/auth/auth.module').then(m => m.AuthAppModule)
-      // },
     ]
   },
   {
@@ -28,18 +27,9 @@ const routes: Routes =[
     canActivate: [RoutesGuard],
     children: [
       { path: 'home', component: HomeDashboardComponent }, 
-      {
-        path: 'users',
-        loadChildren: () => import('./site/user/user.module').then(m => m.UserModule)
-      },
-      {
-        path: 'host',
-        loadChildren: () => import('./site/host/host.module').then(m => m.HostModule)
-      },
-      {
-        path: 'dispute',
-        loadChildren: () => import('./site/dispute/dispute.module').then(m => m.DisputeModule)
-      },
+      { path: 'users', component: UserListingComponent }, 
+      { path: 'host', component: HostListingComponent }, 
+      { path: 'dispute', component: DisputeListingComponent }
     ]
   }
 ]

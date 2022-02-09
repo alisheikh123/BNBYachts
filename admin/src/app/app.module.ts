@@ -1,7 +1,7 @@
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { DisputeService } from './services/site/dispute.service';
+import { UserService } from './services/user.service';
 import { HomeDashboardComponent } from './reports/home-dashboard/home-dashboard.component';
-import { DisputeModule } from './site/dispute/dispute.module';
-import { UserModule } from './site/user/user.module';
-import { HostModule } from './site/host/host.module';
 import { SortService } from './services/sort.service';
 import { LocalStoreService } from 'src/app/services/local-store.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,12 +26,20 @@ import { RoutesGuard } from './routes.guard';
 import {AuthModule, LogLevel} from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './shared/intercepters/http.interceptor';
+import { UserListingComponent } from './site/user-listing/user-listing.component';
+import { HostListingComponent } from './site/host-listing/host-listing.component';
+import { DisputeListingComponent } from './site/dispute-listing/dispute-listing.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export let AppInjector: Injector;
 @NgModule({
   declarations: [
     AppComponent,
     HomeDashboardComponent,
+    UserListingComponent,
+    HostListingComponent,
+    DisputeListingComponent,
     PublicLayoutComponent,
     PrivateLayoutComponent,
     LoadingIconComponent,
@@ -43,17 +51,16 @@ export let AppInjector: Injector;
   ],
   imports: [
     BrowserModule,
+    AccordionModule.forRoot(),
+    PaginationModule.forRoot(),
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientModule,
     ToggleModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AuthAppModule,
-    HostModule,
-    UserModule,
-    DisputeModule,
     AuthModule.forRoot({
       config: {
         authority: environment.Identity.authority,
@@ -74,6 +81,8 @@ export let AppInjector: Injector;
       useClass: HttpConfigInterceptor,
       multi: true
     },
+    UserService,
+    DisputeService,
     LocalStoreService,
     SortService,
     ErrorService,
