@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ɵɵtrustConstantResourceUrl } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder} from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -25,7 +25,7 @@ export class OnBoardingVerifyOtpComponent implements OnInit{
   }
 
   @ViewChild('successfullyVerified', { static: true }) verificationConfirmation: any;
-  constructor(public fb: FormBuilder, private service: AuthService, private modalService: NgbModal) { }
+  constructor(private fb: FormBuilder, private service: AuthService, private modalService: NgbModal) { }
   ngOnInit(): void {
     this.otpSubmittion.otpCreationTime = moment().format();
   }

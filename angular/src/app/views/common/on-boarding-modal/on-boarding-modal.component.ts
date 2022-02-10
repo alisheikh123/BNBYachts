@@ -6,8 +6,6 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OnBoardingVerifyOtpComponent } from '../on-boarding-verify-otp/on-boarding-verify-otp.component';
-import * as moment from 'moment';
-import { timer } from 'rxjs';
 import { OnBoardingProfileModalComponent } from '../on-boarding-profile-modal/on-boarding-profile-modal.component';
 
 @Component({
@@ -17,14 +15,14 @@ import { OnBoardingProfileModalComponent } from '../on-boarding-profile-modal/on
 })
 export class OnBoardingModalComponent implements OnInit {
   mobileVerification: MobileVerification = { phone: "0", userId: '' };
-  public countries: any = countries;
+  countries: any = countries;
   mobileVerificationForm: FormGroup;
   otpGenerationTime =
   {
     expiryTime:"",
     currentTime:""
   };
-  constructor(public fb: FormBuilder, private service: AuthService, private toastr: ToastrService, private modalService: NgbModal) { }
+  constructor(private fb: FormBuilder, private service: AuthService, private toastr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.mobileVerificationConfiguration();
@@ -39,7 +37,6 @@ export class OnBoardingModalComponent implements OnInit {
     if (this.mobileVerificationForm.valid) {
       let formData = this.mobileVerificationForm.value;
       this.mobileVerification.phone = `${formData.countryCode}${formData.phoneNumber}`;
-      this.mobileVerification.userId = localStorage.getItem("userId") || "";
       this.service.sendMobileNumber(this.mobileVerification).subscribe((res: any) => {
           this.modalService.dismissAll();
           this.modalService.open(OnBoardingVerifyOtpComponent, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' });

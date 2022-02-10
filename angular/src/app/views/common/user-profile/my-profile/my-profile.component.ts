@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BoatService } from 'src/app/core/Boat/boat.service';
 import { environment } from 'src/environments/environment';
-import { UploadDefault, UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
+import { UploadDefault, UserRoles } from 'src/app/shared/enums/user-roles';
 import { OnBoardingModalComponent } from '../../on-boarding-modal/on-boarding-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';

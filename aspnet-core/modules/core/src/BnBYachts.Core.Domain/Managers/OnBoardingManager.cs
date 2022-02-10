@@ -43,8 +43,8 @@ namespace BnBYachts.Core.Managers
         public async Task<EntityResponseModel> GenerateOTP(UserMobileVerificationRequestable mobileVerification)
         {
             var response = new EntityResponseModel();
-            var IsUser = await _repository.GetAsync(res => res.Id == Guid.Parse(mobileVerification.UserId)).ConfigureAwait(false);
-            if (IsUser != null)
+            var isUser = await _repository.GetAsync(res => res.Id == Guid.Parse(mobileVerification.UserId)).ConfigureAwait(false);
+            if (isUser != null)
             {
                 var random = new Random();
                 mobileVerification.OtpCode = (random.Next(100000, 999999)).ToString();
