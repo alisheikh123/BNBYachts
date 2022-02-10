@@ -5,9 +5,9 @@ import { HomeDashboardComponent } from './reports/home-dashboard/home-dashboard.
 import { RoutesGuard } from './routes.guard';
 import { PrivateLayoutComponent } from './site/private-layout/private-layout.component';
 import { PublicLayoutComponent } from './site/public-layout/public-layout.component';
-import { UserListingComponent } from './site/user-listing/user-listing.component';
-import { HostListingComponent } from './site/host-listing/host-listing.component';
-import { DisputeListingComponent } from './site/dispute-listing/dispute-listing.component';
+import { UserListingComponent } from './site/user/user-listing/user-listing.component';
+import { HostListingComponent } from './site/host/host-listing/host-listing.component';
+import { DisputeListingComponent } from './site/dispute/dispute-listing/dispute-listing.component';
 
 const routes: Routes =[
   {

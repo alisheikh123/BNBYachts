@@ -11,7 +11,7 @@
       <input [(ngModel)]='searchTerm' id="searchTerm" type="text" class="form-control col-6" placeholder="Search " aria-label="Search" aria-describedby="basic-addon2">
     </div>
     <div class="input-group">
-      <button (click)="filter(false)" id="filter" class="btn kpBtnGreen" type="button"> Filter  </button>
+      <button (click)="filter(false)" id="filter" class="btn kpBtnGreen margin-leftdiv" type="button"> Filter  </button>
       <button (click)="filter(true)" *ngIf="searchTerm" id="filter" class="btn kpBtnYellow" type="button">
         Reset</button>
     </div>

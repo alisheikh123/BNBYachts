@@ -1,17 +1,16 @@
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { DisputeService } from './services/site/dispute.service';
-import { UserService } from './services/user.service';
+import { UserService } from 'src/app/services/user.service';
+import { DisputeListingComponent } from './site/dispute/dispute-listing/dispute-listing.component';
+import { HostListingComponent } from './site/host/host-listing/host-listing.component';
+import { UserListingComponent } from './site/user/user-listing/user-listing.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { HomeDashboardComponent } from './reports/home-dashboard/home-dashboard.component';
 import { SortService } from './services/sort.service';
 import { LocalStoreService } from 'src/app/services/local-store.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthAppModule } from './site/auth/auth.module';
 import { ErrorService } from './services/error.service';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { ToggleModule } from '../app/controls/toggle/toggle.module';
 import { AppComponent } from './app.component';
 import { LoadingIconComponent } from './controls/loading-icon/loading-icon.component';
@@ -26,20 +25,22 @@ import { RoutesGuard } from './routes.guard';
 import {AuthModule, LogLevel} from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment';
 import { HttpConfigInterceptor } from './shared/intercepters/http.interceptor';
-import { UserListingComponent } from './site/user-listing/user-listing.component';
-import { HostListingComponent } from './site/host-listing/host-listing.component';
-import { DisputeListingComponent } from './site/dispute-listing/dispute-listing.component';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { DisputeService } from './services/site/dispute.service';
+
 
 export let AppInjector: Injector;
 @NgModule({
   declarations: [
     AppComponent,
-    HomeDashboardComponent,
     UserListingComponent,
     HostListingComponent,
     DisputeListingComponent,
+    HomeDashboardComponent,
     PublicLayoutComponent,
     PrivateLayoutComponent,
     LoadingIconComponent,
@@ -51,12 +52,12 @@ export let AppInjector: Injector;
   ],
   imports: [
     BrowserModule,
-    AccordionModule.forRoot(),
-    PaginationModule.forRoot(),
     CommonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    AccordionModule.forRoot(),
+    PaginationModule.forRoot(),
     ToggleModule,
     BrowserAnimationsModule,
     AppRoutingModule,

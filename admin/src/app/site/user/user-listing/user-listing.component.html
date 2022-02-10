@@ -1,6 +1,6 @@
 <div class="container">
-<h4 id="tableLabel">Dispute Queries</h4>
-<accordion [isAnimated]="true">
+<h4 id="tableLabel">Users</h4>
+ <accordion [isAnimated]="true">
   <accordion-group [isOpen]="false" class="accordianStyle" id="accordionFilter">
     <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
       <div class="text-left">
@@ -11,35 +11,31 @@
       <input [(ngModel)]='searchTerm' id="searchTerm" type="text" class="form-control col-6" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
     </div>
     <div class="input-group">
-      <button (click)="filter(false)" id="filter" class="btn kpBtnGreen" type="button">
-         Filter</button>
-       <button (click)="filter(true)" *ngIf="searchTerm" id="filter" class="btn kpBtnYellow" type="button">
-         Reset</button>
+      <button (click)="filter(false)" id="filter" class="btn kpBtnGreen margin-leftdiv" type="button"> Filter  </button> 
+      <button (click)="filter(true)" *ngIf="searchTerm" id="filter" class="btn kpBtnYellow" type="button">Reset</button>
     </div>
   </accordion-group>
-</accordion> 
+</accordion>  
 
-  <table sortable-table class='table'>
+  <table class='table'>
     <thead>
       <tr>
-        <th>No</th>
-        <th>Booking Type</th>
-        <th>Dispute Reason</th>
-        <th>Status</th>
-        <th>Complain Date</th>
-        <th>Action</th>
+        <th>SNo #</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Phone Verified</th>
+        <th>Joining Date</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of dispute;  index as i">
+      <tr *ngFor="let item of user;  index as i">
         <td>{{i + 1}}</td>
-        <td id="name">{{ item.bookingType }}</td>
-        <td id="email">{{item.disputeReason}}</td>
-        <td id="phoneNumber">{{item.status}}</td>
+        <td id="name">{{ item.name }}</td>
+        <td id="email">{{item.email}}</td>
+        <td id="phoneNumber">{{item.phoneNumber}}</td>
+        <td id="phoneNumberConfirmed">{{ item.phoneNumberConfirmed}}</td>
         <td id="creationTime">{{ item.creationTime | date : 'medium'}}</td>
-        <td>
-          <button class="btn btn-primary">view</button>
-        </td>
       </tr>
     </tbody>
   </table>
@@ -47,7 +43,6 @@
     <pagination  id="pagination"  [boundaryLinks]="true"  [totalItems]="totalItems"
     [itemsPerPage]="pageSize"
     [(ngModel)]="pageNumber"
-    [maxSize] = 10
     (pageChanged)="pageChanged($event)"
     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 
   </pagination>
