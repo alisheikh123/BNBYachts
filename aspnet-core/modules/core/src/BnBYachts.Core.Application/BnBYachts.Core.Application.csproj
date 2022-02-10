@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\payment\src\BnBYachts.Payments.Application.Contracts\BnBYachts.Payments.Application.Contracts.csproj" />
     <ProjectReference Include="..\BnBYachts.Core.Application.Contracts\BnBYachts.Core.Application.Contracts.csproj" />
     <ProjectReference Include="..\BnBYachts.Core.Domain\BnBYachts.Core.Domain.csproj" />
   </ItemGroup>
