@@ -19,7 +19,6 @@ export class OnBoardingModalComponent implements OnInit {
   mobileVerification: MobileVerification = { phone: "0", userId: '' };
   public countries: any = countries;
   mobileVerificationForm: FormGroup;
-  counter = timer(0, 1000);
   otpGenerationTime =
   {
     expiryTime:"",
@@ -44,9 +43,7 @@ export class OnBoardingModalComponent implements OnInit {
       this.service.sendMobileNumber(this.mobileVerification).subscribe((res: any) => {
           this.modalService.dismissAll();
           this.modalService.open(OnBoardingVerifyOtpComponent, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' });
-          this.counter.subscribe(() => {
-            this.time(res?.data);
-          });
+
       });
     }
     else {
@@ -61,15 +58,6 @@ export class OnBoardingModalComponent implements OnInit {
     this.modalService.dismissAll();
     this.service.IsIntialLoginStatus().subscribe(res=>{});
     this.modalService.open(OnBoardingProfileModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' })
-  }
-  time(otpCreationTime:string)
-  {
-    this.otpGenerationTime.expiryTime = moment(otpCreationTime).add(10,'minutes').format('hh:mm:ss A');
-    this.otpGenerationTime.currentTime = moment().format('hh:mm:ss A');
-    if(this.otpGenerationTime.currentTime==this.otpGenerationTime.expiryTime)
-    {
-        this.service.expireOTP().subscribe((exp:any) => {});
-    }
   }
 
 

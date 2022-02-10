@@ -9,9 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
@@ -105,11 +102,6 @@ namespace BnBYachts.Core.Managers
             }
         }
 
-        public async Task ExpireOTP(string userId)
-        {
-            var otpVerifierEntity = await _repositoryOTPEntity.FindAsync(x => x.UserId == userId).ConfigureAwait(false);
-            await _repositoryOTPEntity.DeleteAsync(otpVerifierEntity, autoSave:true).ConfigureAwait(false);
-            _logger.LogInformation("Expired OTP Code Deleted against this user Id:" + _unitOfWorkManager.Current.Id.ToString());
-        }
+        
     }
 }

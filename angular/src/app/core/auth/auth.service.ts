@@ -105,10 +105,6 @@ export class AuthService {
   }
   IsIntialLoginStatus()
   {
-    return this.http.get<any>(this.apiCoreURl +"/api/app/on-boarding/change-initial-login-status");
-  }
-  expireOTP()
-  {
-    return this.http.get<any>(this.apiCoreURl +"/api/app/on-boarding/expire-oTP");
+    return this.http.get(this.apiCoreURl +"/api/app/on-boarding/change-initial-login-status");
   }
 }

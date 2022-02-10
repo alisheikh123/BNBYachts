@@ -1,9 +1,7 @@
-﻿
-using BnBYachts.Core.Interface;
+﻿using BnBYachts.Core.Interface;
 using BnBYachts.Core.Requestable;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Shared.Model;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -40,11 +38,6 @@ namespace BnBYachts.Core.Services
         public async  Task ChangeInitialLoginStatus()
         {
             await _onbordingManager.ChangeInitialLoginStatus(CurrentUser.Id.ToString());
-        }
-        [HttpGet]
-        public async  Task ExpireOTP()
-        {
-            await _onbordingManager.ExpireOTP(CurrentUser.Id.ToString());
         }
     }
 }

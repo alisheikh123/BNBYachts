@@ -263,5 +263,6 @@
   "Reason": "Reason",
   "RequestedServices": "Requested Services",
   "RejectedServices": "Rejected Services",
-  "Contracts": "Contracts"
+  "Contracts": "Contracts",
+  "ExpiryOTP":"your otp is expiry please click on resend to get latest otp"
 }
