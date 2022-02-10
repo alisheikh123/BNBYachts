@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Core.Data.Model.ForgetPassword;
+using BnBYachts.Core.Data.Model.VerifyPhoneNumber;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -59,6 +60,7 @@ namespace BnBYachts.Core.EntityFrameworkCore
 
         // Forget Password
         public DbSet<ForgetPasswordVerifier> ForgetPasswordVerifier { get; set; }
+        public DbSet<OTPVerifierEntity> OTPVerifierEntity { get; set; }
 
         #endregion
 

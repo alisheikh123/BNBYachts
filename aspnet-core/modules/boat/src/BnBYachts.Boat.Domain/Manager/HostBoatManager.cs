@@ -217,6 +217,7 @@ namespace BnBYachts.Boat.Manager
             var allEvents = await _eventRepository.GetListAsync(res => res.BoatId == eventDetail.BoatId);
             await _eventRepository.EnsurePropertyLoadedAsync(eventDetail, x => x.Boat).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+            await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatCalendars).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatFeatures).ConfigureAwait(false);
             foreach (var feature in eventDetail.Boat.BoatFeatures)
             {

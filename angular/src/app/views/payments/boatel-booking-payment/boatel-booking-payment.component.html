@@ -91,8 +91,8 @@
                             <div class="col-12">
                                 <h6 class="medium py-md-3">{{'PriceDetails' | localization}}</h6>
                                 <div class="custom-flex-between">
-                                    <p>$ {{boatDetails?.perDayCharges}} x {{calculateDays()}} {{'Night' | localization}}</p>
-                                    <p>${{boatDetails?.perDayCharges * calculateDays()}}.00</p>
+                                    <p>$ {{boatDetails?.perDayCharges}} x {{booking?.days}} {{'Night' | localization}}</p>
+                                    <p>${{booking?.amount}}.00</p>
                                 </div>
                                 <div class="custom-flex-between">
                                     <p>{{'TaxFee' | localization}}</p>
@@ -104,8 +104,7 @@
                                 </div>
                                 <div class="custom-flex-between">
                                     <p>{{'Total(USD)' | localization}}</p>
-                                    <p>$ {{boatDetails?.perDayCharges *
-                                        calculateDays() + boatDetails?.taxFee+ 20}}.00</p>
+                                    <p>$ {{booking?.amount + boatDetails?.taxFee+ 20}}.00</p>
                                 </div>
                             </div>
                         </div>
@@ -152,9 +151,9 @@
                             <div class="custom-flex-between py-1"><p class="medium">{{'Bathroom'| localization}}:</p> <p class="grey">{{boatDetails?.totalWashrooms}}</p></div>
                             <div class="custom-flex-between py-1"><p class="medium">{{'CheckInDate'| localization}}:</p> <p class="grey">{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p></div>
                             <div class="custom-flex-between py-1"><p class="medium">{{'CheckOutDate'| localization}}:</p> <p class="grey">{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p></div>
-                            <div class="custom-flex-between py-1"><p class="medium">{{'totalNights'| localization}}:</p> <p class="grey">{{calculateDays()}} Nights</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'totalNights'| localization}}:</p> <p class="grey">{{booking?.days}} Nights</p></div>
                             <div class="border-top my-3"></div>
-                            <div class="custom-flex-between py-1"><p class="medium">{{'Total(USD)'| localization}}:</p> <p class="grey">$ {{boatDetails?.perDayCharges * calculateDays() + boatDetails?.taxFee + 20 }}.00</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'Total(USD)'| localization}}:</p> <p class="grey">$ {{booking?.amount + boatDetails?.taxFee + 20 }}.00</p></div>
                             <div class="custom-flex py-2">
                                 <button class="custom-btn blue big-btn" [routerLink]="['/boat-listing/all-reservations']">{{'gotoReservation'| localization}}</button>
                             </div>

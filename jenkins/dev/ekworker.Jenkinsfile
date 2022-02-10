@@ -81,7 +81,7 @@ pipeline {
     IMAGE_TAG = "dev"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
-    IMAGE_NAME = 'bnb-bkworker'
+    IMAGE_NAME = 'bnb-ekworker'
     IMAGE_URL = "${AWS_ECR_REPO}/${IMAGE_NAME}"
   }
 }

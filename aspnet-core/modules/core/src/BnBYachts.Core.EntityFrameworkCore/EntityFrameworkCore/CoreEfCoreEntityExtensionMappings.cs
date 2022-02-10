@@ -30,6 +30,9 @@ namespace BnBYachts.Core.EntityFrameworkCore
                 ObjectExtensionManager.Instance
               .MapEfCoreProperty<IdentityUser, string>
                   (nameof(AppUser.About));
+                ObjectExtensionManager.Instance
+            .MapEfCoreProperty<IdentityUser, bool>
+                (nameof(AppUser.IsInitialLogin));
             });
         }
     }

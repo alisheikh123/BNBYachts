@@ -25,7 +25,13 @@ import { AddReviewModalComponent } from './views/common/add-review-modal/add-rev
 import { TranslateService } from './core/translate.service';
 import { NgbCustomDateParserFormatter } from './shared/formatters/datepicker-formatter';
 import { ChatService } from './core/chat/chat.service';
+import { OnBoardingModalComponent } from './views/common/on-boarding-modal/on-boarding-modal.component';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { OnBoardingProfileModalComponent } from './views/common/on-boarding-profile-modal/on-boarding-profile-modal.component';
 import {CarouselModule} from 'primeng/carousel';
+import { OnBoardingVerifyOtpComponent } from './views/common/on-boarding-verify-otp/on-boarding-verify-otp.component';
+import { OnBoardingSuccessfullyVerifiedComponent } from './views/common/on-boarding-successfully-verified/on-boarding-successfully-verified.component';
+import { OnboardingWelcomeComponent } from './views/common/onboarding-welcome/onboarding-welcome.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +43,11 @@ import {CarouselModule} from 'primeng/carousel';
     MyProfileComponent,
     UpdateProfileComponent,
     AddReviewModalComponent,
+    OnBoardingModalComponent,
+    OnBoardingProfileModalComponent,
+    OnBoardingVerifyOtpComponent,
+    OnBoardingSuccessfullyVerifiedComponent,
+    OnboardingWelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +74,7 @@ import {CarouselModule} from 'primeng/carousel';
       },
     }),
     NgxStripeModule.forRoot(environment.stripeKey),
+    NgOtpInputModule,
     CarouselModule
   ],
   providers: [
