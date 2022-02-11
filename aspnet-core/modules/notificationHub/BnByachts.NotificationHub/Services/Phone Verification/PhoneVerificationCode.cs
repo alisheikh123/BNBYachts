@@ -1,9 +1,6 @@
 ﻿using BnByachts.NotificationHub.Configuration;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
@@ -26,6 +23,7 @@ namespace BnByachts.NotificationHub.Services.Phone_Verification
                 messageOptions.Body = "your OTP of BNBYachts is " + otpCode;
                 MessageResource.Create(messageOptions);
                 Console.WriteLine("OTP sended");
+                await Task.Run(()=>true);
         }
     }
 }

@@ -5,13 +5,28 @@
            <div class="col-lg-3 col-md-4 py-2">
                <div class="custom-card user-info-wrap">
                 <div class="image-with-text">
-                    <div class="image-with-text-inner big-image">
-                        <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
+                    <div class="image-with-text">
+                        <form [formGroup]="uploadPictureForm">
+                        <div class="avatar-upload-outer edit-avatar-page">
+                            <div class="avatar-upload">
+                              <div class="avatar-preview">
+                                <div id="imagePreview" [ngStyle]="{ 'background-image': 'url(' + assetsUrlProfile+(userResponse?.imagePath!=null?userResponse?.imagePath:USER_DEFAULTS.avatar)+ ')'}">
+                                    <img [src]="imageSrc" class="previewDimention">
+                                </div>
+                              </div>
+                              <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="profile"  (change)="onFileChange($event)"/>
+                                <label for="imageUpload" class="custom-btn blue big-btn"><i class="fa fa-edit"></i></label>
+                              </div>
+                            </div>
 
+                          </div>
+                        </form>
+                      <p class="medium text-center py-2">{{'Updateprofilephoto' | localization}}</p>
+                      <h6 class="bold text-center p-0 pb-3">{{userResponse?.name}}</h6>
                     </div>
-                  <p class="medium text-center py-2">{{"Updateprofilephoto" | localization}}</p>
-                  <h6 class="bold text-center p-0 pb-3">{{userResponse?.name}}</h6>
                 </div>
+
                 <div class="border-top"></div>
                 <div class="py-2">
                     <p class="medium text-center">{{'VerificationStatus' | localization}}</p>

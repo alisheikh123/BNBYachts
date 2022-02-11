@@ -256,11 +256,13 @@
   "comma": ",",
   "commentor": "Lili John",
   "comment": "Host Review Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "ExpireOTPMessage":"* Your OTP is Expired Please Generate New OTP By Resend Button",
   "ArrivalDate": "Arrival Date",
   "AgeLimitMessage": "To sign up, users must be at least 18. Your birthday won't be shared with other people who use BnBYachts.",
   "PleaseProvideDetails": "Please provide details",
   "Reason": "Reason",
   "RequestedServices": "Requested Services",
   "RejectedServices": "Rejected Services",
-  "Contracts": "Contracts"
+  "Contracts": "Contracts",
+  "ExpiryOTP":"your otp is expiry please click on resend to get latest otp"
 }

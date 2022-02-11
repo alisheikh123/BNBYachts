@@ -22,7 +22,8 @@
                             </div>
                             <div class="col-md-1"></div>
                         </div>
-                        <p class="mt-2">{{'ExpiryMessage' | localization}}</p>
+                        <p class="mt-2" *ngIf="beforeExpire==true">{{'ExpiryMessage' | localization}}</p>
+                        <p class="mt-2 text-danger" *ngIf="otpSubmittion.isOTPExpire==true">{{'ExpiryOTP' | localization}}</p>
                     </div>
                     <div class="py-4 text-center">
                         <p>{{'CodenotReceived' | localization}}</p><a href="#">
