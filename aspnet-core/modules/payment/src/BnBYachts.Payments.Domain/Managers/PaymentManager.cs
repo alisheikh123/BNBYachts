@@ -119,12 +119,13 @@ namespace BnBYachts.Payments.Managers
             var response = service.Create(options);
             if (response.Status == PaymentConstants.StatusSucceed)
             {
-                PaymentDetailsEntity pm = new PaymentDetailsEntity
+                var pm = new PaymentDetailsEntity
                 {
                     BookingId = data.BookingId ?? 0,
                     PaymentId = response.Id,
                     CustomerId = user.CustomerId,
-                    Amount = data.Amount
+                    Amount = data.Amount,
+                    IsContract = data.IsContract ?? false
                 };
                 await _userPaymentDetailsRepository.InsertAsync(pm);
                 return true;

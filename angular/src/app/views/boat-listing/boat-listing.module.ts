@@ -26,6 +26,7 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { BookingFilterComponent } from './booking-filter/booking-filter.component';
 import { CharterReservationDetailComponent } from './charter-reservation-detail/charter-reservation-detail.component';
 import { EventReservationDetailComponent } from './event-reservation-detail/event-reservation-detail.component';
+import { ContractsModule } from '../contracts/contracts.module';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { EventReservationDetailComponent } from './event-reservation-detail/even
     NgxStripeModule.forRoot(environment.stripeKey),
     NotFoundModule,
     PaginationModule,
-    CalendarModule
+    CalendarModule,
+    ContractsModule
   ],
     providers: [YachtSearchService, BookingService],
     exports: [BoatListingModule.rootComponent,BoatListingModule.rootReviewComponent],
