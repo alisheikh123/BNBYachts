@@ -1,3 +1,4 @@
+import { HomeDashboardModule } from './pages/home-dashboard/home-dashboard.module';
 import { RoutesGuard } from './routes.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +28,8 @@ import { httpConfigurationClient } from './shared/intercepters/http.interceptor'
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HomeDashboardModule,
+    ThemeModule,
     AppRoutingModule,
     AuthModule.forRoot({
       config: {

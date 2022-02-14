@@ -3,9 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { LayoutService } from '../../../Core/utils';
-import { BoatUserData } from '../../../core/data/user';
+import { Subject } from 'rxjs';import { LayoutService } from '../../../Core/utils/layout.service';
+;
 
 @Component({
   selector: 'ngx-header',
