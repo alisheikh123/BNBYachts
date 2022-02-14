@@ -10,7 +10,8 @@ namespace BnBYachts.Core.Interface
 {
     public interface IAdminService : IApplicationService
     {
-        Task<EntityResponseListModel<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName, string SearchText, PaginationHeader pagination);
+        //Task<EntityResponseListModel<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName, string SearchText, PaginationHeader pagination);
+        Task<List<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName);
         Task<TotalUsersTransferable> GetTotalUsers(string userRole, string hostRole);
 
     }

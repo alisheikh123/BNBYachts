@@ -22,7 +22,7 @@ namespace BnBYachts.Core.Services
             _adminManager = adminManager;
         }
 
-        public async Task<EntityResponseListModel<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName, string SearchText, PaginationHeader pagination) =>  await _adminManager.GetBoatOwersAndUsers(roleName, SearchText, pagination);
+        public async Task<List<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName) =>  await _adminManager.GetBoatOwersAndUsers(roleName);
         public async Task<TotalUsersTransferable> GetTotalUsers(string userRole, string hostRole) => await _adminManager.GetTotalUsers(userRole,hostRole);
     }
 }

@@ -3,7 +3,9 @@ using BnBYachts.Booking.Disputes.Interface;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Booking.Services
 {
+    [Authorize]
     public class DisputeAppService : ApplicationService, IDisputeAppService
     {
         private readonly IDisputeManager _manager;
@@ -22,6 +25,7 @@ namespace BnBYachts.Booking.Services
             _config = config;
             _eventBusDispatcher = eventBusDispatcher;
         }
+        [AllowAnonymous]
         public async Task AddDispute(DisputeRequestableDto data)
         {
 
@@ -38,7 +42,7 @@ namespace BnBYachts.Booking.Services
                 IsBodyHtml = true,
             });
         }
-        public async Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination) => await _manager.GetDisputeList(SearchText, pagination);
+        public async Task<List<DisputeTransferable>> GetDisputeList() => await _manager.GetDisputeList();
 
     }
 }

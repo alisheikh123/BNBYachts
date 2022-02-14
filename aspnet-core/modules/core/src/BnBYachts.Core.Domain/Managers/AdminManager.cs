@@ -20,16 +20,18 @@ namespace BnBYachts.Core.Managers
             _userManager = userManager;
             _objectMapper = objectMapper;
         }
-        public async Task<EntityResponseListModel<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName, string SearchText,PaginationHeader pagination)
+        public async Task<List<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName)
         {
-            var response = new EntityResponseListModel<BoatUserTransferable>();
             var data = await _userManager.GetUsersInRoleAsync(roleName).ConfigureAwait(false);
-            var users = _objectMapper.Map<List<IdentityUser>, PagedList<BoatUserTransferable>>(data.ToList());
-            response.TotalCount = users.Count();
-            response.Data = await PagedList<BoatUserTransferable>.CreateAsync(users, pagination.CurrentPage, pagination.ItemsPerPage);
-            if (!string.IsNullOrWhiteSpace(SearchText))
-                response.Data = response.Data.Where(c => c.Name.Contains(SearchText) || c.Email.Contains(SearchText) || c.PhoneNumber.Contains(SearchText)).ToList();
-            return response;
+            return _objectMapper.Map<List<IdentityUser>, List<BoatUserTransferable>>(data.ToList());
+            //var response = new EntityResponseListModel<BoatUserTransferable>();
+            //var data = await _userManager.GetUsersInRoleAsync(roleName).ConfigureAwait(false);
+            //var users = _objectMapper.Map<List<IdentityUser>, PagedList<BoatUserTransferable>>(data.ToList());
+            //response.TotalCount = users.Count();
+            //response.Data = await PagedList<BoatUserTransferable>.CreateAsync(users, pagination.CurrentPage, pagination.ItemsPerPage);
+            //if (!string.IsNullOrWhiteSpace(SearchText))
+            //    response.Data = response.Data.Where(c => c.Name.Contains(SearchText) || c.Email.Contains(SearchText) || c.PhoneNumber.Contains(SearchText)).ToList();
+            //return response;
         }
         public async Task<TotalUsersTransferable> GetTotalUsers(string userRole, string hostRole)
         {
