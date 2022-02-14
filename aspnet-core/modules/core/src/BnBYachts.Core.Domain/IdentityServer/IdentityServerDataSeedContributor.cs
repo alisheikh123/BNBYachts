@@ -65,7 +65,7 @@ namespace BnBYachts.Core.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "HostGateway", "Chat"});
+            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "HostGateway", "Chat", "Admin"});
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,7 +80,7 @@ namespace BnBYachts.Core.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "HostGateway", "Chat" }, commonApiUserClaims);
+            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "HostGateway", "Chat", "Admin" }, commonApiUserClaims);
         }
 
         private async Task<ApiResource> CreateApiResourceAsync(string[] item, IEnumerable<string> claims)
@@ -149,7 +149,8 @@ namespace BnBYachts.Core.IdentityServer
                 "Boat",
                 "BnBYachts",
                 "HostGateway",
-                "Chat"
+                "Chat",
+                "Admin"
 
             };
 
@@ -166,6 +167,23 @@ namespace BnBYachts.Core.IdentityServer
                     scopes: commonScopes,
                     grantTypes: new[] { "password", "client_credentials", "authorization_code" },
                     secret: (configurationSection["BnBYachts_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: webClientRootUrl,
+                    postLogoutRedirectUri: webClientRootUrl,
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            //Console Test / Angular Admin
+            var consoleAndAngularAdminClientId = configurationSection["BnBYachts_Admin:ClientId"];
+            if (!consoleAndAngularAdminClientId.IsNullOrWhiteSpace())
+            {
+                var webClientRootUrl = configurationSection["BnBYachts_Admin:RootUrl"]?.TrimEnd('/');
+                await CreateClientAsync(
+                    name: consoleAndAngularAdminClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    secret: (configurationSection["BnBYachts_Admin:ClientSecret"] ?? "1q2w3e*").Sha256(),
                     requireClientSecret: false,
                     redirectUri: webClientRootUrl,
                     postLogoutRedirectUri: webClientRootUrl,
@@ -271,6 +289,23 @@ namespace BnBYachts.Core.IdentityServer
                     scopes: commonScopes,
                     grantTypes: new[] { "authorization_code" },
                     secret: configurationSection["Chat_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            //Swagger Admin
+
+            var swaggerAdminClientId = configurationSection["Admin_Swagger:ClientId"];
+            if (!swaggerAdminClientId.IsNullOrWhiteSpace())
+            {
+                var swaggerRootUrl = configurationSection["Admin_Swagger:RootUrl"].TrimEnd('/');
+                await CreateClientAsync(
+                    name: swaggerAdminClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["Admin_Swagger:ClientSecret"]?.Sha256(),
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
