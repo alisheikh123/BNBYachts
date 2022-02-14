@@ -17,7 +17,7 @@ export const environment = {
       redirectUrl: "http://client.bnb.techverxapps.com",
       postLogoutRedirectUri: "http://client.bnb.techverxapps.com",
       clientId: "BnBYachts_Admin",
-      scope: "openid Admin",
+      scope: "openid Core Booking Boat Payments HostGateway Chat Admin",
       responseType: 'code'
     }  
 };

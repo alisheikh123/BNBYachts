@@ -17,12 +17,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
 
 import {
-  FooterComponent,
-  HeaderComponent,
-  SearchInputComponent,
-  TinyMCEComponent,
-} from './components';
-import {
   CapitalizePipe,
   PluralPipe,
   RoundPipe,
@@ -38,6 +32,10 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SearchInputComponent } from './components/search-input/search-input.component';
+import { TinyMCEComponent } from './components/tiny-mce/tiny-mce.component';
 
 const NB_MODULES = [
   NbLayoutModule,

@@ -26,11 +26,6 @@ export class HomeDashboardComponent implements OnInit{
   ngOnInit(): void {
     this.getTotalUser(this.Roles.USER,this.Roles.HOST);
   }
-  
-  private alive = true;
-  ngOnDestroy() {
-    this.alive = false;
-  }
 
   getTotalUser(userRole : string, hostRole : string ){
     this.userService.getTotalUsers(userRole,hostRole).subscribe((res: any) => {
