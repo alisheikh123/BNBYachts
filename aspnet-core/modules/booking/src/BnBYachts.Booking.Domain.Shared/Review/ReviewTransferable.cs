@@ -9,6 +9,6 @@ namespace BnBYachts.Booking.Review
         public string ReviewDescription { get; set; }
         public int Ratings { get; set; }
         public int BookingId { get; set; }
-        public DateTime CreationDateTime { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }

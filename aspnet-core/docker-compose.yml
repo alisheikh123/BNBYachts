@@ -1,19 +1,28 @@
 version: "3"
 services:
   
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    hostname: my-rabbit
-    container_name: rabbitmq
-    volumes:
-      - ../rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
-      - ../rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-      - ../rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
-      - ../rabbitmq/logs:/var/log/rabbitmq/log
+  # rabbitmq:
+  #   image: rabbitmq:3-management-alpine
+  #   hostname: my-rabbit
+  #   container_name: rabbitmq
+  #   volumes:
+  #     - ../rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+  #     - ../rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+  #     - ../rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+  #     - ../rabbitmq/logs:/var/log/rabbitmq/log
+  #   ports:
+  #     - 5672:5672
+  #     - 15672:15672
+
+  bnb_client_portal:
+    container_name: bnb_admin_portal
+    build:
+      context: ../admin
+      dockerfile: Angular.Dockerfile
     ports:
-      - 5672:5672
-      - 15672:15672
-    
+      - "8080:80"
+
+
   # bnb_client_portal:
   #   container_name: bnb_client_portal
   #   build:
@@ -21,6 +30,9 @@ services:
   #     dockerfile: StagAngular.Dockerfile
   #   ports:
   #     - "8080:80"
+
+
+
   # bnb_boat_api:
   #   container_name: bnb_boat_api
   #   build:
@@ -199,33 +211,33 @@ services:
   #   depends_on:
   #     - rabbitmq  
 
-  bnb_notification_hub_engine:
-    container_name: bnb_notification_hub_engine
-    build:
-      context: .
-      dockerfile: EKBKW.Dockerfile
-    environment:
-      "ASPNETCORE_ENVIRONMENT": "Production"
-      "RabbitMq:Host": ${BNB_MQ_HOST}
-      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
-      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
-      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
-      "Settings:Host": ${BNB_SETTINGS_HOST}
-      "Settings:Port": ${BNB_SETTINGS_PORT}
-      "Settings:UserName": ${BNB_SETTINGS_USERNAME}
-      "Settings:Password": ${BNB_SETTINGS_PASSWORD}
-      "Settings:SenderName": ${BNB_SETTINGS_SENDERNAME}
-      "Settings:SenderEmail": ${BNB_SETTINGS_SENDEREMAIL}
-      "Settings:Server": ${BNB_SETTINGS_SERVER}
+  # bnb_notification_hub_engine:
+  #   container_name: bnb_notification_hub_engine
+  #   build:
+  #     context: .
+  #     dockerfile: EKBKW.Dockerfile
+  #   environment:
+  #     "ASPNETCORE_ENVIRONMENT": "Production"
+  #     "RabbitMq:Host": ${BNB_MQ_HOST}
+  #     "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+  #     "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+  #     "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+  #     "Settings:Host": ${BNB_SETTINGS_HOST}
+  #     "Settings:Port": ${BNB_SETTINGS_PORT}
+  #     "Settings:UserName": ${BNB_SETTINGS_USERNAME}
+  #     "Settings:Password": ${BNB_SETTINGS_PASSWORD}
+  #     "Settings:SenderName": ${BNB_SETTINGS_SENDERNAME}
+  #     "Settings:SenderEmail": ${BNB_SETTINGS_SENDEREMAIL}
+  #     "Settings:Server": ${BNB_SETTINGS_SERVER}
 
-    volumes:
-      - ./tmp-build/BNB/BnbNotify-Host/logs:/app/Logs
-      - ./tmp-build/BNB/BnbNotify-Host/.aspnet/https:/root/.aspnet/https:ro
-      - ./tmp-build/BNB/BnbNotify-Host/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro   
-    depends_on:
-      - rabbitmq
-    links:
-      - rabbitmq:rabbitmq  
+  #   volumes:
+  #     - ./tmp-build/BNB/BnbNotify-Host/logs:/app/Logs
+  #     - ./tmp-build/BNB/BnbNotify-Host/.aspnet/https:/root/.aspnet/https:ro
+  #     - ./tmp-build/BNB/BnbNotify-Host/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro   
+  #   depends_on:
+  #     - rabbitmq
+  #   links:
+  #     - rabbitmq:rabbitmq  
     
   # proxyapp:
   #   image: nginx:alpine

@@ -72,8 +72,8 @@ export class BookingService {
   getReviews(bookingId:number){
     return this.http.get(this.bookingApiUrl + '/api/app/review/booking-reviews/'+bookingId).pipe(catchError(this.handleError));
   }
-  getBoatReviews(boatId:number){
-    return this.http.get(this.bookingApiUrl + '/api/app/review/boat-reviews/'+boatId).pipe(catchError(this.handleError));
+  getBoatReviews(boatId:number , reviewSorting : number){
+    return this.http.get(this.bookingApiUrl + '/api/app/review/boat-reviews/'+ boatId + '?reviewSorting=' + reviewSorting).pipe(catchError(this.handleError));
   }
   isReviewPosted(bookingId:number) {
     return this.http.get(this.bookingApiUrl + this.bookingReview +bookingId).pipe(catchError(this.handleError));

@@ -1,12 +1,12 @@
 import { MobileVerification } from './../../../shared/interface/mobileVerify';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component,  OnInit } from '@angular/core';
 import { countries } from 'src/app/shared/services/countries-data';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { OnBoardingProfileModalComponent } from '../on-boarding-profile-modal/on-boarding-profile-modal.component';
 import { OnBoardingVerifyOtpComponent } from '../on-boarding-verify-otp/on-boarding-verify-otp.component';
+import { OnBoardingProfileModalComponent } from '../on-boarding-profile-modal/on-boarding-profile-modal.component';
 
 @Component({
   selector: 'app-on-boarding-modal',
@@ -15,9 +15,14 @@ import { OnBoardingVerifyOtpComponent } from '../on-boarding-verify-otp/on-board
 })
 export class OnBoardingModalComponent implements OnInit {
   mobileVerification: MobileVerification = { phone: "0", userId: '' };
-  public countries: any = countries;
+  countries: any = countries;
   mobileVerificationForm: FormGroup;
-  constructor(public fb: FormBuilder, private service: AuthService, private toastr: ToastrService, private modalService: NgbModal) { }
+  otpGenerationTime =
+  {
+    expiryTime:"",
+    currentTime:""
+  };
+  constructor(private fb: FormBuilder, private service: AuthService, private toastr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.mobileVerificationConfiguration();
@@ -32,10 +37,9 @@ export class OnBoardingModalComponent implements OnInit {
     if (this.mobileVerificationForm.valid) {
       let formData = this.mobileVerificationForm.value;
       this.mobileVerification.phone = `${formData.countryCode}${formData.phoneNumber}`;
-      this.mobileVerification.userId = localStorage.getItem("userId") || "";
       this.service.sendMobileNumber(this.mobileVerification).subscribe((res: any) => {
-        this.modalService.dismissAll();
-        this.modalService.open(OnBoardingVerifyOtpComponent, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' });
+          this.modalService.dismissAll();
+          this.modalService.open(OnBoardingVerifyOtpComponent, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' });
 
       });
     }
@@ -50,6 +54,7 @@ export class OnBoardingModalComponent implements OnInit {
   DismissAll() {
     this.modalService.dismissAll();
     this.service.IsIntialLoginStatus().subscribe(res=>{});
+    this.modalService.open(OnBoardingProfileModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal', backdrop: 'static' })
   }
 
 

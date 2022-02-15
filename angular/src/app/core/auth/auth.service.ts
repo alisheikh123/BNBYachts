@@ -105,6 +105,6 @@ export class AuthService {
   }
   IsIntialLoginStatus()
   {
-    return this.http.get<any>(this.apiCoreURl +"/api/app/on-boarding/change-initial-login-status");
+    return this.http.get(this.apiCoreURl +"/api/app/on-boarding/change-initial-login-status");
   }
 }

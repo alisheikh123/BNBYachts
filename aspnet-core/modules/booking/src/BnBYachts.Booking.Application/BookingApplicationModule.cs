@@ -1,4 +1,7 @@
-﻿using BnBYachts.EventBusShared;
+﻿using BnBYachts.Booking.DTO;
+using BnBYachts.EventBusShared;
+using BnBYachts.Shared;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
@@ -26,6 +29,7 @@ namespace BnBYachts.Booking
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            context.Services.Configure<AWSOptions>(context.Services.GetConfiguration().GetSection("AWSConfiguation"));
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddMaps<BookingApplicationModule>();

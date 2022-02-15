@@ -7,3 +7,6 @@ export enum UserRoles {
 export enum UserDefaults {
     avatar = "default-avatar.png"
 };
+export enum UploadDefault{
+    avatar = "upload-img.png"
+}

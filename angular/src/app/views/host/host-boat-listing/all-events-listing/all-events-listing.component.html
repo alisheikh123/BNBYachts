@@ -10,7 +10,7 @@
                 <p class="">Listing Status:<span
                     [ngClass]="{'text-success' : item.isActive, 'text-danger':!item.isActive}">{{item?.isActive
                         ? "Active":"Inactive"}}</span></p>
-                        <p class=" ">{{item?.eventLocation}}</p>
+                        <p class=" ">{{item?.location}}</p>
                         <p class=" ">{{item?.startDateTime | date:'hh mm a'}} - {{item?.endDateTime | date:'hh mm a'}}</p>
                 
                 <p class=" ">{{item?.creationTime | date}}</p>

@@ -48,7 +48,7 @@ import { OnboardingWelcomeComponent } from './views/common/onboarding-welcome/on
     OnBoardingVerifyOtpComponent,
     OnBoardingSuccessfullyVerifiedComponent,
     OnboardingWelcomeComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

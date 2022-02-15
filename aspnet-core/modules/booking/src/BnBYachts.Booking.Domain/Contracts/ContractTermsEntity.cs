@@ -9,8 +9,8 @@ namespace BnBYachts.Booking.Contracts
 {
     public class ContractTermsEntity : AuditedAggregateRoot<int>
     {
-        public string Name { get; set; }
-        public string AttachmentPath { get; set; }
-        public virtual string ContractId { get; set; }
+        public string Title { get; set; }
+        public string FileName{ get; set; }
+        public virtual int? ContractEntityId { get; set; }
     }
 }

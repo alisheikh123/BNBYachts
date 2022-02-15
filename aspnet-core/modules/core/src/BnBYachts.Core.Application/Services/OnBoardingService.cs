@@ -1,9 +1,7 @@
-﻿
-using BnBYachts.Core.Interface;
+﻿using BnBYachts.Core.Interface;
 using BnBYachts.Core.Requestable;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Shared.Model;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -20,10 +18,10 @@ namespace BnBYachts.Core.Services
             _onbordingManager = onbordingManager;
             _s3Service = s3Service;
         }
-        public async Task GenerateOTP(UserMobileVerificationRequestable mobileVerification)
+        public async Task<EntityResponseModel> GenerateOTP(UserMobileVerificationRequestable mobileVerification)
         {
             mobileVerification.UserId = CurrentUser.Id.ToString();
-            await _onbordingManager.GenerateOTP(mobileVerification);
+            return await _onbordingManager.GenerateOTP(mobileVerification);
         }
         [HttpGet]
         public async Task<EntityResponseModel> VerifyOTP(long otpNumber)
