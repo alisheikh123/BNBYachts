@@ -86,4 +86,8 @@ export class BookingService {
   getmyBookings(boatId:number){
     return this.http.get(this.bookingApiUrl +'/api/app/booking-list/my-bookings/'+boatId).pipe(catchError(this.handleError));
   }
+  savecharterBookingCancellation(charterBookingCancellationRequestable:any)
+  {
+    return this.http.post(this.bookingApiUrl + '/api/app/charter-booking/cancel-charter-booking',charterBookingCancellationRequestable).pipe(catchError(this.handleError));
+  }
 }

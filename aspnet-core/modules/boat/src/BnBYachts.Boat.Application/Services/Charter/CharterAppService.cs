@@ -42,6 +42,10 @@ namespace BnBYachts.Services.Charter
         }
         public async Task<bool> updateCharterLocation(CharterLocationRequestable charter)=>
              await _charterManager.UpdateCharterLocation(charter, CurrentUser.Id);
-        
+
+        public async Task<CharterRequestable> GetCharterDetailById(long charterId)
+        {
+            return await _charterManager.GetCharterDetailById(charterId);
+        }
     }
 }

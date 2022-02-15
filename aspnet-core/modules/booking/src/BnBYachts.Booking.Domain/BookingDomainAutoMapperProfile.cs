@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BnBYachts.Booking.Booking;
 using BnBYachts.Booking.Booking.Requestable;
+using BnBYachts.Booking.Booking.Requestable.Charter;
 using BnBYachts.Booking.Booking.Transferables;
 using BnBYachts.Booking.Disputes;
+using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Review;
 
 namespace BnBYachts.Booking
@@ -28,6 +30,8 @@ namespace BnBYachts.Booking
             CreateMap<EventBookingRequestableDto, EventBookingEntity>();
             CreateMap<BookingRequestsRequestableDto, BoatelBookingEntity>();
             CreateMap<EventBookingEntity, BookingRequestsRequestableDto>();
+            CreateMap<CharterBookingEntity, CharterBookingRequestable>().ReverseMap();
+            CreateMap<BookingCancellationRequestableDto, BookingCancelEntity>().ReverseMap();
             CreateMap<BoatelBookingEntity, CalendarTransferable>().
                   ForMember(res => res.Id, opt => opt.MapFrom(res => res.BoatId)).
                   ForMember(res => res.BookingId, opt => opt.MapFrom(res => res.Id)).

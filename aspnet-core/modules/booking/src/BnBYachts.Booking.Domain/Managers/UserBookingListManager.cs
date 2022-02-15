@@ -133,6 +133,8 @@ namespace BnBYachts.Booking.Managers
             => _objectMapper.Map<BoatelBookingEntity, BoatelBookingTransferableDto>
             (await _boatelBookingRepository.GetAsync(res => res.Id == bookingId).ConfigureAwait(false));
 
+       
+
         public async Task<ICollection<BoatelBookingTransferableDto>> GetHostBoatelBookings(string hostId)
         => _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BoatelBookingTransferableDto>>
             (await _boatelBookingRepository.GetListAsync(res => res.HostId == hostId).ConfigureAwait(false));

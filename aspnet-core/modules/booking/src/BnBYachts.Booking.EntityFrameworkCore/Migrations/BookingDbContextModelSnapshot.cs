@@ -110,6 +110,9 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
+                    b.Property<string>("BookingStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("BookingType")
                         .HasColumnType("int");
 

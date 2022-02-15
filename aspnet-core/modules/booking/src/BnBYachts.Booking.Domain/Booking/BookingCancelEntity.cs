@@ -17,5 +17,6 @@ namespace BnBYachts.Booking.Booking
         
         public string RefundAmount { get; set; }
         public string TotalAmount { get; set; }
+        public string BookingStatus { get; set; }
     }
 }

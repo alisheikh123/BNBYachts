@@ -22,7 +22,7 @@ namespace BnBYachts.Boat.Manager.Charter
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
         private readonly ILogger<ICharterManager> _logger;
 
-        public CharterManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IObjectMapper<BoatDomainModule> objectMapper,ILogger<ICharterManager> logger)
+        public CharterManager(IRepository<BoatEntity, int> boatRepository, IRepository<CharterEntity, int> charterRepository, IObjectMapper<BoatDomainModule> objectMapper, ILogger<ICharterManager> logger)
         {
             _boatRepository = boatRepository;
             _charterRepository = charterRepository;
@@ -50,22 +50,22 @@ namespace BnBYachts.Boat.Manager.Charter
                 await _charterRepository.EnsurePropertyLoadedAsync(charter, res => res.Boat).ConfigureAwait(false);
                 await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, res => res.BoatGalleries).ConfigureAwait(false);
             }
-           var hostCharterList =  _objectMapper.Map<List<CharterEntity>, List<CharterDto>>(charters);
+            var hostCharterList = _objectMapper.Map<List<CharterEntity>, List<CharterDto>>(charters);
             response.TotalCount = hostCharterList.Count;
-            response.Data = await PagedList<CharterDto>.CreateAsync(hostCharterList,pageNo,pageSize);
+            response.Data = await PagedList<CharterDto>.CreateAsync(hostCharterList, pageNo, pageSize);
             return response;
         }
 
         public async Task<CharterDto> InsertCharter(CharterDto charterForm)
         {
-           await _charterRepository.InsertAsync(_objectMapper.Map<CharterDto, CharterEntity>(charterForm),true).ConfigureAwait(false);
+            await _charterRepository.InsertAsync(_objectMapper.Map<CharterDto, CharterEntity>(charterForm), true).ConfigureAwait(false);
             return new CharterDto();
         }
-        public async Task<bool> UpdateCharter(ChartersMapperRequestable charterDetails,Guid? userId)
+        public async Task<bool> UpdateCharter(ChartersMapperRequestable charterDetails, Guid? userId)
         {
             var charterEntity = await _charterRepository.FindAsync(x => x.Id == charterDetails.Id).ConfigureAwait(false);
-            _objectMapper.Map<ChartersMapperRequestable,CharterEntity>(charterDetails, charterEntity);
-            if (charterEntity != null) 
+            _objectMapper.Map<ChartersMapperRequestable, CharterEntity>(charterDetails, charterEntity);
+            if (charterEntity != null)
             {
                 charterEntity.CreatorId = userId;
                 await _charterRepository.UpdateAsync(charterEntity, autoSave: true).ConfigureAwait(false);
@@ -87,7 +87,7 @@ namespace BnBYachts.Boat.Manager.Charter
             _objectMapper.Map<CharterLocationRequestable, CharterEntity>(charterDetails, charterEntity);
             if (charterEntity != null)
             {
-                charterEntity.LastModifierId= userId;
+                charterEntity.LastModifierId = userId;
                 charterEntity.LastModificationTime = DateTime.Now;
                 await _charterRepository.UpdateAsync(charterEntity, autoSave: true).ConfigureAwait(false);
                 _logger.LogInformation("Update the Location of Charter");
@@ -96,5 +96,10 @@ namespace BnBYachts.Boat.Manager.Charter
             return false;
         }
 
+        public async Task<CharterRequestable> GetCharterDetailById(long charterId)
+        {
+            _logger.LogInformation("Get Charter Detail By Id");
+            return _objectMapper.Map<CharterEntity, CharterRequestable>(await _charterRepository.GetAsync(x => x.Id == charterId).ConfigureAwait(false));
+        }
     }
 }
