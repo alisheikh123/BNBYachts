@@ -45,5 +45,20 @@ namespace BnBYachts.Booking.Services
         => await _manager.RejectContract(contractId, reason, CurrentUser.Id).ConfigureAwait(false);
         public async Task<EntityResponseModel> AcceptContract(int contractId)
         => await _manager.AcceptContract(contractId, CurrentUser.Id).ConfigureAwait(false);
+
+        public async Task<EntityResponseModel> EditContract(IFormCollection data, IFormFileCollection files)
+        {
+            var contractForm = JsonConvert.DeserializeObject<ContractsRequestable>(data["contractForm"]);
+            var attachmentsData = JsonConvert.DeserializeObject<List<ContractAttachmentRequestable>>(data["attachments"]); ;
+            var response = await _manager.EditContract(contractForm, attachmentsData).ConfigureAwait(false);
+            if (response.ReturnStatus == true)
+            {
+                foreach (var file in files)
+                {
+                    await _s3Service.UploadFileToAWSAsync(file, "ContractsAttachments", "", "");
+                }
+            }
+            return response;
+        }
     }
 }

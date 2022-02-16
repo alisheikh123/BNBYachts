@@ -78,5 +78,18 @@ namespace BnBYachts.Booking.Managers
             response.ReturnStatus = true;
             return response;
         }
+
+        public async Task<EntityResponseModel> EditContract(ContractsRequestable contractData, List<ContractAttachmentRequestable> attachmentData)
+        {
+            var contractEntity = await _repo.GetAsync(res => res.Id == contractData.Id).ConfigureAwait(false);
+            _objectMapper.Map<ContractsRequestable, ContractEntity>(contractData, contractEntity);
+            await _repo.UpdateAsync(contractEntity,true).ConfigureAwait(false);
+            attachmentData.ForEach((f) => f.ContractEntityId = contractEntity.Id);
+            await _repoContactsTerms.InsertManyAsync(_objectMapper.Map<ICollection<ContractAttachmentRequestable>, ICollection<ContractTermsEntity>>(attachmentData)).ConfigureAwait(false);
+            return new EntityResponseModel
+            {
+                ReturnStatus = true
+            };
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace BnBYachts.Booking.Interface
         Task<EntityResponseModel> GetContractById(int contractId);
         Task<EntityResponseModel> RejectContract(int contractId,string reason);
         Task<EntityResponseModel> AcceptContract(int contractId);
+        Task<EntityResponseModel> EditContract(IFormCollection data, IFormFileCollection files);
 
     }
 }

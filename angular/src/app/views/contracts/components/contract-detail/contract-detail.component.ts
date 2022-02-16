@@ -24,12 +24,14 @@ export class ContractDetailComponent implements OnInit {
   showMore: boolean = false;
   SERVICE_TYPES = BoatServiceType;
   CONTRACT_STATUS = ContractStaus;
+  userId :string;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   attachmentsUrl = environment.S3BUCKET_URL + '/ContractsAttachments/';
   constructor(private activatedRoute: ActivatedRoute, private service: ContractsService,
-     private boatService: YachtSearchService, private _location: Location
+         private boatService: YachtSearchService, private _location: Location
      ,private modal:NgbModal,private toastr:ToastrService,private router:Router) {
     this.contractId = this.activatedRoute.snapshot.params.contractId;
+    this.userId = localStorage.getItem("userId") || "";
   }
 
   ngOnInit(): void {

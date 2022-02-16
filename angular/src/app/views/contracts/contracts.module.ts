@@ -15,13 +15,15 @@ import { ContractListingComponent } from './components/contract-listing/contract
 import { ContractsRoutingModule } from './contracts-routing.module';
 import { ContractDetailComponent } from './components/contract-detail/contract-detail.component';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { ContractEditComponent } from './components/contract-edit/contract-edit.component';
 
 
 @NgModule({
   declarations: [
     ContractFormComponent,
     ContractListingComponent,
-    ContractDetailComponent
+    ContractDetailComponent,
+    ContractEditComponent
     ],
   imports: [
     NgbModule,

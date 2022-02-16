@@ -7,6 +7,7 @@ namespace BnBYachts.Booking.Contracts
 {
     public class ContractsRequestable :IRequestable
     {
+        public int? Id { get; set; }
         public ServiceType ServiceType { get; set; }
         public int NoOfGuests { get; set; }
         public string Description { get; set; }
@@ -14,6 +15,7 @@ namespace BnBYachts.Booking.Contracts
         public string Destination { get; set; }
         public DateTime? EventDateTime { get; set; }
         public string EventTitle { get; set; }
+        public string TerminationClause { get; set; }
         public string EventLocation { get; set; }
         public DateTime? DepartureDate { get; set; }
         public DateTime? ArrivalDate { get; set; }

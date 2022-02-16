@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="custom-flex-start character-info py-2">
                                     <p class="medium description-fotmat"></p>
-                                    <p class="grey">{{contract?.returnDate | date:'dd MMM YYYY hh:mm a'}}/p>
+                                    <p class="grey">{{contract?.returnDate | date:'dd MMM YYYY hh:mm a'}}</p>
                                 </div>
                             </div>
                         </ng-container>
@@ -115,6 +115,12 @@
                                 <p class="medium text-right py-1">{{contract?.qouteAmount + 20}} $</p>
                             </div>
                         </div>
+                        <div *ngIf="contract?.terminationClause != null">
+                            <h5 class="bold pt-3 pb-1">Termination Clause</h5>
+                            <div>
+                                <p class="small-text medium-container text-left grey"> {{contract?.terminationClause}} </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 py-2">
@@ -139,7 +145,8 @@
                                     <td>
                                         {{item?.title}}
                                     </td>
-                                    <td><button (click)="download(item.fileName)"><i class="fas fa-eye"></i></button></td>
+                                    <td><button (click)="download(item.fileName)"><i class="fas fa-eye"></i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -161,12 +168,14 @@
                         mauris.<a href="javascript:(void)"
                             class="custom-btn underline-blue-link no-before-content p-0">Learn more</a></p>
                 </div>
-                <div class="col-sm-12 py-4 text-end" *ngIf="contract?.status == CONTRACT_STATUS.Pending">
-                    <div>
+                <div class="col-sm-12 py-4 text-end">
+                    <div *ngIf="contract?.status == CONTRACT_STATUS.Pending && userId == contract?.userId">
                         <button class="custom-btn btn-big outline-blue-clr me-sm-3" (click)="reject()">Reject</button>
                         <button (click)="confirm()" class="custom-btn btn-big blue">Confirm and Pay</button>
                     </div>
-
+                    <div *ngIf="contract?.status == CONTRACT_STATUS.Rejected && userId == contract?.hostId">
+                        <button class="custom-btn btn-big outline-blue-clr me-sm-3" [routerLink]="['/contracts/edit',contractId]">Resend</button>
+                    </div>
                 </div>
 
             </div>
