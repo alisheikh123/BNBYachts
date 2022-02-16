@@ -4,15 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp" Version="4.4.3" />
