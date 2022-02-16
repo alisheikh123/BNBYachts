@@ -38,7 +38,8 @@ namespace BnBYachts.Booking.Managers.Charter
         public async Task<CharterBookingRequestable> GetCharterBookingById(long charterBookingId)
         {
             _logger.LogInformation("Get Charter Booking Detail By Id");
-            return _objectMapper.Map<CharterBookingEntity, CharterBookingRequestable>(await _charterBookingRepository.GetAsync(x => x.Id == charterBookingId).ConfigureAwait(false));
+             return _objectMapper.Map<CharterBookingEntity, CharterBookingRequestable>(await _charterBookingRepository.FirstOrDefaultAsync(x => x.Id == charterBookingId).ConfigureAwait(false));
+           
         }
         public async Task CancelCharterBooking(BookingCancellationRequestableDto chartercancellationRequestable)
         {

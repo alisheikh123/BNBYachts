@@ -32,14 +32,17 @@ namespace BnBYachts.Booking.Services.Charter
 
         public async Task CancelCharterBooking(BookingCancellationRequestableDto charterBookingCancellationRequestable)
         {
+            
             charterBookingCancellationRequestable.UserId = CurrentUser.Id.ToString();
             await _charterBookingManager.CancelCharterBooking(charterBookingCancellationRequestable);
+            string body = $"<h4>Hello {CurrentUser.Name} </h4> <div> Your charter has successfully cancelled against this Booking Id: {charterBookingCancellationRequestable.BookingId} and" +
+                $" your will received Your Amount: {charterBookingCancellationRequestable.RefundAmount} </div><br>Best Regard";
             await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
                 From = _config.GetSection("EmailConfiguration:Sender").Value,
-                To = _config.GetSection("EmailConfiguration:Receiver").Value,
-                Subject = _config.GetSection("EmailConfiguration:Subject").Value,
-                Body = new StringBuilder().Append(_config.GetSection("EmailConfiguration:Body").Value),
+                To = CurrentUser.Email.ToString(),
+                Subject = "Charter Booking Cancellation",
+                Body = new StringBuilder().Append(body),
                 IsBodyHtml = true
             });
         }

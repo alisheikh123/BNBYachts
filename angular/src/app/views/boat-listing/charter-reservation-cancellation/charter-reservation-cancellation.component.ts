@@ -66,15 +66,14 @@ export class CharterReservationCancellationComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe((res) => {
-
-      this.charterCancellationObject.bookingId = res['bookingId'].toString();
-      this.charterCancellationObject.charterId = res['id'].toString();
+      this.charterCancellationObject.charterId = res['bookingId'].toString();
+      this.charterCancellationObject.bookingId = res['id'].toString();
     });
 
     let userRole = localStorage.getItem('userRole');
     userRole == this.filters.USER_ROLES.host ? (this.isHost = true) : (this.isHost = false);
     this.charterService.getCharterDetailById(this.charterCancellationObject.charterId).subscribe((res: any) => {
-      this.charterBookingDetail = res;
+      this.charterBookingDetail = res.data;
       this.charterBookingService.getCharterBookingDetailById(this.charterCancellationObject.bookingId).subscribe((bookingDetail: any) => {
         this.charterBookingDetail.bookingDetail = bookingDetail;
       });

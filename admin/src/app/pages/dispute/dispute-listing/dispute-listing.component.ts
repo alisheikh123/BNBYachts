@@ -15,8 +15,8 @@ export class DisputeListingComponent implements OnInit {
       add: false,
       edit:false,
       delete: false,
-      custom: [{ 
-        name: 'Detail', 
+      custom: [{
+        name: 'Detail',
         title: '<i class="nb-compose"></i>' }
       ],
       position: 'right'
@@ -44,7 +44,7 @@ export class DisputeListingComponent implements OnInit {
     },
   };
   constructor(private userService: DisputesData, private datePipe : DatePipe) {
-   
+
   }
   ngOnInit() {
   this.filter();
@@ -53,7 +53,6 @@ export class DisputeListingComponent implements OnInit {
     this.userService.getDisputesData().subscribe((res) =>{
       console.log("res", res);
       this.source = res;
-      debugger;
-    });    
+    });
   }
 }

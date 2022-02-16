@@ -50,6 +50,7 @@ export class CharterReservationDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(res => {
       this.charterReservation.bookingId = Number(res['id']);
       this.charterReservation.charterId = Number(res['bookingId']);
+
     });
     var userRole = localStorage.getItem('userRole');
     userRole == this.filters.USER_ROLES.host
@@ -57,14 +58,14 @@ export class CharterReservationDetailComponent implements OnInit {
       : (this.charterReservation.isHost = false);
     this.isUserHost = localStorage.getItem('userRole') == this.filters.USER_ROLES.host ? (this.charterReservation.isHost = true) : (this.charterReservation.isHost = false);
 
-    this.boatService.charterDetailsById(this.charterReservation.charterId).subscribe((res: any) => {
+    this.boatService.charterDetailsById(this.charterReservation.bookingId).subscribe((res: any) => {
       this.charterBooking = res?.charterDetails;
       this.checkedDepartureFromDate = moment(this.charterBooking?.departureFromDate).format("YYYY-MM-DD hh:mm:ss a");
       let departingFromDate = moment(this.charterBooking?.departureFromDate).format('YYYY-MM-DD hh:mm:ss a');
       let departingToDate = moment(this.charterBooking?.departureToDate).format('YYYY-MM-DD hh:mm:ss a');
       this.charterBooking.totalDays = Math.round(moment.duration(moment(departingToDate).diff(departingFromDate)).asDays());
     });
-    this.charterBookingService.getCharterBookingDetailById(this.charterReservation.bookingId).subscribe((bookingDetail: any) => {
+    this.charterBookingService.getCharterBookingDetailById(this.charterReservation.charterId).subscribe((bookingDetail: any) => {
       this.charterBookingStatus = bookingDetail?.bookingStatus;
     });
     this.isReviewPosted();

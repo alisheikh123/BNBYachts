@@ -21,12 +21,11 @@ export class UserService extends BoatUserData {
     super();
   }
   getBoatUsers(roleName : string):any {
-    debugger;
     return this.http.get(this.CORE_API_URL + this.USER_API_URL +'boat-owers-and-users?roleName=' + roleName);
   }
   getBoatsUser(roleName : string, searchModel:any) {
     return this.http.get(this.CORE_API_URL + this.USER_API_URL +'boat-owers-and-users?roleName=' + roleName +" &SearchText=" + searchModel.searchTerm +"&CurrentPage=" +searchModel.pageNumber + "&ItemsPerPage=" + searchModel.pagesize);
-  }  
+  }
   getTotalUsers(userRole : string, hostRole:string) {
     return this.http.get(this.CORE_API_URL + this.USER_API_URL +'total-users?userRole=' + userRole +" &hostRole=" + hostRole).pipe();
   }
