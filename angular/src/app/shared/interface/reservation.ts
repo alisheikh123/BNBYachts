@@ -8,9 +8,9 @@ export interface IEventReservation
 }
 export interface ICharterReservation
 {
-    checkoutTime:any,
-    charterBookingId:number,
+    charterId:number,
     isPosted: boolean,
-    isHost: boolean
+    isHost: boolean,
+    bookingId:number
 
 }

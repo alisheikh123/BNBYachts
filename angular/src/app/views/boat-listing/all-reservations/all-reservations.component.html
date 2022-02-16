@@ -82,8 +82,7 @@
           <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.charter">
             <div class="col-12">
               <div class="custom-card req-user-card" *ngFor="let item of userCharters">
-                <div
-                  [routerLink]="item.isContract ? ['/contracts/contract',item.contractId]:['/boat-listing/charter-reservation-detail',item.charterId]">
+                <div [routerLink]="item.isContract ? ['/contracts/contract',item.contractId]:['/boat-listing/charter-reservation-detail',item.charterId,item.id]">
                   <div class="image-with-text custom-flex-between align-items-start">
                     <div class="image-with-text-inner">
                       <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">

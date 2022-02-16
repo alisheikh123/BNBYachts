@@ -27,6 +27,7 @@ import { BookingFilterComponent } from './booking-filter/booking-filter.componen
 import { CharterReservationDetailComponent } from './charter-reservation-detail/charter-reservation-detail.component';
 import { EventReservationDetailComponent } from './event-reservation-detail/event-reservation-detail.component';
 import { ContractsModule } from '../contracts/contracts.module';
+import { CharterReservationCancellationComponent } from './charter-reservation-cancellation/charter-reservation-cancellation.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ContractsModule } from '../contracts/contracts.module';
     ListReviewsComponent,
     BookingFilterComponent,
     CharterReservationDetailComponent,
-    EventReservationDetailComponent
+    EventReservationDetailComponent,
+    CharterReservationCancellationComponent
 
   ],
   imports: [

@@ -93,7 +93,7 @@ export class EventDetailsComponent implements OnInit {
   }
 
   reserveEvent() {
-    this.isSubmitted = true;  
+    this.isSubmitted = true;
     if(this.authService.authenticated) {
       if ((this.eventFilterDetails.adults + this.eventFilterDetails.childrens) > 0) {
         let bookingModel = {
@@ -147,8 +147,8 @@ export class EventDetailsComponent implements OnInit {
       this.eventId = this.eventSchedule[this.dateScheduleIndex]?.eventId;
       this.eventDetails = res?.eventDetails;
     })
-  }  
-  
+  }
+
   calculatePricing() {
     if ((this.eventFilterDetails?.adults + this.eventFilterDetails?.childrens) > 0  && this.eventDetails != null) {
         let findCalendar = this.eventDetails?.boat.boatCalendars.find((element: any) =>
