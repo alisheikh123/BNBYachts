@@ -18,6 +18,7 @@ namespace BnBYachts.Booking.Contracts
         public DateTime? DepartureDate { get; set; }
         public DateTime? ArrivalDate { get; set; }
         public string EventTitle { get; set; }
+        public string TerminationClause { get; set; }
         public int? BoatId { get; set; }
         public DateTime? ReturnDate { get; set; }
         public bool IsRoundTrip { get; set; }

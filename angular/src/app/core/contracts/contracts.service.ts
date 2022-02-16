@@ -33,4 +33,8 @@ export class ContractsService {
     return this.http.post(this.apiUrl + 'accept-contract/'+contractId,null).pipe(
         catchError(this.errorService.handleError));
   }
+  editContracts(contractForm: any) {
+    return this.http.post(this.apiUrl + 'edit-contract', contractForm).pipe(
+      catchError(this.errorService.handleError));
+  }
 }
