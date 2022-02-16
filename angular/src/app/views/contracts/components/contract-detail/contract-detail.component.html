@@ -169,7 +169,7 @@
                             class="custom-btn underline-blue-link no-before-content p-0">Learn more</a></p>
                 </div>
                 <div class="col-sm-12 py-4 text-end">
-                    <div *ngIf="contract?.status == CONTRACT_STATUS.Pending && userId == contract?.userId">
+                    <div *ngIf="contract?.status == CONTRACT_STATUS.Pending && (userId | lowercase) == (contract?.userId | lowercase)">
                         <button class="custom-btn btn-big outline-blue-clr me-sm-3" (click)="reject()">Reject</button>
                         <button (click)="confirm()" class="custom-btn btn-big blue">Confirm and Pay</button>
                     </div>
