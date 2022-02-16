@@ -11,6 +11,7 @@ import { BookingStatus, BookingType } from 'src/app/shared/enums/booking.constan
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import * as moment from 'moment';
 import { CharterService } from 'src/app/core/Charter/charter.service';
+import { UserRoles } from 'src/app/shared/enums/user-roles';
 
 @Component({
   selector: 'app-charter-reservation-cancellation',
@@ -24,7 +25,6 @@ export class CharterReservationCancellationComponent implements OnInit {
       currentDate: '',
       bookingId: 0,
       departureToDate: ''
-
     }
     charterCancellationReason=
     {
@@ -36,7 +36,6 @@ export class CharterReservationCancellationComponent implements OnInit {
       totalAmount:0,
       userId:'',
       charterBookingStatus: 0
-
     }
   charterBookingDetail: any;
   isCancellationModal: boolean = false;
@@ -45,9 +44,11 @@ export class CharterReservationCancellationComponent implements OnInit {
   isHost: boolean;
   isPosted: boolean;
   isChanged: boolean;
-  BOOKING_STATUS = BookingStatus
-  BOOKING_TYPE = BookingType;
-
+  filters = {
+    USER_ROLES: UserRoles,
+    BOOKING_STATUS:BookingStatus,
+    BOOKING_TYPE:BookingType
+  };
   constructor(
     private service: BookingService,
     private fb: FormBuilder,
@@ -71,7 +72,7 @@ export class CharterReservationCancellationComponent implements OnInit {
     });
 
     let userRole = localStorage.getItem('userRole');
-    userRole == 'a8e857de-7ca6-f663-feb0-3a003661104b' ? (this.isHost = true) : (this.isHost = false);
+    userRole == this.filters.USER_ROLES.host ? (this.isHost = true) : (this.isHost = false);
     this.charterService.getCharterDetailById(this.charterCancellationObject.charterId).subscribe((res: any) => {
       this.charterBookingDetail = res;
       this.charterBookingService.getCharterBookingDetailById(this.charterCancellationObject.bookingId).subscribe((bookingDetail: any) => {
@@ -164,19 +165,19 @@ export class CharterReservationCancellationComponent implements OnInit {
     this.charterCancellationReason.charterBookingId = data.bookingDetail?.charterId;
     this.charterCancellationReason.refundableAmount = data.refundableAmount;
     this.charterCancellationReason.totalAmount = data.deductedAmount + data.refundableAmount;
-    this.charterBookingDetail.BookingType = this.BOOKING_TYPE.Charters;
+    this.charterBookingDetail.BookingType = this.filters.BOOKING_TYPE.Charters;
     this.modal.open(template, { centered: true });
   }
   confirmCancel() {
     let charterCancellationModel = {
       bookingId: Number(this.charterCancellationObject.bookingId),
-      bookingType: this.BOOKING_TYPE.Charters,
+      bookingType: this.filters.BOOKING_TYPE.Charters,
       reason: this.charterCancellationReason.reasonValue,
       userId: "",
       isNotificationSent: true,
       refundAmount: this.charterCancellationReason.refundableAmount.toString(),
       totalAmount: this.charterCancellationReason.totalAmount.toString(),
-      bookingStatus: this.BOOKING_STATUS.Cancel
+      bookingStatus: this.filters.BOOKING_STATUS.Cancel
     };
     this.service.savecharterBookingCancellation(charterCancellationModel)
       .subscribe((res: any) => {

@@ -96,10 +96,12 @@ namespace BnBYachts.Boat.Manager.Charter
             return false;
         }
 
-        public async Task<CharterRequestable> GetCharterDetailById(long charterId)
+        public async Task<EntityResponseModel> GetCharterDetailById(long charterId)
         {
+            var response = new EntityResponseModel();
             _logger.LogInformation("Get Charter Detail By Id");
-            return _objectMapper.Map<CharterEntity, CharterRequestable>(await _charterRepository.GetAsync(x => x.Id == charterId).ConfigureAwait(false));
+            response.Data =  _objectMapper.Map<CharterEntity, CharterRequestable>(await _charterRepository.GetAsync(x => x.Id == charterId).ConfigureAwait(false));
+            return response;
         }
     }
 }

@@ -143,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="charterBookingDetail?.bookingStatus != BOOKING_STATUS.Rejected && charterBookingDetail?.bookingStatus != BOOKING_STATUS.Cancel">
+            <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="charterBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected && charterBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
                 <div class="center-content">
                     <button class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">{{'changeMind' | localization}}</button>&nbsp;&nbsp;
                     <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(policyModal,charterBookingDetail)">{{'ConfirmCancellation'| localization}}</a>
