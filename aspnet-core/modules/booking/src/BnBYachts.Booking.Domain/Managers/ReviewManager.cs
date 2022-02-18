@@ -1,5 +1,6 @@
 ﻿using BnBYachts.Booking.Interfaces;
 using BnBYachts.Booking.Review;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,5 +51,7 @@ namespace BnBYachts.Booking.Managers
             var reviews = await _reviewRepository.GetListAsync(x => x.BookingId == bookingId && x.ReviewerId == userId).ConfigureAwait(false);
             return reviews.Count > 0 ? true : false;
         }
+        public async Task<List<ReviewTransferable>> GetReviewsByReviewerId(string ReviewerId) =>
+                      _objectMapper.Map<List<BookingReviewEntity>, List<ReviewTransferable>>(await _reviewRepository.GetListAsync(x => x.ReviewerId == ReviewerId).ConfigureAwait(false));
     }
 }

@@ -14,4 +14,16 @@ export class UsersApi {
   getTotalUsers(userRole : string, hostRole:string) {
     return this.api.get(`${this.USER_API_URL}total-users?userRole=${userRole}&hostRole=${hostRole}`).pipe();
   }
+  getUserInfoById(id:string) {
+    return this.api.get(`api/GetUserDetailsById/${id}`);
+  }
+  getReviewByUserId(reviewerId : string) {
+    return this.api.getBooking(`api/app/review/reviews-by-reviewer-id/${reviewerId}`);
+  }
+  SuspendUser(userId : string) {
+    return this.api.postwithoutData(`${this.USER_API_URL}${userId}/suspend-user`);
+  }
+  RegisterAdmin(adminData : any) {
+    return this.api.post(`${this.USER_API_URL}admin-register`,adminData);
+  }
 }

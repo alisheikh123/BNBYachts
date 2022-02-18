@@ -1,5 +1,4 @@
 import { AppComponent } from './app.component';
-import { LoginModalComponent } from './pages/auth/login-modal/login-modal.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RoutesGuard } from './routes.guard';

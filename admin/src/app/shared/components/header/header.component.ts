@@ -1,11 +1,12 @@
+import { SignUpComponent } from './../../../pages/auth/sign-up/sign-up.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../../../core/mock/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { LayoutService } from '../../../Core/utils';
-import { BoatUserData } from '../../../core/data/user';
+import { LayoutService } from '../../../core/utils';
 
 @Component({
   selector: 'ngx-header',
@@ -44,6 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private sidebarService: NbSidebarService,
               private authService : AuthService,
               private menuService: NbMenuService,
+              private modalService : NgbModal,
               private themeService: NbThemeService,
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService) {
@@ -82,8 +84,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       console.log('Profile Clicked ')
     }
   }
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
   logout(){
     this.authService.logout;
+  }
+  signUp() {
+    let modalRef = this.modalService.open(SignUpComponent, { windowClass: 'custom-modal custom-large-modal' , centered:true});
   }
   ngOnDestroy() {
     this.destroy$.next();

@@ -10,10 +10,7 @@ namespace BnBYachts.Booking.Services
     public class ReviewService : ApplicationService, IReviewService
     {
         private readonly IReviewManager _reviewManager;
-        public ReviewService(IReviewManager reviewManager)
-        {
-            _reviewManager = reviewManager;
-        }
+        public ReviewService(IReviewManager reviewManager) => _reviewManager = reviewManager;
         public async Task<bool> AddReview(BookingReviewRequestable review)
         {
             review.ReviewerId = CurrentUser.Id.ToString();
@@ -24,5 +21,6 @@ namespace BnBYachts.Booking.Services
         public async Task<ICollection<ReviewTransferable>> GetBookingReviews(int bookingId) => await _reviewManager.GetBookingReviews(bookingId);
         public async Task<ICollection<ReviewTransferable>> GetBoatReviews(int boatId, int reviewSorting) => await _reviewManager.GetBoatReviews(boatId, reviewSorting);
         public async Task<bool> GetIfReviewAlreadyPosted(int bookingId) => await _reviewManager.IsReviewAlreadyPosted(CurrentUser.Id.ToString(), bookingId);
+        public async Task<List<ReviewTransferable>> GetReviewsByReviewerId(string ReviewerId) => await _reviewManager.GetReviewsByReviewerId(ReviewerId);
     }
 }

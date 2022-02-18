@@ -9,4 +9,7 @@ export class DisputesApi {
   getDisputes() {
     return this.api.getBooking(`${this.USER_API_URL}dispute-list`);    
   }
+  getDisputeById(id : number) {
+    return this.api.getBooking(`${this.USER_API_URL}${id}/disputeby-id`);    
+  }
 }

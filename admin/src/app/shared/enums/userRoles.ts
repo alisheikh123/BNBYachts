@@ -3,3 +3,6 @@ export enum UserRoles {
   HOST = "HOST",
   ADMIN = "ADMIN"
 };
+export enum UserDefaults {
+  avatar = "default-avatar.png"
+};

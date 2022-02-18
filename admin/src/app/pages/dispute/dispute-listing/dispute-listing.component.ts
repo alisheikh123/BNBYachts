@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DisputesData, IDispute } from '../../../shared/interfaces/IDispute';
@@ -16,7 +17,7 @@ export class DisputeListingComponent implements OnInit {
       edit:false,
       delete: false,
       custom: [{ 
-        name: 'Detail', 
+        name: 'DisputeDetail', 
         title: '<i class="nb-compose"></i>' }
       ],
       position: 'right'
@@ -43,7 +44,7 @@ export class DisputeListingComponent implements OnInit {
       },
     },
   };
-  constructor(private userService: DisputesData, private datePipe : DatePipe) {
+  constructor(private userService: DisputesData, private datePipe : DatePipe, private router : Router) {
    
   }
   ngOnInit() {
@@ -51,9 +52,10 @@ export class DisputeListingComponent implements OnInit {
    }
   filter(){
     this.userService.getDisputesData().subscribe((res) =>{
-      console.log("res", res);
       this.source = res;
-      debugger;
     });    
+  }
+  onCustomAction(event){
+    this.router.navigate([`pages/dispute/dispute/${event.data.id}`]);
   }
 }

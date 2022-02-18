@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="account-settings">
+            <div class="user-profile">
+              <div class="user-avatar">
+                <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="Users" />
+              </div>
+              <h5 class="user-name">{{userResponse?.name}}</h5>
+              <h6 class="user-email">{{userResponse?.email}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6 class="mb-2 text-primary">Personal Details</h6>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="fullName">User Name</label>
+                <p><b>{{userResponse?.name}}</b></p>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="eMail">Phone Number</label>
+                <p><b>{{userResponse?.phoneNumber}}</b></p>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label>Joining Date</label>
+                <p><b>{{latest_date}}</b></p>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="website">Phone Verified</label>
+                <p><b>{{(userResponse?.isPhoneConfirmed ? 'Yes' : 'No')}}</b></p>
+              </div>
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="about">
+                <label>About</label>
+                <p>{{userResponse?.about}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container CardSpace">
+  <div class="row gutters">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6 class="mb-2 text-primary">Reviews</h6>
+              <hr>
+            </div>
+            <div class="card">
+              <div class="card-body pb-0">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let review of userReview">
+                    <div class="media flex-column flex-sm-row mt-0 mb-3">
+                      <div class="mr-sm-3 mb-2 mb-sm-0">
+                        <div class="card-img-actions">
+                          <img src="{{assetsUrlProfile + (review?.userDetails?.imagePath || USER_DEFAULTS.avatar)}}"
+                            class="img-fluid img-preview rounded" alt="">
+                        </div>
+                        <ul class="list-inline list-inline-dotted text-muted mb-4">
+                          <li class="list-inline-item">{{review?.creationTime | date}}</li>
+                        </ul>
+                      </div>
+                      <div class="media-body">
+                        <h6 class="media-title">{{review?.userDetails?.name}} </h6>
+                        <li class="list-inline-item marginReview">
+                          <ngb-rating [rate]=review?.ratings [max]="5"></ngb-rating>
+                        </li>
+                        <div>{{review?.reviewDescription}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6 class="mb-2 text-primary">Boats List</h6>
+              <hr>
+            </div>
+            <div class="card">
+              <div class="card-body pb-0">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let user of userBoats">
+                    <div class="media flex-column flex-sm-row mt-0 mb-3">
+                      <div class="mr-sm-3 mb-2 mb-sm-0">
+                        <div class="card-img-actions">
+                          <img src="https://i.imgur.com/H0SJA0j.jpg" class="img-fluid img-preview rounded" alt="">
+                        </div>
+                        <ul class="list-inline list-inline-dotted text-muted mb-2">
+                          <li class="list-inline-item"><i class="fa fa-bed mr-2"></i>{{user?.totalBedrooms}}</li>
+                          <li class="list-inline-item"><i class="fa fa-bath mr-2"></i>{{user?.totalWashrooms}}</li>
+                          <li class="list-inline-item"><i class="fa fa-users mr-2"></i>{{user?.boatelCapacity}}</li>
+                        </ul>
+                      </div>
+                      <div class="media-body">
+                        <h6 class="media-title">{{user?.name}}</h6>
+                        <li class="list-inline-item"><i class="fa fa-map"></i> {{user?.location}}</li>
+                        <div>{{user?.description}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import {  DisputeRoutingModule, routedComponents } from './diapute-routing.modul
 import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
 import { ThemeModule } from '../../shared/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DisputeDetailComponent } from './dispute-detail/dispute-detail.component';
 
 
 @NgModule({

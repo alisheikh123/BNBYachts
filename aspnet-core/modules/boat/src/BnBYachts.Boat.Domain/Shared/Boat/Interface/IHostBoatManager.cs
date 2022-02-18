@@ -31,5 +31,6 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
         Task<bool> UpdateboatStatus(long boatId);
         Task<EntityResponseListModel<BoatDTO>> GetHostBoats(Guid? userId,int pageNo,int pageSize);
         Task<ICollection<FeatureEntity>> GetDefaultFeatures();
+        Task<List<BoatDTO>> GetBoatDetailsByUserId(Guid? userId);
     }
 }

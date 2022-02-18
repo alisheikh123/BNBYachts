@@ -12,7 +12,10 @@
     align-items: center;
     width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
   }
-
+  .header-image{
+    height: 50px;
+    width: 150px;
+  }
   nb-action {
     height: auto;
     display: flex;
@@ -26,7 +29,9 @@
   ::ng-deep nb-search button {
     padding: 0!important;
   }
-
+  .signup-btn{
+    margin-top: 10px;
+  }
   .header-container {
     display: flex;
     align-items: center;
@@ -41,7 +46,6 @@
         font-size: 1.75rem;
       }
     }
-
     .logo {
       padding: 0 1.25rem;
       font-size: 1.75rem;

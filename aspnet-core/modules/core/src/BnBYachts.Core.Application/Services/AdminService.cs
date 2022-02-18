@@ -24,5 +24,8 @@ namespace BnBYachts.Core.Services
 
         public async Task<List<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName) =>  await _adminManager.GetBoatOwersAndUsers(roleName);
         public async Task<TotalUsersTransferable> GetTotalUsers(string userRole, string hostRole) => await _adminManager.GetTotalUsers(userRole,hostRole);
+        public async Task<AdminResponseDto> AdminRegister(AdminRegisterTransferable userInput) =>
+            await _adminManager.RegisterAdmin(userInput);
+        public async Task<AdminResponseDto> SuspendUser(Guid id) => await _adminManager.SuspendUser(id);
     }
 }

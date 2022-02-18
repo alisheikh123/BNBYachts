@@ -382,5 +382,12 @@ namespace BnBYachts.Boat.Manager
             return true;
 
         }
+        public async Task<List<BoatDTO>> GetBoatDetailsByUserId(Guid? userId)
+        {
+            var boats = await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false);
+            foreach (var boat in boats)
+                await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
+            return _objectMapper.Map<List<BoatEntity>, List<BoatDTO>>(boats);
+        }
     }
 }

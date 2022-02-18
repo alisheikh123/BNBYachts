@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="account-settings">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="Users" />
+            </div>
+            <h5 class="user-name">{{userResponse?.name}}</h5>
+            <h6 class="user-email">{{userResponse?.email}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Personal Details</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="fullName">User Name</label>
+              <p><b>{{userResponse?.name}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="eMail">Phone Number</label>
+              <p><b>{{userResponse?.phoneNumber}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Joining Date</label>
+              <p><b>{{latest_date}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">Phone Verified</label>
+              <p><b>{{(userResponse?.isPhoneConfirmed ? 'Yes' : 'No')}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="about">
+            <label>About</label>
+            <p>{{userResponse?.about}}</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="container CardSpace col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Reviews</h6>
+          </div> 
+           <hr>
+            <div class="row gutters">
+               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-6" *ngFor="let review of userReview">
+                  <div class="row gutters">
+                <div class="col-md-3">
+                  <img src="http://dummyimage.com/90x90/666/ffffff&text=No+Image" class="img-rounded" />
+                  <div class="review-block-date">{{review?.creationTime | date}}</div>
+                  <hr>
+                </div>
+                <div class="col-md-9">
+                  <div class="row">
+                  <div class="review-block-name col-sm-5">{{review?.userDetails?.name}}</div>
+                  <div class="review-block-rate col-sm-6 offset-1">
+                    <ngb-rating [rate]=review?.ratings [max]="5"></ngb-rating>
+                  </div>
+                </div>
+                  <div class="review-block-description">{{review?.reviewDescription}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

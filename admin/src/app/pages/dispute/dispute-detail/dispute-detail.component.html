@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Dispute </h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="fullName">Booking Type</label>
+              <p><b>{{dispute?.bookingType}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="eMail">Dispute Reason</label>
+              <p><b>{{dispute?.disputeReason}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Status</label>
+              <p><b>{{dispute?.status}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">Complain Date</label>
+              <p><b>{{dispute?.creationTime | date}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="about">
+            <label>Reason</label>
+            <p>{{dispute?.reason}}</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
