@@ -1,4 +1,4 @@
-<div *ngIf="reviews?.length > 0" class="col-12">
+<div class="col-12">
   <div class="rating-wrapper section-padding" *ngIf="boatId">
     <div class="rating-wrap-inner">
         <div class="row">
@@ -59,9 +59,9 @@
         <div class="image-with-text-inner">
             <img src="../../../../assets/images/user-img.png" alt="">
             <div class="user-details">
-                <p class="medium">{{item.userDetails?.name}}</p>
+                <p class="medium">{{item?.userDetails?.name}}</p>
                 <p class="small-stars">
-                  <ngb-rating [rate]=item.ratings [max]="5"></ngb-rating>
+                  <ngb-rating [rate]="item.ratings" [max]="5"></ngb-rating>
                 </p>
             </div>
         </div>

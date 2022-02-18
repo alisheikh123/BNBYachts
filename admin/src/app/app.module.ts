@@ -1,5 +1,6 @@
 import { PagesModule } from './pages/pages.module';
 import { UserModule } from './pages/user/user.module';
+import { HomeDashboardModule } from './pages/home-dashboard/home-dashboard.module';
 import { RoutesGuard } from './routes.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +36,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HomeDashboardModule,
+    ThemeModule,
+    AppRoutingModule,
     AuthModule.forRoot({
       config: {
         authority: environment.Identity.authority,

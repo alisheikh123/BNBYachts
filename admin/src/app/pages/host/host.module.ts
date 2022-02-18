@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HostRoutingModule, routedComponents } from './host-routing.module';
 import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
-import { ThemeModule } from '../../shared/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({

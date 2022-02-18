@@ -4,6 +4,7 @@
     {
         public string PaymentId { get; set; }
         public int? BookingId { get; set; }
+        public bool? IsContract { get; set; }
         public string UserId { get; set; }
         public int Amount { get; set; }
         public string Description { get; set; }

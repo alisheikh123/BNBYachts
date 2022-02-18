@@ -10,6 +10,7 @@ import { ErrorService } from '../Error/error.service';
 export class BookingListingService {
 
   bookingApiUrl: string = environment.BOOKING_API_URL + '/api/app/user-booking-list';
+  charterBookingApiUrl:string = environment.BOOKING_API_URL+'/api/app/charter-booking'
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
   getBookings(param:any) {
@@ -26,5 +27,8 @@ export class BookingListingService {
   }
   getHostBookings() {
     return this.http.get(this.bookingApiUrl + '/host-boatel-bookings').pipe(catchError(this.errorService.handleError));
+  }
+  getCharterBookingDetailById(charterBookingId: number) {
+    return this.http.get(this.charterBookingApiUrl+'/charter-booking-detail-by-id/' + charterBookingId).pipe(catchError(this.errorService.handleError));
   }
 }

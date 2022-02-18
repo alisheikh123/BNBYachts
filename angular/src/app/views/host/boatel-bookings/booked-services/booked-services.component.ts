@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { ContractsService } from 'src/app/core/contracts/contracts.service';
 import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { BookingResponseFilter, BookingStatus, SelectedServiceType } from 'src/app/shared/enums/booking.constants';
@@ -49,7 +51,8 @@ export class BookedServicesComponent implements OnInit {
       year: "",
       userId: "",
     };
-  constructor(config: NgbRatingConfig, private reservationService: ReservationListsService, private boatService: YachtSearchService, private router: Router) {
+  constructor(config: NgbRatingConfig, private reservationService: ReservationListsService,
+    private contractService:ContractsService,private authService:AuthService, private boatService: YachtSearchService, private router: Router) {
     config.max = 5;
     config.readonly = true;
   }
@@ -148,23 +151,49 @@ export class BookedServicesComponent implements OnInit {
   charterStatusFilter(status: number) {
     this.charterServices = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.charterServices.filter((res: any) => res.bookingStatus == status) : this.charterServices;
     this.charterServices.forEach((elem: any) => {
+      if(!elem.isContract){
       this.boatService.charterDetailsById(elem.charterId).subscribe((charterdetail: any) => {
         elem.charterDetail = charterdetail?.charterDetails;
         this.boatService.boatDetailsById(elem.charterDetail?.boatId).subscribe((boatdetails: any) => {
           elem.boatDetail = boatdetails;
         })
       });
+    }
+    else{
+      this.contractService.getContractById(elem.contractId).subscribe((contract: any) => {
+        elem.charterDetail = contract?.data;
+        this.boatService.boatDetailsById(elem.charterDetail?.boatId).subscribe((boatdetails: any) => {
+          elem.boatDetail = boatdetails;
+          this.authService.getUserInfoById(elem.charterDetail?.userId).subscribe((res:any)=>{
+            elem.userName = res?.name;
+          })
+        })
+      });
+    }
     });
   }
   eventStatusFilter(status: number) {
     this.eventServices = (status != null && status != this.listingFilter.BOOKING_STATUS.ChooseFilter) ? this.eventServices.filter((res: any) => res.bookingStatus == status) : this.eventServices;
     this.eventServices.forEach((elem: any) => {
+      if(!elem.isContract){
       this.boatService.eventDetailsById(elem.eventId).subscribe((eventdetail: any) => {
         elem.eventDetail = eventdetail?.eventDetails;
         this.boatService.boatDetailsById(elem.eventDetail?.boatId).subscribe((boatdetails: any) => {
           elem.boatDetail = boatdetails;
         })
       });
+    }
+    else{
+      this.contractService.getContractById(elem.contractId).subscribe((contract: any) => {
+        elem.eventDetail = contract?.data;
+        this.boatService.boatDetailsById(elem.eventDetail?.boatId).subscribe((boatdetails: any) => {
+          elem.boatDetail = boatdetails;
+          this.authService.getUserInfoById(elem.eventDetail?.userId).subscribe((res:any)=>{
+            elem.userName = res?.name;
+          })
+        })
+      });
+    }
     });
   }
 }

@@ -28,7 +28,8 @@ namespace BnBYachts.Booking.Booking.Requestable
 
         public string RefundableAmount { get; set; }
         public string TotalAmount { get; set; }
-
+        public bool? IsContract { get; set; }
+        public int? ContractId { get; set; }
 
     }
 }

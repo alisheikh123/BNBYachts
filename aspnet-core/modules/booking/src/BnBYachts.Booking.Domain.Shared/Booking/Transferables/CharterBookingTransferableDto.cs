@@ -7,6 +7,7 @@ namespace BnBYachts.Booking.Booking.Transferables
 {
    public class CharterBookingTransferableDto : ITransferable
     {
+        public int? Id { get; set; }
         public int? CharterId { get; set; }
         public DateTime DepartureDate { get; set; }
         public int NoOfAdults { get; set; }
@@ -18,5 +19,7 @@ namespace BnBYachts.Booking.Booking.Transferables
         public string HostId { get; set; }
         public BookingStatus BookingStatus { get; set; }
         public string UserName { get; set; }
+        public bool? IsContract { get; set; }
+        public int? ContractId { get; set; }
     }
 }

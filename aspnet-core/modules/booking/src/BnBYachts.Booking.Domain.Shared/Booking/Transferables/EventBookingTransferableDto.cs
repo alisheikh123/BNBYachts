@@ -17,5 +17,7 @@ namespace BnBYachts.Booking.Booking.Transferables
         public string HostId { get; set; }
         public BookingStatus BookingStatus { get; set; }
         public string UserName { get; set; }
+        public bool? IsContract { get; set; }
+        public int? ContractId { get; set; }
     }
 }

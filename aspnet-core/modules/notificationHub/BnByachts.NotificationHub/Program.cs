@@ -3,7 +3,6 @@ using System.Threading;
 using BnBYachts.EventBusShared.Queue;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
-
 namespace BnByachts.NotificationHub
 {
     public class Program

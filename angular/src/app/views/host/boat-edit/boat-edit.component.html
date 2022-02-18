@@ -88,7 +88,7 @@
                             <label>Additional Rules</label>
                             <div class="custom-card">
                                 <div class="row w-100">
-                                    <div class="col-sm-6 my-2" *ngFor="let item of (boatLookups.rules)">
+                                    <div class="col-sm-6 my-2" *ngFor="let item of (boatLookups?.rules)">
                                         <label class="custom-checkbox">
                                             <input type="checkbox" [(ngModel)]="item.isChecked"
                                                 [ngModelOptions]="{standalone: true}">
@@ -110,7 +110,7 @@
                             <div class="custom-card">
                                 <div class="row w-100">
                                     <div class="col-sm-6 my-2"
-                                        *ngFor="let item of ((boatLookups.features | filterBy : 'isSafetyFeature' : true) | filterBy : 'isGuestFavourite' : false )">
+                                        *ngFor="let item of ((boatLookups?.features | filterBy : 'isSafetyFeature' : true) | filterBy : 'isGuestFavourite' : false )">
                                         <label class="custom-checkbox">
                                             <input type="checkbox" [(ngModel)]="item.isChecked"
                                                 [ngModelOptions]="{standalone: true}">
@@ -178,11 +178,12 @@
                     <div class="col-sm-12">
                         <label class="custom-checkbox my-2">
                             <input type="checkbox" formControlName="isBoatelServicesOffered">
-                            <p class="small-text">Want to offer Boatel Services</p>
+                            <p class="small-text">Do not Want to offer Boatel Service</p>
                             <span class="checkmark top-0"></span>
                         </label>
                     </div>
-                    <div class="col-md-6 py-2">
+                    <ng-container *ngIf="!boatEditForm.controls.isBoatelServicesOffered.value">
+                    <div class="col-md-6 py-2" >
                         <div class="custom-input-field">
                             <label>Availabilty</label>
                         </div>
@@ -219,7 +220,6 @@
                             <ejs-timepicker name="timepicker" formControlName="checkoutTime"></ejs-timepicker>
                         </div>
                     </div>
-                    <ng-container *ngIf="boatEditForm.controls.isBoatelServicesOffered.value">
                         <div class="col-md-6 py-2">
                             <div class="custom-input-field">
                                 <label>Boatel Fee Per Night</label>

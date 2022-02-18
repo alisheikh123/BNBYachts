@@ -14,6 +14,8 @@ import { EventBookingPaymentComponent } from './event-booking-payment/event-book
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { UserPaymentMethodsComponent } from './user-payment-methods/user-payment-methods.component';
 import { BookingConfirmedModalComponent } from './charter-booking-payment/booking-confirmed-modal/booking-confirmed-modal.component';
+import { ContractPaymentComponent } from './contract-payment/contract-payment.component';
+import { ContractsService } from 'src/app/core/contracts/contracts.service';
 
 
 
@@ -23,7 +25,8 @@ import { BookingConfirmedModalComponent } from './charter-booking-payment/bookin
     CharterBookingPaymentComponent,
     EventBookingPaymentComponent,
     UserPaymentMethodsComponent,
-    BookingConfirmedModalComponent
+    BookingConfirmedModalComponent,
+    ContractPaymentComponent
   ],
   imports: [
     PaymentsRoutingModule,
@@ -35,6 +38,6 @@ import { BookingConfirmedModalComponent } from './charter-booking-payment/bookin
     SharedPipesModule,
     NgxStripeModule.forRoot(environment.stripeKey)
   ],
-  providers: [YachtSearchService,ReservationService]
+  providers: [YachtSearchService,ReservationService,ContractsService]
 })
 export class PaymentsModule { }

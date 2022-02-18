@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
     // this.userService.getBoatUsers(this.roleName)
-    //   .subscribe((users: any) => 
+    //   .subscribe((users: any) =>
     //   this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
@@ -77,7 +77,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   onItemSelection(title) {
     if ( title === 'Log out' ) {
-      debugger;
        this.authService.logout();
     } else if ( title === 'Profile' ) {
       // Do something on Profile
