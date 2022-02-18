@@ -1,0 +1,227 @@
+<div class="main-wrapper">
+    <div class="reservation-page section-padding charter-cancelation">
+        <div class="container">
+            <div class="row col-md-12">
+                <div class="col-md-6">
+                    <div class="btn-back">
+                        <a (click)="goBack()" class="backIcon">
+                            <i class="fas fa-chevron-left icon"></i>
+                        </a>
+                        <h2 class="bold pb-3">{{'EventReservationCancellation' | localization}}</h2>
+                    </div>
+                    <label class="medium">{{'CancelReason' | localization}}</label>
+                    <div class="custom-input-field">
+                        <textarea class="custom-input"  rows="4" [(ngModel)]="eventCancellationReason.reasonValue"
+                            required></textarea>
+                    </div>
+                    <div class="price-detail py-4">
+                        <h5 class="bold pt-3 pb-1">{{'RefundDetailtxt' | localization}}</h5>
+                        <div class="custom-flex-between">
+                            <p>{{eventDetail?.amountPerPerson}} x {{ eventBookingDetail?.noOfGuests}} Person</p>
+                            <p class=" text-right py-1">{{eventDetail?.amountPerPerson * eventBookingDetail?.noOfGuests}}.00 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p>{{'ServiceFee'| localization}}</p>
+                            <p class=" text-right py-1">20 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p>{{'TaxFee' | localization}}</p>
+                            <p class=" text-right py-1">{{eventDetail?.boat?.taxFee}}.00 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p>{{'Total(USD)' | localization}}</p>
+                            <p class=" text-right py-1">{{(eventDetail?.amountPerPerson * eventBookingDetail?.noOfGuests) + 20 +
+                                eventDetail?.boatDetail?.taxFee}}.00 $</p>
+                        </div>
+                        <div class="border-top my-3"></div>
+                        <div class="custom-flex-between">
+                            <p class="medium">{{'DeductedAmount(USD)' | localization}}</p>
+                            <p class="text-right py-1">{{eventDetail?.deductedAmount}}.00 $</p>
+                        </div>
+                        <div class="custom-flex-between">
+                            <p class="medium">{{'RefundableAmount(USD)' | localization}}</p>
+                            <p class="text-right py-1">{{eventDetail?.refundableAmount}}.00 $</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="price-detail pb-4">
+                        <h5 class="bold py-2">{{'EventReservationDetails' | localization}}</h5>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'BoatName' | localization}}:</p>
+                            <p class="grey text-right py-1">{{eventDetail?.boatDetail?.name}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'EventTitle'| localization}}</p>
+                            <p class="grey text-right py-1">{{eventDetail?.title}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'NoofGuest' | localization}}</p>
+                            <p class="grey text-right py-1">{{eventBookingDetail?.noOfGuests}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'Location:'| localization}}</p>
+                            <p class="grey text-right py-1">{{eventDetail?.location}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'EventType' | localization}}</p>
+                            <p class="grey text-right py-1">{{eventDetail?.eventType == 1 ? 'Adult':'Family'}}</p>
+                        </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'EventFee' | localization}}</p>
+                            <p class="grey text-right py-1">{{eventDetail?.amountPerPerson}}.00 $</p>
+                          </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'EventDate' | localization}}</p>
+                            <p class="grey text-right py-1">{{eventBookingDetail?.eventDate | date}}</p>
+                          </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'StartTime' | localization}}</p>
+                            <p class="grey text-right py-1">{{eventDetail?.startDateTime | date:'hh:mm a'}}</p>
+                          </div>
+                        <div class="custom-flex-start">
+                            <p class="medium">{{'EndTime' | localization}}</p>
+                            <p class="grey text-right py-1">{{eventDetail?.endDateTime | date:'hh:mm a'}}</p>
+                          </div>
+
+                        <div class="custom-margin" *ngIf="!isHost">
+                            <h5 class="bold mb-1">{{'CancellationPolicy' | localization}}</h5>
+                            <p class="small-text text-left">{{'CancellationDeductionOnPayments' | localization}}
+                            </p>
+                            <ul class="custom-ul">
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy1' | localization}}</p>
+                                </li>
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy2' | localization}}</p>
+                                </li>
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy3' | localization}}</p>
+                                </li>
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy4' | localization}}</p>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="eventDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected && eventDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
+                <div class="center-content">
+                    <button class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">{{'changeMind' | localization}}</button>&nbsp;&nbsp;
+                    <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(policyModal,eventDetail)">{{'ConfirmCancellation'| localization}}</a>
+                    <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,eventDetail)">{{'ConfirmCancellation' | localization}}</a>
+                    <a (click)="addReview(eventDetail?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">
+                        {{'AddReview' | localization}}</a>
+                </div>
+            </div>
+            <app-list-reviews></app-list-reviews>
+        </div>
+    </div>
+    <ng-template #policyModal>
+
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">{{'CancellationPolicy' | localization}}</h4>
+                    <div class="py-2">
+                        <p class="small-text text-left">{{'CancellationDeductionOnPayments' | localization}}
+                        </p>
+                        <ul class="custom-ul">
+                            <li>
+                                <p>{{'EventCancellationDeductionPolicy1' | localization}}</p>
+                            </li>
+                            <li>
+                                <p>{{'EventCancellationDeductionPolicy2' | localization}}</p>
+                            </li>
+                            <li>
+                                <p>{{'EventCancellationDeductionPolicy3' | localization}}</p>
+                            </li>
+                            <li>
+                                <p>{{'EventCancellationDeductionPolicy4' | localization}}</p>
+                            </li>
+
+                        </ul>
+                        <p><strong>{{'ConfirmCancelation' | localization}}</strong></p>
+                    </div>
+                    <div class="py-4 text-center">
+                        <button (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
+                            data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#cancellation-confirmed">{{'Cancel' | localization}}</button>&nbsp;
+                        <button class="custom-btn blue big-btn" (click)="confirmCancel()">{{'Confirm' | localization}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+     <!--Host Cancelation Modal -->
+     <ng-template #hosttemplate>
+
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h5 class="bold text-center">{{'ConfirmationMessage'| localization}}</h5>
+                    <div class="py-4 text-center">
+                        <a (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
+                            data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#cancellation-confirmed">Cancel</a>&nbsp;
+                        <button class="custom-btn blue big-btn" style="cursor: pointer;" (click)="confirmCancel()">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <!--Booking Detail Not Available-->
+    <ng-template #bookingstatus>
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">{{'InvalidCharterBooking' | localization}} </h4>
+
+                    <div class="text-center">
+                        <img src="assets/images/cross-icon.png" style="height: 100px;width:100px" alt="">
+                    </div>
+                    <div class="bottom-btn text-center">
+                        <button class="custom-btn blue big-btn mt-3" (click)="goBack()">{{'BackHome'| localization}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </ng-template>
+    <ng-template #bookingcancelled>
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">{{'EventBookingCancelledConfirmed' | localization}}</h4>
+
+                    <div class="text-center">
+                        <img src="assets/images/password-updated.png" alt="">
+                    </div>
+                    <div class="bottom-btn text-center">
+                        <button class="custom-btn blue big-btn mt-3" (click)="goBack()">{{'BackHome'| localization}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </ng-template>
+</div>

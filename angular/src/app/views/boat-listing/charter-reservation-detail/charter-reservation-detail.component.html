@@ -102,19 +102,15 @@
                 <p class="medium text-right py-1">{{(charterBooking?.charterFee) + 20 +
                   charterBooking?.boat?.taxFee}}.00 $</p>
               </div>
-              <ng-container *ngIf="charterBooking?.bookingStatus===filters.BOOKING_STATUS.Cancel">
-              <ng-container *ngFor="let item of charterBooking?.bookingCancelDetail">
-              <div class="custom-flex-between">
-                  <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
-                  <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
-              </div>
 
-              <div class="custom-flex-between">
-                  <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
-                  <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
-              </div>
-            </ng-container>
-            </ng-container>
+              <ng-container *ngIf="charterBookingStatus===filters.BOOKING_STATUS.Cancel">
+                <div *ngFor="let item of charterBookingCancelDetail">
+                      <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
+                      <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+                      <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
+                      <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
+                </div>
+                </ng-container>
             </div>
             <div class="price-detail py-4" *ngIf="charterBooking?.isFullBoatCharges==false">
                 <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
@@ -135,19 +131,14 @@
                   <p class="medium text-right py-1">{{(charterBooking?.charterFee * charterBooking?.totalDays) + 20 +
                     charterBooking?.boat?.taxFee}}.00 $</p>
                 </div>
-                <ng-container *ngIf="charterBooking?.bookingStatus===filters.BOOKING_STATUS.Cancel">
-                <ng-container *ngFor="let item of charterBooking?.bookingCancelDetail">
-                <div class="custom-flex-between">
-                    <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
-                    <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
-                </div>
-
-                <div class="custom-flex-between">
-                    <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
-                    <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
-                </div>
-              </ng-container>
-              </ng-container>
+                <ng-container *ngIf="charterBookingStatus===filters.BOOKING_STATUS.Cancel">
+                  <div *ngFor="let item of charterBookingCancelDetail">
+                        <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
+                        <p class="medium text-right">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+                        <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
+                        <p class="medium text-right" >{{item?.refundAmount}}.00 $</p>
+                  </div>
+                  </ng-container>
               </div>
           </div>
         </div>
