@@ -1,3 +1,4 @@
+using BnBYachts.Core.Shared;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@ using Volo.Abp.Account.Settings;
 using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.Pages.Account;
 using Volo.Abp.Auditing;
+using Volo.Abp.Data;
 using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Settings;
@@ -114,7 +116,7 @@ namespace BnBYachts.Pages.Account
                 LoginInput.Password,
                 true,
                 true
-            );
+            ).ConfigureAwait(false);
 
             if (result.RequiresTwoFactor)
             {
@@ -125,7 +127,6 @@ namespace BnBYachts.Pages.Account
                     rememberMe = LoginInput.RememberMe
                 });
             }
-
             if (result.IsLockedOut)
             {
                 Alerts.Warning(L["UserLockedOutMessage"]);
@@ -147,7 +148,11 @@ namespace BnBYachts.Pages.Account
             //TODO: Find a way of getting user's id from the logged in user and do not query it again like that!
             var user = await UserManager.FindByNameAsync(LoginInput.UserNameOrEmailAddress) ??
                        await UserManager.FindByEmailAsync(LoginInput.UserNameOrEmailAddress);
-
+            if (user.GetProperty<bool>(UserConstants.IsActive) == false)
+            {
+                Alerts.Danger(L["Your Account is Suspended."]);
+                return Page();
+            }
             Debug.Assert(user != null, nameof(user) + " != null");
 
             return RedirectSafely(ReturnUrl, ReturnUrlHash);
