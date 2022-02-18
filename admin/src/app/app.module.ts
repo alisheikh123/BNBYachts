@@ -27,6 +27,7 @@ import { httpConfigurationClient } from './shared/intercepters/http.interceptor'
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     HomeDashboardModule,
     ThemeModule,
+    CommonModule,
     AppRoutingModule,
     AuthModule.forRoot({
       config: {

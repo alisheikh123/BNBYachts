@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { HostRoutingModule, routedComponents } from './host-routing.module';
 import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ThemeModule } from '../../shared/theme.module';
 
 @NgModule({
   imports: [

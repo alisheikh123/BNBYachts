@@ -79,7 +79,7 @@
                             class="img-fluid img-preview rounded" alt="">
                         </div>
                         <ul class="list-inline list-inline-dotted text-muted mb-4">
-                          <li class="list-inline-item">{{review?.creationTime | date}}</li>
+                          <li class="list-inline-item">{{latest_date}}</li>
                         </ul>
                       </div>
                       <div class="media-body">
@@ -137,99 +137,3 @@
     </div>
   </div>
 </div>
-<div ng-app="userProfile">
-    <md-card>
-      <md-toolbar>
-        <div class="md-toolbar-tools">
-          <h2>
-            <span>OVERVIEW</span>
-          </h2>
-        </div>
-      </md-toolbar>
-      <md-card-content layout-sm="column" layout-gt-sm="row">
-        <div class="user" layout-sm layout-gt-sm="column">
-          <img src="https://lh3.googleusercontent.com/-W2XryVdi-lA/U6tSAh3SsbI/AAAAAAAAFGY/ZHJiUEcR_Zs/w480-h480/avatar%2Bmaterial%2Bdesign.png" alt="user avatar" class="user-avatar" />
-          <md-button class="md-icon-button user-avatar-edit" ng-click="browserAvatar()">
-            <md-icon>photo_camera</md-icon>
-          </md-button>
-          <form name="userBasicInfoForm" layout="column" layout-align="start" layout-align-sm="center start" flex>
-            <md-input-container class="user-input-container">
-              <label>Name</label>
-              <textarea name="userName" required class="user-name" ng-model="user.name" ng-disabled="viewMode" flex></textarea>
-              <div ng-messages="userBasicInfoForm.userName.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-            <md-input-container class="user-input-container">
-              <label>Title</label>
-              <input name="userTitle" required class="user-title" ng-model="user.title" ng-disabled="viewMode"></input>
-              <div ng-messages="userBasicInfoForm.userTitle.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-          </form>
-        </div>
-        <form name="userDetailsForm" flex>
-          <div layout="column" layout-gt-sm="row">
-            <md-input-container flex>
-              <label>Department</label>
-              <input required name="userDepartment" ng-model="user.department" ng-disabled="viewMode"></input>
-              <div ng-messages="userDetailsForm.userDepartment.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-            <md-input-container flex>
-              <label>Location</label>
-              <textarea name="userLocation" required ng-model="user.location" ng-disabled="viewMode"></textarea>
-              <div ng-messages="userDetailsForm.userLocation.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-          </div>
-          <div layout="column" layout-gt-sm="row">
-            <md-input-container flex>
-              <label>Company</label>
-              <input name="userCompany" required ng-model="user.company" ng-disabled="viewMode"></input>
-              <div ng-messages="userDetailsForm.userCompany.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-            <md-input-container flex>
-              <label>Manager</label>
-              <input name="userManager" required ng-model="user.manager" ng-disabled="viewMode"></input>
-              <div ng-messages="userDetailsForm.userManager.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-          </div>
-          <div layout="column" layout-gt-sm="row">
-            <md-input-container flex>
-              <label>Work Phone</label>
-              <input type="tel" name="userWorkPhone" required ng-model="user.workPhone" ng-disabled="viewMode"></input>
-              <div ng-messages="userDetailsForm.userWorkPhone.$error">
-                <div ng-message="required">This is required.</div>
-              </div>
-            </md-input-container>
-            <md-input-container flex>
-              <label>Mobile Phone</label>
-              <input type="tel" ng-model="user.mobilePhone" ng-disabled="viewMode"></input>
-            </md-input-container>
-          </div>
-          <md-input-container>
-            <label>Alias</label>
-            <input type="email" name="userAlias" ng-model="user.alias" ng-disabled="viewMode"></input>
-              <div ng-messages="userDetailsForm.userAlias.$error">
-                <div ng-message="email">Email address is invalid</div>
-              </div>
-          </md-input-container>
-          <md-input-container>
-            <label>Other Email</label>
-            <input type="email" name="userOtherEmail" ng-model="user.otherEmail" ng-disabled="viewMode"></input>
-              <div ng-messages="userDetailsForm.userOtherEmail.$error">
-                <div ng-message="email">Email address is invalid</div>
-              </div>
-          </md-input-container>
-        </form>
-      </md-card-content>
-    </md-card>
-  </div>
