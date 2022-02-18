@@ -9,8 +9,8 @@ import { Reviews } from 'src/app/shared/interface/reviews';
   styleUrls: ['./list-reviews.component.scss'],
 })
 export class ListReviewsComponent implements OnInit {
-  reviews: Reviews[];
-  ClientReview : string;
+  reviews: Reviews[] = [];
+  ClientReview : number;
   reviewSorting: number;
   reviewProgress = {
     fiveStars:0,
@@ -34,7 +34,7 @@ export class ListReviewsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.changeReview(event);
+    //this.changeReview(event);
     // this.getReviews();
   }
   changeReview(event : any) {
@@ -61,7 +61,7 @@ export class ListReviewsComponent implements OnInit {
   }
   getSum() {
     let sum: number = this.reviews.map((a: { ratings: any; })=> a.ratings).reduce(function(a: any, b: any){ return a + b;});
-    this.ClientReview = (sum/this.reviews.length).toFixed(2);
+    this.ClientReview = Number((sum/this.reviews.length).toFixed(2));
   }
   getReviews() {
     if (this.boatId == undefined) {

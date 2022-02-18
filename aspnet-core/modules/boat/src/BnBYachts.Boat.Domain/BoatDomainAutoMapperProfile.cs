@@ -89,6 +89,7 @@ namespace BnBYachts.Boat
                 .ForMember(x => x.EndDate, opt => opt.MapFrom(source => (source.ToDate)));
             CreateMap<CalendarRequestableDto, BoatCalendarEntity>();
             CreateMap<BoatCalendarEntity, CalendarRequestableDto>();
+            CreateMap<CharterEntity, CharterRequestable>().ReverseMap();
         }
     }
 }

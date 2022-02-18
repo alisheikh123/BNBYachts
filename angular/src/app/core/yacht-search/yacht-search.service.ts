@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class YachtSearchService {
   apiUrl: string = environment.BOAT_API_URL+'/api';
   apiCoreURL: string = environment.CORE_API_URL+'/api';
+  apiBookingUrl:string  = environment.BOOKING_API_URL+'/api';
 
   constructor(private http: HttpClient) { }
 

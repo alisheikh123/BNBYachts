@@ -125,7 +125,7 @@
                 <div class="image-with-text-inner">
                     <img src="../../../../assets/images/user-img.png" alt="" />
                     <div class="user-details info"  (click)="goToDetail(item)">
-                        <p class="medium">{{ item.userName }}</p>
+                        <p class="medium">{{item.userName}}</p>
                         <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">{{item?.event?.title}}</p>
                         <p class="small-text grey">{{ item.boatDetail?.name }}</p>
                         <ngb-rating [rate]="0"></ngb-rating>

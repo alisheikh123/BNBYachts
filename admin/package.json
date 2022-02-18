@@ -10,12 +10,19 @@
     "url": "https://github.com/akveo/ngx-admin/issues"
   },
   "scripts": {
+
+
     "ng": "ng",
-    "conventional-changelog": "conventional-changelog",
-    "start": "ng serve",
-    "build": "ng build",
-    "build:prod": "npm run build -- --configuration production --aot",
+    "start": "ng serve --host 0.0.0.0 --port 4200",
+    "build": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod=true --outputPath=dist --outputHashing=all --deleteOutputPath=true",
+    "stag": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration=staging --prod=true --outputPath=dist --outputHashing=all --deleteOutputPath=true",
+    "hmr": "ng serve --host 0.0.0.0 --port 4200 --hmr",
     "test": "ng test",
+    "pree2e": "webdriver-manager update --standalone false --gecko false",
+    "e2e": "protractor",
+    "lint": "tslint --force --project src/tsconfig.json src/**/*.ts -t verbose",
+    "conventional-changelog": "conventional-changelog",
+    "build:prod": "npm run build -- --configuration production --aot",
     "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "ng e2e",

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BoatService } from 'src/app/core/Boat/boat.service';
 import { environment } from 'src/environments/environment';
-import { UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
+import { UploadDefault, UserRoles } from 'src/app/shared/enums/user-roles';
 import { OnBoardingModalComponent } from '../../on-boarding-modal/on-boarding-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-my-profile',
@@ -17,12 +18,17 @@ export class MyProfileComponent implements OnInit {
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
   USER_ROLE = UserRoles;
-  USER_DEFAULTS = UserDefaults;
+  USER_DEFAULTS = UploadDefault;
   loggedInUserRole: string | null;
-
-  constructor(private authService : AuthService,private boatService : BoatService,private modal:NgbModal) { }
+  uploadPictureForm: FormGroup;
+  imageSrc: string;
+  uploadDefault = UploadDefault;
+  constructor(private authService : AuthService,private boatService : BoatService,private modal:NgbModal,public fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.uploadPictureForm = this.fb.group({
+      profile: ['']
+    });
     this.authService.getUserInfo().subscribe(res=>{
       this.userResponse = res;
       this.loggedInUserRole = localStorage.getItem('userRole');
@@ -33,8 +39,33 @@ export class MyProfileComponent implements OnInit {
       }
     })
   }
+  get f() {
+    return this.uploadPictureForm.controls;
+  }
   verifyPhoneNumber()
   {
     this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
   }
+  onFileChange(event: any) {
+    const reader = new FileReader();
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+        this.userResponse.imagePath = '';
+        this.uploadPictureForm.get('profile')!.setValue(file);
+        this.uploadImage();
+      }
+    }
+  }
+  uploadImage() {
+    if (this.uploadPictureForm.value) {
+      const formData = new FormData();
+      formData.append('file', this.uploadPictureForm.get('profile')!.value);
+      this.authService.UploadProfileImage(formData).subscribe((res: any) => {
+      });
+    }
+}
+
 }

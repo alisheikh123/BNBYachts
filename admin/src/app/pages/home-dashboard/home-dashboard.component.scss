@@ -1,4 +1,4 @@
-@import '../../shared//styles/themes.scss';
+@import '../../shared/styles/themes';
 
 @include nb-install-component() {
   nb-card {
@@ -39,10 +39,6 @@
           }
         }
       }
-    }
-    .CardImage{
-        height: 100%; 
-        width: 100%;
     }
     &.off {
       color: nb-theme(text-hint-color);

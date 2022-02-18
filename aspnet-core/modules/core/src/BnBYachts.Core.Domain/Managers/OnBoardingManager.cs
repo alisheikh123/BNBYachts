@@ -40,10 +40,11 @@ namespace BnBYachts.Core.Managers
             _eventBusDispatcher = eventBusDispatcher;
             _unitOfWorkManager = unitOfWorkManager;
         }
-        public async Task GenerateOTP(UserMobileVerificationRequestable mobileVerification)
+        public async Task<EntityResponseModel> GenerateOTP(UserMobileVerificationRequestable mobileVerification)
         {
-            var IsUser = await _repository.GetAsync(res => res.Id == Guid.Parse(mobileVerification.UserId)).ConfigureAwait(false);
-            if (IsUser != null)
+            var response = new EntityResponseModel();
+            var isUser = await _repository.GetAsync(res => res.Id == Guid.Parse(mobileVerification.UserId)).ConfigureAwait(false);
+            if (isUser != null)
             {
                 var random = new Random();
                 mobileVerification.OtpCode = (random.Next(100000, 999999)).ToString();
@@ -54,8 +55,10 @@ namespace BnBYachts.Core.Managers
                 });
                 _logger.LogInformation("Generate OTP and send the otp code to user mobile number against this user Id:" + _unitOfWorkManager.Current.Id.ToString());
                 await _repositoryOTPEntity.InsertAsync(_objectMapper.Map<UserMobileVerificationRequestable, OTPVerifierEntity>(mobileVerification), true);
-
+                response.Data = DateTime.Now;
+                return response;
             }
+            return response;
         }
 
         public async Task<EntityResponseModel> VerifyOTP(long otpNumber, string userId)
@@ -99,7 +102,6 @@ namespace BnBYachts.Core.Managers
             }
         }
 
-
-
+        
     }
 }

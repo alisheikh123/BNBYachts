@@ -75,7 +75,7 @@ export class ChatUsersComponent implements OnInit {
   }
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
-      this.senderDetails = res;
+      this.senderDetails = res
     })
   }
 }

@@ -31,3 +31,10 @@ export enum ServiceType {
     Charters = 2,
     Events = 3,
   }
+  export enum ContractStaus
+  {
+    All = 0,
+    Pending = 1,
+    Active = 2,
+    Rejected = 3,
+  }

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { UserDefaults } from 'src/app/shared/enums/user-roles';
+import { UploadDefault } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
 import { OnboardingWelcomeComponent } from '../onboarding-welcome/onboarding-welcome.component';
 
@@ -14,7 +14,7 @@ import { OnboardingWelcomeComponent } from '../onboarding-welcome/onboarding-wel
 })
 export class OnBoardingProfileModalComponent implements OnInit {
   imageSrc: string;
-  USER_DEFAULTS = UserDefaults;
+  USER_DEFAULTS = UploadDefault;
   uploadPictureForm: FormGroup;
   userDetails: any;
   assetsUrl = environment.S3BUCKET_URL + '/profilePicture/';

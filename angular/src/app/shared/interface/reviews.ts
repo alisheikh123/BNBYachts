@@ -5,4 +5,5 @@ export interface Reviews{
     ratings : number
     bookingId : number
     creationTime :Date
+    userDetails:any;
 }

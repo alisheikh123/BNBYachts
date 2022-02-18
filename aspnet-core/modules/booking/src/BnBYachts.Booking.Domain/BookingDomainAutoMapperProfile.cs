@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using BnBYachts.Booking.Booking;
 using BnBYachts.Booking.Booking.Requestable;
+using BnBYachts.Booking.Booking.Requestable.Charter;
 using BnBYachts.Booking.Booking.Transferables;
+using BnBYachts.Booking.Contracts;
 using BnBYachts.Booking.Disputes;
+using BnBYachts.Booking.DTO;
 using BnBYachts.Booking.Review;
 
 namespace BnBYachts.Booking
@@ -28,6 +31,8 @@ namespace BnBYachts.Booking
             CreateMap<EventBookingRequestableDto, EventBookingEntity>();
             CreateMap<BookingRequestsRequestableDto, BoatelBookingEntity>();
             CreateMap<EventBookingEntity, BookingRequestsRequestableDto>();
+            CreateMap<CharterBookingEntity, CharterBookingRequestable>().ReverseMap();
+            CreateMap<BookingCancellationRequestableDto, BookingCancelEntity>().ReverseMap();
             CreateMap<BoatelBookingEntity, CalendarTransferable>().
                   ForMember(res => res.Id, opt => opt.MapFrom(res => res.BoatId)).
                   ForMember(res => res.BookingId, opt => opt.MapFrom(res => res.Id)).
@@ -59,9 +64,34 @@ namespace BnBYachts.Booking
                 .ForMember(x => x.BookingType, opt => opt.MapFrom(source => (BookingType.Event)))
                 .ForMember(x => x.BookingTypeId, opt => opt.MapFrom(source => source.EventId));
             CreateMap<DisputeRequestableDto, BookingDisputeEntity>()
-                .ForMember(res=>res.DisputeReason,opt=>opt.MapFrom(res=>res.ReasonId));
-            CreateMap<BookingDisputeEntity, DisputeTransferable>();
-
+                .ForMember(res => res.DisputeReason, opt => opt.MapFrom(res => res.ReasonId));
+            CreateMap<ContractsRequestable, ContractEntity>();
+            CreateMap<ContractAttachmentRequestable, ContractTermsEntity>();
+            CreateMap<ContractEntity, ContractsTransferable>();
+            CreateMap<ContractTermsEntity, ContractTermsTransferable>();
+            CreateMap<ContractEntity, CharterBookingTransferableDto>()
+                 .ForMember(x => x.ContractId, opt => opt.MapFrom(source => (source.Id)))
+                 .ForMember(x => x.IsContract, opt => opt.MapFrom(source => (true)))
+                   .ForMember(x => x.NoOfAdults, opt => opt.MapFrom(source => (source.NoOfGuests)))
+                   .ForMember(x => x.HostId, opt => opt.MapFrom(source => (source.CreatorId)))
+                   .ForMember(x => x.BookingStatus, opt => opt.MapFrom(source => (BookingStatus.Approved)));
+            CreateMap<ContractEntity, EventBookingTransferableDto>()
+        .ForMember(x => x.ContractId, opt => opt.MapFrom(source => (source.Id)))
+        .ForMember(x => x.EventDate, opt => opt.MapFrom(source => (source.EventDateTime)))
+        .ForMember(x => x.HostId, opt => opt.MapFrom(source => (source.CreatorId)))
+                         .ForMember(x => x.IsContract, opt => opt.MapFrom(source => (true)))
+        .ForMember(x => x.BookingStatus, opt => opt.MapFrom(source => (BookingStatus.Approved)));
+            CreateMap<ContractEntity, BookingRequestsRequestableDto>()
+     .ForMember(x => x.ContractId, opt => opt.MapFrom(source => (source.Id)))
+     .ForMember(x => x.IsContract, opt => opt.MapFrom(source => (true)))
+       .ForMember(x => x.NoOfAdults, opt => opt.MapFrom(source => (source.NoOfGuests)))
+       .ForMember(x => x.HostId, opt => opt.MapFrom(source => (source.CreatorId)))
+       .ForMember(x => x.BookingStatus, opt => opt.MapFrom(source => (BookingStatus.Approved)))
+        .ForMember(x => x.ContractId, opt => opt.MapFrom(source => (source.Id)))
+        .ForMember(x => x.EventDate, opt => opt.MapFrom(source => (source.EventDateTime)))
+        .ForMember(x => x.HostId, opt => opt.MapFrom(source => (source.CreatorId)))
+                         .ForMember(x => x.IsContract, opt => opt.MapFrom(source => (true)))
+        .ForMember(x => x.BookingStatus, opt => opt.MapFrom(source => (BookingStatus.Approved)));
         }
     }
 }

@@ -1,3 +1,4 @@
+import { ThemeModule } from './../../shared/theme.module';
 import { DisputeService } from './../../core/backend/common/services/dispute.service';
 import { HomeDashboardComponent } from './home-dashboard.component';
 import { NgModule } from '@angular/core';
@@ -11,26 +12,22 @@ import {
   NbSelectModule,
   NbListModule,
   NbIconModule,
+  NbTreeGridModule,
+  NbInputModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 
-import { ThemeModule } from '../../shared/theme.module';
 import { FormsModule } from '@angular/forms';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
   imports: [
     FormsModule,
-    ThemeModule,
     NbCardModule,
     NbUserModule,
-    NbButtonModule,
-    NbTabsetModule,
     NbActionsModule,
-    NbRadioModule,
-    NbSelectModule,
     NbListModule,
     NbIconModule,
     NbButtonModule,
-    NgxEchartsModule,
   ],
   declarations: [
     HomeDashboardComponent
