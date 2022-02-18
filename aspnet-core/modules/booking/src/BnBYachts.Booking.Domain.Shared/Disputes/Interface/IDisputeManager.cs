@@ -10,6 +10,7 @@ namespace BnBYachts.Booking.Disputes.Interface
         Task<string> GetEmailContent(int templateId);
         //Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination);
         Task<List<DisputeTransferable>> GetDisputeList();
+        Task<DisputeTransferable> GetDisputebyId(int id);
 
 
     }

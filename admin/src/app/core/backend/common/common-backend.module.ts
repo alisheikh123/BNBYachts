@@ -1,3 +1,6 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { BoatsApi } from './api/boats.api';
 import { DisputesApi } from './api/disputes.api';
 import { DisputeService } from './services/dispute.service';
 import { ModuleWithProviders, NgModule } from '@angular/core';
@@ -7,7 +10,6 @@ import { UsersApi } from './api/users.api';
 import { HttpService } from './api/http.service';
 import { CountryData } from '../../interfaces/common/countries';
 import { SettingsData } from '../../interfaces/common/settings';
-import { BoatUserData } from '../../interfaces/common/users';
 import { DisputesData } from '../../../shared/interfaces/IDispute';
 import { UserActivityService } from '../../mock/user-activity.service';
 import { OrdersChartService } from '../../mock/orders-chart.service';
@@ -45,12 +47,16 @@ import { ElectricityService } from '../../mock/electricity.service';
 import { ElectricityData } from '../../data/electricity';
 import { UserData } from '../../data/users';
 import { UserService } from '../../mock/users.service';
+import { BoatUserData } from '../../../shared/interfaces/BoatUser';
+import { BoatsData } from '../../../shared/interfaces/Boats';
+import { BoatsService } from './services/boats.service';
 
-const API = [UsersApi,DisputesApi, HttpService];
+const API = [UsersApi,DisputesApi,BoatsApi, HttpService];
 
 const SERVICES = [
   { provide: DisputesData, useClass: DisputeService },
   { provide: BoatUserData, useClass: UsersService },
+  { provide: BoatsData, useClass: BoatsService },
   { provide: UserData, useClass: UserService },
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
@@ -72,7 +78,9 @@ const SERVICES = [
 ];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    // CommonModule , BrowserModule , BrowserAnimationsModule
+  ],
 })
 export class CommonBackendModule {
   static forRoot(): ModuleWithProviders<CommonBackendModule> {

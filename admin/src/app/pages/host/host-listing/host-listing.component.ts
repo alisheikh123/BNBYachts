@@ -1,10 +1,9 @@
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BoatUserData } from '../../../core/interfaces/common/users';
-import { UserService } from '../../../core/mock/user.service';
 import { UserRoles } from '../../../shared/enums/userRoles';
-import { BoatUser } from '../../../shared/interfaces/BoatUser';
-import { PaginationSettingsEnum } from '../../../shared/pagination/PaginationSettingsEnum';
+import { BoatUser, BoatUserData } from '../../../shared/interfaces/BoatUser';
+import { StatusComponent } from '../../user/status/status.component';
 
 @Component({
   selector: 'app-host-listing',
@@ -21,8 +20,8 @@ export class HostListingComponent implements OnInit {
       edit:false,
       delete: false,
       custom: [{ 
-        name: 'Detail', 
-        title: '<i class="nb-compose"></i>' }
+        name: 'userDetails', 
+        title: '<i class="nb-compose"></i>'  }
       ],
       position: 'right'
     },
@@ -35,7 +34,7 @@ export class HostListingComponent implements OnInit {
         title: 'Email',
         type: 'string',
       },
-      phone: {
+      phoneNumber: {
         title: 'Phone',
         type: 'string',
       },
@@ -50,9 +49,18 @@ export class HostListingComponent implements OnInit {
           return this.datePipe.transform(new Date(creationTime), 'MM/dd/yyyy');
       },
       },
+      isActive: {
+        title: 'Status',
+        type: 'custom',
+        filter: false,
+        renderComponent: StatusComponent,
+        valuePrepareFunction: (value, row, cell) => {
+            return row;
+        },
+      },
     },
   };
-  constructor(private userService: BoatUserData, private datePipe : DatePipe) {
+  constructor(private userService: BoatUserData, private datePipe : DatePipe, private router : Router) {
    
   }
   ngOnInit() {
@@ -62,5 +70,8 @@ export class HostListingComponent implements OnInit {
     this.userService.getBoatUsers(this.Roles.HOST).subscribe((res) =>{
       this.source = res;
     });    
+  }
+  onCustomAction(event){
+    this.router.navigate([`pages/host/host/${event.data.id}`]);
   }
 }

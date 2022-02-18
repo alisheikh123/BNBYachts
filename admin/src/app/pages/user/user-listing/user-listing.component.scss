@@ -5,6 +5,6 @@
     transform: translate3d(0, 0, 0);
   }
 }
-// :host ::ng-deep tr .ng2-smart-actions{ display: flex; }
-// :host ::ng-deep nbng2-st-tbody-custom {display: flex;}
+:host ::ng-deep tr .ng2-smart-actions{ display: flex; }
+:host ::ng-deep nbng2-st-tbody-custom {display: flex;}
 :host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {display: inline-block;margin-top: 10px; width: 80px;text-align: center;}

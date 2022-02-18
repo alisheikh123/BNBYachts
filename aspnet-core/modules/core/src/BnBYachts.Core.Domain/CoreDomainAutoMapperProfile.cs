@@ -3,7 +3,6 @@ using BnBYachts.Core.Admin.Transferable;
 using BnBYachts.Core.Data.Entities;
 using BnBYachts.Core.Requestable;
 using BnBYachts.Core.Data.Model.VerifyPhoneNumber;
-using BnBYachts.Core.Requestable;
 using BnBYachts.Core.Shared.Requestable;
 using Volo.Abp.Identity;
 
@@ -14,7 +13,7 @@ namespace BnBYachts.Core
         public CoreDomainAutoMapperProfile()
         {
             CreateMap<UserRequestable, IdentityUser>();
-            CreateMap<IdentityUser, BoatUserTransferable>().ReverseMap();
+            CreateMap<IdentityUser, BoatUserTransferable>();
             CreateMap<UserMobileVerificationRequestable, OTPVerifierEntity>().
                 ForMember(source=>source.PhoneNumber,destination=>destination.MapFrom(source=> source.Phone));
             CreateMap<OTPVerifierEntity, UserMobileVerificationRequestable>().

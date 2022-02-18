@@ -1,3 +1,8 @@
+import { BoatsService } from './backend/common/services/boats.service';
+import { DisputeService } from './backend/common/services/dispute.service';
+import { AuthService } from './mock/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
@@ -16,14 +21,11 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 
 export const NB_CORE_PROVIDERS = [
   ...CommonBackendModule.forRoot().providers,
-  // NbSecurityModule.forRoot({}).providers,
   LayoutService
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   declarations: [],
 })
 export class CoreModule {
@@ -37,6 +39,9 @@ export class CoreModule {
       providers: [
         ...NB_CORE_PROVIDERS,
         UsersService,
+        AuthService,
+        DisputeService,
+        BoatsService
       ],
     };
   }

@@ -14,6 +14,11 @@ const routes: Routes = [{
       component: HomeDashboardComponent,
     },
     {
+      path: 'auth',
+      loadChildren: () => import('./auth/auth.module')
+        .then(m => m.AuthAppModule),
+    },
+    {
       path: 'user',
       loadChildren: () => import('./user/user.module')
         .then(m => m.UserModule),
@@ -30,7 +35,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'pages',
       pathMatch: 'full',
     },
     {

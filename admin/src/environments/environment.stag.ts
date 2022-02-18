@@ -15,8 +15,8 @@ export const environment = {
     stripeKey: "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f",
     Identity: {
       authority: "http://idv.bnbstaging.techverxapps.com",
-      redirectUrl: "http://client.bnbstaging.techverxapps.com",
-      postLogoutRedirectUri: "http://client.bnbstaging.techverxapps.com",
+      redirectUrl: "http://admin.bnbstaging.techverxapps.com",
+      postLogoutRedirectUri: "http://admin.bnbstaging.techverxapps.com",
       clientId: "BnBYachts_Admin",
       scope: "openid Core Booking Boat Payments HostGateway Chat Admin"
     }   

@@ -2,6 +2,7 @@ import { DisputeComponent } from './dispute.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DisputeListingComponent } from './dispute-listing/dispute-listing.component';
+import { DisputeDetailComponent } from './dispute-detail/dispute-detail.component';
 
 const routes: Routes = [ {
   path: '',
@@ -11,6 +12,10 @@ const routes: Routes = [ {
       path: 'dispute',
       component: DisputeListingComponent,
     },
+    {
+      path : 'dispute/:id',
+      component : DisputeDetailComponent
+    }
   ]
 }];
 
@@ -21,5 +26,6 @@ const routes: Routes = [ {
 export class DisputeRoutingModule { }
 export const routedComponents = [
   DisputeComponent,
-  DisputeListingComponent
+  DisputeListingComponent,
+  DisputeDetailComponent
 ];

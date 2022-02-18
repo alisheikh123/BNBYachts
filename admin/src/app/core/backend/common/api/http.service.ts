@@ -10,6 +10,7 @@ export class HttpService {
   
   CORE_API_URL = environment.CORE_API_URL;
   BOOKING_API_URL = environment.BOOKING_API_URL;
+  BOAT_API_URL = environment.BOAT_API_URL;
   constructor(private http: HttpClient) {}
 
   getServerDataSource(uri: string): DataSource {
@@ -31,5 +32,14 @@ export class HttpService {
   }
   getBooking(endpoint: string, options?): any {
     return this.http.get(`${this.BOOKING_API_URL}/${endpoint}`, options);
+  }
+  getBoat(endpoint: string, options?): any {
+    return this.http.get(`${this.BOAT_API_URL}/${endpoint}`, options);
+  }
+  post(endpoint: string, data, options?): Observable<any> {
+    return this.http.post(`${this.CORE_API_URL}/${endpoint}`, data, options);
+  }
+  postwithoutData(endpoint: string, options?): Observable<any> {
+    return this.http.post(`${this.CORE_API_URL}/${endpoint}`, options);
   }
 }

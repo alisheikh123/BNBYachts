@@ -80,6 +80,7 @@ namespace BnBYachts.Core.Managers
             };
             user.SetProperty(UserConstants.DOB, userInput.DOB);
             user.SetProperty(UserConstants.IsInitialLogin, true);
+            user.SetProperty(UserConstants.IsActive, true);
             var result = await _userManager.CreateAsync(user, userInput.Password);
             if (result.Succeeded)
             {

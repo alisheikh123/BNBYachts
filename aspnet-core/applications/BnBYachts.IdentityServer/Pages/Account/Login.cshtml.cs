@@ -1,3 +1,4 @@
+using BnBYachts.Core.Shared;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@ using Volo.Abp.Account.Settings;
 using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.Pages.Account;
 using Volo.Abp.Auditing;
+using Volo.Abp.Data;
 using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Settings;
@@ -108,48 +110,52 @@ namespace BnBYachts.Pages.Account
             ValidateModel();
 
             await ReplaceEmailToUsernameOfInputIfNeeds();
-
-            var result = await SignInManager.PasswordSignInAsync(
-                LoginInput.UserNameOrEmailAddress,
-                LoginInput.Password,
-                true,
-                true
-            );
-
-            if (result.RequiresTwoFactor)
-            {
-                return RedirectToPage("./SendSecurityCode", new
-                {
-                    returnUrl = ReturnUrl,
-                    returnUrlHash = ReturnUrlHash,
-                    rememberMe = LoginInput.RememberMe
-                });
-            }
-
-            if (result.IsLockedOut)
-            {
-                Alerts.Warning(L["UserLockedOutMessage"]);
-                return Page();
-            }
-
-            if (result.IsNotAllowed)
-            {
-                Alerts.Warning(L["LoginIsNotAllowed"]);
-                return Page();
-            }
-
-            if (!result.Succeeded)
-            {
-                Alerts.Danger(L["InvalidUserNameOrPassword"]);
-                return Page();
-            }
-
-            //TODO: Find a way of getting user's id from the logged in user and do not query it again like that!
             var user = await UserManager.FindByNameAsync(LoginInput.UserNameOrEmailAddress) ??
                        await UserManager.FindByEmailAsync(LoginInput.UserNameOrEmailAddress);
+            if (user.GetProperty<bool>(UserConstants.IsActive) == false)
+            {
+                Alerts.Danger(L["Your Account is Suspended."]);
+                return Page();
+            }
+            
+                var result = await SignInManager.PasswordSignInAsync(
+                    LoginInput.UserNameOrEmailAddress,
+                    LoginInput.Password,
+                    true,
+                    true
+                ).ConfigureAwait(false);
 
-            Debug.Assert(user != null, nameof(user) + " != null");
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToPage("./SendSecurityCode", new
+                    {
+                        returnUrl = ReturnUrl,
+                        returnUrlHash = ReturnUrlHash,
+                        rememberMe = LoginInput.RememberMe
+                    });
+                }
+                if (result.IsLockedOut)
+                {
+                    Alerts.Warning(L["UserLockedOutMessage"]);
+                    return Page();
+                }
 
+                if (result.IsNotAllowed)
+                {
+                    Alerts.Warning(L["LoginIsNotAllowed"]);
+                    return Page();
+                }
+
+                if (!result.Succeeded)
+                {
+                    Alerts.Danger(L["InvalidUserNameOrPassword"]);
+                    return Page();
+                }
+
+                //TODO: Find a way of getting user's id from the logged in user and do not query it again like that!
+
+                Debug.Assert(user != null, nameof(user) + " != null");
+            
             return RedirectSafely(ReturnUrl, ReturnUrlHash);
         }
 

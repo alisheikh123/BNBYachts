@@ -18,7 +18,7 @@ namespace BnBYachts.Core.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.13")
+                .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BnBYachts.Core.Data.Entities.FrequentQuestionEntity", b =>
@@ -154,7 +154,7 @@ namespace BnBYachts.Core.Migrations
                     b.ToTable("ForgetPasswordVerifier");
                 });
 
-            modelBuilder.Entity("BnBYachts.Core.Data.Model.OTPVerifier.OTPVerifierEntity", b =>
+            modelBuilder.Entity("BnBYachts.Core.Data.Model.VerifyPhoneNumber.OTPVerifierEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

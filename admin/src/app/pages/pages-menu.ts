@@ -14,7 +14,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     {
       title: 'Users',
       link: '/pages/user/users',
-    }
+    },
   ]
   },
   {

@@ -13,5 +13,6 @@ namespace BnBYachts.Booking.Interfaces
         Task<ICollection<ReviewTransferable>> GetBookingReviews(int bookingId);
         Task<bool> IsReviewAlreadyPosted(string userId,int bookingId);
         Task<ICollection<ReviewTransferable>> GetBoatReviews(int boatId, int reviewSorting);
+        Task<List<ReviewTransferable>> GetReviewsByReviewerId(string ReviewerId);
     }
 }

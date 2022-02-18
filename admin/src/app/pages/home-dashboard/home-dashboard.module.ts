@@ -19,7 +19,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 import { FormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-
 @NgModule({
   imports: [
     FormsModule,
@@ -31,7 +30,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbButtonModule,
   ],
   declarations: [
-    HomeDashboardComponent,
+    HomeDashboardComponent
   ],
   providers:[
      DisputeService

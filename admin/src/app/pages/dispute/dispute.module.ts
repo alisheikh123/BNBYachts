@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import {  DisputeRoutingModule, routedComponents } from './diapute-routing.module';
 import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DisputeDetailComponent } from './dispute-detail/dispute-detail.component';
 
 
 @NgModule({
