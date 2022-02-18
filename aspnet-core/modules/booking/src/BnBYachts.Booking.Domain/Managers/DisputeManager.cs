@@ -25,16 +25,10 @@ namespace BnBYachts.Booking.Managers
 
         public async Task AddDispute(DisputeRequestableDto data)
         => await _repo.InsertAsync(_objectMapper.Map<DisputeRequestableDto, BookingDisputeEntity>(data),true).ConfigureAwait(false);
+
+        public async Task<DisputeTransferable> GetDisputebyId(int id) => _objectMapper.Map<BookingDisputeEntity, DisputeTransferable>(await _repo.GetAsync(id).ConfigureAwait(false));
+
         public async Task<List<DisputeTransferable>> GetDisputeList() => _objectMapper.Map<List<BookingDisputeEntity>, List<DisputeTransferable>>(await _repo.GetListAsync().ConfigureAwait(false));
-        //{
-        //    var response = new EntityResponseListModel<DisputeTransferable>();
-        //    var disputes = _objectMapper.Map<List<BookingDisputeEntity>, PagedList<DisputeTransferable>>(await _repo.GetListAsync().ConfigureAwait(false));
-        //    response.TotalCount = disputes.Count();
-        //    response.Data = await PagedList<DisputeTransferable>.CreateAsync(disputes, pagination.CurrentPage, pagination.ItemsPerPage);
-        //    if (!string.IsNullOrWhiteSpace(SearchText))
-        //        response.Data = response.Data.Where(c => c.BookingType.Contains(SearchText) || c.DisputeReason.Contains(SearchText) || c.Status.Contains(SearchText)).ToList();
-        //    return response;
-        //}
         public async Task<string> GetEmailContent(int templateId)
         {
             var email = await _repoTemplates.GetAsync(res => res.TemplateId == templateId).ConfigureAwait(false);

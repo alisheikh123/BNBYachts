@@ -12,4 +12,7 @@ export class DisputeService extends DisputesData {
   getDisputesData(): Observable<IDispute[]> {
     return this.api.getDisputes();
   }
+  getDisputeById(id: number): Observable<IDispute> {
+    return this.api.getDisputeById(id);
+  }
 }

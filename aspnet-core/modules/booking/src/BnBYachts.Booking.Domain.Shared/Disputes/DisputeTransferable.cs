@@ -6,6 +6,7 @@ namespace BnBYachts.Booking.Disputes
 {
     public class DisputeTransferable
     {
+        public int? id { get; set; }
         public int BookingId { get; set; }
         public string DisputeReason { get; set; }
         public string BookingType { get; set; }

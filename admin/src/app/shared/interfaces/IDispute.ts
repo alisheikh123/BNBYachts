@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 
 export interface IDispute{
+    id : number;
     bookingId : number
     disputeReason : string
     bookingType : string
@@ -12,4 +13,5 @@ export interface IDispute{
 
 export abstract class DisputesData {
       abstract getDisputesData(): Observable<IDispute[]>;
+      abstract getDisputeById(id : number) : Observable<IDispute>;
 }

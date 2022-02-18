@@ -4,17 +4,21 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ThemeModule } from '../shared/theme.module';
-
+import { HomeDashboardModule } from './home-dashboard/home-dashboard.module';
+const PAGES_COMPONENTS = [
+  PagesComponent,
+];
 @NgModule({
   imports: [
     PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
-    MiscellaneousModule,
+    HomeDashboardModule,
+    MiscellaneousModule
   ],
   declarations: [
-    PagesComponent,
-  ],
+    ...PAGES_COMPONENTS,
+    ],
 })
 export class PagesModule {
 }

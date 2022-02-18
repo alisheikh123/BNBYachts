@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { environment } from '../../../environments/environment';
 import { LocalStoreService } from './local-store.service';
+import { finalize } from 'rxjs/operators';
 @Injectable()
 export class AuthService {
   apiCoreURl = environment.CORE_API_URL;
@@ -57,5 +58,28 @@ export class AuthService {
   logout() {
     localStorage.removeItem("accessToken");
     this.oidcSecurityService.logoff();
+  }
+  registerUser(userData: any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.http.post(this.apiCoreURl + "/api/register/", userData)
+      .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
+
+  confirmEmail(userName: any, token: any) {
+    return this.http.get<any>(this.apiCoreURl + "/api/confirm-email?username=" + userName + "&token=" + token);
+  }
+  resendEmail(userName: any) {
+    return this.http.get<any>(this.apiCoreURl + "/api/Resend-Email?username=" + userName);
+  }
+  updateUserProfile(userData: any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.http.put(this.apiCoreURl + "/api/Update-User-Profile/", userData)
+      .pipe(finalize(() => this.isLoadingSubject.next(false)));
+  }
+
+  isEmailExists(email:string) {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('X-Skip-Loader-Interceptor', 'true');
+    return this.http.post<boolean>(this.apiCoreURl + "/api/app/user/is-email-exists?email="+email,null,{headers:headers});
   }
 }

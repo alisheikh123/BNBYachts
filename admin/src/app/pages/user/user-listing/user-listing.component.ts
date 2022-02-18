@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BoatUserData } from '../../../core/interfaces/common/users';
 import { UserRoles } from '../../../shared/enums/userRoles';
-import { BoatUser } from '../../../shared/interfaces/BoatUser';
+import { BoatUser, BoatUserData } from '../../../shared/interfaces/BoatUser';
+import { NbDialogService } from '@nebular/theme';
+import { StatusComponent } from '../status/status.component';
 
 @Component({
   selector: 'app-user-listing',
@@ -19,9 +21,11 @@ export class UserListingComponent implements OnInit {
       edit:false,
       delete: false,
       position: 'right',
-      custom: [{ 
-        name: 'Detail', 
-        title: '<i class="nb-compose"></i>' }],
+      custom: [
+      { 
+        name: 'userDetails', 
+        title: '<i class="nb-compose"></i>' 
+      }],
     },
     columns: {
       name: {
@@ -32,7 +36,7 @@ export class UserListingComponent implements OnInit {
         title: 'Email',
         type: 'string',
       },
-      phone: {
+      phoneNumber: {
         title: 'Phone',
         type: 'string',
       },
@@ -47,17 +51,29 @@ export class UserListingComponent implements OnInit {
           return this.datePipe.transform(new Date(created), 'MM/dd/yyyy');
       },
     },
+     isActive: {
+        title: 'Status',
+        type: 'custom',
+        filter: false,
+        renderComponent: StatusComponent,
+        valuePrepareFunction: (value, row, cell) => {
+            return row;
+        },
+      },
   }
 };
-  constructor(private userService: BoatUserData , private datePipe : DatePipe) {
+  constructor(private userService: BoatUserData , private datePipe : DatePipe, private router : Router, private dialogService : NbDialogService) {
    
   }
   ngOnInit() {
   this.filter();
    }
-  filter() : any {
+  filter() {
     this.userService.getBoatUsers(this.Roles.USER).subscribe((res) =>{
       this.source = res;
     });    
+  }
+  onCustomAction(event){
+    this.router.navigate([`pages/user/users/${event.data.id}`]);
   }
 }

@@ -1,9 +1,20 @@
 ﻿using BnBYachts.Core.Admin.Interface;
 using BnBYachts.Core.Admin.Transferable;
+using BnBYachts.Core.Shared;
+using BnBYachts.Core.Shared.Dto;
+using BnBYachts.Core.Shared.Transferable;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.Data;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.Identity;
 using Volo.Abp.ObjectMapping;
@@ -13,25 +24,28 @@ namespace BnBYachts.Core.Managers
     public class AdminManager : DomainService, IAdminManager
     {
         private readonly IdentityUserManager _userManager;
+        private readonly IRepository<IdentityUser, Guid> _repository;
+        private readonly IConfiguration _config;
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
+        private readonly EventBusDispatcher _eventBusDispatcher;
 
-        public AdminManager(IdentityUserManager userManager, IObjectMapper<CoreDomainModule> objectMapper)
+
+        public AdminManager(IdentityUserManager userManager, IObjectMapper<CoreDomainModule> objectMapper,
+            IRepository<IdentityUser, Guid> repository, IConfiguration config, EventBusDispatcher eventBusDispatcher)
         {
             _userManager = userManager;
             _objectMapper = objectMapper;
+            _repository = repository;
+            _config = config;
+            _eventBusDispatcher = eventBusDispatcher;
         }
         public async Task<List<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName)
         {
             var data = await _userManager.GetUsersInRoleAsync(roleName).ConfigureAwait(false);
-            return _objectMapper.Map<List<IdentityUser>, List<BoatUserTransferable>>(data.ToList());
-            //var response = new EntityResponseListModel<BoatUserTransferable>();
-            //var data = await _userManager.GetUsersInRoleAsync(roleName).ConfigureAwait(false);
-            //var users = _objectMapper.Map<List<IdentityUser>, PagedList<BoatUserTransferable>>(data.ToList());
-            //response.TotalCount = users.Count();
-            //response.Data = await PagedList<BoatUserTransferable>.CreateAsync(users, pagination.CurrentPage, pagination.ItemsPerPage);
-            //if (!string.IsNullOrWhiteSpace(SearchText))
-            //    response.Data = response.Data.Where(c => c.Name.Contains(SearchText) || c.Email.Contains(SearchText) || c.PhoneNumber.Contains(SearchText)).ToList();
-            //return response;
+            var boatUsers = _objectMapper.Map<IList<IdentityUser>, IList<BoatUserTransferable>>(data);
+            boatUsers.ToList().ForEach(res=>res.IsActive = data.FirstOrDefault(x=>x.Id.ToString()==res.Id)
+            .GetProperty<bool>(UserConstants.IsActive));
+            return boatUsers.ToList();
         }
         public async Task<TotalUsersTransferable> GetTotalUsers(string userRole, string hostRole)
         {
@@ -41,6 +55,74 @@ namespace BnBYachts.Core.Managers
             response.Users = user.Count();
             response.Hosts = host.Count();
             return response;
+        }
+
+        public async Task<AdminResponseDto> SuspendUser(Guid id)
+        {
+            var response = new AdminResponseDto();
+            var data = await _repository.GetAsync(x=>x.Id == id);
+            if (data.GetProperty<bool>(UserConstants.IsActive) == true)
+            {
+                data.SetProperty(UserConstants.IsActive, false);
+                response.Message = "Account Suspended Successfully";
+            }
+            else
+            {
+                data.SetProperty(UserConstants.IsActive, true);
+                response.Message = "Account Active Successfully";
+            }
+            await _repository.UpdateAsync(data);
+            return response;
+        }
+        public async Task<AdminResponseDto> RegisterAdmin(AdminRegisterTransferable userInput)
+        {
+            var _respone = new AdminResponseDto();
+            var user = new IdentityUser(userInput.Id, userInput.Email, userInput.Email)
+            {
+                Name = userInput.FirstName + " " + userInput.LastName
+            };
+            user.SetProperty(UserConstants.DOB, userInput.DOB);
+            user.SetProperty(UserConstants.IsInitialLogin, true);
+            user.SetProperty(UserConstants.IsActive, true);
+            userInput.Password = userInput.FirstName + "" + userInput.LastName + "123*";
+            var result = await _userManager.CreateAsync(user, userInput.Password);
+            if (result.Succeeded)
+            {
+                var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
+                if (!isRoleAssigned.Succeeded)
+                {
+                    return _respone;
+                }
+                await SendEmailForAdminConfirmationAsync(user , userInput.Password);
+                _respone.Message = "Account created successfully";
+            }
+            else
+            {
+                _respone.Message = result.Errors.ToList().FirstOrDefault()?.Description;
+                _respone.Status = false;
+            }
+            return _respone;
+        }
+        public async Task SendEmailForAdminConfirmationAsync(IdentityUser user, string password)
+        {
+            var rootUrl = _config.GetSection("App:ClientUrl").Value;
+            //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            user.SetProperty(UserConstants.EmailConfirmationToken, true);
+            await _repository.UpdateAsync(user);
+            string baseUrl = rootUrl;
+            var queryParams = new Dictionary<string, string>()
+            {
+            {"username", user.UserName },
+            {"password", password },
+            };
+            string body = $"<h4>Hello {user.Name} </h4> <div> Your Account registered by Super Admin on BnByachts, You can loggedIn your account by clicking here: <a href='{baseUrl}'>Click Here</a> <h1>{queryParams}</h1> </div><br>Best Regard";
+            await _eventBusDispatcher.Send<IEmailContract>(new EmailContract
+            {
+                To = user.Email,
+                Subject = "Admin Confirmation",
+                Body = new StringBuilder().Append(body),
+                IsBodyHtml = true
+            });
         }
     }
 }
