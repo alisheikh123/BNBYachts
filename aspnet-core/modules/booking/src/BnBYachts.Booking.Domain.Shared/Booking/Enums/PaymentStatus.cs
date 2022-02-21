@@ -8,6 +8,8 @@ namespace BnBYachts.Booking
     {
         Pending = 0,
         Approved = 1,
-        Rejected = 2
+        Rejected = 2,
+        Transfered = 3,
+            Refund =4
     }
 }

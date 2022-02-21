@@ -194,7 +194,7 @@ export class BoatDetailsComponent implements OnInit {
     if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null && this.boatDetails != null) {
       var checkinDate = moment(this.boatFilterDetails.checkinDate).format("DD-MM-YYYY");
       var checkoutDate = moment(this.boatFilterDetails.checkoutDate).format("DD-MM-YYYY");
-      for (var i = checkinDate; i <= checkoutDate; i = moment(i, "DD-MM-YYYY").add(1, 'days').format("DD-MM-YYYY")) {
+      for (var i = checkinDate;moment(i,"DD-MM-YYYY").isSameOrBefore(moment(checkoutDate,"DD-MM-YYYY"),'day'); i = moment(i, "DD-MM-YYYY").add(1, 'days').format("DD-MM-YYYY")) {
         let findCalendar = this.boatDetails.boatCalendars.find((element: any) =>
           moment(element.fromDate).format("DD-MM-YYYY") == i &&
           moment(element.toDate).format("DD-MM-YYYY") == i && element.isAvailable

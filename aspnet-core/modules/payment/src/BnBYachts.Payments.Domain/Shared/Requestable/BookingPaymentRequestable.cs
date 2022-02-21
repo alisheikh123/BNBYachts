@@ -1,4 +1,6 @@
-﻿namespace BnBYachts.Payments.Shared.Transferable
+﻿using BnBYachts.Payments.Enum;
+
+namespace BnBYachts.Payments.Shared.Transferable
 {
     public class BookingPaymentRequestable
     {
@@ -10,5 +12,6 @@
         public string Description { get; set; }
         public bool IsSaveNewPaymentMethod { get; set; }
         public string Token { get; set; }
+        public BookingType BookingType { get; set; }
     }
 }

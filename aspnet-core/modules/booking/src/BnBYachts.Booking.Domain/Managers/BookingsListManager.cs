@@ -265,16 +265,19 @@ namespace BnBYachts.Booking.Managers
                 var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
                 userName = booking.UserName;
                 booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+                booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
             }
             else if (serviceType == (int)BookingTypes.Charter)
             {
                 var booking = await _charterBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
                 booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+                booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
             }
             else
             {
                 var booking = await _eventsBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
                 booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+                booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
             }
 
             #region Send-Email
