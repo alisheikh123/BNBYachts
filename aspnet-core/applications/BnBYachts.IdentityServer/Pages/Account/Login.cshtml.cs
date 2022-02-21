@@ -1,4 +1,6 @@
 using BnBYachts.Core.Shared;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
-using System.Text.RegularExpressions;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Volo.Abp;
@@ -20,7 +22,6 @@ using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.Pages.Account;
 using Volo.Abp.Auditing;
 using Volo.Abp.Data;
-using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Settings;
 using Volo.Abp.Uow;
@@ -44,6 +45,10 @@ namespace BnBYachts.Pages.Account
 
         public bool EnableLocalLogin { get; set; }
         public string BaseUrl { get; set; }
+        public bool IsEmailConfirmed { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsAccountLock { get; set; }
+        public bool IsCredentialsWrong { get; set; }
 
         //TODO: Why there is an ExternalProviders if only the VisibleExternalProviders is used.
         public IEnumerable<ExternalProviderModel> ExternalProviders { get; set; }
@@ -62,19 +67,20 @@ namespace BnBYachts.Pages.Account
         protected IAuthenticationSchemeProvider _schemeProvider;
         protected AbpAccountOptions _accountOptions;
         private readonly IConfiguration _configuration;
-
+        private readonly EventBusDispatcher _eventBusDispatcher;
         public LoginModel(
             IAuthenticationSchemeProvider schemeProvider,
-            IOptions<AbpAccountOptions> accountOptions, IConfiguration configuration)
+            IOptions<AbpAccountOptions> accountOptions, IConfiguration configuration, EventBusDispatcher eventBusDispatcher)
         {
             _schemeProvider = schemeProvider;
             _accountOptions = accountOptions.Value;
             _configuration = configuration;
+            _eventBusDispatcher = eventBusDispatcher;
         }
 
         public virtual async Task<IActionResult> OnGetAsync()
         {
-            if (ReturnUrl!=null)
+            if (ReturnUrl != null)
             {
                 this.BaseUrl = GetDomainUrl(ReturnUrl);
             }
@@ -104,7 +110,7 @@ namespace BnBYachts.Pages.Account
         //[UnitOfWork] //TODO: Will be removed when we implement action filter
         public virtual async Task<IActionResult> OnPostAsync(string action)
         {
-            
+
             await CheckLocalLoginAsync();
 
             ValidateModel();
@@ -112,50 +118,73 @@ namespace BnBYachts.Pages.Account
             await ReplaceEmailToUsernameOfInputIfNeeds();
             var user = await UserManager.FindByNameAsync(LoginInput.UserNameOrEmailAddress) ??
                        await UserManager.FindByEmailAsync(LoginInput.UserNameOrEmailAddress);
-            if (user.GetProperty<bool>(UserConstants.IsActive) == false)
+            if (user == null)
+            {
+                Alerts.Danger(L["The username or email you have enter doesn't exist."]);
+                return Page();
+
+            }
+            IsEmailConfirmed = user.EmailConfirmed;
+            IsActive = user.GetProperty<bool>(UserConstants.IsActive);
+            if (IsActive == false)
             {
                 Alerts.Danger(L["Your Account is Suspended."]);
                 return Page();
             }
-            
-                var result = await SignInManager.PasswordSignInAsync(
-                    LoginInput.UserNameOrEmailAddress,
-                    LoginInput.Password,
-                    true,
-                    true
-                ).ConfigureAwait(false);
+            if (IsEmailConfirmed == false)
+            {
+                Alerts.Danger(L["Your account is not verified.Please check your email and verify from them."]);
+                return Page();
+            }
+            var result = await SignInManager.PasswordSignInAsync(
+                LoginInput.UserNameOrEmailAddress,
+                LoginInput.Password,
+                true,
+                lockoutOnFailure: true
+            ).ConfigureAwait(false);
 
-                if (result.RequiresTwoFactor)
+
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToPage("./SendSecurityCode", new
                 {
-                    return RedirectToPage("./SendSecurityCode", new
-                    {
-                        returnUrl = ReturnUrl,
-                        returnUrlHash = ReturnUrlHash,
-                        rememberMe = LoginInput.RememberMe
-                    });
-                }
-                if (result.IsLockedOut)
+                    returnUrl = ReturnUrl,
+                    returnUrlHash = ReturnUrlHash,
+                    rememberMe = LoginInput.RememberMe
+                });
+            }
+            if (result.IsLockedOut)
+            {
+                IsAccountLock = result.IsLockedOut;
+                await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
                 {
-                    Alerts.Warning(L["UserLockedOutMessage"]);
-                    return Page();
-                }
+                    From = _configuration.GetSection("EmailConfiguration:From").Value,
+                    To = user.Email.ToString(),
+                    Subject = "Your Account is Locked",
+                    Body = new StringBuilder().Append("Your Account is Locked Due to Wrong Attempts"),
+                    IsBodyHtml = true
+                });
+                Alerts.Warning(L["The user account has been locked out due to invalid login attempts. Please try after 5 minutes or contact to support"]);
+                return Page();
+            }
 
-                if (result.IsNotAllowed)
-                {
-                    Alerts.Warning(L["LoginIsNotAllowed"]);
-                    return Page();
-                }
+            if (result.IsNotAllowed)
+            {
+                Alerts.Warning(L["LoginIsNotAllowed"]);
+                return Page();
+            }
 
-                if (!result.Succeeded)
-                {
-                    Alerts.Danger(L["InvalidUserNameOrPassword"]);
-                    return Page();
-                }
+            if (!result.Succeeded)
+            {
+                IsCredentialsWrong = true;
+                Alerts.Danger(L["InvalidUserNameOrPassword"]);
+                return Page();
+            }
 
-                //TODO: Find a way of getting user's id from the logged in user and do not query it again like that!
+            //TODO: Find a way of getting user's id from the logged in user and do not query it again like that!
 
-                Debug.Assert(user != null, nameof(user) + " != null");
-            
+            Debug.Assert(user != null, nameof(user) + " != null");
+
             return RedirectSafely(ReturnUrl, ReturnUrlHash);
         }
 
@@ -265,9 +294,9 @@ namespace BnBYachts.Pages.Account
             }
         }
         private static string GetDomainUrl(string returnUrl) => HttpUtility.UrlDecode(returnUrl.Split("&").FirstOrDefault(x => x.Contains("redirect_uri")).Split("=")[1]) + "/auth/forget-password";
-        
 
-public class LoginInputModel
+
+        public class LoginInputModel
         {
             [Required]
             //[StringLength(IdentityUserConsts.MaxEmailLength)]
