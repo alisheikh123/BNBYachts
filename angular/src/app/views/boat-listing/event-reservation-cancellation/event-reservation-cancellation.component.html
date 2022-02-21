@@ -174,7 +174,7 @@
                         <a (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
                             data-bs-dismiss="modal" data-bs-toggle="modal"
                             data-bs-target="#cancellation-confirmed">Cancel</a>&nbsp;
-                        <button class="custom-btn blue big-btn" style="cursor: pointer;" (click)="confirmCancel()">Confirm</button>
+                        <button class="custom-btn blue big-btn confirm-btn"  (click)="confirmCancel()">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -192,7 +192,7 @@
                     <h4 class="bold text-center">{{'InvalidCharterBooking' | localization}} </h4>
 
                     <div class="text-center">
-                        <img src="assets/images/cross-icon.png" style="height: 100px;width:100px" alt="">
+                        <img src="assets/images/cross-icon.png" class="cross-sign" alt="">
                     </div>
                     <div class="bottom-btn text-center">
                         <button class="custom-btn blue big-btn mt-3" (click)="goBack()">{{'BackHome'| localization}}</button>
