@@ -112,7 +112,23 @@
                         </span>
                     </div>
                     <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+                    @if (Model.IsEmailConfirmed==false)
+                    {
+                        
+                    }
+                    @if(Model.IsAccountLock==true)
+                    {
+                         <label class="text text-danger">* You Account is Locked</label>
+                    }
+                    @if(Model.IsActive==false)
+                    {
+                        <label class="text text-danger">* Your Account is Suspended</label>
+                    }
+                    @if(Model.IsCredentialsWrong==true)
+                    {
                     <label class="text text-danger">* You have entered an invalid username or password</label>
+                    }
+                    
                     <div class="custom-flex-between py-4">
                         <div class="left-content">
                             <label class="custom-checkbox m-0">
