@@ -6,6 +6,7 @@ import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { BookingType } from 'src/app/shared/enums/booking.constants';
 import { environment } from 'src/environments/environment';
 import { BookingConfirmedModalComponent } from '../charter-booking-payment/booking-confirmed-modal/booking-confirmed-modal.component';
 import { UserPaymentMethodsComponent } from '../user-payment-methods/user-payment-methods.component';
@@ -34,6 +35,7 @@ export class EventBookingPaymentComponent implements OnInit {
   booking = {
     amount :0
   };
+  BOOKING_TYPE=BookingType;
 
   constructor(public app: AppComponent,
     private cdr: ChangeDetectorRef,
@@ -65,6 +67,7 @@ export class EventBookingPaymentComponent implements OnInit {
       amount: amount + this.eventDetails?.boat.taxFee + 20,
       IsSaveNewPaymentMethod: this.paymentMethodsComponent.isSaveNewPayment,
       token: token,
+      bookingType:this.BOOKING_TYPE.Events,
       description: this.eventDetails?.boat.name + ' Event  Booking Charges from ' + this.eventFilterDetails.eventDate
     };
     this.paymentService.pay(model).subscribe(res => {

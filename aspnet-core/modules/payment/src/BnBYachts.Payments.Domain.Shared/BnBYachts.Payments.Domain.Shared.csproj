@@ -27,4 +27,8 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="5.0.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\BnBYachts.Shared\BnBYachts.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

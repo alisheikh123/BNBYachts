@@ -40,6 +40,7 @@ import { HostReservationCancellationComponent } from './host-reservation-cancell
 import { ContractsService } from 'src/app/core/contracts/contracts.service';
 import { HostContractListingComponent } from './boatel-bookings/host-contract-listing/host-contract-listing.component';
 import { ContractsModule } from '../contracts/contracts.module';
+import { WalletModule } from './wallet/wallet.module';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
