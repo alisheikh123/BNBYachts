@@ -279,5 +279,7 @@
   "BackHome":"Back to Home",
   "CharterBookingConfirmed":"Charter Booking Cancelled Confirm",
   "Confirm":"Confirm",
-  "ExpiryOTP":"your otp is expiry please click on resend to get latest otp"
+  "ExpiryOTP":"your otp is expiry please click on resend to get latest otp",
+  "CustomizeBoatelPricing":"Customize boatel pricing",
+  "CustomizeAvailability":"Customize availability"
 }

@@ -19,7 +19,7 @@
             </a>
           </div>
           <div class="col-sm-3 py-2">
-            <a href="dashboard.html" class="custom-card-link">
+            <a [routerLink]="['/host/host-boat-listing']" class="custom-card-link">
               <div class="custom-smart-card">
                 <div class="blue-bg-img">
                   <svg xmlns="http://www.w3.org/2000/svg" width="27.833" height="29.032" viewBox="0 0 27.833 29.032">
@@ -27,12 +27,12 @@
                   </svg>
 
                 </div>
-                <h6 class="medium py-2">Customize boatel pricing</h6>
+                <h6 class="medium py-2">{{'CustomizeBoatelPricing'| localization}}</h6>
               </div>
             </a>
           </div>
           <div class="col-sm-3 py-2">
-            <a href="dashboard.html" class="custom-card-link">
+            <a [routerLink]="['/host/host-boat-listing']"  class="custom-card-link">
               <div class="custom-smart-card">
                 <div class="blue-bg-img">
                   <svg id="price_change_black_24dp_1_" data-name="price_change_black_24dp (1)" xmlns="http://www.w3.org/2000/svg" width="33.002" height="33.002" viewBox="0 0 33.002 33.002">
@@ -47,7 +47,7 @@
                   </svg>
 
                 </div>
-                <h6 class="medium py-2">Customize availability</h6>
+                <h6 class="medium py-2"> {{'CustomizeAvailability'| localization}}</h6>
               </div>
             </a>
           </div>
@@ -74,7 +74,7 @@
           <a [routerLink]="['/host/charter-creation']" >
               <div class="custom-card-with-img-bottom">
                 <div class="custom-card-with-img-bottom">
-                  <img src="../../../../../assets/images/card-new-3.png" alt="" class="">
+                  <img src="../../../../../assets/images/card-3.png" alt="" class="">
                </div>
                    <div class="custom-host-card-content px-4">
                       <h5 class="bold">{{'CreateCharter' | localization}} </h5>
@@ -87,7 +87,7 @@
           <a [routerLink]="['/host/event-creation']">
               <div class="custom-card-with-img-bottom">
                 <div class="custom-card-with-img-bottom">
-                <img src="../../../../../assets/images/card-new-3.png" alt="" class="">
+                <img src="../../../../../assets/images/corporate.png" alt="" class="">
               </div>
                 <div class="custom-host-card-content px-4">
                   <h5 class="bold">{{'EventCreate'| localization}} </h5>
@@ -109,25 +109,31 @@
           <table>
             <thead>
               <tr>
+                <th>Boat Name</th>
                 <th>Place</th>
                 <th>Check in</th>
                 <th>Check out</th>
                 <th>Guest</th>
-                <th>Reserver</th>
+                <th>User Name</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of upcomingReservations">
+              <tr *ngFor="let item of upcomingBoatelReservations?.slice(0,10)">
+                <td>{{item.boatDetail?.name}}</td>
                 <td> {{item.boatDetail?.location}}</td>
                 <td>{{item.checkinDate | date:'dd MMM/YYYY'}}</td>
                 <td>{{item.checkoutDate | date:'dd MMM/YYYY'}}</td>
                 <td>  {{item.noOfAdults + item.noOfChildrens}} Guests</td>
                 <td>{{item.userName}}</td>
+                <td><a  [routerLink]="['/boat-listing/charter-reservation-detail/',item.id]" class="btn btn-color">View</a></td>
               </tr>
             </tbody>
           </table>
           </div>
-
+          <div class="col-sm-12 text-right">
+            <a [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >See all</a>
+            </div>
         </div>
         </div>
         <!-- custom table -->
@@ -141,42 +147,28 @@
           <table>
             <thead>
               <tr>
+                <th>Boat Name</th>
                 <th>Place</th>
-                <th>Check in</th>
-                <th>Check out</th>
-                <th>Reserver</th>
+                <th>Event Date</th>
+                <th>Guest</th>
+                <th>User Name</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>John Doe laew khalagh</td>
-              </tr>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>John Doe laew khalagh</td>
-              </tr>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>John Doe laew khalagh</td>
-              </tr>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>John Doe laew khalagh</td>
+              <tr *ngFor="let item of upcomingEventReservations?.slice(0,10)">
+                <td>{{item.eventDetail?.boat.name}}</td>
+                <td> {{item.eventDetail?.location}}</td>
+                <td>{{item.eventDate | date:'dd MMM/YYYY'}}</td>
+                <td>  {{item.noOfGuests}} Guests</td>
+                <td>{{item.userName}}</td>
+                <td><a  [routerLink]="['/boat-listing/event-reservation-detail',item.eventId]" class="btn btn-color">View</a></td>
               </tr>
             </tbody>
           </table>
           </div>
           <div class="col-sm-12 text-right">
-          <a href="javascript:(void)" class="custom-btn underline-blue-link no-before-content" >See all</a>
+          <a  [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >See all</a>
           </div>
         </div>
         </div>
@@ -190,47 +182,32 @@
           <table>
             <thead>
               <tr>
-                <th>Place</th>
-                <th>Check in</th>
-                <th>Check out</th>
+                <th>Boat Name</th>
+                <th>Departure From </th>
+                <th>Destination</th>
+                <th>Departure  Date</th>
+                <th>Arrival Date</th>
                 <th>Guest</th>
-                <th>Reserver</th>
+                <th>User Name</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>3 Guests</td>
-                <td>John Doe laew khalagh</td>
-              </tr>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>3 Guests</td>
-                <td>John Doe laew khalagh</td>
-              </tr>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>3 Guests</td>
-                <td>John Doe laew khalagh</td>
-              </tr>
-              <tr>
-                <td>laew khalagh</td>
-                <td>12 July 2021, 13:44</td>
-                <td>12 July 2021, 13:44</td>
-                <td>3 Guests</td>
-                <td>John Doe laew khalagh</td>
+              <tr *ngFor="let item of upcomingCharterReservations?.slice(0,10)">
+                <td>{{item.charterDetail?.boat.name}}</td>
+                 <td>{{item.charterDetail?.departingFrom}}</td>
+                <td>{{item.charterDetail?.destination}}</td>
+                <td>{{item.charterDetail?.departureFromDate | date:'dd MMM/YYYY'}}</td>
+                <td>{{item.charterDetail?.departureToDate | date:'dd MMM/YYYY'}}</td>
+                <td>  {{item.charterDetail?.guestCapacity}} Guests</td>
+                <td>{{item.userName}}</td>
+                <td><a  [routerLink]="['/boat-listing/charter-reservation-detail',item.charterId,item.id]" class="btn btn-color">View</a></td>
               </tr>
             </tbody>
           </table>
           </div>
           <div class="col-sm-12 text-right">
-          <a href="javascript:(void)" class="custom-btn underline-blue-link no-before-content" >See all</a>
+          <a  [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >See all</a>
           </div>
         </div>
         </div>
