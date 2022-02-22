@@ -58,6 +58,9 @@ const routes: Routes = [
   },
   {
     path: "host-reservation-cancellation/:id", component:HostReservationCancellationComponent
+  },{
+    path: 'settings',
+    loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule)
   }
 ];
 

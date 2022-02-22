@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using BnBYachts.EventBusShared;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace BnBYachts.Pages.Account
         {
             public CustomLoginModel(
                 Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider schemeProvider,
-                Microsoft.Extensions.Options.IOptions<Volo.Abp.Account.Web.AbpAccountOptions> accountOptions, IConfiguration configuration)
-                : base(schemeProvider, accountOptions,configuration)
+                Microsoft.Extensions.Options.IOptions<Volo.Abp.Account.Web.AbpAccountOptions> accountOptions, IConfiguration configuration, EventBusDispatcher _eventBusDispatcher)
+                : base(schemeProvider, accountOptions,configuration, _eventBusDispatcher)
             {
             }
 

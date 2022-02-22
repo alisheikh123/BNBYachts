@@ -28,6 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\shared\BnBYachts.Shared\BnBYachts.Shared.csproj" />
 	  <ProjectReference Include="..\..\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
 	</ItemGroup>
 

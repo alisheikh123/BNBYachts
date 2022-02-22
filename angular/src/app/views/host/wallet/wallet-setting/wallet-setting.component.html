@@ -1,0 +1,237 @@
+<div class="main-wrapper">
+    <div class="container">
+        <div class="bank-info-main-wrapper section-padding">
+            <div class="custom-flex-between mb-3">
+                <h2 class="bold">Bank Information</h2>
+            </div>
+            <div class="bank-info-input-wrapper">
+                <form [formGroup]="bankForm" *ngIf="accountDetail?.length == 0">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="custom-select-field" ngbDropdown #myDrop="ngbDropdown" placement="bottom">
+                                <label>{{'CountryTxt' | localization}}</label>
+                                <select class="form-control" formControlName="country">
+                                    <option [value]="'US'">United States of America</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-select-field" ngbDropdown #myDrop="ngbDropdown" placement="bottom">
+                                <label>{{'States' | localization}}</label>
+                                <select class="form-control" formControlName="state">
+                                    <option *ngFor="let option of statesList" [value]="option.abbreviation">
+                                        {{option?.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>Account Name</label>
+                                <input class="custom-input"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.accountHolderName.errors }"
+                                    placeholder="Enter Account holder name" formControlName="accountHolderName">
+                            </div>
+                            <small class="text-danger"
+                                *ngIf="isSubmitted && f.accountHolderName.errors?.required">Account holder name is
+                                required.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>SSN</label>
+                                <input class="custom-input" placeholder="Enter SSN" maxlength="9"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.sSN.errors }" formControlName="sSN">
+                            </div>
+                            <small class="text-danger" *ngIf="isSubmitted && f.sSN.errors?.required">SSN is
+                                required.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>Account Number</label>
+                                <input class="custom-input" placeholder="Enter Account Number"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.accountNumber.errors }"
+                                    formControlName="accountNumber">
+                            </div>
+                            <small class="text-danger" *ngIf="isSubmitted && f.accountNumber.errors?.required">Account
+                                Number is required.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>Routing No</label>
+                                <input class="custom-input" placeholder="Enter Routing Number"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.routingNumber.errors }"
+                                    formControlName="routingNumber">
+                            </div>
+                            <small class="text-danger" *ngIf="isSubmitted && f.routingNumber.errors?.required">Routing
+                                Number is required.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>Phone Number</label>
+                                <input class="custom-input" placeholder="Enter Phone Number"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.phone.errors }" formControlName="phone">
+                            </div>
+                            <small class="text-danger" *ngIf="isSubmitted && f.phone.errors?.required">Phone
+                                Number is required.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>Stree no 1</label>
+                                <input class="custom-input" placeholder="Enter Street 1"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.street1.errors }"
+                                    formControlName="street1">
+                            </div>
+                            <small class="text-danger" *ngIf="isSubmitted && f.street1.errors?.required">Street 1 is
+                                required.</small>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>Street no 2</label>
+                                <input class="custom-input" placeholder="Enter Street 2" formControlName="street2">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>City</label>
+                                <input class="custom-input" placeholder="Enter City"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.city.errors }" formControlName="city">
+                            </div>
+                            <small class="text-danger" *ngIf="isSubmitted && f.city.errors?.required">City 1 is
+                                required.</small>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="custom-input-field">
+                                <label>Zip Code</label>
+                                <input class="custom-input" placeholder="Enter Zip Code"
+                                    [ngClass]="{ 'is-invalid': isSubmitted && f.zipCode.errors }"
+                                    formControlName="zipCode">
+                            </div>
+                            <small class="text-danger" *ngIf="isSubmitted && f.zipCode.errors?.required">Zip Code is
+                                required.</small>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end align-items-end pt-2">
+                            <a href="javascript:void(0)" class="custom-btn outline-blue-clr me-4">Cancel</a>
+                            <a (click)="addBank()" class="custom-btn blue">Save</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="payment-method-wrapper" *ngIf="accountDetail?.length > 0">
+                    <p class="select-payment-card medium pb-2">Bank Details</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="flex">
+                                        <div class="row" *ngFor="let item of accountDetail">
+                                        <div class="col-2 p-0">
+                                            <img width="100px" height="100px" src="../../../../../assets/images/bank.JPG" alt="">
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="medium">{{item?.account_holder_name}}</h6>
+                                                <span class="badge rounded-pill bg-success balance-badge mb-1">{{unPaidBalance}}.00 $</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="medium">{{item?.bank_name}}</p>
+                                                <button class="custom-btn blue small-btn" *ngIf="unPaidBalance > 0" (click)="transferToBank()">Transfer to bank</button>  
+                                            </div>
+
+                                            <p>.......{{item?.last4}}</p>    
+                                            <p>{{item?.country}}</p>    
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="javascript:void(0)"></a>
+                        <a href="javascript:void(0)"></a>
+                    </div>
+                    <div class="custom-tabs-wrapper pt-3">
+                        <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist"
+                            aria-orientation="vertical">
+                            <button class="underline-link-blk active m-0" id="v-pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
+                                aria-selected="true">Incoming Transactions</button>
+                            <button class="underline-link-blk" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-profile" type="button" role="tab"
+                                aria-controls="v-pills-profile" aria-selected="false">Out Going Transactions</button>
+                        </div>
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                aria-labelledby="v-pills-home-tab">
+                                <div class="custom-card custom-margin">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5 class="bold">All Transactions</h5>
+                                        </div>
+                                        <div class="custom-table col-sm-12">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Transaction Id</th>
+                                                        <th>Amount</th>
+                                                        <th>Currency</th>
+                                                        <th>Created On</th>
+                                                        <th>Available On</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of incomingTransactions | filterBy:'reportingCategory':'charge'">
+                                                       <td>{{item.id}}</td>
+                                                        <td>{{item.amount / 100 | currency}}.00</td>
+                                                        <td>{{item.currency}}</td>
+                                                        <td>{{item.created | date:'dd-MMMM-YYYY hh:mm a'}}</td>
+                                                        <td>{{item.availableOn | date:'dd-MMMM-YYYY hh:mm a' }}</td>
+                                                        <td>{{item.status}}</td>
+                                                    </tr>
+                                                    <tr *ngIf="incomingTransactions?.length == 0">
+                                                        <td colspan="6" class="text-center">No data available.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                aria-labelledby="v-pills-profile-tab">
+                                <div class="custom-card custom-margin">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5 class="bold">Outgoing Transcations </h5>
+                                        </div>
+                                        <div class="custom-table col-sm-12">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>id</th>
+                                                        <th>Amount</th>
+                                                        <th>Currency</th>
+                                                        <th>Created On</th>
+                                                        <th>Available On</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="6" class="text-center">No data available.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

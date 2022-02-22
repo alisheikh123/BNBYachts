@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BnBYachts.Payments.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace BnBYachts.Payments.Payments
         public int BookingId { get; set; }
         public decimal  Amount { get; set; }
         public string CustomerId { get; set; }
+        public BookingType BookingType { get; set; }
+        public PaymentStatus Status { get; set; }
         public bool IsContract { get; set; }
     }
 }

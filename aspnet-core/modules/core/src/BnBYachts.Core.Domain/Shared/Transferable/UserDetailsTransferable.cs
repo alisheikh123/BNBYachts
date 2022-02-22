@@ -14,6 +14,7 @@ namespace BnBYachts.Core.Shared.Transferable
         public string About { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsPhoneConfirmed { get; set; }
+        public bool IsEmailConfirmed { get; set; }
         public string Email { get; set; }
         public bool IsInitialLogin { get; set; }
 
@@ -22,7 +23,7 @@ namespace BnBYachts.Core.Shared.Transferable
         {
         }
 
-        internal UserDetailsTransferable(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool initialLogin)
+        internal UserDetailsTransferable(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool initialLogin,bool isEmailConfirmed)
         {
             Id = userId;
             Name = fullName;
@@ -34,14 +35,15 @@ namespace BnBYachts.Core.Shared.Transferable
             IsPhoneConfirmed = isPhoneConfirmed;
             Email = email;
             IsInitialLogin = initialLogin;
+            IsEmailConfirmed = isEmailConfirmed;
 
         }
     }
     public static class UserFactory
     {
-        public static UserDetailsTransferable Contruct(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool IsInitialLogin)
+        public static UserDetailsTransferable Contruct(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool IsInitialLogin,bool IsEmailConfirmed )
         {
-            return new UserDetailsTransferable(userId, fullName, imagePath, userRoles, creationTime, about, phoneNumber, isPhoneConfirmed, email, IsInitialLogin);
+            return new UserDetailsTransferable(userId, fullName, imagePath, userRoles, creationTime, about, phoneNumber, isPhoneConfirmed, email, IsInitialLogin, IsEmailConfirmed);
         }
     }
 }

@@ -3,16 +3,16 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
 using System.Text;
-
-
-namespace BnByachts.NotificationHub.Services
+namespace BnByachts.NotificationHub.Templates
 {
     public class EmailTemplateProvider : IEmailTemplateProvider
     {
 
         private readonly ConcurrentDictionary<string, string> _defaultTemplates;
+
         public EmailTemplateProvider()
         {
+
             _defaultTemplates = new ConcurrentDictionary<string, string>();
         }
 
@@ -22,12 +22,12 @@ namespace BnByachts.NotificationHub.Services
             var tenancyKey = tenantId.HasValue ? tenantId.Value.ToString() : "host";
             return _defaultTemplates.GetOrAdd(tenancyKey, key =>
             {
-                using (var stream = assembly.GetManifestResourceStream("BnByachts.NotificationHub.Templates.default.html"))
+                using (var stream = assembly.GetManifestResourceStream("BnByachts.NotificationHub.Templates.EmailTemplates.default.html"))
                 {
                     var bytes = stream.GetAllBytes();
                     var template = Encoding.UTF8.GetString(bytes, 3, bytes.Length - 3);
-                    return template = template.Replace("{THIS_YEAR}", DateTime.Now.Year.ToString());
-                    //return template.Replace("{EMAIL_LOGO_URL}",EMAILLOGOURL);
+                    template = template.Replace("{THIS_YEAR}", DateTime.Now.Year.ToString());
+                    return template.Replace("{EMAIL_LOGO_URL}", EMAILLOGOURL);
                 }
             });
 

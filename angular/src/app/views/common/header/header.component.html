@@ -114,6 +114,8 @@
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/host/settings/wallet']" *ngIf="app.loggedInUserRole == USER_ROLE.host">Wallet</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/payments/billing']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Billings</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/help-center']">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
