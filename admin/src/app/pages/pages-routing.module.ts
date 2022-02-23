@@ -34,6 +34,11 @@ const routes: Routes = [{
         .then(m => m.DisputeModule),
     },
     {
+      path: 'faqs',
+      loadChildren: () => import('./faqs/faqs.module')
+        .then(m => m.FaqsModule),
+    },
+    {
       path: '',
       redirectTo: 'pages',
       pathMatch: 'full',

@@ -42,4 +42,10 @@ export class HttpService {
   postwithoutData(endpoint: string, options?): Observable<any> {
     return this.http.post(`${this.CORE_API_URL}/${endpoint}`, options);
   }
+  delete(endpoint : string , options?) : any{
+    return this.http.delete(`${this.CORE_API_URL}/${endpoint}`, options);
+  }
+  put(endpoint: string, data, options?): Observable<any> {
+    return this.http.put(`${this.CORE_API_URL}/${endpoint}`, data, options);
+  }
 }

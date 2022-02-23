@@ -1,31 +1,29 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FaqsRoutingModule, routedComponents } from './faqs-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbToggleModule, NbTreeGridModule } from '@nebular/theme';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ThemeModule } from '../../shared/theme.module';
+import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { AuthRoutingModule, routedComponents } from './auth-routing.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    NbCardModule,
     FormsModule,
     ReactiveFormsModule,
-    NbCardModule,
     NgbModule,
     NbTreeGridModule,
     NbIconModule,
     NbButtonModule,
     NbInputModule,
-    ThemeModule,
-    NbToggleModule,
-    AuthRoutingModule,
     Ng2SmartTableModule,
+    FaqsRoutingModule
   ],
   declarations: [
     ...routedComponents,
-  ],
+    ],
+  providers:[NgbActiveModal]
 })
-export class AuthAppModule { }
+export class FaqsModule { }

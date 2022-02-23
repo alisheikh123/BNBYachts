@@ -20,6 +20,7 @@ namespace BnBYachts.Booking
             CreateMap<BookingReviewRequestable, BookingReviewEntity>();
             CreateMap<BoatelBookingEntity, BoatelBookingTransferableDto>();
             CreateMap<BookingReviewEntity, ReviewTransferable>();
+            CreateMap<BookingDisputeEntity, DisputeTransferable>();
             CreateMap<BoatelBookingEntity, BookingRequestsRequestableDto>();
             CreateMap<BookingReviewEntity, BookingReviewsTransferableDto>();
             CreateMap<CharterBookingEntity, BookingRequestsRequestableDto>();
