@@ -7,6 +7,7 @@ namespace BnBYachts.Booking.Booking.Transferables
 {
     public class EventBookingTransferableDto:ITransferable
     {
+        public int? Id { get; set; }
         public int EventId { get; set; }
         public int NoOfGuests { get; set; }
         public DateTime EventDate { get; set; }
