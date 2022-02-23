@@ -4,6 +4,7 @@
       <div class="row" >
         <div class="col-md-3 py-2" *ngIf="!noChatsAvailble">
           <app-chat-users  [activeUserId]="chat.receiverId"
+          [activeChatFilter]="activeChatFilter"
           (noUserAvailble)="noUserAvailable($event)"
             (onChangeUser)="getChat($event)"></app-chat-users>
         </div>
@@ -81,9 +82,9 @@
               </div>
               <p class="medium text-center">{{recieverInfo?.name}}</p>
               <p class="small-text grey text-center">{{recieverInfo?.email}}</p>
-              <!-- <div class="custom-flex pt-5 pb-4">
-                <a href="create-contract.html" class="custom-btn blue big-btn">Create Contract</a>
-              </div> -->
+               <div class="custom-flex pt-5 pb-4">
+                <a [routerLink]="['/contracts/add',chat.receiverId]" class="custom-btn blue big-btn">Create Contract</a>
+              </div>
             </div>
           </div>
         </div>
