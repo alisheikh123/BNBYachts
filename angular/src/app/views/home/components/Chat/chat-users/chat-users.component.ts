@@ -15,9 +15,10 @@ export class ChatUsersComponent implements OnInit {
   chatUsers: any[] = [];
   searchText: string;
   @Input() activeUserId: string;
+  @Input() activeChatFilter: number = 0;
   @Output() onChangeUser: EventEmitter<any> = new EventEmitter();
   @Output() noUserAvailble: EventEmitter<any> = new EventEmitter();
-  activeChatFilter: number = 0;
+  //activeChatFilter: number = 0;
   hostId = null;
   chatFilter = {
     all: 0,
@@ -66,7 +67,7 @@ export class ChatUsersComponent implements OnInit {
       this.chatUsers = Object.assign([], users);
     }
     else {
-      users = this.allChatUsers;
+      users = this.allChatUsers.filter(res => res.isBlocked == false && res.isArchivedUser == false);
       this.chatUsers = Object.assign([], users);
     }
     if (this.chatUsers.length > 0) {
@@ -75,7 +76,7 @@ export class ChatUsersComponent implements OnInit {
   }
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
-      this.senderDetails = res;
+      this.senderDetails = res
     })
   }
 }
