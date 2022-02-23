@@ -1,5 +1,5 @@
 import { BookingResponseFilter, BookingStatus, SelectedServiceType } from './../../../../shared/enums/booking.constants';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -57,9 +57,18 @@ export class BookingRequestsComponent implements OnInit {
       userId: "",
     };
   constructor(private reservationService: ReservationListsService, private boatService: YachtSearchService,
-    private toastr: ToastrService, config: NgbRatingConfig, private modal: NgbModal, private router: Router) {
+    private toastr: ToastrService, config: NgbRatingConfig, private modal: NgbModal,
+     private router: Router,private activatedRoute:ActivatedRoute) {
     config.max = 5;
     config.readonly = true;
+    this.activatedRoute.fragment.subscribe(res=>{
+      if(res=='charters'){
+        this.listingFilter.selectedServiceType = this.bookedServicesTypes.charter;
+      }
+      else if(res=='events'){
+        this.listingFilter.selectedServiceType = this.bookedServicesTypes.event;
+      }
+    })
   }
 
   ngOnInit(): void {

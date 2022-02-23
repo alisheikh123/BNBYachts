@@ -4,6 +4,7 @@
       <div class="row" >
         <div class="col-md-3 py-2" *ngIf="!noChatsAvailble">
           <app-chat-users  [activeUserId]="chat.receiverId"
+          [activeChatFilter]="activeChatFilter"
           (noUserAvailble)="noUserAvailable($event)"
             (onChangeUser)="getChat($event)"></app-chat-users>
         </div>

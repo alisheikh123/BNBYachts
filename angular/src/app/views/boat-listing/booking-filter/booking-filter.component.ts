@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { BookingResponseFilter, BookingStatus, BookingType } from 'src/app/shared/enums/booking.constants';
@@ -43,16 +43,19 @@ export class BookingFilterComponent implements OnInit {
    activeTab = 0;
    RESERVATION_STATUS = BookingType;
   selectedReservationStatus:any = BookingType.Boatels;
-  selectedServiceType: number = 1;
+  @Input() serviceType:number = 1;
+  selectedServiceType: number = this.serviceType;
   selectedReservationsStatus:number = BookingStatus.ChooseFilter;
   @Output() reservationStatus = new EventEmitter<any>();
   @Output() reservationTimeStatus = new EventEmitter<any>();
   @Output() bookingType = new EventEmitter<number>();
   @Output() DurationFilter = new EventEmitter<any>();
    constructor(private service: BookingListingService, private boatService: YachtSearchService, config: NgbRatingConfig) {
+    
   }
 
   ngOnInit(): void {
+    this.selectedServiceType = this.serviceType;
   }
   selectReservationStatus(value: number) {
     this.selectedStatusFilter = value;
