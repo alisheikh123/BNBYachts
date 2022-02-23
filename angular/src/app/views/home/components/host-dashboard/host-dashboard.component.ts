@@ -59,12 +59,9 @@ export class HostDashboardComponent implements OnInit {
       this.boatService.charterDetailsById(elem.charterId).subscribe((charterBookingDetail: any) =>
       {
         let charterDetails = elem.charterDetail = charterBookingDetail?.charterDetails;
-        charterDetails?.forEach((elem2: any) => {
-        this.boatService.boatDetailsById(elem2.boatId).subscribe((boatdetail: any) => {
-        elem2.boatDetail = boatdetail;
+        this.boatService.boatDetailsById(charterDetails?.boatId).subscribe((boatdetail: any) => {
+        elem.boatDetail = boatdetail;
           });
-
-        });
       });
     });
 
@@ -83,11 +80,9 @@ export class HostDashboardComponent implements OnInit {
         let evenDetail = elem.eventDetail;
         evenDetail = eventBookingDetail?.eventDetails;
         elem.eventDetail = eventBookingDetail?.eventDetails;
-        evenDetail?.forEach((elem2: any) => {
-        this.boatService.boatDetailsById(elem2.boatId).subscribe((boatdetail: any) => {
-        elem2.boatDetail = boatdetail;
+        this.boatService.boatDetailsById(evenDetail?.boatId).subscribe((boatdetail: any) => {
+        elem.boatDetail = boatdetail;
           });
-        });
       });
     });
     });

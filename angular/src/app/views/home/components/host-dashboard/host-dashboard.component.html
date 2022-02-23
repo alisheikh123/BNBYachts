@@ -14,7 +14,7 @@
                   </svg>
 
                 </div>
-                <h6 class="medium py-2">Add/update Banking Information</h6>
+                <h6 class="medium py-2">{{'BankingInfo' | localization}}</h6>
               </div>
             </a>
           </div>
@@ -61,7 +61,7 @@
                   </svg>
 
                 </div>
-                <h6 class="medium py-2">View boat analytics</h6>
+                <h6 class="medium py-2"> {{'ViewAnalytics' | localization}}</h6>
               </div>
             </a>
           </div>
@@ -99,7 +99,7 @@
         </div>
         </div>
         <!-- custom table -->
-        <div class="custom-card custom-margin">
+        <div class="custom-card custom-margin" style="margin-top:120px;">
           <div class="row">
           <div class="col-sm-12">
             <h5 class="bold">{{'UpcomingBoatel' | localization}}</h5>
@@ -109,13 +109,13 @@
           <table>
             <thead>
               <tr>
-                <th>Boat Name</th>
-                <th>Place</th>
-                <th>Check in</th>
-                <th>Check out</th>
-                <th>Guest</th>
-                <th>User Name</th>
-                <th>Action</th>
+                <th> {{'BoatName' | localization}}</th>
+                <th> {{'Place' | localization}}</th>
+                <th> {{'Checkin' | localization}}</th>
+                <th>{{'Checkout' | localization}}</th>
+                <th>{{'BankingInfo' | localization}}</th>
+                <th>{{'Guests' | localization}}</th>
+                <th>{{'Action' | localization}}</th>
               </tr>
             </thead>
             <tbody>
@@ -124,15 +124,15 @@
                 <td> {{item.boatDetail?.location}}</td>
                 <td>{{item.checkinDate | date:'dd MMM/YYYY'}}</td>
                 <td>{{item.checkoutDate | date:'dd MMM/YYYY'}}</td>
-                <td>  {{item.noOfAdults + item.noOfChildrens}} Guests</td>
+                <td>  {{item.noOfAdults + item.noOfChildrens}} {{'Guests' | localization}}</td>
                 <td>{{item.userName}}</td>
-                <td><a  [routerLink]="['/boat-listing/charter-reservation-detail/',item.id]" class="btn btn-color">View</a></td>
+                <td><a  [routerLink]="['/boat-listing/reservation-detail/',item.id]" class="fa fa-eye btn-color"></a></td>
               </tr>
             </tbody>
           </table>
           </div>
           <div class="col-sm-12 text-right">
-            <a [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >See all</a>
+            <a [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >{{'Seeall' | localization}}</a>
             </div>
         </div>
         </div>
@@ -147,12 +147,12 @@
           <table>
             <thead>
               <tr>
-                <th>Boat Name</th>
-                <th>Place</th>
-                <th>Event Date</th>
-                <th>Guest</th>
-                <th>User Name</th>
-                <th>Action</th>
+                <th>{{'BoatName' | localization}}</th>
+                <th>{{'Place' | localization}}</th>
+                <th>{{'EventDate' | localization}}</th>
+                <th>{{'Guests' | localization}}</th>
+                <th>{{'UserName' | localization}}</th>
+                <th>{{'Action' | localization}}</th>
               </tr>
             </thead>
             <tbody>
@@ -160,15 +160,15 @@
                 <td>{{item.eventDetail?.boat.name}}</td>
                 <td> {{item.eventDetail?.location}}</td>
                 <td>{{item.eventDate | date:'dd MMM/YYYY'}}</td>
-                <td>  {{item.noOfGuests}} Guests</td>
+                <td>  {{item.noOfGuests}} {{'Guests' | localization}}</td>
                 <td>{{item.userName}}</td>
-                <td><a  [routerLink]="['/boat-listing/event-reservation-detail',item.eventId]" class="btn btn-color">View</a></td>
+                <td><a  [routerLink]="['/boat-listing/event-reservation-detail',item.eventId]" class="fa fa-eye btn-color"></a></td>
               </tr>
             </tbody>
           </table>
           </div>
           <div class="col-sm-12 text-right">
-          <a  [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >See all</a>
+          <a  [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >{{'Seeall' | localization}}</a>
           </div>
         </div>
         </div>
@@ -176,20 +176,20 @@
         <div class="custom-card custom-margin">
           <div class="row">
             <div class="col-sm-12">
-            <h5 class="bold">Upcoming Charters </h5>
+            <h5 class="bold">{{'UpcomingCharters ' | localization}}</h5>
             </div>
           <div class="custom-table col-sm-12">
           <table>
             <thead>
               <tr>
-                <th>Boat Name</th>
-                <th>Departure From </th>
-                <th>Destination</th>
-                <th>Departure  Date</th>
-                <th>Arrival Date</th>
-                <th>Guest</th>
-                <th>User Name</th>
-                <th>Action</th>
+                <th>{{'BoatName' | localization}}</th>
+                <th>{{'DepartureFrom' | localization}} </th>
+                <th> {{'Destination' | localization}}</th>
+                <th> {{'DepartureDate' | localization}}</th>
+                <th> {{'ArrivalDate' | localization}}</th>
+                <th>{{'Guests' | localization}}</th>
+                <th>{{'UserName' | localization}}</th>
+                <th>{{'Action' | localization}}</th>
               </tr>
             </thead>
             <tbody>
@@ -199,15 +199,15 @@
                 <td>{{item.charterDetail?.destination}}</td>
                 <td>{{item.charterDetail?.departureFromDate | date:'dd MMM/YYYY'}}</td>
                 <td>{{item.charterDetail?.departureToDate | date:'dd MMM/YYYY'}}</td>
-                <td>  {{item.charterDetail?.guestCapacity}} Guests</td>
+                <td>  {{item.charterDetail?.guestCapacity}} {{'Guests' | localization}}</td>
                 <td>{{item.userName}}</td>
-                <td><a  [routerLink]="['/boat-listing/charter-reservation-detail',item.charterId,item.id]" class="btn btn-color">View</a></td>
+                <td><a  [routerLink]="['/boat-listing/charter-reservation-detail',item.charterId,item.id]" class="fa fa-eye btn-color"></a></td>
               </tr>
             </tbody>
           </table>
           </div>
           <div class="col-sm-12 text-right">
-          <a  [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >See all</a>
+          <a  [routerLink]="['/boat-listing/all-reservations']" class="custom-btn underline-blue-link no-before-content" >{{'Seeall' | localization}}</a>
           </div>
         </div>
         </div>
