@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout;
   }
   signUp() {
-    let modalRef = this.modalService.open(SignUpComponent, { windowClass: 'custom-modal custom-large-modal' , centered:true});
+    let modalRef = this.modalService.open(SignUpComponent, { size: 'lg' });
   }
   ngOnDestroy() {
     this.destroy$.next();

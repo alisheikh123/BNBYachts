@@ -11,5 +11,8 @@ namespace BnBYachts.Core.Interface
     {
         Task<EntityResponseModel> ContactUS(ContactUsRequestableDto form);
         Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions();
+        Task<EntityResponseModel> InsertFrequentQuestions(FrequentQuestionsDto faqs);
+        Task DeleteFaqs(int faqsId);
+        Task<EntityResponseModel> UpdateFaqs(FrequentQuestionsDto faqs);
     }
 }

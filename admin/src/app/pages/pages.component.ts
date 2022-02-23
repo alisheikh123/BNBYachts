@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NbIconLibraries } from '@nebular/theme';
 
 import { MENU_ITEMS } from './pages-menu';
 
@@ -14,4 +15,8 @@ import { MENU_ITEMS } from './pages-menu';
 })
 export class PagesComponent {
   menu = MENU_ITEMS;
+  constructor (private iconsLibrary : NbIconLibraries) {
+    iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
+    iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
+  }
 }

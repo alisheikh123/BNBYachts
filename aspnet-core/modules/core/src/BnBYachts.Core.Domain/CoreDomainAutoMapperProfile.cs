@@ -18,7 +18,7 @@ namespace BnBYachts.Core
                 ForMember(source=>source.PhoneNumber,destination=>destination.MapFrom(source=> source.Phone));
             CreateMap<OTPVerifierEntity, UserMobileVerificationRequestable>().
                 ForMember(source => source.Phone, destination => destination.MapFrom(source => source.PhoneNumber));
-            CreateMap<FrequentQuestionEntity, FrequentQuestionsDto>();
+            CreateMap<FrequentQuestionEntity, FrequentQuestionsDto>().ReverseMap();
         }
     }
 }

@@ -26,4 +26,7 @@ export class UsersApi {
   RegisterAdmin(adminData : any) {
     return this.api.post(`${this.USER_API_URL}admin-register`,adminData);
   }
+  SetAdminPassword(adminData : any) {
+    return this.api.post(`${this.USER_API_URL}set-admin-password`,adminData);
+  }
 }
