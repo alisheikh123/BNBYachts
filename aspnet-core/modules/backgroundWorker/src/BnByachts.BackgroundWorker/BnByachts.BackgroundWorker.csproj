@@ -5,16 +5,6 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
 		<PackageReference Include="Volo.Abp" Version="4.4.4" />
