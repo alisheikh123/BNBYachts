@@ -16,6 +16,8 @@ pipeline {
       steps {
         script {
           sh '''
+          
+           echo BRANCH_NAME: ${BRANCH_NAME} >> build_info.md
           echo GIT_BRANCH: ${GIT_BRANCH} >> build_info.md
           echo GIT_COMMIT: ${GIT_COMMIT} >> build_info.md
           echo GIT_AUTHOR_NAME: ${GIT_AUTHOR_NAME} >> build_info.md
@@ -76,6 +78,7 @@ pipeline {
   }
 
   environment {
+    BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
     IMAGE_TAG = "dev"
