@@ -27,7 +27,6 @@ namespace BnBYachts.Core
             CreateMap<ServiceProviderRequestableDto, ServiceProviderEntity>();
             CreateMap<TimeSlotEntity, TimeSlotTransferable>();
             CreateMap<ServiceProviderEntity, ServiceProviderTransferable>()
-                .ForMember(source => source.AvaliableDate, destination => destination.MapFrom(source => (source.FromDate.HasValue && source.ToDate.HasValue) ? $"{source.FromDate.Value.ToString("MMMM dd") + '-' + source.ToDate.Value.ToString("MMMM dd")}" : ""))
                 .ForMember(source => source.PaymentType, destination => destination.MapFrom(source => (source.PaymentOption.HasValue && source.PaymentOption.Value > 0) ? (source.PaymentOption == CaptainPaymentType.PerHour) ? "Per Hour" : "Per Day" : ""));
         }
     }
