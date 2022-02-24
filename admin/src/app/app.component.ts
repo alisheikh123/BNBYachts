@@ -11,10 +11,9 @@ template: '<router-outlet></router-outlet>',
 export class AppComponent implements OnInit {
 private destroy$: Subject<void> = new Subject<void>();
 
-constructor(protected router: Router, private service : UsersService, private oidcSecurityService : OidcSecurityService) {
+constructor(protected router: Router, private oidcSecurityService : OidcSecurityService) {
 }
 ngOnInit() {
-  debugger;
   this.oidcSecurityService
   .checkAuth()
   .subscribe((res: any) => {
@@ -30,8 +29,4 @@ ngOnInit() {
     }
   });
 }
-// ngOnDestroy() {
-//   this.destroy$.next();
-//   this.destroy$.complete();
-// }
 }

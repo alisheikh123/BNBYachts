@@ -104,3 +104,6 @@ border-collapse: separate !important;
 :host ::ng-deep .fc-event-title{
   font-size: 12px !important;
 }
+.user-details {
+  width: calc(100% - 300px) !important;
+}

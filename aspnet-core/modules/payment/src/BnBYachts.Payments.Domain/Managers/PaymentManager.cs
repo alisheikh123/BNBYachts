@@ -6,6 +6,7 @@ using BnBYachts.Payments.Shared.Requestable;
 using BnBYachts.Payments.Shared.Transferable;
 using BnBYachts.Payments.Transferables;
 using BnBYachts.Shared.Model;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Stripe;
 using Stripe.Issuing;
@@ -22,18 +23,20 @@ namespace BnBYachts.Payments.Managers
         private readonly IRepository<UserCardInfoEntity, int> _userCardRepository;
         private readonly IRepository<PaymentDetailsEntity, int> _userPaymentDetailsRepository;
         private readonly IRepository<UserBankDetailsEntity, int> _userBankRepository;
+        private readonly IConfiguration _config;
 
-        public PaymentManager(IRepository<UserCardInfoEntity, int> userCardRepository, IRepository<PaymentDetailsEntity, int> userPaymentDetailsRepository, IRepository<UserBankDetailsEntity, int> userBankRepository)
+        public PaymentManager(IRepository<UserCardInfoEntity, int> userCardRepository, IRepository<PaymentDetailsEntity, int> userPaymentDetailsRepository, IRepository<UserBankDetailsEntity, int> userBankRepository, IConfiguration config)
         {
             //var configurationBuilder = new ConfigurationBuilder()
             //             .SetBasePath(Directory.GetCurrentDirectory())
             //             .AddJsonFile("appsettings.json", optional: false).Build();
-
             //StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("BNB_STRIPE_APIKEY", EnvironmentVariableTarget.Machine);//"sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
-            StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
+            //StripeConfiguration.ApiKey = "sk_test_51JjjR4IQmeuKTcwEPY0veVnt0GzKPdicOMKC0jRrQouRJQg18bMbu86kfPGcPbG8l1ETH6lHwWhlFT8kgX0pHL3j00GkdfQLDP";//configurationBuilder.GetSection("Stripe")["ApiKey"].ToString();
             _userCardRepository = userCardRepository;
             _userPaymentDetailsRepository = userPaymentDetailsRepository;
             _userBankRepository = userBankRepository;
+            _config = config;
+            StripeConfiguration.ApiKey = _config.GetSection("Stripe")["ApiKey"];
         }
 
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId)
@@ -121,7 +124,14 @@ namespace BnBYachts.Payments.Managers
                 PaymentMethod = data.PaymentId,
                 TransferGroup = Guid.NewGuid().ToString(),
                 Description = data.Description,
-                Confirm = true
+                Confirm = true,
+                //PaymentMethodOptions = new PaymentIntentPaymentMethodOptionsOptions
+                //{
+                //    Card = new PaymentIntentPaymentMethodOptionsCardOptions
+                //    {
+                //        RequestThreeDSecure = "any"
+                //    }
+                //}
             };
             var service = new PaymentIntentService();
 

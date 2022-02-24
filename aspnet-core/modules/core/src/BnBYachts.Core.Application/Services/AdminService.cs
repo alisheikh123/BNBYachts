@@ -27,5 +27,8 @@ namespace BnBYachts.Core.Services
         public async Task<AdminResponseDto> AdminRegister(AdminRegisterTransferable userInput) =>
             await _adminManager.RegisterAdmin(userInput);
         public async Task<AdminResponseDto> SuspendUser(Guid id) => await _adminManager.SuspendUser(id);
+
+        public async Task<AdminResponseDto> SetAdminPassword(SetPasswordRequestable userInput) =>
+            await _adminManager.SetAdminPassword(userInput);
     }
 }

@@ -38,6 +38,7 @@ export class ChatComponent implements OnInit {
     isBlockedByMe: false
   };
   noChatsAvailble = false;
+  activeChatFilter:number = 0;
   @ViewChild('chatScrollContainer') private chatScrollContainer: ElementRef;
   @ViewChild('noChatModal', { static: true }) noChatModalTemplate: any;
 
@@ -142,6 +143,8 @@ export class ChatComponent implements OnInit {
       this.chat.isBlockedByMe = this.chat.blockedUser;
       let index = this.chatUsersComponent.allChatUsers.findIndex(res=>res.userId == this.chat.receiverId);
       this.chatUsersComponent.allChatUsers[index].isBlocked =  this.chat.blockedUser;
+      this.activeChatFilter = 2;
+      this.chatUsersComponent.filterUsers(this.activeChatFilter);
       this.toastr.success("User blocked successfully", "Blocked");
     })
   }
@@ -150,6 +153,8 @@ export class ChatComponent implements OnInit {
       recieverInfo.isArchivedUser = !recieverInfo.isArchivedUser; 
       let index = this.chatUsersComponent.allChatUsers.findIndex(res=>res.userId == this.chat.receiverId);
       this.chatUsersComponent.allChatUsers[index].isArchivedUser =  recieverInfo?.isArchivedUser;
+      this.activeChatFilter = 1;
+      this.chatUsersComponent.filterUsers(this.activeChatFilter);
       // this.userMessages= this.userMessages.filter((res:any)=>res.receiverId != this.chat.receiverId && res.senderId != this.chat.senderId);
       this.toastr.success("Chat Archived successfully", "Archived");
     })

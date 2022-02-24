@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { environment } from '../../../environments/environment';
-import { LocalStoreService } from './local-store.service';
 import { finalize } from 'rxjs/operators';
 @Injectable()
 export class AuthService {

@@ -184,11 +184,11 @@
                                                 <tbody>
                                                     <tr *ngFor="let item of incomingTransactions | filterBy:'reportingCategory':'charge'">
                                                        <td>{{item.id}}</td>
-                                                        <td>{{item.amount / 100 | currency}}.00</td>
-                                                        <td>{{item.currency}}</td>
+                                                        <td>{{item.amount / 100 | currency}}</td>
+                                                        <td>{{item.currency | uppercase}}</td>
                                                         <td>{{item.created | date:'dd-MMMM-YYYY hh:mm a'}}</td>
                                                         <td>{{item.availableOn | date:'dd-MMMM-YYYY hh:mm a' }}</td>
-                                                        <td>{{item.status}}</td>
+                                                        <td><span class="badge bg-success balance-badge mb-1">{{item.status == 'available' ? 'Paid':'Not Paid'}}</span></td>
                                                     </tr>
                                                     <tr *ngIf="incomingTransactions?.length == 0">
                                                         <td colspan="6" class="text-center">No data available.</td>

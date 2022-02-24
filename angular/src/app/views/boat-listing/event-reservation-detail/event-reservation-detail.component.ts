@@ -22,6 +22,7 @@ import { IEventReservation } from 'src/app/shared/interface/reservation';
 export class EventReservationDetailComponent implements OnInit {
   eventReservation: IEventReservation =
     {
+      eventId: 0,
       checkoutTime: '',
       eventBookingId: 0,
       isPosted: false,
@@ -36,6 +37,8 @@ export class EventReservationDetailComponent implements OnInit {
     EVENT_TYPE: EventTypes.Adults
   };
   eventBooking: any;
+  eventBookingDetail: any;
+  bookingCancelDetail:any;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
   constructor(private service: BookingService
@@ -46,19 +49,27 @@ export class EventReservationDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.eventReservation.eventBookingId = Number(res['id']);
+      this.eventReservation.eventId = Number(res['eventId']);
     });
     var userRole = localStorage.getItem('userRole');
     userRole == this.filters.USER_ROLES.host
       ? (this.eventReservation.isHost = true)
       : (this.eventReservation.isHost = false);
-    this.boatService.eventDetailsById(this.eventReservation.eventBookingId).subscribe((res: any) => {
+    this.service.getEventBookingDetailById(this.eventReservation.eventBookingId).subscribe((eventBookingDetail: any) => {
+      this.eventBookingDetail = eventBookingDetail.data;
+    });
+    this.service.getBookingCancelDetail(this.eventReservation.eventBookingId).subscribe((eventBookingCancelDetail: any) => {
+      this.bookingCancelDetail = eventBookingCancelDetail.data;
+    });
+    this.boatService.eventDetailsById(this.eventReservation.eventId).subscribe((res: any) => {
       this.eventBooking = res?.eventDetails;
       this.filters.checkedStartDate = new Date(this.eventBooking?.startDate).toLocaleDateString();
       this.eventBooking.startDate = new Date(this.eventBooking?.startDateTime);
+     this.eventBooking.eventStartDateTime =  moment(this.eventBooking?.eventDate).format('YYYY-MM-DD')+' '+(moment(this.eventBooking?.startDateTime).format('hh:mm:a'));
+     this.eventBooking.eventEndDateTime =  moment(this.eventBooking?.eventDate).format('YYYY-MM-DD')+' '+(moment(this.eventBooking?.endDateTime).format('hh:mm:a'));
       this.eventBooking.endDate = new Date(this.eventBooking?.endDateTime);
       this.eventReservation.checkoutTime = this.eventBooking?.boat?.checkoutTime;
       this.filters.checkinTimeValidation = this.eventBooking?.boat?.checkinTime;
-
     });
     this.isReviewPosted();
   }
@@ -94,23 +105,23 @@ export class EventReservationDetailComponent implements OnInit {
   goBack() {
     this.eventReservation.isHost == true ? this.route.navigate(['host/my-bookings']) : this.route.navigate(['boat-listing/all-reservations']);
   }
-  isEventStarted(startDate: Date, checkinTime: Date) {
+  isEventStarted(startDate: string) {
     let inDate = moment(startDate).format("DD-MM-YYYY");
     let currentDate = moment().format("DD-MM-YYYY");
-    let inTime = moment(checkinTime).format("HH:mm");
+    let inTime = moment(startDate).format("HH:mm");
     let curretTime = moment().format("HH:mm");
-    if (startDate != undefined && checkinTime != undefined) {
-      return (inDate == currentDate && inTime > curretTime) ? true : moment(startDate).isAfter(moment().format("YYYY-MM-DD")) ? true : false;
+    if (startDate != undefined && inTime != undefined) {
+      return (inDate == currentDate && inTime > curretTime) ? true :  false;
     }
     return false;
   }
-  isEndDateEnded(endDate: Date, checkoutTime: Date) {
+  isEndDateEnded(endDate: string) {
     let outDate = moment(endDate).format("DD-MM-YYYY");
     let currentDate = moment().format("DD-MM-YYYY");
-    let outTime = moment(checkoutTime).format("HH:mm");
+    let outTime = moment(endDate).format("HH:mm");
     let curretTime = moment().format("HH:mm");
-    if (endDate != undefined && checkoutTime != undefined) {
-      return (outDate == currentDate && curretTime > outTime) ? true : moment(endDate).isAfter(moment().format("YYYY-MM-DD")) ? true : false;
+    if (endDate != undefined && outTime != undefined) {
+      return (outDate == currentDate && moment(outTime).isAfter(curretTime) ? true : false)
     }
     else {
       return false;

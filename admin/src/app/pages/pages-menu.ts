@@ -3,23 +3,27 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
-    icon: 'home-outline',
+    icon: { icon: 'home', pack: 'fa' },
     link: '/pages/dashboard',
     home: true,
   },
   {
     title: 'USER',
-    icon: 'person-outline',
+    icon: { icon: 'user', pack: 'fa' },
     children: [
     {
       title: 'Users',
       link: '/pages/user/users',
     },
+    // {
+    //   title: 'Set Password',
+    //   link: '/pages/auth/setpassword',
+    // },
   ]
   },
   {
     title: 'Host',
-    icon: 'person-outline',
+    icon: { icon: 'user-tie', pack: 'fa' },
     children: [
       {
         title: 'Hosts',
@@ -29,11 +33,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Dispute',
-    icon: 'person-outline',
+    icon: { icon: 'question-circle', pack: 'fa' },
     children: [
       {
         title: 'Disputes',
         link: '/pages/dispute/dispute',
+      }
+    ]
+  },
+  {
+    title: 'FAQS',
+    icon: { icon: 'info-circle', pack: 'fa' },
+    children: [
+      {
+        title: 'Faqs Listing',
+        link: '/pages/faqs/faqs-listing',
       }
     ]
   },

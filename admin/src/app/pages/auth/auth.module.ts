@@ -8,7 +8,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AuthRoutingModule, routedComponents } from './auth-routing.module';
 
 
-
 @NgModule({
   imports: [
     CommonModule,

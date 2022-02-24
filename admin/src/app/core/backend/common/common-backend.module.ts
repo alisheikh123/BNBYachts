@@ -1,3 +1,5 @@
+import { FaqsApi } from './api/faqs.api';
+import { FaqsService } from './services/faqs.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { BoatsApi } from './api/boats.api';
@@ -50,14 +52,18 @@ import { UserService } from '../../mock/users.service';
 import { BoatUserData } from '../../../shared/interfaces/BoatUser';
 import { BoatsData } from '../../../shared/interfaces/Boats';
 import { BoatsService } from './services/boats.service';
+import { FaqsData } from '../../../shared/interfaces/Faqs';
 
-const API = [UsersApi,DisputesApi,BoatsApi, HttpService];
+const API = [UsersApi,DisputesApi,BoatsApi, FaqsApi,HttpService];
 
 const SERVICES = [
   { provide: DisputesData, useClass: DisputeService },
   { provide: BoatUserData, useClass: UsersService },
   { provide: BoatsData, useClass: BoatsService },
   { provide: UserData, useClass: UserService },
+  { provide : FaqsData, useClass : FaqsService},
+
+
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
   { provide: ElectricityData, useClass: ElectricityService },
@@ -79,7 +85,6 @@ const SERVICES = [
 
 @NgModule({
   imports: [
-    // CommonModule , BrowserModule , BrowserAnimationsModule
   ],
 })
 export class CommonBackendModule {

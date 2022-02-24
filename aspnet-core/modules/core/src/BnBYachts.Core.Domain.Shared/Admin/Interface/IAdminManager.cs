@@ -14,6 +14,7 @@ namespace BnBYachts.Core.Admin.Interface
         Task<TotalUsersTransferable> GetTotalUsers(string userRole, string hostRole);
         Task<AdminResponseDto> SuspendUser(Guid id);
         Task<AdminResponseDto> RegisterAdmin(AdminRegisterTransferable userInput);
+        Task<AdminResponseDto> SetAdminPassword(SetPasswordRequestable userInput);
 
     }
 }

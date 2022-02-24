@@ -32,6 +32,7 @@ export class CharterReservationDetailComponent implements OnInit {
     today: new Date().toLocaleDateString(),
     checkinTimeValidation: Date()
   };
+  charterBookingCancelDetail:any;
   checkedDepartureFromDate: any;
   charterBooking: any;
   charterBookingStatus:any;
@@ -68,6 +69,10 @@ export class CharterReservationDetailComponent implements OnInit {
     this.charterBookingService.getCharterBookingDetailById(this.charterReservation.charterId).subscribe((bookingDetail: any) => {
       this.charterBookingStatus = bookingDetail?.bookingStatus;
     });
+    this.service.getBookingCancellationDetail(this.charterReservation.charterId).subscribe((eventBookingCancelDetail: any) => {
+      this.charterBookingCancelDetail = eventBookingCancelDetail.data;
+    });
+
     this.isReviewPosted();
   }
   addReview() {

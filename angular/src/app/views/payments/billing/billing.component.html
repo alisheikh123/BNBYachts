@@ -3,12 +3,12 @@
   <div class="bank-info-main-wrapper section-padding">
           <div class="bank-info-input-wrapper">
               <div class="custom-flex-start custom-margin"> 
-                <h4 class="medium">Payment Method</h4>
+                <h4 class="medium">Available Payment Method</h4>
             </div>
               <div class="payment-method-wrapper">
                   <div class="row">
                       <div class="col-md-6">
-                        <app-user-payment-methods></app-user-payment-methods>
+                        <app-user-payment-methods [canAddNewCards]="false"></app-user-payment-methods>
                       </div>
                   </div>
                   <div class="custom-tabs-wrapper pt-3">
@@ -36,7 +36,7 @@
                                     <th>Card</th>
                                     <th>Brand</th>
                                     <th>Status</th>
-                                    <th>View Reciept</th>
+                                    <th>View Invoice</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -47,8 +47,14 @@
                                     <td>{{item.billing_details.name | titlecase}}</td>
                                     <td>....{{item.payment_method_details.card.last4}}</td>
                                     <td>{{item.payment_method_details.card.brand | titlecase}}</td>
-                                    <td>{{item.status | titlecase}}</td>
-                                    <td><a href="{{item.receipt_url}}" target="_blank" ><i class="fas fa-eye"></i></a></td>
+                                    <td>
+                                      <span class="badge bg-success balance-badge mb-1"
+                                      [ngClass]="{
+                                        'bg-success': item.status=='succeeded',
+                                        'bg-danger': item.status == 'failed'
+                                      }"
+                                      >{{item.status | titlecase}}</span></td>
+                                    <td><a *ngIf="item.receipt_url" href="{{item.receipt_url}}" target="_blank" ><i class="fas fa-eye"></i></a></td>
                                   </tr>
                                   <tr *ngIf="userTransactions?.length == 0">
                                       <td colspan="8" class="text-center">No Transaction Found</td>

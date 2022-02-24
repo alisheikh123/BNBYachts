@@ -27,6 +27,11 @@ export interface User{
     DOB : Date
     RoleId : string[]
 }
+export interface SetPasswordModal{
+    email : string;
+    password : string;
+    confirmPassword : string;
+}
  export abstract class BoatUserData {
      abstract getBoatUsers(roleName : string): Observable<BoatUser[]>;
      abstract getTotalUsers(userRole : string, hostRole:string) :  Observable<IUser>;
@@ -34,5 +39,6 @@ export interface User{
      abstract getReviewByUserId(reviewerId : string) : Observable<BookingReview[]>;
      abstract SuspendUser(userId : string);
      abstract RegisterAdmin(user : User);
+     abstract SetAdminPassword(admin : SetPasswordModal);
    }
  
