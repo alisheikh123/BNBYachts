@@ -1,5 +1,6 @@
 export interface IEventReservation
 {
+    eventId:number,
     checkoutTime:any,
     eventBookingId:number,
     isPosted: boolean,
@@ -8,9 +9,9 @@ export interface IEventReservation
 }
 export interface ICharterReservation
 {
-    checkoutTime:any,
-    charterBookingId:number,
+    charterId:number,
     isPosted: boolean,
-    isHost: boolean
+    isHost: boolean,
+    bookingId:number
 
 }

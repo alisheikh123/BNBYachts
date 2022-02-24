@@ -14,6 +14,10 @@ namespace BnBYachts.Shared.Model
 
         public int TotalPages { get; set; }
 
+        public PaginationHeader()
+        {
+
+        }
         public PaginationHeader(int currentPage, int itemsPerPage, int totalItems, int totalPages)
         {
             CurrentPage = currentPage;

@@ -1,0 +1,19 @@
+<div class="modal-content">
+    <div class="modal-header no-border">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+            (click)="activeModal.dismiss()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="custom-text-center">
+            <div class="img-wrapper">
+                <img src="../../../../../assets/images/no-charter.png" alt="">
+            </div>
+            <h4 class="bold">Confirmation</h4>
+            <p class="py-2">Are you sure?.You want to transfer into your bank.</p>
+            <div class="bottom-btn pt-2">
+                <button (click)="activeModal.dismiss()" class="custom-btn  small-btn">Cancel</button>
+                <button (click)="onActionClick(true)" class="custom-btn blue small-btn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

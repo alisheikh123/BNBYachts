@@ -31,11 +31,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <img src="~/images/logo.png" class="text-center" style="width:100px;height:60px;" />
+                        <img src="~/images/logo.png" class="text-center" style="width:150px;height:100px;" />
                     </div>
                 </div>
             </div>
-
+            <br />
             <h4 class="bold text-center">@L["Login"]</h4>
         </div>
         <div class="card-body" style="background-color: #ffffff">
@@ -112,7 +112,23 @@
                         </span>
                     </div>
                     <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+                    @if (Model.IsEmailConfirmed==false)
+                    {
+                        
+                    }
+                    @if(Model.IsAccountLock==true)
+                    {
+                         <label class="text text-danger">* You Account is Locked</label>
+                    }
+                    @if(Model.IsActive==false)
+                    {
+                        <label class="text text-danger">* Your Account is Suspended</label>
+                    }
+                    @if(Model.IsCredentialsWrong==true)
+                    {
                     <label class="text text-danger">* You have entered an invalid username or password</label>
+                    }
+                    
                     <div class="custom-flex-between py-4">
                         <div class="left-content">
                             <label class="custom-checkbox m-0">

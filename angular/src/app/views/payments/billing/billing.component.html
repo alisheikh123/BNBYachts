@@ -1,0 +1,73 @@
+<div class="main-wrapper">
+    <div class="container">
+  <div class="bank-info-main-wrapper section-padding">
+          <div class="bank-info-input-wrapper">
+              <div class="custom-flex-start custom-margin"> 
+                <h4 class="medium">Available Payment Method</h4>
+            </div>
+              <div class="payment-method-wrapper">
+                  <div class="row">
+                      <div class="col-md-6">
+                        <app-user-payment-methods [canAddNewCards]="false"></app-user-payment-methods>
+                      </div>
+                  </div>
+                  <div class="custom-tabs-wrapper pt-3">
+                      <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="underline-link-blk active m-0" id="v-pills-home-tab" data-bs-toggle="pill"
+                          data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
+                          aria-selected="true">My Transactions</button>
+                      </div>
+                      <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                          aria-labelledby="v-pills-home-tab">
+                          <div class="custom-card custom-margin">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                <h5 class="bold">All Transactions</h5>
+                                </div>
+                              <div class="custom-table col-sm-12">
+                              <table>
+                                <thead>
+                                  <tr>
+                                    <th>Transaction Id</th>
+                                    <th>Amount</th>
+                                    <th>Currency</th>
+                                    <th>Billing Name</th>
+                                    <th>Card</th>
+                                    <th>Brand</th>
+                                    <th>Status</th>
+                                    <th>View Invoice</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of userTransactions">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.amount/100 | currency}}</td>
+                                    <td>{{item.currency | uppercase}}</td>
+                                    <td>{{item.billing_details.name | titlecase}}</td>
+                                    <td>....{{item.payment_method_details.card.last4}}</td>
+                                    <td>{{item.payment_method_details.card.brand | titlecase}}</td>
+                                    <td>
+                                      <span class="badge bg-success balance-badge mb-1"
+                                      [ngClass]="{
+                                        'bg-success': item.status=='succeeded',
+                                        'bg-danger': item.status == 'failed'
+                                      }"
+                                      >{{item.status | titlecase}}</span></td>
+                                    <td><a *ngIf="item.receipt_url" href="{{item.receipt_url}}" target="_blank" ><i class="fas fa-eye"></i></a></td>
+                                  </tr>
+                                  <tr *ngIf="userTransactions?.length == 0">
+                                      <td colspan="8" class="text-center">No Transaction Found</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              </div>
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+          </div>
+      </div>
+  </div>

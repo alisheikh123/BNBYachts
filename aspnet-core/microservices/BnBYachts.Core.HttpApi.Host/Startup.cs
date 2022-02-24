@@ -13,11 +13,12 @@ namespace BnBYachts.Core
         {
             services.AddApplication<CoreHttpApiHostModule>();
             services.AddAbpIdentity().AddDefaultTokenProviders();
-        }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {
-            app.InitializeApplication();
-        }
+        
     }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+    {
+        app.InitializeApplication();
+    }
+}
 }

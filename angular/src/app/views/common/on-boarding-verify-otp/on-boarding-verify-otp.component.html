@@ -1,0 +1,36 @@
+    <div class="modal-content">
+        <div class="row col-md-12 ">
+            <button class=" fas fa-arrow-left mt-3 m-3 later text-left  btn" (click)="previousModal()"></button>
+
+            <div class="col-md-10">
+                <div class="modal-header no-border">
+                </div>
+            </div>
+        </div>
+        <form>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold text-center">{{'OTPCodeTxt' | localization}}</h4>
+                    <p class="text-center pt-3">{{'codeLocation' | localization}}</p>
+                    <div class="py-2">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:6}">
+                                </ng-otp-input>
+                                <p class="text-danger mt-3" *ngIf="isInvalidCode">{{'InvalidCode' | localization}}</p>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <p class="mt-2" *ngIf="beforeExpire==true">{{'ExpiryMessage' | localization}}</p>
+                        <p class="mt-2 text-danger" *ngIf="otpSubmittion.isOTPExpire==true">{{'ExpiryOTP' | localization}}</p>
+                    </div>
+                    <div class="py-4 text-center">
+                        <p>{{'CodenotReceived' | localization}}</p><a href="#">
+                            <p class="later" (click)="resendCode()">{{'ResendCode' | localization}}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

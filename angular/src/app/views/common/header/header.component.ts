@@ -1,23 +1,20 @@
-import { ResetPasswordComponent } from './../../auth/components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './../../auth/components/forgot-password/forgot-password.component';
-
-import { OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../../auth/components/login-modal/login-modal.component';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { AppComponent } from 'src/app/app.component';
 import { UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
-import { textChangeRangeIsUnchanged } from 'typescript';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { HubConnection,HubConnectionBuilder} from '@microsoft/signalr';
+import { HubConnection} from '@microsoft/signalr';
 import { ChatComponent } from '../../home/components/Chat/chat/chat.component';
 import { ChatService } from 'src/app/core/chat/chat.service';
 import { HeaderTabs } from 'src/app/shared/enums/header-tabs';
+import { OnBoardingModalComponent } from '../on-boarding-modal/on-boarding-modal.component';
 
 
 @Component({
@@ -38,6 +35,7 @@ export class HeaderComponent implements OnInit {
   USER_ROLE = UserRoles;
   USER_DEFAULTS = UserDefaults;
   assetsUrl = environment.CORE_API_URL + '/user-profiles/';
+  assetUrlS3 = environment.S3BUCKET_URL + '/profilePicture/';
   @ViewChild('earnwithus', { static: true }) templateRef: any;
   selectedOption = {
     byHost : false,
@@ -45,7 +43,7 @@ export class HeaderComponent implements OnInit {
   };
   @ViewChild(ChatComponent) chatComponent: ChatComponent;
   constructor(public router: Router, public app: AppComponent, 
-    private toastr: ToastrService, private modal: NgbModal, 
+    private toastr: ToastrService, private modal: NgbModal,
     private oidcSecurityService: OidcSecurityService, 
     private authService: AuthService,private chatService:ChatService) { }
     activeTab: number = 0;
@@ -71,9 +69,7 @@ export class HeaderComponent implements OnInit {
   }
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
-      if (res == null) {
-      }
-      else {
+
         this.userDetails = res;
         if (res?.roles?.length > 1) {
           this.canSwitchAccount = true;
@@ -90,7 +86,8 @@ export class HeaderComponent implements OnInit {
           localStorage.setItem('userRole', this.app.loggedInUserRole);
         }
         this.isLoggedIn = true;
-      }
+        this.onBoardingModal();
+
     })
   }
   getUnreadChatCount() {
@@ -138,7 +135,7 @@ export class HeaderComponent implements OnInit {
       this.toastr.success('Account switched to user.', 'Success');
     }
     localStorage.setItem('userRole', this.app.loggedInUserRole);
-    
+
   }
   earn() {
     if(this.isLoggedIn){
@@ -151,8 +148,15 @@ export class HeaderComponent implements OnInit {
 
   continueToEarn() {
     if(this.selectedOption.byHost){
-      this.router.navigate(['try-hosting']);
       this.modal.dismissAll();
+      this.router.navigate(['try-hosting']);
+    }
+  }
+  onBoardingModal()
+  {
+    if(this.userDetails?.isInitialLogin==true)
+    {
+     this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
     }
   }
 }

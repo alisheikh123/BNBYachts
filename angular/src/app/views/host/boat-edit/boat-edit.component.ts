@@ -90,7 +90,7 @@ export class BoatEditComponent implements OnInit {
         length: res?.length,
         totalBedrooms: res?.totalBedrooms,
         totalWashrooms: res?.totalWashrooms,
-        isBoatelServicesOffered: res?.isBoatelServicesOffered,
+        isBoatelServicesOffered: !res?.isBoatelServicesOffered,
         boatelCapacity: res?.boatelCapacity,
         boatelAvailabilityDays: res?.boatelAvailabilityDays,
         checkinTime: res?.checkinTime,
@@ -209,6 +209,7 @@ export class BoatEditComponent implements OnInit {
       this.boatEditForm.controls.checkinTime.setValue(moment(this.boatEditForm.controls['checkinTime'].value).format());
       this.boatEditForm.controls.checkoutTime.setValue(moment(this.boatEditForm.controls['checkoutTime'].value).format());
       let data = this.boatEditForm.value;
+      data.isBoatelServicesOffered = !data.isBoatelServicesOffered;
       this.boatGallery = [...this.boatGallery, ...this.otherGalleryImages];
       data.boatGallery = this.boatGallery;
       data.boatCalendar = this.boatCalendar;
@@ -223,9 +224,10 @@ export class BoatEditComponent implements OnInit {
     }
   }
   changeCalendar(item: any) {
-    this.boatCalendar.fromDate = item.startDate;
-    this.boatCalendar.toDate = item.endDate;
-
+    if(item?.startDate !=null && item?.endDate != null){
+      this.boatCalendar.fromDate = item.startDate;
+      this.boatCalendar.toDate = item.endDate;
+    }
   }
 
 }

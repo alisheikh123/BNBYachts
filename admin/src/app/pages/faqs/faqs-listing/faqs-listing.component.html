@@ -1,0 +1,118 @@
+<div>
+</div>
+<nb-card>
+    <nb-card-header>
+     <span> Frequent Questions </span>
+     <span class="btn-floating"><button type="button" class="btn btn-primary" (click)="openLg(content)">Add Faqs</button></span>
+      </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" (custom)="onCustomAction(contents,contentData,$event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header no-border">
+      <h4 class="bold">Add Faqs</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="faqsForm" novalidate="novalidate" (ngSubmit)="onSubmit()">
+        <div class="custom-modal-inner">  
+          <div class="modal-content-inner-text">
+            <div class="form-text-inner">
+                <div>
+                  <div>
+                    <label>Category</label>
+                    <select class="form-control" formControlName="categoryId" name="categoryId" >
+                    <option [ngValue]="null" selected>Choose Category</option>
+                    <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-input-field">
+                    <label>Question</label>
+                    <input type="text" class="form-control" formControlName="question" name="question" placeholder="Enter Question">
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-input-field">
+                    <label>Answer</label>
+                    <textarea type="text" class="form-control" placeholder="Enter Answer" formControlName="answer" name="answer" rows="5" autocomplete="off" ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Close</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<ng-template #contents let-c="close" let-d="dismiss">    
+  <div class="modal-header">    
+      <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>    
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">    
+          <span aria-hidden="true">×</span>    
+      </button>    
+  </div>    
+  <div class="modal-body">    
+      <p>Are you sure to delete this?</p>    
+  </div>    
+  <div class="modal-footer">    
+      <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>    
+      <button type="button" class="btn btn-primary" (click)="c('yes')">Yes</button>    
+  </div>    
+</ng-template>   
+<ng-template #contentData let-modal>
+  <div class="modal-content">
+    <div class="modal-header no-border">
+      <h4 class="bold">Update Faqs</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="faqsForm" novalidate="novalidate" (ngSubmit)="onSubmit()">
+        <div class="custom-modal-inner">  
+          <div class="modal-content-inner-text">
+            <div class="form-text-inner">
+                <div>
+                  <div>
+                    <label>Category</label>
+                    <select class="form-control" formControlName="categoryId" name="categoryId" >
+                    <option [ngValue]="null" selected>Choose Category</option>
+                    <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-input-field">
+                    <label>Question</label>
+                    <input type="text" class="form-control" name="question" formControlName="question" placeholder="Enter Question">
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-input-field">
+                    <label>Answer</label>
+                    <textarea type="text" class="form-control" placeholder="Enter Answer" name="answer" formControlName="answer" rows="5" autocomplete="off" ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-light"   (click)="modal.dismiss('Cross click')">Close</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

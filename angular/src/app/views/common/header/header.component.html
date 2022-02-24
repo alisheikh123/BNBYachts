@@ -53,7 +53,7 @@
                                     </span>
                                     Inbox
                                 <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
-                            </a>                                
+                            </a>
                             <a [routerLink]="['/host/calendar']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Calendar" [ngClass]="{'active':activeTab == HEADER_TABS.Calendar}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/calendar-icon.svg"
@@ -76,7 +76,7 @@
                                     </span>
                                     Listing
                             </a>
-                            <div class="dropdown custom-dropdown borderless-dropdown">                                
+                            <div class="dropdown custom-dropdown borderless-dropdown">
                                 <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="logo-wrapper">
                                         <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
@@ -102,7 +102,7 @@
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
                                 id="dropdownMenuButton1">
-                                <img src="{{assetsUrl + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
+                                <img src="{{assetUrlS3 + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
                             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
@@ -114,6 +114,8 @@
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/host/settings/wallet']" *ngIf="app.loggedInUserRole == USER_ROLE.host">Wallet</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/payments/billing']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Billings</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/help-center']">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
@@ -129,6 +131,8 @@
 </header>
 <ng-template #earnwithus>
      <div class="modal-content">
+        <div class="modal-header no-border">
+        </div>
 
         <div class="modal-body">
           <div class="custom-text-center">
@@ -140,17 +144,15 @@
                 </div>
               <img src="../../../../assets/images/host-img-small.png" alt="">
 
-              </a>
-              <a [ngClass]="{'earn-active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider" class="custom-card custom-flex-between card-right-img mt-3">
+            </a>
+              <a [ngClass]="{'earn-active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider;continueToEarn()" class="custom-card custom-flex-between card-right-img mt-3">
                 <div class="card-right-img-inside">
                   <h6 class="medium p-0 text-start">Service Provider</h6>
                   <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
                   </div>
                 <img src="../../../../assets/images/service-provider.png" alt="">
-
-                </a>
+                </a>                
           </div>
         </div>
-
       </div>
 </ng-template>

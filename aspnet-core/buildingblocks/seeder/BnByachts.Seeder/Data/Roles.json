@@ -1,5 +1,13 @@
 ﻿[
   {
+    "Id": "a8e857de-7ca6-f663-feb0-3a003661101B",
+    "Name": "superadmin",
+    "NormalizedName": "SUPERADMIN",
+    "IsDefault": false,
+    "IsStatic": true,
+    "IsPublic": true
+  },
+  {
     "Id": "a8e857de-7ca6-f663-feb0-3a003661104b",
     "Name": "host",
     "NormalizedName": "HOST",

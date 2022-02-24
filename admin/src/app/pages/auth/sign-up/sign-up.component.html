@@ -1,0 +1,110 @@
+
+
+
+<!-- <div id="myModal" class="modal fade" role="dialog"> -->
+
+  <div class="modal-content">
+    <div class="modal-header no-border">
+      <h4 class="bold">Add New Admin</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="form" [formGroup]="registrationForm" novalidate="novalidate" (ngSubmit)="submit()">
+        <div class="custom-modal-inner">
+          <!-- <div class="side-img-left">
+            <img src="../../../../../assets/images/signup-wrap.png" alt="">
+          </div> -->
+          <div class="modal-content-inner-text">
+            <div class="form-text-inner">
+              <div class="row">
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label>FirstName</label>
+                    <input type="text" class="form-control" placeholder="First Name" name="firstname"
+                      formControlName="FirstName">
+                    <ng-container [ngTemplateOutlet]="formError" class="error-Modal" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'First name is required',
+                        control: registrationForm.controls['FirstName']
+                    }"></ng-container>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label>LastName</label>
+                    <input type="text" class="form-control" name="lastname" formControlName="LastName"
+                      placeholder="Last Name">
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                    validation: 'required',
+                                                    message: 'Last name is required',
+                                                    control: registrationForm.controls['LastName']
+                                                  }"></ng-container>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label>Email</label>
+                    <input type="email" class="form-control" placeholder="Email Address" name="email"
+                      formControlName="Email" autocomplete="off">
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Email is required',
+                      control: registrationForm.controls['Email']
+                    }"></ng-container>
+  
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'pattern',
+                      message: 'Invalid Email',
+                      control: registrationForm.controls['Email']
+                    }"></ng-container>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                validation: 'emailTaken',
+                                                message: 'Email Already Exists',
+                                                control: registrationForm.controls['Email']
+                                              }"></ng-container>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 py-2">
+                  <div class="custom-input-field">
+                    <label class="label-withtooltip">DateOfBirth</label>
+                      <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                        <input class="form-control" type="date" formControlName="DOB" [max]="getToday()">
+                      </div>              
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'required',
+                          message: 'Date of birth is required',
+                          control: registrationForm.controls['DOB']
+                        }"></ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 py-2 pb-3 text-center">
+                <button type="submit" class="btn btn-primary"
+                  >Create New</button>
+                  <!-- [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value" -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          {{ message }}
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+
+
+
+
+
+

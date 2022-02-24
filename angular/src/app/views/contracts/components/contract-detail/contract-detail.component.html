@@ -1,0 +1,184 @@
+<div class="main-wrapper">
+    <div class="section-padding contact-form reservation-page">
+        <div class="container">
+            <div class="row">
+
+                <div class="btn-back">
+                    <a (click)="goBack()"> <span class="material-icons arrow_back_ios">
+                            arrow_back_ios
+                        </span></a>
+                    <h2 class="bold">Contract Form</h2>
+                </div>
+                <div class="col-sm-8 py-2">
+                    <div>
+                        <h5 class="bold pt-3 pb-1">Description</h5>
+                        <div *ngIf="((contract?.description.length<=100));else greaterThanLimitBlock">
+                            <p class="small-text medium-container text-left grey"> {{ contract?.description }} </p>
+                        </div>
+                        <ng-template #greaterThanLimitBlock>
+                            {{ this.showMore ? (contract?.description) : (contract?.description|slice:0:100)+'...' }}
+                            <button class="custom-btn underline-blue-link no-before-content p-0"
+                                (click)="this.showMore = !this.showMore">{{ this.showMore ? 'Show Less' : 'Show More'
+                                }}</button>
+                        </ng-template>
+                    </div>
+                    <div>
+                        <div class="character-info-wrapper  custom-flex">
+                            <div class="custom-flex-start character-info py-2">
+                                <p class="medium description-fotmat">Boat:</p>
+                                <p class="grey">{{contract?.boat?.name}}</p>
+                            </div>
+                            <div class="custom-flex-start character-info py-2">
+                                <p class="medium description-fotmat">Guests:</p>
+                                <p class="grey">{{contract?.noOfGuests}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <ng-container *ngIf="contract?.serviceType == SERVICE_TYPES.Charter">
+
+                            <div class="character-info-wrapper  custom-flex">
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Departing from:</p>
+                                    <p class="grey">{{contract?.departureFrom}}</p>
+                                </div>
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Destination:</p>
+                                    <p class="grey">{{contract?.destination}}</p>
+                                </div>
+                            </div>
+                            <div class="character-info-wrapper  custom-flex">
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Boat Capacity:</p>
+                                    <p class="grey">{{contract?.boatCapacity}}</p>
+                                </div>
+                                <div class="custom-flex-start character-info py-2">
+                                    <!-- <p class="medium description-fotmat">Boat Capacity:</p> -->
+                                    <!-- <p class="grey">{{contract?.boatCapacity}}</p> -->
+                                </div>
+                            </div>
+                            <div class="character-info-wrapper  custom-flex">
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Departure:</p>
+                                    <p class="grey">{{contract?.departureDate | date:'dd MMM YYYY hh:mm a'}}</p>
+                                </div>
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Arrival:</p>
+                                    <p class="grey">{{contract?.arrivalDate | date:'dd MMM YYYY hh:mm a'}}</p>
+                                </div>
+                            </div>
+                            <div class="character-info-wrapper  custom-flex">
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Return Trip:</p>
+                                    <p class="grey">{{contract?.isRoundTrip ? 'Yes':'No'}}</p>
+                                </div>
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat"></p>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="character-info-wrapper  custom-flex" *ngIf="contract?.isRoundTrip">
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Return Details:</p>
+                                    <p></p>
+                                </div>
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat"></p>
+                                    <p class="grey">{{contract?.returnDate | date:'dd MMM YYYY hh:mm a'}}</p>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="contract?.serviceType == SERVICE_TYPES.Event">
+                            <div class="character-info-wrapper  custom-flex">
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Event Location:</p>
+                                    <p class="grey">{{contract?.eventLocation}}</p>
+                                </div>
+                                <div class="custom-flex-start character-info py-2">
+                                    <p class="medium description-fotmat">Event Date:</p>
+                                    <p class="grey">{{contract?.eventDateTime | date:'dd MMM YYYY hh:mm a'}}</p>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="price-detail py-4">
+                            <h5 class="bold pt-3 pb-1">Price Details</h5>
+                            <div class="custom-flex-between">
+                                <p class="medium">Quote Amount</p>
+                                <p class="medium text-right py-1">{{contract?.qouteAmount}} $</p>
+                            </div>
+                            <div class="custom-flex-between">
+                                <p class="medium">Service Fee</p>
+                                <p class="medium text-right py-1">20$</p>
+                            </div>
+                            <div class="custom-flex-between">
+                                <p class="medium">Total(USD)</p>
+                                <p class="medium text-right py-1">{{contract?.qouteAmount + 20}} $</p>
+                            </div>
+                        </div>
+                        <div *ngIf="contract?.terminationClause != null">
+                            <h5 class="bold pt-3 pb-1">Termination Clause</h5>
+                            <div>
+                                <p class="small-text medium-container text-left grey"> {{contract?.terminationClause}} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 py-2">
+                    <div class="character-info-img"
+                        *ngFor="let item of (contract?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                        <img src="{{assetsUrl + (item?.imagePath)}}" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-12 pt-2" *ngIf="contract?.contractTerms?.length >0">
+                    <h5>Contract Attachments</h5>
+                    <hr />
+                    <div class="custom-table ">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of contract?.contractTerms">
+                                    <td>
+                                        {{item?.title}}
+                                    </td>
+                                    <td><button (click)="download(item.fileName)"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12 pt-3">
+                    <h5 class="bold">Terms and Conditions</h5>
+                    <p class="small-text secondary-black-clr py-2">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus consequat
+                        ultrices nec sed nulla. Nullam volutpat vitae lectus sed pretium. Integer rutrum libero eget
+                        risus aliquam, ut imperdiet velit scelerisque. Donec commodo mi odio, sed accumsan justo aliquam
+                        quis. In tincidunt sollicitudin felis, et faucibus mauris posuere non. Quisque elementum sit
+                        amet enim viverra iaculis. Fusce nec urna non elit posuere commodo at quis lorem. Duis ac quam
+                        tincidunt, aliquam turpis vel, laoreet purus. Aliquam at ante sit amet sem bibendum scelerisque
+                        sit amet a lacus. Praesent non posuere nisi. Orci varius natoque penatibus et magnis dis
+                        parturient montes, nascetur ridiculus mus. Ut suscipit sollicitudin velit, sed porttitor turpis
+                        efficitur eu. Cras augue turpis, tempor in imperdiet in, venenatis sodales turpis. Curabitur
+                        lobortis maximus scelerisque. Nam non justo luctus, scelerisque dolor pulvinar, aliquam
+                        mauris.<a href="javascript:(void)"
+                            class="custom-btn underline-blue-link no-before-content p-0">Learn more</a></p>
+                </div>
+                <div class="col-sm-12 py-4 text-end">
+                    <div *ngIf="contract?.status == CONTRACT_STATUS.Pending && (userId | lowercase) == (contract?.userId | lowercase)">
+                        <button class="custom-btn btn-big outline-blue-clr me-sm-3" (click)="reject()">Reject</button>
+                        <button (click)="confirm()" class="custom-btn btn-big blue">Confirm and Pay</button>
+                    </div>
+                    <div *ngIf="contract?.status == CONTRACT_STATUS.Rejected && userId == contract?.hostId">
+                        <button class="custom-btn btn-big outline-blue-clr me-sm-3" [routerLink]="['/contracts/edit',contractId]">Resend</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

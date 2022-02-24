@@ -12,5 +12,8 @@ namespace BnBYachts.Core.IdentityServer
         public string EmailConfirmationToken { get; set; }
         public DateTime DOB { get; set; }
         public string About { get; set; }
+        public bool IsInitialLogin { get; set; }
+        public bool IsActive { get; set; }
     }
 }
+ 

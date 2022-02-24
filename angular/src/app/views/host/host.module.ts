@@ -35,9 +35,12 @@ import { CalendarScheduleComponent } from './calendar-schedule/calendar-schedule
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
-import { BookingFilterComponent } from '../boat-listing/booking-filter/booking-filter.component';
 import { BoatListingModule } from '../boat-listing/boat-listing.module';
 import { HostReservationCancellationComponent } from './host-reservation-cancellation/host-reservation-cancellation.component';
+import { ContractsService } from 'src/app/core/contracts/contracts.service';
+import { HostContractListingComponent } from './boatel-bookings/host-contract-listing/host-contract-listing.component';
+import { ContractsModule } from '../contracts/contracts.module';
+import { WalletModule } from './wallet/wallet.module';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -69,7 +72,7 @@ CharterLocationSettingComponent,
 EventLocationSettingComponent,
 CalendarScheduleComponent,
 HostReservationCancellationComponent,
-
+HostContractListingComponent
   ],
   imports: [
     HostRoutingModule,
@@ -87,8 +90,9 @@ HostReservationCancellationComponent,
     PaginationModule,
     CalendarModule,
     FullCalendarModule,
-    BoatListingModule
+    BoatListingModule,
+    ContractsModule
   ],
-  providers: [YachtSearchService,ReservationService]
+  providers: [YachtSearchService,ReservationService,ContractsService]
 })
 export class HostModule { }

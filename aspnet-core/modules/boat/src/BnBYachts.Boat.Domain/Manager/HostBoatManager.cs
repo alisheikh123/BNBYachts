@@ -217,6 +217,7 @@ namespace BnBYachts.Boat.Manager
             var allEvents = await _eventRepository.GetListAsync(res => res.BoatId == eventDetail.BoatId);
             await _eventRepository.EnsurePropertyLoadedAsync(eventDetail, x => x.Boat).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+            await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatCalendars).ConfigureAwait(false);
             await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatFeatures).ConfigureAwait(false);
             foreach (var feature in eventDetail.Boat.BoatFeatures)
             {
@@ -380,6 +381,13 @@ namespace BnBYachts.Boat.Manager
             boat.IsActive = !boat.IsActive;
             return true;
 
+        }
+        public async Task<List<BoatDTO>> GetBoatDetailsByUserId(Guid? userId)
+        {
+            var boats = await _boatRepository.GetListAsync(x => x.CreatorId == userId).ConfigureAwait(false);
+            foreach (var boat in boats)
+                await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
+            return _objectMapper.Map<List<BoatEntity>, List<BoatDTO>>(boats);
         }
     }
 }

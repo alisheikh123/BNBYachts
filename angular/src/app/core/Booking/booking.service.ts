@@ -1,3 +1,4 @@
+import { ErrorService } from './../Error/error.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
@@ -11,46 +12,32 @@ export class BookingService {
   bookingCancellation:string = '/api/app/boat-booking/booking-cancellation-detail/';
   boatApiUrl: string = environment.BOAT_API_URL+'/api';
   paymentApiUrl: string = environment.PAYMENTS_API_URL;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private errorService: ErrorService) { }
 
   boatelBooking(model: any) {
     return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/boatel-booking', model).pipe(
-      catchError(this.handleError));
+      catchError(this.errorService.handleError));
   }
 
   charterBooking(model: any) {
     return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/charter-booking', model).pipe(
-      catchError(this.handleError));
+      catchError(this.errorService.handleError));
   }
   eventBooking(model: any) {
     return this.http.post<any>(this.bookingApiUrl + '/api/app/boat-booking/event-booking', model).pipe(
-      catchError(this.handleError));
+      catchError(this.errorService.handleError));
   }
 
   modifyboatelBooking(model: any) {
     return this.http.post(this.bookingApiUrl + '/api/app/boat-booking/modify-boatel-booking', model).pipe(
-      catchError(this.handleError));
+      catchError(this.errorService.handleError));
   }
 
 
-  ///Exception handler
-  handleError(error: any) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(errorMessage);
-  }
-
-
-  /* Ali */
 
   getBoatInfo(boatId: any) {
-    return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
+    return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(
+      catchError(this.errorService.handleError));
   }
 
   saveCancellation(model: any) {
@@ -59,31 +46,58 @@ export class BookingService {
     return this.http.post<boolean>(this.bookingApiUrl + '/api/app/boat-booking/booking-cancel', data, {
       headers: headerOptions
     }).pipe(
-      catchError(this.handleError));
+      catchError(this.errorService.handleError));
   }
 
   getRefundable(bookingId: number, refundAmount: number) {
-    return this.http.get(this.paymentApiUrl + '/api/refund/' + bookingId + '/' + refundAmount).pipe(catchError(this.handleError));
+    return this.http.get(this.paymentApiUrl + '/api/refund/' + bookingId + '/' + refundAmount).pipe(
+      catchError(this.errorService.handleError));
   }
 
   addReview(review:any) {
-    return this.http.post(this.bookingApiUrl + '/api/app/review/review',review).pipe(catchError(this.handleError));
+    return this.http.post(this.bookingApiUrl + '/api/app/review/review',review).pipe(
+      catchError(this.errorService.handleError));
   }
   getReviews(bookingId:number){
-    return this.http.get(this.bookingApiUrl + '/api/app/review/booking-reviews/'+bookingId).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl + '/api/app/review/booking-reviews/'+bookingId).pipe(
+      catchError(this.errorService.handleError));
   }
-  getBoatReviews(boatId:number){
-    return this.http.get(this.bookingApiUrl + '/api/app/review/boat-reviews/'+boatId).pipe(catchError(this.handleError));
+  getBoatReviews(boatId:number , reviewSorting : number){
+    return this.http.get(this.bookingApiUrl + '/api/app/review/boat-reviews/'+ boatId + '?reviewSorting=' + reviewSorting).pipe(
+      catchError(this.errorService.handleError));
   }
   isReviewPosted(bookingId:number) {
-    return this.http.get(this.bookingApiUrl + this.bookingReview +bookingId).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl + this.bookingReview +bookingId).pipe(
+      catchError(this.errorService.handleError));
   }
   getBookingCancellationDetail(bookingId:number):Observable<object>
   {
-    return this.http.get(this.bookingApiUrl +this.bookingCancellation+bookingId).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl +this.bookingCancellation+bookingId).pipe(
+      catchError(this.errorService.handleError));
   }
 
   getmyBookings(boatId:number){
-    return this.http.get(this.bookingApiUrl +'/api/app/booking-list/my-bookings/'+boatId).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl +'/api/app/booking-list/my-bookings/'+boatId).pipe(
+      catchError(this.errorService.handleError));
   }
+  savecharterBookingCancellation(charterBookingCancellationRequestable:any)
+  {
+    return this.http.post(this.bookingApiUrl + '/api/app/charter-booking/cancel-charter-booking',charterBookingCancellationRequestable).pipe(
+      catchError(this.errorService.handleError));
+  }
+  saveEventBookingCancellation(eventBookingCancellationRequestable:any)
+  {
+    return this.http.post(this.bookingApiUrl + '/api/app/event-booking/cancel-event-booking',eventBookingCancellationRequestable).pipe(
+      catchError(this.errorService.handleError));
+  }
+  getEventBookingDetailById(eventBookingId:number)
+  {
+    return this.http.get(this.bookingApiUrl +'/api/app/event-booking/event-booking-detail-by-id/'+eventBookingId).pipe(
+      catchError(this.errorService.handleError));
+  }
+  getBookingCancelDetail(bookingId:number)
+  {
+    return this.http.get(this.bookingApiUrl +'/api/app/event-booking/booking-cancel-detail/'+bookingId).pipe(catchError(this.errorService.handleError));
+  }
+
 }

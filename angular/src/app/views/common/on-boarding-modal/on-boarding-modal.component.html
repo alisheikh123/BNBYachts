@@ -1,0 +1,47 @@
+<div class="modal-content">
+    <div class="modal-header no-border">
+    </div>
+    <form [formGroup]="mobileVerificationForm">
+        <div class="modal-body">
+            <div class="custom-text-center">
+                <h4 class="bold text-center">{{'MobileVerificationTxt' | localization}}</h4>
+                <div class="py-2">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="custom-select-field" ngbDropdown #myDrop="ngbDropdown" placement="bottom">
+                                <label>{{'CountryTxt' | localization}}</label>
+                                <select  formControlName="countryCode" class="form-control" name="countryCode"
+                                    id="countryCode" (change)="selectCountry($event)">
+
+                                    <option *ngFor="let country of countries" [value]="country.phone">
+                                        {{country.name}}&nbsp;({{country.phone}})</option>
+                                    <option [ngValue]=null selected>{{'SelectCountry' | localization}}</option>
+                                </select>
+                            </div>
+                            <div class="custom-input-field">
+                                <label>{{'PhoneNumber' | localization}}</label>
+                                <input formControlName="phoneNumber" type="number" class="form-control"
+                                    placeholder="Enter mobile Number" />
+                                <small class="pt-2">{{'SuccessMessage' | localization}}</small>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+
+                </div>
+                <div class="py-4 text-center">
+                    <button class="custom-btn blue big-btn"
+                        [ngClass]="{'grey': !mobileVerificationForm.valid,'blue':mobileVerificationForm.valid}"
+                        [disabled]="!mobileVerificationForm.valid" (click)="submit()">{{'Continue' |
+                        localization}}</button>
+                </div>
+                <div class="py-4 text-center">
+                    <button class="later" (click)="DismissAll()">{{'DoLater' | localization}}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

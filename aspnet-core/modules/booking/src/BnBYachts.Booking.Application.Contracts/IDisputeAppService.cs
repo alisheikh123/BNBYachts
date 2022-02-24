@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Booking.Disputes;
+using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,8 @@ namespace BnBYachts.Booking
     public interface IDisputeAppService
     {
         Task AddDispute(DisputeRequestableDto data);
+        //Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination);
+        Task<List<DisputeTransferable>> GetDisputeList();
+        Task<DisputeTransferable> GetDisputebyId(int id);
     }
 }

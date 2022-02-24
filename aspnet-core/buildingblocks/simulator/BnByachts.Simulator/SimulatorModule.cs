@@ -1,4 +1,5 @@
-﻿using BnBYachts.EventBusShared;
+﻿using BnBYachts.ElasticSearch;
+using BnBYachts.EventBusShared;
 using BnByachts.Simulator.Handler;
 using MassTransit;
 using Volo.Abp.Autofac;
@@ -9,7 +10,8 @@ namespace BnByachts.Simulator
 
     [DependsOn(
         typeof(AbpAutofacModule),
-        typeof(EventBusSharedModule)
+        typeof(EventBusSharedModule),
+        typeof(TechverxElasticSearchModule)
     )]
     public class SimulatorModule : AbpModule
    {

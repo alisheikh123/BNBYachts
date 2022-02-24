@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,12 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\payment\src\BnBYachts.Payments.Application.Contracts\BnBYachts.Payments.Application.Contracts.csproj" />
     <ProjectReference Include="..\BnBYachts.Core.Application.Contracts\BnBYachts.Core.Application.Contracts.csproj" />
     <ProjectReference Include="..\BnBYachts.Core.Domain\BnBYachts.Core.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Amazon.S3" Version="0.22.4" />
+	  <PackageReference Include="AWSSDK.S3" Version="3.7.7.17" />
+	  <PackageReference Include="Twilio" Version="5.70.1" />
     <PackageReference Include="Volo.Abp.Account.Application" Version="4.4.3" />
     <PackageReference Include="Volo.Abp.Identity.Application" Version="4.4.3" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="4.4.3" />

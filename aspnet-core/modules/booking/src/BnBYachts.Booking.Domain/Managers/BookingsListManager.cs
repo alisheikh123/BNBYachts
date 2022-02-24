@@ -2,6 +2,7 @@
 using BnBYachts.Booking.Booking;
 using BnBYachts.Booking.Booking.Enums;
 using BnBYachts.Booking.Booking.Requestable;
+using BnBYachts.Booking.Contracts;
 using BnBYachts.Booking.Interfaces;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
@@ -21,15 +22,18 @@ namespace BnBYachts.Booking.Managers
         private readonly IRepository<BoatelBookingEntity, int> _boatelBookingRepository;
         private readonly IRepository<CharterBookingEntity, int> _charterBookingRepository;
         private readonly IRepository<EventBookingEntity, int> _eventsBookingRepository;
+        private readonly IRepository<ContractEntity, int> _contractRepository;
         private readonly IObjectMapper<BookingDomainModule> _objectMapper;
         private readonly EventBusDispatcher _eventBusDispatcher;
         public BookingsListManager(IRepository<BoatelBookingEntity, int> boatelBookingRepository, IObjectMapper<BookingDomainModule> objectMapper,
-            EventBusDispatcher eventBusDispatcher, IRepository<CharterBookingEntity, int> charterBookingRepository, IRepository<EventBookingEntity, int> eventsBookingRepository)
+            EventBusDispatcher eventBusDispatcher, IRepository<CharterBookingEntity, int> charterBookingRepository,
+            IRepository<ContractEntity, int> contractRepository,IRepository<EventBookingEntity, int> eventsBookingRepository)
         {
             _boatelBookingRepository = boatelBookingRepository;
             _objectMapper = objectMapper;
             _eventBusDispatcher = eventBusDispatcher;
             _charterBookingRepository = charterBookingRepository;
+            _contractRepository = contractRepository;
             _eventsBookingRepository = eventsBookingRepository;
         }
         public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetBookedServices(EntityBookingParamsDto param)
@@ -73,6 +77,10 @@ namespace BnBYachts.Booking.Managers
                (await _charterBookingRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
                && res.BookingStatus == BookingStatus.Approved &&
                (!string.IsNullOrEmpty(param.Month) && !string.IsNullOrEmpty(param.Year) ? (res.DepartureDate.Month == int.Parse(param.Month) && res.DepartureDate.Year == int.Parse(param.Year)) : (1 == 1))).ConfigureAwait(false));
+                var contracts = _objectMapper.Map<List<ContractEntity>, List<BookingRequestsRequestableDto>>
+                    (await _contractRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
+                    && res.Status == ContractsStatus.Approved && res.ServiceType == ServiceType.Charter).ConfigureAwait(false));
+                allBookings.AddRange(contracts);
                 response.TotalCount = allBookings.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, param.PageNo, param.PageSize).ConfigureAwait(false);
             }
@@ -82,6 +90,10 @@ namespace BnBYachts.Booking.Managers
                 (await _charterBookingRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
                 && res.BookingStatus == BookingStatus.Approved && res.DepartureDate > DateTime.Today &&
                (!string.IsNullOrEmpty(param.Month) && !string.IsNullOrEmpty(param.Year) ? (res.DepartureDate.Month == int.Parse(param.Month) && res.DepartureDate.Year == int.Parse(param.Year)) : (1 == 1))).ConfigureAwait(false));
+                var contracts = _objectMapper.Map<List<ContractEntity>, List<BookingRequestsRequestableDto>>
+                    (await _contractRepository.GetListAsync(res => res.HostId == param.UserId.ToString() 
+                    && res.Status == ContractsStatus.Approved && res.ServiceType == ServiceType.Charter).ConfigureAwait(false));
+                allBookings.AddRange(contracts);
                 response.TotalCount = allBookings.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, param.PageNo, param.PageSize).ConfigureAwait(false);
             }
@@ -104,6 +116,10 @@ namespace BnBYachts.Booking.Managers
                 var allBookings = _objectMapper.Map<List<EventBookingEntity>, List<BookingRequestsRequestableDto>>
                (await _eventsBookingRepository.GetListAsync(res => res.HostId == param.UserId.ToString()&& 
                res.BookingStatus == BookingStatus.Approved && (!string.IsNullOrEmpty(param.Month) && !string.IsNullOrEmpty(param.Year) ? (res.EventDate.Month == int.Parse(param.Month) && res.EventDate.Year == int.Parse(param.Year)) : (1 == 1))).ConfigureAwait(false));
+                var contracts = _objectMapper.Map<List<ContractEntity>, List<BookingRequestsRequestableDto>>
+                     (await _contractRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
+                     && res.Status == ContractsStatus.Approved && res.ServiceType == ServiceType.Event).ConfigureAwait(false));
+                allBookings.AddRange(contracts);
                 response.TotalCount = allBookings.Count;
                 response.Data = await PagedList<BookingRequestsRequestableDto>.CreateAsync(allBookings, param.PageNo, param.PageSize).ConfigureAwait(false);
             }
@@ -249,16 +265,19 @@ namespace BnBYachts.Booking.Managers
                 var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
                 userName = booking.UserName;
                 booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+                booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
             }
             else if (serviceType == (int)BookingTypes.Charter)
             {
                 var booking = await _charterBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
                 booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+                booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
             }
             else
             {
                 var booking = await _eventsBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
                 booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
+                booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
             }
 
             #region Send-Email

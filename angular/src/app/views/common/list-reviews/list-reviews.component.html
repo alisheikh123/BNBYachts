@@ -1,19 +1,77 @@
-<div *ngIf="reviews?.length > 0" class="total-reviews section-padding">
-    <div class="custom-flex-start small-stars black-stars me-2">
-      <span class="fa fa-star stars-clr me-2"></span>
-      <p class="medium">{{reviews?.length}} reviews</p>
-    </div>
-    <div class="image-with-text pt-4 pb-2" *ngFor="let item of reviews">
-      <div class="image-with-text-inner">
-        <img src="../../../../assets/images/user-img.png" alt="" />
-        <div class="user-details">
-          <p class="medium">{{item.userDetails?.name}}</p>
-          <ngb-rating [rate]=item.ratings [max]="5"></ngb-rating>
+<div class="col-12">
+  <div class="rating-wrapper section-padding" *ngIf="boatId">
+    <div class="rating-wrap-inner">
+        <div class="row">
+            <div class="col-md-4 offset-2">
+                <h2 class="big-text-with-small">{{ClientReview | number}} <span> ({{reviews?.length}}) Reviews</span></h2>
+                <p class="grey py-2">
+                  <ngb-rating [rate]=ClientReview [max]="5"></ngb-rating>
+                </p>
+            </div>
+            <div class="col-md-4">
+              <div class="overall-rating-wrapper">
+                  <div class="custom-flex-start progress-with-text">
+                  <p>5</p>
+                  <div class="custom-progress-bar progress"> 
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{'width': reviewProgress?.fiveStars + '%' }"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    </div>
+                    <div class="custom-flex-start progress-with-text">
+                      <p>4</p>
+                      <div class="custom-progress-bar progress"> 
+                          <div class="progress-bar" role="progressbar"  [ngStyle]="{'width': reviewProgress?.fourStars + '%' }"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        </div>
+                        <div class="custom-flex-start progress-with-text">
+                          <p>3</p>
+                          <div class="custom-progress-bar progress"> 
+                              <div class="progress-bar" role="progressbar"  [ngStyle]="{'width': reviewProgress?.threeStars + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            </div>
+                            <div class="custom-flex-start progress-with-text">
+                              <p>2</p>
+                              <div class="custom-progress-bar progress"> 
+                                  <div class="progress-bar" role="progressbar"  [ngStyle]="{'width': reviewProgress?.twoStars + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                </div>
+                                <div class="custom-flex-start progress-with-text">
+                                  <p>1</p>
+                                  <div class="custom-progress-bar progress"> 
+                                      <div class="progress-bar" role="progressbar"  [ngStyle]="{'width': reviewProgress?.oneStar + '%' }" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    </div>
+              </div>
+          </div>
+          
         </div>
-      </div>
-      <p class="my-3 line-clamp-1">
-        {{item?.reviewDescription}}
-      </p>
-      <p class="text-right grey" style="font-size: 0.8em;">{{item?.creationTime}}</p>
     </div>
+</div>
+<div class="persons-rating section-padding">
+    <div class="row">
+      <div class="col-md-3 offset-9" >
+        <select class="form-control" (change)="changeReview($event)" >
+          <option  value=0 selected>Newest</option>
+          <option  value=1 >Oldest</option>
+        </select>
+      </div>
+     <div class="col-md-6 py-2" *ngFor="let item of reviews">
+       <div class="image-with-text">
+        <div class="image-with-text-inner">
+            <img src="../../../../assets/images/user-img.png" alt="">
+            <div class="user-details">
+                <p class="medium">{{item?.userDetails?.name}}</p>
+                <p class="small-stars">
+                  <ngb-rating [rate]="item.ratings" [max]="5"></ngb-rating>
+                </p>
+            </div>
+        </div>
+        <p class="my-3 line-clamp-1"> {{item?.reviewDescription}} </p>
+        <p><small style="font-size: .675em">{{item?.creationTime | date:'short'}}</small></p>
+    </div>
+    </div>
+        <div class="col-sm-12 py-2 text-right">
+            <button class="underline-blue-link no-underline" data-bs-toggle="modal" data-bs-target="#all-reviews-modal">See All</button>
+        </div>
+    </div>
+</div>
 </div>
