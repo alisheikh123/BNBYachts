@@ -14,10 +14,6 @@ const routes: Routes = [
         path: '',
         component: LoginComponent,
       },
-      // {
-      //   path: 'setpassword',
-      //   component: SetPasswordComponent,
-      // }
     ]
     }
 ];
@@ -29,5 +25,4 @@ export class AuthRoutingModule { }
 export const routedComponents = [
     AuthComponent,
     SignUpComponent,
-    // SetPasswordComponent
 ];

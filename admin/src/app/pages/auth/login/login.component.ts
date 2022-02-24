@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
   constructor(private oidcSecurityService : OidcSecurityService,private router : Router ) { }
 
   ngOnInit(): void {
-    console.log("Login Component");
     this.oidcSecurityService
   .checkAuth()
   .subscribe((res: any) => {
