@@ -46,9 +46,9 @@ namespace BnBYachts.Core.Managers
 
         }
 
-        public async Task<List<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request)
+        public async Task<EntityResponseListModel<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request)
         {
-
+            var response = new EntityResponseListModel<ServiceProviderTransferable>();
             var res = await _servicerepository.GetListAsync(x => x.ServiceProviderType == request.ServiceProviderType).ConfigureAwait(false);
             res = res.WhereIf(request.AvaliableDate != null, x => x.FromDate >= request.AvaliableDate).ToList();
             res = res.WhereIf(!string.IsNullOrEmpty(request.Location), x => x.Location.Equals(request.Location)).ToList();
@@ -61,8 +61,9 @@ namespace BnBYachts.Core.Managers
                 user.UserName = userInfo.Name;
                 user.UserImagePath = userInfo.ImagePath;
             }
+            response.Data = result;
             _logger.LogInformation("Search Service Provider Executed Successfully");
-            return result;
+            return response;
 
         }
         public async Task<EntityResponseModel> GetServiceProviderDetailsById(int id)

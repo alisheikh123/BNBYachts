@@ -13,7 +13,7 @@ namespace BnBYachts.Core.ServiceProvider.Interface
     public interface IServiceProviderManager
     {
         Task<EntityResponseModel> CreateonBoarding(ServiceProviderRequestableDto request);
-        Task<List<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request);
+        Task<EntityResponseListModel<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request);
         Task<EntityResponseModel> GetServiceProviderDetailsById(int id);
 
     }

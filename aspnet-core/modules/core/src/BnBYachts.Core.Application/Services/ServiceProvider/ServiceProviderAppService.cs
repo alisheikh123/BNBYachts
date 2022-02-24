@@ -17,11 +17,11 @@ using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Core.Services.ServiceProvider
 {
-    public class ServiceProviderService :ApplicationService ,IServiceProviderService
+    public class ServiceProviderAppService :ApplicationService ,IServiceProviderAppService
     {
         private readonly IServiceProviderManager _serviceproviderManager;
         private readonly IS3FileService _s3Service;
-        public ServiceProviderService(IServiceProviderManager serviceproviderManager, IS3FileService s3Service)
+        public ServiceProviderAppService(IServiceProviderManager serviceproviderManager, IS3FileService s3Service)
         {
             _serviceproviderManager = serviceproviderManager;
             _s3Service = s3Service;
@@ -44,10 +44,10 @@ namespace BnBYachts.Core.Services.ServiceProvider
                 }
                 return  response;
         }
-        public async Task<List<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request)=>
+        public async Task<EntityResponseListModel<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request)=>
             await _serviceproviderManager.SearchServiceProvider(request).ConfigureAwait(false);
         
-        [Route("api/app/service-provider/service-provider-by-id/{id}")]
+        //[Route("api/app/service-provider/service-provider-by-id/{id}")]
         public async Task<EntityResponseModel> GetServiceProviderById(int id)=>
         await _serviceproviderManager.GetServiceProviderDetailsById(id).ConfigureAwait(false);
         

@@ -9,10 +9,10 @@ using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Core.Interface
 {
- public interface IServiceProviderService  : IApplicationService
+ public interface IServiceProviderAppService  : IApplicationService
     {
         Task<EntityResponseModel> CreateonBoarding(IFormCollection formdata);
-        Task<List<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request);
+        Task<EntityResponseListModel<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request);
         Task<EntityResponseModel> GetServiceProviderById(int id);
     }
 }
