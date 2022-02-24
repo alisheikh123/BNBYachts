@@ -1,9 +1,8 @@
 import { NbToastrService } from '@nebular/theme';
 import { UsersService } from './../../../core/backend/common/services/users.service';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../core/mock/auth.service';
 
 @Component({
@@ -17,14 +16,11 @@ export class SignUpComponent implements OnInit {
   hasError: boolean;
 
   constructor(
-    private modal: NgbModal,
     public activeModal: NgbActiveModal,
     public authService: AuthService,
     private toaster : NbToastrService,
     public usersService : UsersService,
     private fb: FormBuilder,
-    private router: Router,
-    // private toaster: ToastrService,
   )  { }
 
   ngOnInit(): void {

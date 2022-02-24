@@ -43,8 +43,12 @@ namespace BnBYachts.Core.Services.HelpCenter
                 Errors = null
             };
         }
-
         public async Task<EntityResponseListModel<FrequentQuestionsDto>> GetFrequentQuestions()
             => await _manager.GetFrequentQuestions().ConfigureAwait(false);
+        public async Task<EntityResponseModel> InsertFrequentQuestions(FrequentQuestionsDto faqs) =>
+             await _manager.AddFrequentQuestions(faqs);
+        public async Task DeleteFaqs(int faqsId) => await _manager.DeleteFaqs(faqsId);
+        public async Task<EntityResponseModel> UpdateFaqs(FrequentQuestionsDto faqs) =>
+            await _manager.UpdateFaqs(faqs);
     }
 }

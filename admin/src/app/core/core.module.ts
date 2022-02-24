@@ -41,7 +41,7 @@ export class CoreModule {
         UsersService,
         AuthService,
         DisputeService,
-        BoatsService
+        BoatsService,
       ],
     };
   }

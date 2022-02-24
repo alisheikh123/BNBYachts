@@ -5,7 +5,7 @@ import { RoutesGuard } from './routes.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,10 +28,12 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthAppModule } from './pages/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -39,7 +41,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     HomeDashboardModule,
     ThemeModule,
-    CommonModule,
+    AuthAppModule,
     AppRoutingModule,
     AuthModule.forRoot({
       config: {

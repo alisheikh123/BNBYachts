@@ -26,7 +26,7 @@ export class ContractEditComponent implements OnInit {
   contractId: number;
   contract: any;
   userId :string;
-  
+
   constructor(private fb: FormBuilder, private service: ContractsService,private localStorage:LocalStoreService,
     private toastr: ToastrService, private activatedRoute: ActivatedRoute,
     private router:Router,

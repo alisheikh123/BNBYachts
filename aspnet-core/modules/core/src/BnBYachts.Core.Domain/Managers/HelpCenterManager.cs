@@ -25,6 +25,16 @@ namespace BnBYachts.Core.Managers
             _repoQuestions = repoQuestions;
             _objectMapper = objectMapper;
         }
+
+        public async Task<EntityResponseModel> AddFrequentQuestions(FrequentQuestionsDto faqs)
+        {
+            var response = new EntityResponseModel();
+            response.Data = await _repoQuestions.InsertAsync(_objectMapper.Map<FrequentQuestionsDto, FrequentQuestionEntity>(faqs));
+            return response;
+        }
+
+        public async Task DeleteFaqs(int faqsId) => await _repoQuestions.DeleteAsync(x=>x.Id == faqsId);
+
         public async Task<EntityResponseModel> GetEmailContent(int templateId)
         {
             var emailRepo = await _repository.GetAsync(res => res.TemplateId == templateId).ConfigureAwait(false);
@@ -41,6 +51,18 @@ namespace BnBYachts.Core.Managers
                 Data = _objectMapper.Map<List<FrequentQuestionEntity>, List<FrequentQuestionsDto>>(
                 await _repoQuestions.GetListAsync().ConfigureAwait(false))
             };
+        }
+
+        public async Task<EntityResponseModel> UpdateFaqs(FrequentQuestionsDto faqs)
+        {
+            var response = new EntityResponseModel();
+            var Frequentqs = await _repoQuestions.GetAsync(x => x.Id == faqs.Id).ConfigureAwait(false);
+            Frequentqs.CategoryId = faqs.CategoryId;
+            Frequentqs.Question = faqs.Question;
+            Frequentqs.Answer = faqs.Answer;
+            //var data = _objectMapper.Map<FrequentQuestionsDto, FrequentQuestionEntity>(faqs);
+            response.Data = await _repoQuestions.UpdateAsync(Frequentqs);
+            return response;
         }
     }
 }
