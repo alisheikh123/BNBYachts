@@ -48,8 +48,13 @@ pipeline {
               stage('Build') {
                 steps {
                   script {
-                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                     if (env.BRANCH_NAME == 'stag') {
+                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_VERSION} \
                       -f aspnet-core/EKBKW.Dockerfile ./aspnet-core "
+                       } else {
+                           sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                      -f aspnet-core/EKBKW.Dockerfile ./aspnet-core "
+                    }
                   }
                 }
               }
@@ -57,8 +62,14 @@ pipeline {
               stage('Publish') {
                 steps {
                   script{
-                    sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_URL}:${IMAGE_TAG}"
+                     if (env.BRANCH_NAME == 'stag') {
+                    sh "docker tag ${IMAGE_NAME}:${IMAGE_VERSION} ${IMAGE_URL}:${IMAGE_VERSION}"
+                    sh "docker push ${IMAGE_URL}:${IMAGE_VERSION}"
+
+                    } else {
+                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_URL}:${IMAGE_TAG}"
                     sh "docker push ${IMAGE_URL}:${IMAGE_TAG}"
+                    }
                   }
                 }
               }
@@ -80,12 +91,7 @@ pipeline {
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
     IMAGE_VERSION = env.GIT_COMMIT.take(7)
-    if(BRANCH_NAME == "dev") { 
-  IMAGE_TAG ="dev"
-   } else{ 
-    IMAGE_TAG = IMAGE_VERSION
-   }
-    IMAGE_TAG = "${BRANCH_NAME}-${GIT_COMMIT}"
+    IMAGE_TAG ="dev"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
     IMAGE_NAME = 'bnb-ekworker'
