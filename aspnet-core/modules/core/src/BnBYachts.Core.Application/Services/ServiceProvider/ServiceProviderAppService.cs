@@ -46,8 +46,6 @@ namespace BnBYachts.Core.Services.ServiceProvider
         }
         public async Task<EntityResponseListModel<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request)=>
             await _serviceproviderManager.SearchServiceProvider(request).ConfigureAwait(false);
-        
-        //[Route("api/app/service-provider/service-provider-by-id/{id}")]
         public async Task<EntityResponseModel> GetServiceProviderById(int id)=>
         await _serviceproviderManager.GetServiceProviderDetailsById(id).ConfigureAwait(false);
         
