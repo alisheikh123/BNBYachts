@@ -11,3 +11,13 @@
 :host ::ng-deep tr .ng2-smart-actions{ display: flex; width: auto;height: fit-content; }
 :host ::ng-deep nbng2-st-tbody-custom {display: flex;}
 :host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {display: inline-block;margin-top: 10px;margin-bottom: 5px; width: auto;text-align: center;}
+.fv-plugins-message-container{
+  color: #ff6b6b;
+  font-size: 12px;
+  padding-top: 5px;
+  text-align: left;
+}
+button:disabled{
+  opacity: 0.4;
+  cursor: default;
+}

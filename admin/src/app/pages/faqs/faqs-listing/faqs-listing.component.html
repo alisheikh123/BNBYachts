@@ -27,27 +27,42 @@
                 <div>
                   <div>
                     <label>Category</label>
-                    <select class="form-control" formControlName="categoryId" name="categoryId" >
+                    <select class="form-control" formControlName="categoryId" >
                     <option [ngValue]="null" selected>Choose Category</option>
                     <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
                     </select>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Category is required',
+                      control: faqsForm.controls['categoryId']
+                  }"></ng-container>
                   </div>
                 </div>
                 <div>
                   <div class="custom-input-field">
                     <label>Question</label>
                     <input type="text" class="form-control" formControlName="question" name="question" placeholder="Enter Question">
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Question is required',
+                      control: faqsForm.controls['question']
+                  }"></ng-container>
                   </div>
                 </div>
                 <div>
                   <div class="custom-input-field">
                     <label>Answer</label>
                     <textarea type="text" class="form-control" placeholder="Enter Answer" formControlName="answer" name="answer" rows="5" autocomplete="off" ></textarea>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Answer is required',
+                      control: faqsForm.controls['answer']
+                  }"></ng-container>
                   </div>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" [disabled]="faqsForm.invalid">Submit</button>
                 <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Close</button>
             </div>
           </div>
@@ -91,23 +106,38 @@
                     <option [ngValue]="null" selected>Choose Category</option>
                     <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
                     </select>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Question is required',
+                      control: faqsForm.controls['categoryId']
+                  }"></ng-container>
                   </div>
                 </div>
                 <div>
                   <div class="custom-input-field">
                     <label>Question</label>
                     <input type="text" class="form-control" name="question" formControlName="question" placeholder="Enter Question">
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Question is required',
+                      control: faqsForm.controls['question']
+                  }"></ng-container>
                   </div>
                 </div>
                 <div>
                   <div class="custom-input-field">
                     <label>Answer</label>
                     <textarea type="text" class="form-control" placeholder="Enter Answer" name="answer" formControlName="answer" rows="5" autocomplete="off" ></textarea>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Answer is required',
+                      control: faqsForm.controls['answer']
+                  }"></ng-container>
                   </div>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" [disabled]="faqsForm.invalid">Submit</button>
                 <button type="button" class="btn btn-light"   (click)="modal.dismiss('Cross click')">Close</button>
             </div>
           </div>
@@ -115,4 +145,14 @@
       </form>
     </div>
   </div>
+</ng-template>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
 </ng-template>
