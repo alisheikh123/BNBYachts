@@ -1,13 +1,14 @@
 ﻿using BnBYachts.Core.Enum;
 using BnBYachts.Core.Requestable;
 using BnBYachts.Core.ServiceProvider.Requestable;
+using BnBYachts.Shared.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BnBYachts.Core.ServiceProvider.Transferable
 {
-    public class ServiceProviderTransferable
+    public class ServiceProviderTransferable : ITransferable
     {
         public int Id { get; set; }
         public string UserId { get; set; }
