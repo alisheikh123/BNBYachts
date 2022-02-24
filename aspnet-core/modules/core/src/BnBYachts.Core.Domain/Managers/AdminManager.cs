@@ -84,8 +84,7 @@ namespace BnBYachts.Core.Managers
             user.SetProperty(UserConstants.DOB, userInput.DOB);
             user.SetProperty(UserConstants.IsInitialLogin, true);
             user.SetProperty(UserConstants.IsActive, true);
-            userInput.Password = userInput.FirstName + "" + userInput.LastName + "123*";
-            var result = await _userManager.CreateAsync(user, userInput.Password);
+            var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
                 var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
@@ -93,7 +92,7 @@ namespace BnBYachts.Core.Managers
                 {
                     return _respone;
                 }
-                await SendEmailForAdminConfirmationAsync(user , userInput.Password);
+                await SendEmailForAdminConfirmationAsync(user);
                 _respone.Message = "Account created successfully";
             }
             else
@@ -103,19 +102,19 @@ namespace BnBYachts.Core.Managers
             }
             return _respone;
         }
-        public async Task SendEmailForAdminConfirmationAsync(IdentityUser user, string password)
+        public async Task SendEmailForAdminConfirmationAsync(IdentityUser user)
         {
             var rootUrl = _config.GetSection("App:ClientUrl").Value;
-            //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, true);
             await _repository.UpdateAsync(user);
-            string baseUrl = rootUrl;
+            string baseUrl = rootUrl + "auth/setpassword";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },
-            {"password", password },
+            {"id", token },
             };
-            string body = $"<h4>Hello {user.Name} </h4> <div> Your Account registered by Super Admin on BnByachts, You can loggedIn your account by clicking here: <a href='{baseUrl}'>Click Here</a> <h1>{queryParams}</h1> </div><br>Best Regard";
+            string body = $"<h4>Hello {user.Name} </h4> <div> Your Account registered on BnByachts, You can create your password by clicking here: <a href='{baseUrl}'>Click Here</a> <h1>{queryParams}</h1> </div><br>Best Regard";
             await _eventBusDispatcher.Send<IEmailContract>(new EmailContract
             {
                 To = user.Email,
@@ -123,6 +122,23 @@ namespace BnBYachts.Core.Managers
                 Body = new StringBuilder().Append(body),
                 IsBodyHtml = true
             });
+        }
+        public async Task<AdminResponseDto> SetAdminPassword(SetPasswordRequestable userInput)
+        {
+            var response = new AdminResponseDto();
+            var user = await _userManager.FindByEmailAsync(userInput.Email);
+            await _userManager.RemovePasswordAsync(user);
+            var result = await _userManager.AddPasswordAsync(user, userInput.Password);
+            if (result.Succeeded)
+            {
+               response.Message = "Password created Successfully";
+            }
+            else
+            {
+                response.Message = result.Errors.ToList().FirstOrDefault()?.Description;
+                response.Status = false;
+            }
+            return response;
         }
     }
 }

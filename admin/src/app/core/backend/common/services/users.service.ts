@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsersApi } from '../api/users.api';
-// import { NbAuthService } from '@nebular/auth';
 import { IUser } from '../../../../shared/interfaces/totalUsers';
-import { BoatUser, BoatUserData, BookingReview, User } from '../../../../shared/interfaces/BoatUser';
-import { AnyARecord } from 'dns';
+import { BoatUser, BoatUserData, BookingReview, SetPasswordModal, User } from '../../../../shared/interfaces/BoatUser';
 
 @Injectable()
 export class UsersService extends BoatUserData {
@@ -28,5 +26,8 @@ export class UsersService extends BoatUserData {
   }
   RegisterAdmin(user: User) {
     return this.api.RegisterAdmin(user);
+  }
+  SetAdminPassword(admin: SetPasswordModal) {
+    return this.api.SetAdminPassword(admin);
   }
 }

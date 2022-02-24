@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CreateTokenCardData, StripeCardElementChangeEvent, StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardComponent, StripeService } from 'ngx-stripe';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
@@ -11,6 +11,7 @@ import { PaymentsService } from 'src/app/core/Payment/payments.service';
 export class UserPaymentMethodsComponent implements OnInit {
 
   userPaymentMethods:any;
+  @Input() canAddNewCards:boolean=true
   paymentMethodId = null;
   cardErrors: string;
   /////Stripe Region

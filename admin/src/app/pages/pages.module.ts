@@ -5,6 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ThemeModule } from '../shared/theme.module';
 import { HomeDashboardModule } from './home-dashboard/home-dashboard.module';
+import { FaqsComponent } from './faqs/faqs.component';
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];

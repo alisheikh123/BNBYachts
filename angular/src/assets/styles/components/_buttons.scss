@@ -233,7 +233,7 @@
         color: $brand-color;
        @include custom-transition;
         &::before{
-            width: 50px;
+            width: 100%;
            @include custom-transition;
         }
 
@@ -241,7 +241,7 @@
     &.active{
         color: $brand-color;
         &::before{
-          width: 50px;
+          width: 100%;
         }
 
     }

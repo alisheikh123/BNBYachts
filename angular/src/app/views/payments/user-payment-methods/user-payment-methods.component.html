@@ -16,7 +16,7 @@
         </div>
     </label>
 </div>
-<div><button *ngIf="!addCardDetails || paymentMethodId" class="underline-blue-link no-underline py-md-4" id="add-card-btn"
+<div><button *ngIf="(!addCardDetails || paymentMethodId) && canAddNewCards" class="underline-blue-link no-underline py-md-4" id="add-card-btn"
         (click)="addCard();"><i class="fa fa-plus me-2"></i>Add new Card</button>
 
     <div *ngIf="addCardDetails && !paymentMethodId">

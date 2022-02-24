@@ -33,7 +33,7 @@ namespace BnBYachts.Booking.Managers
         {
             var result = new EntityResponseListModel<CalendarTransferable>();
             result.Data = _objectMapper.Map<List<BoatelBookingEntity>,List<CalendarTransferable>>(
-                await _boatelBookingRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false));
+                await _boatelBookingRepository.GetListAsync(res => res.CreatorId == userId && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
             return result;
         }
 
@@ -41,7 +41,7 @@ namespace BnBYachts.Booking.Managers
         {
             var result = new EntityResponseListModel<CalendarTransferable>();
             result.Data = _objectMapper.Map<List<CharterBookingEntity>, List<CalendarTransferable>>(
-                await _charterBookingRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false));
+                await _charterBookingRepository.GetListAsync(res => res.CreatorId == userId && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
             return result;
         }
 
@@ -49,14 +49,14 @@ namespace BnBYachts.Booking.Managers
         {
             var result = new EntityResponseListModel<CalendarTransferable>();
             result.Data = _objectMapper.Map<List<EventBookingEntity>, List<CalendarTransferable>>(
-                await _eventBookingRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false));
+                await _eventBookingRepository.GetListAsync(res => res.CreatorId == userId && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false));
             return result;
         }
         public async Task<EntityResponseModel> GetBoatBookingCalendar(string hostId,int month, int boatId)
         {
-            var getBoatelBookings = await _boatelBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId && res.CheckinDate.Month == month).ConfigureAwait(false);
-            var getCharterBookings = await _charterBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId  && res.DepartureDate.Month == month).ConfigureAwait(false);
-            var getEventsBooking = await _eventBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId &&  res.EventDate.Month == month).ConfigureAwait(false);
+            var getBoatelBookings = await _boatelBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId && res.CheckinDate.Month == month && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false);
+            var getCharterBookings = await _charterBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId  && res.DepartureDate.Month == month && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false);
+            var getEventsBooking = await _eventBookingRepository.GetListAsync(res => res.HostId == hostId && res.BoatId == boatId &&  res.EventDate.Month == month && res.BookingStatus == BookingStatus.Approved).ConfigureAwait(false);
             var response = new BookingCalendarTransferable();
             response.Boatels = _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<CalendarTransferable>>(getBoatelBookings);
             response.Charters = _objectMapper.Map<ICollection<CharterBookingEntity>, ICollection<CalendarTransferable>>(getCharterBookings);

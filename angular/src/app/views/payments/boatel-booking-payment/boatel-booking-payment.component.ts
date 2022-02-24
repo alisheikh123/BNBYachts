@@ -112,6 +112,10 @@ export class BoatelBookingPaymentComponent implements OnInit {
         this.isBookingConfirmed = false;
         this.isPaymentFailed = true;
       }
+    },
+    err=>{
+      this.isBookingConfirmed = false;
+      this.isPaymentFailed = true;
     })
   }
 
