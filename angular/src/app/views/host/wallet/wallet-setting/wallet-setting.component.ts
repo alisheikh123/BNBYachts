@@ -17,7 +17,7 @@ export class WalletSettingComponent implements OnInit {
   statesList: any = states;
   bankForm: FormGroup;
   isSubmitted: boolean = false;
-  accountDetail: any = [];
+  accountDetail: any;
   unPaidBalance: number = 0;
   escrowBookings:any = [];
   incomingTransactions:any = [];
@@ -57,6 +57,9 @@ export class WalletSettingComponent implements OnInit {
       if(res != null){
         this.accountDetail = res?.data;
         this.getAllIncomingTransaction();
+      }
+      else{
+        this.accountDetail = [];
       }
     })
   }
