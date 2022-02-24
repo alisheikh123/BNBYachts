@@ -6,8 +6,8 @@ namespace BnBYachts.Core.Enum
 {
    public enum ServiceProviderType
     {  
-        captain=1,
-        management=2,
-        cleaning=3
+        Captain=1,
+        Management=2,
+        Cleaning=3
     }
 }
