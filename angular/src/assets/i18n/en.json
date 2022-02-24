@@ -287,7 +287,17 @@
   "CharterBookingConfirmed":"Charter Booking Cancelled Confirmed",
   "Confirm":"Confirm",
   "ExpiryOTP":"your otp is expiry please click on resend to get latest otp",
+  "CustomizeBoatelPricing":"Customize boatel pricing",
+  "CustomizeAvailability":"Customize availability",
+  "BankingInfo":"Add/update Banking Information",
+  "ViewAnalytics":"View boat analytics",
+  "Place":"Place",
+  "Checkin":"Check in",
+  "Checkout":"Check out",
+  "Action":"Action",
+  "UserName":"User Name",
+  "UpcomingCharters":"Upcoming Charters",
+  "Seeall":"See all"
   "RefundDetail":"Refundable Detail",
   "EventBookingCancelledConfirmed":"Event Booking Cancelled Confirmed"
-
 }
