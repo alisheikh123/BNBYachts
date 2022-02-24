@@ -104,18 +104,18 @@ namespace BnBYachts.Core.Managers
         }
         public async Task SendEmailForAdminConfirmationAsync(IdentityUser user)
         {
-            var rootUrl = _config.GetSection("App:ClientUrl").Value;
+            var rootUrl = _config.GetSection("AppUrl:ClientUrl").Value;
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, true);
             await _repository.UpdateAsync(user);
-            string baseUrl = rootUrl + "auth/setpassword";
+            string baseUrl = rootUrl + "/setpassword";
             var queryParams = new Dictionary<string, string>()
             {
             {"username", user.UserName },
             {"id", token },
             };
-            string body = $"<h4>Hello {user.Name} </h4> <div> Your Account registered on BnByachts, You can create your password by clicking here: <a href='{baseUrl}'>Click Here</a> <h1>{queryParams}</h1> </div><br>Best Regard";
-            await _eventBusDispatcher.Send<IEmailContract>(new EmailContract
+            string body = $"<h4>Hello {user.Name} </h4> <div> Your Account registered on BnByachts, You can create your password by clicking here: <a href='{baseUrl}'>Click Here</a> <p> {QueryHelpers.AddQueryString(baseUrl,queryParams)} </p> </div><br>Best Regard";
+            await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
             {
                 To = user.Email,
                 Subject = "Admin Confirmation",

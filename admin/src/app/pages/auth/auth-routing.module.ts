@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,9 +11,13 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       {
-        path: 'setpassword',
-        component: SetPasswordComponent,
-      }
+        path: '',
+        component: LoginComponent,
+      },
+      // {
+      //   path: 'setpassword',
+      //   component: SetPasswordComponent,
+      // }
     ]
     }
 ];
@@ -24,5 +29,5 @@ export class AuthRoutingModule { }
 export const routedComponents = [
     AuthComponent,
     SignUpComponent,
-    SetPasswordComponent
+    // SetPasswordComponent
 ];
