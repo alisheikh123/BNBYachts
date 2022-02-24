@@ -16,16 +16,15 @@ pipeline {
       steps {
         script {
           sh '''
-echo GIT_BRANCH: ${GIT_BRANCH} >> build_info.md
-echo GIT_COMMIT: ${GIT_COMMIT} >> build_info.md
-echo GIT_AUTHOR_NAME: ${GIT_AUTHOR_NAME} >> build_info.md
-echo BUILD_URL: ${BUILD_URL} >> build_info.md
-echo NODE_NAME: ${NODE_NAME} >> build_info.md
-echo BUILD_TIME: ${IMAGE_BUILD_TIMESTAMP} >> build_info.md
-echo IMAGE_TAG: ${IMAGE_TAG} >> build_info.md
-echo IDV_URL: ${IDV_URL}:${IMAGE_TAG}  >> build_info.md
-cat build_info.md > aspnet-core/build_info.md
-
+          echo GIT_BRANCH: ${GIT_BRANCH} >> build_info.md
+          echo GIT_COMMIT: ${GIT_COMMIT} >> build_info.md
+          echo GIT_AUTHOR_NAME: ${GIT_AUTHOR_NAME} >> build_info.md
+          echo BUILD_URL: ${BUILD_URL} >> build_info.md
+          echo NODE_NAME: ${NODE_NAME} >> build_info.md
+          echo BUILD_TIME: ${IMAGE_BUILD_TIMESTAMP} >> build_info.md
+          echo IMAGE_TAG: ${IMAGE_TAG} >> build_info.md
+          echo Notification_URL: ${notification}:${IMAGE_TAG}  >> build_info.md
+          cat build_info.md > aspnet-core/build_info.md
 '''
         }
       }
@@ -44,13 +43,13 @@ cat build_info.md > aspnet-core/build_info.md
 
     stage('Phase-1') {
       parallel {
-          stage('IDV-API') {
+          stage('Notification-API') {
             stages {
               stage('Build') {
                 steps {
                   script {
-                    sh "docker build -t ${IDV_IMAGE_NAME}:${IMAGE_TAG} \
-                      -f aspnet-core/IDV.Dockerfile ./aspnet-core "
+                    sh "docker build -t ${NOTIFICATION_IMAGE_NAME}:${IMAGE_TAG} \
+                      -f aspnet-core/Notification.Dockerfile ./aspnet-core "
                   }
                 }
               }
@@ -58,8 +57,8 @@ cat build_info.md > aspnet-core/build_info.md
               stage('Publish') {
                 steps {
                   script{
-                    sh "docker tag ${IDV_IMAGE_NAME}:${IMAGE_TAG} ${IDV_URL}:${IMAGE_TAG}"
-                    sh "docker push ${IDV_URL}:${IMAGE_TAG}"
+                    sh "docker tag ${NOTIFICATION_IMAGE_NAME}:${IMAGE_TAG} ${NOTIFICATION_URL}:${IMAGE_TAG}"
+                    sh "docker push ${NOTIFICATION_URL}:${IMAGE_TAG}"
                   }
                 }
               }
@@ -68,9 +67,10 @@ cat build_info.md > aspnet-core/build_info.md
       }
 
     }
+
      stage('Cleanup') {
       steps {
-        sh "docker rmi ${IDV_URL}:${IMAGE_TAG}"
+        sh "docker rmi ${NOTIFICATION_URL}:${IMAGE_TAG}"
       }
     }
   }
@@ -78,10 +78,10 @@ cat build_info.md > aspnet-core/build_info.md
   environment {
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
-    IMAGE_TAG = "dev"
+    IMAGE_TAG ="${env.BRANCH_NAME == 'dev' ? 'dev' : env.GIT_COMMIT.take(7)}"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
-    IDV_IMAGE_NAME = 'idv-server'
-    IDV_URL = "${AWS_ECR_REPO}/${IDV_IMAGE_NAME}"
+    NOTIFICATION_IMAGE_NAME = 'bnb-notification'
+    NOTIFICATION_URL = "${AWS_ECR_REPO}/${NOTIFICATION_IMAGE_NAME}"
   }
 }
