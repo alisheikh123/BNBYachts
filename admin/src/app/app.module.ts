@@ -1,22 +1,19 @@
-import { PagesModule } from './pages/pages.module';
-import { UserModule } from './pages/user/user.module';
+import { LoginComponent } from './pages/auth/login/login.component';
 import { HomeDashboardModule } from './pages/home-dashboard/home-dashboard.module';
 import { RoutesGuard } from './routes.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {
-  NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
-  NbToggleModule,
   NbWindowModule,
 } from '@nebular/theme';
 import { CoreModule } from './core/core.module';
@@ -29,9 +26,12 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthAppModule } from './pages/auth/auth.module';
+import { SetPasswordComponent } from './pages/auth/set-password/set-password.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent , LoginComponent , SetPasswordComponent
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -41,6 +41,7 @@ import { AuthAppModule } from './pages/auth/auth.module';
     ReactiveFormsModule,
     HomeDashboardModule,
     ThemeModule,
+    NbToastrModule,
     AuthAppModule,
     AppRoutingModule,
     AuthModule.forRoot({
@@ -73,7 +74,9 @@ import { AuthAppModule } from './pages/auth/auth.module';
        useClass: httpConfigurationClient, 
        multi: true 
       },
-    RoutesGuard
+    RoutesGuard,
+    LoginComponent,
+    SetPasswordComponent
   ],
 })
 export class AppModule {
