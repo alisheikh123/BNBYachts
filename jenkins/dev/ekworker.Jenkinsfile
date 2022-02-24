@@ -16,8 +16,6 @@ pipeline {
       steps {
         script {
           sh '''
-          
-           echo BRANCH_NAME: ${BRANCH_NAME} >> build_info.md
           echo GIT_BRANCH: ${GIT_BRANCH} >> build_info.md
           echo GIT_COMMIT: ${GIT_COMMIT} >> build_info.md
           echo GIT_AUTHOR_NAME: ${GIT_AUTHOR_NAME} >> build_info.md
@@ -81,7 +79,7 @@ pipeline {
     BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
-    IMAGE_TAG = "dev"
+    IMAGE_TAG = "${BRANCH_NAME}-${GIT_COMMIT}"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
     IMAGE_NAME = 'bnb-ekworker'
