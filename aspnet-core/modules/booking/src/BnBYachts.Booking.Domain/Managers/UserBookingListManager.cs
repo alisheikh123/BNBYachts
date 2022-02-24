@@ -142,7 +142,7 @@ namespace BnBYachts.Booking.Managers
             => _objectMapper.Map<BoatelBookingEntity, BoatelBookingTransferableDto>
             (await _boatelBookingRepository.GetAsync(res => res.Id == bookingId).ConfigureAwait(false));
 
-       
+
 
         public async Task<ICollection<BoatelBookingTransferableDto>> GetHostBoatelBookings(string hostId)
         => _objectMapper.Map<ICollection<BoatelBookingEntity>, ICollection<BoatelBookingTransferableDto>>
@@ -156,6 +156,36 @@ namespace BnBYachts.Booking.Managers
             response.Data.AddRange(charterBookings);
             var eventBookings = _objectMapper.Map<List<EventBookingEntity>, List<BookingsLookupDto>>(await _eventBookingRepository.GetListAsync(res => res.CreatorId == userId && res.BookingStatus == BookingStatus.Approved));
             response.Data.AddRange(eventBookings);
+            return response;
+        }
+
+        public async Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetHostUpcomingBoatelBookings(EntityBookingParamsDto param)
+        {
+            var response = new EntityResponseListModel<BoatelBookingTransferableDto>();
+            var allBooking = _objectMapper.Map<List<BoatelBookingEntity>, List<BoatelBookingTransferableDto>>(await _boatelBookingRepository.GetListAsync(x => x.HostId == param.UserId.ToString() &&
+                 x.CheckinDate > DateTime.Today).ConfigureAwait(false));
+            response.TotalCount = allBooking.Count;
+            response.Data = await PagedList<BoatelBookingTransferableDto>.CreateAsync(allBooking, param.PageNo, param.PageSize).ConfigureAwait(false);
+            return response;
+        }
+
+        public async Task<EntityResponseListModel<CharterBookingTransferableDto>> GetHostUpcomingCharterBookings(EntityBookingParamsDto param)
+        {
+            var response = new EntityResponseListModel<CharterBookingTransferableDto>();
+            var allBooking = _objectMapper.Map<List<CharterBookingEntity>, List<CharterBookingTransferableDto>>(await _charterBookingRepository.GetListAsync(x => x.HostId == param.UserId.ToString() &&
+                 x.DepartureDate > DateTime.Today).ConfigureAwait(false));
+            response.TotalCount = allBooking.Count;
+            response.Data = await PagedList<CharterBookingTransferableDto>.CreateAsync(allBooking, param.PageNo, param.PageSize).ConfigureAwait(false);
+            return response;
+        }
+
+        public async Task<EntityResponseListModel<EventBookingTransferableDto>> GetHostUpcomingEventBookings(EntityBookingParamsDto param)
+        {
+            var response = new EntityResponseListModel<EventBookingTransferableDto>();
+            var allBooking = _objectMapper.Map<List<EventBookingEntity>, List<EventBookingTransferableDto>>(await _eventBookingRepository.GetListAsync(x => x.HostId == param.UserId.ToString() &&
+                 x.EventDate > DateTime.Today).ConfigureAwait(false));
+            response.TotalCount = allBooking.Count;
+            response.Data = await PagedList<EventBookingTransferableDto>.CreateAsync(allBooking, param.PageNo, param.PageSize).ConfigureAwait(false);
             return response;
         }
     }

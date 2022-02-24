@@ -31,5 +31,5 @@ export const routedComponents = [
   UserComponent,
   UserListingComponent,
   UserDetailComponent,
-  StatusComponent
+  StatusComponent,
 ];

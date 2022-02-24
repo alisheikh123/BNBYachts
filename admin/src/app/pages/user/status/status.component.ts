@@ -4,7 +4,7 @@ import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-status',
-  template: '<ui-switch [checked]="value.isActive" (change)="onSuspendUser(value.id)"></ui-switch>',
+  template: '<ui-switch [checked]="value.isActive" color="#004fc4" (change)="onSuspendUser(value.id)"></ui-switch>',
 })
 export class StatusComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class StatusComponent implements OnInit {
   onSuspendUser(id : string){
     this.userService.SuspendUser(id).subscribe((response: any) => {
       if (response.status == true) {
-        this.toaster.success(response.message , 'User');
+        this.toaster.primary(response.message , 'User');
       }else
       {
         this.toaster.danger(response.message, 'User');

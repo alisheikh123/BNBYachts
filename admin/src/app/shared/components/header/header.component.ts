@@ -1,3 +1,5 @@
+import { BoatUser } from './../../interfaces/BoatUser';
+import { Router } from '@angular/router';
 import { SignUpComponent } from './../../../pages/auth/sign-up/sign-up.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../../../core/mock/auth.service';
@@ -7,6 +9,8 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { LayoutService } from '../../../core/utils';
+import { environment } from '../../../../environments/environment';
+import { UserDefaults } from '../../enums/userRoles';
 
 @Component({
   selector: 'ngx-header',
@@ -17,7 +21,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
+  userProfile : string;
+  assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
+  assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
   user: any;
+  USER_DEFAULTS  = UserDefaults;
   roleName : string = "USER"
   themes = [
     {
@@ -48,16 +56,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private modalService : NgbModal,
               private themeService: NbThemeService,
               private layoutService: LayoutService,
+              private router : Router,
               private breakpointService: NbMediaBreakpointsService) {
 
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-    // this.userService.getBoatUsers(this.roleName)
-    //   .subscribe((users: any) =>
-    //   this.user = users.nick);
-
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
@@ -74,13 +79,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+      this.authService.getUserInfoById(localStorage.getItem('userId')).subscribe(res =>{
+        this.user = res;
+      })
   }
   onItemSelection(title) {
     if ( title === 'Log out' ) {
        this.authService.logout();
     } else if ( title === 'Profile' ) {
-      // Do something on Profile
-      console.log('Profile Clicked ')
+      this.router.navigate([`pages/user/users/${localStorage.getItem('userId')}`]);
     }
   }
   openLg(content) {

@@ -15,6 +15,7 @@ pipeline {
     stage('Init') {
       steps {
         script {
+          
           sh '''
           echo GIT_BRANCH: ${GIT_BRANCH} >> build_info.md
           echo GIT_COMMIT: ${GIT_COMMIT} >> build_info.md
@@ -48,8 +49,9 @@ pipeline {
               stage('Build') {
                 steps {
                   script {
-                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                          sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} \
                       -f aspnet-core/EKBKW.Dockerfile ./aspnet-core "
+                    
                   }
                 }
               }
@@ -57,8 +59,10 @@ pipeline {
               stage('Publish') {
                 steps {
                   script{
-                    sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_URL}:${IMAGE_TAG}"
-                    sh "docker push ${IMAGE_URL}:${IMAGE_TAG}"
+                     
+                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_URL}:${IMAGE_TAG}"
+                        sh "docker push ${IMAGE_URL}:${IMAGE_TAG}"
+                    
                   }
                 }
               }
@@ -76,9 +80,10 @@ pipeline {
   }
 
   environment {
+    BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
-    IMAGE_TAG = "dev"
+     IMAGE_TAG ="${env.BRANCH_NAME == 'dev' ? 'dev' : env.GIT_COMMIT.take(7)}"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
     IMAGE_NAME = 'bnb-ekworker'
