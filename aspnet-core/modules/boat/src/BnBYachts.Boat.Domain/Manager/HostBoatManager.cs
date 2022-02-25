@@ -318,6 +318,7 @@ namespace BnBYachts.Boat.Manager
             boatCalendar.IsAvailable = true;
             await _boatelCalendarRepo.InsertAsync(boatCalendar, autoSave: true).ConfigureAwait(false);
             dataResponse.isSuccess = true;
+            dataResponse.Id = postBoatData.Id;
             return dataResponse;
         }
 

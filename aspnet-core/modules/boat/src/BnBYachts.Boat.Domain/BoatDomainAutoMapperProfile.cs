@@ -5,6 +5,7 @@ using BnBYachts.Boat.Calendar;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
+using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boat.Wishlist.Transferable;
 using BnBYachts.Boat.Wishlists;
 using BnBYachts.Boats.Charter;
@@ -90,6 +91,7 @@ namespace BnBYachts.Boat
             CreateMap<CalendarRequestableDto, BoatCalendarEntity>();
             CreateMap<BoatCalendarEntity, CalendarRequestableDto>();
             CreateMap<CharterEntity, CharterRequestable>().ReverseMap();
+            CreateMap<EventEntity, EventAddResponseTransferable>();
         }
     }
 }

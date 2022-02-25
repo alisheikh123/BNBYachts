@@ -15,6 +15,7 @@ namespace BnBYachts.Core.ServiceProvider.Interface
         Task<EntityResponseModel> CreateonBoarding(ServiceProviderRequestableDto request);
         Task<EntityResponseListModel<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request);
         Task<EntityResponseModel> GetServiceProviderDetailsById(int id);
+        Task<bool> isServiceProviderExist(ServiceProviderTypeCheckRequestable request);
 
     }
 }

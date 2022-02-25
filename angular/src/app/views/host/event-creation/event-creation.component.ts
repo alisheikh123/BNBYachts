@@ -82,8 +82,8 @@ export class EventCreationComponent implements OnInit {
     this.submitted = true;
     if (this.eventCreationForm.valid) {
       let data = this.eventCreationForm.value;
-      this.eventService.saveEvent(data).subscribe(res => {
-        if (res) {
+      this.eventService.saveEvent(data).subscribe((res: any) => {
+        if (res.returnStatus) {
           this.router.navigate(['/host/host-boat-listing']);
           // let modal = this.modal.open(EventCreationSuccessModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
           // modal.componentInstance.data = this.eventCreationForm.value;

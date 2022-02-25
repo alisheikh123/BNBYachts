@@ -14,6 +14,7 @@ using Volo.Abp.ObjectMapping;
 using BnBYachts.Core.ServiceProvider.Transferable;
 using BnBYachts.Core.ServiceProvider.Interface;
 using BnBYachts.Core.ServiceProvider.Requestable;
+using Volo.Abp.Users;
 
 namespace BnBYachts.Core.Managers
 {
@@ -79,5 +80,13 @@ namespace BnBYachts.Core.Managers
             _logger.LogInformation("Service Provider Details Fetched Successfully");
             return response;
         }
+        public async Task<bool> isServiceProviderExist(ServiceProviderTypeCheckRequestable request )
+        {
+            if (request == null) return false;
+           var check=   await _servicerepository.FirstOrDefaultAsync(x => x.UserId == request.UserId &&  x.ServiceProviderType== request.ServiceProviderType).ConfigureAwait(false);
+           return check != null ? true : false;
+        }
     }
+
+   
 }

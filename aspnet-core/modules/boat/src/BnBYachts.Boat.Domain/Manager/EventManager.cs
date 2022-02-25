@@ -2,6 +2,7 @@
 using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Event.Transferables;
+using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Events;
 using BnBYachts.Shared.Model;
 using Microsoft.Extensions.Logging;
@@ -34,10 +35,12 @@ namespace BnBYachts.Boat.Manager
             return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatLookupTransferable>>(boats);
         }
 
-        public async Task<bool> SaveEvent(EventRequestable boatEvent)
+        public async Task<EntityResponseModel> SaveEvent(EventRequestable boatEvent)
         {
+            var response = new EntityResponseModel();
             var eventDetails = await _eventRepository.InsertAsync(_objectMapper.Map<EventRequestable, EventEntity>(boatEvent), true).ConfigureAwait(false);
-            return eventDetails.Id > 0 ? true : false;
+            response.Data = _objectMapper.Map<EventEntity, EventAddResponseTransferable>(eventDetails);
+            return response;
         }
 
         public async Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId)

@@ -48,7 +48,12 @@ namespace BnBYachts.Core.Services.ServiceProvider
             await _serviceproviderManager.SearchServiceProvider(request).ConfigureAwait(false);
         public async Task<EntityResponseModel> GetServiceProviderById(int id)=>
         await _serviceproviderManager.GetServiceProviderDetailsById(id).ConfigureAwait(false);
-        
+        public async Task<bool> isServiceProviderExist(ServiceProviderTypeCheckRequestable request)
+        {
+            request.UserId = CurrentUser.Id.ToString();
+            return await _serviceproviderManager.isServiceProviderExist(request).ConfigureAwait(false);
+        }
 
+
+        }
     }
-}

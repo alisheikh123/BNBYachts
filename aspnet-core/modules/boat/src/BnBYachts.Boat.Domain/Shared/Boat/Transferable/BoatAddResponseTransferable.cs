@@ -8,6 +8,7 @@ namespace BnBYachts.Boat.Shared.Boat.Transferable
 {
    public class BoatAddResponseTransferable
     {
+        public int Id { get; set; }
         public bool isSuccess { get; set; }
         public bool isHostExists { get; set; }
     }
