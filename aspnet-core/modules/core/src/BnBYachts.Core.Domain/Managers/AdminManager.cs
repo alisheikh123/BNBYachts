@@ -104,7 +104,7 @@ namespace BnBYachts.Core.Managers
         }
         public async Task SendEmailForAdminConfirmationAsync(IdentityUser user)
         {
-            var rootUrl = _config.GetSection("AppUrl:ClientUrl").Value;
+            var rootUrl = _config.GetSection("App:AdminUrl").Value;
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.SetProperty(UserConstants.EmailConfirmationToken, true);
             await _repository.UpdateAsync(user);
