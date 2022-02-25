@@ -11,7 +11,7 @@ namespace BnBYachts.Boat.Interfaces.Boat
     public interface IEventAppService : IApplicationService
     {
         Task<ICollection<BoatLookupTransferable>> GetBoats();
-        Task<bool> SaveEvent(EventRequestable boatEvent);
+        Task<EntityResponseModel> SaveEvent(EventRequestable boatEvent);
         Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId);
         Task<EntityResponseListModel<EventDTO>> GetEvents(int page, int pageSize);
         Task<EntityResponseModel> GetEventById(int eventId);
