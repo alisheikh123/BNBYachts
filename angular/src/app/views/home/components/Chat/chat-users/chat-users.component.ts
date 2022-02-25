@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
+import { UserDefaults } from 'src/app/shared/enums/user-roles';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat-users',
@@ -18,6 +20,8 @@ export class ChatUsersComponent implements OnInit {
   @Input() activeChatFilter: number = 0;
   @Output() onChangeUser: EventEmitter<any> = new EventEmitter();
   @Output() noUserAvailble: EventEmitter<any> = new EventEmitter();
+  assetUrlS3 = environment.S3BUCKET_URL + '/profilePicture/';
+  USER_DEFAULTS = UserDefaults;
   //activeChatFilter: number = 0;
   hostId = null;
   chatFilter = {
