@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,7 @@ import { FsIconComponent } from './user.component';
 
 @NgModule({
   imports: [
+    CommonModule,
     NbCardModule,
     UiSwitchModule,
     NgbModule,
@@ -22,6 +24,7 @@ import { FsIconComponent } from './user.component';
   declarations: [
     ...routedComponents,
     FsIconComponent,
+    
   ],
   providers:[]
 })
