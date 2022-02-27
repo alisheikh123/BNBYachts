@@ -297,7 +297,7 @@
   "Action":"Action",
   "UserName":"User Name",
   "UpcomingCharters":"Upcoming Charters",
-  "Seeall":"See all"
+  "Seeall":"See all",
   "RefundDetail":"Refundable Detail",
   "EventBookingCancelledConfirmed":"Event Booking Cancelled Confirmed",
   "Services" :"Services",
@@ -364,5 +364,4 @@
  "AvailableTimeSlots": "Available Time Slots",
  "Calender" : "Calender here",
  "BookedTimeSlots" : "Booked Time slots"
-  "EventBookingCancelledConfirmed":"Event Booking Cancelled Confirmed"
 }

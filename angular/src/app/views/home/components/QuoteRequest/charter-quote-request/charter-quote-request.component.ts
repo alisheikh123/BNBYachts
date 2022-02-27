@@ -111,7 +111,8 @@ export class CharterQuoteRequestComponent implements OnInit {
           '<b>Departure Date:</b>' + moment(this.formControl.departureFromDate.value).format("DD-MMM-YYYY hh:mm a") + '<br/>' +
           '<b>Arrival Date:</b>' + moment(this.formControl.departureToDate.value).format("DD-MMM-YYYY hh:mm a") + '<br/>' +
           '<b>Number Of Guests:</b>' + this.formControl.guestCapacity.value + '<br/>' +
-          '<b>Return Date & Time:</b>' + moment(this.formControl.returnDate.value).format("DD-MM-YYYY") + '<br/>' +
+          this.formControl.isRoundTrip.value ? 
+          '<b>Return Date & Time:</b>' + moment(this.formControl.returnDate.value).format("DD-MM-YYYY") + '<br/>':'' +
           '<b>Other Requirements:</b>' + this.formControl.otherRequirments.value + '.';
       }
       else {
