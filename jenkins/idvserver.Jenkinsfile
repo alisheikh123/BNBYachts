@@ -78,7 +78,7 @@ cat build_info.md > aspnet-core/build_info.md
   environment {
     AWS_ACCOUNT_ID = '989660349111'
     AWS_DEFAULT_REGION = 'us-east-1'
-    IMAGE_TAG ="${env.BRANCH_NAME == 'dev' ? 'dev' : env.GIT_COMMIT.take(7)}"
+    IMAGE_TAG ="${GIT_BRANCH == 'origin/dev' ? 'dev' : env.GIT_COMMIT.take(7)}"
     AWS_ECR_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     IMAGE_BUILD_TIMESTAMP = (new Date()).format('EEE, MMMM dd,yy hh:mm:ss a')
     IDV_IMAGE_NAME = 'idv-server'
