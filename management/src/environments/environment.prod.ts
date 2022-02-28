@@ -17,9 +17,9 @@ export const environment = {
     stripeKey: "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f",
     Identity: {
       authority: "http://idv.bnb.techverxapps.com",
-      redirectUrl: "http://client.bnb.techverxapps.com",
-      postLogoutRedirectUri: "http://client.bnb.techverxapps.com",
-      clientId: "BnBYachts_App",
+      redirectUrl: "http://management.bnb.techverxapps.com",
+      postLogoutRedirectUri: "http://management.bnb.techverxapps.com",
+      clientId: "BnBYachts_Management",
       scope: "openid Core Booking Boat Payments Chat",
       responseType: 'code'
     }  
