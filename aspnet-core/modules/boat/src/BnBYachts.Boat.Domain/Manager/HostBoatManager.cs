@@ -258,7 +258,7 @@ namespace BnBYachts.Boat.Manager
             var totalBoats = await _boatRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
             //Host Role
             var dataResponse = new BoatAddResponseTransferable();
-            dataResponse.isHostExists = totalBoats.Count == 0 ? false : true;
+            dataResponse.IsHostExists = totalBoats.Count == 0 ? false : true;
             var boat = boatDetails.CreateMapped<HostBoatRequestable, BoatEntity>();
             boat.CreationTime = DateTime.Now;
             boat.LastModifierId = boat.CreatorId = userId;
@@ -317,7 +317,7 @@ namespace BnBYachts.Boat.Manager
             boatCalendar.BoatEntityId = postBoatData.Id;
             boatCalendar.IsAvailable = true;
             await _boatelCalendarRepo.InsertAsync(boatCalendar, autoSave: true).ConfigureAwait(false);
-            dataResponse.isSuccess = true;
+            dataResponse.IsSuccess = true;
             dataResponse.Id = postBoatData.Id;
             return dataResponse;
         }
