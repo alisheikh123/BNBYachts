@@ -1,0 +1,132 @@
+<div class="main-wrapper">
+    <div class="section-padding user-info-page">
+    <div class="container">
+       <div class="row">
+           <div class="col-lg-3 col-md-4  py-2">
+               <div class="custom-card user-info-wrap">
+                <div class="image-with-text">
+                    <div class="avatar-upload-outer edit-avatar-page">
+                        <div class="avatar-upload">
+                          <div class="avatar-preview">
+                            <div id="imagePreview"  [ngStyle]="{ 'background-image': 'url(' + (serviceProvider?.userImagePath!=null?profilePictureurl + serviceProvider.userImagePath:userDefaults.avatar)+ ')'}"  >
+                              
+                            </div>
+                          </div>
+                        </div>
+                       
+                      </div>
+                  <h6 class="bold text-center p-0 pb-3">{{serviceProvider.userName}}</h6>
+                </div>
+                <div class="border-top"></div>
+                <div class="py-2">
+                    <div class="py-2 text-center">
+                        <button class="custom-btn blue">{{'Contact'| localization}}</button>
+                    </div>
+                </div>
+               </div>
+           </div>
+           <div class="col-lg-9 col-md-8 py-2">
+               <div class="user-details-info-wrapper">
+                   <div class="custom-flex-between align-items-start">
+                       <div class="user-details-info-wrapper-inner">
+                           <p class="bold">{{serviceProvider.userName}}</p>
+                           <p class="grey pt-2">Joined 2021</p>
+                           <p class="grey py-1">{{serviceProvider.experience}} {{'Experience' | localization}}</p>
+                        </div>
+                        
+                   </div>
+                   <div class="py-2">
+                       <p class="bold">About</p>
+                       <p class="regular py-2 medium-container line-clamp-3 text-left">{{serviceProvider.bio}}</p>
+                   </div>
+                   <div class="py-2">
+                       <p class="medium"><i class="fa fa-map-pin me-3"></i>{{serviceProvider.location}}</p>
+                       <!-- <google-map height="560px" width="600px" [options]="mapOptions" [center]="center" [zoom]="zoom">
+
+                        <map-marker  
+                        [position]="position"
+                        [label]="serviceProvider.location" [title]="serviceProvider.location"
+                        >
+                      </map-marker>
+                    </google-map> -->
+                   </div>
+                   <div class="row">
+                       <div class="col-md-4">
+                           <p class="bold">{{'Calender' | localization}}</p>
+                           <ejs-calendar (renderDayCell)='highlightAvliableDays($event)'  [value]='serviceProvider.fromDate' [min]='serviceProvider.fromDate' [max]='serviceProvider.toDate'></ejs-calendar>
+                           <!-- <img src="./images/work-in-progress.jpg" alt="" > -->
+                           </div>
+                           <div class="col-md-8">
+                            <div class="py-2 pb-0">
+                                <p class="bold">{{'Availability' | localization}}</p>
+                                <div class="py-2 pb-0">
+                                    <p class="bold">{{'AvailableTimeSlots' | localization}} </p> 
+                                    <div class="custom-chip-wrapper" *ngFor="let slots of serviceProvider.timeSlots" >
+                                        <input id="condition-3" value="3" name="apiary_condition[3]" type="checkbox">
+                                        <label for="condition-3">{{slots.time | timeformat }}</label>
+                                    </div>
+                                    
+                                </div>
+                           </div>
+                            <div class="py-2">
+                                <p class="bold">{{'BookedTimeSlots' | localization }}</p> 
+                                <div class="custom-chip-wrapper">
+                                    <input id="condition-3" value="3" name="apiary_condition[3]" type="checkbox">
+                                    <label for="condition-3">11:30</label>
+                                </div>
+                                <div class="custom-chip-wrapper">
+                                    <input id="condition-3" value="3" name="apiary_condition[3]" type="checkbox">
+                                    <label for="condition-3">11:30</label>
+                                </div>
+                               
+                            </div>
+                        </div>     
+                  
+                    </div>
+               </div>
+               <div class="total-reviews section-padding">
+                   <div class="custom-flex-between">
+                <div class=" custom-flex-start small-stars black-stars me-2"><span class="fa fa-star stars-clr me-2"></span> <p class="medium ">9 Reviews</p></div>
+                <button class="custom-btn outline-blue-clr">{{'AddReview' | localization}}</button>
+                </div>
+                <div class="image-with-text pt-5">
+                   <div class="image-with-text-inner">
+                       <img src="../../../../assets/images/user-img.png" alt="">
+                       <div class="user-details">
+                           <p class="medium">Elijah</p>
+                           <p class="small-stars">
+                               <span class="fa fa-star stars-clr "></span>
+                               <span class="fa fa-star stars-clr"></span>
+                               <span class="fa fa-star stars-clr"></span>
+                               <span class="fa fa-star stars-clr"></span>
+                               <span class="fa fa-star stars-clr"></span>
+                           </p>
+                       </div>
+                   </div>
+                   <p class="my-3 line-clamp-1">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elitShort description about the </p>
+                   <p class="text-right grey">12 July 2021, 13:44</p>
+               </div>
+               <div class="image-with-text">
+                   <div class="image-with-text-inner">
+                       <img src="../../../../assets/images/user-img.png" alt="">
+                       <div class="user-details">
+                           <p class="medium">Elijah</p>
+                           <p class="small-stars">
+                               <span class="fa fa-star stars-clr "></span>
+                               <span class="fa fa-star stars-clr"></span>
+                               <span class="fa fa-star stars-clr"></span>
+                               <span class="fa fa-star stars-clr"></span>
+                               <span class="fa fa-star stars-clr"></span>
+                           </p>
+                       </div>
+                   </div>
+                   <p class="my-3 line-clamp-1">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elitShort description about the </p>
+                   <p class="text-right grey">12 July 2021, 13:44</p>
+               </div>
+              </div>
+               </div>
+              
+            </div>
+       </div>
+    </div>
+    </div>

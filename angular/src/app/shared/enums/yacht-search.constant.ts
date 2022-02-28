@@ -31,7 +31,29 @@ export enum OnBoardingTabs {
   BoatelServices = 5,
   LocalRentalLaws = 6
 }
-
+export enum CaptainBoardingTabs {
+  Registeration = 1,
+  CaptainFee = 2,
+  BankInfo = 3,
+  SupportiveDoc = 4,
+  Terms = 5
+}
+export enum ManagementBoardingTabs {
+  Registeration = 1,
+  CompanyProfile = 2,
+  Description = 3,
+  BankInfo = 4,
+  SupportiveDoc = 5,
+  Terms = 6
+}
+export enum CleaningBoardingTabs {
+  Registeration = 1,
+  CompanyProfile = 2,
+  Description = 3,
+  BankInfo = 4,
+  SupportiveDoc = 5,
+  Terms = 6
+}
 export enum FeaturesTypes {
   OtherFeature = 1,
   GuestFavoriteFeature = 2,

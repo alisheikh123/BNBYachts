@@ -12,7 +12,7 @@ namespace BnBYachts.Boat.Boat.Interfaces
    public interface IEventManager
     {
         Task<ICollection<BoatLookupTransferable>> GetBoats(Guid? userId);
-        Task<bool> SaveEvent(EventRequestable boatEvent);
+        Task<EntityResponseModel> SaveEvent(EventRequestable boatEvent);
         Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId);
         Task<EntityResponseListModel<EventDTO>> GetEvents(Guid? userId, int pageNo, int pageSize);
         Task<EntityResponseModel> GetEventById(int eventId);

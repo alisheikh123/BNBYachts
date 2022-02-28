@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { LoaderService } from "../loader/services/loader.service";
@@ -80,6 +80,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 //this.toastr.error("Error", "Oops! Something went wrong. Please try again.", { timeOut: 3000, closeButton: true, progressBar: true });
             }
         }
-        return Observable.throw(errMsg);
+        return throwError(error);
     }
 }
