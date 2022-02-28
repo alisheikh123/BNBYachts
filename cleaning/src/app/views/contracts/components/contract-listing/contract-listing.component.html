@@ -1,0 +1,113 @@
+<div class="row pb-4">
+    <div class="col-3">
+        <div class="dropdown custom-dropdown dropdown-rounded">
+            <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="dropdown-align">
+                    {{filter.serviceType == 2 ? 'Charters':'Events'}}
+                </span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <a class="dropdown-item" (click)="onChangeServiceType(SERVICE_TYPES.Charter)">{{'Charters' | localization}}</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="onChangeServiceType(SERVICE_TYPES.Event)">{{'Events' | localization}}</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-3">
+        <div class="dropdown custom-dropdown dropdown-rounded">
+            <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="dropdown-align">
+                    {{filter.boatId ? (boats | filterBy : 'id':filter.boatId)[0]?.name : "Select Boat"}}
+                </span>
+            </button>
+            <ul class="dropdown-menu boat-dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let item of boats">
+                    <a class="dropdown-item" (click)="onChangeBoat(item.id)">{{item?.name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="dropdown custom-dropdown dropdown-rounded">
+            <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="dropdown-align">
+                    {{filter.statusId == CONTRACT_STATUS.Pending ? 'Pending':
+                    filter.statusId == CONTRACT_STATUS.Active ? 'Active'
+                    :filter.statusId == CONTRACT_STATUS.Rejected ? 'Rejected'
+                    :filter.statusId == CONTRACT_STATUS.All ? 'All':'Choose Status'}}
+                </span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <a class="dropdown-item" (click)="onChangeStatus(CONTRACT_STATUS.All)">{{'All' | localization}}</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="onChangeStatus(CONTRACT_STATUS.Pending)">{{'Pending' | localization}}</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="onChangeStatus(CONTRACT_STATUS.Active)"> {{'Active' | localization}}</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="onChangeStatus(CONTRACT_STATUS.Rejected)"> {{'Rejected' | localization}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div>
+            <div class="row">
+                <div class="col">
+                    <div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block" container="body">
+                        <button class="dropdownBTN btn btn-outline-secondary" id="dropdownForm1" ngbDropdownToggle>
+                            {{filter.month || 'Month'}}-{{filter.year || 'Year'}}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                            <ejs-calendar #ejCalendar [value]='filter.date'
+                            (change)="applyDateFilter($event);myDrop.close()" start='Decade' depth='Year'>
+                            </ejs-calendar>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="custom-table ">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Creation Date & Time</th>
+                <th>Service Type</th>
+                <th>Status</th>
+                <th>Quote Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of contracts" [routerLink]="['/contracts/contract',item.id]"> 
+                <td>{{item.userName}}</td>
+                <td>{{item.creationTime | date:'dd MMM YYYY hh:mm a'}}</td>
+                <td>{{item.serviceType == SERVICE_TYPES.Charter ? 'Charter':'Event'}}</td>
+                <td>{{item.status == CONTRACT_STATUS.Pending ? 'Pending' : item.status == CONTRACT_STATUS.Active ? 'Active':'Rejected'}}</td>
+                <td>$ {{item.qouteAmount}}</td>
+            </tr>
+            <tr *ngIf="contracts?.length == 0">
+                <td colspan="5" class="text-center bg-light">
+                    <span>No data found.</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-12 pt-2" *ngIf="contracts?.length > 0">
+    <app-pagination [totalRecords]="totalRecord" [paginationParam]="filter" (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+</div>

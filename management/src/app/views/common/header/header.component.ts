@@ -11,10 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HubConnection} from '@microsoft/signalr';
-import { ChatComponent } from '../../home/components/Chat/chat/chat.component';
 import { ChatService } from 'src/app/core/chat/chat.service';
 import { HeaderTabs } from 'src/app/shared/enums/header-tabs';
-import { OnBoardingModalComponent } from '../on-boarding-modal/on-boarding-modal.component';
 
 
 @Component({
@@ -41,7 +39,6 @@ export class HeaderComponent implements OnInit {
     byHost : false,
     byServiceProvider : false
   };
-  @ViewChild(ChatComponent) chatComponent: ChatComponent;
   constructor(public router: Router, public app: AppComponent, 
     private toastr: ToastrService, private modal: NgbModal,
     private oidcSecurityService: OidcSecurityService, 
@@ -86,7 +83,6 @@ export class HeaderComponent implements OnInit {
           localStorage.setItem('userRole', this.app.loggedInUserRole);
         }
         this.isLoggedIn = true;
-        this.onBoardingModal();
 
     })
   }
@@ -154,12 +150,6 @@ export class HeaderComponent implements OnInit {
     else if(this.selectedOption.byServiceProvider){
       this.router.navigate(['service-provider']);
     }
-  }
-  onBoardingModal()
-  {
-    if(this.userDetails?.isInitialLogin==true)
-    {
-     this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
-    }
+
   }
 }

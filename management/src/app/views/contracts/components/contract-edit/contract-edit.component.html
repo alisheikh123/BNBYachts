@@ -1,0 +1,233 @@
+<div class="main-wrapper" *ngIf="contract != null">
+    <div class="create-contract section-padding">
+    <div class="container">
+        <form [formGroup]="contractForm">
+        <div class="row">
+            <div class="btn-back">
+                <a (click)="goBack()"> <span class="material-icons arrow_back_ios">
+                  arrow_back_ios
+                    </span></a>
+                <h2 class="bold">Contract Form</h2>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div class="custom-select-field">
+                    <label>Service Type</label>
+                    <select name="select" id="select" formControlName="serviceType" (change)="addValidation()">
+                        <option [ngValue]="SERVICE_TYPES.Charter">{{'Charter'}}</option>
+                        <option [ngValue]="SERVICE_TYPES.Event">{{'Event'}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6 py-2">
+            <div class="custom-select-field">
+                <label>{{'BoatListing' | localization}}</label>
+                <select name="select" id="select" formControlName="boatId"
+                    [ngClass]="{  'is-invalid':isSubmitted && f.boatId.errors }">
+                    <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
+                    <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
+                </select>
+                <small class="text-danger"
+                    *ngIf="((f.boatId.dirty && f.boatId.touched || isSubmitted) && f.boatId.hasError('required'))">
+                    {{'vBoatIsRequired'|localization}}
+                </small>
+            </div>
+            </div>
+            <div class="col-sm-6 py-2" *ngIf="f.serviceType.value == SERVICE_TYPES.Event">
+                <div class="custom-input-field">
+                    <label>Event Title</label>
+                    <input class="custom-input" formControlName="eventTitle"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.eventTitle.errors }"
+                    placeholder="Enter Title">
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.eventTitle.errors?.required">Title is required.</small>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div class="counter-input-wrapper pt-0">
+                    <label>No Of Guests</label>
+                    <div class="number">
+                        <div class="custom-flex-start">
+                            <label>Guests</label>
+                            <div class="custom-flex-start">
+                                <span class="minus" (click)="removeGuests(f.noOfGuests)">-</span>
+                                <input type="number" min="0" formControlName="noOfGuests" />
+                                <span class="plus" (click)="addGuests(f.noOfGuests)">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 py-2">
+                <div class="custom-input-field">
+                    <label>Description</label>
+                    <textarea class="custom-input" id="exampleFormControlTextarea1"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.description.errors }"
+                     rows="3" formControlName="description"></textarea>
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.description.errors?.required">Description is
+                required</small>
+            </div>
+            <ng-container *ngIf="f.serviceType.value == SERVICE_TYPES.Event">
+              
+            <div class="col-sm-6 py-2">
+                <div class="custom-input-field">
+                    <label>Event Location</label>
+                    <input class="custom-input" formControlName="eventLocation"
+                    ngx-google-places-autocomplete
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.eventLocation.errors }"
+                    (onAddressChange)="handleDepartingAddress($event,contractForm.controls.eventLocation)"
+                    placeholder="Bali Island">
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.eventLocation.errors?.required">Event Location is
+                required</small>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div class="">
+                    <label>Event Date</label>
+                    <ejs-datepicker formControlName="eventDateTime"></ejs-datepicker>
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.eventDateTime.errors?.required">Departure date is
+                required</small>
+            </div>
+        </ng-container>
+            <ng-container *ngIf="f.serviceType.value == SERVICE_TYPES.Charter">
+            <div class="col-sm-6 py-2">
+                <div class="custom-input-field">
+                    <label>Departing From</label>
+                    <input class="custom-input" formControlName="departureFrom"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.departureFrom.errors }"
+                    ngx-google-places-autocomplete
+                    (onAddressChange)="handleDepartingAddress($event,contractForm.controls.departureFrom)"
+                    placeholder="Bali Island">
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.departureFrom.errors?.required">Departure location is
+                required</small>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div class="custom-input-field">
+                    <label>Destination</label>
+                    <input class="custom-input" formControlName="destination"
+                    ngx-google-places-autocomplete
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.destination.errors }"
+                    (onAddressChange)="handleDepartingAddress($event,contractForm.controls.destination)"
+                    placeholder="Bali Island">
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.destination.errors?.required">Destination location is
+                required</small>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div>
+                    <label>Departure Date</label>
+                    <ejs-datepicker formControlName="departureDate"></ejs-datepicker>
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.departureDate.errors?.required">Departure date is
+                required</small>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div>
+                    <label>Arrival Date</label>
+                    <ejs-datepicker formControlName="arrivalDate"></ejs-datepicker>
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.arrivalDate.errors?.required">Arrival date is
+                required</small>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div class="custom-input-field">
+                    <label>Is it a round trip</label>
+                    <div class="custom-flex">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="isRoundTrip"
+                            [value]="true"
+                                id="flexRadioDefault1" formControlName="isRoundTrip">
+                            Yes
+                        </div>
+                        <div class="form-check ms-5">
+                            <input class="form-check-input" type="radio" name="isRoundTrip"
+                            [value]="false"
+                            formControlName="isRoundTrip"
+                                id="flexRadioDefault1">
+                            No
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 py-2">
+                <div class="counter-input-wrapper pt-0">
+                    <label>Boat Capacity</label>
+                    <div class="number">
+                        <div class="custom-flex-start">
+                            <label>Capacity</label>
+                            <div class="custom-flex-start">
+                                <span class="minus" (click)="removeGuests(f.boatCapacity)">-</span>
+                                <input type="number" min="0" formControlName="boatCapacity" />
+                                <span class="plus" (click)="addGuests(f.boatCapacity)">+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6 py-2" *ngIf="f.isRoundTrip.value == true">
+                <div class="">
+                    <label>Return Date</label>
+                    <ejs-datepicker formControlName="returnDate"></ejs-datepicker>
+                </div>
+            </div>
+        </ng-container>
+            <div class="col-sm-6 py-2">
+                <div class="custom-input-field">
+                    <label>Quote Amount</label>
+                    <input type="number" min="0" class="custom-input" 
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.qouteAmount.errors }" placeholder="Type" formControlName="qouteAmount">
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.qouteAmount.errors?.required">Quote amount is
+                required</small>
+            </div>
+            <div class="col-sm-12 py-2">
+                <div class="custom-input-field">
+                    <label>Termination Clause</label>
+                    <textarea class="custom-input" id="exampleFormControlTextarea1"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.terminationClause.errors }"
+                     rows="3" formControlName="terminationClause"></textarea>
+                </div>
+                <small class="text-danger"
+                *ngIf="isSubmitted && f.terminationClause.errors?.required">Termination Clause is
+                required</small>
+            </div>
+            <div class="col-sm-12 py-2">
+                <div class="custom-input-field">
+                    <label>Terms and Conditions</label>
+                    <div class="icon-inside-it mt-2" *ngFor="let item of contract?.contractTerms;let i=index">
+                        <input type="text" class="custom-input" placeholder="Name" [(ngModel)]="item.title"  [ngModelOptions]="{standalone: true}">
+                        <div class="btns-wrap-attachments">
+                            <button class="custom-btn round-btn" (click)="removeAttachment(i)"><i class="fa fa-trash"></i></button>
+                            <div class="input-type-attachemement ">
+                                <label for="attachement" class="round-btn">
+                                    <input type="file" id="attachment" (change)="onFileChoose($event,item)"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-add-new-btn py-2">
+                    <button class="custom-blue-btn" (click)="addAttachment()"><i class="fa fa-plus"></i>Add new</button>
+                </div>
+            </div>
+            <div class="col-sm-12 py-2 pb-5">
+                <div class="custom-flex-end">
+                    <button class="custom-btn blue" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+.boatel-counter{
+    min-width: 150px;
+    .center{
+  @include custom-flex-between;
+  .counter-button{
+    font-size: 30px;
+    line-height: 30px;
+    background-color: $new-grey-clr-secondary;
+    width: 30px;
+    height: 30px;
+    @include custom-shadow-light;
+    text-align: center;
+      }
+    }
+  }
+
+  .counter-input-wrapper{
+    padding: 10px 0;
+    > label{
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: $new-black-color;
+      display: block;
+      @include breakpoint(laptop){
+        font-size: 14px;
+        margin-bottom: 0.2rem;
+      }
+        @include breakpoint(sm){
+          font-size: 14px;
+        }
+  }
+    .number{
+      border:1px solid $placeholder-color;
+      border-radius: 5px;
+      padding: 4px 15px;
+      @include custom-flex-start;
+      align-items: center;
+      label{
+        min-width: 70px;
+        margin-right:10px;
+        font-weight: 700;
+
+      }
+      input{
+        max-width: 30px;
+        text-align: center;
+      }
+      span{
+        width: 30px;
+        height: 30px;
+        border:1px solid $placeholder-color;
+        border-radius: 50%;
+        @include custom-flex;
+        font-size: 25px;
+        font-weight: 700;
+        color: $placeholder-color;
+        @include breakpoint(laptop){
+          width: 23px;
+          height:23px;
+          font-size: 16px;
+        }
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }		
+  }
