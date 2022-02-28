@@ -1,0 +1,75 @@
+// breakpoints
+
+/* respo */
+
+@mixin breakpoint($media) {
+    /* Landscape phones and down */
+    @if $media == xs {
+        @media (max-width: 480px) { @content; }
+    }
+    /* Landscape phone to portrait tablet */
+    @else if $media == mobile {
+        @media (min-width: 481px) and (max-width: 575px) {@content; }
+    }
+    /* Landscape phone to portrait tablet */
+    @else if $media == sm {
+        @media (max-width: 767px) {@content; }
+    }
+    /* Portrait tablet to landscape and desktop */
+    @else if $media == md {
+        @media (min-width: 768px) and (max-width: 991px) { @content; }
+    }
+    @else if $media == lg {
+        @media (max-width: 1199px)  { @content; }
+    } 
+
+    @else if $media == ipadLandscape {
+        @media (max-width: 1024px) and (max-height: 1366px) { @content; }
+    } 
+
+    /* laptop desktop */
+     /* Large desktop */
+     @else if $media == lg {
+        @media (min-width: 991px) and (max-width: 1199px) { @content; }
+    }
+    @else if $media == lp {
+        @media (min-width: 1025px) and (max-width: 1645px) { @content; }
+    }
+    @else if $media == laptop-break {
+        @media (max-width: 1440px) { @content; }
+    }
+    @else if $media == extra-small-laptop {
+        @media  (max-width: 1200px) { @content; }
+    }
+    @else if $media == small-laptop {
+        @media  (max-width: 1366px) { @content; }
+    }
+    @else if $media == laptop {
+        @media  (max-width: 1440px) { @content; }
+    }
+   
+
+    @else if $media == xlg {
+        @media (min-width: 1920px) { @content; }
+    }
+
+
+
+    // Non-Retina
+    @else if $media == non-retina {
+        @media screen and (-webkit-max-device-pixel-ratio: 1) { @content; }
+    }
+    // Retina Only
+    @else if $media == retina {
+        @media screen and (-webkit-min-device-pixel-ratio: 2) { @content; }
+    }
+    // Specific max width
+    @else {
+        @media only screen and (max-width: #{$media}px) { @content; }
+    }
+}
+
+
+
+
+

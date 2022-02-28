@@ -1,0 +1,155 @@
+.custom-modal{
+    border-radius: 16px;
+    &.custom-large-modal{
+        .modal-dialog{
+            max-width: 1270px;
+            @include breakpoint(laptop){
+                max-width: 930px;
+            }
+        }
+        
+    }
+    .modal-content{
+        border-radius: 16px;
+        border: none;
+        min-height: 100px;
+
+        .modal-header{
+            @include custom-flex-end;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            .btn-close{
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background-color:transparent ;
+                color: $white-color ;
+                background-image: none !important;
+                margin: 0;
+                opacity: 1;
+                position: relative;
+                padding: 0;
+                i{
+                    color: $new-black-color !important;
+                }
+                &::before{
+                    font-family: "Material Icons";
+                    content: "\e5cd";
+                    color: $new-black-color !important;              
+                   }
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: $modal-close-btn;
+                }
+            }
+        }
+        .modal-body{
+            padding: 0;
+            .custom-modal-inner{
+                display: flex;
+                >div{
+                    min-height: 100%;
+                }
+                .side-img-left{
+                    max-width: calc(100% - 722px);
+                    @include breakpoint(laptop){
+                        max-width: calc(100% - 490px);   
+                    }
+                    img{
+                        max-width: 100%;
+                        height: 100%;
+                    }
+                    @include breakpoint(sm){
+                        display: none;
+                    }
+                }
+                .modal-content-inner-text{
+                   max-width: 100%;
+                   width: 100%;
+                   border-radius: 16px;
+                   margin-left: -30px;
+                   background-color: $white-color;
+                   padding: 50px 30px;
+                   @include breakpoint(laptop){
+                       padding: 25px;
+                   }
+                   @include breakpoint(lg){
+                       margin: 0 auto;
+                   }
+                   @include breakpoint(sm){
+                    border-radius: 16px;
+                   }
+                  @include custom-flex-start;
+                  flex-direction: column;
+                    h4{
+                        width: 100%;
+                        text-align: center;
+                        padding: 10px 0;
+                        @include breakpoint(laptop){
+                            padding: 5px 0;  
+                        }
+                    }
+                   .form-text-inner{
+                    width: 100%;
+                    padding: 20px 0;
+                    @include breakpoint(laptop){
+                        padding: 10px 0;
+                    }
+                   }
+                   
+                }
+            }
+        }
+    }
+    &.custom-small-modal{
+        .modal-dialog{
+            max-width: 580px;
+            @include breakpoint(laptop){
+                max-width: 470px;
+            }
+            .modal-content{
+                text-align: center;
+            }
+        }
+    }
+    &.custom-medium-modal{
+        .modal-dialog{
+            max-width: 750px;
+            @include breakpoint(laptop){
+                max-width: 600px;
+            }
+            .modal-content{
+                text-align: center;
+            }
+        }
+    }
+    .custom-text-center{
+        padding: 40px ;
+        @include breakpoint(laptop){
+            padding: 25px;
+        }
+        h4{
+            margin-bottom: 10px;
+            @include breakpoint(laptop){
+                margin-bottom: 5px;  
+            }
+        }
+    }
+    .modal-scroll-div{
+        max-height: calc(100vh - 200px);
+        overflow-y: scroll;
+      &::-webkit-scrollbar{
+          display:none;
+      }
+        .image-with-text {
+            padding: 15px 0;
+        }
+    }
+}
+.modal-open{
+    padding-right: 0 !important;
+}

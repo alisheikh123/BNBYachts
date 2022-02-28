@@ -1,0 +1,60 @@
+<h6 class="select-payment-card pb-4">Select Card</h6>
+<div class="form-check-radio" *ngFor="let item of userPaymentMethods">
+    <input class="form-check-input" style="position: initial !important;" type="radio"
+    [(ngModel)]="paymentMethodId"
+    (ngModelChange)="changeMethod()"
+    [value]="item.id"
+        name="flexRadioDefault" id="flexRadioDefault1">
+    <label class="form-check-label" for="flexRadioDefault1">
+        <div class="payment-method-radio-btn">
+            <h6 class="medium">{{item.cardHolderName}}</h6>
+            <h6 class="medium">...{{item.lastFourDigit}}</h6>
+            <div class="payment-method-radio-img">
+                <img src="../../../../assets/images/visa-img.png" alt="" *ngIf="item.cardType == 'visa'" >
+                <img src="../../../../assets/images/mastercard-img.png" alt="" *ngIf="item.cardType == 'mastercard'">
+            </div>
+        </div>
+    </label>
+</div>
+<div><button *ngIf="!addCardDetails || paymentMethodId" class="underline-blue-link no-underline py-md-4" id="add-card-btn"
+        (click)="addCard();"><i class="fa fa-plus me-2"></i>Add new Card</button>
+
+    <div *ngIf="addCardDetails && !paymentMethodId">
+        <div class="add-card-details">
+            <h6 class="select-payment-card py-2">Card Details</h6>
+            <div>
+                <div class="custom-input-field">
+                    <input type="text" class="custom-input big-input" [(ngModel)]="stripeModel.name"
+                        placeholder="Card Holder Name">
+                </div>
+            </div>
+
+            <div>
+                <div class="custom-input-field">
+                    <input type="text" class="custom-input big-input" placeholder="Card Name">
+                </div>
+            </div>
+            <div>
+                <div class="pt-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-element">
+                                <ngx-stripe-card [options]="cardOptions"
+                                (change)="onChange($event)"
+                                    [elementsOptions]="elementsOptions"></ngx-stripe-card>
+                            </div>
+                        </div>
+                        <small class="text-danger" *ngIf="cardErrors != ''">{{cardErrors}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="py-3">
+                <label class="custom-checkbox">
+                    <input type="checkbox" checked="checked" [(ngModel)]="isSaveNewPayment">
+                    <p class="small-text">Save this card for future transactions.</p>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

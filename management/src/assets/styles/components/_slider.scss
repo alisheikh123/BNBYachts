@@ -1,0 +1,80 @@
+.custom-sync-slider{
+  .self-boat-slider{
+    .slick-slide {
+      text-align:center;
+      padding: 10px;
+  }  
+}
+  .self-boat-slider-content{
+    p{
+      max-width: 500px;
+    width: 100%;
+    text-overflow: ellipsis;
+    margin: 0 auto;
+    }
+    
+  }
+  .slick-arrow{
+    color: $grey-light-color;
+    border:1px solid $grey-light-color;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    @include breakpoint(sm){
+      width: 16px;
+      height: 16px;
+    }
+    &:hover{
+      background-color: $brand-secondary-color;
+      color: $white-color;
+      border:1px solid transparent;
+      &::before{
+        color: $white-color !important;
+      }
+    }
+    &.slick-next{
+      right: 50px;
+      top: 60px;
+      @include breakpoint(laptop){
+        top: 40px;
+      }
+      &::before{
+        font-family: FontAwesome;
+        content: "\f105";
+        color: $grey-new-color;
+        font-size: 20px;
+        @include breakpoint(sm){
+          font-size: 14px;
+        }
+      }
+
+      @include  breakpoint(sm){
+        right: 20px;
+      }
+    }
+    &.slick-prev{
+      right: 100px;
+      top: 60px;
+      z-index: 1;
+      left: unset;
+      @include breakpoint(laptop){
+        top: 40px;
+      }
+      &::before{
+        font-family: FontAwesome;
+        content: "\f104";
+        color: $grey-new-color;
+        font-size: 20px;
+        @include breakpoint(sm){
+          font-size: 14px;
+        }
+      }
+      @include  breakpoint(sm){
+        right: 50px;
+      }
+    }
+  }
+  
+}
+ 
+  
