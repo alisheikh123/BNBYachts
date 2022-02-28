@@ -1,0 +1,29 @@
+// custom ul
+.custom-ul{
+    padding: 5px 0;
+    @include breakpoint(sm){
+      padding: 5px 0;
+    }
+    li{
+      margin-top: 10px;
+      position: relative;
+      padding-left: 20px;
+      &::before{
+        content:'';
+        position: absolute;
+        height: 6px;
+        width: 6px;
+        background: $brand-color;
+        left: 0;
+        top: 10px;
+        border-radius: 100%;
+      }
+      p{
+        font-size: 14px;
+        text-align: left;
+        @include breakpoint(laptop){
+          font-size: 12px;
+        }
+      }
+    }
+  }

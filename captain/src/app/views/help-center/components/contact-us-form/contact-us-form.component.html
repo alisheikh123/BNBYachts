@@ -1,0 +1,69 @@
+<section class="request-quote-sec section-padding card shadow  rounded">
+    <div class="container card-body">
+        <form [formGroup]="contactUsForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="custom-input-field">
+                        <label>First Name:*</label>
+                        <input type="text" class="form-control custom-input" name="firstName"
+                            [ngClass]="{ 'is-invalid': isSubmitted && f.firstName.errors }"
+                            formControlName="firstName" placeholder="First Name" />
+                        <small class="text-danger small"
+                            *ngIf="isSubmitted && f.firstName.errors?.required">First name is
+                            required</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-input-field">
+                        <label>Last Name:*</label>
+                        <input type="text" class="form-control custom-input"
+                            [ngClass]="{ 'is-invalid': isSubmitted && f.lastName?.errors }"
+                            formControlName="lastName" placeholder="Last Name" />
+                        <small class="text-danger small"
+                            *ngIf="isSubmitted && f.lastName.errors?.required">Last name is
+                            required</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-input-field">
+                        <label>Email:*</label>
+                        <input type="text" class="form-control custom-input" name="email"
+                            [ngClass]="{ 'is-invalid': isSubmitted && f.email.errors }"
+                            formControlName="email" placeholder="Email">
+                        <small class="text-danger"
+                            *ngIf="isSubmitted && f.email.errors?.required">Email is
+                            required</small>
+                        <small class="text-danger"
+                            *ngIf="isSubmitted && f.email.errors?.pattern">Email is invalid</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Attachment:</label>
+                        <input class="form-control form-control-sm" type="file" id="formFile"
+                        formControlName="filePath"
+                        (change)="onFileChoose($event)">
+                      </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="custom-input-field">
+                        <label>Message:*</label>
+                        <textarea class="form-control custom-input" name="message" formControlName="message"
+                            [ngClass]="{ 'is-invalid': isSubmitted && f.message.errors }" cols="3"
+                            rows="5" placeholder="Message"></textarea>
+                    </div>
+                    <small class="text-danger"
+                        *ngIf="isSubmitted && f.message.errors?.required">Message is
+                        required</small>
+                </div>
+                <!-- <pre>{{contactUsForm.controls.firstNames | json}}</pre> -->
+
+                <div class="col-sm-12 pt-2">
+                    <div class="custom-flex-end">
+                        <button class="custom-btn blue" id="save-btn" (click)="send()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
