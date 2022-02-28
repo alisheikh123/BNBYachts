@@ -73,6 +73,7 @@ export class ChatUsersComponent implements OnInit {
     else {
       users = this.allChatUsers.filter(res => res.isBlocked == false && res.isArchivedUser == false);
       this.chatUsers = Object.assign([], users);
+       
     }
     if (this.chatUsers.length > 0) {
       this.onChangeUser.emit(this.chatUsers[0]);
