@@ -363,6 +363,6 @@
  "Availability": "Availability",
  "AvailableTimeSlots": "Available Time Slots",
  "Calender" : "Calender here",
- "BookedTimeSlots" : "Booked Time slots"
-  "EventBookingCancelledConfirmed":"Event Booking Cancelled Confirmed"
+ "BookedTimeSlots" : "Booked Time slots",
+ "Skip":"Skip"
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { EventService } from 'src/app/core/Event/event.service';
+import { CreatorTypes } from 'src/app/shared/enums/creator-types';
 import { EventTypes } from 'src/app/shared/enums/yacht-search.constant';
 import { EventCreationSuccessModalComponent } from './event-creation-success-modal/event-creation-success-modal.component';
 
@@ -25,6 +26,7 @@ export class EventCreationComponent implements OnInit {
   currentTab = 1;
   isAgree: boolean = false;
   boatExistingEventDates :any;
+  creatorTypes=CreatorTypes;
   @ViewChild('createEventSuccessModal', { static: true }) templateRef: any;
   minDate = new Date(); 
 
@@ -84,7 +86,7 @@ export class EventCreationComponent implements OnInit {
       let data = this.eventCreationForm.value;
       this.eventService.saveEvent(data).subscribe((res: any) => {
         if (res.returnStatus) {
-          this.router.navigate(['/host/host-boat-listing']);
+          this.router.navigate(['/service-provider/service-provider-information/', res.data.id ,this.creatorTypes.Event]);
           // let modal = this.modal.open(EventCreationSuccessModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
           // modal.componentInstance.data = this.eventCreationForm.value;
         }

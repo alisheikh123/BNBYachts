@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CharterService } from 'src/app/core/host/charter.service';
 import { Router } from '@angular/router';
 import { utils } from 'src/app/shared/utility/utils';
+import { CreatorTypes } from 'src/app/shared/enums/creator-types';
 
 @Component({
   selector: 'app-charter-creation-component',
@@ -24,8 +25,8 @@ export class CharterCreationComponentComponent implements OnInit {
   boatlistOptions:any=[];
   isAgree: boolean = false;
   minDate = new Date();
-
-
+  creatorTypes=CreatorTypes;
+  eventId:number;
   ngOnInit(): void {
 
     this.service.getBoats().subscribe((boatlist:any)=>{
@@ -59,6 +60,7 @@ export class CharterCreationComponentComponent implements OnInit {
     if(this.charterCreationForm.valid){
       let data = this.charterCreationForm.value;
       this.service.saveCharter(data).subscribe((res: any) => {
+     this.eventId  = res.id;
           this.openModal(this.templateRef);
       });
     }
@@ -109,6 +111,6 @@ onRenderCell(args: any) {
 }
 Redirect(){
   this.modal.dismissAll();
-    this.route.navigate(['/host-dashboard']);
+  this.route.navigate(['/service-provider/service-provider-information/', this.eventId ,this.creatorTypes.Charter]);
 }
 }
