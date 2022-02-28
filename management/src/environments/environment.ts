@@ -12,13 +12,16 @@ export const environment = {
   PAYMENTS_API_URL: 'https://localhost:44366',
   CHAT_API_URL:'https://localhost:44363',
   S3BUCKET_URL:'https://bnbyachts.s3.amazonaws.com',
+  CAPTAIN_APP_URL:'http://localhost:4201/',
+  MANAGEMENT_APP_URL:'http://localhost:4202/',
+  CLEANING_APP_URL:'http://localhost:4203/',
   stripeKey: "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f",
   Identity: {
     authority: "https://localhost:44311",
-    redirectUrl: "http://localhost:4200",
-    postLogoutRedirectUri: "http://localhost:4200",
-    clientId: "BnBYachts_App",
-    scope: "openid Core Booking Boat Payments HostGateway Chat",
+    redirectUrl: "http://localhost:4202",
+    postLogoutRedirectUri: "http://localhost:4202",
+    clientId: "BnBYachts_Management",
+    scope: "openid Core Booking Boat Payments HostGateway Chat Management",
     responseType: 'code'
   }
 };

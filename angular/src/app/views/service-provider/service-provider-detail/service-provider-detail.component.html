@@ -20,7 +20,7 @@
                 <div class="border-top"></div>
                 <div class="py-2">
                     <div class="py-2 text-center">
-                        <button class="custom-btn blue">{{'Contact'| localization}}</button>
+                        <button (click)="sendMessage()" class="custom-btn blue">{{'Contact'| localization}}</button>
                     </div>
                 </div>
                </div>
@@ -41,14 +41,6 @@
                    </div>
                    <div class="py-2">
                        <p class="medium"><i class="fa fa-map-pin me-3"></i>{{serviceProvider.location}}</p>
-                       <!-- <google-map height="560px" width="600px" [options]="mapOptions" [center]="center" [zoom]="zoom">
-
-                        <map-marker  
-                        [position]="position"
-                        [label]="serviceProvider.location" [title]="serviceProvider.location"
-                        >
-                      </map-marker>
-                    </google-map> -->
                    </div>
                    <div class="row">
                        <div class="col-md-4">

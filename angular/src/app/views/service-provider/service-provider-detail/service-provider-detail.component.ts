@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ChatService } from 'src/app/core/chat/chat.service';
 import { ServiceProviderService } from 'src/app/core/serviceprovider/serviceprovider.service';
 import { UploadDefault } from 'src/app/shared/enums/user-roles';
 import { ServiceProviderDTO } from 'src/app/shared/interface/service-provider/service-providerdto';
@@ -14,13 +15,17 @@ import { environment } from 'src/environments/environment';
 export class ServiceProviderDetailComponent implements OnInit {
   
 id:number;
+senderId:string;
 profilePictureurl :string = environment.S3BUCKET_URL + '/profilePicture/';
 userDefaults = UploadDefault;
 serviceProvider:ServiceProviderDTO=<ServiceProviderDTO>{};
   constructor(public activatedRoute: ActivatedRoute,
     private route: Router,
     private toastr: ToastrService,
-   private serviceproviderService: ServiceProviderService) { }
+   private serviceproviderService: ServiceProviderService,
+   private chatService : ChatService) { 
+    this.senderId = localStorage.getItem('userId')?.toString() || "";
+   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
@@ -54,4 +59,8 @@ if(res)
 });
 
 }
+sendMessage() {
+  this.route.navigate(['/chat', this.serviceProvider.userId]);
+}
+
 }
