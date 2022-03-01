@@ -45,7 +45,10 @@ namespace BnBYachts.Core.Services
         {
             return await _appUserManager.AddHostRole(CurrentUser.Id.ToString());
         }
-
+        public async Task<bool> AddServiceProviderRole(string type)
+        {
+            return await _appUserManager.AddServiceProviderRole(CurrentUser.Id.ToString(), type);
+        }
         [HttpPost]
         [AllowAnonymous]
         [Route("api/Register")]

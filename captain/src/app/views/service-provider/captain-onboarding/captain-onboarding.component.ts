@@ -167,7 +167,6 @@ return false;
       if(res)
       {
         this._serviceProvider.createServiceProvider(formData).subscribe((res: any) => {
-          debugger;
           if (res.returnStatus) {
             this.toastr.success("Captain Onboarding Completed!", "Service Provider");
             this.router.navigate(['service-provider/service-provider-dashboard'])

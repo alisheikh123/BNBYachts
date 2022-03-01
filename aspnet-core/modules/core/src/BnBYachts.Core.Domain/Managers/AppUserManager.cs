@@ -163,6 +163,13 @@ namespace BnBYachts.Core.Managers
             await _userManager.AddToRoleAsync(user, "Host");
             return true;
         }
+        public async Task<bool> AddServiceProviderRole(string userId, string type)
+        {
+            var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            if (user == null || type.IsNullOrWhiteSpace()) return false;
+            await _userManager.AddToRoleAsync(user, type);
+            return true;
+        }
 
         public async Task<ResponseDto> AddRoles(RolesTransferable userInput)
         {

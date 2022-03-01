@@ -5,6 +5,7 @@ using BnBYachts.Core.ServiceProvider.Requestable;
 using BnBYachts.Core.ServiceProvider.Transferable;
 using BnBYachts.Core.Shared.Constants;
 using BnBYachts.Shared.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -17,6 +18,7 @@ using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Core.Services.ServiceProvider
 {
+    [Authorize]
     public class ServiceProviderAppService :ApplicationService ,IServiceProviderAppService
     {
         private readonly IServiceProviderManager _serviceproviderManager;

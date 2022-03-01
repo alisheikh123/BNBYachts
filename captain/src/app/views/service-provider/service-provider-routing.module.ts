@@ -12,7 +12,7 @@ const routes: Routes = [
         path: "captain-onboarding", component: CaptainOnboardingComponent
       },
       {
-        path: "service-provider-dashboard", component:ServiceProviderDashboardComponent
+        path: "captain-dashboard", component:ServiceProviderDashboardComponent
       },
 ];
 
