@@ -15,6 +15,10 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { ErrorService } from 'src/app/core/Error/error.service';
 import { ManagementOnboardingComponent } from './management-onboarding/management-onboarding.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from 'src/environments/environment';
+import { CarouselModule } from 'primeng/carousel';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 
 
@@ -38,8 +42,10 @@ import { ManagementOnboardingComponent } from './management-onboarding/managemen
     ServiceProviderRoutingModule,
     GooglePlaceModule,
     SharedPipesModule,
-    CalendarModule
-
+    CalendarModule,
+    NgxStripeModule.forRoot(environment.stripeKey),
+    NgOtpInputModule,
+    CarouselModule
   ],
   providers: [ServiceProviderService , YachtSearchService, ErrorService]
 })

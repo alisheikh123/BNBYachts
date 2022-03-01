@@ -1,7 +1,6 @@
 import { ForgotPasswordComponent } from './../../auth/components/forgot-password/forgot-password.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { LoginModalComponent } from '../../auth/components/login-modal/login-modal.component';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -13,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { HubConnection} from '@microsoft/signalr';
 import { ChatService } from 'src/app/core/chat/chat.service';
 import { HeaderTabs } from 'src/app/shared/enums/header-tabs';
+import { ManagementComponent } from '../../management/management/management.component';
 
 
 @Component({
@@ -22,10 +22,6 @@ import { HeaderTabs } from 'src/app/shared/enums/header-tabs';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
-  // get hasLoggedIn(): boolean {
-  //   return this.oAuthService.hasValidAccessToken();
-  // }
-  // ,private oAuthService: OAuthService
   userDetails: any;
   private _hubConnection!: HubConnection;
   private readonly socketUrl = environment.CHAT_API_URL + '/chatsocket';
@@ -39,7 +35,7 @@ export class HeaderComponent implements OnInit {
     byHost : false,
     byServiceProvider : false
   };
-  constructor(public router: Router, public app: AppComponent, 
+  constructor(public router: Router, public app: ManagementComponent, 
     private toastr: ToastrService, private modal: NgbModal,
     private oidcSecurityService: OidcSecurityService, 
     private authService: AuthService,private chatService:ChatService) { }
@@ -90,14 +86,6 @@ export class HeaderComponent implements OnInit {
     this.chatService.getUnreadCount().subscribe(res => {
       this.app.unReadChatCount = res;
     })
-  }
-
-  signUp() {
-    let modalRef = this.modal.open(SignupModalComponent, { windowClass: 'custom-modal custom-large-modal' , centered:true});
-  }
-
-  login() {
-    this.oidcSecurityService.authorize();
   }
 
   logout() {
