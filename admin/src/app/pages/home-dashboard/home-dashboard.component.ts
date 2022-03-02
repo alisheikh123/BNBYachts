@@ -22,7 +22,15 @@ export class HomeDashboardComponent implements OnInit{
   ngOnInit(): void {
     this.getTotalUser(this.Roles.USER,this.Roles.HOST);
   }
-
+  GoToUser(){
+    this.router.navigate(['pages/user/users'])
+  }
+  GoToHost(){
+    this.router.navigate(['pages/host/host'])
+  }
+  GoToDispute(){
+    this.router.navigate(['pages/dispute/dispute'])
+  }
   getTotalUser(userRole : string, hostRole : string ){
     this.userService.getTotalUsers(userRole,hostRole).subscribe((res: any) => {
       this.totalUser = res;

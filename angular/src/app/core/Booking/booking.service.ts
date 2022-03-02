@@ -90,4 +90,7 @@ export class BookingService {
   {
     return this.http.post(this.bookingApiUrl + '/api/app/charter-booking/cancel-charter-booking',charterBookingCancellationRequestable).pipe(catchError(this.handleError));
   }
+  getReviewByUserId(revieweeId:string){
+    return this.http.get(this.bookingApiUrl +'/api/app/review/reviews-by-reviewee-id/'+revieweeId).pipe(catchError(this.handleError));
+  }
 }

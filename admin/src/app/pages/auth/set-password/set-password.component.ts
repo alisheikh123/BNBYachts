@@ -12,6 +12,7 @@ import { AuthService } from '../../../core/mock/auth.service';
 })
 export class SetPasswordComponent implements OnInit {
   email: string;
+  id : string ;
   registrationForm: FormGroup;
   hasError: boolean;
   passwordValidator: string;
@@ -22,12 +23,11 @@ export class SetPasswordComponent implements OnInit {
   };
   constructor(
     public authService: AuthService,
-    private toaster : NbToastrService,
     public usersService : UsersService,
+    private toaster : NbToastrService,
     private fb: FormBuilder,
     private router: Router,
-    private route : ActivatedRoute
-    // private toaster: ToastrService,
+    private route : ActivatedRoute,
   )  {
     this.passwordValidator =
     '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z0-9$@$!%*?&].{7,}$';
@@ -39,8 +39,10 @@ export class SetPasswordComponent implements OnInit {
   initForm() {
     debugger;
     this.email = this.route.snapshot.queryParams.username;
+    this.id = this.route.snapshot.queryParams.id;
     this.registrationForm = this.fb.group(
       {
+        Id : this.id,
         Email : this.email,
       Password: [
         '',
@@ -63,9 +65,12 @@ export class SetPasswordComponent implements OnInit {
     this.hasError = false;
     var user = this.registrationForm.value;
     this.usersService.SetAdminPassword(user).subscribe(res => {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('userId');
-      this.router.navigate(['/login']);
+      if(res.status == true){
+        this.router.navigate(['/login']);
+        // this.toaster.primary(res.message , 'Set Passwrod');
+      }else{
+        // this.toaster.danger(res.message , 'Set Passwrod');
+      }
     });
   }
 toggleFieldTextType(isPassword: boolean) {

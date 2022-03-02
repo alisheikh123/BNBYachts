@@ -37,7 +37,7 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
     this.isLoggedIn = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
   getUserInfo() {
     return this.http.get(this.apiCoreURl + "/api/GetLoggedInUserDetails");

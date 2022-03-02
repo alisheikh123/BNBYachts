@@ -32,8 +32,8 @@ export class UserDetailComponent implements OnInit {
       this.userResponse = res;
     }); 
   }
-  UserReviews(reviewerId : string){
-    this.userService.getReviewByUserId(reviewerId).subscribe((res) =>{
+  UserReviews(revieweeId : string){
+    this.userService.getReviewByUserId(revieweeId).subscribe((res) =>{
       this.userReview = res;
       res.forEach((elem: any) => {
         this.userService.getUserInfoById(elem.reviewerId).subscribe((userDetails: any) => {

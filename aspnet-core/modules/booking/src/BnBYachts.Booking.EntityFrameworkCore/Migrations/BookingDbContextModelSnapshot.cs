@@ -377,11 +377,14 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<string>("ReviewDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RevieweeID")
-                        .HasColumnType("int");
+                    b.Property<string>("RevieweeId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReviewerId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("boatId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

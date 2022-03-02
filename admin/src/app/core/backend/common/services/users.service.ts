@@ -18,8 +18,8 @@ export class UsersService extends BoatUserData {
   getUserInfoById(id: string) {
     return this.api.getUserInfoById(id);
   }
-  getReviewByUserId(reviewerId: string): Observable<BookingReview[]> {
-    return this.api.getReviewByUserId(reviewerId);
+  getReviewByUserId(revieweeId: string): Observable<BookingReview[]> {
+    return this.api.getReviewByUserId(revieweeId);
   }
   SuspendUser(userId: string) {
     return this.api.SuspendUser(userId);

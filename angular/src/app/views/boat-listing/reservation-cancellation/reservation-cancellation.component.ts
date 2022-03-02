@@ -275,7 +275,8 @@ export class ReservationCancellationComponent implements OnInit {
       })
       .componentInstance.onSave.subscribe((res: any) => {
         let review = {
-          revieweeID: boatId,
+          revieweeID : this.bookingCancelDetail?.hostId ,
+          boatId: boatId,
           bookingId: this.bkCancel,
           reviewDescription: res.reviewText,
           ratings: res.ratingStars,

@@ -34,8 +34,7 @@ export class ListReviewsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //this.changeReview(event);
-    // this.getReviews();
+    this.changeReview(event);
   }
   changeReview(event : any) {
     if(event == undefined){  
