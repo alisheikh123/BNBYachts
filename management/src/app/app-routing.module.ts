@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./views/management/management.module').then(m => m.ManagementModule)
   },
-  { path: '**', redirectTo: 'app/service-provider' },
+  { path: '**', redirectTo: 'app/management' },
 
 ];
 

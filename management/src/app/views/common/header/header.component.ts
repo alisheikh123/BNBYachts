@@ -4,7 +4,6 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { AppComponent } from 'src/app/app.component';
 import { UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -42,27 +41,12 @@ export class HeaderComponent implements OnInit {
     activeTab: number = 0;
     HEADER_TABS = HeaderTabs;
 
-  ngOnInit(): void {
-    this.oidcSecurityService
-      .checkAuth()
-      .subscribe((res: any) => {
-                if (res.isAuthenticated) {
-          if (res?.accessToken != null && res?.userData?.sub != null) {
-            localStorage.setItem('accessToken', res?.accessToken);
-            localStorage.setItem('userId', res?.userData?.sub);
-          }
-        }
-        const userId = localStorage.getItem('userId');
-        if (userId != null) {
-          this.authService.authenticated = true;
+  ngOnInit(): void {    
           this.getUserDetails();
-          this.getUnreadChatCount();
-        }
-      });
+          this.getUnreadChatCount();       
   }
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
-
         this.userDetails = res;
         if (res?.roles?.length > 1) {
           this.canSwitchAccount = true;
@@ -87,7 +71,6 @@ export class HeaderComponent implements OnInit {
       this.app.unReadChatCount = res;
     })
   }
-
   logout() {
     this.oidcSecurityService.logoff();
     this.authService.authenticated = false;

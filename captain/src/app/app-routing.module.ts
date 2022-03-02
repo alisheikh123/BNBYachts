@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./views/captain/captain.module').then(m => m.CaptainModule)
   },
-  { path: '**', redirectTo: 'app/service-provider' },
+  { path: '**', redirectTo: 'app/captain' },
 
 ];
 
