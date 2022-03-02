@@ -9,6 +9,11 @@ export enum ServiceProviderRole
     captain="captain",
     management='management'
 }
+export enum Roles{
+    User = "USER",
+    Host = "HOST",
+    Admin ="ADMIN"
+}
 
 export enum UserDefaults {
     avatar = "default-avatar.png"

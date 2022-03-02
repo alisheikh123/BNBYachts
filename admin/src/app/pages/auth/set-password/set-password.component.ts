@@ -37,7 +37,6 @@ export class SetPasswordComponent implements OnInit {
     this.initForm();
   }
   initForm() {
-    debugger;
     this.email = this.route.snapshot.queryParams.username;
     this.id = this.route.snapshot.queryParams.id;
     this.registrationForm = this.fb.group(
@@ -67,9 +66,6 @@ export class SetPasswordComponent implements OnInit {
     this.usersService.SetAdminPassword(user).subscribe(res => {
       if(res.status == true){
         this.router.navigate(['/login']);
-        // this.toaster.primary(res.message , 'Set Passwrod');
-      }else{
-        // this.toaster.danger(res.message , 'Set Passwrod');
       }
     });
   }

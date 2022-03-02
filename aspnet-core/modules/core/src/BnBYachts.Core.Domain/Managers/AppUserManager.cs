@@ -195,12 +195,12 @@ namespace BnBYachts.Core.Managers
             return _respone;
 
         }
-        public async Task<UserReview> IsRoleName(string userId)
+        public async Task<UserReview> IsRoleName(string userId, string userRole , string hostRole)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            if (await _userManager.IsInRoleAsync(user, "USER") && await _userManager.IsInRoleAsync(user, "HOST"))
+            if (await _userManager.IsInRoleAsync(user, userRole) && await _userManager.IsInRoleAsync(user, "HOST"))
                 return UserReview.Both;
-            else if(await _userManager.IsInRoleAsync(user, "USER"))
+            else if(await _userManager.IsInRoleAsync(user, userRole))
                 return UserReview.User;
             else
                 return UserReview.Host;

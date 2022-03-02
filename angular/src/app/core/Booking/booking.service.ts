@@ -91,7 +91,7 @@ export class BookingService {
       catchError(this.errorService.handleError));
   }
   getReviewByUserId(revieweeId:string){
-    return this.http.get(this.bookingApiUrl +'/api/app/review/reviews-by-reviewee-id/'+revieweeId).pipe(catchError(this.handleError));
+    return this.http.get(this.bookingApiUrl +'/api/app/review/reviews-by-reviewee-id/'+revieweeId).pipe(catchError(this.errorService.handleError));
   }
   getEventBookingDetailById(eventBookingId:number)
   {

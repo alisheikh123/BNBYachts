@@ -6,7 +6,6 @@
                <div class="custom-card user-info-wrap">
                 <div class="image-with-text">
                     <div class="image-with-text">
-                        {{userResponse?.imagePath}}
                         <form [formGroup]="uploadPictureForm">
                         <div class="avatar-upload-outer edit-avatar-page">
                             <div class="avatar-upload">
@@ -61,7 +60,7 @@
                    <div class="py-2" *ngIf="loggedInUserRole == USER_ROLE.host">
                         <p class="bold pb-2">My Listing</p>
                         <div class="boat-container" *ngFor="let item of userBoats">
-                            <div class="image-wrapper-boat"  *ngFor="let item of (item?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                            <div class="image-wrapper-boat"  *ngFor="let item of (item.boatGalleries | filterBy : 'isCoverPic' : true)">
                                 <img  src="{{assetsUrl + item?.imagePath}}" alt="">
                             </div>
                            <div class="custom-flex-start py-1"> <p class="bold ">New</p> <div class="small-stars yellow-stars ms-2"><span class="fa fa-star stars-clr"></span></div></div>
@@ -82,7 +81,7 @@
                                         <div class="user-details">
                                             <p class="medium">{{user?.userDetails?.name}}</p>
                                             <p class="small-stars">
-                                                <ngb-rating [rate]="user?.ratings" [max]="5" [readonly]="true"></ngb-rating>
+                                                <ngb-rating [rate]="user.ratings" [max]="5" [readonly]="true"></ngb-rating>
                                             </p>
                                         </div>
                                     </div>
@@ -101,7 +100,7 @@
                                     <div class="user-details">
                                         <p class="medium">{{host?.userDetails?.name}}</p>
                                         <p class="small-stars">
-                                            <ngb-rating [rate]="host?.ratings" [max]="5" [readonly]="true"></ngb-rating>
+                                            <ngb-rating [rate]="host.ratings" [max]="5" [readonly]="true"></ngb-rating>
                                         </p>
                                     </div>
                                 </div>

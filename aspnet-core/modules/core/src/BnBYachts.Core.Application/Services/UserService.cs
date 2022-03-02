@@ -87,7 +87,7 @@ namespace BnBYachts.Core.Services
         public async Task<bool> IsEmailExists(string email) => await _appUserManager.IsEmailExist(email).ConfigureAwait(false);
         [AllowAnonymous]
         [HttpGet]
-        public async Task<UserReview> IsRoleName(string userId) => await _appUserManager.IsRoleName(userId);
+        public async Task<UserReview> IsRoleName(string userId, string userRole, string hostRole) => await _appUserManager.IsRoleName(userId, userRole, hostRole);
     }
 
 

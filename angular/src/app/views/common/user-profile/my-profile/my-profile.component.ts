@@ -1,13 +1,16 @@
+import { Reviews } from 'src/app/shared/interface/reviews';
 import { find } from 'rxjs/operators';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BoatService } from 'src/app/core/Boat/boat.service';
 import { environment } from 'src/environments/environment';
-import { UploadDefault, UserRoles } from 'src/app/shared/enums/user-roles';
+import { Roles, UploadDefault, UserRoles } from 'src/app/shared/enums/user-roles';
 import { OnBoardingModalComponent } from '../../on-boarding-modal/on-boarding-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { UserDetails } from 'src/app/shared/interface/UserDetails';
+import { UserBoats } from 'src/app/shared/interface/UserBoats';
 
 @Component({
   selector: 'app-my-profile',
@@ -15,14 +18,15 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./my-profile.component.scss']
 })
 export class MyProfileComponent implements OnInit {
-  userResponse: any;
-  userBoats: any;
+  userResponse: UserDetails;
+  userBoats: Array<UserBoats>;
   totalReviews : number;
-  userReview : Array<any> = [];
-  hostReviews :Array<any> = [];
+  userReview : Array<Reviews> = [];
+  hostReviews :Array<Reviews> = [];
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
   USER_ROLE = UserRoles;
+  roles = Roles;
   USER_DEFAULTS = UploadDefault;
   loggedInUserRole: string | null;
   uploadPictureForm: FormGroup;
@@ -34,17 +38,16 @@ export class MyProfileComponent implements OnInit {
     this.uploadPictureForm = this.fb.group({
       profile: ['']
     });
-    this.authService.getUserInfo().subscribe(res=>{
+    this.authService.getUserInfo().subscribe((res : any)=>{
       this.userResponse = res;
       this.GetReviews(this.userResponse.id)
       this.loggedInUserRole = localStorage.getItem('userRole');
       if(this.loggedInUserRole == this.USER_ROLE.host){
-        this.boatService.getUserBoats(1,5).subscribe(res=>{
+        this.boatService.getUserBoats(1,5).subscribe((res : any)=>{
           this.userBoats = res;
         })
       }
     })
-    // this.GetReviews(this.userResponse.id)
   }
   get f() {
     return this.uploadPictureForm.controls;
@@ -58,19 +61,21 @@ export class MyProfileComponent implements OnInit {
             elem.userDetails = userDetails;
           });
         });
-        this.authService.IsRoleName(review.reviewerId).subscribe(data => {
-          if (data == 0) {
-            this.userReview?.push(review);
-            this.hostReviews?.push(review);
-          } else if(data == 1){
-            this.userReview?.push(review);
-          }
-          else {
-            this.hostReviews?.push(review);
+        this.authService.IsRoleName(review.reviewerId, this.roles.User, this.roles.Host).subscribe(data => {
+          switch (data) {
+            case 0:
+              this.userReview?.push(review);
+              this.hostReviews?.push(review);
+              break;
+            case 1:
+              this.userReview?.push(review);
+              break;
+            case 2:
+              this.hostReviews?.push(review);
+              break;
           }
         })
       });
-      console.log("userReview", this.userReview);
     })
   }
   verifyPhoneNumber()
