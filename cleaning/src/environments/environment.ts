@@ -20,7 +20,7 @@ export const environment = {
     authority: "https://localhost:44311",
     redirectUrl: "http://localhost:4200",
     postLogoutRedirectUri: "http://localhost:4200",
-    clientId: "BnBYachts_App",
+    clientId: "BnBYachts_Cleaning",
     scope: "openid Core Booking Boat Payments HostGateway Chat",
     responseType: 'code'
   }

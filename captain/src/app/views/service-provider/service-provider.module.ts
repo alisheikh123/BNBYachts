@@ -15,6 +15,11 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { ErrorService } from 'src/app/core/Error/error.service';
+import { environment } from 'src/environments/environment';
+import { NgxStripeModule } from 'ngx-stripe';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { CarouselModule } from 'primeng/carousel';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -24,7 +29,8 @@ import { ErrorService } from 'src/app/core/Error/error.service';
     CaptainOnboardingComponent,
     ServiceProviderDashboardComponent,
     UpcomingEventsComponent,
-    ContactListComponent
+    ContactListComponent,
+    
   ],
   imports: [
     NgbModule,
@@ -32,15 +38,21 @@ import { ErrorService } from 'src/app/core/Error/error.service';
     FormsModule,
     CommonModule,
     TimePickerModule ,
+  RouterModule,
     DateRangePickerModule,
     DateTimePickerModule,
     NotFoundModule,
     ServiceProviderRoutingModule,
     GooglePlaceModule,
     SharedPipesModule,
-    CalendarModule
+    CalendarModule,
+    NgxStripeModule.forRoot(environment.stripeKey),
+    NgOtpInputModule,
+    CarouselModule
 
   ],
-  providers: [ServiceProviderService , YachtSearchService, ErrorService]
+  providers: [ 
+     ServiceProviderService , YachtSearchService, ErrorService
+    ]
 })
 export class ServiceProviderModule { }

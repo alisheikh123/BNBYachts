@@ -1,26 +1,6 @@
 <header>
-    <ng-container *ngIf="!isLoggedIn">
-        <div class="header-wrap">
-            <div class="container">
-                <div class="custom-flex-between">
-                    <div class="left-content">
-                        <div class="logo-wrapper">
-                            <a [routerLink]="['']" class="logo-btn"><img src="../../../../assets/images/logo.png" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="right-content">
-                        <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="login()"><span>Login</span></a>
-                            <a href="javascript:void(0)" class="underline-link-blk" data-bs-toggle="modal"
-                            data-bs-target="#signup-modal" (click)="signUp()"><span>Sign Up</span></a>
-                        <a [routerLink]="['/help-center']" class="underline-link-blk"><span>Help</span></a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ng-container>
-    <ng-container *ngIf="isLoggedIn">
+ 
+    <ng-container>
         <div class="header-wrap">
             <div class="container">
                 <div class="custom-flex-between">
@@ -31,16 +11,11 @@
                         </div>
                     </div>
                     <div class="center-content">
-                        <ng-container *ngIf="app.loggedInUserRole == USER_ROLE.host">
-                           
+                        <ng-container >
+                    
                         </ng-container>
                     </div>
                     <div class="right-content">
-                        <!-- <a (click)="earn()" class="custom-btn white grey-btn regular"
-                            *ngIf="userDetails?.roles?.length == 1">Earn With Us</a>
-                        <a (click)="switchRole()" class="custom-btn white grey-btn regular"
-                            *ngIf="userDetails?.roles?.length > 1">Switch to {{app.loggedInUserRole == USER_ROLE.host ?
-                            'User' :'Host'}}</a> -->
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
                                 id="dropdownMenuButton1">
@@ -51,13 +26,12 @@
                                 <li>
                                     <p class="header-content small-text">{{userDetails?.name}}</p>
                                 </li>
-                                <li><a class="dropdown-item" [routerLink]="['/boat-listing/all-reservations']" *ngIf="app.loggedInUserRole == USER_ROLE.user">My Bookings</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/chat']">Messages<span style="float: right;" class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span></a></li>
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
-                                <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" [routerLink]="['/help-center']">Help</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/app/my-profile']" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/app/help-center']">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
 
                             </ul>

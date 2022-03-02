@@ -3,6 +3,7 @@ using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Transferable;
+using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +47,10 @@ namespace BnBYachts.Core.Services
         {
             return await _appUserManager.AddHostRole(CurrentUser.Id.ToString());
         }
-
+        public async Task<EntityResponseModel> AddServiceProviderRole(string type)
+        {
+            return await _appUserManager.AddServiceProviderRole(CurrentUser.Id.ToString(), type);
+        }
         [HttpPost]
         [AllowAnonymous]
         [Route("api/Register")]

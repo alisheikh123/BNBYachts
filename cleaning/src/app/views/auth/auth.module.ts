@@ -15,6 +15,7 @@ import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { NotLoggedInComponent } from './components/not-logged-in/not-logged-in.component';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
     ReactiveFormsModule,
     HttpClientModule,
     AuthRoutingModule,
-    SharedPipesModule
+    SharedPipesModule,
+    LoginComponent
   ],
   declarations: [
       LoginModalComponent,
