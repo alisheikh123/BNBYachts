@@ -43,7 +43,6 @@ export class ContractEditComponent implements OnInit {
 
   loadContractDetails() {
     this.service.getContractById(this.contractId).subscribe((res: any) => {
-      debugger;
       this.contract = res.data;
       this.contractForm = this.fb.group({
         id: [this.contract.id],

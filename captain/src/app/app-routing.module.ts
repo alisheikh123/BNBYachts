@@ -1,45 +1,32 @@
-import { AuthAppModule } from './views/auth/auth.module';
-import { ResetPasswordComponent } from './views/auth/components/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ConfirmEmailComponent } from './views/auth/components/confirm-email/confirm-email.component';
-import { ActivateAccountComponent } from './views/auth/components/activate-account/activate-account.component';
-import { MyProfileComponent } from './views/common/user-profile/my-profile/my-profile.component';
-import { UpdateProfileComponent } from './views/common/user-profile/update-profile/update-profile.component';
+import { LoginComponent } from './views/auth/components/login/login.component';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    loadChildren: () => import('./views/auth/auth.module').then(m => m.AuthAppModule)
+    path: "", component: LoginComponent
   },
   {
-    path: "my-profile", component: MyProfileComponent
+    path: "login", component: LoginComponent
   },
   {
-    path: "update-profile/:id", component: UpdateProfileComponent
+    path: 'app',
+    loadChildren: () => import('./views/captain/captain.module').then(m => m.CaptainModule)
   },
-  {
-    path: 'payments',
-    loadChildren: () => import('./views/payments/payments.module').then(m => m.PaymentsModule)
-  },
-  {
-    path: 'help-center',
-    loadChildren: () => import('./views/help-center/help-center.module').then(m => m.HelpCenterModule)
-  },
-  {
-    
-    path: "", 
-    loadChildren: () => import('./views/service-provider/service-provider.module').then(m => m.ServiceProviderModule)
-  },
-  {
-    path: 'contracts',
-    loadChildren: () => import('./views/contracts/contracts.module').then(m => m.ContractsModule)
-  }
+  { path: '**', redirectTo: 'app/captain' },
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+      scrollPositionRestoration: 'enabled',
+      enableTracing: false
+    })
+  ],
+  exports: [RouterModule],
+  providers: []
 })
 export class AppRoutingModule { }

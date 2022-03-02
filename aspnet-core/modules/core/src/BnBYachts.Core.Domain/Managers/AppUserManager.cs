@@ -10,6 +10,7 @@ using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Transferable;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
+using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -162,6 +163,13 @@ namespace BnBYachts.Core.Managers
             var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
             await _userManager.AddToRoleAsync(user, "Host");
             return true;
+        }
+        public async Task<EntityResponseModel> AddServiceProviderRole(string userId, string type)
+        {
+            var user = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            if (user == null || type.IsNullOrWhiteSpace()) return  new EntityResponseModel{ ReturnStatus=false};
+            await _userManager.AddToRoleAsync(user, type);
+            return new EntityResponseModel();
         }
 
         public async Task<ResponseDto> AddRoles(RolesTransferable userInput)

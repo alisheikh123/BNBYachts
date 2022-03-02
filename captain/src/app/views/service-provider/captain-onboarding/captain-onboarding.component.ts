@@ -164,10 +164,9 @@ return false;
     }
     formData.append('seviceproviderdata', JSON.stringify(data));
     this._serviceProvider.addServiceProviderRole(this.user_Roles.captain).subscribe((res:any)=>{
-      if(res)
+      if(res.returnStatus)
       {
         this._serviceProvider.createServiceProvider(formData).subscribe((res: any) => {
-          debugger;
           if (res.returnStatus) {
             this.toastr.success("Captain Onboarding Completed!", "Service Provider");
             this.router.navigate(['service-provider/service-provider-dashboard'])

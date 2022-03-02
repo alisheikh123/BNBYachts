@@ -18,6 +18,7 @@ namespace BnBYachts.Core.Shared.Interface
         Task<bool> AddHostRole(string userId);
         Task<bool> IsEmailExist(string email);
         Task<ResponseDto> AddRoles(RolesTransferable userInput);
+        Task<bool> AddServiceProviderRole(string userId, string type);
     }
 
 }
