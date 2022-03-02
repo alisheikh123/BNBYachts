@@ -107,4 +107,8 @@ export class AuthService {
   {
     return this.http.get(this.apiCoreURl +"/api/app/on-boarding/change-initial-login-status");
   }
+  IsRoleName(userId : string,userRole : string, hostRole : string)
+  {
+    return this.http.get(this.apiCoreURl +'/api/app/user/is-role-name/'+ userId + '?userRole=' + userRole + '&hostRole'+ hostRole);
+  }
 }

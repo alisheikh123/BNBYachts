@@ -58,7 +58,7 @@
     </div>
   </div>
 </div>
-<div class="container CardSpace">
+<div class="container CardSpace" *ngIf="userReview?.length  != 0">
   <div class="row gutters">
     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-6">
       <div class="card h-100">
@@ -98,7 +98,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-6">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-6" *ngIf="userBoats?.length  != 0">
       <div class="card h-100">
         <div class="card-body">
           <div class="row gutters">

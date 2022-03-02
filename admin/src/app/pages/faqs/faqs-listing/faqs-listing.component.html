@@ -15,7 +15,7 @@
   <div class="modal-content">
     <div class="modal-header no-border">
       <h4 class="bold">Add Faqs</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -63,7 +63,7 @@
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="faqsForm.invalid">Submit</button>
-                <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Close</button>
+                <button type="button" class="btn btn-light" (click)="resetForm()" (click)="modal.dismiss('Cross click')">Close</button>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@
   <div class="modal-content">
     <div class="modal-header no-border">
       <h4 class="bold">Update Faqs</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -138,7 +138,7 @@
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="faqsForm.invalid">Submit</button>
-                <button type="button" class="btn btn-light"   (click)="modal.dismiss('Cross click')">Close</button>
+                <button type="button" class="btn btn-light" (click)="resetForm()"  (click)="modal.dismiss('Cross click')">Close</button>
             </div>
           </div>
         </div>

@@ -56,7 +56,6 @@ namespace BnBYachts.Core.Managers
             response.Hosts = host.Count();
             return response;
         }
-
         public async Task<AdminResponseDto> SuspendUser(Guid id)
         {
             var response = new AdminResponseDto();
@@ -89,9 +88,7 @@ namespace BnBYachts.Core.Managers
             {
                 var isRoleAssigned = await _userManager.AddToRoleAsync(user, "ADMIN");
                 if (!isRoleAssigned.Succeeded)
-                {
                     return _respone;
-                }
                 await SendEmailForAdminConfirmationAsync(user);
                 _respone.Message = "Account created successfully";
             }
@@ -106,7 +103,7 @@ namespace BnBYachts.Core.Managers
         {
             var rootUrl = _config.GetSection("App:AdminUrl").Value;
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            user.SetProperty(UserConstants.EmailConfirmationToken, true);
+            user.SetProperty(UserConstants.EmailConfirmationToken, token);
             await _repository.UpdateAsync(user);
             string baseUrl = rootUrl + "/setpassword";
             var queryParams = new Dictionary<string, string>()
@@ -126,16 +123,30 @@ namespace BnBYachts.Core.Managers
         public async Task<AdminResponseDto> SetAdminPassword(SetPasswordRequestable userInput)
         {
             var response = new AdminResponseDto();
-            var user = await _userManager.FindByEmailAsync(userInput.Email);
-            await _userManager.RemovePasswordAsync(user);
-            var result = await _userManager.AddPasswordAsync(user, userInput.Password);
-            if (result.Succeeded)
+            var user = await _userManager.FindByEmailAsync(userInput.Email).ConfigureAwait(false);
+            if (user != null)
             {
-               response.Message = "Password created Successfully";
+                var result1 = await _userManager.ConfirmEmailAsync(user, userInput.Id).ConfigureAwait(false);
+                if (result1.Succeeded)
+                {
+                    var result = await _userManager.AddPasswordAsync(user, userInput.Password);
+                    if (result.Succeeded)
+                        response.Message = "Password created Successfully";
+                    else
+                    {
+                        response.Message = result.Errors.ToList().FirstOrDefault()?.Description;
+                        response.Status = false;
+                    }
+                }
+                else
+                {
+                    response.Message = result1.Errors.ToList().FirstOrDefault()?.Description;
+                    response.Status = false;
+                }
             }
             else
             {
-                response.Message = result.Errors.ToList().FirstOrDefault()?.Description;
+                response.Message = "User Not Found";
                 response.Status = false;
             }
             return response;

@@ -14,7 +14,7 @@ import { BoatsData, BoatsDetail } from '../../../shared/interfaces/Boats';
 })
 export class HostDetailComponent implements OnInit {
   userResponse : BoatUser;
-  userReview : BookingReview;
+  userReview : BookingReview[];
   userBoats : BoatsDetail[];
   latest_date : string;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';

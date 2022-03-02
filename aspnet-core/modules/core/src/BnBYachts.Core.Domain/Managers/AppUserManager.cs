@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BnBYachts.Core.Enum;
 using BnBYachts.Core.Shared;
 using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
@@ -193,6 +194,16 @@ namespace BnBYachts.Core.Managers
             }
             return _respone;
 
+        }
+        public async Task<UserReview> IsRoleName(string userId, string userRole , string hostRole)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (await _userManager.IsInRoleAsync(user, userRole) && await _userManager.IsInRoleAsync(user, hostRole))
+                return UserReview.Both;
+            else if(await _userManager.IsInRoleAsync(user, userRole))
+                return UserReview.User;
+            else
+                return UserReview.Host;
         }
     }
 }

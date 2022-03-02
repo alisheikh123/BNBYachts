@@ -90,6 +90,9 @@ export class BookingService {
     return this.http.post(this.bookingApiUrl + '/api/app/event-booking/cancel-event-booking',eventBookingCancellationRequestable).pipe(
       catchError(this.errorService.handleError));
   }
+  getReviewByUserId(revieweeId:string){
+    return this.http.get(this.bookingApiUrl +'/api/app/review/reviews-by-reviewee-id/'+revieweeId).pipe(catchError(this.errorService.handleError));
+  }
   getEventBookingDetailById(eventBookingId:number)
   {
     return this.http.get(this.bookingApiUrl +'/api/app/event-booking/event-booking-detail-by-id/'+eventBookingId).pipe(
@@ -99,5 +102,4 @@ export class BookingService {
   {
     return this.http.get(this.bookingApiUrl +'/api/app/event-booking/booking-cancel-detail/'+bookingId).pipe(catchError(this.errorService.handleError));
   }
-
 }

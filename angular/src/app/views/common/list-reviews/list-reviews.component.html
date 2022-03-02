@@ -61,12 +61,12 @@
             <div class="user-details">
                 <p class="medium">{{item?.userDetails?.name}}</p>
                 <p class="small-stars">
-                  <ngb-rating [rate]="item.ratings" [max]="5"></ngb-rating>
+                  <ngb-rating [rate]="item.ratings" [max]="5" [readonly]="true"></ngb-rating>
                 </p>
             </div>
         </div>
         <p class="my-3 line-clamp-1"> {{item?.reviewDescription}} </p>
-        <p><small style="font-size: .675em">{{item?.creationTime | date:'short'}}</small></p>
+        <p><small class="date-style">{{item?.creationTime | date:'short'}}</small></p>
     </div>
     </div>
         <div class="col-sm-12 py-2 text-right">
