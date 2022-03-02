@@ -198,7 +198,7 @@ namespace BnBYachts.Core.Managers
         public async Task<UserReview> IsRoleName(string userId, string userRole , string hostRole)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            if (await _userManager.IsInRoleAsync(user, userRole) && await _userManager.IsInRoleAsync(user, "HOST"))
+            if (await _userManager.IsInRoleAsync(user, userRole) && await _userManager.IsInRoleAsync(user, hostRole))
                 return UserReview.Both;
             else if(await _userManager.IsInRoleAsync(user, userRole))
                 return UserReview.User;
