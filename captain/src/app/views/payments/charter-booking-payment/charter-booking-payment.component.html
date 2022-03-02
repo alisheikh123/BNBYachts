@@ -1,0 +1,153 @@
+<div class="main-wrapper" *ngIf="!isPaymentFailed">
+    <div class="container section-padding payment-method-wrapper">
+        <div class="btn-back">
+                <a [routerLink]="['/boat-listing/charter-details',charterId]" class="backLink">
+                    <i class="fas fa-chevron-left leftIcon"></i>
+                  </a>
+            <h2 class="bold">Book a Charter</h2>
+        </div>
+        <div class="row m-0">
+            <div class="col-md-5 payment-method-left-box py-2">
+                <app-user-payment-methods></app-user-payment-methods>
+                <div>
+                    <p>By selecting the button below, iagree to the <a href="#" class="underline-blue-link">host's house
+                            rules. Airbnb's Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <div>
+
+                    <button [disabled]="disablePayment()" (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">Confirm and
+                        Pay</button>
+                </div>
+                <div>
+                    <h6 class="medium-bold mb-3">Cancellation Policy</h6>
+                    <div *ngIf="this.cancellationPolicyString.length<=20; else GreaterThanLimitBlock">
+                        <p>{{this.cancellationPolicyString}}</p>
+                    </div>
+                    <ng-template #GreaterThanLimitBlock>
+                        {{this.readAll?(this.cancellationPolicyString):(this.cancellationPolicyString|slice:0:21)}}
+                        <button class="underline-blue-link py-2 no-underline" (click)="this.readAll=!this.readAll">{{this.readAll?'Read Less':'Read More...'}}</button>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col-md-7 py-2">
+                <div class="payment-main-wrap">
+                    <div class="payment-method-card-wrapper">
+                        <div class="payment-method-card">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="payment-method-img"
+                                        *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                        <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="payment-method-content">
+                                        <h6 class="px-2 medium">{{charterDetails?.boat?.name}}</h6>
+                                        <div class="custom-flex-start flex-mobile-column w-100">
+                                            <div class="custom-flex-start  w-100 p-1">
+                                                <p class="medium px-2 w-50">Departure From:</p>
+                                                <p class=" w-50">{{charterDetails?.departingFrom}}</p>
+                                            </div>
+                                            </div>
+                                            <div class="custom-flex-start flex-mobile-column w-100">
+                                            <div class="custom-flex-start  w-100 p-1">
+                                                <p class="medium px-2 w-50">Destination:</p>
+                                                <p class=" w-50">{{charterDetails?.destination}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Departure Date:</p>
+                                            <p class=" w-50">{{charterDetails?.departureFromDate | date}}</p>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Arrival Date:</p>
+                                            <p class=" w-50">{{charterDetails?.departureToDate | date}}</p>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Departure Time:</p>
+                                            <p class=" w-50">{{charterDetails?.DepartureTime}}</p>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Arrival Time:</p>
+                                            <p class=" w-50">{{charterDetails?.ArrivalTime}}</p>
+                                        </div>
+                                        <ng-container *ngIf="charterDetails?.isRoundTrip">
+                                        <h6 class="py-4 px-2 pb-2 medium">Return Details</h6>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Return Date:</p>
+                                            <p class=" w-50">{{charterDetails?.returnDate | date}}</p>
+                                        </div>
+                                        <div class="custom-flex-start  w-100 p-1">
+                                            <p class="medium px-2 w-50">Return Time:</p>
+                                            <p class=" w-50">{{charterDetails?.ReturnTime }}</p>
+                                        </div>
+                                    </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row custom-margin">
+                            <div class="col-12" *ngIf="charterDetails?.isFullBoatCharges==false">
+                                <h6 class="medium py-md-3">Price Details</h6>
+                                <div class="custom-flex-between">
+                                    <p>Quote Amount</p>
+                                    <p>${{charterDetails?.isFullBoatCharges ? charterDetails?.charterFee :
+                                        charterDetails?.charterFee * (charterFilterDetails.adults +
+                                        charterFilterDetails.childrens) }}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Tax Fee</p>
+                                    <p>${{charterDetails?.boat?.taxFee}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Service Fee</p>
+                                    <p>$20.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Total(USD)</p>
+                                    <p>$ {{charterDetails?.isFullBoatCharges ? charterDetails?.charterFee :
+                                        charterDetails?.charterFee * (charterFilterDetails.adults +
+                                        charterFilterDetails.childrens) + charterDetails?.boat?.taxFee + 20}}.00</p>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="charterDetails?.isFullBoatCharges==true">
+                                <h6 class="medium py-md-3">Price Details</h6>
+                                <div class="custom-flex-between">
+                                    <p>Quote Amount</p>
+                                    <p>${{charterDetails?.charterFee}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Tax Fee</p>
+                                    <p>${{charterDetails?.boat?.taxFee}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Service Fee</p>
+                                    <p>$20.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>Total(USD)</p>
+                                    <p class="medium">$ {{charterDetails?.charterFee  + charterDetails?.boat?.taxFee+ 20}}.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end">
+
+                        <div class="col-12">
+                            <div class="custom-flex-start align-items-start">
+                                <img src="../../../../assets/images/reservation-img.png" alt="">
+                                <div class="ms-2">
+                                    <p class="medium">Your reservation won't be confirmed until host accepts your
+                                        request with in 24 hours</p>
+                                    <p>You won't be charged until then.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

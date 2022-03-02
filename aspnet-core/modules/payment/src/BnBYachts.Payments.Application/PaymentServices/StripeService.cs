@@ -1,8 +1,11 @@
-﻿using BnBYachts.Payments.Shared.Interface;
+﻿using BnBYachts.Payments.Requestables;
+using BnBYachts.Payments.Shared.Interface;
 using BnBYachts.Payments.Shared.Requestable;
 using BnBYachts.Payments.Shared.Transferable;
+using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
@@ -16,8 +19,6 @@ namespace BnBYachts.Payments.PaymentServices
         {
             _paymentManager = paymentManager;
         }
-
-
         [HttpGet]
         [Authorize]
         [Route("api/get-customers-cards")]
@@ -51,29 +52,31 @@ namespace BnBYachts.Payments.PaymentServices
             return response;
         }
 
-        //public void CreateAccount(Account account)
-        //{
-        //    StripeConfiguration.ApiKey = "pk_test_51JjjR4IQmeuKTcwEUxVurdeswUrX0kjd0thsgPIYZpOiuPm7wf2XdKjWBjU2FtsT8PGjxmj7lCXU7QPA35qXuRPY00YGIKhP5f";
+        public async Task CreateConnectAccount(StripeOnboardingRequestable data)
+        {
+            data.FirstName = CurrentUser.Name.Trim();
+            data.LastName = CurrentUser.Name.Trim();
+            data.Email = CurrentUser.Email;
+            await _paymentManager.CreateAccount(data, CurrentUser.Id.ToString());
+        }
 
-        //    var options = new AccountCreateOptions
-        //    {
-        //        Type = account.BusinessType,
-        //        Country = account.Country,
-        //        Email = account.Email,
-        //        Capabilities = new AccountCapabilitiesOptions
-        //        {
-        //            CardPayments = new AccountCapabilitiesCardPaymentsOptions
-        //            {
-        //                Requested = true,
-        //            },
-        //            Transfers = new AccountCapabilitiesTransfersOptions
-        //            {
-        //                Requested = true,
-        //            },
-        //        },
-        //    };
-        //    var service = new AccountService();
-        //    service.Create(options);
-        //}
+        public async Task<string> GetAccountDetails()
+          => await _paymentManager.GetAccountDetails(CurrentUser.Id.ToString()).ConfigureAwait(false);
+        public async Task SendToBankAmount(string accountId, int amount)
+        {
+            await _paymentManager.SendToBankAmount(accountId, amount);
+        }
+        public async Task<EntityResponseModel> CalculateFunds(List<BookingsRequestable> data)
+            => await _paymentManager.CalculateFunds(data).ConfigureAwait(false);
+
+        public async Task<StripeList<BalanceTransaction>> GetTransactionDetails(string accountId)
+        {
+            return await _paymentManager.GetTransactionDetails(accountId).ConfigureAwait(false);
+        }
+
+        public async Task<string> GetCustomerTransactions()
+        {
+            return await _paymentManager.GetCustomerTransactions(CurrentUser.Id.ToString()).ConfigureAwait(false);
+        }
     }
 }

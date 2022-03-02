@@ -16,6 +16,7 @@ import { UserPaymentMethodsComponent } from './user-payment-methods/user-payment
 import { BookingConfirmedModalComponent } from './charter-booking-payment/booking-confirmed-modal/booking-confirmed-modal.component';
 import { ContractPaymentComponent } from './contract-payment/contract-payment.component';
 import { ContractsService } from 'src/app/core/contracts/contracts.service';
+import { BillingComponent } from './billing/billing.component';
 
 
 
@@ -26,7 +27,8 @@ import { ContractsService } from 'src/app/core/contracts/contracts.service';
     EventBookingPaymentComponent,
     UserPaymentMethodsComponent,
     BookingConfirmedModalComponent,
-    ContractPaymentComponent
+    ContractPaymentComponent,
+    BillingComponent
   ],
   imports: [
     PaymentsRoutingModule,

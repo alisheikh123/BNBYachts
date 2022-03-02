@@ -1,0 +1,186 @@
+<div class="main-wrapper" *ngIf="!isBookingConfirmed && !isPaymentFailed">
+    <div class="container section-padding payment-method-wrapper">
+
+        <div class="btn-back">
+                <a [routerLink]="['/boat-listing/boatel-details',boatId]" class="backLink">
+                    <i class="fas fa-chevron-left leftIcon"></i>
+                  </a>
+            <h2 class="bold">{{'BookaBoatel' | localization}}</h2>
+        </div>
+        <div class="row m-0">
+            <div class="col-md-5 payment-method-left-box py-2">
+               <app-user-payment-methods></app-user-payment-methods>
+                <div>
+                    <p>{{'selectingbtn' | localization}} <a href="" class="underline-blue-link">{{'lorem' | localization }}</a> {{'loremDesc' | localization}}</p>
+                </div>
+                <div>
+
+                    <button [disabled]="disablePayment()" (click)="confirmBooking()" class="custom-btn blue d-block custom-margin">
+                        {{'PayConfirmation' | localization}}
+                    </button>
+                </div>
+                <div>
+                    <h6 class="medium-bold mb-3">Cancellation Policy</h6>
+                        <div *ngIf="((this.cancellationPolicyString.length<=20));else greaterThanLimitBlock">
+                            <p>{{this.cancellationPolicyString}}</p>
+                        </div>
+                        <ng-template #greaterThanLimitBlock>
+                            {{ this.readAll ? (this.cancellationPolicyString):(this.cancellationPolicyString|slice:0:21) }}
+                            <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.readAll = !this.readAll">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
+                          </ng-template>
+                </div>
+            </div>
+            <div class="col-md-7 py-2">
+                <div class="payment-main-wrap">
+                    <div class="payment-method-card-wrapper">
+                        <div class="payment-method-card">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="payment-method-img"
+                                        *ngFor="let item of (boatDetails?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                        <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="payment-method-content">
+                                        <p class="px-2 bold">{{boatDetails?.name}}</p>
+                                        <div class="custom-flex-start align-items-start">
+                                            <p class="medium px-2">{{'Location' | localization}}:</p>
+                                            <p>{{boatDetails?.location}}</p>
+                                        </div>
+                                        <div class="custom-flex-start flex-mobile-column">
+                                            <div class="custom-flex-start">
+                                                <p class="medium px-2">{{'CheckInDate' | localization}}</p>
+                                                <p>{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="custom-flex-start flex-mobile-column">
+                                            <div class="custom-flex-start">
+                                                <p class="medium px-2">{{'CheckOutDate' | localization}}</p>
+                                                <p>{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p>
+                                            </div>
+                                            </div>
+                                        <div class="custom-flex-start flex-mobile-column">
+                                            <div class="custom-flex-start">
+                                                <p class="medium px-2">{{'CheckInTime' | localization}}</p>
+                                                <p>{{boatDetails?.checkinTime | date:'hh:mm a'}}</p>
+                                            </div>
+                                            </div>
+                                        <div class="custom-flex-start flex-mobile-column">
+                                            <div class="custom-flex-start">
+                                                <p class="medium px-2">{{'CheckOutTime' | localization}}</p>
+                                                <p>{{boatDetails?.checkoutTime | date:'hh:mm a'}}</p>
+                                            </div>
+                                            </div>
+
+
+                                        <div class="custom-flex-start">
+                                            <p class="medium px-2">{{'Bathroom' | localization}}</p>
+                                            <p>{{boatDetails?.totalBedrooms}}</p>
+                                        </div>
+                                        <div class="custom-flex-start">
+                                            <p class="medium px-2">{{'Bedroom' | localization}}:</p>
+                                            <p>{{boatDetails?.totalWashrooms}}</p>
+                                            </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row custom-margin">
+                            <div class="col-12">
+                                <h6 class="medium py-md-3">{{'PriceDetails' | localization}}</h6>
+                                <div class="custom-flex-between">
+                                    <p>$ {{boatDetails?.perDayCharges}} x {{booking?.days}} {{'Night' | localization}}</p>
+                                    <p>${{booking?.amount}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>{{'TaxFee' | localization}}</p>
+                                    <p>${{boatDetails?.taxFee}}.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>{{'ServiceFee' | localization}}</p>
+                                    <p>$20.00</p>
+                                </div>
+                                <div class="custom-flex-between">
+                                    <p>{{'Total(USD)' | localization}}</p>
+                                    <p>$ {{booking?.amount + boatDetails?.taxFee+ 20}}.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end">
+
+                        <div class="col-12">
+                            <div class="custom-flex-start align-items-start">
+                                <img src="../../../../assets/images/reservation-img.png" alt="">
+                                <div class="ms-2">
+                                    <p class="medium">{{'hostAcceptanceDescription' | localization}}</p>
+                                    <p>{{'chargeDes' |localization}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-wrapper auto-height custom-flex" *ngIf="isBookingConfirmed && !isPaymentFailed">
+    <div class="section-padding w-100">
+        <div class="container">
+       <div class="row">
+           <div class="col-md-6 py-2 text-center">
+               <div class="img-wrapper big-image">
+                   <img src="../../../../assets/images/boat.png" alt="">
+               </div>
+               <h2 class="medium">{{'bookingRequestSent' | localization}}</h2>
+               <p class="line-clamp-1 my-2 medium-container">{{'LoremDescription'| localization}} </p>
+               <a [routerLink]="['/boat-listing/all-reservations']" class="custom-btn blue big-btn my-2">{{'Home'| localization}}</a>
+           </div>
+           <div  class="col-md-6 py-2">
+            <div class="payment-main-wrap">
+                <div class="payment-method-card-wrapper">
+
+                    <div class="row custom-margin">
+                        <div class="col-12">
+                            <h6 class="medium py-md-3">{{'BoatelDetails'| localization}}</h6>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'Location'| localization}}:</p> <p class="grey">{{boatDetails?.location}}</p></div>
+                            <div class="custom-flex-between  py-1"><p class="medium"> {{'Bedroom'| localization}}:</p> <p class="grey">{{boatDetails?.totalBedrooms}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'Bathroom'| localization}}:</p> <p class="grey">{{boatDetails?.totalWashrooms}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'CheckInDate'| localization}}:</p> <p class="grey">{{boatFilterDetails?.checkinDate | date:'dd-MM-YYYY'}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'CheckOutDate'| localization}}:</p> <p class="grey">{{boatFilterDetails?.checkoutDate | date:'dd-MM-YYYY'}}</p></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'totalNights'| localization}}:</p> <p class="grey">{{booking?.days}} Nights</p></div>
+                            <div class="border-top my-3"></div>
+                            <div class="custom-flex-between py-1"><p class="medium">{{'Total(USD)'| localization}}:</p> <p class="grey">$ {{booking?.amount + boatDetails?.taxFee + 20 }}.00</p></div>
+                            <div class="custom-flex py-2">
+                                <button class="custom-btn blue big-btn" [routerLink]="['/boat-listing/all-reservations']">{{'gotoReservation'| localization}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+            </div>
+           </div>
+       </div>
+       </div>
+    </div>
+  </div>
+  <div class="main-wrapper custom-flex center-content center-content-vertically" *ngIf="!isBookingConfirmed && isPaymentFailed">
+    <div class="section-padding payment-method-wrapper">
+        <div class="custom-center-card">
+            <div class="custom-center-card-img">
+             <div class="">
+                 <img src="../../../../assets/images/loader-error.png" alt="">
+               </div>
+            </div>
+            <div class="custom-center-card-message py-sm-3 px-sm-5">
+                <h4 class="py-3 bold"> {{'PaymentFailed'| localization}}</h4>
+                <p class="grey "> {{'PaymentTryAgain'| localization}}</p>
+            </div>
+            <div><button (click)="retryPayment()" class="custom-btn red big-btn mt-3"> {{'TryAgain'| localization}}</button></div>
+        </div>
+    </div>
+    </div>

@@ -39,9 +39,9 @@
                                     </span>
                                     Dashboard
                             </a>
-                            <a class="underline-link-blk" (click)="activeTab=HEADER_TABS.ServiceProvider" [ngClass]="{'active':activeTab == HEADER_TABS.ServiceProvider}">
+                            <a  [routerLink]="['/service-provider/services']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.ServiceProvider" [ngClass]="{'active':activeTab == HEADER_TABS.ServiceProvider}">
                                 <span class="logo-wrapper">
-                                    <a class="logo-btn"><img src="../../../../assets/images/provider-icon.svg"
+                                    <a  class="logo-btn"><img src="../../../../assets/images/provider-icon.svg"
                                         alt=""></a>
                                     </span>
                                     Service Provider
@@ -114,6 +114,8 @@
                                 <li><a class="dropdown-item" href="#">Notification</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['wishlists']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/host/settings/wallet']" *ngIf="app.loggedInUserRole == USER_ROLE.host">Wallet</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/payments/billing']" *ngIf="app.loggedInUserRole == USER_ROLE.user">Billings</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/my-profile']" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" [routerLink]="['/help-center']">Help</a></li>
                                 <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>

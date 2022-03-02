@@ -1,0 +1,6 @@
+<div *ngIf="!isAlreadyManager">
+<app-management-onboarding></app-management-onboarding>
+</div>
+<div  *ngIf="isAlreadyManager"> 
+<app-service-provider-dashboard></app-service-provider-dashboard>
+</div>

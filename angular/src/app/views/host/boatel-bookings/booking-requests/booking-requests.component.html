@@ -1,5 +1,5 @@
 <div class="filter-wrap mb-3 custom-flex-between">
-    <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>
+    <app-booking-filter [serviceType]="listingFilter.selectedServiceType" (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>
 </div>
 <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.boatel">
 <div class="custom-card req-user-card custom-margin" *ngFor="let item of boatelBookings; let i = index">

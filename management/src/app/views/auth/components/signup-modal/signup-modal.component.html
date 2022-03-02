@@ -1,0 +1,172 @@
+<!-- <div id="myModal" class="modal fade" role="dialog"> -->
+
+<div class="modal-content">
+  <div class="modal-header no-border">
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form" [formGroup]="registrationForm" novalidate="novalidate" (ngSubmit)="submit()">
+      <div class="custom-modal-inner">
+        <div class="side-img-left">
+          <img src="../../../../../assets/images/signup-wrap.png" alt="">
+        </div>
+        <div class="modal-content-inner-text">
+          <h4 class="bold">{{'Signup'|localization}}</h4>
+          <div class="form-text-inner">
+            <div class="row">
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class="custom-input-field">
+                  <label>{{'FirstName'|localization}}</label>
+                  <input type="text" class="custom-input" placeholder="First Name" name="firstname"
+                    formControlName="FirstName">
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'First name is required',
+                      control: registrationForm.controls['FirstName']
+                  }"></ng-container>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class="custom-input-field">
+                  <label>{{'LastName'|localization}}</label>
+                  <input type="text" class="custom-input" name="lastname" formControlName="LastName"
+                    placeholder="Last Name">
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                  validation: 'required',
+                                                  message: 'Last name is required',
+                                                  control: registrationForm.controls['LastName']
+                                                }"></ng-container>
+                </div>
+              </div>
+              <!-- email -->
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class="custom-input-field">
+                  <label>{{'Email'|localization}}</label>
+                  <input type="email" class="custom-input" placeholder="Email Address" name="email"
+                    formControlName="Email" autocomplete="off">
+                  <!-- <p class="small-txt-error">Invalid email</p> -->
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'required',
+                    message: 'Email is required',
+                    control: registrationForm.controls['Email']
+                  }"></ng-container>
+
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'pattern',
+                    message: 'Invalid Email',
+                    control: registrationForm.controls['Email']
+                  }"></ng-container>
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                              validation: 'emailTaken',
+                                              message: 'Email Already Exists',
+                                              control: registrationForm.controls['Email']
+                                            }"></ng-container>
+                </div>
+              </div>
+              <!-- date of birth -->
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class="custom-input-field">
+                  <label class="label-withtooltip"><span>{{'DateOfBirth'|localization}}</span> <div class="tooltip-wrapper"><span class="circle-icon"><i class="fa fa-info"></i></span><div class="tooltip-dialogue"><p class="small-mini-text grey white-bg-card">{{"AgeLimitMessage" | localization}}</p></div></div></label>
+                    <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                      <input class="custom-input" type="date" formControlName="DOB" [max]="getToday()">
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'required',
+                          message: 'Date of birth is required',
+                          control: registrationForm.controls['DOB']
+                        }"></ng-container>
+                    </div>              
+                </div>
+              </div>
+              <!-- password -->
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class=" custom-input-field">
+                  <label>{{'Password'|localization}}</label>
+                  <div class="tooltip-wrapper">
+                    <input id="password-field" [attr.type]="passwordViewer.passwordFieldTextType ? 'text':'password'"
+                      class="custom-input" (change)="onPasswordChange()" name="password" formControlName="Password">
+                    <span toggle="#password-field" (click)="toggleFieldTextType(true)"
+                      class="fa fa-fw field-icon toggle-password" [ngClass]="{
+                        'fa-eye-slash': !passwordViewer.passwordFieldTextType,
+                        'fa-eye': passwordViewer.passwordFieldTextType
+                      }"></span>
+                    <div class="tooltip-dialogue">
+                      <p class="small-text bold">{{'tipChoosingAPassword'|localization}}</p>
+                      <p class="small-text dark-grey">{{'tipYourPasswordMustInclude'|localization}}</p>
+                      <ul>
+                        <li class="small-text">{{'tipAtLeast8Characters'|localization}}</li>
+                        <li class="small-text">{{'tipUpperAndLowerCase'|localization}}</li>
+                        <li class="small-text">{{'tipNumbers'|localization}}</li>
+                        <li class="small-text">{{'tipSpecialCharacters'|localization}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'pattern',
+                      message: 'Invalid Password',
+                      control: registrationForm.controls['Password']
+                    }"></ng-container>
+                </div>
+              </div>
+              <!-- confirm password -->
+              <div class="col-md-6 col-sm-12 py-2">
+                <div class="custom-input-field pswd-field">
+                  <label>{{'ConfirmPassword'|localization}}</label>
+                  <div class="p-relative">
+                    <input id="password-fields"
+                      [attr.type]="passwordViewer.confirmPasswordFieldTextType == true ? 'text':'password'"
+                      class="custom-input" name="confirmPassword" (change)="onPasswordChange()"
+                      formControlName="confirmPassword" autocomplete="off">
+                    <span toggle="#password-fields" (click)="toggleFieldTextType(false)"
+                      class="fa fa-fw field-icon toggle-cnfrm-pswd" [ngClass]="{
+                        'fa-eye-slash': !passwordViewer.confirmPasswordFieldTextType,
+                        'fa-eye': passwordViewer.confirmPasswordFieldTextType
+                      }"></span>
+                  </div>
+                </div>
+                <span class="text-danger"
+                  *ngIf="registrationForm.controls['confirmPassword'].hasError('mismatch')">{{'vPasswordDoNotMatch'| localization}}</span>
+              </div>
+              <!-- <ng-container *ngIf="
+                        registrationForm.controls['confirmPassword'].errors &&
+                        registrationForm.controls['confirmPassword'].errors.ConfirmPassword
+                        ">
+                        <div class="fv-plugins-message-container">
+                          <div class="fv-help-block">
+                            'Passsword' and 'Confirm Password' didn't match.
+                          </div>
+                        </div>
+                      </ng-container> -->
+            </div>
+            <div class="col-sm-12 custom-margin text-right mobile-padding-btns">
+              <label class="custom-checkbox">
+                <input type="checkbox" formControlName="agree" name="agree">
+                <p class="small-text">I agree to BnBYacht's <a href="javascript:void(0)" class="underline-blue-link">Terms of Service</a>, <a href="javascript:void(0)" class="underline-blue-link">Disclaimer</a> and acknowledge the <a href="javascript:void(0)" class="underline-blue-link">Privacy Policy</a>.</p>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="col-sm-12 py-2 pb-3 text-center">
+              <button type="submit" class="custom-btn blue big-btn"
+                [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value">{{'Continue'|localization}}</button>
+            </div>
+            <!-- <div class="col-sm-12 text-center">
+                <p class="small-text light">Already have an Account? <a href="javascript:void(0)"  (click)="login()" class="underline-blue-link">Log in</a></p>
+              </div> -->
+          </div><!-- form inner text -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

@@ -65,7 +65,7 @@ namespace BnBYachts.Core.IdentityServer
 
         private async Task CreateApiScopesAsync()
         {
-            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "HostGateway", "Chat", "Admin"});
+            await CreateApiScopeAsync(new[] { "Core", "Payments", "Booking", "Boat", "HostGateway", "Chat", "Admin", "Captain", "Management", "Cleaning"});
         }
 
         private async Task CreateApiResourcesAsync()
@@ -80,7 +80,7 @@ namespace BnBYachts.Core.IdentityServer
                 "role"
             };
 
-            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "HostGateway", "Chat", "Admin" }, commonApiUserClaims);
+            await CreateApiResourceAsync(new[] { "Core","Payments","Booking","Boat", "HostGateway", "Chat", "Admin" , "Captain", "Management", "Cleaning" }, commonApiUserClaims);
         }
 
         private async Task<ApiResource> CreateApiResourceAsync(string[] item, IEnumerable<string> claims)
@@ -150,7 +150,10 @@ namespace BnBYachts.Core.IdentityServer
                 "BnBYachts",
                 "HostGateway",
                 "Chat",
-                "Admin"
+                "Admin",
+                "Captain", 
+                "Management",
+                "Cleaning"
 
             };
 
@@ -190,8 +193,55 @@ namespace BnBYachts.Core.IdentityServer
                     corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
                 );
             }
+            //Console Test / Angular Captain
+            var consoleAndAngularCaptainClientId = configurationSection["BnBYachts_Captain:ClientId"];
+            if (!consoleAndAngularCaptainClientId.IsNullOrWhiteSpace())
+            {
+                var webClientRootUrl = configurationSection["BnBYachts_Captain:RootUrl"]?.TrimEnd('/');
+                await CreateClientAsync(
+                    name: consoleAndAngularCaptainClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    secret: (configurationSection["BnBYachts_Captain:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: webClientRootUrl,
+                    postLogoutRedirectUri: webClientRootUrl,
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                );
+            }
 
-
+            //Console Test / Angular Management
+            var consoleAndAngularManagementClientId = configurationSection["BnBYachts_Management:ClientId"];
+            if (!consoleAndAngularManagementClientId.IsNullOrWhiteSpace())
+            {
+                var webClientRootUrl = configurationSection["BnBYachts_Management:RootUrl"]?.TrimEnd('/');
+                await CreateClientAsync(
+                    name: consoleAndAngularManagementClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    secret: (configurationSection["BnBYachts_Management:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: webClientRootUrl,
+                    postLogoutRedirectUri: webClientRootUrl,
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                );
+            }
+            //Console Test / Angular Cleaning
+            var consoleAndAngularCleaningClientId = configurationSection["BnBYachts_Cleaning:ClientId"];
+            if (!consoleAndAngularCleaningClientId.IsNullOrWhiteSpace())
+            {
+                var webClientRootUrl = configurationSection["BnBYachts_Cleaning:RootUrl"]?.TrimEnd('/');
+                await CreateClientAsync(
+                    name: consoleAndAngularCleaningClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    secret: (configurationSection["BnBYachts_Cleaning:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: webClientRootUrl,
+                    postLogoutRedirectUri: webClientRootUrl,
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                );
+            }
 
             // Swagger Core Client
             var swaggerClientId = configurationSection["Core_Swagger:ClientId"];

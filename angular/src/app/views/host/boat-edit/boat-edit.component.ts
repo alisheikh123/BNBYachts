@@ -116,7 +116,6 @@ export class BoatEditComponent implements OnInit {
         }
       });
     });
-    console.log(this.boatCalendar);
   }
 
   handleAddressChange(address: any) {

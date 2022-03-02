@@ -140,7 +140,8 @@
             <div class="col-12">
               <div class="custom-card req-user-card" *ngFor="let item of userEvents">
                 <div
-                  [routerLink]="item.isContract ? ['/contracts/contract',item.contractId]:['/boat-listing/event-reservation-detail',item.eventId]">
+
+                  [routerLink]="item.isContract ? ['/contracts/contract',item.contractId]:['/boat-listing/event-reservation-detail',item.id,item.eventId]">
                   <div class="image-with-text custom-flex-between align-items-start">
                     <div class="image-with-text-inner">
                       <div *ngFor="let imgs of item?.boatDetail?.boatGalleries | filterBy : 'isCoverPic':true">

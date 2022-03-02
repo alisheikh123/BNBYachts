@@ -1,0 +1,100 @@
+
+/* -------------------------------------------------------------
+  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
+  By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
+
+  List of CSS3 Sass Mixins File to be @imported and @included as you need
+
+  The purpose of this library is to facilitate the use of CSS3 on different browsers avoiding HARD TO READ and NEVER
+  ENDING css files
+
+  note: All CSS3 Properties are being supported by Safari 5
+  more info: http://www.findmebyip.com/litmus/#css3-properties
+
+------------------------------------------------------------- */
+
+
+////
+/// @author Matthieu Aussaguel
+/// @group sass-css3-mixins
+////
+
+@mixin animation($str) {
+  @include css3-prefix('animation', $str);
+}
+@mixin custom-shadow(){
+  box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.1);
+}
+@mixin custom-shadow-increased(){
+  box-shadow:0px 6px 20px rgba(0,0,0,0.2) !important;
+}
+@mixin custom-shadow-light(){
+box-shadow:0px 1px 5px 0px rgba(0,0,0,0.1);
+}
+@mixin custom-shadow-dark(){
+  box-shadow:0px 1px 5px 0px rgba(0,0,0,0.5);
+}
+@mixin  position-absolute-left(){
+  position: absolute;
+  left: 0;
+   top: 0;
+   transform: translateY(-50%); 
+}
+@mixin  position-absolute-right(){
+  position: absolute;
+  top: 0;
+   right: 0;
+   transform: translateY(-50%); 
+}
+@mixin custom-flex(){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin custom-flex-start(){
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+@mixin custom-flex-between(){
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin custom-flex-end(){
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+@mixin custom-flex-col(){
+  @include custom-flex-start;
+  flex-direction: column;
+}
+
+@mixin  gradient-blue {
+  background: rgb(9,22,84);
+  background: linear-gradient(90deg, rgba(9,22,84,1) 0%, rgba(98,118,216,1) 100%);
+}
+@mixin custom-transition(){
+  transition: .5s ease;
+}
+@mixin  bg-layer-black() {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($new-black-color, 0.5);
+  z-index: 1;
+}
+@mixin black-graient(){
+  background: rgb(0,0,0);
+background: linear-gradient(0deg, #262626 0%, rgba(0, 0, 0, 0.0704657) 33%);
+}
+@mixin custom-transition() {
+  transition: .5s ease !important;
+}

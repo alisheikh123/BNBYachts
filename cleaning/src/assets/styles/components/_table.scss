@@ -1,0 +1,79 @@
+    .custom-table{
+        overflow-x: scroll;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        table{
+            @include breakpoint(sm){
+                min-width: 350px;
+            }
+            width: 100%;
+            thead{
+                border-radius: 6px;
+                th{
+                    background-color: $brand-color;
+                    color: $white-color;
+                    padding: 10px 8px;
+                    font-size: 16px;
+                    font-weight: 500;
+                   text-align: center;
+                   @include breakpoint(laptop){
+                    padding: 8px;
+                    font-size: 14px;
+                   }
+                   @include breakpoint(md){
+                    font-size: 12px;
+                   }
+                   @include breakpoint(sm){
+                    min-width: 150px;
+                    font-size: 12px;
+                   }
+                   @include breakpoint(xs){
+                    padding:8px;
+                    font-size: 12px;
+                   }
+                   &:nth-child(1){
+                    border-radius: 6px 0 0 6px;
+                    }
+                    &:nth-last-child(1){
+                        border-radius:0 6px 6px 0;
+                    }
+                }
+            }
+        }
+        tbody{
+            tr{
+                cursor: pointer;
+                &:hover{
+                    background-color: $grey-border-clr;
+                    
+                }
+                td{
+                    text-align: center;
+                    padding: 8px;
+                    font-size: 14px;
+                    &:nth-child(1){
+                    border-radius: 6px 0 0 6px;
+                    }
+                    &:nth-last-child(1){
+                        border-radius:0 6px 6px 0;
+                    }
+                    @include breakpoint(laptop){
+                        padding: 10px 8px;
+                        font-size: 14px;
+                       }
+                       @include breakpoint(md){
+                        font-size: 12px;
+                       }
+                       @include breakpoint(sm){
+                        min-width: 150px;
+                        font-size: 12px;
+                       }
+                       @include breakpoint(xs){
+                        padding:8px;
+                        font-size: 12px;
+                       }
+                }
+            }
+        }
+    }

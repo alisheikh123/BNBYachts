@@ -5,6 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { BookingType } from 'src/app/shared/enums/booking.constants';
 import { environment } from 'src/environments/environment';
 import { UserPaymentMethodsComponent } from '../user-payment-methods/user-payment-methods.component';
 
@@ -31,6 +32,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
   isBookingConfirmed: boolean = false;
   isPaymentFailed: boolean = false;
   bookingId: any;
+  BOOKING_TYPE = BookingType;
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
   cancellationPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.";  
   readAll: boolean = false;
@@ -67,7 +69,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
     if (this.boatFilterDetails.checkinDate != null && this.boatFilterDetails.checkoutDate != null && this.boatDetails != null) {
       var checkinDate = moment(this.boatFilterDetails.checkinDate).format("DD-MM-YYYY");
       var checkoutDate = moment(this.boatFilterDetails.checkoutDate).format("DD-MM-YYYY");
-      for (var i = checkinDate; i <= checkoutDate; i = moment(i, "DD-MM-YYYY").add(1, 'days').format("DD-MM-YYYY")) {
+      for (var i = checkinDate;moment(i,"DD-MM-YYYY").isSameOrBefore(moment(checkoutDate,"DD-MM-YYYY"),'day'); i = moment(i, "DD-MM-YYYY").add(1, 'days').format("DD-MM-YYYY")) {
         let findCalendar = this.boatDetails.boatCalendars.find((element: any) =>
           moment(element.fromDate).format("DD-MM-YYYY") == i &&
           moment(element.toDate).format("DD-MM-YYYY") == i && element.isAvailable
@@ -98,6 +100,7 @@ export class BoatelBookingPaymentComponent implements OnInit {
       amount: amount + this.boatDetails.taxFee + 20,
       IsSaveNewPaymentMethod: this.paymentMethodsComponent.isSaveNewPayment,
       token: token,
+      bookingType:this.BOOKING_TYPE.Boatels,
       description: this.boatDetails.name + ' Booking Charges from ' + this.boatFilterDetails.checkinDate + " to " + this.boatFilterDetails.checkoutDate
     };
     this.paymentService.pay(model).subscribe(res => {
@@ -109,6 +112,10 @@ export class BoatelBookingPaymentComponent implements OnInit {
         this.isBookingConfirmed = false;
         this.isPaymentFailed = true;
       }
+    },
+    err=>{
+      this.isBookingConfirmed = false;
+      this.isPaymentFailed = true;
     })
   }
 

@@ -6,6 +6,7 @@ import { AppComponent } from 'src/app/app.component';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { BookingType } from 'src/app/shared/enums/booking.constants';
 import { environment } from 'src/environments/environment';
 import { UserPaymentMethodsComponent } from '../user-payment-methods/user-payment-methods.component';
 import { BookingConfirmedModalComponent } from './booking-confirmed-modal/booking-confirmed-modal.component';
@@ -29,6 +30,7 @@ export class CharterBookingPaymentComponent implements OnInit {
   isPaymentFailed: boolean = false;
   bookingId: any;
   charterDetails: any;
+  BOOKING_TYPE = BookingType;
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
   cancellationPolicyString = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.";
   readAll = false;
@@ -65,6 +67,7 @@ export class CharterBookingPaymentComponent implements OnInit {
       amount: amount + this.charterDetails?.boat.taxFee + 20,
       IsSaveNewPaymentMethod: this.paymentMethodsComponent.isSaveNewPayment,
       token: token,
+      bookingType:this.BOOKING_TYPE.Charters,
       description: this.charterDetails?.boat.name + ' Charter Booking Charges from ' + this.charterFilterDetails.departureDate
     };
     this.paymentService.pay(model).subscribe(res => {

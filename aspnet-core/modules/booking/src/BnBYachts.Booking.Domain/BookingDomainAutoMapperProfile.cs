@@ -93,6 +93,16 @@ namespace BnBYachts.Booking
         .ForMember(x => x.HostId, opt => opt.MapFrom(source => (source.CreatorId)))
                          .ForMember(x => x.IsContract, opt => opt.MapFrom(source => (true)))
         .ForMember(x => x.BookingStatus, opt => opt.MapFrom(source => (BookingStatus.Approved)));
+            CreateMap<BoatelBookingEntity, UnPaidBookingsTransferable>()
+        .ForMember(x => x.BookingId, opt => opt.MapFrom(source => (source.Id)))
+                .ForMember(x => x.BookingType, opt => opt.MapFrom(source => (BookingType.Boatel)));
+            CreateMap<CharterBookingEntity, UnPaidBookingsTransferable>()
+          .ForMember(x => x.BookingId, opt => opt.MapFrom(source => (source.Id)))
+            .ForMember(x => x.BookingType, opt => opt.MapFrom(source => (BookingType.Charter)));
+            CreateMap<EventBookingEntity, UnPaidBookingsTransferable>()
+        .ForMember(x => x.BookingId, opt => opt.MapFrom(source => (source.Id)))
+            .ForMember(x => x.BookingType, opt => opt.MapFrom(source => (BookingType.Event)));
+            CreateMap<BookingDisputeEntity, DisputeTransferable>();
         }
     }
 }

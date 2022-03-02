@@ -22,6 +22,7 @@ using BnBYachts.Core.EntityFrameworkCore;
 using BnBYachts.Core.MultiTenancy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 
 namespace BnBYachts
 {
@@ -127,7 +128,12 @@ namespace BnBYachts
                 options.ApplicationName = "AuthServer";
             });
 
-
+            Configure<IdentityOptions>(options =>
+            {
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+            });
             Configure<AppUrlOptions>(options =>
             {
                 options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];

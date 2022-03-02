@@ -147,9 +147,12 @@ export class HeaderComponent implements OnInit {
   }
 
   continueToEarn() {
+    this.modal.dismissAll();
     if(this.selectedOption.byHost){
-      this.modal.dismissAll();
       this.router.navigate(['try-hosting']);
+    }
+    else if(this.selectedOption.byServiceProvider){
+      this.router.navigate(['service-provider']);
     }
   }
   onBoardingModal()

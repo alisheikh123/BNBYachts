@@ -4,6 +4,7 @@
       <div class="row" >
         <div class="col-md-3 py-2" *ngIf="!noChatsAvailble">
           <app-chat-users  [activeUserId]="chat.receiverId"
+          [activeChatFilter]="activeChatFilter"
           (noUserAvailble)="noUserAvailable($event)"
             (onChangeUser)="getChat($event)"></app-chat-users>
         </div>
@@ -11,7 +12,7 @@
           <div class="bg-grey-light border-radius-5 p-2">
             <div class="image-with-text">
               <div class="image-with-text-inner small-img">
-                <img src="../../../../../../assets/images/user-img.png" alt="">
+                <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                 <div class="user-details">
                   <p class="medium">{{recieverInfo?.name}}</p>
                   <p class="small-text grey">{{recieverInfo?.email}}</p>
@@ -45,7 +46,7 @@
                 <small class="chatTime">{{message.sentTime | date:'hh:mm a'}}</small>
               </div>
               <div class="pe-2" *ngIf="!isReciever(message.receiverId,chat.senderId)"></div>
-              <img src="../../../../../../assets/images/user-img.png" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
+              <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
               </div>
             </div>
           </div>
@@ -77,7 +78,7 @@
           <div class="custom-card">
             <div class="image-with-text ">
               <div class="image-with-text-inner">
-                <img src="../../../../../../assets/images/user-img.png" alt="">
+                <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
               </div>
               <p class="medium text-center">{{recieverInfo?.name}}</p>
               <p class="small-text grey text-center">{{recieverInfo?.email}}</p>

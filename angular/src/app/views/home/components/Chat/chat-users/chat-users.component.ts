@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
+import { UserDefaults } from 'src/app/shared/enums/user-roles';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat-users',
@@ -15,9 +17,12 @@ export class ChatUsersComponent implements OnInit {
   chatUsers: any[] = [];
   searchText: string;
   @Input() activeUserId: string;
+  @Input() activeChatFilter: number = 0;
   @Output() onChangeUser: EventEmitter<any> = new EventEmitter();
   @Output() noUserAvailble: EventEmitter<any> = new EventEmitter();
-  activeChatFilter: number = 0;
+  assetUrlS3 = environment.S3BUCKET_URL + '/profilePicture/';
+  USER_DEFAULTS = UserDefaults;
+  //activeChatFilter: number = 0;
   hostId = null;
   chatFilter = {
     all: 0,
@@ -66,8 +71,9 @@ export class ChatUsersComponent implements OnInit {
       this.chatUsers = Object.assign([], users);
     }
     else {
-      users = this.allChatUsers;
+      users = this.allChatUsers.filter(res => res.isBlocked == false && res.isArchivedUser == false);
       this.chatUsers = Object.assign([], users);
+       
     }
     if (this.chatUsers.length > 0) {
       this.onChangeUser.emit(this.chatUsers[0]);

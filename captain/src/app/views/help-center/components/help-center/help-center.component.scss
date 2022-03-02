@@ -1,0 +1,20 @@
+.custom-icon{
+    flex-direction: row !important;
+    text-align: center !important;
+    padding-left: 20px !important;
+    i{
+        padding-bottom: 0 !important;
+        padding-right: 10px !important;
+    }
+    &.active{
+    &::before{
+        width: 100% !important;
+    }   
+           
+}
+&:hover{
+    &::before{
+        width: 100% !important;
+    }
+} 
+}

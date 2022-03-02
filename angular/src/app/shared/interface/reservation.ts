@@ -1,5 +1,6 @@
 export interface IEventReservation
 {
+    eventId:number,
     checkoutTime:any,
     eventBookingId:number,
     isPosted: boolean,

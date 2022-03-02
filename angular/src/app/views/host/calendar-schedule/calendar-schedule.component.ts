@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { CalendarService } from 'src/app/core/calendar/calendar.service';
 import { EventService } from 'src/app/core/Event/event.service';
@@ -8,7 +8,8 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { find } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { debug } from 'console';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class CalendarScheduleComponent implements OnInit {
     events: [],
     eventClick: this.getEventDetails.bind(this),
     dateClick: this.getDayClick.bind(this),
-    datesSet: this.getMonth.bind(this)
+    datesSet: this.getMonth.bind(this),
+    displayEventTime: false
     //height:1100,
   };
   boatCalendar: any;
@@ -52,8 +54,9 @@ export class CalendarScheduleComponent implements OnInit {
   totalEventRequest: number = 0;
   showNote: boolean = false;
   activeMonth: number = Number(moment().format("MM"));
+  @ViewChild('detailModal', { static: true }) templateRef: any;
   constructor(private service: EventService, private boatService: YachtSearchService,
-    private authService: AuthService,
+    private authService: AuthService,private modal:NgbModal,
     private calendarService: CalendarService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
@@ -107,24 +110,25 @@ export class CalendarScheduleComponent implements OnInit {
   bindEvents() {
     let event: any = [];
     this.bookingsCalendar.forEach((element: any) => {
+      console.log(event);
       event.push({
         eventId: element.id,
         serviceType: element.serviceType,
         isBooking: true,
         bookingId: element.bookingId,
         userId: element.userId,
-        start: new Date(element.startDate),
-        end: new Date(element.endDate),
+        start: element.startDate,
+        end: element.endDate,
         title: element.serviceType === this.SERVICE_TYPES.Boatel ? element.name
           : (element.serviceType === this.SERVICE_TYPES.Charter ? this.totalChartersRequest + ' Requests' : this.totalEventRequest + ' Requests'),
-        allDay: true,
+        allDay: false,
         backgroundColor: element.serviceType === this.SERVICE_TYPES.Boatel ? "#091654"
           : (element.serviceType === this.SERVICE_TYPES.Charter ? 'rgb(199 130 5)' : 'rgb(151 19 141)'),
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        }
+        //draggable: true,
+        // resizable: {
+        //   beforeStart: true,
+        //   afterEnd: true,
+        // }
       });
     });
     this.boatCalendar.forEach((element: any) => {
@@ -134,8 +138,8 @@ export class CalendarScheduleComponent implements OnInit {
         isBooking: false,
         title: element.startDate == element.endDate && element.isAvailable ? element.name +' $':'',
         textColor: '#f000',
-        start: new Date(element.startDate),
-        end: new Date(element.endDate),
+        start: element.startDate,
+        end: element.endDate,
         allDay: true,
         backgroundColor: element.startDate == element.endDate && element.isAvailable  ? "#FFFFFF" : "#777777",
         display: 'background'
@@ -167,6 +171,7 @@ export class CalendarScheduleComponent implements OnInit {
           });
         })
       }
+      this.modal.open(this.templateRef, {centered: true ,windowClass:'custom-modal custom-small-modal'});
     }
   }
 
@@ -190,6 +195,7 @@ export class CalendarScheduleComponent implements OnInit {
       this.boatCalendar.push(event);
       this.bindEvents();
       this.showEventDetails = false;
+      this.modal.dismissAll();
       this.toastr.success('Calendar Updated Successfully', 'Update')
     })
   }
@@ -197,9 +203,13 @@ export class CalendarScheduleComponent implements OnInit {
     if (this.booking.serviceType == this.SERVICE_TYPES.Boatel) {
       this.router.navigate(['/boat-listing/reservation-detail', this.booking.id])
     }
-    else {
-      this.router.navigate(['/host/my-bookings'])
+    else if(this.booking.serviceType == this.SERVICE_TYPES.Charter){
+      this.router.navigate(['/host/my-bookings'],{fragment:'charters'})
     }
+    else if(this.booking.serviceType == this.SERVICE_TYPES.Event){
+      this.router.navigate(['/host/my-bookings'],{ fragment: 'events' })
+    }
+    this.modal.dismissAll();
   }
   getDayClick(event: any) {
     if (new Date(event.date) >= new Date()) {
@@ -213,14 +223,23 @@ export class CalendarScheduleComponent implements OnInit {
       //   moment(event.date).isBetween(moment(res.startDate), moment(res.endDate))
       //   || moment(res.startDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD')
       //   || moment(res.endDate).format('YYYY-MM-DD') == moment(event.date).format('YYYY-MM-DD'));
-      if (isBooking == null) {
+      if (isBooking == undefined || isBooking == null) {
         this.showEventDetails = true;
+        this.isBookingEvent = false;
         this.calendarService.getDayCalendar(this.boatId, moment(this.dayCalendar.fromDate).format("YYYY-MM-DD")).subscribe((res: any) => {
           if (res.data != null) {
             this.dayCalendar = res.data;
           }
+          else{
+            this.dayCalendar.amount =0;
+            this.dayCalendar.notes= '';
+          }
+          this.modal.open(this.templateRef, {centered: true ,windowClass:'custom-modal custom-small-modal'});
         })
       }
     }
+  }
+  closeModal(){
+    this.modal.dismissAll();
   }
 }

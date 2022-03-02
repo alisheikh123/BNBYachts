@@ -137,7 +137,6 @@ export class AllReservationsComponent implements OnInit {
       else{
           this.contractService.getContractById(elem.contractId).subscribe((contract: any) => {
             elem.eventDetail = contract?.data;
-            console.log(elem.eventDetail);
             this.boatService.boatDetailsById(elem.eventDetail?.boatId).subscribe((boatdetails: any) => {
               elem.boatDetail = boatdetails;
             })

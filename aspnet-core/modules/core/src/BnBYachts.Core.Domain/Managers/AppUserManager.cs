@@ -57,15 +57,21 @@ namespace BnBYachts.Core.Managers
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
             _logger.LogInformation("Get user detail against user Id : " + _unitOfWorkManager.Current.Id.ToString());
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)));
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)),(user.GetProperty<bool>(UserConstants.IsEmailConfirmed)));
         }
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             var user = await _repository.GetAsync(res => res.UserName == username).ConfigureAwait(false);
             _logger.LogInformation("Get user detail against user name : " + _unitOfWorkManager.Current.Id.ToString());
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)));
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)), (user.GetProperty<bool>(UserConstants.IsEmailConfirmed)));
         }
+        public async Task<UserDetailsTransferable> GetUserDetailsById(string id)
+        {
+            var user = await _repository.GetAsync(res => res.Id.ToString() == id.ToString()).ConfigureAwait(false);
+            _logger.LogInformation("Get user detail against user name : " + _unitOfWorkManager.Current.Id.ToString());
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)), (user.GetProperty<bool>(UserConstants.IsEmailConfirmed)));
 
+        }
         public async Task<bool> IsEmailExist(string email)
         {
             var user = await _repository.FindAsync(res => res.Email == email).ConfigureAwait(false);
