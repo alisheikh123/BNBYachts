@@ -234,6 +234,7 @@ export class HostOnboardingComponent implements OnInit {
           }
           else {
             this.toastr.success("Boat added successfully.", "Boat");
+            debugger;
             this.router.navigate(['/service-provider/service-provider-information/', res.id ,this.creatorTypes.Boatel]);
           }
 
