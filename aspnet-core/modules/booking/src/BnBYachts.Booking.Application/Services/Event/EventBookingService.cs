@@ -1,6 +1,7 @@
 ﻿
 using BnBYachts.Booking.Booking.Event;
 using BnBYachts.Booking.Booking.Interfaces.Event;
+using BnBYachts.Booking.Booking.Requestable;
 using BnBYachts.Booking.DTO;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
@@ -47,10 +48,32 @@ namespace BnBYachts.Booking.Services.Event
 
 
         [HttpGet]
-        public async Task<EntityResponseModel> BookingCancelDetail(long bookingId) 
+        public async Task<EntityResponseModel> BookingCancelDetail(long bookingId)
         {
-            return await _eventBookingManager.BookingCancelDetail(bookingId);        
-        
+            return await _eventBookingManager.BookingCancelDetail(bookingId);
+
+        }
+
+        public async Task ModifyEventBooking(EventBookingRequestableDto data)
+        {
+            data.UserId = CurrentUser.Id.ToString();  
+            data.UserName = CurrentUser.Name.ToString();
+            await _eventBookingManager.ModifyEventBooking(data);
+        }
+
+        public async Task ModifyEventBookingRefundable(BookingRefundableRequestable data)
+        {
+            await _eventBookingManager.ModifyEventBookingRefundable(data,CurrentUser.Id);
+            string body = $"<h4>Hello {CurrentUser.Name} </h4> <div> Your Event Booking has been successfully Modified against this Booking Id: {data.BookingId} and" +
+               $" your will received Your Amount after 24 hrs: {data.RefundableAmount} </div><br>Best Regard";
+            await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+            {
+                From = _config.GetSection("EmailConfiguration:Sender").Value,
+                To = CurrentUser.Email.ToString(),
+                Subject = " Event Booking Refundable Successfully",
+                Body = new StringBuilder().Append(body),
+                IsBodyHtml = true
+            });
         }
     }
 }
