@@ -7,6 +7,7 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { CreatorTypes } from 'src/app/shared/enums/creator-types';
 import { ServiceProviderType } from 'src/app/shared/enums/service-provider-type';
 import { ServiceProviderDTO } from 'src/app/shared/interface/service-provider/service-providerdto';
+import { utils } from 'src/app/shared/utility/utils';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -44,11 +45,20 @@ export class ServiceProviderServicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((res : any) => {
-      if(res && res.length>0)
+      if(!utils.isEmptyObject(res))
       {
-        this.createdReservationInfo.serviceProviderType=Number(res['serviceprovidertype']);     
-     this.createdReservationInfo.reservationId= Number(res['reservationid']);
+        if(res['reservationid'])
+        {
+          this.createdReservationInfo.reservationId= Number(res['reservationid']);
+        }
+        if(res['serviceprovidertype'])
+        {
+          this.createdReservationInfo.serviceProviderType=Number(res['serviceprovidertype']);
+        }     
+     if(res['reservationtype'])
+     {
      this.createdReservationInfo.reservationType=Number(res['reservationtype']);
+     }
      this.setFilterData();
       }
     });
@@ -75,9 +85,9 @@ if(res)
     this.yachtSearchService.eventDetailsById(id).subscribe((res:any)=>{
 if (res )
 {
-  this.serviceProviderSearchParam.location=res.data.location;
-  this.serviceProviderSearchParam.longitude=res.data.locationLong;
-  this.serviceProviderSearchParam.latitude=res.data.locationLat;
+  this.serviceProviderSearchParam.location=res.eventDetails.location;
+  this.serviceProviderSearchParam.longitude=res.eventDetails.locationLong;
+  this.serviceProviderSearchParam.latitude=res.eventDetails.locationLat;
  this.serviceProviderSearchParam.avaliableDate= new Date(res.data.startDateTime);
  this.getServiceProviderDetail();
 } 
@@ -87,9 +97,9 @@ if (res )
     this.yachtSearchService.charterDetailsById(id).subscribe((res:any)=>{
 if (res )
 {
-  this.serviceProviderSearchParam.location=res.data.departingFrom ;
-  this.serviceProviderSearchParam.longitude=res.data.departingLongitude;
-  this.serviceProviderSearchParam.latitude=res.data.departingLatitude;
+  this.serviceProviderSearchParam.location=res.charterDetails.departingFrom ;
+  this.serviceProviderSearchParam.longitude=res.charterDetails.departingLongitude;
+  this.serviceProviderSearchParam.latitude=res.charterDetails.departingLatitude;
  this.serviceProviderSearchParam.avaliableDate= new Date(res.data.departureFromDate);
  this.getServiceProviderDetail();
 } 
@@ -110,7 +120,7 @@ if (res )
      else if(this.createdReservationInfo.reservationType==this.reservationType.Charter)
      {
 
-      this.getEventDetail(this.createdReservationInfo.reservationId);
+      this.getCharterDetail(this.createdReservationInfo.reservationId);
      }
      else
      this.getServiceProviderDetail();

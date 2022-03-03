@@ -43,4 +43,8 @@ export class utils {
       {
           return  moment(date).format("YYYY-MM-DD") + " " + moment(time).format("hh:mm a");
       }
+    static  isEmptyObject(obj:any) {
+        return (obj && (Object.keys(obj).length === 0));
+
+      }
 }
