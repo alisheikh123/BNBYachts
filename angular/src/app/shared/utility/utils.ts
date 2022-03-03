@@ -31,4 +31,7 @@ export class utils {
         var Days =  EndDate.diff(startDate, 'days');
         return Days < 0 ? 0 : Days+1;
       }
+    static  isEmptyObject(obj:any) {
+        return (obj && (Object.keys(obj).length === 0));
+      }
 }
