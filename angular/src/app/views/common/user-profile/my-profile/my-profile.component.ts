@@ -1,7 +1,7 @@
 import { Reviews } from 'src/app/shared/interface/reviews';
 import { find } from 'rxjs/operators';
 import { BookingService } from 'src/app/core/Booking/booking.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BoatService } from 'src/app/core/Boat/boat.service';
 import { environment } from 'src/environments/environment';
@@ -32,6 +32,7 @@ export class MyProfileComponent implements OnInit {
   uploadPictureForm: FormGroup;
   imageSrc: string;
   uploadDefault = UploadDefault;
+  @Output() profileImage = new EventEmitter<any>();
   constructor(private authService : AuthService,private boatService : BoatService,private bookingService : BookingService,private modal:NgbModal,public fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -94,13 +95,16 @@ export class MyProfileComponent implements OnInit {
         this.uploadImage();
       }
     }
-  }  
+  }
   uploadImage() {
     if (this.uploadPictureForm.value) {
       const formData = new FormData();
       formData.append('file', this.uploadPictureForm.get('profile')!.value);
+      debugger;
       this.authService.UploadProfileImage(formData).subscribe((res: any) => {
+        this.profileImage.emit(this.uploadPictureForm.value);
       });
+      this.imageSrc = this.uploadPictureForm.value;
     }
 }
 

@@ -102,6 +102,7 @@
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
                                 id="dropdownMenuButton1">
+                                <app-my-profile (profileImage)="updateProfileImage($event)" style="display: none;"></app-my-profile>
                                 <img src="{{assetUrlS3 + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
@@ -151,7 +152,7 @@
                   <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
                   </div>
                 <img src="../../../../assets/images/service-provider.png" alt="">
-                </a>                
+                </a>
           </div>
         </div>
       </div>
