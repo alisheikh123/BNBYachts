@@ -40,4 +40,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class CaptainRoutingModule { }
+export class ManagementRoutingModule { }

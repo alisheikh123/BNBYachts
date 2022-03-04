@@ -149,7 +149,7 @@ return false;
   }
   supportDocumentStepValidation()
   {
-    return (!this.fileModel) ? false  : true;
+   if (this.fileModel && this.fileModel.file) return true ; else return false;
   }
   submit(){
     let formData: FormData;
@@ -169,7 +169,7 @@ return false;
         this._serviceProvider.createServiceProvider(formData).subscribe((res: any) => {
           if (res.returnStatus) {
             this.toastr.success("Captain Onboarding Completed!", "Service Provider");
-            this.router.navigate(['service-provider/service-provider-dashboard'])
+            this.router.navigate(['/app/captain/captain-dashboard'])
           }
         });
       }
