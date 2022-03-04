@@ -78,7 +78,8 @@ export class CharterReservationDetailComponent implements OnInit {
   addReview() {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
       let review = {
-        revieweeID: this.charterBooking?.boatId,
+        revieweeID: this.charterBooking?.hostId,
+        boatId: this.charterBooking?.boatId,
         bookingId: this.charterReservation.charterId,
         reviewDescription: res.reviewText,
         ratings: res.ratingStars

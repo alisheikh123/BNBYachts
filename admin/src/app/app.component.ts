@@ -9,7 +9,7 @@ template: '<router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit {
 
-constructor(protected router: Router,public login : LoginComponent ,private oidcSecurityService : OidcSecurityService) {
+constructor(protected router: Router,public login : LoginComponent) {
 }
 ngOnInit() {
   if(this.login.isLoggedIn == false){

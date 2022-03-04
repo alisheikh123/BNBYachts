@@ -1,4 +1,5 @@
-﻿using BnBYachts.Core.Shared.Dto;
+﻿using BnBYachts.Core.Enum;
+using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Transferable;
@@ -84,9 +85,9 @@ namespace BnBYachts.Core.Services
         }
         [AllowAnonymous]
         public async Task<bool> IsEmailExists(string email) => await _appUserManager.IsEmailExist(email).ConfigureAwait(false);
-     
-
-
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<UserReview> IsRoleName(string userId, string userRole, string hostRole) => await _appUserManager.IsRoleName(userId, userRole, hostRole);
     }
 
 

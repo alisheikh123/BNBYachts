@@ -1,7 +1,7 @@
 import { ErrorService } from './../Error/error.service';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError, Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -33,8 +33,13 @@ export class BookingService {
       catchError(this.errorService.handleError));
   }
 
-
-
+  modifyEventBooking(model: any,data:any):Observable<any[]>{
+    let modifybooking =  this.http.post(this.bookingApiUrl + '/api/app/event-booking/modify-event-booking', model).pipe(
+      catchError(this.errorService.handleError));
+    let modifyrefundable =  this.http.post(this.bookingApiUrl + '/api/app/event-booking/modify-event-booking-refundable', data).pipe(
+        catchError(this.errorService.handleError));
+           return forkJoin([modifybooking,modifyrefundable]);
+  }
   getBoatInfo(boatId: any) {
     return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(
       catchError(this.errorService.handleError));
@@ -90,6 +95,9 @@ export class BookingService {
     return this.http.post(this.bookingApiUrl + '/api/app/event-booking/cancel-event-booking',eventBookingCancellationRequestable).pipe(
       catchError(this.errorService.handleError));
   }
+  getReviewByUserId(revieweeId:string){
+    return this.http.get(this.bookingApiUrl +'/api/app/review/reviews-by-reviewee-id/'+revieweeId).pipe(catchError(this.errorService.handleError));
+  }
   getEventBookingDetailById(eventBookingId:number)
   {
     return this.http.get(this.bookingApiUrl +'/api/app/event-booking/event-booking-detail-by-id/'+eventBookingId).pipe(
@@ -99,5 +107,4 @@ export class BookingService {
   {
     return this.http.get(this.bookingApiUrl +'/api/app/event-booking/booking-cancel-detail/'+bookingId).pipe(catchError(this.errorService.handleError));
   }
-
 }

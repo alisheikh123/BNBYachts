@@ -1,4 +1,5 @@
-﻿using BnBYachts.Booking.DTO;
+﻿using BnBYachts.Booking.Booking.Requestable;
+using BnBYachts.Booking.DTO;
 using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace BnBYachts.Booking.Booking.Interfaces.Event
         Task<EntityResponseModel> EventBookingDetailById(long eventId);
         Task CancelEventBooking(BookingCancellationRequestableDto eventBookingCancellationRequestable);
         Task<EntityResponseModel> BookingCancelDetail(long bookingId);
+        Task ModifyEventBooking(EventBookingRequestableDto data);
+        Task ModifyEventBookingRefundable(BookingRefundableRequestable data, Guid? userId);
     }
 }

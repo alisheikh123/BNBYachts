@@ -6,7 +6,6 @@ import { SetPasswordComponent } from './pages/auth/set-password/set-password.com
 import { AuthComponent } from './pages/auth/auth.component';
 
 export const routes: Routes = [
-  // { path: 'login',component: LoginComponent  },
   {
     path: '',
     component : AuthComponent,
@@ -27,8 +26,6 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
   },
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

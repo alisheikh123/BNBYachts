@@ -7,7 +7,7 @@ COPY package*.json ./
 
 RUN npm cache clean --force
 
-RUN npx npm-force-resolutions
+#RUN npx npm-force-resolutions
 
 RUN npm install
 

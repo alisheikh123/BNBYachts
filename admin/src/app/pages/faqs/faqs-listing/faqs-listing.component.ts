@@ -86,7 +86,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.faqsForm = this.fb.group({
       id :[0],
-      categoryId: ['', Validators.required],
+      categoryId: [null, Validators.required],
       question: ['', Validators.required],
       answer: ['', Validators.required],
     })
@@ -94,12 +94,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
    }
    openLg(content) {
      this.modalService.open(content, { size: 'lg' });
-     this.faqsForm.patchValue({
-      id: 0,
-      categoryId: '',
-      question: '',
-      answer:''
-     }); 
+     this.resetForm();
    }
   get faqssForm() {
     return this.faqsForm.controls;
@@ -130,17 +125,18 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
      });
   }
   onSubmit() {
-    debugger;
     var faqsData = this.faqsForm.value;
     if (faqsData.id > 0) {
       this.faqsService.UpdateFaqs(faqsData).subscribe(response =>{
       this.toaster.success('Faqs updated successfully', 'Faqs');
+      this.resetForm();
       this.modalService.dismissAll();
       this.getFaqs();
       });
     }else{
       this.faqsService.AddFaqs(faqsData).subscribe(response =>{
         this.toaster.primary('Faqs created successfully', 'Faqs');
+        this.resetForm();
         this.modalService.dismissAll();
         this.getFaqs();
       });
@@ -182,4 +178,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
       });
     }
   }  
+  resetForm(){
+    this.faqsForm.reset();
+  }
 }

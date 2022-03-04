@@ -58,8 +58,9 @@ namespace BnBYachts.Boat.Manager.Charter
 
         public async Task<CharterDto> InsertCharter(CharterDto charterForm)
         {
-            await _charterRepository.InsertAsync(_objectMapper.Map<CharterDto, CharterEntity>(charterForm), true).ConfigureAwait(false);
-            return new CharterDto();
+            var map = _objectMapper.Map<CharterDto, CharterEntity>(charterForm);
+            await _charterRepository.InsertAsync(map, true).ConfigureAwait(false);
+            return _objectMapper.Map<CharterEntity, CharterDto>(map);
         }
         public async Task<bool> UpdateCharter(ChartersMapperRequestable charterDetails, Guid? userId)
         {

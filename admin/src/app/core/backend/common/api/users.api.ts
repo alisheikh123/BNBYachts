@@ -17,8 +17,8 @@ export class UsersApi {
   getUserInfoById(id:string) {
     return this.api.get(`api/GetUserDetailsById/${id}`);
   }
-  getReviewByUserId(reviewerId : string) {
-    return this.api.getBooking(`api/app/review/reviews-by-reviewer-id/${reviewerId}`);
+  getReviewByUserId(revieweeId : string) {
+    return this.api.getBooking(`api/app/review/reviews-by-reviewee-id/${revieweeId}`);
   }
   SuspendUser(userId : string) {
     return this.api.postwithoutData(`${this.USER_API_URL}${userId}/suspend-user`);

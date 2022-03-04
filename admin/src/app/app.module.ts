@@ -41,7 +41,6 @@ import { SetPasswordComponent } from './pages/auth/set-password/set-password.com
     ReactiveFormsModule,
     HomeDashboardModule,
     ThemeModule,
-    NbToastrModule,
     AuthAppModule,
     AppRoutingModule,
     AuthModule.forRoot({

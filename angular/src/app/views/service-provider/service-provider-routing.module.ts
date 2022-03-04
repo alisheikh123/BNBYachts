@@ -13,6 +13,9 @@ const routes: Routes = [
         path: "services" , component:ServiceProviderServicesComponent
       },
       {
+        path: "services/:serviceprovidertype" , component:ServiceProviderServicesComponent
+      },
+      {
         path: "services/:reservationid/:reservationtype/:serviceprovidertype" , component:ServiceProviderServicesComponent
       },
       { 

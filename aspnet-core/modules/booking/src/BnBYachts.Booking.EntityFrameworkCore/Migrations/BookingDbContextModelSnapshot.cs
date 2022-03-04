@@ -269,6 +269,9 @@ namespace BnBYachts.Booking.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Adults")
+                        .HasColumnType("int");
+
                     b.Property<string>("BankingDetailsId")
                         .HasColumnType("nvarchar(max)");
 
@@ -276,6 +279,9 @@ namespace BnBYachts.Booking.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("BookingStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Children")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -377,11 +383,14 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<string>("ReviewDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RevieweeID")
-                        .HasColumnType("int");
+                    b.Property<string>("RevieweeId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReviewerId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("boatId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

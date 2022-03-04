@@ -49,7 +49,7 @@ namespace BnBYachts.Boat
 
             CreateMap<BoatEntity, BoatDto>();
             CreateMap<CharterEntity, CharterDto>();
-            CreateMap<CharterDto, CharterEntity>();
+            CreateMap<CharterDto, CharterEntity>().ReverseMap();
             CreateMap<BoatEntity, BoatLookupTransferable>();
             CreateMap<BoatEntity, HostBoatRequestable>();
             CreateMap<BoatRuleEntity, BoatRuleDTO>();

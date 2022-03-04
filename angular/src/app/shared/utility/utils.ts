@@ -31,4 +31,20 @@ export class utils {
         var Days =  EndDate.diff(startDate, 'days');
         return Days < 0 ? 0 : Days+1;
       }
+      static convertToDate(date:Date)
+      {
+          return moment(date).format("DD-MM-YYYY");
+      }
+       static convertToTime(date:Date)
+      {
+          return moment(date).format("HH:mm");
+      }
+      static concatinateDateTime(date:Date,time:Date)
+      {
+          return  moment(date).format("YYYY-MM-DD") + " " + moment(time).format("hh:mm a");
+      }
+    static  isEmptyObject(obj:any) {
+        return (obj && (Object.keys(obj).length === 0));
+
+      }
 }

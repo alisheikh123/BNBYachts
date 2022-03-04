@@ -220,8 +220,8 @@ export class HostOnboardingComponent implements OnInit {
         if (res.isSuccess == true) {
           //this.router.navigate[];
           if (res.isHostExists == false) {
-            this.onBoardingService.addHostRole().subscribe((res:any) => {
-              if (res == true) {
+            this.onBoardingService.addHostRole().subscribe((resp:any) => {
+              if (resp == true) {
                 this.toastr.success("Host Onboarding Completed!", "Boat");
                 this.router.navigate(['/service-provider/service-provider-information/', res.id ,this.creatorTypes.Boatel]);
                 this.app.loggedInUserRole = this.USER_ROLES.host;

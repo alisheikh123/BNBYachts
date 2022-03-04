@@ -1,6 +1,8 @@
 version: "3"
 services:
   bnb_client_portal:
-    build: .
+    build:
+     context: .
+     dockerfile: Angular.Dockerfile
     ports:
       - "8080:80"

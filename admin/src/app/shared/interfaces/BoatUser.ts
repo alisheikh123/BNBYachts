@@ -28,6 +28,7 @@ export interface User{
     RoleId : string[]
 }
 export interface SetPasswordModal{
+    id : string;
     email : string;
     password : string;
     confirmPassword : string;

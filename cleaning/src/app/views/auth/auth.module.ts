@@ -26,7 +26,6 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     AuthRoutingModule,
     SharedPipesModule,
-    LoginComponent
   ],
   declarations: [
       LoginModalComponent,
@@ -35,7 +34,9 @@ import { LoginComponent } from './components/login/login.component';
       ResetPasswordComponent,
       ConfirmEmailComponent,
       ActivateAccountComponent,
-      NotLoggedInComponent
+      NotLoggedInComponent,
+      LoginComponent
+
   ],
   providers: [
   AuthService

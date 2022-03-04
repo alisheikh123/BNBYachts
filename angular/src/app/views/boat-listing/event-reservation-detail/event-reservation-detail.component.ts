@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 import { IEventReservation } from 'src/app/shared/interface/reservation';
+import { utils } from 'src/app/shared/utility/utils';
 
 @Component({
   selector: 'app-event-reservation-detail',
@@ -76,7 +77,8 @@ export class EventReservationDetailComponent implements OnInit {
   addReview() {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
       let review = {
-        revieweeID: this.eventBooking?.boatId,
+        revieweeID : this.eventBooking?.hostId,
+        boatId: this.eventBooking?.boatId,
         bookingId: this.eventReservation.eventBookingId,
         reviewDescription: res.reviewText,
         ratings: res.ratingStars
@@ -105,15 +107,18 @@ export class EventReservationDetailComponent implements OnInit {
   goBack() {
     this.eventReservation.isHost == true ? this.route.navigate(['host/my-bookings']) : this.route.navigate(['boat-listing/all-reservations']);
   }
-  isEventStarted(startDate: string) {
-    let inDate = moment(startDate).format("DD-MM-YYYY");
+  isEventStarted(eventDate:Date,startTime:Date) {
+    let eventDates = utils.convertToDate(eventDate);
     let currentDate = moment().format("DD-MM-YYYY");
-    let inTime = moment(startDate).format("HH:mm");
+    let startTimes = utils.convertToTime(startTime);
     let curretTime = moment().format("HH:mm");
-    if (startDate != undefined && inTime != undefined) {
-      return (inDate == currentDate && inTime > curretTime) ? true :  false;
+    if (eventDates != undefined && startTimes != undefined) {
+      return (eventDates == currentDate && startTimes>curretTime)? true:(moment(eventDate).isAfter(moment()))?true:false;
     }
+    else
+    {
     return false;
+    }
   }
   isEndDateEnded(endDate: string) {
     let outDate = moment(endDate).format("DD-MM-YYYY");
@@ -129,3 +134,7 @@ export class EventReservationDetailComponent implements OnInit {
   }
 
 }
+function convertToDate(eventDate: Date) {
+  throw new Error('Function not implemented.');
+}
+
