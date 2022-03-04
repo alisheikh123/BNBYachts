@@ -70,7 +70,7 @@
                                                         </div>
                                                         <div class="custom-flex mobile-width-100">
                                                             <p class="medium min-width-text  small-content">{{'Remaining'|localization}}</p>
-                                                            <p class="min-width-text-small">{{eventDetails?.guestCapacity}}</p>
+                                                            <p class="min-width-text-small">{{eventDetails?.guestCapacity - (eventBookingDetail?.adults + eventBookingDetail?.children)}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="custom-flex-start py-1 flex-mobile-column">
@@ -89,7 +89,7 @@
                                                 </div>
                                                 <h6 class="bold mt-3">{{'ApprovalPolicy' | localization}}</h6>
                                                 <div class="tabs-inner-details-inner">
-                                                    <div class="custom-flex-coumn" *ngIf="((this.approvalPolicyString.length<=20));else greaterThanLimitBlock">
+                                                   <div class="custom-flex-coumn" *ngIf="((this.approvalPolicyString.length<=20));else greaterThanLimitBlock">
                                                         <p>{{this.approvalPolicyString}}</p>
                                                     </div>
                                                     <ng-template #greaterThanLimitBlock>
@@ -103,51 +103,51 @@
                                                     <div class="col-md-6 py-2">
                                                         <div class="custom-date-month-view"
                                                             *ngIf="eventSchedule?.length > 0">
-                                                            <span class="fas fa-chevron-left"
-                                                                (click)="onChangeDate(false)"
-                                                                [hidden]="dateScheduleIndex == 0">
+                                                            <span class="fas fa-chevron-left" [hidden]="eventModifyObject.dateScheduleIndex == 0">
                                                             </span>
                                                             <div class="">
                                                                 <div class="">
                                                                     <span>
-                                                                        <b>{{eventSchedule[dateScheduleIndex]?.eventDate
+                                                                        <b>{{eventSchedule[eventModifyObject.dateScheduleIndex]?.eventDate
                                                                             | date : 'MMM-dd-YYYY'}}</b></span>
                                                                 </div>
                                                             </div>
                                                             <span
-                                                                [hidden]="dateScheduleIndex == eventSchedule.length -1 "
+                                                                [hidden]="eventModifyObject.dateScheduleIndex == eventSchedule.length -1 "
                                                                 class="fas fa-chevron-right"
-                                                                (click)="onChangeDate(true)"></span>
-                                                            <!-- </div>
-                                                    <small class="text-danger"
+                                                                ></span>
+                                                             </div>
+                                                    <!-- <small class="text-danger"
                                                         *ngIf="(charterFilterDetails?.checkinDate == '' || charterFilterDetails?.checkoutDate == '')&& isSubmitted">Enter
                                                         {{!charterFilterDetails.checkinDate ? 'check-in':'check-out'}}
                                                         date</small> -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 py-2">
-                                                        <div class="">
-                                                            <div class="custom-flex select custom-select select-search custom-input-label-inside"
-                                                                [ngbPopover]="popContent" placement="bottom"
-                                                                autoClose="outside" triggers="manual"
-                                                                #popOver="ngbPopover" (click)="openPopover()">
-                                                                <label>{{'Guests'|localization}}</label>
 
-                                                                <div class="custom-flex w-100">
-                                                                    <p class="counter-text-total">
-                                                                        {{eventFilterDetails?.adults}}
-                                                                        {{'Adult(s)'|localization}}</p>
-                                                                    <p class="counter-text-total">
-                                                                        {{eventFilterDetails?.childrens}}
-                                                                        {{'Children'|localization}}</p>
+                                                        </div>
+                                                        <div class="col-md-6 py-2">
+                                                            <div class="">
+                                                                <div class="custom-flex select custom-select select-search custom-input-label-inside"
+                                                                    [ngbPopover]="popContent" placement="bottom"
+                                                                    [autoClose]="false" triggers="manual"
+                                                                    #popOver="ngbPopover" (click)="openPopover()">
+                                                                    <label>{{'Guests'|localization}}</label>
+
+                                                                    <div class="custom-flex w-100">
+                                                                        <p class="counter-text-total">
+                                                                            {{eventBookingDetail?.adults}}
+                                                                            {{'Adult(s)'|localization}}</p>
+                                                                        <p class="counter-text-total">
+                                                                            {{this.eventBookingDetail?.children}}
+                                                                            {{'Children'|localization}}</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                            <small class="text-danger"
+                                                                *ngIf="(eventBookingDetail?.adults == 0 && eventBookingDetail?.children == 0) && isSubmitted">{{'EnterGuestsDetails'|localization}}</small>
                                                         </div>
-                                                        <small class="text-danger"
-                                                            *ngIf="(eventFilterDetails.adults == 0 && eventFilterDetails.childrens == 0) && isSubmitted">{{'EnterGuestsDetails'|localization}}</small>
                                                     </div>
 
-                                                    <ng-template #popContent>
+
+                                                 <ng-template #popContent>
                                                         <div class="row p-2">
                                                             <div class="col-12">
                                                                 <div class="counter-input-wrapper">
@@ -158,12 +158,12 @@
                                                                             <div class="custom-flex-start max-width-50">
                                                                                 <span class="minus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults > 0 ? popOverFilterData.adults - 1 : 0;">-</span>
+                                                                                    (click)="eventBookingDetail.adults = eventBookingDetail?.adults > 0 ? eventBookingDetail?.adults - 1 : 0;">-</span>
                                                                                 <input type="text"
-                                                                                    [(ngModel)]="popOverFilterData.adults" />
+                                                                                    [(ngModel)]="eventBookingDetail.adults" />
                                                                                 <span class="plus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+</span>
+                                                                                    (click)="eventBookingDetail.adults = eventBookingDetail?.adults + 1;">+</span>
                                                                             </div>
                                                                         </div>
 
@@ -183,19 +183,19 @@
                                                                             <div class="custom-flex-start max-width-50">
                                                                                 <span class="minus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens > 0 ? popOverFilterData.childrens -1 : 0;">-</span>
+                                                                                    (click)="eventBookingDetail.children = eventBookingDetail?.children > 0 ? eventBookingDetail?.children -1 : 0;">-</span>
                                                                                 <input type="text"
-                                                                                    [(ngModel)]="popOverFilterData.childrens" />
+                                                                                    [(ngModel)]="eventBookingDetail.children" />
                                                                                 <span class="plus"
                                                                                     style="cursor: pointer;"
-                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens +1;">+</span>
+                                                                                    (click)="eventBookingDetail.children = eventBookingDetail?.children +1;">+</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 pt-2">
-                                                                <small class="text-danger">{{eventCapcityValidation}}</small>
+                                                                <div *ngIf="isEventGuestValidation==true"><small class="text-danger" >Please decrease the guests</small></div>
                                                                 <div class="custom-flex-end">
                                                                     <button class="custom-btn blue small-btn"
                                                                         (click)="updateGuests()">{{'Done'|localization}}</button>
@@ -205,12 +205,10 @@
                                                     </ng-template>
                                                     <div class="total-amount-wrap custom-padding-top">
                                                         <div class="total-amount-wrap-inner">
-                                                            <p>$ {{booking.amount}} X
-                                                                {{eventFilterDetails.adults +
-                                                                eventFilterDetails.childrens}} </p>
-                                                            <p>$ {{booking.amount *
-                                                                (eventFilterDetails.adults +
-                                                                eventFilterDetails.childrens)}}.00</p>
+                                                            <p>$ {{eventDetails?.amountPerPerson}} X
+                                                                {{this.eventBookingDetail?.adults + eventBookingDetail?.children}} Person</p>
+                                                            <p>$ {{eventDetails?.amountPerPerson *
+                                                                (eventBookingDetail?.adults + eventBookingDetail?.children)}}.00</p>
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner">
@@ -225,13 +223,22 @@
                                                         </div>
                                                         <div class="total-amount-wrap-inner bottom">
                                                             <p class="medium">{{'Total(USD)'|localization}}</p>
-                                                            <p class="medium">$ {{booking.amount *
-                                                                (eventFilterDetails.adults +
-                                                                eventFilterDetails.childrens) +
+                                                            <p class="medium">$ {{eventDetails?.amountPerPerson *
+                                                                (eventBookingDetail?.adults + eventBookingDetail?.children) +
                                                                 eventDetails?.boat?.taxFee+ 20}}.00</p>
 
                                                         </div>
-                                                        <button class="custom-btn blue" (click)="reserveEvent()">{{'BookNow'|localization}}</button>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p class="medium">{{'DeductedAmount(USD)' | localization}}</p>
+                                                            <p class="medium">{{this.eventDetails?.deductedAmount}}.00$</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p class="medium">{{'RefundableAmount(USD)' | localization}}</p>
+                                                            <p class="medium">{{this.eventDetails?.refundableAmount}}.00$</p>
+
+                                                        </div>
+                                                        <button class="custom-btn blue" (click)="openModal(modifyPop)">{{'BookNow'|localization}}</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -263,18 +270,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="offerings">
+                                        <div class="offerings">
                                         <p *ngFor="let item of featureFilter(false,false) | mySlice:3:6"><i
                                                 class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
                                         </p>
-                                    </div> -->
+                                    </div>
                                     </div>
                                     <button (click)="showMore = !showMore;"
                                         class="custom-btn outline-blue-clr my-2">Show
                                         {{showMore ? 'less' :'all'}}</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <h5 class="bold">{{'Favourites'|localization}}</h5>
+                                    <h5 class="bold">{{'Favourites' | localization}}</h5>
                                     <div class="custom-flex-start">
                                         <div class="offerings">
                                             <p *ngFor="let item of featureFilter(true,false) | mySlice:0:3"><i
@@ -349,7 +356,7 @@
                                                         <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                             alt="...">
                                                         <div class="card-body bg-white">
-                                                            <p>{{'PrivateCharter'|localization}}</p>
+                                                            <p>{{'PrivateEvent'|localization}}</p>
 
                                                         </div>
                                                     </div>
@@ -365,7 +372,7 @@
                                                         <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
                                                             alt="...">
                                                         <div class="card-body bg-white">
-                                                            <p>{{'PrivateCharter'|localization}}</p>
+                                                            <p>{{'PrivateEvent'|localization}}</p>
 
                                                         </div>
                                                     </div>
@@ -393,7 +400,7 @@
                                 </div>
                                 <div class="col-md-6 py-2 text-center">
                                     <div class="image-wrapper-host">
-                                        <img src="{{assetsCoreUrl + (boatHost?.imagePath || USER_DEFAULTS.avatar)}}"
+                                        <img src="{{assetsUrlprofile + (boatHost?.imagePath || USER_DEFAULTS.avatar)}}"
                                             alt="">
                                     </div>
                                 </div>
@@ -412,4 +419,43 @@
             </div>
 
         </div>
+        <ng-template #modifyPop>
+
+            <div class="modal-content">
+                <div class="modal-header no-border">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-text-center">
+                        <h4 class="bold text-center">{{'ModificationPolicy' | localization}}</h4>
+                        <div class="py-2">
+                            <p class="small-text text-left">{{'ModificationDeductionOnPayments' | localization}}
+                            </p>
+                            <ul class="custom-ul">
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy1' | localization}}</p>
+                                </li>
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy2' | localization}}</p>
+                                </li>
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy3' | localization}}</p>
+                                </li>
+                                <li>
+                                    <p>{{'EventCancellationDeductionPolicy4' | localization}}</p>
+                                </li>
+
+                            </ul>
+                            <p><strong>{{'EventModificationConfirmation' | localization}}</strong></p>
+                        </div>
+                        <div class="py-4 text-center">
+                            <button (click)="cancelpopup()" class="custom-btn big-btn outline-blue-clr me-sm-3"
+                                data-bs-dismiss="modal" data-bs-toggle="modal"
+                                data-bs-target="#cancellation-confirmed">Cancel</button>&nbsp;
+                            <button class="custom-btn blue big-btn" (click)="reserveEvent()">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
     </div>
