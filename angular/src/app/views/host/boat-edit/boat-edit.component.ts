@@ -78,8 +78,8 @@ export class BoatEditComponent implements OnInit {
 
   getBoatDetailsById() {
     this.boatService.boatDetailsById(this.boatId).subscribe((res: any) => {
-      this.boatCalendar.fromDate = (res?.boatCalendars?.isAvailable == true) ? res?.boatCalendars?.fromDate : res?.boatCalendars[0]?.fromDate;
-      this.boatCalendar.toDate = (res?.boatCalendars?.isAvailable == true) ? res?.boatCalendars?.toDate : res?.boatCalendars[0]?.toDate;
+      this.boatCalendar.fromDate = (res?.boatCalendars?.isAvailable == true) ? new Date(moment(res?.boatCalendars?.fromDate).format("MM/DD/YYYY")) : new Date(moment(res?.boatCalendars[0]?.fromDate).format("MM/DD/YYYY"));
+      this.boatCalendar.toDate = (res?.boatCalendars?.isAvailable == true) ?  new Date(moment(res?.boatCalendars?.toDate).format("MM/DD/YYYY")) :  new Date(moment(res?.boatCalendars[0]?.toDate).format("MM/DD/YYYY"));
       this.boatEditForm.setValue({
         id: this.boatId,
         name: res?.name,
