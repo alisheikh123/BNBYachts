@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../common/header/header.component';
 import { LoaderComponent } from 'src/app/shared/loader/component/loader/loader.component';
@@ -15,7 +15,6 @@ import { RouterModule } from '@angular/router';
 import { DateRangePickerModule, DateTimePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { NotFoundModule } from '../common/not-found-component/not-found.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpConfigInterceptor } from 'src/app/shared/interceptors/http.interceptor';
 import { MyProfileComponent } from '../common/user-profile/my-profile/my-profile.component';
 import { UpdateProfileComponent } from '../common/user-profile/update-profile/update-profile.component';
@@ -23,9 +22,7 @@ import { AddReviewModalComponent } from '../common/add-review-modal/add-review-m
 import { OnboardingWelcomeComponent } from '../common/onboarding-welcome/onboarding-welcome.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { TranslateService } from 'src/app/core/translate.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
-
 
 
 @NgModule({
@@ -36,8 +33,8 @@ import { ChatService } from 'src/app/core/chat/chat.service';
     OnboardingWelcomeComponent],
   imports: [
     HttpClientModule,
-    CommonModule,
      NgbModule, 
+     CommonModule,
      ReactiveFormsModule,
     FormsModule,
     ToastrModule.forRoot(),
@@ -59,18 +56,11 @@ import { ChatService } from 'src/app/core/chat/chat.service';
 
     multi: true
   },
-  TranslateService,
-  {
-    provide: APP_INITIALIZER,
-    useFactory: setupTranslateFactory,
-    deps: [TranslateService],
-    multi: true
-  },
     NgbActiveModal ,  {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter},
     LoaderService , ChatService,
-    { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter },]
+    { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter }
+   
+  ],
+  bootstrap: [CaptainComponent]
 })
 export class CaptainModule { }
-export function setupTranslateFactory(service: TranslateService): Function {
-  return () => service.use('en');
-}

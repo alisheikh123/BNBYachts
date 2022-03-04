@@ -22,7 +22,6 @@ import { AddReviewModalComponent } from '../common/add-review-modal/add-review-m
 import { OnboardingWelcomeComponent } from '../common/onboarding-welcome/onboarding-welcome.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { TranslateService } from 'src/app/core/translate.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
 
 
@@ -58,18 +57,8 @@ import { ChatService } from 'src/app/core/chat/chat.service';
 
     multi: true
   },
-  TranslateService,
-  {
-    provide: APP_INITIALIZER,
-    useFactory: setupTranslateFactory,
-    deps: [TranslateService],
-    multi: true
-  },
     NgbActiveModal ,  {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter},
     LoaderService , ChatService,
     { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter },]
 })
 export class CleaningModule { }
-export function setupTranslateFactory(service: TranslateService): Function {
-  return () => service.use('en');
-}
