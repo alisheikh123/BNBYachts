@@ -1,6 +1,7 @@
 (function (window) {
     window.__env = window.__env || {};
     // API url
+      window.__env.BOAT_API_URL= 'https://localhost:44387',
       window.__env.BOOKING_API_URL= 'https://localhost:44337',
       window.__env.CORE_API_URL= 'https://localhost:44347',
       window.__env.IDENTITY_API_URL= 'https://localhost:44311',
