@@ -1,5 +1,6 @@
 export const environment = {
-  production: false,
+  staging: true,
+  production:false,
   BOAT_API_URL:(<any>window)._env.BOAT_API_URL,
   BOOKING_API_URL: (<any>window)._env.BOOKING_API_URL,
   CORE_API_URL: (<any>window)._env.CORE_API_URL,
@@ -12,7 +13,7 @@ export const environment = {
   CLEANING_APP_URL:(<any>window)._env.CLEANING_APP_URL,
   stripeKey: (<any>window)._env.stripeKey,
   Identity: {
-    authority: (<any>window)._env.identity_authority_authority,
+    authority: (<any>window)._env.identity_authority,
     redirectUrl: (<any>window)._env.identity_redirectUrl,
     postLogoutRedirectUri: (<any>window)._env.identity_postLogoutRedirectUri,
     clientId: (<any>window)._env.identity_clientId,
