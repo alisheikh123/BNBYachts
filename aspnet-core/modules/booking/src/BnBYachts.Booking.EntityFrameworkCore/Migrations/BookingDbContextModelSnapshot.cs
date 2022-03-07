@@ -269,6 +269,9 @@ namespace BnBYachts.Booking.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Adults")
+                        .HasColumnType("int");
+
                     b.Property<string>("BankingDetailsId")
                         .HasColumnType("nvarchar(max)");
 
@@ -276,6 +279,9 @@ namespace BnBYachts.Booking.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("BookingStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Children")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")

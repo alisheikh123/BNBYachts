@@ -51,8 +51,6 @@ import { RouterModule } from '@angular/router';
     CarouselModule
 
   ],
-  providers: [ 
-     ServiceProviderService , YachtSearchService, ErrorService
-    ]
+  providers: [ServiceProviderService , YachtSearchService, ErrorService ]
 })
 export class ServiceProviderModule { }

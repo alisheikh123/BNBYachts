@@ -68,6 +68,7 @@ import {CarouselModule} from 'primeng/carousel';
     { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter }
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }
 
