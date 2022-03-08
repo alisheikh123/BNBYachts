@@ -22,11 +22,9 @@ export class AllHostBoatsService {
   getAllCharters(pageNo?: number, pageSize?: number) {
     return this.http.get(this.boatApiUrl + this.apiCharterPrefix + '/charters?pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
   }
-
-  getAllEvents(page: number, pageSize: number) {
-    return this.http.get(this.boatApiUrl + this.apiEventPrefix + '/events?pageNo=' + page + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
+  getAllEvents(pageNo?: number, pageSize?: number) {
+    return this.http.get(this.boatApiUrl + this.apiEventPrefix + '/events?pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(catchError(this.errorService.handleError));
   }
-
   updateBoatStatus(boatId: number) {
     return this.http.get(this.boatApiUrl + '/api/host-boat-status/' + boatId).pipe(catchError(this.errorService.handleError));
   }
