@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserDetails } from 'src/app/shared/interface/UserDetails';
 import { UserBoats } from 'src/app/shared/interface/UserBoats';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-my-profile',
@@ -30,11 +31,10 @@ export class MyProfileComponent implements OnInit {
   USER_DEFAULTS = UploadDefault;
   loggedInUserRole: string | null;
   uploadPictureForm: FormGroup;
-  imageSrc: string;
+  imageSrc: any;
   uploadDefault = UploadDefault;
   @Output() profileImage = new EventEmitter<any>();
-  constructor(private authService : AuthService,private boatService : BoatService,private bookingService : BookingService,private modal:NgbModal,public fb:FormBuilder) { }
-
+  constructor(private authService : AuthService,private boatService : BoatService,private bookingService : BookingService,private modal:NgbModal,public fb:FormBuilder,private _sanitizer: DomSanitizer) { }
   ngOnInit(): void {
     this.uploadPictureForm = this.fb.group({
       profile: ['']
@@ -84,9 +84,10 @@ export class MyProfileComponent implements OnInit {
     this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
   }
   onFileChange(event: any) {
-    const reader = new FileReader();
+
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
+      const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageSrc = reader.result as string;
@@ -100,11 +101,10 @@ export class MyProfileComponent implements OnInit {
     if (this.uploadPictureForm.value) {
       const formData = new FormData();
       formData.append('file', this.uploadPictureForm.get('profile')!.value);
-      debugger;
       this.authService.UploadProfileImage(formData).subscribe((res: any) => {
         this.profileImage.emit(this.uploadPictureForm.value);
       });
-      this.imageSrc = this.uploadPictureForm.value;
+
     }
 }
 
