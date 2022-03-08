@@ -77,6 +77,8 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');
+    localStorage.clear();
+    sessionStorage.clear();
     this.isLoggedIn = false;
   }
 

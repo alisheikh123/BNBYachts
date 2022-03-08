@@ -1,0 +1,112 @@
+<div class="main-wrapper" >
+  <section class="chat-wrapper-section section-padding">
+    <div class="container-fluid">
+      <div class="row" >
+        <div class="col-md-3 py-2" *ngIf="!noChatsAvailble">
+          <app-chat-users  [activeUserId]="chat.receiverId"
+          [activeChatFilter]="activeChatFilter"
+          (noUserAvailble)="noUserAvailable($event)"
+            (onChangeUser)="getChat($event)"></app-chat-users>
+        </div>
+        <div class="col-md-6 py-2" *ngIf="!noChatsAvailble">
+          <div class="bg-grey-light border-radius-5 p-2">
+            <div class="image-with-text">
+              <div class="image-with-text-inner small-img">
+                <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
+                <div class="user-details">
+                  <p class="medium">{{recieverInfo?.name}}</p>
+                  <p class="small-text grey">{{recieverInfo?.email}}</p>
+                </div>
+                <div class="dropdown custom-dropdown no-border">
+                  <button class="dropdown-btn dropdown-toggle no-border" type="button" id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-ellipsis-v"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><button class="dropdown-item" (click)="changeStatus()" *ngIf="chat.isBlockedByMe || !chat.blockedUser">{{chat.blockedUser ? 'Unblock':'Block'}}</button></li>
+                      <li><button class="dropdown-item" (click)="archiveChat(recieverInfo)">{{!recieverInfo?.isArchivedUser ? 'Archive Chat':'Unarchive chat'}}</button></li>
+                  </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="userMessages && chat.receiverId">
+          <div class="chat-wrap-bg-blue" #chatScrollContainer>
+          <ng-container *ngFor="let msg of userMessages | groupBy: 'sentDate'">
+            <div class="chat-separator">
+              <span class="small-text grey">{{msg.key}}</span>
+          </div>
+            <div class="image-with-text" *ngFor="let message of msg.value"
+            [ngClass]="{'bg-blue-text reciever-msg':isReciever(message.receiverId,chat.senderId)}">
+            <div class="image-with-text-inner small-img">
+              <div class="w-100 d-flex align-items-start justify-content-end reciver-msj">
+       
+              <div class="user-details">
+                <p [innerHtml]="message.message"></p>
+                <small class="chatTime">{{message.sentTime | date:'hh:mm a'}}</small>
+              </div>
+              <div class="pe-2" *ngIf="!isReciever(message.receiverId,chat.senderId)"></div>
+              <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
+              </div>
+            </div>
+          </div>
+          </ng-container> 
+  
+            <p class="text-center bold" *ngIf="chat.blockedUser">You cannot reply to this conversion...</p>
+
+         
+          </div>
+          <div class="message-box px-3" *ngIf="!chat.blockedUser">
+            <form>
+              <div class="form-floating custom-input-field">
+                <input type="text" name="message" class="custom-input big-input" [(ngModel)]="chat.message"
+                  placeholder="Type a message..." id="write-msg" placeholder="Type your message ...">
+              </div>
+              <div class="message-actions">
+                <button (click)="send()" [disabled]="chat.message == ''"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+              </div>
+            </form>
+          </div>
+          </ng-container>
+          <div *ngIf="!userMessages && !chat.receiverId">
+            <div class="text-center">
+              <p class="pb-2">No Chats found</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2" *ngIf="recieverInfo">
+          <div class="custom-card">
+            <div class="image-with-text ">
+              <div class="image-with-text-inner">
+                <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
+              </div>
+              <p class="medium text-center">{{recieverInfo?.name}}</p>
+              <p class="small-text grey text-center">{{recieverInfo?.email}}</p>
+               <div class="custom-flex pt-5 pb-4">
+                <a [routerLink]="['/contracts/add',chat.receiverId]" class="custom-btn blue big-btn">Create Contract</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- <ng-template #noChatModal>
+  <div class="modal-content">
+    <div class="modal-header no-border">
+    </div>
+    <div class="modal-body">
+      <div class="custom-text-center">
+        <h4 class="bold text-center">No Chat Aailable</h4>
+        <div>
+        </div>
+        <div class="bottom-btn vertical-center text-center">
+          <button (click)="findHost()" class="custom-btn blue big-btn mt-3" data-bs-toggle="modal" data-bs-target="#noChatModal" data-bs-dismiss="modal">Find Host</button>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+</ng-template> -->
