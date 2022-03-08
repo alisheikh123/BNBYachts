@@ -31,7 +31,7 @@ export class MyProfileComponent implements OnInit {
   USER_DEFAULTS = UploadDefault;
   loggedInUserRole: string | null;
   uploadPictureForm: FormGroup;
-  imageSrc: any;
+  imageSrc: string;
   uploadDefault = UploadDefault;
   @Output() profileImage = new EventEmitter<any>();
   constructor(private authService : AuthService,private boatService : BoatService,private bookingService : BookingService,private modal:NgbModal,public fb:FormBuilder,private _sanitizer: DomSanitizer) { }

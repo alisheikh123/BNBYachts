@@ -153,7 +153,7 @@ export class ChatComponent implements OnInit {
   }
   archiveChat(recieverInfo:any) {
     this.chatService.archiveChat(this.chat.receiverId,!recieverInfo?.isArchivedUser).subscribe(res => {
-      recieverInfo.isArchivedUser = !recieverInfo.isArchivedUser; 
+      recieverInfo.isArchivedUser = !recieverInfo.isArchivedUser;
       let index = this.chatUsersComponent.allChatUsers.findIndex(res=>res.userId == this.chat.receiverId);
       this.chatUsersComponent.allChatUsers[index].isArchivedUser =  recieverInfo?.isArchivedUser;
       this.activeChatFilter = 1;
@@ -162,15 +162,11 @@ export class ChatComponent implements OnInit {
       this.toastr.success("Chat Archived successfully", "Archived");
     })
   }
-  findHost(){
-    this.router.navigate(['']);
-    this.modal.dismissAll();
-  }
 
   noUserAvailable(available:boolean) {
     if(available!){
       this.noChatsAvailble = true;
-      this.modal.open(this.noChatModalTemplate, { centered: true });      
+      this.modal.open(this.noChatModalTemplate, { centered: true });
     }
       this.noChatsAvailble = false;
   }

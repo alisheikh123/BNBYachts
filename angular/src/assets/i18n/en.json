@@ -366,6 +366,7 @@
  "Calender" : "Calender here",
  "BookedTimeSlots" : "Booked Time slots",
  "Skip":"Skip",
- "NoDataMessage":"No Data Found"
+ "NoDataMessage":"No Data Found",
+ "profileDescription":"Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
 
 }
