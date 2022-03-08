@@ -110,7 +110,6 @@ export class CalendarScheduleComponent implements OnInit {
   bindEvents() {
     let event: any = [];
     this.bookingsCalendar.forEach((element: any) => {
-      console.log(event);
       event.push({
         eventId: element.id,
         serviceType: element.serviceType,

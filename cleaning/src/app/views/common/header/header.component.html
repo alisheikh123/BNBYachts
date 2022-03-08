@@ -11,7 +11,14 @@
                     </div>
                     <div class="center-content">
                         <ng-container >
-                    
+                            <a [routerLink]="['/app/chats']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Inbox" [ngClass]="{'active':activeTab == HEADER_TABS.Inbox}">
+                                <span class="logo-wrapper">
+                                    <a class="logo-btn"><img src="../../../../assets/images/inbox-icon.svg"
+                                        alt=""></a>
+                                    </span>
+                                    Inbox
+                                <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
+                            </a>
                         </ng-container>
                     </div>
                     <div class="right-content">

@@ -365,6 +365,7 @@
  "AvailableTimeSlots": "Available Time Slots",
  "Calender" : "Calender here",
  "BookedTimeSlots" : "Booked Time slots",
- "Skip":"Skip"
+ "Skip":"Skip",
+ "NoDataMessage":"No Data Found"
 
 }

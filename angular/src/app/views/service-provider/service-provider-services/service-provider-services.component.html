@@ -48,6 +48,10 @@
         <div class="col-lg-3 col-md-3  py-2"><a   (click)="getServiceProviderDetail()"
             class="custom-btn cstmbtn big-btn grey medium search-btn">{{'Search' | localization}}</a></div>
       </div>
+      <div class="customsg" *ngIf="serviceProviderList.length==0;else serviceProvidersList">
+          {{'NoDataMessage' | localization}}
+      </div>
+      <ng-template #serviceProvidersList >
       <div *ngFor="let item of serviceProviderList">
 
      
@@ -90,6 +94,7 @@
           </div>
           </div>
         </div>
+    </ng-template>
       </div>
   </div>
   </div>

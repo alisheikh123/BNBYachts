@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp;
 using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Core.Services.ServiceProvider
@@ -31,7 +32,9 @@ namespace BnBYachts.Core.Services.ServiceProvider
         }
         public async Task<EntityResponseModel> CreateonBoarding(IFormCollection formdata)
         {
-           
+            try
+            {
+
                 var data = JsonConvert.DeserializeObject<ServiceProviderRequestableDto>(formdata["seviceproviderdata"]);
                 data.UserId = CurrentUser.Id.ToString();
                 var response = await _serviceproviderManager.CreateonBoarding(data).ConfigureAwait(false);
@@ -44,7 +47,12 @@ namespace BnBYachts.Core.Services.ServiceProvider
                 {
                     await _s3Service.UploadFileToAWSAsync(formdata.Files.FirstOrDefault(x => x.Name == FileTypeConstants.Image), "serviceprovider", "companyprofile");
                 }
-                return  response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new UserFriendlyException(ex.ToString());
+            }
         }
         public async Task<EntityResponseListModel<ServiceProviderTransferable>> SearchServiceProvider(ServiceProviderSearchRequestable request)=>
             await _serviceproviderManager.SearchServiceProvider(request).ConfigureAwait(false);
