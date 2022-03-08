@@ -50,11 +50,9 @@ export class HeaderComponent implements OnInit {
     HEADER_TABS = HeaderTabs;
 
   ngOnInit(): void {
-    debugger;
     this.oidcSecurityService
       .checkAuth()
       .subscribe((res: any) => {
-        debugger;
                 if (res.isAuthenticated) {
           if (res?.accessToken != null && res?.userData?.sub != null) {
             localStorage.setItem('accessToken', res?.accessToken);
@@ -88,7 +86,6 @@ export class HeaderComponent implements OnInit {
           localStorage.setItem('userRole', this.app.loggedInUserRole);
         }
         this.isLoggedIn = true;
-        debugger;
         this.onBoardingModal();
 
     })
