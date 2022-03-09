@@ -1,5 +1,4 @@
-﻿
-namespace BnBYachts.Core.Dto
+﻿namespace BnByachts.BackgroundWorker
 {
     public class AWSOptions
     {

@@ -47,9 +47,9 @@ export class HeaderComponent implements OnInit {
     byServiceProvider : false
   };
   @ViewChild(ChatComponent) chatComponent: ChatComponent;
-  constructor(public router: Router, public app: AppComponent, 
+  constructor(public router: Router, public app: AppComponent,
     private toastr: ToastrService, private modal: NgbModal,
-    private oidcSecurityService: OidcSecurityService, 
+    private oidcSecurityService: OidcSecurityService,
     private authService: AuthService,private chatService:ChatService) { }
     activeTab: number = 0;
     HEADER_TABS = HeaderTabs;
@@ -224,5 +224,9 @@ tryHosting(){
     {
      this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
     }
+  }
+  updateProfileImage(event:any)
+  {
+    this.userDetails.imagePath = event.profile?.name;
   }
 }

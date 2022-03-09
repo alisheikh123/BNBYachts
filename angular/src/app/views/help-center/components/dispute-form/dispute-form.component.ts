@@ -65,7 +65,7 @@ export class DisputeFormComponent implements OnInit {
             element.name = res?.eventDetails?.title + '-' + res?.eventDetails?.location;
           })
         }
-        else if (element.bookingType == this.BOOKING_TYPES.Charters && element.bookingTypeId == 14) {
+        else if (element.bookingType == this.BOOKING_TYPES.Charters ) {
           this.boatService.charterDetailsById(element.bookingTypeId).subscribe((res: any) => {
             element.name = res?.charterDetails?.boat?.name + '-' + res?.charterDetails?.departingFrom + '/' + res?.charterDetails?.destination;
           })

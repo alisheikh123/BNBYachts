@@ -1,7 +1,7 @@
 import { Reviews } from 'src/app/shared/interface/reviews';
 import { find } from 'rxjs/operators';
 import { BookingService } from 'src/app/core/Booking/booking.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { BoatService } from 'src/app/core/Boat/boat.service';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserDetails } from 'src/app/shared/interface/UserDetails';
 import { UserBoats } from 'src/app/shared/interface/UserBoats';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-my-profile',
@@ -32,8 +33,8 @@ export class MyProfileComponent implements OnInit {
   uploadPictureForm: FormGroup;
   imageSrc: string;
   uploadDefault = UploadDefault;
-  constructor(private authService : AuthService,private boatService : BoatService,private bookingService : BookingService,private modal:NgbModal,public fb:FormBuilder) { }
-
+  @Output() profileImage = new EventEmitter<any>();
+  constructor(private authService : AuthService,private boatService : BoatService,private bookingService : BookingService,private modal:NgbModal,public fb:FormBuilder,private _sanitizer: DomSanitizer) { }
   ngOnInit(): void {
     this.uploadPictureForm = this.fb.group({
       profile: ['']
@@ -83,9 +84,10 @@ export class MyProfileComponent implements OnInit {
     this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
   }
   onFileChange(event: any) {
-    const reader = new FileReader();
+
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
+      const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageSrc = reader.result as string;
@@ -94,13 +96,15 @@ export class MyProfileComponent implements OnInit {
         this.uploadImage();
       }
     }
-  }  
+  }
   uploadImage() {
     if (this.uploadPictureForm.value) {
       const formData = new FormData();
       formData.append('file', this.uploadPictureForm.get('profile')!.value);
       this.authService.UploadProfileImage(formData).subscribe((res: any) => {
+        this.profileImage.emit(this.uploadPictureForm.value);
       });
+
     }
 }
 

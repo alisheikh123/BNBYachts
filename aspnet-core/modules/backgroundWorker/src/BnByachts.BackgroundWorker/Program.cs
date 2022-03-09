@@ -6,7 +6,7 @@ using BnBYachts.EventBusShared.Queue;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
-namespace BnByachts.NotificationHub
+namespace BnByachts.BackgroundWorker
 {
     public class Program
     {
@@ -24,12 +24,18 @@ namespace BnByachts.NotificationHub
                 options.UseAutofac();
             });
             application.Initialize();
-            using (var serviceScope = application.ServiceProvider.CreateScope())
-            {
-                serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
-                serviceScope.ServiceProvider.GetService<MyLogWorker>().StartAsync().GetAwaiter();
-                serviceScope.ServiceProvider.GetService<BookingWorker>().StartAsync().GetAwaiter();
-            }
+          
+                using (var serviceScope = application.ServiceProvider.CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
+                    if (false)
+                    {
+                        serviceScope.ServiceProvider.GetService<MyLogWorker>().StartAsync().GetAwaiter();
+                        serviceScope.ServiceProvider.GetService<BookingWorker>().StartAsync().GetAwaiter();
+                    }
+                }
+            
+
             Console.WriteLine("Background Worker is Running");
             Console.WriteLine("Ctrl + C to Quit");
             QuitEvent.WaitOne();

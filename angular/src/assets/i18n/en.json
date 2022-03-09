@@ -376,6 +376,7 @@
  "BecomeHost" :"Become a Host",
  "BecomeCaptain":"Become a Captain",
  "BecomeManagement":"Become a Management",
- "BecomeCleaning":"Become a Cleaning"
+ "BecomeCleaning":"Become a Cleaning",
+ "profileDescription":"Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
 
 }
