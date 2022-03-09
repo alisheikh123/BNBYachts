@@ -9,6 +9,7 @@ using BnBYachts.Core.ServiceProvider.Requestable;
 using BnBYachts.Core.Data.Entities.ServiceProvider;
 using BnBYachts.Core.ServiceProvider.Transferable;
 using BnBYachts.Core.Enum;
+using BnBYachts.Core.Shared.Transferable;
 
 namespace BnBYachts.Core
 {
@@ -17,6 +18,7 @@ namespace BnBYachts.Core
         public CoreDomainAutoMapperProfile()
         {
             CreateMap<UserRequestable, IdentityUser>();
+            CreateMap<IdentityRole, RolesTransferable>();
             CreateMap<IdentityUser, BoatUserTransferable>();
             CreateMap<UserMobileVerificationRequestable, OTPVerifierEntity>().
                 ForMember(source=>source.PhoneNumber,destination=>destination.MapFrom(source=> source.Phone));
