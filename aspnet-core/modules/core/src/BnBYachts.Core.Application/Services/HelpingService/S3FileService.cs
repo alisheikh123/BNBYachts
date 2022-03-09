@@ -16,7 +16,7 @@ namespace BnBYachts.Core.Services.HelpingService
         {
             _awsSettings = awsSettings.Value;
         }
-        public async Task<S3ResponseDTO> UploadFileToAWSAsync(IFormFile myfile, string subFolder = "", string childFolder = "")
+        public async Task<S3ResponseDTO> UploadFileToAWSAsync(IFormFile file, string subFolder = "", string childFolder = "")
         {
                 var s3Client = new AmazonS3Client(_awsSettings.AWSAccessKey, _awsSettings.AWSSecretKey, RegionEndpoint.USEast1);
                 var bucketName = _awsSettings.AWSBucketName;
@@ -33,23 +33,24 @@ namespace BnBYachts.Core.Services.HelpingService
                     }
 
                 }
-                keyName = keyName + "/" + myfile.FileName;
-                var fs = myfile.OpenReadStream();
+                keyName = keyName + "/" + file.FileName;
+                var fs = file.OpenReadStream();
                 
                 var request = new Amazon.S3.Model.PutObjectRequest
                 {
                     BucketName = bucketName,
                     Key = keyName,
                     InputStream =fs,
-                    ContentType = myfile.ContentType,
+                    ContentType = file.ContentType,
                     CannedACL = S3CannedACL.PublicRead
                 };
-                var response = await s3Client.PutObjectAsync(request);
+                await s3Client.PutObjectAsync(request);
+
                 return new S3ResponseDTO
                 {
                     FullPath = keyName,
                     BucketName = bucketName,
-                    KeyName = myfile.FileName
+                    KeyName = file.FileName
                 };
         }
     }
