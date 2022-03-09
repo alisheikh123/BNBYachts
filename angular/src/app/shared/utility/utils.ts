@@ -47,4 +47,8 @@ export class utils {
         return (obj && (Object.keys(obj).length === 0));
 
       }
+      static convertToCalenderDate(date:Date)
+      {
+          return moment(date).format("MM/DD/YYYY");
+      }
 }

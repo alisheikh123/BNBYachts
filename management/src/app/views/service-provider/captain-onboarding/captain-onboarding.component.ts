@@ -33,14 +33,14 @@ captainOnBoardingForm: FormGroup;
   filetype=FileType;
   fileModel:FileModel=<FileModel>{};
   constructor( private router: Router,
-    private toastr: ToastrService, 
+    private toastr: ToastrService,
     private fb: FormBuilder,
     private  _serviceProvider : ServiceProviderService
 ) { }
 
   ngOnInit(): void {
     this.buildFormConfiguration();
-  
+
   }
   buildFormConfiguration() {
     this.captainOnBoardingForm = this.fb.group({
@@ -55,8 +55,8 @@ captainOnBoardingForm: FormGroup;
       bankName: ['', Validators.required],
       zipCode: ['', Validators.required],
       swift: ['', Validators.required],
-      iban: ['', Validators.required], 
-      supportiveDoc:[''],    
+      iban: ['', Validators.required],
+      supportiveDoc:[''],
       timeSlots: new FormArray([]),
 
     });
@@ -135,7 +135,7 @@ return false;
      else {
       this.fileModel.file = event.target.files[0];
       this.fileModel.type=this.filetype.PDF;
-      this.captainOnBoardingForm.get('supportiveDoc')?.setValue(this.fileModel.file?.name);   
+      this.captainOnBoardingForm.get('supportiveDoc')?.setValue(this.fileModel.file?.name);
       this.toastr.error("Supportive Document added successfully","Supportive Document")
     }
   }
@@ -143,7 +143,7 @@ return false;
   isValidFile(file:any){
     if(file.type == "application/pdf") {
       return true;
-     
+
     }
     return false;
   }
@@ -167,7 +167,6 @@ return false;
       if(res)
       {
         this._serviceProvider.createServiceProvider(formData).subscribe((res: any) => {
-          debugger;
           if (res.returnStatus) {
             this.toastr.success("Captain Onboarding Completed!", "Service Provider");
             this.router.navigate(['service-provider/service-provider-dashboard'])
@@ -179,5 +178,5 @@ return false;
       this.toastr.error(err);
     });
   }
-  
+
 }

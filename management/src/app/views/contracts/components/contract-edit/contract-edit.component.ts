@@ -26,7 +26,7 @@ export class ContractEditComponent implements OnInit {
   contractId: number;
   contract: any;
   userId :string;
-  
+
   constructor(private fb: FormBuilder, private service: ContractsService,private localStorage:LocalStoreService,
     private toastr: ToastrService, private activatedRoute: ActivatedRoute,
     private router:Router,
@@ -43,7 +43,6 @@ export class ContractEditComponent implements OnInit {
 
   loadContractDetails() {
     this.service.getContractById(this.contractId).subscribe((res: any) => {
-      debugger;
       this.contract = res.data;
       this.contractForm = this.fb.group({
         id: [this.contract.id],

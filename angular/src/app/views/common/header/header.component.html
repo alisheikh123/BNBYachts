@@ -102,6 +102,7 @@
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
                                 id="dropdownMenuButton1">
+                                <app-my-profile (profileImage)="updateProfileImage($event)" class="myProfileChild"></app-my-profile>
                                 <img src="{{assetUrlS3 + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
@@ -140,7 +141,7 @@
           <a [ngClass]="{'earn-active': selectedOption.byHost}" (click)="selectedOption.byServiceProvider = false;selectedOption.byHost = !selectedOption.byHost;continueToEarn()" class="custom-card custom-flex-between card-right-img">
               <div class="card-right-img-inside">
                 <h6 class="medium p-0 text-start">Become a Host</h6>
-                <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                <p class="grey small-tetx my-2 line-clamp-1">{{"profileDescription" | localization}}</p>
                 </div>
               <img src="../../../../assets/images/host-img-small.png" alt="">
 
@@ -148,10 +149,10 @@
               <a [ngClass]="{'earn-active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider;continueToEarn()" class="custom-card custom-flex-between card-right-img mt-3">
                 <div class="card-right-img-inside">
                   <h6 class="medium p-0 text-start">Service Provider</h6>
-                  <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                  <p class="grey small-tetx my-2 line-clamp-1">{{"profileDescription" | localization}}</p>
                   </div>
                 <img src="../../../../assets/images/service-provider.png" alt="">
-                </a>                
+                </a>
           </div>
         </div>
       </div>
