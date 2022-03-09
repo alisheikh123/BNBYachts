@@ -14,6 +14,7 @@ window._env = {
     identity_redirectUrl: "http://localhost:4203",
     identity_postLogoutRedirectUri: "http://localhost:4203",
     identity_clientId: "BnBYachts_Cleaning",
+    CLIENT_APP_URL:'http://localhost:4200/',
     identity_scope: "openid Core Booking Boat Payments HostGateway Chat",
     identity_responseType: 'code',
     enableDebug : false

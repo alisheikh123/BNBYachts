@@ -366,6 +366,16 @@
  "Calender" : "Calender here",
  "BookedTimeSlots" : "Booked Time slots",
  "Skip":"Skip",
- "NoDataMessage":"No Data Found"
+ "NoDataMessage":"No Data Found",
+ "SwitchRole":"Switch Role",
+ "SwitchUser":"Switch  to User",
+ "SwitchHost":"Switch  to Host",
+ "SwitchCaptain":"Switch  to Captain",
+ "SwitchManagement":"Switch  to Management",
+ "SwitchCleaning":"Switch  to Cleaning",
+ "BecomeHost" :"Become a Host",
+ "BecomeCaptain":"Become a Captain",
+ "BecomeManagement":"Become a Management",
+ "BecomeCleaning":"Become a Cleaning"
 
 }
