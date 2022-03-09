@@ -205,5 +205,20 @@ namespace BnBYachts.Core.Managers
             else
                 return UserReview.Host;
         }
+
+        public async Task<bool> UpdateAdminProfile(AdminProfileRequestable userInput)
+        {
+            var user = await _repository.GetAsync(x => x.Id.ToString() == userInput.Id).ConfigureAwait(false);
+            if (user != null)
+            {
+                user.Name = userInput.Name;
+                user.SetProperty(UserConstants.About, userInput.About);
+                var changePhoneNumberToken = await _userManager.GenerateChangePhoneNumberTokenAsync(user, userInput.PhoneNumber);
+                var changePhoneResult = await _userManager.ChangePhoneNumberAsync(user, userInput.PhoneNumber, changePhoneNumberToken);
+                var res = await _repository.UpdateAsync(user);
+                return true;
+            }
+            return false;
+        }
     }
 }

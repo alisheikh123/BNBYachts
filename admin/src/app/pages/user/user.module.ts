@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +11,8 @@ import { FsIconComponent } from './user.component';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     NbCardModule,
     UiSwitchModule,
     NgbModule,

@@ -1,3 +1,4 @@
+import { AdminProfileModal } from './../../../../shared/interfaces/BoatUser';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsersApi } from '../api/users.api';
@@ -29,5 +30,8 @@ export class UsersService extends BoatUserData {
   }
   SetAdminPassword(admin: SetPasswordModal) {
     return this.api.SetAdminPassword(admin);
+  }
+  UpdateAdminProfile(admin: AdminProfileModal) {
+    return this.api.UpdateAdminProfile(admin);
   }
 }

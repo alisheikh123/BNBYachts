@@ -134,6 +134,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
       this.getFaqs();
       });
     }else{
+      faqsData.id = 0;
       this.faqsService.AddFaqs(faqsData).subscribe(response =>{
         this.toaster.primary('Faqs created successfully', 'Faqs');
         this.resetForm();

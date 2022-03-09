@@ -1,9 +1,13 @@
 using AutoMapper;
 using BnBYachts.Boat.Boat.Enum;
+using BnBYachts.Boat.Boat.FeaturedCity;
+using BnBYachts.Boat.Boat.Marketing;
 using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Calendar;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Event.Requestable;
+using BnBYachts.Boat.Marketing.Requestable;
+using BnBYachts.Boat.Marketing.Transferable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boat.Wishlist.Transferable;
@@ -92,6 +96,10 @@ namespace BnBYachts.Boat
             CreateMap<BoatCalendarEntity, CalendarRequestableDto>();
             CreateMap<CharterEntity, CharterRequestable>().ReverseMap();
             CreateMap<EventEntity, EventAddResponseTransferable>();
+            CreateMap<FeaturedCityRequestable, FeaturedCityEntity>().ReverseMap();
+            CreateMap<FeaturedCityEntity,FeaturedCityTransferable> ().ReverseMap();
+            CreateMap<MarketingRequestable, MarketingPageEntity>().ReverseMap();
+            CreateMap<MarketingPageEntity, MarketingTransferable>().ReverseMap();
         }
     }
 }
