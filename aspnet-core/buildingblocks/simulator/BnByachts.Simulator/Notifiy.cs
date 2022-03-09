@@ -16,41 +16,41 @@ namespace BnByachts.Simulator
    public class Notifiy : ITransientDependency
    {
 
-       private readonly ITechverxElasticSearch _techverxElasticSearch;
-        public Notifiy(ITechverxElasticSearch techverxElasticSearch)
+       //private readonly ITechverxElasticSearch _techverxElasticSearch;
+       // public Notifiy(ITechverxElasticSearch techverxElasticSearch)
+       // {
+       //     _techverxElasticSearch = techverxElasticSearch;
+       // }
+
+        private readonly EventBusDispatcher _eventBusDispatcher;
+
+        public Notifiy(EventBusDispatcher eventBusDispatcher)
         {
-            _techverxElasticSearch = techverxElasticSearch;
+            _eventBusDispatcher = eventBusDispatcher;
         }
-
-        //private readonly EventBusDispatcher _eventBusDispatcher;
-
-        //public Notifiy(EventBusDispatcher eventBusDispatcher)
-        //{
-        //    _eventBusDispatcher = eventBusDispatcher;
-        //}
         public void pushEmail()
         {
            // var response=_techverxElasticSearch.CrateIndexAsync("test1").GetAwaiter();
 
-           var response1= _techverxElasticSearch.AddOrUpdateAsync<temp, int>("test1", new temp
-            {
-                Id = 3,
-                Name = "testing"
+           //var response1= _techverxElasticSearch.AddOrUpdateAsync<temp, int>("test1", new temp
+           // {
+           //     Id = 3,
+           //     Name = "testing"
 
-            }).GetAwaiter();
-           var searchDescriptor = new SearchDescriptor<temp>()
-               .From(0)
-               .Size(20);
+           // }).GetAwaiter();
+           //var searchDescriptor = new SearchDescriptor<temp>()
+           //    .From(0)
+           //    .Size(20);
 
-            var res=_techverxElasticSearch.SearchAsync<temp, int>("test1", searchDescriptor, 0,10).GetAwaiter().GetResult();
+           // var res=_techverxElasticSearch.SearchAsync<temp, int>("test1", searchDescriptor, 0,10).GetAwaiter().GetResult();
            //Console.WriteLine("email sending");
 
-           //_ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
-           //{
-           //    To = "umar.draz@techverx.com",
-           //    Subject = "test",
-           //    Body = new StringBuilder().Append("test")
-           //});
+           _ = _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+           {
+              ChildFolder = "",
+              File = null,
+              SubFolder = ""
+           });
         }
     }
 

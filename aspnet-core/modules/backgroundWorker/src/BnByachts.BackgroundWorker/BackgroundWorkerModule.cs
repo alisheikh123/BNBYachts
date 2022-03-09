@@ -51,10 +51,10 @@ namespace BnByachts.BackgroundWorker
 
             context.Services.AddMassTransit(mt =>
             {
-                mt.AddConsumer<BackgroundConsumer>().Endpoint(e =>
-                {
-                    e.Name = EventBusQueue.QBackgroundWorker;
-                });
+                //mt.AddConsumer<BackgroundConsumer>().Endpoint(e =>
+                //{
+                //    e.Name = EventBusQueue.QBackgroundWorker;
+                //});
 
                 mt.AddConsumer<S3FileConsumer>().Endpoint(e =>
                 {
