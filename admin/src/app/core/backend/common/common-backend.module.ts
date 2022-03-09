@@ -1,3 +1,5 @@
+import { MarketApi } from './api/market.api';
+import { MarketService } from './services/market.service';
 import { FaqsApi } from './api/faqs.api';
 import { FaqsService } from './services/faqs.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,8 +55,9 @@ import { BoatUserData } from '../../../shared/interfaces/BoatUser';
 import { BoatsData } from '../../../shared/interfaces/Boats';
 import { BoatsService } from './services/boats.service';
 import { FaqsData } from '../../../shared/interfaces/Faqs';
+import { MarketData } from '../../../shared/interfaces/Market';
 
-const API = [UsersApi,DisputesApi,BoatsApi, FaqsApi,HttpService];
+const API = [UsersApi,DisputesApi,BoatsApi, FaqsApi, MarketApi,HttpService];
 
 const SERVICES = [
   { provide: DisputesData, useClass: DisputeService },
@@ -62,6 +65,8 @@ const SERVICES = [
   { provide: BoatsData, useClass: BoatsService },
   { provide: UserData, useClass: UserService },
   { provide : FaqsData, useClass : FaqsService},
+  { provide : MarketData, useClass : MarketService},
+
 
 
   { provide: UserActivityData, useClass: UserActivityService },

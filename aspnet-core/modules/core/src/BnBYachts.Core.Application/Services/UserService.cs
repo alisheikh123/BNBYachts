@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Core.Enum;
+using BnBYachts.Core.Interface;
 using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Requestable;
@@ -16,9 +17,11 @@ namespace BnBYachts.Core.Services
     public class UserService : ApplicationService
     {
         private readonly IAppUserManager _appUserManager;
-        public UserService(IAppUserManager appUserManager)
+        private readonly IS3FileService _s3Service;
+        public UserService(IAppUserManager appUserManager, IS3FileService s3Service)
         {
             _appUserManager = appUserManager;
+            _s3Service = s3Service;
         }
 
         [HttpGet]
@@ -73,7 +76,7 @@ namespace BnBYachts.Core.Services
 
         [HttpGet]
         public async Task<UserReview> IsRoleName(string userId, string userRole, string hostRole) => await _appUserManager.IsRoleName(userId, userRole, hostRole);
+        [HttpPut]
+        public async Task UpdateAdminProfile(AdminProfileRequestable userInput) => await _appUserManager.UpdateAdminProfile(userInput);
     }
-
-
 }

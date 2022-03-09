@@ -39,6 +39,11 @@ const routes: Routes = [{
         .then(m => m.FaqsModule),
     },
     {
+      path: 'marketing',
+      loadChildren: () => import('./marketing/marketing.module')
+        .then(m => m.MarketingModule),
+    },
+    {
       path: '',
       redirectTo: 'pages',
       pathMatch: 'full',

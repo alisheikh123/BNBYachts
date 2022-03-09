@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { environment } from '../../../../../environments/environment';
+import { AdminProfileModal } from '../../../../shared/interfaces/BoatUser';
 
 @Injectable()
 export class UsersApi {
@@ -28,5 +29,8 @@ export class UsersApi {
   }
   SetAdminPassword(adminData : any) {
     return this.api.post(`${this.USER_API_URL}set-admin-password`,adminData);
+  }
+  UpdateAdminProfile(admin: AdminProfileModal) {
+    return this.api.put(`api/app/user/admin-profile`,admin);
   }
 }
