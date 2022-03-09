@@ -43,7 +43,6 @@ namespace BnBYachts.Core.Services.ServiceProvider
                     await _s3Service.UploadFileToAWSAsync(formdata.Files.FirstOrDefault(x => x.Name == FileTypeConstants.Pdf), "serviceprovider", "supportdocument");
                 }
                 if (response.ReturnStatus && !string.IsNullOrEmpty(data.CompanyProfilePicture) && formdata.Files.Count > 0)
-
                 {
                     await _s3Service.UploadFileToAWSAsync(formdata.Files.FirstOrDefault(x => x.Name == FileTypeConstants.Image), "serviceprovider", "companyprofile");
                 }
