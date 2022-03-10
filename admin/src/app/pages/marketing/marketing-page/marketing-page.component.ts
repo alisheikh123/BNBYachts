@@ -30,7 +30,7 @@ export class MarketingPageComponent implements OnInit {
   },
   {
     id: this.MarketingType.Event,
-    name: "Charter Local Laws",
+    name: "Event Local Laws",
   },
   {
     id: this.MarketingType.RentelPermission,
@@ -66,7 +66,7 @@ export class MarketingPageComponent implements OnInit {
         title: '<i class="nb-edit" title="onEditAction"></i>',
       },
       { 
-        name: 'deleteFaqs', 
+        name: 'deleteMarketPage', 
         title: '<i class="nb-trash" title="deleteMarketPage"></i>'
       }
     ],
@@ -144,7 +144,7 @@ export class MarketingPageComponent implements OnInit {
     var faqsData = this.marketForm.value;
     if (faqsData.id > 0) {
       this.marketService.updateMarketPage(faqsData).subscribe(response =>{
-      this.toaster.success('Faqs updated successfully', 'Faqs');
+      this.toaster.primary('Market Page updated successfully', 'Market Page');
       this.resetForm();
       this.modalService.dismissAll();
       this.getMarketPage();
@@ -152,7 +152,7 @@ export class MarketingPageComponent implements OnInit {
     }else{
       faqsData.id = 0;
       this.marketService.AddMarketPage(faqsData).subscribe(response =>{
-        this.toaster.primary('Faqs created successfully', 'Faqs');
+        this.toaster.primary('Market Page created successfully', 'Market Page');
         this.resetForm();
         this.modalService.dismissAll();
         this.getMarketPage();
@@ -161,6 +161,7 @@ export class MarketingPageComponent implements OnInit {
     this.cleanup = true;
   }
   onCustomAction(contents, contentData,event){
+    debugger;
     switch (event.action) {
       case 'onEditAction':
         this.onEditAction(contentData, event.data);
@@ -186,7 +187,7 @@ export class MarketingPageComponent implements OnInit {
         this.closeResult = `Closed with: ${result}`;  
         if (result === 'yes') {  
           this.marketService.deleteMarketPage(id).subscribe(res =>{
-            this.toaster.success("Faqs Deleted Successfully.", "Faqs");
+            this.toaster.primary("Market Page Deleted Successfully.", "Market Page");
             this.getMarketPage();
           })
         }  

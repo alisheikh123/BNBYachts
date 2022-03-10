@@ -16,7 +16,7 @@ export class UsersApi {
     return this.api.get(`${this.USER_API_URL}total-users?userRole=${userRole}&hostRole=${hostRole}`).pipe();
   }
   getUserInfoById(id:string) {
-    return this.api.get(`api/GetUserDetailsById/${id}`);
+    return this.api.get(`api/app/user/user-details-by-id/${id}`);
   }
   getReviewByUserId(revieweeId : string) {
     return this.api.getBooking(`api/app/review/reviews-by-reviewee-id/${revieweeId}`);
@@ -33,4 +33,9 @@ export class UsersApi {
   UpdateAdminProfile(admin: AdminProfileModal) {
     return this.api.put(`api/app/user/admin-profile`,admin);
   }
+  UpdateProfilePicture(file : any) {
+    return this.api.post(`api/app/on-boarding/upload-profile-image`, file);
+  }
 }
+
+
