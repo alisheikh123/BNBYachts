@@ -58,6 +58,7 @@ export class HeaderComponent implements OnInit {
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
         this.userDetails = res;
+        console.log(this.userDetails);
         this.rolesNotAssigned();
         this.isLoggedIn = true;
 

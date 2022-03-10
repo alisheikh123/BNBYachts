@@ -16,6 +16,7 @@ import { ActivateAccountComponent } from './components/activate-account/activate
 import { NotLoggedInComponent } from './components/not-logged-in/not-logged-in.component';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { LoginComponent } from './components/login/login.component';
+import { ServiceProviderService } from 'src/app/core/serviceprovider/serviceprovider.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { LoginComponent } from './components/login/login.component';
       LoginComponent
   ],
   providers: [
-  AuthService
+  AuthService,
+  ServiceProviderService
 
   ],
   

@@ -10,6 +10,10 @@ const routes: Routes = [
     path: "login", component: LoginComponent
   },
   {
+    path: 'notauthorize',
+    loadChildren: () => import('./views/not-authorize/not-authorize.module').then(m => m.NotAuthorizeModule)
+  },
+  {
     path: 'app',
     loadChildren: () => import('./views/management/management.module').then(m => m.ManagementModule)
   },

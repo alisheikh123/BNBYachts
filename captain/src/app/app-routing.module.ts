@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./views/captain/captain.module').then(m => m.CaptainModule)
   },
+  {
+    path: 'notauthorize',
+    loadChildren: () => import('./views/not-authorize/not-authorize.module').then(m => m.NotAuthorizeModule)
+  },
   { path: '**', redirectTo: 'app/captain' },
 
 ];
