@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Volo.Abp.Identity;
 
 namespace BnBYachts.Core.Shared.Transferable
@@ -11,6 +12,9 @@ namespace BnBYachts.Core.Shared.Transferable
         public string ImagePath { get; set; }
         public DateTime CreationTime { get; set; }
         public ICollection<IdentityUserRole> Roles { get; set; }
+         #nullable enable
+        public List<RolesTransferable>? UserRoles { get; set; }
+        #nullable disable
         public string About { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsPhoneConfirmed { get; set; }
@@ -23,12 +27,13 @@ namespace BnBYachts.Core.Shared.Transferable
         {
         }
 
-        internal UserDetailsTransferable(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool initialLogin,bool isEmailConfirmed)
+        internal UserDetailsTransferable(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> roles , DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool initialLogin,bool isEmailConfirmed, [Optional]List<RolesTransferable>? userRoles )
         {
             Id = userId;
             Name = fullName;
             ImagePath = imagePath;
-            Roles = userRoles;
+            Roles = roles;
+            UserRoles = userRoles;
             CreationTime = creationTime;
             About = about;
             PhoneNumber = phoneNumber;
@@ -41,9 +46,9 @@ namespace BnBYachts.Core.Shared.Transferable
     }
     public static class UserFactory
     {
-        public static UserDetailsTransferable Contruct(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> userRoles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool IsInitialLogin,bool IsEmailConfirmed )
+        public static UserDetailsTransferable Contruct(string userId, string fullName, string imagePath, ICollection<IdentityUserRole> roles, DateTime creationTime, string about, string phoneNumber, bool isPhoneConfirmed, string email,bool IsInitialLogin,bool IsEmailConfirmed, [Optional] List<RolesTransferable>  userRoles)
         {
-            return new UserDetailsTransferable(userId, fullName, imagePath, userRoles, creationTime, about, phoneNumber, isPhoneConfirmed, email, IsInitialLogin, IsEmailConfirmed);
+            return new UserDetailsTransferable(userId, fullName, imagePath, roles, creationTime, about, phoneNumber, isPhoneConfirmed, email, IsInitialLogin, IsEmailConfirmed, userRoles);
         }
     }
 }

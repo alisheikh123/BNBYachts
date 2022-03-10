@@ -11,6 +11,7 @@ export const environment = {
   CAPTAIN_APP_URL:(<any>window)._env.CAPTAIN_APP_URL,
   MANAGEMENT_APP_URL:(<any>window)._env.MANAGEMENT_APP_URL,
   CLEANING_APP_URL:(<any>window)._env.CLEANING_APP_URL,
+  CLIENT_APP_URL:(<any>window)._env.CLIENT_APP_URL,
   stripeKey: (<any>window)._env.stripeKey,
   Identity: {
     authority: (<any>window)._env.identity_authority,

@@ -6,31 +6,10 @@
             do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
-    <div class="row">
-        <div class="col-sm-4 col-xs-12 py-2">
-            <a href="boatel-search.html" class="big-img-link"><img src="../../assets/images/ships-img.png"
-                    alt=""><span class="underline-link-blk">New York</span> </a>
+    <div class="row" >
+        <div class="col-sm-4 col-xs-12 py-2" *ngFor="let city of featuredCities">
+            <a href="boatel-search.html" class="big-img-link"><img src="{{assetsUrlProfile + city.imagePath}}"
+                    alt=""><span class="underline-link-blk">{{city.name}}</span> </a>
         </div>
-        <div class="col-sm-4 col-xs-12 py-2">
-            <a href="boatel-search.html" class="big-img-link"><img src="../../assets/images/ships-img.png"
-                    alt=""><span class="underline-link-blk">New York</span> </a>
-        </div>
-        <div class="col-sm-4 col-xs-12 py-2">
-            <a href="boatel-search.html" class="big-img-link"><img src="../../assets/images/ships-img.png"
-                    alt=""><span class="underline-link-blk">New York</span></a>
-        </div>
-        <div class="col-sm-4 col-xs-12 py-2">
-            <a href="boatel-search.html" class="big-img-link"><img src="../../assets/images/ships-img.png"
-                    alt=""><span class="underline-link-blk">New York</span></a>
-        </div>
-        <div class="col-sm-4 col-xs-12 py-2">
-            <a href="boatel-search.html" class="big-img-link"><img src="../../assets/images/street-harbour.png"
-                    alt=""><span class="underline-link-blk">Philadelphia</span> </a>
-        </div>
-        <div class="col-sm-4 col-xs-12 py-2">
-            <a href="boatel-search.html" class="big-img-link"><img src="../../assets/images/ships-img.png"
-                    alt=""><span class="underline-link-blk">New York</span></a>
-        </div>
-
     </div>
 </div>

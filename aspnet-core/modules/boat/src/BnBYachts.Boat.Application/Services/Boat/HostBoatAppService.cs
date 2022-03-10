@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boat.Shared.Boat.Requestable;
-using Microsoft.AspNetCore.Authorization;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
@@ -23,16 +22,13 @@ namespace BnBYachts.Services.Boat
             _hostBoatManager = hostBoatManager;
         }
 
-        
         [HttpPost]
         public async Task<ICollection<BoatEntity>> GetBoatelsByFilters(BoatelSearchFiltersRequestable parameters) => await _hostBoatManager.GetBoatelsByFilters(parameters);
 
-        
         [HttpPost]
         public async Task<bool> BoatCalendarUpdate(BoatCalendarEntity boatCalendar) => await _hostBoatManager.BoatCalendarUpdate(boatCalendar, CurrentUser.Id);
         
 
-        
         [HttpPost]
         public async Task<ICollection<CharterEntity>> GetChartersByFilters(CharterSearchRequestable parameters) 
         {
@@ -53,7 +49,6 @@ namespace BnBYachts.Services.Boat
             return response;
         }
 
-       
         [HttpGet]
         public async Task<CharterDetailsTransferable> GetCharterDetailsById(int charterId)
         {

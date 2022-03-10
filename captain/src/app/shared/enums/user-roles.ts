@@ -4,10 +4,19 @@ export enum UserRoles {
     admin = "A8E857DE-7CA6-F663-FEB0-3A003661112B",
    
 };
+export enum Roles{
+    User = "USER",
+    Host = "HOST",
+    Admin ="ADMIN",
+    Captain = "CAPTAIN",
+    Management="MANAGEMENT",
+    Cleaning="CLEANING"
+}
 export enum ServiceProviderRole
 {
     captain="captain",
-    management='management'
+    management='management',
+    cleaning='cleaning'
 }
 
 export enum UserDefaults {

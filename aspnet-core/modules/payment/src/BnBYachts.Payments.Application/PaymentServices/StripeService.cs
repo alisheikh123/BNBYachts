@@ -21,14 +21,12 @@ namespace BnBYachts.Payments.PaymentServices
         }
         [HttpGet]
         [Authorize]
-        [Route("api/get-customers-cards")]
         public async Task<List<UserPaymentMethodTransferable>> GetCustomersCard()
         {
             var data = await _paymentManager.GetCustomersCard(CurrentUser.Id);
             return data;
         }
         [HttpPost]
-        [Route("api/create-customer")]
         public async Task<bool> CreateCustomer(StripeCustomerRequestable customerRequestable)
         {
             var result = await _paymentManager.CreateCustomer(customerRequestable);
@@ -36,7 +34,6 @@ namespace BnBYachts.Payments.PaymentServices
         }
 
         [HttpPost]
-        [Route("api/pay-amount")]
         public async Task<bool> Pay(BookingPaymentRequestable data)
         {
             data.UserId = CurrentUser.Id.ToString();
@@ -45,7 +42,6 @@ namespace BnBYachts.Payments.PaymentServices
         }
 
         [HttpGet]
-        [Route("api/refund/{bookingId}/{refundAmount}")]
         public async Task<bool> RefundPayment(int bookingId, long refundAmount)
         {
             var response = await _paymentManager.RefundPayment(bookingId, refundAmount);
