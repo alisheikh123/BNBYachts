@@ -46,7 +46,7 @@ export class AuthService {
     return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-id/"+id);
   }
   getUserInfoByUserName(userName: string) {
-    return this.http.get(this.apiCoreURl + "/api/GetUserDetailsByUserName?username=" + userName);
+    return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-user-name?username=" + userName);
   }
 
   login() {
@@ -72,7 +72,7 @@ export class AuthService {
   }
   updateUserProfile(userData: any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.http.put(this.apiCoreURl + "/api/Update-User-Profile/", userData)
+    return this.http.put(this.apiCoreURl + "/api/app/user/admin-profile", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 

@@ -6,7 +6,18 @@
         <div class="account-settings">
           <div class="user-profile">
             <div class="user-avatar">
-              <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="Users" />
+              <div class="avatar-preview" [ngStyle]="{ 'background-image': 'url(' + assetsUrlProfile+(userResponse?.imagePath!=null?userResponse?.imagePath:USER_DEFAULTS.avatar)+ ')'}">
+                <!-- <div id="avatar-preview" [ngStyle]="{ 'background-image': 'url(' + assetsUrlProfile+(userResponse?.imagePath!=null?userResponse?.imagePath:USER_DEFAULTS.avatar)+ ')'}"> -->
+                    <img [src]="adminImage" class="previewDimention" >
+                <!-- </div> -->
+              </div>
+              <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="profile" (change)="onFileChange($event)" hidden />
+                <label for="imageUpload" class="custom-btn blue big-btn"><i class="fa fa-edit"></i></label>
+              </div>
+              <!-- <img src="{{assetsUrlProfile + (userResponse?.imagePath || USER_DEFAULTS.avatar)}}" alt="Users" />
+              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="profile" />
+              <label for="imageUpload" class="custom-btn blue big-btn"><i class="fa fa-edit"></i></label> -->
             </div>
             <h5 class="user-name">{{userResponse?.name}}</h5>
             <h6 class="user-email">{{userResponse?.email}}</h6>

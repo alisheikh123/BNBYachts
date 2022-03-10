@@ -33,4 +33,9 @@ export class UsersApi {
   UpdateAdminProfile(admin: AdminProfileModal) {
     return this.api.put(`api/app/user/admin-profile`,admin);
   }
+  UpdateProfilePicture(file : any) {
+    return this.api.post(`api/app/on-boarding/upload-profile-image`, file);
+  }
 }
+
+

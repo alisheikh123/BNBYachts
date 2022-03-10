@@ -34,4 +34,7 @@ export class UsersService extends BoatUserData {
   UpdateAdminProfile(admin: AdminProfileModal) {
     return this.api.UpdateAdminProfile(admin);
   }
+  UpdateProfilePicture(file : any) {
+    return this.api.UpdateProfilePicture(file);
+  }
 }

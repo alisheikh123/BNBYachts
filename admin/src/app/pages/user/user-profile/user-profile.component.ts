@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
@@ -15,6 +15,7 @@ import {  BoatUser, BoatUserData } from '../../../shared/interfaces/BoatUser';
 })
 export class UserProfileComponent implements OnInit {
   userResponse : BoatUser;
+  uploadPictureForm : FormGroup;
   userForm: FormGroup;
   adminImage : string;
   latest_date : string;
@@ -22,8 +23,12 @@ export class UserProfileComponent implements OnInit {
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
   USER_DEFAULTS  = UserDefaults;
+  @Output() profileImage = new EventEmitter<any>();
   constructor(private userService : BoatUserData,private fb : FormBuilder, private route : ActivatedRoute, private datePipe : DatePipe, private modalService : NgbModal, private toaster : NbToastrService) { }
   ngOnInit(): void {
+    this.uploadPictureForm = this.fb.group({
+      profile: ['']
+    });
     this.userForm = this.fb.group({
       id : [0],
       imagePath: ['', Validators.required],
@@ -65,10 +70,30 @@ export class UserProfileComponent implements OnInit {
       });
     }
   }
-  onChangeFile(event){
-    this.adminImage = event.target.files[0];
+  onFileChange(event: any) {
+    debugger;
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.adminImage = reader.result as string;
+        this.userResponse.imagePath = '';
+        this.uploadPictureForm.get('profile')!.setValue(file);
+        this.uploadImage();
+      }
+    }
   }
+  uploadImage() {
+    if (this.uploadPictureForm.value) {
+      const formData = new FormData();
+      formData.append('file', this.uploadPictureForm.get('profile')!.value);
+      this.userService.UpdateProfilePicture(formData).subscribe((res: any) => {
+        this.profileImage.emit(this.uploadPictureForm.value);
+      });
 
+    }
+  }
   resetForm(){
     this.userForm.reset();
   }
