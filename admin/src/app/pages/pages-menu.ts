@@ -51,4 +51,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
       }
     ]
   },
+  {
+    title: 'Marketing',
+    icon: { icon: 'chart-bar', pack: 'fa' },
+    children: [
+      {
+        title : 'Market Pages',
+        link : '/pages/marketing/marketing'
+      },
+      {
+        title: 'Featured City',
+        link: '/pages/marketing/cities',
+      }
+    ]
+  },
 ];

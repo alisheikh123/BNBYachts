@@ -57,14 +57,23 @@ namespace BnBYachts.Core.Managers
         public async Task<UserDetailsTransferable> GetLoggedInUserDetails(Guid? userId)
         {
             var user = await _repository.GetAsync(res => res.Id == userId.Value).ConfigureAwait(false);
+            var userRoles = new List<RolesTransferable>();
+            if (user.Roles.Any())
+            {
+                foreach (var item in user.Roles)
+                {
+                    userRoles.Add(_objectMapper.Map<IdentityRole, RolesTransferable>(await _roleManager.GetByIdAsync(item.RoleId).ConfigureAwait(false)));
+                }
+            }
             _logger.LogInformation("Get user detail against user Id : " + _unitOfWorkManager.Current.Id.ToString());
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)),(user.GetProperty<bool>(UserConstants.IsEmailConfirmed)));
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)),(user.GetProperty<bool>(UserConstants.IsEmailConfirmed)), userRoles);
         }
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             var user = await _repository.GetAsync(res => res.UserName == username).ConfigureAwait(false);
+              
             _logger.LogInformation("Get user detail against user name : " + _unitOfWorkManager.Current.Id.ToString());
-            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? ""), user.Roles, user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)), (user.GetProperty<bool>(UserConstants.IsEmailConfirmed)));
+            return UserFactory.Contruct(user.Id.ToString(), user.Name, (user.GetProperty<string>(UserConstants.ImagePath) ?? "") , user.Roles , user.CreationTime, (user.GetProperty<string>(UserConstants.About) ?? ""), user.PhoneNumber, user.PhoneNumberConfirmed, user.Email, (user.GetProperty<bool>(UserConstants.IsInitialLogin)), (user.GetProperty<bool>(UserConstants.IsEmailConfirmed)));
         }
         public async Task<UserDetailsTransferable> GetUserDetailsById(string id)
         {
@@ -204,6 +213,32 @@ namespace BnBYachts.Core.Managers
                 return UserReview.User;
             else
                 return UserReview.Host;
+        }
+       public async  Task<bool> RoleVerify( string userId,string []roles)
+        {
+            if (userId.IsNullOrEmpty() || !roles.Any() ) return false;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return false;
+            foreach (var role in roles)
+            {
+                if (await _userManager.IsInRoleAsync(user, role)) return true;
+               
+            }
+            return false;
+        }
+        public async Task<bool> UpdateAdminProfile(AdminProfileRequestable userInput)
+        {
+            var user = await _repository.GetAsync(x => x.Id.ToString() == userInput.Id).ConfigureAwait(false);
+            if (user != null)
+            {
+                user.Name = userInput.Name;
+                user.SetProperty(UserConstants.About, userInput.About);
+                var changePhoneNumberToken = await _userManager.GenerateChangePhoneNumberTokenAsync(user, userInput.PhoneNumber);
+                var changePhoneResult = await _userManager.ChangePhoneNumberAsync(user, userInput.PhoneNumber, changePhoneNumberToken);
+                var res = await _repository.UpdateAsync(user);
+                return true;
+            }
+            return false;
         }
     }
 }

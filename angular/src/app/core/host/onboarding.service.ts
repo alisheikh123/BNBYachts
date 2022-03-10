@@ -14,11 +14,11 @@ export class OnboardingService {
   constructor(private http: HttpClient) { }
 
   getLookups() {
-    return this.http.get(this.boatApiUrl + '/GetHostOnBoardingLookup').pipe(
+    return this.http.get(this.boatApiUrl + '/app/host-boat/host-on-boarding-lookup').pipe(
       catchError(this.handleError));
   }
   addBoat(boat:any) {
-    return this.http.post(this.boatApiUrl + '/add-host-boats',boat).pipe(
+    return this.http.post(this.boatApiUrl + '/app/host-boat/host-boats',boat).pipe(
       catchError(this.handleError));
   }
   addHostRole(){

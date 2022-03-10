@@ -23,6 +23,24 @@
                         </ng-container>
                     </div>
                     <div class="right-content">
+                        <div *ngIf="userDetails?.userRoles?.length > 0" class="dropdown custom-dropdown borderless-dropdown">
+                            <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="logo-wrapper">
+                                    <!-- <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
+                                        alt=""></a> -->
+                                </span>
+                               {{'SwitchRole' | localization}} 
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <div *ngFor="let role of userDetails?.userRoles">
+                                    <li><a (click)="switchRole(roles.User)" *ngIf="role?.normalizedName==roles.User" class="dropdown-item">{{'SwitchUser' | localization}}</a></li>
+                                <li><a (click)="switchRole(roles.Host)" *ngIf="role?.normalizedName==roles.Host" class="dropdown-item">{{'SwitchHost' | localization}}</a></li>
+                            </div>
+                            <div *ngFor="let role of rolesList">
+                                <li><a (click)="tryHosting()" *ngIf="role==roles.Host"  class="dropdown-item" >{{'BecomeHost'| localization }}</a></li>
+                            </div>
+                            </ul>
+                          </div>
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
                                 id="dropdownMenuButton1">

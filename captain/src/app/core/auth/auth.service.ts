@@ -33,10 +33,10 @@ export class AuthService {
   }
 
   getUserInfo() {
-    return this.http.get(this.apiCoreURl + "/api/GetLoggedInUserDetails");
+    return this.http.get(this.apiCoreURl + "/api/app/user/logged-in-user-details");
   }
   getUserInfoById(id:string) {
-    return this.http.get(this.apiCoreURl + "/api/GetUserDetailsById/"+id);
+    return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-id/"+id);
   }
   getUserInfoByUserName(userName: string) {
     return this.http.get(this.apiCoreURl + "/api/GetUserDetailsByUserName?username=" + userName);
@@ -68,7 +68,7 @@ export class AuthService {
 
   registerUser(userData: any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.http.post(this.apiCoreURl + "/api/register/", userData)
+    return this.http.post(this.apiCoreURl + "/api/app/user/user-register/", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
@@ -76,7 +76,7 @@ export class AuthService {
     return this.http.get<any>(this.apiCoreURl + "/api/confirm-email?username=" + userName + "&token=" + token);
   }
   resendEmail(userName: any) {
-    return this.http.get<any>(this.apiCoreURl + "/api/Resend-Email?username=" + userName);
+    return this.http.get<any>(this.apiCoreURl + "/api/app/user/resend-email?username=" + userName);
   }
   updateUserProfile(userData: any): Observable<any> {
     this.isLoadingSubject.next(true);

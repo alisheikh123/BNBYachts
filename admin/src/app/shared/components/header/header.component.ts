@@ -81,13 +81,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(themeName => this.currentTheme = themeName);
       this.authService.getUserInfoById(localStorage.getItem('userId')).subscribe(res =>{
         this.user = res;
+        this.userProfile = (this.assetsUrlProfile + (this.user.imagePath || this.USER_DEFAULTS.avatar)).replace(/\s/g, '%20')
       })
   }
   onItemSelection(title) {
     if ( title === 'Log out' ) {
        this.authService.logout();
     } else if ( title === 'Profile' ) {
-      this.router.navigate([`pages/user/users/${localStorage.getItem('userId')}`]);
+      this.router.navigate([`pages/user/userProfile/${localStorage.getItem('userId')}`]);
     }
   }
   openLg(content) {

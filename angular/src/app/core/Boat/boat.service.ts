@@ -17,6 +17,10 @@ export class BoatService {
     return this.http.get(this.apiCoreURl + '/api/app/host-boat/host-boats?pageNo=' + pageNo + '&pageSize=' + pageSize).pipe(
       catchError(this.handleError));;
   }
+  getFeaturedCities() {
+    return this.http.get(this.apiCoreURl + '/api/app/marketing/cities').pipe(
+      catchError(this.handleError));;
+  }
    ///Exception handler
    handleError(error: any) {
     let errorMessage = '';

@@ -367,6 +367,16 @@
  "BookedTimeSlots" : "Booked Time slots",
  "Skip":"Skip",
  "NoDataMessage":"No Data Found",
+ "SwitchRole":"Switch Role",
+ "SwitchUser":"Switch  to User",
+ "SwitchHost":"Switch  to Host",
+ "SwitchCaptain":"Switch  to Captain",
+ "SwitchManagement":"Switch  to Management",
+ "SwitchCleaning":"Switch  to Cleaning",
+ "BecomeHost" :"Become a Host",
+ "BecomeCaptain":"Become a Captain",
+ "BecomeManagement":"Become a Management",
+ "BecomeCleaning":"Become a Cleaning",
  "profileDescription":"Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
 
 }

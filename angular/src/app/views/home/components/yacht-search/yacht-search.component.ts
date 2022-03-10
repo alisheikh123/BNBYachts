@@ -56,9 +56,9 @@ export class YachtSearchComponent implements OnInit {
   @ViewChild('popOver') public popover: NgbPopover;
 
 
-  constructor(private yachtService: YachtSearchService, 
+  constructor(private yachtService: YachtSearchService,
     private router: Router, private yachtSearchResults: YachtSearchDataService,
-     private modal: NgbModal) { 
+     private modal: NgbModal) {
      }
 
   ngOnInit(): void {

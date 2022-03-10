@@ -12,17 +12,17 @@ export class PaymentsService {
   constructor(private http: HttpClient) { }
 
   getUserPaymentMethods() {
-    return this.http.get(this.paymentsApiUrl + '/api/get-customers-cards').pipe(
+    return this.http.get(this.paymentsApiUrl + '/api/app/stripe-account/customers-card').pipe(
       catchError(this.handleError));
   }
 
   createCustomer(userData: any) {
-    return this.http.post(this.paymentsApiUrl + '/api/create-customer',userData).pipe(
+    return this.http.post(this.paymentsApiUrl + '/api/app/stripe-account/customer',userData).pipe(
       catchError(this.handleError));
   }
 
   pay(data: any) {
-    return this.http.post(this.paymentsApiUrl + '/api/pay-amount', data).pipe(catchError(this.handleError));
+    return this.http.post(this.paymentsApiUrl + '/api/app/stripe-account/pay', data).pipe(catchError(this.handleError));
   }
 
   ///Exception handler

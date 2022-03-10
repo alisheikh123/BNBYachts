@@ -8,6 +8,7 @@ export const environment = {
   CHAT_API_URL:(<any>window)._env.CHAT_API_URL,
   S3BUCKET_URL:(<any>window)._env.S3BUCKET_URL,
   CAPTAIN_APP_URL:(<any>window)._env.CAPTAIN_APP_URL,
+  CLIENT_APP_URL:(<any>window)._env.CLIENT_APP_URL,
   MANAGEMENT_APP_URL:(<any>window)._env.MANAGEMENT_APP_URL,
   CLEANING_APP_URL:(<any>window)._env.CLEANING_APP_URL,
   stripeKey: (<any>window)._env.stripeKey,
