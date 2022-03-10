@@ -49,5 +49,6 @@ export interface AdminProfileModal{
      abstract RegisterAdmin(user : User);
      abstract SetAdminPassword(admin : SetPasswordModal);
      abstract UpdateAdminProfile(admin : AdminProfileModal);
+     abstract UpdateProfilePicture(file : any);
    }
  

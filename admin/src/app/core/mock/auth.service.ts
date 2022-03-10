@@ -40,13 +40,13 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
   getUserInfo() {
-    return this.http.get(this.apiCoreURl + "/api/GetLoggedInUserDetails");
+    return this.http.get(this.apiCoreURl + "/api/app/user/logged-in-user-details");
   }
   getUserInfoById(id:string) {
-    return this.http.get(this.apiCoreURl + "/api/GetUserDetailsById/"+id);
+    return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-id/"+id);
   }
   getUserInfoByUserName(userName: string) {
-    return this.http.get(this.apiCoreURl + "/api/GetUserDetailsByUserName?username=" + userName);
+    return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-user-name?username=" + userName);
   }
 
   login() {
@@ -65,14 +65,14 @@ export class AuthService {
   }
 
   confirmEmail(userName: any, token: any) {
-    return this.http.get<any>(this.apiCoreURl + "/api/confirm-email?username=" + userName + "&token=" + token);
+    return this.http.get<any>(this.apiCoreURl + "/api/app/user/confirm-email?username=" + userName + "&token=" + token);
   }
   resendEmail(userName: any) {
-    return this.http.get<any>(this.apiCoreURl + "/api/Resend-Email?username=" + userName);
+    return this.http.get<any>(this.apiCoreURl + "/api/app/user/resend-email?username=" + userName);
   }
   updateUserProfile(userData: any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.http.put(this.apiCoreURl + "/api/Update-User-Profile/", userData)
+    return this.http.put(this.apiCoreURl + "/api/app/user/admin-profile", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
