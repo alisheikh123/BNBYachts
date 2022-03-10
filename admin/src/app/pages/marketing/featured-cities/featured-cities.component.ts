@@ -16,6 +16,7 @@ export class FeaturedCitiesComponent implements OnInit {
   cityForm: FormGroup;
   assetsUrlCity = environment.S3BUCKET_URL + '/cities/';
   citiesPic : string;
+  fileInfo : string ='';
   closeResult: string;
   featureCityPic : cityPicTransferable;
   source: City[];
@@ -82,6 +83,7 @@ export class FeaturedCitiesComponent implements OnInit {
   }
    openLg(content) {
      this.modalService.open(content, { size: 'lg' });
+     this.fileInfo = '';
      this.resetForm();
    }
   get citiesForm() {
@@ -101,7 +103,7 @@ export class FeaturedCitiesComponent implements OnInit {
       description: cityData.description,
       creationTime : cityData.creationTime,
     });
-    debugger;
+    this.fileInfo = cityData.imagePath;
   }
   onSubmit() {
 
@@ -166,6 +168,7 @@ export class FeaturedCitiesComponent implements OnInit {
     if (fileInput.target.files.length > 0) {
       let fileData: File;
       fileData = <File>fileInput.target.files[0];
+      this.fileInfo = fileData.name;
       var mimeType = fileData.type;
       if (mimeType.match(/image\/*/) == null) {
         return;
