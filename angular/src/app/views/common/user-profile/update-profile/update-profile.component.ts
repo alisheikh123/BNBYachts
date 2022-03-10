@@ -1,8 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
+import { Roles, UploadDefault, UserRoles } from 'src/app/shared/enums/user-roles';
+import { BoatService } from 'src/app/core/Boat/boat.service';
+import { BookingService } from 'src/app/core/Booking/booking.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OnBoardingModalComponent } from '../../on-boarding-modal/on-boarding-modal.component';
+import { UserBoats } from 'src/app/shared/interface/UserBoats';
+import { Reviews } from 'src/app/shared/interface/reviews';
 
 
 @Component({
@@ -12,22 +20,47 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UpdateProfileComponent implements OnInit {
   userid: any;
+  userBoats: Array<UserBoats>;
+  totalReviews : number;
   profileForm: FormGroup;
   hasError: boolean;
   userResponse: any;
-
+  assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
+  imageSrc: string;
+  USER_DEFAULTS = UploadDefault;
+  uploadPictureForm: FormGroup;
+  loggedInUserRole: string | null;
+  USER_ROLE = UserRoles;
+  userReview : Array<Reviews> = [];
+  hostReviews :Array<Reviews> = [];
+  roles = Roles;
+  @Output() profileImage = new EventEmitter<any>();
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private authService : AuthService  ,
     private toasterService : ToastrService,
-    private router: Router
+    private router: Router,private boatService : BoatService,
+    private bookingService : BookingService,
+    private modal:NgbModal
     ) { }
 
   ngOnInit(): void {
     this.userid = this.activatedRoute.snapshot.params["id"];
+    this.uploadPictureForm = this.fb.group({
+      profile: ['']
+    });
+    this.authService.getUserInfo().subscribe((res : any)=>{
+      this.userResponse = res;
+      this.GetReviews(this.userResponse.id)
+      this.loggedInUserRole = localStorage.getItem('userRole');
+      if(this.loggedInUserRole == this.USER_ROLE.host){
+        this.boatService.getUserBoats(1,5).subscribe((res : any)=>{
+          this.userBoats = res;
+        })
+      }
+    })
     this.getUserData();
-    // initialize the form
   }
 
   getUserData(){
@@ -63,7 +96,6 @@ export class UpdateProfileComponent implements OnInit {
       },
     );
   }
-    // Get form fields
     get formValues() {
       return this.profileForm.controls;
     }
@@ -87,4 +119,58 @@ export class UpdateProfileComponent implements OnInit {
       }
       );
     }
+    verifyPhoneNumber()
+    {
+      this.modal.open(OnBoardingModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal',backdrop:'static' });
+    }
+    onFileChange(event: any) {
+
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
+          this.userResponse.imagePath = '';
+          this.uploadPictureForm.get('profile')!.setValue(file);
+          this.uploadImage();
+        }
+      }
+    }
+    uploadImage() {
+      if (this.uploadPictureForm.value) {
+        const formData = new FormData();
+        formData.append('file', this.uploadPictureForm.get('profile')!.value);
+        this.authService.UploadProfileImage(formData).subscribe((res: any) => {
+          this.profileImage.emit(this.uploadPictureForm.value);
+        });
+
+      }
+  }
+  GetReviews(revieweeId : string){
+    this.bookingService.getReviewByUserId(revieweeId).subscribe((res: any)=>{
+      this.totalReviews = res?.length;
+      res.forEach((review: any) => {
+        res.forEach((elem : any)=> {
+          this.authService.getUserInfoById(elem.reviewerId).subscribe((userDetails: any) => {
+            elem.userDetails = userDetails;
+          });
+        });
+        this.authService.IsRoleName(review.reviewerId, this.roles.User, this.roles.Host).subscribe(data => {
+          switch (data) {
+            case 0:
+              this.userReview?.push(review);
+              this.hostReviews?.push(review);
+              break;
+            case 1:
+              this.userReview?.push(review);
+              break;
+            case 2:
+              this.hostReviews?.push(review);
+              break;
+          }
+        })
+      });
+    })
+  }
 }
