@@ -41,7 +41,7 @@ export class BookingService {
            return forkJoin([modifybooking,modifyrefundable]);
   }
   getBoatInfo(boatId: any) {
-    return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(
+    return this.http.get(this.boatApiUrl + '/app/host-boat/boat-details-by-id/' + boatId).pipe(
       catchError(this.errorService.handleError));
   }
 

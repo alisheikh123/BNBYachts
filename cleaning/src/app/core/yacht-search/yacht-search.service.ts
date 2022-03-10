@@ -13,7 +13,7 @@ export class YachtSearchService {
   constructor(private http: HttpClient) { }
 
   boatelSearch(params: any) {
-    return this.http.post(this.apiUrl + '/FilterBoatelBoats', params).pipe(
+    return this.http.post(this.apiUrl + '/app/host-boat/get-boatels-by-filters', params).pipe(
       catchError(this.handleError));
   }
 
@@ -22,7 +22,7 @@ export class YachtSearchService {
       catchError(this.handleError));
   }
   boatDetailsById(id: any) {
-    return this.http.get(this.apiUrl + '/boat-details/' + id).pipe(
+    return this.http.get(this.apiUrl + '/app/host-boat/boat-details-by-id/' + id).pipe(
       catchError(this.handleError));
   }
   hostDetailsById(id:string) {
@@ -30,23 +30,23 @@ export class YachtSearchService {
       catchError(this.handleError));
   }
   charterSearch(param: any) {
-    return this.http.post(this.apiUrl + '/FilterChartersBoats', param).pipe(
+    return this.http.post(this.apiUrl + '/app/host-boat/get-charters-by-filters', param).pipe(
       catchError(this.handleError));
   }
   charterDetailsById(id: number) {
-    return this.http.get(this.apiUrl + '/charter-details/' + id).pipe(
+    return this.http.get(this.apiUrl + '/app/host-boat/charter-details-by-id/' + id).pipe(
       catchError(this.handleError));
   }
   eventSearch(param: any) {
-    return this.http.post(this.apiUrl + '/FilterEventsBoats', param).pipe(
+    return this.http.post(this.apiUrl + '/app/host-boat/get-events-by-filters', param).pipe(
       catchError(this.handleError));
   }
   eventDetailsById(id: number) {
-    return this.http.get(this.apiUrl + '/event-details/' + id).pipe(
+    return this.http.get(this.apiUrl + '/app/host-boat/event-details-by-id/' + id).pipe(
       catchError(this.handleError));
   }
   defaultFeatures() {
-    return this.http.get(this.apiUrl + '/get-default-features').pipe(
+    return this.http.get(this.apiUrl + '/app/host-boat/default-features').pipe(
       catchError(this.handleError));
   }
   updateCharter(boat:any){

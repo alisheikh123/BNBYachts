@@ -40,7 +40,9 @@ export class UpdateProfileComponent implements OnInit {
     private fb: FormBuilder,
     private authService : AuthService  ,
     private toasterService : ToastrService,
-    private router: Router,private boatService : BoatService,private bookingService : BookingService,private modal:NgbModal
+    private router: Router,private boatService : BoatService,
+    private bookingService : BookingService,
+    private modal:NgbModal
     ) { }
 
   ngOnInit(): void {

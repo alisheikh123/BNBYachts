@@ -15,7 +15,7 @@ export class ReservationService {
   constructor(private http: HttpClient) { }
 
   updateBoatLocation(boatLocation: any) {
-    return this.http.post(this.boatApiUrl + '/update-location', boatLocation).pipe(
+    return this.http.post(this.boatApiUrl + '/app/host-boat/update-boat-location', boatLocation).pipe(
       catchError(this.handleError));
   }
   updateCharterLocation(charterLocation: any) {
