@@ -91,7 +91,6 @@ export class UserProfileComponent implements OnInit {
       this.userService.UpdateProfilePicture(formData).subscribe((res: any) => {
         this.profileImage.emit(this.uploadPictureForm.value);
       });
-
     }
   }
   resetForm(){

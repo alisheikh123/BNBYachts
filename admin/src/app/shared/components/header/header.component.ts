@@ -81,7 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(themeName => this.currentTheme = themeName);
       this.authService.getUserInfoById(localStorage.getItem('userId')).subscribe(res =>{
         this.user = res;
-        this.userProfile = (this.assetsUrlProfile + this.user.imagePath).replace(/\s/g, '%20')
+        this.userProfile = (this.assetsUrlProfile + (this.user.imagePath || this.USER_DEFAULTS.avatar)).replace(/\s/g, '%20')
       })
   }
   onItemSelection(title) {
