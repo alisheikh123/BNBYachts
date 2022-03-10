@@ -20461,3 +20461,358 @@ DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
 2022-03-10 17:30:20.771 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
 2022-03-10 17:30:20.771 +05:00 [DBG] Added 0 entity changes to the current audit log
 2022-03-10 17:30:20.772 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 1339.6066ms
+2022-03-10 17:59:40.291 +05:00 [INF] Starting BnBYachts.Chat.HttpApi.Host.
+2022-03-10 18:00:07.673 +05:00 [INF] User profile is available. Using 'C:\Users\M.Saif\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-10 18:00:08.375 +05:00 [INF] Loaded ABP modules:
+2022-03-10 18:00:08.375 +05:00 [INF] - BnBYachts.Chat.ChatHttpApiHostModule
+2022-03-10 18:00:08.375 +05:00 [INF]   - BnBYachts.Chat.ChatHttpApiModule
+2022-03-10 18:00:08.375 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-10 18:00:08.375 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-10 18:00:08.375 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-10 18:00:08.375 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-10 18:00:08.375 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-10 18:00:08.375 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-10 18:00:08.375 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-10 18:00:08.375 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2022-03-10 18:00:08.375 +05:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-10 18:00:08.375 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-10 18:00:08.375 +05:00 [INF]                     - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-10 18:00:08.375 +05:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-10 18:00:08.375 +05:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Json.AbpJsonModule
+2022-03-10 18:00:08.375 +05:00 [INF]                   - Volo.Abp.Timing.AbpTimingModule
+2022-03-10 18:00:08.375 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-10 18:00:08.375 +05:00 [INF]                       - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-10 18:00:08.375 +05:00 [INF]                       - Volo.Abp.Settings.AbpSettingsModule
+2022-03-10 18:00:08.375 +05:00 [INF]                         - Volo.Abp.Security.AbpSecurityModule
+2022-03-10 18:00:08.375 +05:00 [INF]                         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-10 18:00:08.375 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-10 18:00:08.375 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-10 18:00:08.375 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2022-03-10 18:00:08.375 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-10 18:00:08.375 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-10 18:00:08.375 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-10 18:00:08.375 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2022-03-10 18:00:08.375 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-10 18:00:08.375 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-10 18:00:08.375 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-10 18:00:08.375 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-10 18:00:08.375 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-10 18:00:08.375 +05:00 [INF]   - BnBYachts.Chat.ChatApplicationModule
+2022-03-10 18:00:08.375 +05:00 [INF]     - BnBYachts.Chat.ChatDomainModule
+2022-03-10 18:00:08.375 +05:00 [INF]       - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-10 18:00:08.375 +05:00 [INF]       - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-10 18:00:08.375 +05:00 [INF]   - BnBYachts.Chat.EntityFrameworkCore.ChatEntityFrameworkCoreModule
+2022-03-10 18:00:08.375 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2022-03-10 18:00:08.375 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2022-03-10 18:00:08.375 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-10 18:00:08.375 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-10 18:00:11.916 +05:00 [INF] Initialized all ABP modules.
+2022-03-10 18:00:12.838 +05:00 [INF] Now listening on: https://localhost:44363
+2022-03-10 18:00:12.843 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-10 18:00:12.843 +05:00 [INF] Hosting environment: Development
+2022-03-10 18:00:12.843 +05:00 [INF] Content root path: D:\BnBYachts\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host
+2022-03-10 18:00:16.292 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/ - -
+2022-03-10 18:00:18.106 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-03-10 18:00:18.304 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Chat.Controllers.HomeController (BnBYachts.Chat.HttpApi.Host).
+2022-03-10 18:00:18.366 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2022-03-10 18:00:18.377 +05:00 [INF] Executed action BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) in 62.0919ms
+2022-03-10 18:00:18.377 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-03-10 18:00:18.449 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/index.html - -
+2022-03-10 18:00:18.449 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/ - - - 302 0 - 2157.1596ms
+2022-03-10 18:00:19.699 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/index.html - - - 200 - text/html;charset=utf-8 1249.8405ms
+2022-03-10 18:00:20.012 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - -
+2022-03-10 18:00:20.020 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - - - 200 11961 application/javascript;+charset=utf-8 7.4475ms
+2022-03-10 18:00:20.307 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - -
+2022-03-10 18:00:20.432 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/favicon-32x32.png - -
+2022-03-10 18:00:20.449 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-03-10 18:00:20.450 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/favicon-32x32.png - - - 200 628 image/png 17.9702ms
+2022-03-10 18:00:20.847 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 540.9885ms
+2022-03-10 18:10:28.242 +05:00 [INF] Starting BnBYachts.Chat.HttpApi.Host.
+2022-03-10 18:10:45.184 +05:00 [INF] User profile is available. Using 'C:\Users\M.Saif\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-10 18:10:45.671 +05:00 [INF] Loaded ABP modules:
+2022-03-10 18:10:45.671 +05:00 [INF] - BnBYachts.Chat.ChatHttpApiHostModule
+2022-03-10 18:10:45.672 +05:00 [INF]   - BnBYachts.Chat.ChatHttpApiModule
+2022-03-10 18:10:45.672 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-10 18:10:45.672 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-10 18:10:45.672 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-10 18:10:45.672 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-10 18:10:45.672 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-10 18:10:45.672 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-10 18:10:45.672 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-10 18:10:45.672 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2022-03-10 18:10:45.672 +05:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-10 18:10:45.672 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-10 18:10:45.672 +05:00 [INF]                     - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-10 18:10:45.672 +05:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-10 18:10:45.672 +05:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Json.AbpJsonModule
+2022-03-10 18:10:45.672 +05:00 [INF]                   - Volo.Abp.Timing.AbpTimingModule
+2022-03-10 18:10:45.672 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-10 18:10:45.672 +05:00 [INF]                       - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-10 18:10:45.672 +05:00 [INF]                       - Volo.Abp.Settings.AbpSettingsModule
+2022-03-10 18:10:45.672 +05:00 [INF]                         - Volo.Abp.Security.AbpSecurityModule
+2022-03-10 18:10:45.672 +05:00 [INF]                         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-10 18:10:45.672 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-10 18:10:45.672 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-10 18:10:45.672 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2022-03-10 18:10:45.672 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-10 18:10:45.672 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-10 18:10:45.672 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-10 18:10:45.672 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2022-03-10 18:10:45.672 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-10 18:10:45.672 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-10 18:10:45.672 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-10 18:10:45.672 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-10 18:10:45.672 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-10 18:10:45.672 +05:00 [INF]   - BnBYachts.Chat.ChatApplicationModule
+2022-03-10 18:10:45.672 +05:00 [INF]     - BnBYachts.Chat.ChatDomainModule
+2022-03-10 18:10:45.672 +05:00 [INF]       - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-10 18:10:45.672 +05:00 [INF]       - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-10 18:10:45.672 +05:00 [INF]   - BnBYachts.Chat.EntityFrameworkCore.ChatEntityFrameworkCoreModule
+2022-03-10 18:10:45.672 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2022-03-10 18:10:45.672 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2022-03-10 18:10:45.672 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-10 18:10:45.672 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-10 18:10:47.678 +05:00 [INF] Initialized all ABP modules.
+2022-03-10 18:10:48.405 +05:00 [INF] Now listening on: https://localhost:44363
+2022-03-10 18:10:48.471 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-10 18:10:48.472 +05:00 [INF] Hosting environment: Development
+2022-03-10 18:10:48.472 +05:00 [INF] Content root path: D:\BnBYachts\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host
+2022-03-10 18:10:50.838 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/ - -
+2022-03-10 18:10:51.947 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-03-10 18:10:52.192 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Chat.Controllers.HomeController (BnBYachts.Chat.HttpApi.Host).
+2022-03-10 18:10:52.265 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2022-03-10 18:10:52.276 +05:00 [INF] Executed action BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) in 74.4524ms
+2022-03-10 18:10:52.276 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-03-10 18:10:52.329 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/ - - - 302 0 - 1492.4221ms
+2022-03-10 18:10:52.389 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/index.html - -
+2022-03-10 18:10:52.979 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/index.html - - - 200 - text/html;charset=utf-8 589.4020ms
+2022-03-10 18:11:06.362 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - -
+2022-03-10 18:11:06.366 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - - - 200 11961 application/javascript;+charset=utf-8 4.2704ms
+2022-03-10 18:11:15.489 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - -
+2022-03-10 18:11:15.768 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 278.8248ms
+2022-03-10 19:28:16.245 +05:00 [INF] Starting BnBYachts.Chat.HttpApi.Host.
+2022-03-10 19:28:30.140 +05:00 [INF] User profile is available. Using 'C:\Users\M.Saif\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-10 19:28:30.650 +05:00 [INF] Loaded ABP modules:
+2022-03-10 19:28:30.651 +05:00 [INF] - BnBYachts.Chat.ChatHttpApiHostModule
+2022-03-10 19:28:30.651 +05:00 [INF]   - BnBYachts.Chat.ChatHttpApiModule
+2022-03-10 19:28:30.651 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-10 19:28:30.651 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-10 19:28:30.651 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-10 19:28:30.651 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-10 19:28:30.651 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-10 19:28:30.651 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-10 19:28:30.651 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-10 19:28:30.651 +05:00 [INF]             - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2022-03-10 19:28:30.651 +05:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-10 19:28:30.651 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-10 19:28:30.651 +05:00 [INF]                     - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-10 19:28:30.651 +05:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-10 19:28:30.651 +05:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Json.AbpJsonModule
+2022-03-10 19:28:30.651 +05:00 [INF]                   - Volo.Abp.Timing.AbpTimingModule
+2022-03-10 19:28:30.651 +05:00 [INF]                     - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-10 19:28:30.651 +05:00 [INF]                       - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-10 19:28:30.651 +05:00 [INF]                       - Volo.Abp.Settings.AbpSettingsModule
+2022-03-10 19:28:30.651 +05:00 [INF]                         - Volo.Abp.Security.AbpSecurityModule
+2022-03-10 19:28:30.651 +05:00 [INF]                         - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.Http.AbpHttpModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Minify.AbpMinifyModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-10 19:28:30.651 +05:00 [INF]             - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-10 19:28:30.651 +05:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-10 19:28:30.651 +05:00 [INF]             - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.UI.AbpUiModule
+2022-03-10 19:28:30.651 +05:00 [INF]             - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-10 19:28:30.651 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Guids.AbpGuidsModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-10 19:28:30.651 +05:00 [INF]                 - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-10 19:28:30.651 +05:00 [INF]               - Volo.Abp.Features.AbpFeaturesModule
+2022-03-10 19:28:30.651 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-10 19:28:30.651 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-10 19:28:30.651 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-10 19:28:30.651 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-10 19:28:30.651 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-10 19:28:30.651 +05:00 [INF]   - BnBYachts.Chat.ChatApplicationModule
+2022-03-10 19:28:30.651 +05:00 [INF]     - BnBYachts.Chat.ChatDomainModule
+2022-03-10 19:28:30.651 +05:00 [INF]       - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-10 19:28:30.651 +05:00 [INF]       - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-10 19:28:30.651 +05:00 [INF]   - BnBYachts.Chat.EntityFrameworkCore.ChatEntityFrameworkCoreModule
+2022-03-10 19:28:30.651 +05:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2022-03-10 19:28:30.651 +05:00 [INF]       - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2022-03-10 19:28:30.651 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-10 19:28:30.651 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-10 19:28:32.613 +05:00 [INF] Initialized all ABP modules.
+2022-03-10 19:28:33.621 +05:00 [INF] Now listening on: https://localhost:44363
+2022-03-10 19:28:33.676 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-10 19:28:33.677 +05:00 [INF] Hosting environment: Development
+2022-03-10 19:28:33.677 +05:00 [INF] Content root path: D:\BnBYachts\aspnet-core\microservices\BnBYachts.Chat.HttpApi.Host
+2022-03-10 19:28:37.948 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/ - -
+2022-03-10 19:28:39.646 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-03-10 19:28:39.894 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Chat.Controllers.HomeController (BnBYachts.Chat.HttpApi.Host).
+2022-03-10 19:28:39.976 +05:00 [INF] Executing RedirectResult, redirecting to /swagger.
+2022-03-10 19:28:39.988 +05:00 [INF] Executed action BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host) in 81.9327ms
+2022-03-10 19:28:39.988 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Controllers.HomeController.Index (BnBYachts.Chat.HttpApi.Host)'
+2022-03-10 19:28:40.042 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/ - - - 302 0 - 2094.7897ms
+2022-03-10 19:28:40.192 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/index.html - -
+2022-03-10 19:28:40.816 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/index.html - - - 200 - text/html;charset=utf-8 624.3869ms
+2022-03-10 19:28:41.060 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - -
+2022-03-10 19:28:41.063 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/_framework/aspnetcore-browser-refresh.js - - - 200 11961 application/javascript;+charset=utf-8 3.1909ms
+2022-03-10 19:28:41.408 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - -
+2022-03-10 19:28:41.927 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 518.9204ms
+2022-03-10 19:37:28.859 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 19:37:28.868 +05:00 [INF] CORS policy execution successful.
+2022-03-10 19:37:28.870 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 11.7712ms
+2022-03-10 19:37:28.883 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 19:37:28.887 +05:00 [INF] CORS policy execution successful.
+2022-03-10 19:37:29.823 +05:00 [INF] Successfully validated the token.
+2022-03-10 19:37:29.841 +05:00 [INF] Authorization was successful.
+2022-03-10 19:37:29.846 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 19:37:29.852 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 19:37:34.780 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 19:37:34.801 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 4948.1105ms
+2022-03-10 19:37:34.802 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 19:37:34.858 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 19:37:34.865 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 5982.7214ms
+2022-03-10 19:39:54.758 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 19:39:54.764 +05:00 [INF] CORS policy execution successful.
+2022-03-10 19:39:54.766 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 7.6827ms
+2022-03-10 19:39:54.817 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 19:39:54.818 +05:00 [INF] CORS policy execution successful.
+2022-03-10 19:39:54.820 +05:00 [INF] Successfully validated the token.
+2022-03-10 19:39:54.821 +05:00 [INF] Authorization was successful.
+2022-03-10 19:39:54.837 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 19:39:54.838 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 19:39:54.918 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 19:39:54.918 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 79.9517ms
+2022-03-10 19:39:54.918 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 19:39:54.920 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 19:39:54.921 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 103.9311ms
+2022-03-10 20:23:32.632 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 20:23:32.632 +05:00 [INF] CORS policy execution successful.
+2022-03-10 20:23:32.632 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 0.9843ms
+2022-03-10 20:23:32.648 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 20:23:32.648 +05:00 [INF] CORS policy execution successful.
+2022-03-10 20:23:32.649 +05:00 [INF] Successfully validated the token.
+2022-03-10 20:23:32.649 +05:00 [INF] Authorization was successful.
+2022-03-10 20:23:32.650 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 20:23:32.650 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 20:23:32.854 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 20:23:32.855 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 204.2161ms
+2022-03-10 20:23:32.855 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 20:23:32.855 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 20:23:32.856 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 208.0391ms
+2022-03-10 21:02:52.303 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:02:52.304 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:02:52.304 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 0.6385ms
+2022-03-10 21:02:52.314 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:02:52.314 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:02:52.316 +05:00 [INF] Successfully validated the token.
+2022-03-10 21:02:52.316 +05:00 [INF] Authorization was successful.
+2022-03-10 21:02:52.317 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:02:52.317 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 21:02:53.030 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 21:02:53.030 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 713.371ms
+2022-03-10 21:02:53.031 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:02:53.032 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 21:02:53.033 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 719.1134ms
+2022-03-10 21:04:19.555 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:04:19.556 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:04:19.556 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 3.9972ms
+2022-03-10 21:04:19.576 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:04:19.577 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:04:19.578 +05:00 [INF] Successfully validated the token.
+2022-03-10 21:04:19.578 +05:00 [INF] Authorization was successful.
+2022-03-10 21:04:19.580 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:04:19.581 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 21:04:19.613 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 21:04:19.614 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 32.8819ms
+2022-03-10 21:04:19.614 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:04:19.622 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 21:04:19.622 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 45.8897ms
+2022-03-10 21:05:14.950 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:05:14.951 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:05:14.951 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 0.7083ms
+2022-03-10 21:05:14.967 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:05:14.967 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:05:14.967 +05:00 [INF] Successfully validated the token.
+2022-03-10 21:05:14.968 +05:00 [INF] Authorization was successful.
+2022-03-10 21:05:14.968 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:05:14.968 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 21:05:15.006 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 21:05:15.007 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 38.1018ms
+2022-03-10 21:05:15.007 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:05:15.007 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 21:05:15.008 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 41.1889ms
+2022-03-10 21:05:42.222 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:05:42.222 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:05:42.224 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 1.9520ms
+2022-03-10 21:05:42.468 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:05:42.468 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:05:42.470 +05:00 [INF] Successfully validated the token.
+2022-03-10 21:05:42.471 +05:00 [INF] Authorization was successful.
+2022-03-10 21:05:42.471 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:05:42.471 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 21:05:42.783 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 21:05:42.783 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 311.614ms
+2022-03-10 21:05:42.783 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:05:42.784 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 21:05:42.784 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 316.2027ms
+2022-03-10 21:06:01.315 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:06:01.315 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:06:01.315 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:44363/api/app/chat/un-read-chat-counts - - - 204 - - 0.4964ms
+2022-03-10 21:06:01.332 +05:00 [INF] Request starting HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - -
+2022-03-10 21:06:01.333 +05:00 [INF] CORS policy execution successful.
+2022-03-10 21:06:01.335 +05:00 [INF] Successfully validated the token.
+2022-03-10 21:06:01.335 +05:00 [INF] Authorization was successful.
+2022-03-10 21:06:01.336 +05:00 [INF] Executing endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:06:01.336 +05:00 [INF] Route matched with {action = "GetUnReadChatCounts", controller = "Chat", area = "", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Int32] GetUnReadChatCounts() on controller BnBYachts.Chat.Services.ChatAppService (BnBYachts.Chat.Application).
+2022-03-10 21:06:01.418 +05:00 [INF] Executing ObjectResult, writing value of type 'System.Int32'.
+2022-03-10 21:06:01.418 +05:00 [INF] Executed action BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application) in 82.3941ms
+2022-03-10 21:06:01.418 +05:00 [INF] Executed endpoint 'BnBYachts.Chat.Services.ChatAppService.GetUnReadChatCounts (BnBYachts.Chat.Application)'
+2022-03-10 21:06:01.419 +05:00 [DBG] Added 0 entity changes to the current audit log
+2022-03-10 21:06:01.420 +05:00 [INF] Request finished HTTP/2 GET https://localhost:44363/api/app/chat/un-read-chat-counts - - - 200 - application/json;+charset=utf-8 88.5197ms
