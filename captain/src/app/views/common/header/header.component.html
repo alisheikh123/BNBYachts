@@ -9,8 +9,9 @@
                             <a [routerLink]="['']" class="logo-btn"><img src="../../../../assets/images/logo.png"
                                     alt=""></a>
                         </div>
+                       
                     </div>
-                    <div class="center-content">
+                    <div class="cstmcntn center-content">
                         <ng-container >
                             <a [routerLink]="['/app/chats']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Inbox" [ngClass]="{'active':activeTab == HEADER_TABS.Inbox}">
                                 <span class="logo-wrapper">
@@ -20,8 +21,10 @@
                                     Inbox
                                 <span class="badge bg-blue" *ngIf="app.unReadChatCount > 0">{{app.unReadChatCount}}</span>
                             </a>
+
                         </ng-container>
                     </div>
+                   
                     <div class="right-content">
                         <div *ngIf="userDetails?.userRoles?.length > 0" class="dropdown custom-dropdown borderless-dropdown">
                             <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,9 +38,6 @@
                                 <div *ngFor="let role of userDetails?.userRoles">
                                     <li><a (click)="switchRole(roles.User)" *ngIf="role?.normalizedName==roles.User" class="dropdown-item">{{'SwitchUser' | localization}}</a></li>
                                 <li><a (click)="switchRole(roles.Host)" *ngIf="role?.normalizedName==roles.Host" class="dropdown-item">{{'SwitchHost' | localization}}</a></li>
-                            </div>
-                            <div *ngFor="let role of rolesList">
-                                <li><a (click)="tryHosting()" *ngIf="role==roles.Host"  class="dropdown-item" >{{'BecomeHost'| localization }}</a></li>
                             </div>
                             </ul>
                           </div>

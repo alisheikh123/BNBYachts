@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./featured-cities.component.scss']
 })
 export class FeaturedCitiesComponent implements OnInit {
-  featuredCities :FeaturedCities[];
+  featuredCities : FeaturedCities[];
   assetsUrlProfile = environment.S3BUCKET_URL + '/cities/';
 
   constructor(private boatService : BoatService) { }

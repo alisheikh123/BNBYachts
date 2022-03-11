@@ -38,7 +38,9 @@ export class HeaderComponent implements OnInit {
   rolesList= []as Array<string>;
   keys=Keys;
   onBoardingUrl='/onboarding';
-  hostDashboardUrl='/host-dashboard';
+  hostDashboardUrl='switchapp/1';
+  userDashboardUrl='/switchapp/2';
+  isHost:boolean;
   @ViewChild('earnwithus', { static: true }) templateRef: any;
   selectedOption = {
     byHost : false,
@@ -58,11 +60,11 @@ export class HeaderComponent implements OnInit {
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
         this.userDetails = res;
-        this.rolesNotAssigned();
         this.isLoggedIn = true;
 
     })
   }
+  
   getUnreadChatCount() {
     this.chatService.getUnreadCount().subscribe(res => {
       this.app.unReadChatCount = res;
@@ -88,32 +90,18 @@ export class HeaderComponent implements OnInit {
     const token = this.oidcSecurityService.getAccessToken();
     let user = this.oidcSecurityService.getUserData();
   }
-  rolesNotAssigned(){
-    for( let role in this.roles){
-      if(this.userDetails?.userRoles){
-        let check=  this.userDetails.userRoles.filter((item:any)=> item.normalizedName== this.roles.Captain || item.normalizedName== this.roles.Management || item.normalizedName == this.roles.Cleaning );
-   let roleValue= Roles[role as keyof typeof Roles];
-    let roleData=  this.userDetails.userRoles.filter((item:any)=> item.normalizedName== roleValue);
-    if(roleData.length==0){
-      if(!(check.length > 0) && (roleValue== this.roles.Captain || roleValue== this.roles.Management || roleValue== this.roles.Cleaning))
-      {
-      this.rolesList.push(roleValue);
-      }
-    }
-      }
-
-    };
-
-}
+ 
 switchRole(role:Roles)
 {
   switch (role) {
+    
     case this.roles.Host:
       window.location.href= environment.CLIENT_APP_URL + this.hostDashboardUrl;
       this.toastr.success('Account switched to host.', 'Success');
       break;
       case this.roles.User:
-        window.location.href= environment.CLIENT_APP_URL;
+        let us=environment.CLIENT_APP_URL + this.userDashboardUrl;
+        window.location.href= environment.CLIENT_APP_URL + this.userDashboardUrl;
         this.toastr.success('Account switched to user.', 'Success'); 
         break;
     default: 

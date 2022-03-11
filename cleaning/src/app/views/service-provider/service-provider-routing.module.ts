@@ -9,7 +9,7 @@ const routes: Routes = [
         path: "", component: ServiceProviderComponent
       },
       {
-        path: "service-provider-dashboard", component:ServiceProviderDashboardComponent
+        path: "cleaning-dashboard", component:ServiceProviderDashboardComponent
       },
       {
         path: "cleaning-onboarding", component:CleaningOnBoardingComponent

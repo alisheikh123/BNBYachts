@@ -63,6 +63,10 @@ namespace BnBYachts.Core.Services.ServiceProvider
             return await _serviceproviderManager.isServiceProviderExist(request).ConfigureAwait(false);
         }
 
-
+        public async Task<EntityResponseModel> AlreadyServiceProvider(ServiceProviderTypeCheckRequestable request)
+        {
+            request.UserId = CurrentUser.Id.ToString();
+            return await _serviceproviderManager.AlreadyServiceProvider(request).ConfigureAwait(false);
         }
+    }
     }

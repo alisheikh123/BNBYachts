@@ -214,7 +214,18 @@ namespace BnBYachts.Core.Managers
             else
                 return UserReview.Host;
         }
-
+       public async  Task<bool> RoleVerify( string userId,string []roles)
+        {
+            if (userId.IsNullOrEmpty() || !roles.Any() ) return false;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return false;
+            foreach (var role in roles)
+            {
+                if (await _userManager.IsInRoleAsync(user, role)) return true;
+               
+            }
+            return false;
+        }
         public async Task<bool> UpdateAdminProfile(AdminProfileRequestable userInput)
         {
             var user = await _repository.GetAsync(x => x.Id.ToString() == userInput.Id).ConfigureAwait(false);

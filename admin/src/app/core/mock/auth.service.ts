@@ -13,15 +13,15 @@ export class AuthService {
   isLoadingSubject: BehaviorSubject<boolean>;
   authenticated: boolean = false;
   isLoggedIn!: boolean;
-  constructor(private http: HttpClient, private cookiesService : CookieService,
-    public oidcSecurityService: OidcSecurityService, 
-    // private store: LocalStoreService, 
+  constructor(private http: HttpClient,
+    public oidcSecurityService: OidcSecurityService,
+    // private store: LocalStoreService,
     private router: Router) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
     this.checkAuth();
   }
-  
+
   checkAuth() {
     if (localStorage.getItem('userId') != null) {
       this.authenticated = true;
@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   login() {
-    this.oidcSecurityService.authorize();  
+    this.oidcSecurityService.authorize();
     localStorage.setItem("accessToken", this.oidcSecurityService.getAccessToken());
   }
 
@@ -60,7 +60,7 @@ export class AuthService {
   }
   registerUser(userData: any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.http.post(this.apiCoreURl + "/api/register/", userData)
+    return this.http.post(this.apiCoreURl + "/api/app/user/user-register/", userData)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 

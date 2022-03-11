@@ -31,6 +31,7 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             return await _appUserManager.GetUserDetailsByUserName(username);
@@ -48,17 +49,20 @@ namespace BnBYachts.Core.Services
         {
             return await _appUserManager.AddServiceProviderRole(CurrentUser.Id.ToString(), type);
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ResponseDto> UserRegister(UserRegisterTransferable userInput)
         {
             return await _appUserManager.RegisterUser(userInput);
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<bool> ConfirmEmail(string username, string token)
         {
             bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
             return isConfirmed;
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<bool> ResendEmail(string username)
         {
@@ -72,6 +76,7 @@ namespace BnBYachts.Core.Services
             var result = await _appUserManager.UpdateUserProfile(userInput);
             return result;
         }
+        [AllowAnonymous]
         public async Task<bool> IsEmailExists(string email) => await _appUserManager.IsEmailExist(email).ConfigureAwait(false);
 
         [HttpGet]

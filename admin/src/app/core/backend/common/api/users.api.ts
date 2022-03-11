@@ -10,7 +10,7 @@ export class UsersApi {
   USER_API_URL = 'api/app/admin/'
   constructor(private api: HttpService) {}
   getBoatUsers(roleName: string) {
-    return  this.api.get(`${this.USER_API_URL}boat-owers-and-users?roleName=${roleName}`);    
+    return  this.api.get(`${this.USER_API_URL}boat-owers-and-users?roleName=${roleName}`);
   }
   getTotalUsers(userRole : string, hostRole:string) {
     return this.api.get(`${this.USER_API_URL}total-users?userRole=${userRole}&hostRole=${hostRole}`).pipe();

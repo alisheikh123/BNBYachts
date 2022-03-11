@@ -1,11 +1,10 @@
 ﻿using BnBYachts.Boat.Boat.Interfaces;
 using BnBYachts.Boat.Shared.Boat.Requestable;
-using BnBYachts.Boat.Shared.Helper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.ObjectMapping;
@@ -22,10 +21,11 @@ namespace BnBYachts.Boat.Manager
         private readonly IRepository<FeatureEntity, int> _featuresRepo;
         private readonly IRepository<RuleEntity, int> _rulesRepo;
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
+        private EventBusDispatcher _eventBusDispatcher;
 
         public BoatSettingsManager(IRepository<BoatEntity, int> boatRepository, IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRepo,
             IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatGalleryRepo, IObjectMapper<BoatDomainModule> objectMapper, IRepository<FeatureEntity, int> featureRepo,
-            IRepository<RuleEntity, int> rulesRepo)
+            IRepository<RuleEntity, int> rulesRepo, EventBusDispatcher eventBusDispatcher)
         {
             _boatRepository = boatRepository;
             _boatelFeatureRepo = boatelFeatureRepo;
@@ -35,6 +35,7 @@ namespace BnBYachts.Boat.Manager
             _rulesRepo = rulesRepo;
             _featuresRepo = featureRepo;
             _objectMapper = objectMapper;
+            _eventBusDispatcher = eventBusDispatcher;
         }
 
         public async Task<bool> UpdateBoat(HostBoatRequestable boatDetails, Guid? userId)
@@ -54,8 +55,15 @@ namespace BnBYachts.Boat.Manager
                 if (boatGallery.Id == 0)
                 {
                     boatGallery.BoatEntityId = boatDetails.Id;
-                    string uploadedFilePath = boatGallery.ImagePath;//FileUploader.UploadFilesLocal(gallery.FileName, gallery.FileData);
-                    await FileUploader.UploadFileToAWSAsync(gallery.FileName, gallery.FileData, "boatGallery", "");
+                     _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+                    {
+                        ChildFolder = "",
+                        File = Convert.FromBase64String(gallery.FileData.Split("base64,")[1]),
+                        FileName = gallery.FileName,
+                        ContentType = gallery.FileType,
+                        SubFolder = "boatGallery"
+                    });
+
                     boatGallery.ImagePath = gallery.FileName;
                     await _boatGalleryRepo.InsertAsync(boatGallery).ConfigureAwait(false);
                 }
