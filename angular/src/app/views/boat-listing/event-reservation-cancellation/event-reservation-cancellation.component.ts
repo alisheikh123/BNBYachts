@@ -77,7 +77,7 @@ constructor(
         let eventStartDateTime = moment(this.eventBookingDetail?.eventDate).format('YYYY-MM-DD')+' '+(moment(this.eventDetail?.startDateTime).format('hh:mm:a'));
         let remaingHours = moment.duration(moment(eventStartDateTime).diff(moment().format('YYYY-MM-DD hh:mm:a'))).asHours();
         let reservationFeeCalculation = 0;
-        if (this.eventBookingDetail.bookingStatus == 0) {
+        if (this.eventBookingDetail.bookingStatus == 0 || this.eventBookingDetail.bookingStatus == 1) {
           if (remaingHours > 72) {
               this.eventDetail.deductedAmount = 0;
               reservationFeeCalculation =

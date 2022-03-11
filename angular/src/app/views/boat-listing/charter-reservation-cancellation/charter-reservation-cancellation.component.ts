@@ -87,7 +87,7 @@ export class CharterReservationCancellationComponent implements OnInit {
         this.charterBookingDetail.TotalDays = totalDays;
         let reservationFeeCalculation = 0;
 
-        if (this.charterBookingDetail.bookingStatus == 0) {
+        if (this.charterBookingDetail.bookingStatus == 0 || this.charterBookingDetail.bookingStatus == 1) {
           this.charterBookingDetail.deductedAmount = 0;
           reservationFeeCalculation = this.charterBookingDetail?.charterFee * totalDays + 20 + this.charterBookingDetail.boatDetail.taxFee;
           this.charterBookingDetail.refundableAmount = this.charterBookingDetail.deductedAmount + reservationFeeCalculation;
