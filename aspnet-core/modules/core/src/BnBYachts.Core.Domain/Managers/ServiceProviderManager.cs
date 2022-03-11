@@ -15,6 +15,7 @@ using BnBYachts.Core.ServiceProvider.Transferable;
 using BnBYachts.Core.ServiceProvider.Interface;
 using BnBYachts.Core.ServiceProvider.Requestable;
 using Volo.Abp.Users;
+using BnBYachts.Core.Shared.Constants;
 
 namespace BnBYachts.Core.Managers
 {
@@ -85,6 +86,13 @@ namespace BnBYachts.Core.Managers
             if (request == null) return false;
            var check=   await _servicerepository.FirstOrDefaultAsync(x => x.UserId == request.UserId &&  x.ServiceProviderType== request.ServiceProviderType).ConfigureAwait(false);
            return check != null ? true : false;
+        }
+        public async Task<EntityResponseModel> AlreadyServiceProvider(ServiceProviderTypeCheckRequestable request)
+        {       
+            var checkserviceprovider = await _servicerepository.FirstOrDefaultAsync(x => x.UserId == request.UserId && x.ServiceProviderType != request.ServiceProviderType).ConfigureAwait(false);
+            var rolechecked = await _appUserManager.RoleVerify(request.UserId,  new string[] { RoleConstants.AdminRoleName, RoleConstants.SuperAdminRoleName });
+            if (checkserviceprovider != null && !rolechecked) return new EntityResponseModel();
+            else return new EntityResponseModel { ReturnStatus = false };
         }
     }
 

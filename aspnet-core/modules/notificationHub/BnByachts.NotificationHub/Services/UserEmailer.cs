@@ -41,7 +41,7 @@ namespace BnByachts.NotificationHub.Services
                 mailMessage.AppendLine("<span style=\"font-size: 9pt;\">" + "If the button above doesn't work, paste this into your browser:" + "</span><br />");
                 mailMessage.AppendLine("<span style=\"font-size: 8pt;\">" + link + "</span>");
             }
-            await ReplaceBodyAndSend("email", "BNB password reset", emailTemplate, mailMessage);
+            await ReplaceBodyAndSend("umar.draz@techverx.com", "BNB password reset", emailTemplate, mailMessage);
         }
         private StringBuilder GetTitleAndSubTitle(int? tenantId, string title, string subTitle, string logUrl)
         {

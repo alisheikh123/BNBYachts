@@ -45,11 +45,16 @@ namespace BnByachts.Simulator
            // var res=_techverxElasticSearch.SearchAsync<temp, int>("test1", searchDescriptor, 0,10).GetAwaiter().GetResult();
            //Console.WriteLine("email sending");
 
-           _ = _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+           //_ = _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+           //{
+           //   ChildFolder = "",
+           //   File = null,
+           //   SubFolder = ""
+           //});
+           _ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
            {
-              ChildFolder = "",
-              File = null,
-              SubFolder = ""
+              To = "umar.draz@techverx.com",
+              
            });
         }
     }

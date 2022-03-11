@@ -35,4 +35,9 @@ export class ServiceProviderService {
     return this.http.post(this.coreApiUrl + '/app/service-provider/is-service-provider-exist',serviceprovidertype ).pipe(
       catchError(this.error_service.handleError));
   }
+  alreadyServiceProvider(serviceprovidertype: any)
+  {
+    return this.http.post(this.coreApiUrl + '/app/service-provider/already-service-provider',serviceprovidertype ).pipe(
+      catchError(this.error_service.handleError));
+  }
 }

@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   getUserInfo() {
-    return this.http.get(this.apiCoreURl + "/api/app/user/logged-in-user-detailsGetLoggedInUserDetails");
+    return this.http.get(this.apiCoreURl + "/api/app/user/logged-in-user-details");
   }
   getUserInfoById(id:string) {
     return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-id/"+id);

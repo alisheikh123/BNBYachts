@@ -18,9 +18,7 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Templates\EmailTemplates\default.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <Content Include="Templates\EmailTemplates\default.html" />
   </ItemGroup>
 
   <!--<ItemGroup>
