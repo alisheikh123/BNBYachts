@@ -31,22 +31,15 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        [Route("api/GetUserDetailsByUserName")]
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             return await _appUserManager.GetUserDetailsByUserName(username);
         }
 
         [HttpGet]
-        
-
-        [AllowAnonymous]
-        [Route("api/GetUserDetailsById/{userId}")]
         public async Task<UserDetailsTransferable> GetUserDetailsById(Guid? userId) => await _appUserManager.GetLoggedInUserDetails(userId);
 
         [HttpGet]
-
         public async Task<bool> AddHostRole()
         {
             return await _appUserManager.AddHostRole(CurrentUser.Id.ToString());
@@ -56,25 +49,18 @@ namespace BnBYachts.Core.Services
             return await _appUserManager.AddServiceProviderRole(CurrentUser.Id.ToString(), type);
         }
         [AllowAnonymous]
-        [Route("api/Register")]
-        [Route("api/UserRegister")]
         [HttpPost]
         public async Task<ResponseDto> UserRegister(UserRegisterTransferable userInput)
         {
             return await _appUserManager.RegisterUser(userInput);
         }
         [HttpGet]
-        [AllowAnonymous]
-        [Route("api/Confirm-Email")]
-        [Route("api/ConfirmEmail")]
         public async Task<bool> ConfirmEmail(string username, string token)
         {
             bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
             return isConfirmed;
         }
         [AllowAnonymous]
-        [Route("api/Resend-Email")]
-        [Route("api/ResendEmail")]
         [HttpGet]
         public async Task<bool> ResendEmail(string username)
         {
@@ -82,9 +68,6 @@ namespace BnBYachts.Core.Services
             return true;
         }
 
-        [AllowAnonymous]
-        [Route("api/Update-User-Profile")]
-        [Route("api/UpdateUserProfile")]
         public async Task<bool> UpdateUserProfile(UserProfileRequestable userInput)
         {
             userInput.Id = CurrentUser.Id.ToString();
