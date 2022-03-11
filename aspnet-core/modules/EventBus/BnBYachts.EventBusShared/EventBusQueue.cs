@@ -18,6 +18,7 @@ namespace BnBYachts.EventBusShared
         public const string QUsersSeeder = "q-usersseeder";
         public const string QEmailNotification = "q-email-notification";
         public const string QBackgroundWorker = "q-background-worker";
+        public const string QS3BackgroundWorker = "q--s3file-background-worker";
         public const string QGenerateOTP = "q-generate-otp";
     }
 }
