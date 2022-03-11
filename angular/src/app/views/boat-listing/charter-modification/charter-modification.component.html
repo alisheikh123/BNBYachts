@@ -1,0 +1,528 @@
+<div class="main-wrapper">
+    <div class="image-gallery-bannner section-padding">
+        <div class="container">
+            <div class="image-gallery-head-content white-text">
+                <h3 class="bold mb-2">{{charterDetails?.boat?.name}}</h3>
+                <p>{{charterDetails?.boat?.location}}</p>
+            </div>
+            <div class="image-gallery-collage">
+                <div class="row" *ngIf="charterDetails?.boat?.boatGalleries?.length > 0">
+                    <div class="col-md-6 py-2">
+                        <div class="gallery-img-large custom-image-prev"
+                            *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                            <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="gallery-images-small-wrapper">
+                            <div class="row">
+                                <div class="col-sm-6 py-2"
+                                    *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : false);let i = index">
+                                    <div class="gallery-images-small custom-image-prev" *ngIf="i < 4">
+                                        <img src="{{assetsUrl + item?.imagePath}}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="gallery-link-wrapper"><a href="#" class="underline-white-link">Gallery <span><i
+                            class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="section-padding">
+                    <div class="card-wrapper p-0">
+                        <div class="custom-tabs-wrapper custom-filled-view">
+                            <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <button class="underline-link-blk active" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-profile" type="button" role="tab"
+                                    aria-controls="v-pills-profile" aria-selected="false">{{'Charter'| localization}}</button>
+                            </div>
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                    aria-labelledby="v-pills-home-tab">
+                                    <div class="tabs-inner-details">
+                                        <div class="row">
+                                            <div class="col-xl-6 py-2">
+                                                <h6 class="bold">{{'CharterDetails'| localization}}</h6>
+                                                <div class="tabs-inner-details-inner">
+                                                    <div class="custom-flex-start py-1 align-items-start depart-date-lg-view">
+                                                        <div class="custom-flex align-items-start mobile-width-100" >
+                                                            <p class="medium min-width-text small-content">{{'DepartingFrom:'| localization}}</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.departingFrom}}</p>
+                                                        </div>
+                                                        <div class="custom-flex align-items-start mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content align-items-start">{{'Destination:'| localization}}</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.destination}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content">{{'BoatCapacity:'| localization}}</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.guestCapacity}}</p>
+                                                        </div>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content"> {{'SeatsRemaining:'| localization}}</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.guestCapacity}}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content"> {{'DepartureDate:'| localization}}</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.departureFromDate |
+                                                                date:'MMM-dd-YYYY'}}</p>
+                                                        </div>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content"> {{'ArrivalDate:'| localization}}</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content"> {{'DepartureTime:'| localization}}</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.DepartureTime}}</p>
+                                                        </div>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content">{{'ArrivalTime:'| localization}}</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.ArrivalTime}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content">{{'RoundTrip:'| localization}}</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.isRoundTrip ? 'Yes':'No'}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="charterDetails?.isRoundTrip==true">
+                                                    <p class="medium min-width-text"> {{'ReturnDetails:'| localization}}</p>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text small-content"> {{'DepartureDate:'| localization}}</p>
+                                                            <p class="min-width-text-small">
+                                                                {{charterDetails?.departureToDate | date:'MMM-dd-YYYY'}}</p>
+                                                        </div>
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content"> {{'ReturnDate:'| localization}}</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.returnDate | date:'MMM-dd-YYYY'}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-flex-start py-1 flex-mobile-column">
+                                                        <div class="custom-flex mobile-width-100">
+                                                            <p class="medium min-width-text-small small-content"> {{'ReturnTime'| localization}}</p>
+                                                            <p class="min-width-text-small">{{charterDetails?.ReturnTime}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <h6 class="bold mt-3">{{'ApprovalPolicy' | localization}}</h6>
+                                                <div class="tabs-inner-details-inner">
+                                                    <div class="custom-flex-coumn" *ngIf="((this.approvalPolicyString.length<=20));else greaterThanLimitBlock">
+                                                        <p>{{this.approvalPolicyString}}</p>
+                                                    </div>
+                                                    <ng-template #greaterThanLimitBlock>
+                                                        {{this.readAll ? (this.approvalPolicyString) : (this.approvalPolicyString|slice:0:21)}}
+                                                        <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.readAll = !this.readAll">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 py-2">
+                                                <div class="row pb-2 m-0 check-in-out-wrap">
+                                                    <div class="col-md-6 py-2">
+                                                        <div class="custom-date-month-view"
+                                                            *ngIf="charterSchedule?.length > 0">
+                                                            <span class="fas fa-chevron-left"
+                                                                (click)="onChangeDate(false)"
+                                                                [hidden]="dateScheduleIndex == 0">
+                                                            </span>
+                                                            <div class="">
+                                                                <div class="">
+                                                                    <span>
+                                                                        <b>{{charterSchedule[dateScheduleIndex]?.departureDate
+                                                                            | date : 'MMM-dd-YYYY'}}</b></span>
+                                                                </div>
+                                                            </div>
+                                                            <span
+                                                                [hidden]="dateScheduleIndex == charterSchedule.length -1 "
+                                                                class="fas fa-chevron-right"
+                                                                (click)="onChangeDate(true)"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 py-2">
+                                                        <div class="custom-flex select custom-select select-search custom-input-label-inside"
+                                                            [ngbPopover]="popContent" placement="bottom"
+                                                            autoClose="outside" triggers="manual" #popOver="ngbPopover"
+                                                            (click)="openPopover()">
+                                                            <label>{{'Guests'|localization}}</label>
+
+                                                            <div class="custom-flex w-100">
+                                                                <p class="counter-text-total">
+                                                                    {{charterFilterDetails?.adults}}
+                                                                    {{'Adult(s)'|localization}}</p>
+                                                                <p class="counter-text-total">
+                                                                    {{charterFilterDetails?.childrens}}
+                                                                    {{'Children'|localization}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <small class="text-danger"
+                                                            *ngIf="(charterFilterDetails.adults == 0 && charterFilterDetails.childrens == 0) && isSubmitted">{{'EnterGuestsDetails'|localization}}</small>
+                                                    </div>
+
+                                                    <ng-template #popContent>
+                                                        <div class="row p-2">
+                                                            <div class="col-12">
+                                                                <div class="counter-input-wrapper">
+                                                                    <div class="number border-0 p-0 w-100">
+                                                                        <div class="custom-flex-start w-100">
+                                                                            <label
+                                                                                class="m-0 max-width-50">{{'Adults'|localization}}</label>
+                                                                            <div class="custom-flex-start max-width-50">
+                                                                                <span class="minus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults>0?popOverFilterData.adults- 1: popOverFilterData.adults;">- {{''| localization}}</span>
+                                                                                <input type="text"
+                                                                                    [(ngModel)]="popOverFilterData.adults" />
+                                                                                <span class="plus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.adults = popOverFilterData.adults + 1;">+ {{''| localization}}</span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="counter-input-wrapper">
+                                                                    <div class="number border-0 p-0 w-100">
+                                                                        <div class="custom-flex-start w-100">
+
+                                                                            <div class="max-width-50">
+                                                                                <label class="m-0">{{'Children'|localization}}</label>
+                                                                                <label
+                                                                                    class="grey small-txt m-0 extra-small-text">{{'Ages0-13'|localization}}</label>
+                                                                            </div>
+                                                                            <div class="custom-flex-start max-width-50">
+                                                                                <span class="minus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens>0?popOverFilterData.childrens-1:popOverFilterData.childrens;">-</span>
+                                                                                <input type="text"
+                                                                                    [(ngModel)]="popOverFilterData.childrens" />
+                                                                                <span class="plus"
+                                                                                    style="cursor: pointer;"
+                                                                                    (click)="popOverFilterData.childrens = popOverFilterData.childrens +1;">+</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 pt-2">
+                                                                <small class="text-danger">{{charterCapcityValidation}}</small>
+                                                                <div class="custom-flex-end">
+                                                                    <button class="custom-btn blue small-btn"
+                                                                        (click)="updateGuests()">{{'Done'|localization}}</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                    <div class="total-amount-wrap custom-padding-top" *ngIf="charterDetails?.isFullBoatCharges==true">
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>{{'EntireBoatCharges'|localization}}</p>
+                                                            <p>${{charterDetails?.charterFee}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>{{'Tax'|localization}}</p>
+                                                            <p>${{charterDetails?.boat?.taxFee}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>{{'ServiceFee'|localization}}</p>
+                                                            <p>$20.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner bottom">
+                                                            <p class="medium">{{'Total(USD)'|localization}}</p>
+                                                            <p class="medium">$ {{charterDetails?.charterFee  + charterDetails?.boat?.taxFee+ 20}}.00</p>
+
+                                                        </div>
+                                                        <button class="custom-btn blue" (click)="reserveCharter()">{{'BookNow'|localization}}</button>
+                                                    </div>
+                                                    <div class="total-amount-wrap custom-padding-top" *ngIf="charterDetails?.isFullBoatCharges==false">
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>$ {{charterDetails?.charterFee}} X
+                                                                {{charterFilterDetails.adults +
+                                                                charterFilterDetails.childrens}} </p>
+                                                            <p>${{charterDetails?.charterFee *
+                                                                (charterFilterDetails.adults +
+                                                                charterFilterDetails.childrens)}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>{{'Tax'|localization}}</p>
+                                                            <p>${{charterDetails?.boat?.taxFee}}.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner">
+                                                            <p>{{'ServiceFee'|localization}}</p>
+                                                            <p>$20.00</p>
+
+                                                        </div>
+                                                        <div class="total-amount-wrap-inner bottom">
+                                                            <p class="medium">{{'Total(USD)'|localization}}</p>
+                                                            <p class="medium">$ {{charterDetails?.charterFee *
+                                                                (charterFilterDetails.adults +
+                                                                charterFilterDetails.childrens) +
+                                                                charterDetails?.boat?.taxFee+ 20}}.00</p>
+
+                                                        </div>
+                                                        <button class="custom-btn blue" (click)="reserveCharter()">{{'BookNow'|localization}}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="section-padding">
+                        <h5 class="bold">{{'AboutTheBoat'|localization}}</h5>
+                        <p class="max-width-content py-2">{{charterDetails?.boat?.description}}</p>
+                    </div>
+                    <div class="section-padding">
+                        <div class="what-offers">
+                            <div class="row" *ngIf="charterDetails?.boat?.boatFeatures">
+                                <div class="col-md-4">
+                                    <h5 class="bold">{{'WhatThisBoatOffers'|localization}}</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings" style="width: 100%;">
+                                            <div class="row">
+                                                <div class="col-6"
+                                                    *ngFor="let item of (showMore ? featureFilter(false,false):(featureFilter(false,false)) | slice:0:4)">
+                                                    <p><i
+                                                            class="fa {{item.offeredFeatures.icon}}"></i>{{item.offeredFeatures.name}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="offerings">
+                                        <p *ngFor="let item of featureFilter(false,false) | mySlice:3:6"><i
+                                                class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                        </p>
+                                    </div> -->
+                                    </div>
+                                    <button (click)="showAllFeatures()" class="custom-btn outline-blue-clr my-2">{{'ShowAll'|localization}}</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="bold">{{'BoatCapacity'|localization}}</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings" style="width: 100%;">
+                                            <div class="row">
+                                                <div>
+                                                    <p><i class="fas fa-bed"></i>{{charterDetails.boat?.totalBedrooms}}
+                                                        {{'Bedrooms'|localization}}
+                                                    </p>
+                                                    <p><i
+                                                            class="fas fa-toilet"></i>{{charterDetails.boat?.totalWashrooms}}
+                                                        {{'Bathrooms'|localization}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="bold">{{'Favourites'|localization}}</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings">
+                                            <p *ngFor="let item of featureFilter(true,false) | mySlice:0:3"><i
+                                                    class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                            </p>
+                                        </div>
+                                        <div class="offerings">
+                                            <p *ngFor="let item of featureFilter(true,false) | mySlice:3:6"><i
+                                                    class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-padding">
+                        <div class="what-offers">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="bold">{{'BoatRules'|localization}}</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings">
+                                            <p *ngFor="let item of charterDetails?.boat?.boatRules"><i
+                                                    class="fa {{item?.offeredRule?.icon}}"></i>{{item?.offeredRule?.name}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6" *ngIf="charterDetails?.boat?.boatFeatures">
+                                    <h5 class="bold">{{'Health&Safety'|localization}}</h5>
+                                    <div class="custom-flex-start">
+                                        <div class="offerings">
+                                            <p *ngFor="let item of featureFilter(false,true)"><i
+                                                    class="fa {{item?.offeredFeatures?.icon}}"></i>{{item?.offeredFeatures?.name}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exlusive-offer section-padding  quote-section-blue">
+                        <div class="bg-image-wrap no-hover text-left">
+                            <div class="row h-100 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="custom-flex-start white-text h-100">
+                                        <h2 class="bold">{{'AskForAQuote'|localization}}</h2>
+                                        <p class="medium-container regular">Short description about the service how it
+                                            works
+                                            , ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                            nostrud {{''| localization}}</p>
+                                        <p class="medium-container regular">Short description about the host Lorem ipsum
+                                            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut
+                                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                                        <a [routerLink]="['/quote',charterDetails?.boatId]" class="custom-btn white">{{'GetAQuote'|localization}}</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 py-2">
+                                    <div class="row">
+                                        <div class="col-md-6 py-2">
+                                            <div class="custom-card-img-bottom-text-wrap">
+                                                <div class="custom-card-img-bottom-text-wrap-inner"
+                                                    *ngIf="charterDetails?.boat?.boatGalleries?.length > 0">
+                                                    <div class="card"
+                                                        *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                        <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
+                                                            alt="...">
+                                                        <div class="card-body bg-white">
+                                                            <p>{{'PrivateCharter'|localization}}</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 py-2">
+                                            <div class="custom-card-img-bottom-text-wrap">
+                                                <div class="custom-card-img-bottom-text-wrap-inner">
+                                                    <div class="card"
+                                                        *ngFor="let item of (charterDetails?.boat?.boatGalleries | filterBy : 'isCoverPic' : true)">
+                                                        <img src="{{assetsUrl + item?.imagePath}}" class="card-img-top"
+                                                            alt="...">
+                                                        <div class="card-body bg-white">
+                                                            <p>{{'PrivateCharter'|localization}}</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="host-details section-padding">
+                        <div class="host-details-wrap">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 py-2 text-center-mobile">
+                                    <h5 class="bold">{{'HostedBy'|localization}}</h5>
+                                    <p class="medium py-2">{{'NameHost'|localization}} {{boatHost?.name}}</p>
+                                    <div class="address-details">
+                                        <p>{{'JoinDate:'|localization}} {{boatHost?.creationTime | date:'dd-MMM-YYYY'}}</p>
+                                        <p><i class="fa fa-check"></i> {{'IdentityVerified'|localization}} Verified </p>
+                                        <p><i class="fa fa-star"></i> {{'ResponseRate'|localization}} 0%</p>
+                                        <p>{{'ResponseTime'|localization}} 0 min</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 py-2 text-center">
+                                    <div class="image-wrapper-host">
+                                        <img src="{{assetsCoreUrl + (boatHost?.imagePath || USER_DEFAULTS.avatar)}}"
+                                            alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 pt-2 text-center">
+                                    <button class="custom-btn blue big-btn">{{'ContactHost'|localization}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rating-wrapper section-padding">
+                            <div class="row">
+                                <app-list-reviews [boatId]=charterDetails?.boatId></app-list-reviews>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Modal-->
+    <ng-template #allFeaturesModal>
+        <div class="modal-content">
+            <div class="modal-header no-border">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-text-center">
+                    <h4 class="bold">{{'WhatThisBoatOffers'|localization}}</h4>
+                    <div class="py-2">
+                        <h5 class="bold text-left">{{'Favorite'|localization}}</h5>
+
+                        <div class="custom-flex-start">
+                            <div class="row text-left">
+                                <div class="col-6"
+                                    *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':false">
+                                    <p><i class="fa fa-cutlery pe-2"></i>{{item?.offeredFeatures.name}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="py-2">
+                        <h5 class="bold text-left">{{'SafetyServices'|localization}}</h5>
+                        <div class="custom-flex-start">
+                            <div class="row text-left">
+                                <div class="col-6"
+                                    *ngFor="let item of charterDetails?.boat.boatFeatures | filterBy:'isSafetyFeature':true">
+                                    <p><i class="fa fa-cutlery pe-2"></i>{{item?.offeredFeatures.name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ng-template>
