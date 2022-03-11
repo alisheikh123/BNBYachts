@@ -39,7 +39,7 @@ namespace BnBYachts.Boat.Manager.Marketing
                 ChildFolder = "",
                 File = Convert.FromBase64String(featured.FeaturedCityGallery.FileData.Split("base64,")[1]),
                 FileName = featured.FeaturedCityGallery.FileName,
-                ContentType = "image/png",
+                ContentType = featured.FeaturedCityGallery.FileType,
                 SubFolder = "cities"
             });
 
@@ -61,7 +61,7 @@ namespace BnBYachts.Boat.Manager.Marketing
                 ChildFolder = "",
                 File = Convert.FromBase64String(featured.FeaturedCityGallery.FileData.Split("base64,")[1]),
                 FileName = featured.FeaturedCityGallery.FileName,
-                ContentType = "image/png",
+                ContentType = featured.FeaturedCityGallery.FileType,
                 SubFolder = "cities"
             });
 

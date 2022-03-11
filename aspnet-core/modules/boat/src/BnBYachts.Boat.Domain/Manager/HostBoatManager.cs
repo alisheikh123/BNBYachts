@@ -275,12 +275,13 @@ namespace BnBYachts.Boat.Manager
             {
                 var boatGallery = gallery.CreateMapped<BoatGalleryRequestable, BoatGalleryEntity>();
                 boatGallery.BoatEntityId = postBoatData.Id;
+                
                 _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
                 {
                     ChildFolder = "",
                     File = Convert.FromBase64String(gallery.FileData.Split("base64,")[1]),
                     FileName = gallery.FileName,
-                    ContentType = "image/png",
+                    ContentType = gallery.FileType,
                     SubFolder = "boatGallery"
                 });
 

@@ -60,7 +60,7 @@ namespace BnBYachts.Boat.Manager
                         ChildFolder = "",
                         File = Convert.FromBase64String(gallery.FileData.Split("base64,")[1]),
                         FileName = gallery.FileName,
-                        ContentType = "image/png",
+                        ContentType = gallery.FileType,
                         SubFolder = "boatGallery"
                     });
 
