@@ -10,8 +10,6 @@
     "url": "https://github.com/akveo/ngx-admin/issues"
   },
   "scripts": {
-
-
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port 4200",
     "build": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod=true --outputPath=dist --outputHashing=all --deleteOutputPath=true",
@@ -19,13 +17,11 @@
     "hmr": "ng serve --host 0.0.0.0 --port 4200 --hmr",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor",
+    "e2e": "ng e2e",
     "lint": "tslint --force --project src/tsconfig.json src/**/*.ts -t verbose",
     "conventional-changelog": "conventional-changelog",
     "build:prod": "npm run build -- --configuration production --aot",
     "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
-    "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "ng e2e",
     "docs": "compodoc -p src/tsconfig.app.json -d docs",
     "docs:serve": "compodoc -p src/tsconfig.app.json -d docs -s",
     "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
@@ -65,6 +61,7 @@
     "nebular-icons": "1.1.0",
     "ng2-ckeditor": "^1.2.9",
     "ng2-smart-table": "^1.6.0",
+    "ngx-cookie-service": "^13.1.2",
     "ngx-echarts": "^4.2.2",
     "ngx-star-rating": "^2.1.0",
     "ngx-toggle-switch": "^2.0.5",

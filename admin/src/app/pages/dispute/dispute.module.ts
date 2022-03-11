@@ -11,7 +11,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbIconModule,
     NbInputModule,
     DisputeRoutingModule,
-    Ng2SmartTableModule,
+    Ng2SmartTableModule
   ],
   declarations: [
     ...routedComponents,

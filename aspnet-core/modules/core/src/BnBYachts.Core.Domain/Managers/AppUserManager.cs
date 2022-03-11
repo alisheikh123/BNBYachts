@@ -229,5 +229,14 @@ namespace BnBYachts.Core.Managers
             }
             return false;
         }
+        public async Task<bool> checkAdminRoleName(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (await _userManager.IsInRoleAsync(user, "SUPERADMIN") || await _userManager.IsInRoleAsync(user, "ADMIN"))
+                return true;
+            else
+                return false;
+        }
+
     }
 }
