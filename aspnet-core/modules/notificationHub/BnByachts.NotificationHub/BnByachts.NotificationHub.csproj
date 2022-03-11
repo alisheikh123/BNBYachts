@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFramework>net5.0</TargetFramework>
@@ -10,14 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.json" />
     <None Remove="Templates\EmailTemplates\default.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="Templates\EmailTemplates\default.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

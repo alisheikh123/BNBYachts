@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading;
-using BnByachts.BackgroundWorker;
-using BnByachts.BackgroundWorker.Jobs;
 using BnBYachts.EventBusShared.Queue;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;

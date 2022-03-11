@@ -1,9 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using BnBYachts.Boat.MultiTenancy;
+using BnBYachts.EventBusShared;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Emailing;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 
@@ -12,7 +11,8 @@ namespace BnBYachts.Boat
     [DependsOn(
         typeof(BoatDomainSharedModule),
         typeof(AbpAuditLoggingDomainModule),
-        typeof(AbpAutoMapperModule)
+        typeof(AbpAutoMapperModule),
+        typeof(EventBusSharedModule)
     )]
     public class BoatDomainModule : AbpModule
     {

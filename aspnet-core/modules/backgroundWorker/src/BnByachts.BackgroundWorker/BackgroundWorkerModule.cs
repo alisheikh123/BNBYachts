@@ -17,7 +17,6 @@ namespace BnByachts.BackgroundWorker
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
         typeof(AbpAutofacModule)
-      //  typeof(AbpBackgroundJobsQuartzModule)
     )]
     public class BackgroundWorkerModule : AbpModule
     {
@@ -26,6 +25,7 @@ namespace BnByachts.BackgroundWorker
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AWSOptions>(context.Services.GetConfiguration().GetSection("AWSConfiguation"));
+
             context.Services.AddMassTransit(mt =>
             {
                 mt.AddConsumer<S3FileConsumer>().Endpoint(e =>

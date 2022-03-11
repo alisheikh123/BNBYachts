@@ -9,7 +9,7 @@
                                     alt=""></a>
                         </div>
                     </div>
-                    <div class="center-content">
+                    <div class="cstmcntn center-content">
                         <ng-container >
                             <a [routerLink]="['/app/chats']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.Inbox" [ngClass]="{'active':activeTab == HEADER_TABS.Inbox}">
                                 <span class="logo-wrapper">
@@ -34,9 +34,6 @@
                                 <div *ngFor="let role of userDetails?.userRoles">
                                     <li><a (click)="switchRole(roles.User)" *ngIf="role?.normalizedName==roles.User" class="dropdown-item">{{'SwitchUser' | localization}}</a></li>
                                 <li><a (click)="switchRole(roles.Host)" *ngIf="role?.normalizedName==roles.Host" class="dropdown-item">{{'SwitchHost' | localization}}</a></li>
-                            </div>
-                            <div *ngFor="let role of rolesList">
-                                <li><a (click)="tryHosting()" *ngIf="role==roles.Host"  class="dropdown-item" >{{'BecomeHost'| localization }}</a></li>
                             </div>
                             </ul>
                           </div>
