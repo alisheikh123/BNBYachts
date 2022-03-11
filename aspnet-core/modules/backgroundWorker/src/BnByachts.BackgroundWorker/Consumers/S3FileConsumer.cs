@@ -14,7 +14,8 @@ namespace BnByachts.BackgroundWorker.Consumers
         }
         public async Task Consume(ConsumeContext<IS3FileContract> context)
         {
-             await _is3FileService.UploadFile(context.Message.File, context.Message.SubFolder,
+             await _is3FileService.UploadFile(context.Message.File,context.Message.FileName,context.Message.ContentType,
+                 context.Message.SubFolder,
                 context.Message.ChildFolder);
         }
     }

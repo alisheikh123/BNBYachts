@@ -6,6 +6,6 @@ namespace BnByachts.BackgroundWorker.Services
 {
     public  interface IS3FileService:IDomainService
     {
-        Task UploadFile(IFormFile file, string subFolder = "", string childFolder = "");
+        Task UploadFile(byte[] file, string fileName ="", string contentType = "", string subFolder = "", string childFolder = "");
     }
 }

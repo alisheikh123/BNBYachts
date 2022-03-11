@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.IO;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
 using BnBYachts.Core.Dto;
@@ -17,10 +18,14 @@ namespace BnBYachts.Core.Services.HelpingService
         }
         public async Task<S3ResponseDTO> UploadFileToAWSAsync(IFormFile file, string subFolder = "", string childFolder = "")
         {
+            var ms = new MemoryStream(new byte[file.Length]);
+            await file.CopyToAsync(ms);
             await _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
             {
                 ChildFolder = childFolder,
-                File = file,
+                File = ms.ToArray(),
+                FileName = file.FileName,
+                ContentType = file.ContentType,
                 SubFolder = subFolder
             }).ConfigureAwait(false);
 

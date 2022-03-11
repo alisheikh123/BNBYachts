@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Amazon.S3;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -13,7 +14,7 @@ namespace BnByachts.BackgroundWorker.Services
         {
             _awsSettings = awsSettings.Value;
         }
-        public async Task UploadFile(IFormFile file, string subFolder = "", string childFolder = "")
+        public async Task UploadFile(byte[] file,string fileName="",string contentType="", string subFolder = "", string childFolder = "")
         {
             var s3Client = new AmazonS3Client(_awsSettings.AWSAccessKey, _awsSettings.AWSSecretKey, RegionEndpoint.USEast1);
             var bucketName = _awsSettings.AWSBucketName;
@@ -30,15 +31,15 @@ namespace BnByachts.BackgroundWorker.Services
                 }
 
             }
-            keyName = keyName + "/" + file.FileName;
-            var fs = file.OpenReadStream();
+            keyName = keyName + "/" + fileName;
+            var fs = new MemoryStream(file);
 
             var request = new Amazon.S3.Model.PutObjectRequest
             {
                 BucketName = bucketName,
                 Key = keyName,
                 InputStream = fs,
-                ContentType = file.ContentType,
+                ContentType = contentType,
                 CannedACL = S3CannedACL.PublicRead
             };
             await s3Client.PutObjectAsync(request);
