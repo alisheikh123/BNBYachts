@@ -94,12 +94,13 @@
                     </div>
                     <div class="right-content">
                         <!-- <a [routerLink]="['/my-bookings']" class="custom-btn white grey-btn regular">Host Bookings</a> -->
-                        <a (click)="earn()" class="custom-btn white grey-btn regular"
-                            *ngIf="userDetails?.roles?.length == 1">Earn With Us</a>
-                            
-                        <!-- <a (click)="switchRole()" class="custom-btn white grey-btn regular"
-                            *ngIf="userDetails?.roles?.length > 1">Switch to {{app.loggedInUserRole == USER_ROLE.host ?
-                            'User' :'Host'}}</a> -->
+                        <a *ngIf="showEarnWithUs" (click)="earn()" class="custom-btn white grey-btn regular"
+                     >Earn With Us</a>
+                     <a *ngIf="showServiceProvider" [routerLink]="['/service-provider']" (click)="earn()" class="custom-btn white grey-btn regular"
+                     >{{'BecomeServiceProvider'| localization }}</a>
+                     <a *ngIf="showServiceProvider && isHost" [routerLink]="['/service-provider']" class="custom-btn white grey-btn regular"
+                     >{{'BecomeServiceProvider'| localization }}</a>
+                     <a [routerLink]="['/try-hosting']" *ngIf="showHost"  class="custom-btn white grey-btn regular" >{{'BecomeHost'| localization }}</a>
                             <div *ngIf="userDetails?.userRoles?.length > 0" class="dropdown custom-dropdown borderless-dropdown">
                                 <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="logo-wrapper">
@@ -115,12 +116,6 @@
                                     <li><a  (click)="switchRole(roles.Captain)" *ngIf="role?.normalizedName==roles.Captain"  class="dropdown-item" >{{'SwitchCaptain' | localization}}</a></li>
                                     <li><a (click)="switchRole(roles.Management)" *ngIf="role?.normalizedName==roles.Management" class="dropdown-item">{{'SwitchManagement' | localization}}</a></li>
                                     <li><a (click)="switchRole(roles.Cleaning)" *ngIf="role?.normalizedName==roles.Cleaning" class="dropdown-item">{{'SwitchCleaning' | localization }}</a></li>
-                                </div>
-                                <div *ngFor="let role of rolesList">
-                                    <li><a (click)="tryHosting()" *ngIf="role==roles.Host"  class="dropdown-item" >{{'BecomeHost'| localization }}</a></li>
-                                    <li><a (click)="switchRole(roles.Captain)" *ngIf="role==roles.Captain"  class="dropdown-item" >{{'BecomeCaptain'| localization }}</a></li>
-                                    <li><a (click)="switchRole(roles.Cleaning)" *ngIf="role==roles.Cleaning"  class="dropdown-item" >{{'BecomeCleaning' | localization}}</a></li>
-                                    <li><a (click)="switchRole(roles.Management)" *ngIf="role==roles.Management"  class="dropdown-item" >{{'BecomeManagement' | localization }}</a></li>
                                 </div>
                                 </ul>
                               </div>

@@ -36,9 +36,9 @@
                                     <li><a (click)="switchRole(roles.User)" *ngIf="role?.normalizedName==roles.User" class="dropdown-item">{{'SwitchUser' | localization}}</a></li>
                                 <li><a (click)="switchRole(roles.Host)" *ngIf="role?.normalizedName==roles.Host" class="dropdown-item">{{'SwitchHost' | localization}}</a></li>
                             </div>
-                            <div *ngFor="let role of rolesList">
+                            <!-- <div *ngFor="let role of rolesList">
                                 <li><a (click)="tryHosting()" *ngIf="role==roles.Host"  class="dropdown-item" >{{'BecomeHost'| localization }}</a></li>
-                            </div>
+                            </div> -->
                             </ul>
                           </div>
                         <div class="dropdown custom-dropdown" ngbDropdown>
