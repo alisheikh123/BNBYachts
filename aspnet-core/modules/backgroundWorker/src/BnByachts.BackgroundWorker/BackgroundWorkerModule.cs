@@ -49,6 +49,8 @@ namespace BnByachts.BackgroundWorker
         {
             Configure<AWSOptions>(context.Services.GetConfiguration().GetSection("AWSConfiguation"));
 
+            
+
             context.Services.AddMassTransit(mt =>
             {
                 mt.AddConsumer<S3FileConsumer>().Endpoint(e =>
