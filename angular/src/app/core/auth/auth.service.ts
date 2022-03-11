@@ -39,7 +39,7 @@ export class AuthService {
     return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-id/"+id);
   }
   getUserInfoByUserName(userName: string) {
-    return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-user-name=" + userName);
+    return this.http.get(this.apiCoreURl + "/api/app/user/user-details-by-user-name?username=" + userName);
   }
 
   login() {
