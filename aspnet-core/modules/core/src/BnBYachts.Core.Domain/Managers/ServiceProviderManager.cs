@@ -52,7 +52,7 @@ namespace BnBYachts.Core.Managers
         {
             var response = new EntityResponseListModel<ServiceProviderTransferable>();
             var res = await _servicerepository.GetListAsync(x => x.ServiceProviderType == request.ServiceProviderType).ConfigureAwait(false);
-            res = res.WhereIf(request.AvaliableDate != null, x => x.FromDate >= request.AvaliableDate).ToList();
+            res = res.WhereIf(request.AvaliableDate != null, x => x.FromDate.Value.Date >= request.AvaliableDate.Value.Date).ToList();
             res = res.WhereIf(!string.IsNullOrEmpty(request.Location), x => x.Location.Equals(request.Location)).ToList();
             foreach (var timeslot in res)          
                 await _servicerepository.EnsureCollectionLoadedAsync(timeslot, x => x.TimeSlots).ConfigureAwait(false);           
