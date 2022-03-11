@@ -24,21 +24,14 @@ namespace BnByachts.BackgroundWorker
                 options.UseAutofac();
             });
             application.Initialize();
-          
-                using (var serviceScope = application.ServiceProvider.CreateScope())
-                {
-                    serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
-                    if (false)
-                    {
-                        serviceScope.ServiceProvider.GetService<MyLogWorker>().StartAsync().GetAwaiter();
-                        serviceScope.ServiceProvider.GetService<BookingWorker>().StartAsync().GetAwaiter();
-                    }
-                }
-            
-
+            using (var serviceScope = application.ServiceProvider.CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
+            }
             Console.WriteLine("Background Worker is Running");
             Console.WriteLine("Ctrl + C to Quit");
             QuitEvent.WaitOne();
+            Console.WriteLine("end");
         }
     }
 }
