@@ -1,0 +1,6 @@
+appsettings.json
+appsettings.Development.json
+appsettings.secrets.json
+Logs
+bin
+script/create_quartz.sql
