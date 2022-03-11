@@ -31,6 +31,7 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<UserDetailsTransferable> GetUserDetailsByUserName(string username)
         {
             return await _appUserManager.GetUserDetailsByUserName(username);
@@ -55,6 +56,7 @@ namespace BnBYachts.Core.Services
             return await _appUserManager.RegisterUser(userInput);
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<bool> ConfirmEmail(string username, string token)
         {
             bool isConfirmed = await _appUserManager.ConfirmEmail(username, token);
