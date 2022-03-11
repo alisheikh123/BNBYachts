@@ -4,10 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/main-home/home.component';
 import { HostDashboardComponent } from './components/host-dashboard/host-dashboard.component';
 import { CharterQuoteRequestComponent } from './components/QuoteRequest/charter-quote-request/charter-quote-request.component';
+import { SwitchRoleComponent } from './components/switch-role/switch-role.component';
 
 const routes: Routes = [
   {
     path: "", component: HomeComponent
+  },
+  {
+    path: "switchapp", component: SwitchRoleComponent
+  },
+  {
+    path: "switchapp/:switchtype", component: SwitchRoleComponent
   },
   {
     path: "host-dashboard", component: HostDashboardComponent
