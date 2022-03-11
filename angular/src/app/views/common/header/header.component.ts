@@ -41,6 +41,10 @@ export class HeaderComponent implements OnInit {
   assetUrlS3 = environment.S3BUCKET_URL + '/profilePicture/';
   currentRole:string='';
   keys=Keys;
+  showEarnWithUs:boolean;
+  showServiceProvider:boolean;
+  showHost:boolean;
+isHost:boolean;
   @ViewChild('earnwithus', { static: true }) templateRef: any;
   selectedOption = {
     byHost : false,
@@ -74,7 +78,6 @@ export class HeaderComponent implements OnInit {
   }
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
-
         this.userDetails = res;
         this.rolesNotAssigned();
         this.currentRole = this.userDetails?.userRoles?.find((role: any) => role?.normalizedName == this.roles.User)?.normalizedName;
@@ -139,20 +142,14 @@ export class HeaderComponent implements OnInit {
     let user = this.oidcSecurityService.getUserData();
   }
 rolesNotAssigned(){
-    for( let role in this.roles){
       if(this.userDetails?.userRoles){
-        let check=  this.userDetails.userRoles.filter((item:any)=> item.normalizedName== this.roles.Captain || item.normalizedName== this.roles.Management || item.normalizedName == this.roles.Cleaning );
-   let roleValue= Roles[role as keyof typeof Roles];
-    let roleData=  this.userDetails.userRoles.filter((item:any)=> item.normalizedName== roleValue);
-    if(roleData.length==0){
-      if(!(check.length > 0) && (roleValue== this.roles.Captain || roleValue== this.roles.Management || roleValue== this.roles.Cleaning))
-      {
-      this.rolesList.push(roleValue);
+        let checkServiceProvider=  this.userDetails.userRoles.filter((item:any)=> item.normalizedName== this.roles.Captain || item.normalizedName== this.roles.Management || item.normalizedName == this.roles.Cleaning );
+        let checkHost=  this.userDetails.userRoles.filter((item:any)=> item.normalizedName== this.roles.Host );
+        if(checkHost.length >0 ) this.isHost=true;
+        if(checkServiceProvider.length <= 0  && checkHost.length <= 0) this.showEarnWithUs=true;
+        else if ( checkServiceProvider.length > 0  && checkHost.length <= 0 ) this.showHost=true;
+        else if(checkServiceProvider.length <=0  && checkHost.length > 0) this.showServiceProvider=true;
       }
-    }
-      }
-
-    };
 
 }
 switchRole(role:Roles)
