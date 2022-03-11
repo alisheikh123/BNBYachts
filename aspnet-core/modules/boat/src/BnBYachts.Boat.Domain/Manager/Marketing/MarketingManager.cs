@@ -34,6 +34,7 @@ namespace BnBYachts.Boat.Manager.Marketing
         {
             var response = new EntityResponseModel();
             var data = _objectMapper.Map<FeaturedCityRequestable, FeaturedCityEntity>(featured);
+
             _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
             {
                 ChildFolder = "",

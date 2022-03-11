@@ -20,14 +20,15 @@ namespace BnBYachts.Core.Services.HelpingService
         {
             var ms = new MemoryStream(new byte[file.Length]);
             await file.CopyToAsync(ms);
-            await _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+
+             _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
             {
                 ChildFolder = childFolder,
                 File = ms.ToArray(),
                 FileName = file.FileName,
                 ContentType = file.ContentType,
                 SubFolder = subFolder
-            }).ConfigureAwait(false);
+            });
 
             return new S3ResponseDTO
                 {
