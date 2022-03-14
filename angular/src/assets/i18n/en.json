@@ -380,5 +380,8 @@
  "profileDescription":"Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
  "BecomeServiceProvider":"Become a ServiceProvider",
 "EarnWithUs" :"Earn With Us",
-"Join": "Joined"
+"Join": "Joined",
+"ReservationCancellation":"Reservation Cancellation",
+"ReservationDetails":"Reservation Details",
+"BookingCancelledConfirm":"Booking Cancelled Confirm"
 }

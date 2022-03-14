@@ -1,3 +1,4 @@
+import { utils } from 'src/app/shared/utility/utils';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -12,11 +13,12 @@ import { environment } from 'src/environments/environment';
 import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-logged-in.component';
 
 @Component({
-  selector: 'app-charter-details',
-  templateUrl: './charter-details.component.html',
-  styleUrls: ['./charter-details.component.scss']
+  selector: 'app-charter-modification',
+  templateUrl: './charter-modification.component.html',
+  styleUrls: ['./charter-modification.component.scss']
 })
-export class CharterDetailsComponent implements OnInit {
+export class CharterModificationComponent implements OnInit {
+
   constructor(config: NgbRatingConfig, private toastr: ToastrService, private yachtSearchService: YachtSearchService, private router: Router, private bookingService: BookingService, private yachtParamService: YachtSearchDataService, private activatedRoute: ActivatedRoute, private modal: NgbModal, private authService:AuthService) {
     config.max = 5;
     config.readonly = true;
@@ -45,6 +47,7 @@ export class CharterDetailsComponent implements OnInit {
   charterCapcityValidation:any;
   @ViewChild('popOver') public popover: NgbPopover;
   approvalPolicyString: any = "Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.charterId = Number(res['id']);
@@ -52,13 +55,13 @@ export class CharterDetailsComponent implements OnInit {
     this.getCharterDetailsById();
   }
 
-
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
-       this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
-       this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
-       this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
+      this.charterDetails.totalDays = utils.getDaysBetweenTwoDates(this.charterDetails?.departureFromDate,this.charterDetails?.departureToDate)
+       this.charterDetails.DepartureTime = utils.getTime(this.charterDetails?.departureFromDate);
+       this.charterDetails.ArrivalTime = utils.getTime(this.charterDetails?.departureToDate);
+       this.charterDetails.ReturnTime =utils.getTime(this.charterDetails?.returnDate);
       this.charterSchedule = res.charterSchedule;
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
@@ -69,6 +72,7 @@ export class CharterDetailsComponent implements OnInit {
       this.boatHost = res;
     })
   }
+
   featureFilter(isFavroute: boolean, isHealthSafetyFeature: boolean) {
     if (isHealthSafetyFeature == false) {
       return this.charterDetails?.boat.boatFeatures.filter((res: any) => res.offeredFeatures.isGuestFavourite == isFavroute && res.offeredFeatures.isSafetyFeature == false);
@@ -78,9 +82,11 @@ export class CharterDetailsComponent implements OnInit {
     }
 
   }
+
   ruleFilter(isHealthSafetyRule: boolean) {
     return this.charterDetails?.boat.boatRules.filter((res: any) => res.offeredFeatures.isGuestFavourite == isHealthSafetyRule);
   }
+
   reserveCharter() {
     this.isSubmitted = true;
     if(this.authService.authenticated) {
@@ -129,16 +135,18 @@ export class CharterDetailsComponent implements OnInit {
     this.charterFilterDetails.childrens = this.popOverFilterData.childrens;
     this.charterCapcityValidation = ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity)||(this.charterFilterDetails.adults + this.charterFilterDetails.childrens<1))?"Entered guest capacity is not available":this.popover.close();
   }
+
   showAllFeatures() {
     this.modal.open(this.templateRef, { centered: true, windowClass: 'custom-modal custom-small-modal' });
   }
+
   onChangeDate(isIncrease: boolean) {
     this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
     this.yachtSearchService.charterDetailsById(this.charterSchedule[this.dateScheduleIndex]?.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
-      this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
-      this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
-      this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
+      this.charterDetails.DepartureTime = utils.getTime(this.charterDetails?.departureFromDate)
+      this.charterDetails.ArrivalTime = utils.getTime(this.charterDetails?.departureToDate)
+      this.charterDetails.ReturnTime = utils.getTime(this.charterDetails?.returnDate)
     })
   }
 }
