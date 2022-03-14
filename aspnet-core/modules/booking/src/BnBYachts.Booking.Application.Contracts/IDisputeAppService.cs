@@ -13,5 +13,6 @@ namespace BnBYachts.Booking
         //Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination);
         Task<List<DisputeTransferable>> GetDisputeList();
         Task<DisputeTransferable> GetDisputebyId(int id);
+        Task<bool> ChangeDisputeStatus(ChangeStatusRequestable status);
     }
 }
