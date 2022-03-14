@@ -95,9 +95,6 @@
                     <div class="right-content">
                         <a *ngIf="showEarnWithUs" (click)="earn()" class="custom-btn white grey-btn regular"
                      >Earn With Us</a>
-                     <a *ngIf="showServiceProvider && isHost" [routerLink]="['/service-provider']" class="custom-btn white grey-btn regular"
-                     >{{'BecomeServiceProvider'| localization }}</a>
-                     <a [routerLink]="['/try-hosting']" *ngIf="showHost"  class="custom-btn white grey-btn regular" >{{'BecomeHost'| localization }}</a>
                             <div *ngIf="userDetails?.userRoles?.length > 1" class="dropdown custom-dropdown borderless-dropdown">
                                 <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="logo-wrapper">
@@ -114,6 +111,12 @@
                                     <li><a (click)="switchRole(roles.Management)" *ngIf="role?.normalizedName==roles.Management" class="dropdown-item">{{'SwitchManagement' | localization}}</a></li>
                                     <li><a (click)="switchRole(roles.Cleaning)" *ngIf="role?.normalizedName==roles.Cleaning" class="dropdown-item">{{'SwitchCleaning' | localization }}</a></li>
                                 </div>
+                                <li>  <a *ngIf="showServiceProvider && isHost" [routerLink]="['/service-provider']" class="dropdown-item"
+                                    >{{'BecomeServiceProvider'| localization }}</a>
+                                  </li>
+                                  <li>
+                                    <a [routerLink]="['/try-hosting']" *ngIf="showHost"  class="dropdown-item" >{{'BecomeHost'| localization }}</a>
+                                  </li>
                                 </ul>
                               </div>
                         <div class="dropdown custom-dropdown" ngbDropdown>

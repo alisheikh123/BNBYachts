@@ -24,12 +24,16 @@ roles=Roles;
            case 1:
             localStorage.setItem('userRole',this.userRoles.host );
             localStorage.setItem('userRoleName', this.roles.Host);
-            this.router.navigate(['/host-dashboard']);
+            this.router.navigate(['/host-dashboard']) .then(() => {
+              window.location.reload();
+            });
              break;
          case 2:
           localStorage.setItem('userRole',this.userRoles.user );
           localStorage.setItem('userRoleName', this.roles.User);
-          this.router.navigate(['']);
+          this.router.navigate(['']).then(() => {
+            window.location.reload();
+          });;
           break;
            default:
              break;

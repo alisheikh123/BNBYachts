@@ -180,7 +180,7 @@ switchRole(role:Roles)
           window.location.href=environment.MANAGEMENT_APP_URL;
           break;
           case this.roles.Cleaning:
-            this.toastr.success('Account switched to captain.', 'Success'); 
+            this.toastr.success('Account switched to cleaning.', 'Success'); 
             window.location.href=environment.CLEANING_APP_URL;
             break;
     default:

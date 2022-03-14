@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   serviceProviderType= ServiceProviderType;
   checkServiceProvider={
     serviceProviderType:this.serviceProviderType.cleaning
-  }
+  };
   constructor(private _serviceProviderService: ServiceProviderService,private authService: AuthService ,private oidcSecurityService : OidcSecurityService,private router : Router ) { }
 
   ngOnInit(): void {

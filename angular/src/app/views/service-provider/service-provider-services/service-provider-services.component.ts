@@ -88,7 +88,7 @@ if (res )
   this.serviceProviderSearchParam.location=res.eventDetails.location;
   this.serviceProviderSearchParam.longitude=res.eventDetails.locationLong;
   this.serviceProviderSearchParam.latitude=res.eventDetails.locationLat;
- this.serviceProviderSearchParam.avaliableDate= new Date(res.data.startDateTime);
+ this.serviceProviderSearchParam.avaliableDate= new Date(res.eventDetails.startDateTime);
  this.getServiceProviderDetail();
 } 
 });
@@ -100,7 +100,7 @@ if (res )
   this.serviceProviderSearchParam.location=res.charterDetails.departingFrom ;
   this.serviceProviderSearchParam.longitude=res.charterDetails.departingLongitude;
   this.serviceProviderSearchParam.latitude=res.charterDetails.departingLatitude;
- this.serviceProviderSearchParam.avaliableDate= new Date(res.data.departureFromDate);
+ this.serviceProviderSearchParam.avaliableDate= new Date(res.charterDetails.departureFromDate);
  this.getServiceProviderDetail();
 } 
 });
