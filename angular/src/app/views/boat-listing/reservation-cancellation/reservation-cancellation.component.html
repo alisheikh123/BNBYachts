@@ -80,12 +80,12 @@
                             <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.location}}</p>
                         </div>
                         <div class="custom-flex-start">
-                            <p class="medium">Check In Time:</p>
+                            <p class="medium">{{'CheckInTime' | localization}}</p>
                             <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.checkinTime | date:'h:mm a' }}</p>
                         </div>
                         <ng-container *ngIf="bookingCancelDetail?.serviceType != bookedServicesTypes.event && bookingCancelDetail?.isContract">
                             <div class="custom-flex-start">
-                                <p class="medium">Check Out Time:</p>
+                                <p class="medium">{{'CheckOutTime' | localization}}</p>
                                 <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.checkoutTime | date:'h:mm a'}}</p>
                             </div>
                             </ng-container>
