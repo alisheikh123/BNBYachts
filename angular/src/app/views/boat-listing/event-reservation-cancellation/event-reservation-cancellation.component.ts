@@ -77,7 +77,7 @@ constructor(
         let eventStartDateTime = moment(this.eventBookingDetail?.eventDate).format('YYYY-MM-DD')+' '+(moment(this.eventDetail?.startDateTime).format('hh:mm:a'));
         let remaingHours = moment.duration(moment(eventStartDateTime).diff(moment().format('YYYY-MM-DD hh:mm:a'))).asHours();
         let reservationFeeCalculation = 0;
-        if (this.eventBookingDetail.bookingStatus == 0 || this.eventBookingDetail.bookingStatus == 1) {
+        if (this.eventBookingDetail.bookingStatus == this.filters.BOOKING_STATUS.Approved) {
           if (remaingHours > 72) {
               this.eventDetail.deductedAmount = 0;
               reservationFeeCalculation =
@@ -100,6 +100,13 @@ constructor(
 
           }
 
+      }
+      if(this.eventBookingDetail.bookingStatus == this.filters.BOOKING_STATUS.Pending)
+      {
+        this.eventDetail.deductedAmount = 0;
+        reservationFeeCalculation =
+        this.eventDetail?.amountPerPerson * this.eventBookingDetail?.noOfGuests + 20 + this.eventDetail?.boatDetail?.taxFee;
+        this.eventDetail.refundableAmount = this.eventDetail.deductedAmount + reservationFeeCalculation;
       }
         if (this.isHost) {
           this.eventDetail.deductedAmount = 0;

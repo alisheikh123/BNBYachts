@@ -51,4 +51,14 @@ export class utils {
       {
           return moment(date).format("MM/DD/YYYY");
       }
+      static convertDateToYearMonthDay(date:Date)
+      {
+          return moment(date).format("YYYY-MM-DD");
+      }
+      static getDaysBetweenTwoDates(date1:Date,date2:Date)
+      {
+        let firstDate = moment(date1).format('YYYY-MM-DD hh:mm:ss a');
+        let secondDate = moment(date2).format('YYYY-MM-DD hh:mm:ss a');
+        return Math.round(moment.duration(moment(secondDate).diff(firstDate)).asDays())
+      }
 }

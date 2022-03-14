@@ -114,7 +114,7 @@
             </div>
             <div class="price-detail py-4" *ngIf="charterBooking?.isFullBoatCharges==false">
                 <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
-                
+
                 <div class="custom-flex-between">
                   <p class="medium">{{charterBooking?.charterFee}} x {{ charterBooking?.totalDays}} Night</p>
                   <p class="medium text-right py-1">{{charterBooking?.charterFee * charterBooking?.totalDays }}.00 $</p>
@@ -160,8 +160,8 @@
                 <div class="center-content">
                   <a [routerLink]="['/boat-listing/charter-reservation-cancellation',charterReservation.charterId,charterReservation.bookingId]"
                     class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
-                  <a *ngIf="!isUserHost && !charterBooking?.isFullBoatCharges==true" [routerLink]="['/boat-listing/charter-modification-reservation',charterBooking?.id]"
-                    class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a>
+                  <!-- <a *ngIf="!isUserHost && !charterBooking?.isFullBoatCharges==true" [routerLink]="['/boat-listing/charter-modification-reservation',charterBooking?.id]"
+                    class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a> -->
                     <a (click)="addReview()"
                     *ngIf='!charterReservation?.isPosted && isBookingPassed() && charterBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
                     class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>

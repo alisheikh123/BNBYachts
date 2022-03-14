@@ -1,3 +1,4 @@
+import { utils } from 'src/app/shared/utility/utils';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbPopover, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -57,6 +58,7 @@ export class CharterModificationComponent implements OnInit {
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
+      this.charterDetails.totalDays = utils.getDaysBetweenTwoDates(this.charterDetails?.departureFromDate,this.charterDetails?.departureToDate)
        this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
        this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
        this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")

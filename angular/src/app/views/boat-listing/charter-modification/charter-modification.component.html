@@ -264,11 +264,9 @@
                                                     <div class="total-amount-wrap custom-padding-top" *ngIf="charterDetails?.isFullBoatCharges==false">
                                                         <div class="total-amount-wrap-inner">
                                                             <p>$ {{charterDetails?.charterFee}} X
-                                                                {{charterFilterDetails.adults +
-                                                                charterFilterDetails.childrens}} </p>
+                                                                {{this.charterDetails.totalDays}} Nights</p>
                                                             <p>${{charterDetails?.charterFee *
-                                                                (charterFilterDetails.adults +
-                                                                charterFilterDetails.childrens)}}.00</p>
+                                                                (this.charterDetails.totalDays)}}.00</p>
 
                                                         </div>
                                                         <div class="total-amount-wrap-inner">
@@ -284,8 +282,7 @@
                                                         <div class="total-amount-wrap-inner bottom">
                                                             <p class="medium">{{'Total(USD)'|localization}}</p>
                                                             <p class="medium">$ {{charterDetails?.charterFee *
-                                                                (charterFilterDetails.adults +
-                                                                charterFilterDetails.childrens) +
+                                                                (this.charterDetails.totalDays) +
                                                                 charterDetails?.boat?.taxFee+ 20}}.00</p>
 
                                                         </div>
