@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
+import { ContractsService } from 'src/app/core/contracts/contracts.service';
 
 @Component({
   selector: 'app-reservation-cancellation',
@@ -36,7 +37,12 @@ export class ReservationCancellationComponent implements OnInit {
   isPosted: boolean;
   isChanged: boolean;
   BOOKING_STATUS = BookingStatus
-
+  contractId: string;
+  bookedServicesTypes = {
+    boatel:1,
+    charter:2,
+    event:3
+  }
   constructor(
     private service: BookingService,
     private fb: FormBuilder,
@@ -44,7 +50,8 @@ export class ReservationCancellationComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     private route: Router,
     private bookingListingService:BookingListingService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private contractService: ContractsService
   ) {}
   @ViewChild('template') templateRef: TemplateRef<any>;
   @ViewChild('bookingstatus') bookingtemplate: TemplateRef<any>;
@@ -53,6 +60,7 @@ export class ReservationCancellationComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((res) => {
       this.bkCancel = res['id'].toString();
+      this.contractId = res['contractId'];
     });
     var userRole = localStorage.getItem('userRole');
     userRole == 'a8e857de-7ca6-f663-feb0-3a003661104b'
@@ -68,8 +76,6 @@ export class ReservationCancellationComponent implements OnInit {
           this.bookingCancelDetail.boatDetail = boatdetail;
           let checkInTime = utils.formatTime(boatdetail.checkinTime);
           let checkoutTime = utils.formatTime(boatdetail.checkoutTime);
-
-          debugger;
           this.currentCombindDateTime = new Date(
             currentDate + ' ' + currentTime
           );
@@ -88,7 +94,6 @@ export class ReservationCancellationComponent implements OnInit {
           let remainingDays = utils.getDaysBetweenTwoDates(this.currentCombindDateTime,this.checkinCombindDateTime);
           this.bookingCancelDetail.TotalDays = utils.getDaysBetweenTwoDates(this.checkinCombindDateTime,this.checkoutCombindDateTime);
           this.bookingCancelDetail.remaingDays = remainingDays;
-debugger;
           if (this.bookingCancelDetail.bookingStatus == this.BOOKING_STATUS.Pending) {
             // Refund 100%
             this.bookingCancelDetail.deductedAmount = 0;

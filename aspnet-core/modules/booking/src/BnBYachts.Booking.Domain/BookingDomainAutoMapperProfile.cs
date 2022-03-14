@@ -68,7 +68,8 @@ namespace BnBYachts.Booking
                 .ForMember(res => res.DisputeReason, opt => opt.MapFrom(res => res.ReasonId));
             CreateMap<ContractsRequestable, ContractEntity>();
             CreateMap<ContractAttachmentRequestable, ContractTermsEntity>();
-            CreateMap<ContractEntity, ContractsTransferable>();
+            CreateMap<ContractEntity, ContractsTransferable>()
+                .ForMember(x => x.IsContract, opt => opt.MapFrom(source => true));
             CreateMap<ContractTermsEntity, ContractTermsTransferable>();
             CreateMap<ContractEntity, CharterBookingTransferableDto>()
                  .ForMember(x => x.ContractId, opt => opt.MapFrom(source => (source.Id)))

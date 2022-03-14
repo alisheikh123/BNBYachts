@@ -4,6 +4,7 @@ import { RoutesGuard } from './routes.guard';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { SetPasswordComponent } from './pages/auth/set-password/set-password.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { UnauthorizePageComponent } from './pages/miscellaneous/unauthorize-page/unauthorize-page.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,10 @@ export const routes: Routes = [
         component: SetPasswordComponent
       }
     ]
+  },
+  {
+    path: 'unauthorize',
+    component : UnauthorizePageComponent
   },
   {
     path: 'pages',

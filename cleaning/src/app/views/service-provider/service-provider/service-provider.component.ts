@@ -11,10 +11,10 @@ import { SignupModalComponent } from '../../auth/components/signup-modal/signup-
   styleUrls: ['./service-provider.component.scss']
 })
 export class ServiceProviderComponent implements OnInit {
-isAlreadyCaptain :false;
+isAlreadyCleaning :false;
 serviceProviderType= ServiceProviderType;
 checkServiceProvider={
-  serviceProviderType:this.serviceProviderType.captain
+  serviceProviderType:this.serviceProviderType.cleaning
 }
   constructor(private modal: NgbModal,
     private router: Router,
@@ -29,7 +29,7 @@ checkServiceProvider={
     this._serviceProviderService.isServiceProviderExist(this.checkServiceProvider).subscribe((res:any)=>{
 if(res)
 { 
-  this.isAlreadyCaptain=res;
+  this.isAlreadyCleaning=res;
 }
     });
     

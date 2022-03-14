@@ -1,5 +1,5 @@
 <!-- <div class="dropdown custom-dropdown dropdown-rounded pb-2"> -->
-    <!-- <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+<!-- <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
         aria-expanded="false">
         <span style="float: left;">
             {{selectedServiceType == 1 ? 'Boatels':selectedServiceType == 2? 'Charters':'Events'}}
@@ -18,7 +18,10 @@
     </ul> -->
 <!-- </div> -->
 <div class="filter-wrap mb-3 custom-flex-between">
-    <app-booking-filter (bookingType)="filterServiceType($event)" (reservationStatus)="selectedReservationStatus($event)" (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)"></app-booking-filter>
+    <app-booking-filter (bookingType)="filterServiceType($event)"
+        (reservationStatus)="selectedReservationStatus($event)"
+        (reservationTimeStatus)="selectedReservationTime($event)" (DurationFilter)="selectedDuration($event)">
+    </app-booking-filter>
 </div>
 <!-- <div class="custom-card req-user-card custom-margin" *ngFor="let item of bookedServices; let i = index">
 
@@ -77,9 +80,10 @@
         <div class="image-with-text custom-flex-between align-items-start">
             <div class="image-with-text-inner">
                 <img src="../../../../assets/images/user-img.png" alt="" />
-                <div class="user-details info"  (click)="goToDetail(item)">
+                <div class="user-details info" (click)="goToDetail(item)">
                     <p class="medium">{{ item.userName }}</p>
-                    <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">{{item?.event?.title}}</p>
+                    <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">
+                        {{item?.event?.title}}</p>
                     <p class="small-text grey">{{ item.boatDetail?.name }}</p>
                     <ngb-rating [rate]="0"></ngb-rating>
                     <p class="small-text grey">
@@ -100,116 +104,185 @@
                     {{ item.checkinDate | date: "dd MMM/YYYY" }} -
                     {{ item.checkoutDate | date: "dd MMM/YYYY" }}
                 </p>
-                <div class="custom-flex mt-4">
-                    <a [routerLink]="[
-                '/host/host-reservation-cancellation',
-                item.id
-              ]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
-                </div>
+                <ng-container
+                    *ngIf="checkIfServiceDatePassed(bookedServicesTypes.boatel,item.checkinDate,item.checkinTime); else detailsViewBtnTemplate">
+                    <div class="custom-flex mt-4">
+                        <a [routerLink]="['/boat-listing/reservation-detail',item.id]" class="custom-btn blue">
+                            View Reservation</a>&nbsp;&nbsp;
+                    </div>
+                </ng-container>
+                <ng-template #detailsViewBtnTemplate>
+                    <div class="custom-flex mt-4">
+                        <a [routerLink]="['/host/host-reservation-cancellation',item.id]" class="custom-btn blue">
+                            Modify Reservation</a>&nbsp;&nbsp;
+                    </div>
+
+                </ng-template>
             </div>
         </div>
     </div>
 
     <div *ngIf="bookedServices?.length == 0">
         <app-not-found-component></app-not-found-component>
-      </div>
+    </div>
 
-      <div class="col-12 pt-2" *ngIf="bookedServices?.length > 0">
-        <app-pagination [totalRecords]="listingFilter.totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
-            (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+    <div class="col-12 pt-2" *ngIf="bookedServices?.length > 0">
+        <app-pagination [totalRecords]="listingFilter.totalRecords" [paginationParam]="queryParams"
+            (pageChange)="onPageChange($event)" (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
     </div>
-    </div>
-    <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.charter">
-        <div class="custom-card req-user-card custom-margin" *ngFor="let item of charterServices; let i = index">
-            <div class="image-with-text custom-flex-between align-items-start">
-                <div class="image-with-text-inner">
-                    <img src="../../../../assets/images/user-img.png" alt="" />
-                    <div class="user-details info"  (click)="goToDetail(item)">
-                        <p class="medium">{{item.userName}}</p>
-                        <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">{{item?.event?.title}}</p>
-                        <p class="small-text grey">{{ item.boatDetail?.name }}</p>
-                        <ngb-rating [rate]="0"></ngb-rating>
-                        <p class="small-text grey">
-                            Location : {{ item.boatDetail?.location }}
-                        </p>
-                        <p class="small-text grey">
-                            Guest: {{ item.noOfAdults + item.noOfChildrens }}
-                        </p>
-                    </div>
+</div>
+<div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.charter">
+    <div class="custom-card req-user-card custom-margin" *ngFor="let item of charterServices; let i = index">
+        <div class="image-with-text custom-flex-between align-items-start">
+            <div class="image-with-text-inner">
+                <img src="../../../../assets/images/user-img.png" alt="" />
+                <div class="user-details info" (click)="goToDetail(item)">
+                    <p class="medium">{{item.userName}}</p>
+                    <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">
+                        {{item?.event?.title}}</p>
+                    <p class="small-text grey">{{ item.boatDetail?.name }}</p>
+                    <ngb-rating [rate]="0"></ngb-rating>
+                    <p class="small-text grey">
+                        Location : {{ item.boatDetail?.location }}
+                    </p>
+                    <p class="small-text grey">
+                        Guest: {{ item.noOfAdults + item.noOfChildrens }}
+                    </p>
                 </div>
-                <div class="
+            </div>
+            <div class="
                   right-content
                   custom-flex
                   flex-column
                   align-items-end
                 ">
+                <ng-container *ngIf="item.charterDetail?.departureFromDate != null; else contractsCharterViewDatesTemplate">
                     <p class="small-text grey">
                         {{ item?.charterDetail?.departureFromDate | date: "dd MMM/YYYY" }} -
-                        {{ item?.charterDetail?.departureToDate |  date: "dd MMM/YYYY" }}
+                        {{ item?.charterDetail?.departureToDate | date: "dd MMM/YYYY" }}
                     </p>
+                </ng-container>
+                <ng-template #contractsCharterViewDatesTemplate>
+                    <p class="small-text grey">
+                        {{ item?.charterDetail?.departureDate | date: "dd MMM/YYYY" }} -
+                        {{ item?.charterDetail?.arrivalDate | date: "dd MMM/YYYY" }}
+                    </p>
+                </ng-template>
+
+                <ng-container
+                    *ngIf="checkIfServiceDatePassed(bookedServicesTypes.charter,(item.charterDetail?.departureFromDate == null ? item.charterDetail?.departureDate : item.charterDetail?.departureFromDate ))  else charterDetailsViewBtnTemplate">
+                    <div class="custom-flex mt-4">
+                        <ng-container *ngIf="item.charterDetail?.departureFromDate != null; else contractViewBtn">
+                            <a [routerLink]="[
+                            '/boat-listing/charter-reservation-detail',
+                            item.charterId,item.id
+                          ]" class="custom-btn blue">View Reservation</a>&nbsp;&nbsp;
+
+                        </ng-container>
+                        <ng-template #contractViewBtn>
+                            <a [routerLink]="[
+                            '/contracts/contract',
+                            item.charterDetail.id
+                          ]" class="custom-btn blue">View Reservation</a>&nbsp;&nbsp;
+                        </ng-template>
+                    </div>
+                </ng-container>
+                <ng-template #charterDetailsViewBtnTemplate>
                     <div class="custom-flex mt-4">
                         <a [routerLink]="[
-                    '/boat-listing/reservation-cancellation',
-                    item.id
-                  ]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
+                        '/boat-listing/reservation-cancellation',
+                        item.id,item.contractId
+                      ]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
                     </div>
-                </div>
+                </ng-template>
             </div>
         </div>
+    </div>
 
-        <div *ngIf="charterServices?.length == 0">
-            <app-not-found-component></app-not-found-component>
-          </div>
+    <div *ngIf="charterServices?.length == 0">
+        <app-not-found-component></app-not-found-component>
+    </div>
 
-          <div class="col-12 pt-2" *ngIf="charterServices?.length > 0">
-            <app-pagination [totalRecords]="listingFilter.totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
-                (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
-        </div>
-        </div>
-        <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.event">
-            <div class="custom-card req-user-card custom-margin" *ngFor="let item of eventServices; let i = index">
-                <div class="image-with-text custom-flex-between align-items-start">
-                    <div class="image-with-text-inner">
-                        <img src="../../../../assets/images/user-img.png" alt="" />
-                        <div class="user-details info"  (click)="goToDetail(item)">
-                            <p class="medium">{{ item.userName }}</p>
-                            <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">{{item?.event?.title}}</p>
-                            <p class="small-text grey">{{ item.boatDetail?.name }}</p>
-                            <ngb-rating [rate]="0"></ngb-rating>
-                            <p class="small-text grey">
-                                Location : {{ item.boatDetail?.location }}
-                            </p>
-                            <p class="small-text grey">
-                                Guest: {{ item.noOfAdults + item.noOfChildrens }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="
+    <div class="col-12 pt-2" *ngIf="charterServices?.length > 0">
+        <app-pagination [totalRecords]="listingFilter.totalRecords" [paginationParam]="queryParams"
+            (pageChange)="onPageChange($event)" (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+    </div>
+</div>
+<div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.event">
+    <div class="custom-card req-user-card custom-margin" *ngFor="let item of eventServices; let i = index">
+        <div class="image-with-text custom-flex-between align-items-start">
+            <div class="image-with-text-inner">
+                <img src="../../../../assets/images/user-img.png" alt="" />
+                <div class="user-details info" (click)="goToDetail(item)">
+                    <p class="medium">{{ item.userName }}</p>
+                    <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">
+                        {{item?.event?.title}}</p>
+                    <p class="small-text grey">{{ item.boatDetail?.name }}</p>
+                    <ngb-rating [rate]="0"></ngb-rating>
+                    <p class="small-text grey">
+                        Location : {{ item.boatDetail?.location }}
+                    </p>
+                    <p class="small-text grey">
+                        Guest: {{ item.noOfAdults + item.noOfChildrens }}
+                    </p>
+                </div>
+            </div>
+            <div class="
                       right-content
                       custom-flex
                       flex-column
                       align-items-end
                     ">
-                        <p class="small-text grey">
-                            {{ item?.eventDetail?.startDateTime | date: "dd MMM/YYYY" }} -
-                            {{ item?.eventDetail?.endDateTime | date: "dd MMM/YYYY" }}
-                        </p>
-                        <div class="custom-flex mt-4">
+
+                <ng-container *ngIf="item?.eventDetail?.startDateTime != null; else contractsEventViewDates">
+                    <p class="small-text grey">
+                        {{ item?.eventDetail?.startDateTime | date: "dd MMM/YYYY" }} -
+                        {{ item?.eventDetail?.endDateTime | date: "dd MMM/YYYY" }}
+                    </p>
+                </ng-container>
+                <ng-template #contractsEventViewDates>
+                    <p class="small-text grey">
+                        {{ item?.eventDetail?.eventDateTime | date: "dd MMM/YYYY" }}
+                    </p>
+                </ng-template>
+
+                <ng-container
+                    *ngIf="checkIfServiceDatePassed(bookedServicesTypes.event,(item?.eventDetail?.startDateTime == null ? item?.eventDetail?.eventDateTime : item?.eventDetail?.startDateTime )); else eventDetailsViewBtn">
+                    <div class="custom-flex mt-4">
+                        <ng-container *ngIf="item?.eventDetail?.startDateTime != null; else contractsEventViewBtn">
                             <a [routerLink]="[
-                        '/boat-listing/reservation-cancellation',
-                        item.id
-                      ]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
-                        </div>
+                                    '/boat-listing/event-reservation-detail',
+                                    item.id,item.eventId
+                                  ]" class="custom-btn blue">View Reservation</a>&nbsp;&nbsp;
+                        </ng-container>
+                        <ng-template #contractsEventViewBtn>
+                            <a [routerLink]="[
+                                    '/contracts/contract',
+                                    item.eventDetail.id
+                                  ]" class="custom-btn blue">View Reservation</a>&nbsp;&nbsp;
+                        </ng-template>
+
                     </div>
-                </div>
-            </div>
 
-            <div *ngIf="eventServices?.length == 0">
-                <app-not-found-component></app-not-found-component>
-              </div>
+                </ng-container>
+                <ng-template #eventDetailsViewBtn>
+                    <div class="custom-flex mt-4">
+                        <a [routerLink]="[
+                                                '/boat-listing/reservation-cancellation',
+                                                item.id,item.contractId
+                                              ]" class="custom-btn blue">Modify Reservation</a>&nbsp;&nbsp;
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
 
-              <div class="col-12 pt-2" *ngIf="eventServices?.length > 0">
-                <app-pagination [totalRecords]="listingFilter.totalRecords" [paginationParam]="queryParams" (pageChange)="onPageChange($event)"
-                    (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
-            </div>
-            </div>
+    <div *ngIf="eventServices?.length == 0">
+        <app-not-found-component></app-not-found-component>
+    </div>
+
+    <div class="col-12 pt-2" *ngIf="eventServices?.length > 0">
+        <app-pagination [totalRecords]="listingFilter.totalRecords" [paginationParam]="queryParams"
+            (pageChange)="onPageChange($event)" (pageSizeChange)="onPageSizeChange($event)"></app-pagination>
+    </div>
+</div>
