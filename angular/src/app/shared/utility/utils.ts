@@ -61,4 +61,12 @@ export class utils {
         let secondDate = moment(date2).format('YYYY-MM-DD hh:mm:ss a');
         return Math.round(moment.duration(moment(secondDate).diff(firstDate)).asDays())
       }
+      static getRemaingHours(firstDateTime:any,secondDateTime:any)
+      {
+        return Math.abs(firstDateTime - secondDateTime ) / 36e5;
+      }
+      static getTime(dateTime:any)
+      {
+        return moment(dateTime).format("hh:mm a")
+      }
 }

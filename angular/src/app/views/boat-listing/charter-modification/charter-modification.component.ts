@@ -59,9 +59,9 @@ export class CharterModificationComponent implements OnInit {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
       this.charterDetails.totalDays = utils.getDaysBetweenTwoDates(this.charterDetails?.departureFromDate,this.charterDetails?.departureToDate)
-       this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
-       this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
-       this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
+       this.charterDetails.DepartureTime = utils.getTime(this.charterDetails?.departureFromDate);
+       this.charterDetails.ArrivalTime = utils.getTime(this.charterDetails?.departureToDate);
+       this.charterDetails.ReturnTime =utils.getTime(this.charterDetails?.returnDate);
       this.charterSchedule = res.charterSchedule;
       this.getHostDetails(this.charterDetails?.boat.creatorId);
     })
@@ -144,9 +144,9 @@ export class CharterModificationComponent implements OnInit {
     this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
     this.yachtSearchService.charterDetailsById(this.charterSchedule[this.dateScheduleIndex]?.charterId).subscribe((res: any) => {
       this.charterDetails = res?.charterDetails;
-      this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
-      this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
-      this.charterDetails.ReturnTime = moment(this.charterDetails?.returnDate).format("hh:mm a")
+      this.charterDetails.DepartureTime = utils.getTime(this.charterDetails?.departureFromDate)
+      this.charterDetails.ArrivalTime = utils.getTime(this.charterDetails?.departureToDate)
+      this.charterDetails.ReturnTime = utils.getTime(this.charterDetails?.returnDate)
     })
   }
 }
