@@ -26,6 +26,15 @@ namespace BnBYachts.Booking.Managers
         public async Task AddDispute(DisputeRequestableDto data)
         => await _repo.InsertAsync(_objectMapper.Map<DisputeRequestableDto, BookingDisputeEntity>(data),true).ConfigureAwait(false);
 
+        public async Task<bool> ChangeDisputeStatus(ChangeStatusRequestable status)
+        {
+            var data = await _repo.GetAsync(x => x.Id == status.Id).ConfigureAwait(false);
+            if (data == null) return false;
+            data.Status = status.status;
+            await _repo.UpdateAsync(data).ConfigureAwait(false);
+            return true;
+        }
+
         public async Task<DisputeTransferable> GetDisputebyId(int id) => _objectMapper.Map<BookingDisputeEntity, DisputeTransferable>(await _repo.GetAsync(id).ConfigureAwait(false));
 
         public async Task<List<DisputeTransferable>> GetDisputeList() => _objectMapper.Map<List<BookingDisputeEntity>, List<DisputeTransferable>>(await _repo.GetListAsync().ConfigureAwait(false));

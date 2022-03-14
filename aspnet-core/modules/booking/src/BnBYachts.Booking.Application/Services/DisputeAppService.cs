@@ -42,8 +42,8 @@ namespace BnBYachts.Booking.Services
                 IsBodyHtml = true,
             });
         }
+        public async Task<bool> ChangeDisputeStatus(ChangeStatusRequestable status) => await _manager.ChangeDisputeStatus(status).ConfigureAwait(false);
         public async Task<DisputeTransferable> GetDisputebyId(int id) => await _manager.GetDisputebyId(id).ConfigureAwait(false);
-
         public async Task<List<DisputeTransferable>> GetDisputeList() => await _manager.GetDisputeList();
 
     }
