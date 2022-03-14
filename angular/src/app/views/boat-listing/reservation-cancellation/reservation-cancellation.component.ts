@@ -18,10 +18,7 @@ import { BookingListingService } from 'src/app/core/Booking/booking-listing.serv
 export class ReservationCancellationComponent implements OnInit {
   public bkCancel: any;
   public bookingCancelDetail: any;
-  totalDays: any;
   isCancellationModal: boolean = false;
-  remainingDays: any;
-  remaingHours: any;
   Reason: string = '';
   userId: any;
   bookingId: any;
@@ -73,65 +70,42 @@ export class ReservationCancellationComponent implements OnInit {
           let checkoutTime = utils.formatTime(boatdetail.checkoutTime);
 
           debugger;
-          // Concat current date with current Time
           this.currentCombindDateTime = new Date(
             currentDate + ' ' + currentTime
           );
-          // Concat checkin date with checkin Time
           this.checkinCombindDateTime = new Date(
             checkInDate + ' ' + checkInTime
           );
-          // Concat checkout date with checkin Time
           this.checkoutCombindDateTime = new Date(
             checkOutDate + ' ' + checkoutTime
           );
-
-          // Calculate Remaing
-          this.remaingHours =
-            Math.abs(
-              this.checkinCombindDateTime - this.currentCombindDateTime
-            ) / 36e5;
-
-          // Add in booking Detail
+          let remaingHours =utils.getRemaingHours(this.checkinCombindDateTime,this.currentCombindDateTime);
           this.bookingCancelDetail.currentCombindDateTime = this.currentCombindDateTime;
           this.bookingCancelDetail.checkinCombindDateTime = this.checkinCombindDateTime;
           this.bookingCancelDetail.checkoutCombindDateTime = this.checkoutCombindDateTime;
-          this.bookingCancelDetail.remaingHours = this.remaingHours;
+          this.bookingCancelDetail.remaingHours = remaingHours;
 
-          this.remainingDays = utils.getDaysBetweenTwoDates(this.currentCombindDateTime,this.checkinCombindDateTime);
-          this.totalDays = utils.getDaysBetweenTwoDates(this.checkinCombindDateTime,this.checkoutCombindDateTime);
-
-          // Add in booking Detail
-          this.bookingCancelDetail.remaingDays = this.remainingDays;
-          this.bookingCancelDetail.TotalDays = this.totalDays;
-
-          if (this.bookingCancelDetail.bookingStatus == 0) {
+          let remainingDays = utils.getDaysBetweenTwoDates(this.currentCombindDateTime,this.checkinCombindDateTime);
+          this.bookingCancelDetail.TotalDays = utils.getDaysBetweenTwoDates(this.checkinCombindDateTime,this.checkoutCombindDateTime);
+          this.bookingCancelDetail.remaingDays = remainingDays;
+debugger;
+          if (this.bookingCancelDetail.bookingStatus == this.BOOKING_STATUS.Pending) {
             // Refund 100%
             this.bookingCancelDetail.deductedAmount = 0;
-            this.bookingCancelDetail.totalreservationFee =this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays +20 +this.bookingCancelDetail.boatDetail.taxFee;
-            this.bookingCancelDetail.totalAmount = this.bookingCancelDetail.deductedAmount + this.bookingCancelDetail.totalreservationFee;
+            this.bookingCancelDetail.totalreservationFee =
+            this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays + 20 +this.bookingCancelDetail.boatDetail.taxFee;
+              this.bookingCancelDetail.totalAmount = this.bookingCancelDetail.deductedAmount + this.bookingCancelDetail.totalreservationFee;
           }
-           if (this.bookingCancelDetail.bookingStatus == 1) {
-            if (this.remaingHours > 72) {
-              // Refund 100%
+           if (this.bookingCancelDetail.bookingStatus == this.BOOKING_STATUS.Approved) {
+            if (remaingHours > 72) {
               this.bookingCancelDetail.deductedAmount = 0;
               this.bookingCancelDetail.totalreservationFee =
-              this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays +
-                20 +
-                this.bookingCancelDetail.boatDetail.taxFee;
+              this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays + 20 +this.bookingCancelDetail.boatDetail.taxFee;
                 this.bookingCancelDetail.totalAmount = this.bookingCancelDetail.deductedAmount + this.bookingCancelDetail.totalreservationFee;
             }
-            if (
-              this.remaingHours == 72 ||
-              (this.remaingHours < 72 && this.remaingHours >= 24)
-            ) {
-              // deducted 50%
+            if ( remaingHours == 72 || (remaingHours < 72 && remaingHours >= 24)) {
               this.bookingCancelDetail.deductedAmount =
-                ((this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays +
-                  20 +
-                  this.bookingCancelDetail.boatDetail.taxFee) *
-                  50) /
-                100;
+                ((this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays +20 +this.bookingCancelDetail.boatDetail.taxFee) * 50) /  100;
                 this.bookingCancelDetail.totalreservationFee =
                 ((this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays +
                   20 +
@@ -140,23 +114,20 @@ export class ReservationCancellationComponent implements OnInit {
                 100;
                 this.bookingCancelDetail.totalAmount = this.bookingCancelDetail.deductedAmount + this.bookingCancelDetail.totalreservationFee;
             }
-            if (this.remaingHours < 24) {
-              // Deducted 1 Night Fee
+            if (remaingHours < 24) {
               this.bookingCancelDetail.deductedAmount = this.bookingCancelDetail.boatDetail.perDayCharges * 1;
               this.bookingCancelDetail.totalreservationFee =
               this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays +
                 20 +
                 this.bookingCancelDetail.boatDetail.taxFee -
-                this.bookingCancelDetail.boatDetail.perDayCharges * this.remainingDays;
-                this.bookingCancelDetail.totalAmount = this.bookingCancelDetail.deductedAmount + this.bookingCancelDetail.totalreservationFee;
+                this.bookingCancelDetail.boatDetail.perDayCharges * remainingDays;
+                this.bookingCancelDetail.totalAmount =  this.bookingCancelDetail.totalreservationFee;
             }
           }
-          // #region Set data for Host
           if (this.isHost) {
             this.bookingCancelDetail.deductedAmount = (this.bookingCancelDetail.boatDetail.perDayCharges * this.bookingCancelDetail.TotalDays + 20 + this.bookingCancelDetail.boatDetail.taxFee) * 0.029 + 0.030;
             this.bookingCancelDetail.totalAmount = this.bookingCancelDetail.totalreservationFee -   this.bookingCancelDetail.deductedAmount;
           }
-          // #endregion
         });
     });
 
