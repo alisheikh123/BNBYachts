@@ -25,7 +25,7 @@ export class BookingListingService {
   getEventBookings(param:any) {
     return this.http.get(this.bookingApiUrl + '/event-bookings?filter=' + param.filter +'&bookingType='+ param.bookingType + '&month=' + param.month + '&year=' + param.year + '&pageNo=' + param.pageNo + '&pageSize=' + param.pageSize).pipe(catchError(this.errorService.handleError));
   }
-  getBookingDetailbyId(BookId: any) {debugger
+  getBookingDetailbyId(BookId: any) {
     return this.http.get(this.bookingApiUrl + '/boatel-booking/' + BookId).pipe(catchError(this.errorService.handleError));
   }
   getHostBookings() {
