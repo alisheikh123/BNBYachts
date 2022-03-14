@@ -31,7 +31,8 @@ namespace BnBYachts.Booking.Managers
             await _repoContactsTerms.InsertManyAsync(_objectMapper.Map<ICollection<ContractAttachmentRequestable>, ICollection<ContractTermsEntity>>(attachmentData)).ConfigureAwait(false);
             return new EntityResponseModel
             {
-                ReturnStatus = true
+                ReturnStatus = true,
+                Data = contract
             };
         }
 

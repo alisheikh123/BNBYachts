@@ -58,15 +58,22 @@
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Check In Date:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.checkinDate | date}}</p>
+                            <p class="grey text-right py-1">{{((bookingCancelDetail?.isContract) ? (bookingCancelDetail?.serviceType == bookedServicesTypes.event ? bookingCancelDetail?.eventDateTime : bookingCancelDetail?.departureDate)  : bookingCancelDetail?.checkinDate) | date}}</p>
                         </div>
-                        <div class="custom-flex-start">
-                            <p class="medium">Check Out Date:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.checkoutDate | date}}</p>
-                        </div>
+                        <ng-container *ngIf="bookingCancelDetail?.serviceType != bookedServicesTypes.event && bookingCancelDetail?.isContract">
+                            <div class="custom-flex-start">
+                                <p class="medium">Check Out Date:</p>
+                                <p class="grey text-right py-1">{{  bookingCancelDetail?.serviceType != bookedServicesTypes.charter ? bookingCancelDetail?.checkoutDate : bookingCancelDetail?.arrivalDate | date}}</p>
+                            </div>
+                        </ng-container>
                         <div class="custom-flex-start">
                             <p class="medium">No of Guest:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.noOfAdults + bookingCancelDetail?.noOfChildrens}}</p>
+                            <ng-container *ngIf="bookingCancelDetail?.serviceType != bookedServicesTypes.event && !bookingCancelDetail?.isContract; else contractEventsGuests">
+                                <p class="grey text-right py-1">{{bookingCancelDetail?.noOfAdults + bookingCancelDetail?.noOfChildrens}}</p>
+                            </ng-container>
+                            <ng-template #contractEventsGuests>
+                                <p class="grey text-right py-1">{{bookingCancelDetail?.noOfGuests}}</p>
+                            </ng-template>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">Location :</p>
@@ -76,10 +83,13 @@
                             <p class="medium">Check In Time:</p>
                             <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.checkinTime | date:'h:mm a' }}</p>
                         </div>
-                        <div class="custom-flex-start">
-                            <p class="medium">Check Out Time:</p>
-                            <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.checkoutTime | date:'h:mm a'}}</p>
-                        </div>
+                        <ng-container *ngIf="bookingCancelDetail?.serviceType != bookedServicesTypes.event && bookingCancelDetail?.isContract">
+                            <div class="custom-flex-start">
+                                <p class="medium">Check Out Time:</p>
+                                <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.checkoutTime | date:'h:mm a'}}</p>
+                            </div>
+                            </ng-container>
+                        
                         <div class="custom-flex-start">
                             <p class="medium">Bedroom:</p>
                             <p class="grey text-right py-1">{{bookingCancelDetail?.boatDetail?.totalBedrooms}}</p>

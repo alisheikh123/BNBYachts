@@ -31,6 +31,8 @@ namespace BnBYachts.Booking.Contracts
         public string UserName { get; set; }
         public ContractsStatus? Status { get; set; } = ContractsStatus.Pending;
         public DateTime CreationTime { get; set; }
+        public bool? IsContract { get; set; }
+
         public ICollection<ContractTermsTransferable> ContractTerms{ get; set; }
     }
     public class ContractTermsTransferable : ITransferable

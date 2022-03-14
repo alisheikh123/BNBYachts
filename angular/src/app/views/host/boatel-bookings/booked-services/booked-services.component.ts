@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ContractsService } from 'src/app/core/contracts/contracts.service';
 import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { BookingResponseFilter, BookingStatus, SelectedServiceType } from 'src/app/shared/enums/booking.constants';
+import { utils } from 'src/app/shared/utility/utils';
 
 @Component({
   selector: 'app-booked-services',
@@ -86,6 +88,19 @@ export class BookedServicesComponent implements OnInit {
         this.eventStatusFilter(this.listingFilter.currentReservationStatus);
       });
     }
+  }
+
+  checkIfServiceDatePassed = (bookedServicesType:any,checkInDate: string, checkInTime?: string): boolean => {
+    const currentDate = new Date().toString();
+    const charterDepartureDateTime = moment(checkInDate, 'YYYY-MM-DD HH:mm:ss');
+    const formatcheckInDate = moment(checkInDate).format('YYYY-MM-DD');
+    const checkInConcateDateTime = new Date(formatcheckInDate + ' ' + checkInTime).toString();
+    const checkInDateTime = moment(checkInConcateDateTime).format('YYYY-MM-DD HH:mm:ss');
+    const currentDateTime = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
+    const checkInStartDateTime = moment(checkInDateTime, 'YYYY-MM-DD HH:mm:ss');
+    const currentTime = moment(currentDateTime, 'YYYY-MM-DD HH:mm:ss');
+    const startDateTime = bookedServicesType !== 1 ? charterDepartureDateTime : checkInStartDateTime;
+    return startDateTime <= currentTime ? true : false;
   }
 
   filterServiceType(serviceType: number) {
