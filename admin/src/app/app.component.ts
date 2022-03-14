@@ -1,7 +1,6 @@
 import { LoginComponent } from './pages/auth/login/login.component';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
 selector: 'ngx-app',

@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { environment } from '../../../environments/environment';
 import { finalize } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 @Injectable()
 export class AuthService {
   apiCoreURl = environment.CORE_API_URL;
@@ -55,7 +56,6 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("accessToken");
     this.oidcSecurityService.logoff();
   }
   registerUser(userData: any): Observable<any> {
@@ -81,4 +81,8 @@ export class AuthService {
     headers = headers.append('X-Skip-Loader-Interceptor', 'true');
     return this.http.post<boolean>(this.apiCoreURl + "/api/app/user/is-email-exists?email="+email,null,{headers:headers});
   }
+  checkAdminRole(userId : string) {
+    return this.http.get(this.apiCoreURl + "/api/app/user/check-admin-role-name/"+userId);
+  }
 }
+

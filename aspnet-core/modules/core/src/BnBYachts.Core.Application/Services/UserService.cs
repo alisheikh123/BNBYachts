@@ -83,5 +83,7 @@ namespace BnBYachts.Core.Services
         public async Task<UserReview> IsRoleName(string userId, string userRole, string hostRole) => await _appUserManager.IsRoleName(userId, userRole, hostRole);
         [HttpPut]
         public async Task UpdateAdminProfile(AdminProfileRequestable userInput) => await _appUserManager.UpdateAdminProfile(userInput);
+        [HttpGet]
+        public async Task<bool> checkAdminRoleName(string userId) => await _appUserManager.checkAdminRoleName(userId);
     }
 }

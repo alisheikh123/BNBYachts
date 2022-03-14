@@ -27,6 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthAppModule } from './pages/auth/auth.module';
 import { SetPasswordComponent } from './pages/auth/set-password/set-password.component';
+import { UnauthorizePageComponent } from './pages/miscellaneous/unauthorize-page/unauthorize-page.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { SetPasswordComponent } from './pages/auth/set-password/set-password.com
       },
     RoutesGuard,
     LoginComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
+    UnauthorizePageComponent 
   ],
 })
 export class AppModule {

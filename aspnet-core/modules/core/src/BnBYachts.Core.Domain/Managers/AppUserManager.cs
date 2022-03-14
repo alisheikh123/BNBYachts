@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BnBYachts.Core.Enum;
 using BnBYachts.Core.Shared;
+using BnBYachts.Core.Shared.Constants;
 using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Interface;
 using BnBYachts.Core.Shared.Requestable;
@@ -239,6 +240,14 @@ namespace BnBYachts.Core.Managers
                 return true;
             }
             return false;
+        }
+        public async Task<bool> checkAdminRoleName(string userId)
+        {
+            if (userId.IsNullOrEmpty()) return false;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return false;
+            if (await _userManager.IsInRoleAsync(user, RoleConstants.SuperAdminRoleName) || await _userManager.IsInRoleAsync(user, RoleConstants.AdminRoleName)) return true;
+            else return false;
         }
     }
 }
