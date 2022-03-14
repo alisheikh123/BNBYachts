@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
 
 export class ServiceProviderServicesComponent implements OnInit {
   profilePictureurl :string = environment.S3BUCKET_URL + '/profilePicture/';
-  companyPictureurl :string = environment.S3BUCKET_URL + '/serviceprovider/companyprofile';
+  companyPictureurl :string = environment.S3BUCKET_URL + '/profilePicture/serviceprovider/companyprofile/';
 
   serviceProviderList=[]as Array<ServiceProviderDTO>;
   reservationType= CreatorTypes;
