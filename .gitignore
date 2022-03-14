@@ -1,2 +1,4 @@
 
 aspnet-core/microservices/BnBYachts.Chat.HttpApi.Host/Logs/logs.txt
+/aspnet-core/modules/EventBus/BnBYachts.EventBusShared/appsettings.json
+/aspnet-core/appsettings.json
