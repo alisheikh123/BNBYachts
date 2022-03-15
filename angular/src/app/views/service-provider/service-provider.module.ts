@@ -15,6 +15,7 @@ import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.servi
 import { ErrorService } from 'src/app/core/Error/error.service';
 import { ServiceProviderDetailComponent } from './service-provider-detail/service-provider-detail.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ServieProviderReviewListComponent } from './servie-provider-review-list/servie-provider-review-list.component';
 
 
 
@@ -23,7 +24,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     ServiceProviderComponent,
     ServiceProviderServicesComponent,
     ServiceProviderInformationComponent,
-    ServiceProviderDetailComponent
+    ServiceProviderDetailComponent,
+    ServieProviderReviewListComponent
     
   ],
   imports: [
