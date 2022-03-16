@@ -6,6 +6,7 @@ using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.Boat.Calendar;
 using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Event.Requestable;
+using BnBYachts.Boat.Event.Transferables;
 using BnBYachts.Boat.Marketing.Requestable;
 using BnBYachts.Boat.Marketing.Transferable;
 using BnBYachts.Boat.Shared.Boat.Requestable;
@@ -100,6 +101,8 @@ namespace BnBYachts.Boat
             CreateMap<FeaturedCityEntity,FeaturedCityTransferable> ().ReverseMap();
             CreateMap<MarketingRequestable, MarketingPageEntity>().ReverseMap();
             CreateMap<MarketingPageEntity, MarketingTransferable>().ReverseMap();
+
+            CreateMap<BoatEventCalendarTransferable, BoatCalendarTransferableDTO>().ReverseMap();
         }
     }
 }

@@ -7,7 +7,6 @@ import { ContractsService } from 'src/app/core/contracts/contracts.service';
 import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { BookingResponseFilter, BookingStatus, SelectedServiceType } from 'src/app/shared/enums/booking.constants';
-import { utils } from 'src/app/shared/utility/utils';
 
 @Component({
   selector: 'app-booked-services',

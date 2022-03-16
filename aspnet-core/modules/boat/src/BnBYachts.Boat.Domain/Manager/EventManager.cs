@@ -1,8 +1,11 @@
 ﻿using BnBYachts.Boat.Boat.Interfaces;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.Boat.Calendar;
+using BnBYachts.Boat.Charter.Dto;
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Event.Transferables;
 using BnBYachts.Boat.Shared.Boat.Transferable;
+using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
 using BnBYachts.Shared.Model;
 using Microsoft.Extensions.Logging;
@@ -21,12 +24,19 @@ namespace BnBYachts.Boat.Manager
         private readonly IRepository<EventEntity, int> _eventRepository;
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
         private readonly ILogger<IEventManager> _logger;
-        public EventManager(IRepository<BoatEntity, int> boatRepository, IObjectMapper<BoatDomainModule> objectMapper, IRepository<EventEntity, int> eventRepository, ILogger<IEventManager> logger)
+        private readonly IRepository<CharterEntity, int> _charterRepository;
+        private readonly IRepository<BoatCalendarEntity, int> _boatelCalendarRepository;
+
+        public EventManager(IRepository<BoatEntity, int> boatRepository, IObjectMapper<BoatDomainModule> objectMapper, IRepository<EventEntity, int> eventRepository, ILogger<IEventManager> logger,
+                            IRepository<CharterEntity,int> charterRepository,
+                            IRepository<BoatCalendarEntity, int> boatelCalendarRepository)
         {
             _boatRepository = boatRepository;
             _objectMapper = objectMapper;
             _eventRepository = eventRepository;
             _logger = logger;
+            _charterRepository = charterRepository;
+            _boatelCalendarRepository = boatelCalendarRepository;
         }
 
         public async Task<ICollection<BoatLookupTransferable>> GetBoats(Guid? userId)
@@ -46,7 +56,13 @@ namespace BnBYachts.Boat.Manager
         public async Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId)
         {
             var allEvents = _objectMapper.Map<ICollection<EventEntity>, ICollection<EventRequestable>>(await _eventRepository.GetListAsync(res => res.BoatId == boatId).ConfigureAwait(false));
+            var allBotals = _objectMapper.Map<ICollection<BoatCalendarEntity>, ICollection<CalendarRequestableDto>>(await _boatelCalendarRepository.GetListAsync(res => res.BoatEntityId == boatId).ConfigureAwait(false));
+            var allCharters = _objectMapper.Map<ICollection<CharterEntity>, ICollection<CharterRequestable>>(await _charterRepository.GetListAsync(res => res.BoatId == boatId).ConfigureAwait(false));
+            var calendarTransferables = new BoatCalendarTransferableDTO();
+
             var boatBookedDates = new BoatEventCalendarTransferable();
+
+            var charterCalendarTransferable = new CharterCalendarTransferable();
             foreach (var evnt in allEvents)
             {
                 do
@@ -55,6 +71,28 @@ namespace BnBYachts.Boat.Manager
                     evnt.StartDateTime = evnt.StartDateTime.AddDays(1);
                 } while (evnt.StartDateTime.Date <= evnt.EndDateTime.Date);
             }
+
+
+            foreach (var botal in allBotals)
+            {
+                do
+                {
+                    calendarTransferables.BookedDates.Add(botal.FromDate);
+                    botal.FromDate = botal.FromDate.AddDays(1);
+                } while (botal.FromDate.Date <= botal.ToDate);
+            }
+
+            foreach (var charter in allCharters)
+            {
+                do
+                {
+                    charterCalendarTransferable.BookedDates.Add(charter.DepartureFromDate);
+                    charter.DepartureFromDate = charter.DepartureFromDate.AddDays(1);
+                } while (charter.DepartureFromDate <= charter.DepartureToDate);
+            }
+
+            charterCalendarTransferable.BookedDates.AddRange(calendarTransferables.BookedDates);
+            boatBookedDates.BookedDates.AddRange(charterCalendarTransferable.BookedDates);
             return boatBookedDates;
         }
 
