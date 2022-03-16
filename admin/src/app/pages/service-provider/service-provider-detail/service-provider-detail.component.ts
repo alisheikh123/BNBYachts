@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { UserDefaults } from '../../../shared/enums/userRoles';
 import { ServiceProviderData } from '../../../shared/interfaces/ServiceProviderData';
+import { ServiceProviderType } from '../../../shared/enums/serviceProviderType';
 
 @Component({
   selector: 'ngx-service-provider-detail',
@@ -14,18 +15,25 @@ import { ServiceProviderData } from '../../../shared/interfaces/ServiceProviderD
 export class ServiceProviderDetailComponent implements OnInit {
 
   serviceProvider : ServiceProvider;
-  latest_date : string;
+  serviceProviderType  = ServiceProviderType;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
   USER_DEFAULTS  = UserDefaults;
   constructor(private serviceProviderService : ServiceProviderData,private route : ActivatedRoute, private datePipe : DatePipe) { }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.UserDetail(Number(id));
+    this.ServiceProviderDetail(Number(id));
   }
-  UserDetail(id : number){
+  ServiceProviderDetail(id : number){
     this.serviceProviderService.GetServiceProviderById(id).subscribe((res) =>{
-      this.serviceProvider = res;
+      this.serviceProvider = res.data;
+      if (this.serviceProvider.serviceProviderType == this.serviceProviderType.Captain) {
+        this.serviceProvider.serviceProviderName = "Captain";
+      }else if (this.serviceProvider.serviceProviderType == this.serviceProviderType.Cleaning) {
+        this.serviceProvider.serviceProviderName = "Cleaning";
+      }else if (this.serviceProvider.serviceProviderType == this.serviceProviderType.Management) {
+        this.serviceProvider.serviceProviderName = "Management";
+      }
     }); 
   }
 }
