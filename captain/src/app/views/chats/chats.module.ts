@@ -18,6 +18,7 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
     CommonModule,
     SharedPipesModule,
     ChatsRoutingModule
-  ]
+  ],
+  exports: [ChatComponent, ChatUsersComponent]
 })
 export class ChatsModule { }
