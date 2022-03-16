@@ -353,5 +353,13 @@
  "BecomeHost" :"Become a Host",
  "BecomeCaptain":"Become a Captain",
  "BecomeManagement":"Become a Management",
- "BecomeCleaning":"Become a Cleaning"
+ "BecomeCleaning":"Become a Cleaning",
+ "RevenueOverview":"Revenue Overview",
+ "PendingContract":"Pending Contracts",
+ "ApprovedContract":"Approved Contracts",
+ "Revenue":"Revenue",
+ "Dashboard": "DashBoard",
+ "Calendar": "Calendar",
+ "Inbox": "Inbox",
+ "Reservation" : "Reservation"
 }
