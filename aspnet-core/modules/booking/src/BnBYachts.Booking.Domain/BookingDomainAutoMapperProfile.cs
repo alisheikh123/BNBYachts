@@ -55,6 +55,12 @@ namespace BnBYachts.Booking
                   .ForMember(res => res.EndDate, opt => opt.MapFrom(res => res.EventDate))
                   .ForMember(res => res.Name, opt => opt.MapFrom(res => res.UserName + "- Event"))
                   .ForMember(x => x.ServiceType, opt => opt.MapFrom(source => (BookingType.Event)));
+            CreateMap<ContractEntity, CalendarTransferable>()
+                .ForMember(res => res.Id, opt => opt.MapFrom(res => res.Id))
+                .ForMember(res => res.StartDate, opt => opt.MapFrom(res => res.ServiceType == ServiceType.Event ? res.EventDateTime : res.DepartureDate))
+                .ForMember(res => res.EndDate, opt => opt.MapFrom(res => res.ArrivalDate))
+                .ForMember(res => res.ServiceType, opt => opt.MapFrom(res => res.ServiceType))
+                .ReverseMap();
             CreateMap<BoatelBookingEntity, BookingsLookupDto>()
                   .ForMember(x => x.BookingType, opt => opt.MapFrom(source => (BookingType.Boatel)))
                   .ForMember(x => x.BookingTypeId, opt => opt.MapFrom(source => source.BoatId));

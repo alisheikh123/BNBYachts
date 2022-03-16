@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BnBYachts.Boat.Event.Transferables
+namespace BnBYachts.Boat.Charter.Dto
 {
-   public class BoatEventCalendarTransferable
+    public class CharterCalendarTransferable
     {
         public List<DateTime> BookedDates { get; set; }
-        public BoatEventCalendarTransferable()
+        public CharterCalendarTransferable()
         {
             BookedDates = new List<DateTime>();
         }
