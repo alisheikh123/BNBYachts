@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BnBYachts.Boat.Enum;
+﻿using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using BnBYachts.Boat.Shared.Boat.Requestable;
 using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boats.Charter;
-using BnBYachts.Boat.Shared.Boat.Transferable;
-using BnBYachts.Boat.Helpers;
-using BnBYachts.Boat.Shared.Helper;
 using Volo.Abp.ObjectMapping;
 using BnBYachts.Events;
 

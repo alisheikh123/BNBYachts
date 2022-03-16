@@ -22,7 +22,7 @@ export class OnboardingService {
       catchError(this.handleError));
   }
   addHostRole(){
-    return this.http.get(this.coreApiUrl + '/AddHostRole').pipe(
+    return this.http.get(this.coreApiUrl + '/app/user/add-host-role').pipe(
       catchError(this.handleError));
   }
   ///Exception handler

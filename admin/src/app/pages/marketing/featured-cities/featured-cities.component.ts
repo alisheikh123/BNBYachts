@@ -45,8 +45,7 @@ export class FeaturedCitiesComponent implements OnInit {
         width: '10%',
         valuePrepareFunction: (imagePath) => { 
           this.citiesPic = this.assetsUrlCity + imagePath;
-          console.log(this.citiesPic);
-          return `<img src="${this.assetsUrlCity + imagePath}" alt="City" height="25" width="50"/>`;
+          return `<img src="${this.citiesPic}" alt="City" height="25" width="50"/>`;
         } 
       },
       name: {
@@ -57,18 +56,11 @@ export class FeaturedCitiesComponent implements OnInit {
       description: {
         title: 'Description',
         type: 'string',
-        width: '35%',
+        width: '55%',
         valuePrepareFunction: (value) => { 
            return value.substring(0, 49)+'...';
         } 
       },
-      creationTime: {
-        title: 'Created On',
-        type: 'string',
-        valuePrepareFunction: (created) => {
-          return this.datePipe.transform(new Date(created), 'MM/dd/yyyy');
-      },
-    },
   }
 };
   constructor(private fb: FormBuilder,private datePipe : DatePipe ,private marketService: MarketData , private modalService : NgbModal, private toaster : NbToastrService) { }
@@ -101,7 +93,6 @@ export class FeaturedCitiesComponent implements OnInit {
       name: cityData.name,
       imagePath : cityData.imagePath,
       description: cityData.description,
-      creationTime : cityData.creationTime,
     });
     this.fileInfo = cityData.imagePath;
   }

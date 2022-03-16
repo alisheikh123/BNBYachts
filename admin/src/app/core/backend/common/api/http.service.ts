@@ -33,6 +33,9 @@ export class HttpService {
   getBooking(endpoint: string, options?): any {
     return this.http.get(`${this.BOOKING_API_URL}/${endpoint}`, options);
   }
+  postBooking(endpoint: string, data, options?): Observable<any> {
+    return this.http.post(`${this.BOOKING_API_URL}/${endpoint}`, data, options);
+  }
   getBoat(endpoint: string, options?): any {
     return this.http.get(`${this.BOAT_API_URL}/${endpoint}`, options);
   }

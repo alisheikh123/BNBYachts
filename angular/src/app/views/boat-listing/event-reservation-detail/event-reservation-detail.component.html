@@ -121,8 +121,8 @@
               <div class="center-content">
                 <button [routerLink]="['/boat-listing/event-reservation-cancellation',eventReservation.eventBookingId,eventReservation.eventId]"
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
-                <button [routerLink]="['/boat-listing/event-modify-reservation',eventReservation.eventBookingId]"
-                  class="custom-btn btn-big blue me-sm-3" >{{'ModifyReservation' | localization}}</button>
+                <!-- <button [routerLink]="['/boat-listing/event-modify-reservation',eventReservation.eventBookingId]"
+                  class="custom-btn btn-big blue me-sm-3" >{{'ModifyReservation' | localization}}</button> -->
                   <a (click)="addReview()"
                   *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
                   class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>

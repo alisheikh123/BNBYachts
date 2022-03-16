@@ -30,6 +30,7 @@ namespace BnBYachts.Core.Data.Entities.ServiceProvider
         public string Iban { get; set; }
         public string Swift { get; set; }
         public string SupportiveDoc { get; set; }
+        public bool IsActive { get; set; }
         public ICollection< TimeSlotEntity> TimeSlots { get; set; }
 
 

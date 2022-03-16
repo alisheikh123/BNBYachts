@@ -1,16 +1,14 @@
 ﻿using BnBYachts.Boat.Boat.FeaturedCity;
 using BnBYachts.Boat.Boat.Marketing;
-using BnBYachts.Boat.Helpers;
 using BnBYachts.Boat.Marketing;
 using BnBYachts.Boat.Marketing.Requestable;
 using BnBYachts.Boat.Marketing.Transferable;
-using BnBYachts.Boat.Shared.Helper;
 using BnBYachts.Shared.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.ObjectMapping;
@@ -22,17 +20,29 @@ namespace BnBYachts.Boat.Manager.Marketing
         private readonly IRepository<FeaturedCityEntity, int> _repository;
         private readonly IRepository<MarketingPageEntity, int> _marketingRepository;
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
-        public MarketingManager(IRepository<FeaturedCityEntity, int> repository, IObjectMapper<BoatDomainModule> objectMapper, IRepository<MarketingPageEntity, int> marketingRepository)
+        private readonly EventBusDispatcher _eventBusDispatcher;
+        public MarketingManager(IRepository<FeaturedCityEntity, int> repository, IObjectMapper<BoatDomainModule> objectMapper, 
+            IRepository<MarketingPageEntity, int> marketingRepository,
+            EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
             _objectMapper = objectMapper;
             _marketingRepository = marketingRepository;
-        }
+            _eventBusDispatcher = eventBusDispatcher;
+        } 
         public async Task<EntityResponseModel> AddCity(FeaturedCityRequestable featured)
         {
             var response = new EntityResponseModel();
             var data = _objectMapper.Map<FeaturedCityRequestable, FeaturedCityEntity>(featured);
-            await FileUploader.UploadFileToAWSAsync(featured.FeaturedCityGallery.FileName, featured.FeaturedCityGallery.FileData, "cities", "");
+            _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+            {
+                ChildFolder = "",
+                File = Convert.FromBase64String(featured.FeaturedCityGallery.FileData.Split("base64,")[1]),
+                FileName = featured.FeaturedCityGallery.FileName,
+                ContentType = featured.FeaturedCityGallery.FileType,
+                SubFolder = "cities"
+            });
+
             data.imagePath = featured.FeaturedCityGallery.FileName;
             response.Data = await _repository.InsertAsync(data).ConfigureAwait(false);
             return response;
@@ -46,7 +56,15 @@ namespace BnBYachts.Boat.Manager.Marketing
             var response = new EntityResponseModel();
             var data = _objectMapper.Map<FeaturedCityRequestable, FeaturedCityEntity>(featured, await _repository.GetAsync(x => x.Id == featured.Id).ConfigureAwait(false));
             featured.FeaturedCityGallery.BoatEntityId = data.Id;
-            await FileUploader.UploadFileToAWSAsync(featured.FeaturedCityGallery.FileName, featured.FeaturedCityGallery.FileData, "cities", "");
+            _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+            {
+                ChildFolder = "",
+                File = Convert.FromBase64String(featured.FeaturedCityGallery.FileData.Split("base64,")[1]),
+                FileName = featured.FeaturedCityGallery.FileName,
+                ContentType = featured.FeaturedCityGallery.FileType,
+                SubFolder = "cities"
+            });
+
             data.imagePath = featured.FeaturedCityGallery.FileName;
             response.Data = await _repository.UpdateAsync(data);
             return response;
@@ -64,5 +82,7 @@ namespace BnBYachts.Boat.Manager.Marketing
             response.Data = await _marketingRepository.UpdateAsync(data);
             return response;
         }
+        public async Task getMarketPageByMarketingType(int? MarketingTypeId)
+            => await _marketingRepository.GetAsync(x => ((int)x.MarketingTypeId) == MarketingTypeId);
     }
 }

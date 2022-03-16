@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   
 
@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
     <ProjectReference Include="..\BnBYachts.Boat.Domain.Shared\BnBYachts.Boat.Domain.Shared.csproj" />
   </ItemGroup>
 
@@ -28,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Manager\NewFolder\" />
+    <Folder Include="Shared\Helper\" />
     <Folder Include="Shared\NewFolder\" />
   </ItemGroup>
 
