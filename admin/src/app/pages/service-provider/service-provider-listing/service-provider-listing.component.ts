@@ -91,6 +91,6 @@ export class ServiceProviderListingComponent implements OnInit {
     });    
   }
   onCustomAction(event){
-    // this.router.navigate([`pages/service/service/${event.data.id}`]);
+    this.router.navigate([`pages/service/service/${event.data.id}`]);
   }
 }

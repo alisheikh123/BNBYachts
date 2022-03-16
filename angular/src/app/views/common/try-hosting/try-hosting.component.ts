@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BoatList } from 'src/app/shared/interface/boatslist';
 
 @Component({
   selector: 'app-try-hosting',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./try-hosting.component.scss']
 })
 export class TryHostingComponent implements OnInit {
-  boats: any[];
+  boats: BoatList[];
   carouselSettings: any[];
   page: number;
   constructor() {    
@@ -31,13 +32,30 @@ export class TryHostingComponent implements OnInit {
 
   ngOnInit(): void {
     this.boats = [
-      '../../../../assets/images/card-1.png',
-      '../../../../assets/images/card-1.png',
-      '../../../../assets/images/card-1.png',
-      '../../../../assets/images/card-1.png',
-      '../../../../assets/images/corporate.png',
-      '../../../../assets/images/card-3.png',
-      '../../../../assets/images/card-3.png'
+      {
+        imagePath : '../../../../assets/images/card-1.png',
+        description : 'Explore a world where everything is possible, and everything is within your grasp when you charter a yacht.',
+      },
+      {
+        imagePath : '../../../../assets/images/card-1.png',
+        description : 'Everyone deserves a day on the water, surrounded by friends, with sea spray in his face, and BnBYachts will provide it. ',
+      },
+      {
+        imagePath : '../../../../assets/images/card-1.png',
+        description :'With charter destinations like Bahamas, Miami, San Diego, Vancouver, etc you can virtually charter a yacht and vacation anywhere.',
+      },
+      {
+        imagePath : '../../../../assets/images/card-1.png',
+        description: 'Explore a world where everything is possible, and everything is within your grasp when you charter a yacht.',
+      },
+      {
+        imagePath : '../../../../assets/images/corporate.png',
+        description :'Everyone deserves a day on the water, surrounded by friends, with sea spray in his face, and BnBYachts will provide it. ',
+      },
+      {
+        imagePath : '../../../../assets/images/card-3.png',
+        description :'With charter destinations like Bahamas, Miami, San Diego, Vancouver, etc you can virtually charter a yacht and vacation anywhere.',
+      }
     ];
   }
 }
