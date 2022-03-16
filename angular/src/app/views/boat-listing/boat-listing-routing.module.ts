@@ -43,7 +43,7 @@ const routes: Routes = [
     path: "reservation-detail/:id", component: ReservationDetailComponent
   },
   {
-    path: "reservation-cancellation/:id", component: ReservationCancellationComponent
+    path: "reservation-cancellation/:id/:contractId", component: ReservationCancellationComponent
   },
   {
     path: "modify-reservation/:id", component: ModifyReservationComponent

@@ -17,6 +17,7 @@ import { NotLoggedInComponent } from './components/not-logged-in/not-logged-in.c
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { LoginComponent } from './components/login/login.component';
 import { ServiceProviderService } from 'src/app/core/serviceprovider/serviceprovider.service';
+import { ChatsModule } from '../chats/chats.module';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { ServiceProviderService } from 'src/app/core/serviceprovider/serviceprov
     ReactiveFormsModule,
     HttpClientModule,
     AuthRoutingModule,
-    SharedPipesModule
+    SharedPipesModule,
+    ChatsModule
   ],
   declarations: [
       LoginModalComponent,

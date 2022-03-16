@@ -19,6 +19,8 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from 'src/environments/environment';
 import { CarouselModule } from 'primeng/carousel';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { ChatsModule } from '../chats/chats.module';
+
 
 
 
@@ -45,7 +47,9 @@ import { NgOtpInputModule } from 'ng-otp-input';
     CalendarModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     NgOtpInputModule,
-    CarouselModule
+    CarouselModule,
+    ChatsModule
+    
   ],
   providers: [ServiceProviderService , YachtSearchService, ErrorService]
 })

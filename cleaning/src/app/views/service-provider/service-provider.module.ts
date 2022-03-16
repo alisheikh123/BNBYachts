@@ -15,6 +15,7 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { ErrorService } from 'src/app/core/Error/error.service';
+import { ChatsModule } from '../chats/chats.module';
 @NgModule({
   declarations: [
     ServiceProviderComponent,
@@ -35,7 +36,8 @@ import { ErrorService } from 'src/app/core/Error/error.service';
     ServiceProviderRoutingModule,
     GooglePlaceModule,
     SharedPipesModule,
-    CalendarModule
+    CalendarModule,
+    ChatsModule
   ],
   providers: [ServiceProviderService , YachtSearchService, ErrorService]
 })
