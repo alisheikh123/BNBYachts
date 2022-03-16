@@ -102,10 +102,6 @@ export class CharterCreationComponentComponent implements OnInit {
   selectBoatName(event: any)
   {
     let id = event.target.value;
-    console.log(id)
-    this.service.getSelectedBoatDetail(id).subscribe((res:any)=>
-    {
-    })
     this.eventService.getBoatBookedDates(id).subscribe((res:any)=>{
       this.boatExistingEventDates = res?.bookedDates;
     });
