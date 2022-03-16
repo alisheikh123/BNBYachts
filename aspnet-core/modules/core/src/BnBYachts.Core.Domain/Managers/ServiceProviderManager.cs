@@ -94,6 +94,35 @@ namespace BnBYachts.Core.Managers
             if (checkserviceprovider != null && !rolechecked) return new EntityResponseModel();
             else return new EntityResponseModel { ReturnStatus = false };
         }
+
+        public async Task<EntityResponseModel> GetServiceProvidersList()
+        {
+            var response = new EntityResponseModel();
+            var data = await _servicerepository.GetListAsync().ConfigureAwait(false);
+            var result = _objectMapper.Map<List<ServiceProviderEntity>, List<ServiceProviderTransferable>>(data);
+            foreach (var item in result)
+            {
+                var userInfo = await _appUserManager.GetUserDetailsById(item.UserId).ConfigureAwait(false);
+                item.UserName = userInfo.Name;
+                item.UserImagePath = userInfo.ImagePath;
+            }
+            response.Data = result;
+            return response;
+        }
+        public async Task<EntityResponseModel> SuspendServiceProvider(long id)
+        {
+            var response = new EntityResponseModel();
+            var data = await _servicerepository.GetAsync(x => x.Id == id);
+            if (data.IsActive == true)
+            {
+                data.IsActive = false; 
+                response.ReturnStatus = true;
+            }
+            else
+                data.IsActive = true;
+            await _servicerepository.UpdateAsync(data);
+            return response;
+        }
     }
 
    

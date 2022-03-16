@@ -18,5 +18,6 @@ namespace BnBYachts.Boat.Interfaces.Marketing
         Task DeleteMarketPage(int? id);
         Task<List<MarketingTransferable>> GetMarketPages();
         Task<EntityResponseModel> UpdateMarketingPage(MarketingRequestable featured);
+        Task getMarketPageByMarketingType(int? MarketingTypeId);
     }
 }

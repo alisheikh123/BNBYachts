@@ -6,11 +6,11 @@
         <div class="account-settings">
           <div class="user-profile">
             <div class="user-avatar">
-              <div class="avatar-preview" id="imagePreview" [ngStyle]="{ 'background-image': 'url(' + assetsUrlProfile+(userResponse?.imagePath!=null?userResponse?.imagePath:USER_DEFAULTS.avatar)+ ')'}">
+            <div class="avatar-preview" id="imagePreview" [ngStyle]="{ 'background-image': 'url(' + assetsUrlProfile+(userResponse?.imagePath!=null?userResponse?.imagePath:USER_DEFAULTS.avatar)+ ')'}">
                 <img [src]="adminImage" class="previewDimention" >
             </div>
               <div class="avatar-edit">
-                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="profile" (change)="onFileChange($event)" hidden />
+                <input type='file' id="imageUpload" name="profile" (change)="onFileChange($event)" hidden />
                 <label for="imageUpload" class="custom-btn blue big-btn"><i class="fa fa-edit"></i></label>
               </div>
             </div>

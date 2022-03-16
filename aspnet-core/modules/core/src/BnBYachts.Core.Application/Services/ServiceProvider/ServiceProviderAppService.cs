@@ -68,5 +68,7 @@ namespace BnBYachts.Core.Services.ServiceProvider
             request.UserId = CurrentUser.Id.ToString();
             return await _serviceproviderManager.AlreadyServiceProvider(request).ConfigureAwait(false);
         }
+        public async Task<EntityResponseModel> GetServiceProvidersList() => await _serviceproviderManager.GetServiceProvidersList().ConfigureAwait(false);
+        public async Task<EntityResponseModel> SuspendServiceProvider(long id) => await _serviceproviderManager.SuspendServiceProvider(id).ConfigureAwait(false);
     }
-    }
+}
