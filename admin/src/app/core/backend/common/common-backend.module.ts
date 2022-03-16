@@ -1,3 +1,5 @@
+import { ServiceProviderApi } from './api/service-provider.api';
+import { ServiceProviderService } from './services/service-provider.service';
 import { MarketApi } from './api/market.api';
 import { MarketService } from './services/market.service';
 import { FaqsApi } from './api/faqs.api';
@@ -56,8 +58,9 @@ import { BoatsData } from '../../../shared/interfaces/Boats';
 import { BoatsService } from './services/boats.service';
 import { FaqsData } from '../../../shared/interfaces/Faqs';
 import { MarketData } from '../../../shared/interfaces/Market';
+import { ServiceProviderData } from '../../../shared/interfaces/ServiceProviderData';
 
-const API = [UsersApi,DisputesApi,BoatsApi, FaqsApi, MarketApi,HttpService];
+const API = [UsersApi,DisputesApi,BoatsApi, FaqsApi, MarketApi,ServiceProviderApi,HttpService];
 
 const SERVICES = [
   { provide: DisputesData, useClass: DisputeService },
@@ -66,7 +69,7 @@ const SERVICES = [
   { provide: UserData, useClass: UserService },
   { provide : FaqsData, useClass : FaqsService},
   { provide : MarketData, useClass : MarketService},
-
+  { provide : ServiceProviderData, useClass : ServiceProviderService},
 
 
   { provide: UserActivityData, useClass: UserActivityService },

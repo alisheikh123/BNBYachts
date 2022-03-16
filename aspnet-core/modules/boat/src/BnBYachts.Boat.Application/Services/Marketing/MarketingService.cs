@@ -29,6 +29,8 @@ namespace BnBYachts.Boat.Services.Marketing
         [AllowAnonymous]
         public async Task<List<FeaturedCityTransferable>> GetCities() => await _manager.GetCities().ConfigureAwait(false);
 
+        public async Task getMarketPageByMarketingType(int? MarketingTypeId) => await _manager.getMarketPageByMarketingType(MarketingTypeId).ConfigureAwait(false);
+
         public async Task<List<MarketingTransferable>> GetMarketPages() => await _manager.GetMarketPages().ConfigureAwait(false);
 
         public async Task<EntityResponseModel> UpdateFeatureCity(FeaturedCityRequestable featured) => await _manager.UpdateFeatureCity(featured).ConfigureAwait(false);

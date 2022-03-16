@@ -36,7 +36,7 @@
                   <div>
                     <label>Upload Image</label>
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" formControlName="imagePath" id="imagePath" name="imagePath" accept=".png, .jpg, .jpeg" (change)="onFileChange($event)" >
+                        <input type="file" class="custom-file-input" formControlName="imagePath" id="imagePath" name="imagePath" (change)="onFileChange($event)" >
                         <label class="custom-file-label" for="file">{{ fileInfo || "Choose file..."}}</label>
                       </div>
                       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{

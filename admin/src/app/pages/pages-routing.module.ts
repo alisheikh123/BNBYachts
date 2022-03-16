@@ -29,6 +29,11 @@ const routes: Routes = [{
         .then(m => m.HostModule),
     },
     {
+      path: 'service',
+      loadChildren: () => import('./service-provider/service-provider.module')
+        .then(m => m.ServiceProviderModule),
+    },
+    {
       path: 'dispute',
       loadChildren: () => import('./dispute/dispute.module')
         .then(m => m.DisputeModule),

@@ -1,12 +1,10 @@
 import { Observable } from 'rxjs';
-import { cityPicTransferable } from './cityPicTransferable';
 
 export interface City{
     id : number
     name : string;
     description : string;
     imagePath : string;
-    creationTime : Date;
 }
 export interface AddCity{
     cityData: { fileName: string; };
@@ -14,7 +12,6 @@ export interface AddCity{
     name : string;
     description : string;
     imagePath : string;
-    creationTime : Date;
     featuredCityGallery :any;
 }
 export interface AddMarket{

@@ -32,6 +32,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Service Provider',
+    icon: { icon: 'user-tie', pack: 'fa' },
+    children: [
+      {
+        title: 'Service Provider',
+        link: '/pages/service/services',
+      }
+    ]
+  },
+  {
     title: 'Dispute',
     icon: { icon: 'question-circle', pack: 'fa' },
     children: [

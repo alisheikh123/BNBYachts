@@ -34,7 +34,6 @@ namespace BnBYachts.Boat.Manager.Marketing
         {
             var response = new EntityResponseModel();
             var data = _objectMapper.Map<FeaturedCityRequestable, FeaturedCityEntity>(featured);
-
             _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
             {
                 ChildFolder = "",
@@ -83,5 +82,7 @@ namespace BnBYachts.Boat.Manager.Marketing
             response.Data = await _marketingRepository.UpdateAsync(data);
             return response;
         }
+        public async Task getMarketPageByMarketingType(int? MarketingTypeId)
+            => await _marketingRepository.GetAsync(x => ((int)x.MarketingTypeId) == MarketingTypeId);
     }
 }

@@ -33,14 +33,6 @@ export class MarketingPageComponent implements OnInit {
     name: "Event Local Laws",
   },
   {
-    id: this.MarketingType.RentelPermission,
-    name: "Rentel Permission"
-  },
-  {
-    id: this.MarketingType.Signup,
-    name: "Signup Policy"
-  },
-  {
     id: this.MarketingType.Captain,
     name: "Captain Terms"
   },
@@ -118,10 +110,6 @@ export class MarketingPageComponent implements OnInit {
           element.marketingType = "Charter Local Laws";
         }else if (element.marketingTypeId == this.MarketingType.Event) {
           element.marketingType = "Event Local Laws";
-        }else if (element.marketingTypeId == this.MarketingType.RentelPermission) {
-          element.marketingType = "Rentel Permission"
-        }else if (element.marketingTypeId == this.MarketingType.Signup) {
-          element.marketingType = "Signup Policy";
         }else if (element.marketingTypeId == this.MarketingType.Captain) {
           element.marketingType = "Captain Terms";
         }else if (element.marketingTypeId == this.MarketingType.Management) {
