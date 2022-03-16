@@ -385,4 +385,8 @@
  "BNBYachtsPoint1" : "Explore a world where everything is possible, and everything is within your grasp when you charter a yacht. ",
  "BNBYachtsPoint2" : "Everyone deserves a day on the water, surrounded by friends, with sea spray in his face, and BnBYachts will provide it. ",
  "BNBYachtsPoint3" : "With charter destinations like Bahamas, Miami, San Diego, Vancouver, etc you can virtually charter a yacht and vacation anywhere. "
+"Join": "Joined",
+"ReservationCancellation":"Reservation Cancellation",
+"ReservationDetails":"Reservation Details",
+"BookingCancelledConfirm":"Booking Cancelled Confirm"
 }

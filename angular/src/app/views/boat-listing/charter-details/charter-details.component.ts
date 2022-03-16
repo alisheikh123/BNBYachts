@@ -69,7 +69,6 @@ export class CharterDetailsComponent implements OnInit {
       this.boatHost = res;
     })
   }
-
   featureFilter(isFavroute: boolean, isHealthSafetyFeature: boolean) {
     if (isHealthSafetyFeature == false) {
       return this.charterDetails?.boat.boatFeatures.filter((res: any) => res.offeredFeatures.isGuestFavourite == isFavroute && res.offeredFeatures.isSafetyFeature == false);
@@ -79,11 +78,9 @@ export class CharterDetailsComponent implements OnInit {
     }
 
   }
-
   ruleFilter(isHealthSafetyRule: boolean) {
     return this.charterDetails?.boat.boatRules.filter((res: any) => res.offeredFeatures.isGuestFavourite == isHealthSafetyRule);
   }
-
   reserveCharter() {
     this.isSubmitted = true;
     if(this.authService.authenticated) {
@@ -132,11 +129,9 @@ export class CharterDetailsComponent implements OnInit {
     this.charterFilterDetails.childrens = this.popOverFilterData.childrens;
     this.charterCapcityValidation = ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity)||(this.charterFilterDetails.adults + this.charterFilterDetails.childrens<1))?"Entered guest capacity is not available":this.popover.close();
   }
-
   showAllFeatures() {
     this.modal.open(this.templateRef, { centered: true, windowClass: 'custom-modal custom-small-modal' });
   }
-
   onChangeDate(isIncrease: boolean) {
     this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
     this.yachtSearchService.charterDetailsById(this.charterSchedule[this.dateScheduleIndex]?.charterId).subscribe((res: any) => {

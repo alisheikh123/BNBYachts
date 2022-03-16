@@ -24,6 +24,7 @@ export interface ServiceProviderDTO{
      swift: string;
     supportiveDoc: string;
     timeSlots: TimeSlotDto [];
+    creationTime : Date;
     userName:string;
     avaliableDate:string;
     userImagePath:string;

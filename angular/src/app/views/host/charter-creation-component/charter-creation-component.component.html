@@ -106,7 +106,7 @@
                           <div class="col-md-3 py-2">
                             <div class="custom-select-field">
                                 <label> {{'DepartureDate'| localization}}</label>
-                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate"
+                                <ejs-datetimepicker #ejDateTimePicker formControlName="departureFromDate" (renderDayCell)="onRenderCell($event)"
                                 [min]="minDate" name="datetimepicker"  placeholder='Select Departure From' ></ejs-datetimepicker>
 
                               </div>
@@ -114,7 +114,7 @@
                           <div class="col-md-3 py-2">
                             <div class="custom-select-field">
                                 <label> {{'ArrivalDate'| localization}}</label>
-                                <ejs-datetimepicker placeholder='Select Departure From'
+                                <ejs-datetimepicker placeholder='Select Departure From' (renderDayCell)="onRenderCell($event)"
                                 formControlName="departureToDate" [min]="minDate"></ejs-datetimepicker>
 
                               </div>

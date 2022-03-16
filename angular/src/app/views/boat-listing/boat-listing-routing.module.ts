@@ -15,6 +15,7 @@ import { CharterReservationDetailComponent } from './charter-reservation-detail/
 import { CharterReservationCancellationComponent } from './charter-reservation-cancellation/charter-reservation-cancellation.component';
 import { EventModifyReservationComponent } from './event-modify-reservation/event-modify-reservation.component';
 import { EventReservationCancellationComponent } from './event-reservation-cancellation/event-reservation-cancellation.component';
+import { CharterModificationComponent } from './charter-modification/charter-modification.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,9 @@ const routes: Routes = [
   },
   {
     path: "event-reservation-cancellation/:id/:eventId", component:EventReservationCancellationComponent
+  },
+  {
+    path:"charter-modification-reservation/:id",component:CharterModificationComponent
   }
 ];
 
