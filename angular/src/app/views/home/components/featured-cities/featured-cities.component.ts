@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class FeaturedCitiesComponent implements OnInit {
   featuredCities : FeaturedCities[];
-  assetsUrlProfile = environment.S3BUCKET_URL + '/cities/';
+  assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/cities/';
 
   constructor(private boatService : BoatService) { }
 

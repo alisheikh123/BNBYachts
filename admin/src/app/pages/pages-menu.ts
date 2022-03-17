@@ -33,7 +33,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Service Provider',
-    icon: { icon: 'user-tie', pack: 'fa' },
+    icon: { icon: 'user-cog', pack: 'fa' },
     children: [
       {
         title: 'Service Provider',
@@ -72,6 +72,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Featured City',
         link: '/pages/marketing/cities',
+      }
+    ]
+  },
+  {
+    title: 'Settings',
+    icon: { icon: 'cog', pack: 'fa' },
+    children: [
+      {
+        title: 'Services Fee',
+        link: '/pages/settings/servicesFee',
       }
     ]
   },

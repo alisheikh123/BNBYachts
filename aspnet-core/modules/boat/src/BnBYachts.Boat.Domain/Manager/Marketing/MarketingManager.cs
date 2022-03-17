@@ -34,14 +34,14 @@ namespace BnBYachts.Boat.Manager.Marketing
         {
             var response = new EntityResponseModel();
             var data = _objectMapper.Map<FeaturedCityRequestable, FeaturedCityEntity>(featured);
-            _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+            await _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
             {
                 ChildFolder = "",
                 File = Convert.FromBase64String(featured.FeaturedCityGallery.FileData.Split("base64,")[1]),
                 FileName = featured.FeaturedCityGallery.FileName,
                 ContentType = featured.FeaturedCityGallery.FileType,
                 SubFolder = "cities"
-            });
+            }).ConfigureAwait(false);
 
             data.imagePath = featured.FeaturedCityGallery.FileName;
             response.Data = await _repository.InsertAsync(data).ConfigureAwait(false);
@@ -56,7 +56,7 @@ namespace BnBYachts.Boat.Manager.Marketing
             var response = new EntityResponseModel();
             var data = _objectMapper.Map<FeaturedCityRequestable, FeaturedCityEntity>(featured, await _repository.GetAsync(x => x.Id == featured.Id).ConfigureAwait(false));
             featured.FeaturedCityGallery.BoatEntityId = data.Id;
-            _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+            await _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
             {
                 ChildFolder = "",
                 File = Convert.FromBase64String(featured.FeaturedCityGallery.FileData.Split("base64,")[1]),

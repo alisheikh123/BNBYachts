@@ -49,6 +49,11 @@ const routes: Routes = [{
         .then(m => m.MarketingModule),
     },
     {
+      path: 'settings',
+      loadChildren: () => import('./setting-tab/setting-tab.module')
+        .then(m => m.SettingTabModule),
+    },
+    {
       path: '',
       redirectTo: 'pages',
       pathMatch: 'full',

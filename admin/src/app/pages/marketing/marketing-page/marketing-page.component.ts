@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MarketingType } from '../../../shared/enums/MarketingType';
-import { AddFaqs, FaqsData } from '../../../shared/interfaces/Faqs';
 
 @Component({
   selector: 'ngx-marketing-page',
@@ -149,7 +148,6 @@ export class MarketingPageComponent implements OnInit {
     this.cleanup = true;
   }
   onCustomAction(contents, contentData,event){
-    debugger;
     switch (event.action) {
       case 'onEditAction':
         this.onEditAction(contentData, event.data);
