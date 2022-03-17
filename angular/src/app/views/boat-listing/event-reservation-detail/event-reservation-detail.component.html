@@ -112,7 +112,7 @@
         </div>
       </div>
       <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
-        *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected">
+        *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected && eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Pending">
         <div *ngIf="eventBookingDetail?.bookingStatus == filters.BOOKING_STATUS.Cancel"> </div>
         <div *ngIf="filters.checkedStartDate == filters.today"></div>
         <div *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">

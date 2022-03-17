@@ -3,10 +3,10 @@
 </div>
 <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.boatel">
 <div class="custom-card req-user-card custom-margin" *ngFor="let item of boatelBookings; let i = index">
-    <div class="image-with-text custom-flex-between align-items-start">
+    <div class="image-with-text custom-flex-between align-items-start" (click)="goToDetail(item)">
         <div class="image-with-text-inner">
             <img src="../../../../assets/images/user-img.png" alt="" />
-            <div class="user-details info"  (click)="goToDetail(item)">
+            <div class="user-details info">
                 <p class="medium">{{ item.userName }}</p>
                 <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">{{item?.event?.title}}</p>
                 <p class="small-text grey">{{ item.boatDetail?.name }}</p>
@@ -52,10 +52,10 @@
 </div>
 <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.charter">
     <div class="custom-card req-user-card custom-margin" *ngFor="let item of userCharters; let i = index">
-        <div class="image-with-text custom-flex-between align-items-start">
+        <div class="image-with-text custom-flex-between align-items-start" (click)="goToDetail(item)">
             <div class="image-with-text-inner">
                 <img src="../../../../assets/images/user-img.png" alt="" />
-                <div class="user-details info"  (click)="goToDetail(item)">
+                <div class="user-details info">
                     <p class="medium">{{ item.userName }}</p>
                     <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">{{item?.event?.title}}</p>
                     <p class="small-text grey">{{ item.boatDetail?.name }}</p>
@@ -101,10 +101,10 @@
     </div>
     <div *ngIf="listingFilter.selectedServiceType==bookedServicesTypes.event">
         <div class="custom-card req-user-card custom-margin" *ngFor="let item of userEvents; let i = index">
-            <div class="image-with-text custom-flex-between align-items-start">
+            <div class="image-with-text custom-flex-between align-items-start" (click)="goToDetail(item)">
                 <div class="image-with-text-inner">
                     <img src="../../../../assets/images/user-img.png" alt="" />
-                    <div class="user-details info"  (click)="goToDetail(item)">
+                    <div class="user-details info">
                         <p class="medium">{{ item.userName }}</p>
                         <p *ngIf="listingFilter.selectedServiceType == listingFilter.SELECTED_SERVICE_TYPE.Events">{{item?.event?.title}}</p>
                         <p class="small-text grey">{{ item.boatDetail?.name }}</p>
