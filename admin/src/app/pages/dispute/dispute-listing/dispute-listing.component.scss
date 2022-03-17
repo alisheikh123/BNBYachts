@@ -4,7 +4,10 @@
   nb-card {
     transform: translate3d(0, 0, 0);
   }
+  .edit {
+    color : yellow;
+  }
 }
 :host ::ng-deep tr .ng2-smart-actions{ display: flex;height: fit-content; }
 :host ::ng-deep nbng2-st-tbody-custom {display: flex;}
-:host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {display: inline-block;margin-left: 10px ;margin-top: 16px;margin-bottom: 15px; width: auto;text-align: center;}
+:host ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {display: inline-block;margin-left: 10px ;color:lightgray;margin-top: 16px;margin-bottom: 15px; width: auto;text-align: center;}

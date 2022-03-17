@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFramework>net5.0</TargetFramework>
@@ -8,6 +8,16 @@
 	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Templates\EmailTemplates\default.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\EmailTemplates\default.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
 
   <!--<ItemGroup>
     <None Remove="appsettings.json" />
@@ -30,6 +40,12 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\shared\BnBYachts.Shared\BnBYachts.Shared.csproj" />
 	  <ProjectReference Include="..\..\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

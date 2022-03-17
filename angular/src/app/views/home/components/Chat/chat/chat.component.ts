@@ -10,6 +10,7 @@ import { find } from 'rxjs/operators';
 import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ChatService } from 'src/app/core/chat/chat.service';
+import { UserDefaults } from 'src/app/shared/enums/user-roles';
 import { environment } from 'src/environments/environment';
 import { ChatUsersComponent } from '../chat-users/chat-users.component';
 
@@ -41,6 +42,8 @@ export class ChatComponent implements OnInit {
   activeChatFilter:number = 0;
   @ViewChild('chatScrollContainer') private chatScrollContainer: ElementRef;
   @ViewChild('noChatModal', { static: true }) noChatModalTemplate: any;
+  assetUrlS3 = environment.S3BUCKET_URL + '/profilePicture/';
+  USER_DEFAULTS = UserDefaults;
 
   @ViewChild(ChatUsersComponent) chatUsersComponent: ChatUsersComponent;
 
@@ -150,7 +153,7 @@ export class ChatComponent implements OnInit {
   }
   archiveChat(recieverInfo:any) {
     this.chatService.archiveChat(this.chat.receiverId,!recieverInfo?.isArchivedUser).subscribe(res => {
-      recieverInfo.isArchivedUser = !recieverInfo.isArchivedUser; 
+      recieverInfo.isArchivedUser = !recieverInfo.isArchivedUser;
       let index = this.chatUsersComponent.allChatUsers.findIndex(res=>res.userId == this.chat.receiverId);
       this.chatUsersComponent.allChatUsers[index].isArchivedUser =  recieverInfo?.isArchivedUser;
       this.activeChatFilter = 1;
@@ -159,15 +162,11 @@ export class ChatComponent implements OnInit {
       this.toastr.success("Chat Archived successfully", "Archived");
     })
   }
-  findHost(){
-    this.router.navigate(['']);
-    this.modal.dismissAll();
-  }
 
   noUserAvailable(available:boolean) {
     if(available!){
       this.noChatsAvailble = true;
-      this.modal.open(this.noChatModalTemplate, { centered: true });      
+      this.modal.open(this.noChatModalTemplate, { centered: true });
     }
       this.noChatsAvailble = false;
   }

@@ -1,0 +1,7 @@
+<div class="iframe-wrapper">
+    <google-map height="{{mapStyles?.height}}" width="{{mapStyles?.width}}" [options]="mapOptions" [center]="center" [zoom]="zoom">
+      <map-marker #markerr="mapMarker" *ngFor="let marker of markers" [position]="marker.position"
+      [label]="marker.label" [title]="marker.title" [options]="marker.options">
+    </map-marker>
+    </google-map>
+  </div>

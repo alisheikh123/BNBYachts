@@ -1,0 +1,103 @@
+<div class="main-wrapper">
+    <div class="container">
+  <div class="services-main-wrapper section-padding services-list">
+      <div class="custom-flex-between mb-3">
+        <h5 class="bold">{{'Services' | localization}}</h5>
+      </div>
+      <div class="row m-0">
+        <div class="col-lg-3 col-md-3  py-2">
+            <div class="">
+                <div
+                    class="select custom-select custom-input-label-inside w-100">
+                    <label>{{'ServiceType' | localization}} </label>
+                    <select [(ngModel)] = "serviceProviderSearchParam.serviceProviderType">
+                        <option [ngValue]="1">{{'Captain' | localization}}</option>
+                        <option [ngValue]="2">{{'ManagementCompany' | localization }}</option>
+                        <option [ngValue]="3">{{'CleaningCompany' | localization }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+          <div class="col-lg-3 col-md-3  py-2">
+            <div class="">
+                <div class="select custom-select select-search custom-input-label-inside w-100">
+                    <label>{{'Location' | localization}}</label>
+                    <input type="text" ngx-google-places-autocomplete
+                        (onAddressChange)="handleAddressChange($event)"
+                        [(ngModel)]="serviceProviderSearchParam.location" class="custom-input search-input"
+                        placeholder="{{'SearchLocation' | localization}}"><i class="fa fa-search font-awesom-icon"></i>
+                </div>
+                <small class="text-danger"
+                    *ngIf="isSubmitted && serviceProviderSearchParam.location == ''">{{'locationError' | localization }}</small>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3  py-2">
+            <div class="select custom-select select-search custom-input-label-inside w-100 flex-row">
+                <div class="">
+                    <div class="w-100">
+                        <label>{{'Date' | localization }}</label>
+                        <input placeholder="Add date" name="dp"
+                        container="body"
+                            [(ngModel)]="serviceProviderSearchParam.avaliableDate" (click)="d.toggle()"
+                            ngbDatepicker #d="ngbDatepicker">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3  py-2"><a   (click)="getServiceProviderDetail()"
+            class="custom-btn cstmbtn big-btn grey medium search-btn">{{'Search' | localization}}</a></div>
+      </div>
+      <div class="customsg" *ngIf="serviceProviderList.length==0;else serviceProvidersList">
+          {{'NoDataMessage' | localization}}
+      </div>
+      <ng-template #serviceProvidersList >
+      <div *ngFor="let item of serviceProviderList">
+
+     
+          <div class="custom-card req-user-card custom-margin ps-0 py-0 no-padding-mobile">
+          <div class="image-with-text custom-flex-between align-items-center flex-column-tab">
+          <div class="image-with-text-inner">
+              <div class="image-width-text-img" *ngIf="item.serviceProviderType==serviceProviderType.captain" ><img src="{{item.userImagePath!='' && item.userImagePath!=null? profilePictureurl + item.userImagePath : '../../../../assets/images/captain-img.png' }}" alt="">
+                  <a  class="fav-btn white-clr-font"><i class="fa fa-heart-o"></i></a>
+              </div>
+              <div class="image-width-text-img" *ngIf="item.serviceProviderType !=serviceProviderType.captain" ><img src="{{item.companyProfilePicture!='' && item.companyProfilePicture!=null? companyPictureurl + item.companyProfilePicture : '../../../../assets/images/captain-img.png' }}" alt="">
+                <a  class="fav-btn white-clr-font"><i class="fa fa-heart-o"></i></a>
+            </div>
+              <div class="user-details">
+                <p *ngIf="item.serviceProviderType==serviceProviderType.management" class="medium py-1">{{'ManagementCompany' | localization }} </p>
+                <p *ngIf="item.serviceProviderType==serviceProviderType.cleaning" class="medium py-1">{{'CleaningCompany' | localization }}  </p>
+                <p *ngIf="item.serviceProviderType !=serviceProviderType.captain" class="medium py-1">{{item.companyName}}</p>
+                  <p *ngIf="item.serviceProviderType==serviceProviderType.captain" class="medium py-1">{{item.userName}}</p>
+                  <p class=" py-1">{{item.experience}} Years of Exeprience</p>
+                  <div class="small-stars  grey-stars py-1">
+                      <span class="fa fa-star stars-clr "></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                      <span class="fa fa-star stars-clr"></span>
+                   </div>
+              </div>
+          </div>
+          <div class="right-content custom-flex align-items-end">
+              <div *ngIf="item.serviceProviderType==serviceProviderType.captain"  class="custom-one-line-calendar me-sm-3">
+                  <p class="medium py-2 pt-0">Availbility</p>
+                  <p class="small-text">
+                      <span class="pe-2"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                      {{item.fromDate| datemonthformat}}-{{ item.toDate| datemonthformat}}
+                      <span class="ps-2"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                  </p>
+              </div>
+              <div class="">
+                  <p class="bold text-center py-2" *ngIf="item.serviceProviderType==serviceProviderType.captain" >{{item.fee}} <span class="regular">{{item.paymentType}}</span></p>
+                  <a  (click)="ViewProfile(item.id)" class="custom-btn blue me-0">View Profile</a>
+
+              </div>
+              </div>
+          </div>
+          </div>
+        </div>
+    </ng-template>
+      </div>
+  </div>
+  </div>

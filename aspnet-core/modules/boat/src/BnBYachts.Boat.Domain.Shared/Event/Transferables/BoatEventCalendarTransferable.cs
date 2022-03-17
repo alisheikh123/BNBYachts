@@ -6,10 +6,10 @@ namespace BnBYachts.Boat.Event.Transferables
 {
    public class BoatEventCalendarTransferable
     {
-        public ICollection<DateTime> BookedDates { get; set; }
+        public List<DateTime> BookedDates { get; set; }
         public BoatEventCalendarTransferable()
         {
-            BookedDates = new HashSet<DateTime>();
+            BookedDates = new List<DateTime>();
         }
     }
 }

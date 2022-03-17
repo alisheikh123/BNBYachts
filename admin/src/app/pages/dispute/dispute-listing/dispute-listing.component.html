@@ -3,7 +3,49 @@
     Disputes
   </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)">
+    <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event,content)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">    
+  <div class="modal-header">    
+      <h4 class="modal-title" id="modal-basic-title">Update Status</h4>    
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">    
+          <span aria-hidden="true">×</span>    
+      </button>    
+  </div>    
+  <form  [formGroup]="statusForm" novalidate="novalidate" (ngSubmit)="onSubmit()">
+  <div class="modal-body container"> 
+    <div>  
+      <label>Category</label>
+      <select class="form-control" formControlName="status" name="status" >
+      <option [ngValue]="null" selected>Choose Category</option>
+      <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
+      </select>
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Question is required',
+        control: statusForm.controls['status']
+    }"></ng-container>
+  </div> 
+  </div>   
+  <div class="modal-footer">    
+    <button type="submit" class="btn btn-primary btn-md" >Update</button>    
+    <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>
+  </div> 
+</form>    
+</ng-template>   
+
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

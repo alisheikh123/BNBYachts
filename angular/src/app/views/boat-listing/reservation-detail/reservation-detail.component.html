@@ -94,7 +94,7 @@
             </div>
             <div class="custom-flex-between">
               <p class="medium">{{"Total(USD)" | localization}}</p>
-              <p class="medium text-right py-1">{{(booking?.boatDetail?.perDayCharges * booking?.TotalDays) + 20 + 20 +
+              <p class="medium text-right py-1">{{(booking?.boatDetail?.perDayCharges * booking?.TotalDays)  + 20 +
                 booking?.boatDetail?.taxFee}}.00 $</p>
             </div>
             <pre>{{booking?.bookingCancelDetail | json}}</pre>
@@ -146,7 +146,7 @@
             <!-- </div> -->
           </div>
         </div>
-         <!-- <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking?.boatDetail?.checkoutTime)"> -->        
+         <!-- <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking?.boatDetail?.checkoutTime)"> -->
       </div>
       <!-- </div> -->
       <app-list-reviews [bookingId]=bookingId></app-list-reviews>

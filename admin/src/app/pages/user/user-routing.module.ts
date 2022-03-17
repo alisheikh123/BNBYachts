@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StatusComponent } from './status/status.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserListingComponent } from './user-listing/user-listing.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: 'users/:id',
         component : UserDetailComponent,
       },
+      {
+        path: 'userProfile/:id',
+        component : UserProfileComponent,
+      },
     ]
   }
 ];
@@ -31,5 +36,6 @@ export const routedComponents = [
   UserComponent,
   UserListingComponent,
   UserDetailComponent,
-  StatusComponent
+  StatusComponent,
+  UserProfileComponent,
 ];

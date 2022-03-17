@@ -32,6 +32,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Service Provider',
+    icon: { icon: 'user-tie', pack: 'fa' },
+    children: [
+      {
+        title: 'Service Provider',
+        link: '/pages/service/services',
+      }
+    ]
+  },
+  {
     title: 'Dispute',
     icon: { icon: 'question-circle', pack: 'fa' },
     children: [
@@ -48,6 +58,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Faqs Listing',
         link: '/pages/faqs/faqs-listing',
+      }
+    ]
+  },
+  {
+    title: 'Marketing',
+    icon: { icon: 'chart-bar', pack: 'fa' },
+    children: [
+      {
+        title : 'Market Pages',
+        link : '/pages/marketing/marketing'
+      },
+      {
+        title: 'Featured City',
+        link: '/pages/marketing/cities',
       }
     ]
   },

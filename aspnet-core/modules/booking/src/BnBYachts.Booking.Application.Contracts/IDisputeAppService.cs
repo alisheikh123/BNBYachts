@@ -10,8 +10,8 @@ namespace BnBYachts.Booking
     public interface IDisputeAppService
     {
         Task AddDispute(DisputeRequestableDto data);
-        //Task<EntityResponseListModel<DisputeTransferable>> GetDisputeList(string SearchText, PaginationHeader pagination);
         Task<List<DisputeTransferable>> GetDisputeList();
         Task<DisputeTransferable> GetDisputebyId(int id);
+        Task<bool> ChangeDisputeStatus(ChangeStatusRequestable status);
     }
 }

@@ -24,7 +24,7 @@
                     <label>FirstName</label>
                     <input type="text" class="form-control" placeholder="First Name" name="firstname"
                       formControlName="FirstName">
-                    <ng-container [ngTemplateOutlet]="formError" class="error-Modal" [ngTemplateOutletContext]="{
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                         validation: 'required',
                         message: 'First name is required',
                         control: registrationForm.controls['FirstName']
@@ -81,10 +81,7 @@
                 </div>
               </div>
               <div class="col-sm-12 py-2 pb-3 text-center">
-                <button type="submit" class="btn btn-primary"
-                  >Create New</button>
-                  <!-- [disabled]="registrationForm.invalid || !registrationForm.controls.agree.value" -->
-
+                <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Create</button>
               </div>
             </div>
           </div>

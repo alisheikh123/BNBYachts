@@ -1,0 +1,21 @@
+<section class="request-quote-sec section-padding card shadow  rounded">
+    <div class="container card-body">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="w-100">
+                    <div class="form-group has-search">
+                        <label class="customLbl">Country/Region</label>
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" class="form-control" placeholder="Search Location"
+                            ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event)"
+                            [(ngModel)]="searchParam.location">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 py-2" *ngIf="officesList?.length > 0">
+                <small class="customLbl">{{officesList?.length}} Search Results Found.</small>
+                <app-bnb-google-map *ngIf="officesList?.length > 0" [mapData]="officesList" [mapLocations]="searchParam"></app-bnb-google-map>
+              </div>
+        </div>
+    </div>
+</section>

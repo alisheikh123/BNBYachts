@@ -12,7 +12,7 @@
           <div class="bg-grey-light border-radius-5 p-2">
             <div class="image-with-text">
               <div class="image-with-text-inner small-img">
-                <img src="../../../../../../assets/images/user-img.png" alt="">
+                <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                 <div class="user-details">
                   <p class="medium">{{recieverInfo?.name}}</p>
                   <p class="small-text grey">{{recieverInfo?.email}}</p>
@@ -40,21 +40,21 @@
             [ngClass]="{'bg-blue-text reciever-msg':isReciever(message.receiverId,chat.senderId)}">
             <div class="image-with-text-inner small-img">
               <div class="w-100 d-flex align-items-start justify-content-end reciver-msj">
-       
+
               <div class="user-details">
                 <p [innerHtml]="message.message"></p>
                 <small class="chatTime">{{message.sentTime | date:'hh:mm a'}}</small>
               </div>
               <div class="pe-2" *ngIf="!isReciever(message.receiverId,chat.senderId)"></div>
-              <img src="../../../../../../assets/images/user-img.png" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
+              <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="" *ngIf="isReciever(message.receiverId,chat.senderId)">
               </div>
             </div>
           </div>
-          </ng-container> 
-  
+          </ng-container>
+
             <p class="text-center bold" *ngIf="chat.blockedUser">You cannot reply to this conversion...</p>
 
-         
+
           </div>
           <div class="message-box px-3" *ngIf="!chat.blockedUser">
             <form>
@@ -78,7 +78,7 @@
           <div class="custom-card">
             <div class="image-with-text ">
               <div class="image-with-text-inner">
-                <img src="../../../../../../assets/images/user-img.png" alt="">
+                <img src="{{assetUrlS3 + (recieverInfo?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
               </div>
               <p class="medium text-center">{{recieverInfo?.name}}</p>
               <p class="small-text grey text-center">{{recieverInfo?.email}}</p>
@@ -102,11 +102,8 @@
         <h4 class="bold text-center">No Chat Aailable</h4>
         <div>
         </div>
-        <div class="bottom-btn vertical-center text-center">
-          <button (click)="findHost()" class="custom-btn blue big-btn mt-3" data-bs-toggle="modal" data-bs-target="#noChatModal" data-bs-dismiss="modal">Find Host</button>
-        </div>
       </div>
     </div>
-   
+
   </div>
 </ng-template>

@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CharterService } from 'src/app/core/host/charter.service';
 import { Router } from '@angular/router';
 import { utils } from 'src/app/shared/utility/utils';
+import { CreatorTypes } from 'src/app/shared/enums/creator-types';
+import { EventService } from 'src/app/core/Event/event.service';
 
 @Component({
   selector: 'app-charter-creation-component',
@@ -17,15 +19,17 @@ export class CharterCreationComponentComponent implements OnInit {
   public dateValue:Date = new Date();
   isSubmitted = false;
   charterCreationForm: FormGroup;
-  constructor(public fb: FormBuilder,private modal: NgbModal,private service:CharterService, private toastr: ToastrService,private route: Router,) { }
+  boatExistingEventDates: any;
+  constructor(public fb: FormBuilder,private modal: NgbModal,private service:CharterService, private toastr: ToastrService,private route: Router,
+    private eventService: EventService) { }
   @ViewChild('chartercreationpopup') templateRef: TemplateRef<any>;
   CHARTER_TABS = CharterCreationTab;
   currentTab = this.CHARTER_TABS.BoatSelection;
   boatlistOptions:any=[];
   isAgree: boolean = false;
   minDate = new Date();
-
-
+  creatorTypes=CreatorTypes;
+  eventId:number;
   ngOnInit(): void {
 
     this.service.getBoats().subscribe((boatlist:any)=>{
@@ -59,6 +63,7 @@ export class CharterCreationComponentComponent implements OnInit {
     if(this.charterCreationForm.valid){
       let data = this.charterCreationForm.value;
       this.service.saveCharter(data).subscribe((res: any) => {
+     this.eventId  = res.id;
           this.openModal(this.templateRef);
       });
     }
@@ -96,19 +101,24 @@ export class CharterCreationComponentComponent implements OnInit {
   }
   selectBoatName(event: any)
   {
-    let Id = event.target.value;
-    this.service.getSelectedBoatDetail(Id).subscribe((res:any)=>
-    {
-    })
+    let id = event.target.value;
+    this.eventService.getBoatBookedDates(id).subscribe((res:any)=>{
+      this.boatExistingEventDates = res?.bookedDates;
+    });
   }
 
 openModal(template: TemplateRef<any>) {
   this.modal.open(template,{ windowClass: 'custom-modal custom-small-modal' });
 }
 onRenderCell(args: any) {
+  let find = this.boatExistingEventDates.findIndex((res:any)=>
+    new Date(res).toLocaleDateString() == new Date(args.date).toLocaleDateString()
+  );
+  if(find>0)
+  args.isDisabled = true;
 }
 Redirect(){
   this.modal.dismissAll();
-    this.route.navigate(['/host-dashboard']);
+  this.route.navigate(['/service-provider/service-provider-information/', this.eventId ,this.creatorTypes.Charter]);
 }
 }

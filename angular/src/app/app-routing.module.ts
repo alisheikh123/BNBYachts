@@ -1,8 +1,5 @@
-import { AuthAppModule } from './views/auth/auth.module';
-import { ResetPasswordComponent } from './views/auth/components/reset-password/reset-password.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ConfirmEmailComponent } from './views/auth/components/confirm-email/confirm-email.component';
 import { ActivateAccountComponent } from './views/auth/components/activate-account/activate-account.component';
 import { TryHostingComponent } from './views/common/try-hosting/try-hosting.component';
 import { MyProfileComponent } from './views/common/user-profile/my-profile/my-profile.component';
@@ -57,6 +54,11 @@ const routes: Routes = [
   {
     path: 'contracts',
     loadChildren: () => import('./views/contracts/contracts.module').then(m => m.ContractsModule)
+  },
+  {
+    
+    path: "service-provider", 
+    loadChildren: () => import('./views/service-provider/service-provider.module').then(m => m.ServiceProviderModule)
   }
 ];
 

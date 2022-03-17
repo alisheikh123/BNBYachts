@@ -10,6 +10,9 @@ import { MySlicePipe } from './my-slice.pipe';
 import { LocalizationPipe } from './localization.pipe';
 import { SearchFilterPipe } from './search.pipe';
 import { GroupByPipe } from './group-by.pipe';
+import { TimeFormatPipe } from './timeformat.pipe';
+import { DateMonthFormatPipe } from './date-month-format.pipe';
+import { YearFormatPipe } from './yearformat.pipe';
 const pipes = [
   ExcerptPipe,
   GetValueByKeyPipe,
@@ -20,7 +23,10 @@ const pipes = [
   MySlicePipe,
   LocalizationPipe,
   SearchFilterPipe,
-  GroupByPipe
+  GroupByPipe,
+  TimeFormatPipe,
+  DateMonthFormatPipe,
+  YearFormatPipe
 ];
 
 @NgModule({

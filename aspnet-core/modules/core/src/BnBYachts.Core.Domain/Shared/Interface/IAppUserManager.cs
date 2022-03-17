@@ -1,6 +1,8 @@
-﻿using BnBYachts.Core.Shared.Dto;
+﻿using BnBYachts.Core.Enum;
+using BnBYachts.Core.Shared.Dto;
 using BnBYachts.Core.Shared.Requestable;
 using BnBYachts.Core.Shared.Transferable;
+using BnBYachts.Shared.Model;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
@@ -18,6 +20,11 @@ namespace BnBYachts.Core.Shared.Interface
         Task<bool> AddHostRole(string userId);
         Task<bool> IsEmailExist(string email);
         Task<ResponseDto> AddRoles(RolesTransferable userInput);
+        Task<UserReview> IsRoleName(string userId,string userRole , string hostRole);
+        Task<EntityResponseModel> AddServiceProviderRole(string userId, string type);
+        Task<bool> UpdateAdminProfile(AdminProfileRequestable userInput);
+        Task<bool> checkAdminRoleName(string userId);
+        Task<bool> RoleVerify(string userId, string []roles);
     }
 
 }

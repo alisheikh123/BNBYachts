@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="account-settings">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="{{assetsUrlProfile + (serviceProvider?.userImagePath || USER_DEFAULTS.avatar)}}" alt="Service Provider" />
+            </div>
+            <h5 class="user-name">{{serviceProvider?.userName}}</h5>
+            <div>
+                <h6 class="user-name">{{serviceProvider?.companyName}}</h6>
+                <div><h6 class="user-name">{{serviceProvider?.serviceProviderName}}</h6></div>
+            </div>
+          </div>                 
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Personal Details</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="fullName">User Name</label>
+              <p><b>{{serviceProvider?.userName}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="eMail">Address</label>
+              <p><b>{{serviceProvider?.location}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Date From</label>
+              <p><b>{{serviceProvider?.fromDate | date}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Date From</label>
+              <p><b>{{serviceProvider?.toDate | date}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Experience</label>
+              <p><b>{{serviceProvider?.experience}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Service Fee</label>
+              <p><b>{{serviceProvider?.fee}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Bank Details</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">Account Name</label>
+              <p><b>{{serviceProvider?.accountName}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">Bank Name</label>
+              <p><b>{{serviceProvider?.bankName}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">IBAN Number</label>
+              <p><b>{{serviceProvider?.iban}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">Swift</label>
+              <p><b>{{serviceProvider?.swift}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">Zip Code</label>
+              <p><b>{{serviceProvider?.zipCode}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="about">
+            <label>Bio</label>
+            <p>{{serviceProvider?.bio}}</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+</div>

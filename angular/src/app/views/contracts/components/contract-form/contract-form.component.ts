@@ -8,6 +8,7 @@ import { IContractsTerms } from '../interfaces/contracts-attachments';
 import {Location} from '@angular/common';
 import { EventService } from 'src/app/core/Event/event.service';
 import { ContractStaus } from 'src/app/shared/enums/booking.constants';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contract-form',
@@ -148,8 +149,11 @@ export class ContractFormComponent implements OnInit {
       formData.append('contractForm', JSON.stringify(this.contractForm.value));
       formData.append('attachments', JSON.stringify(this.termsAttachments));
       this.termsAttachments.forEach((f) => formData.append('files', f.file));
-      this.service.addContracts(formData).subscribe(res => {
-        this.toastr.success('Contract request sent successfully', "Contracts");
+      this.service.addContracts(formData).subscribe((res:any) => {
+        this.toastr.success(`Contract request sent successfully <a href="${window.location.origin}/contracts/contract/${res?.data?.id}">View Contract</a>`,
+          "Contracts", {
+          enableHtml: true
+        });
         this._location.back();
       })
     }

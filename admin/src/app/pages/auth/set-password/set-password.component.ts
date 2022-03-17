@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../../../core/backend/common/services/users.service';
 import { AuthService } from '../../../core/mock/auth.service';
 
@@ -12,7 +11,8 @@ import { AuthService } from '../../../core/mock/auth.service';
   styleUrls: ['./set-password.component.scss']
 })
 export class SetPasswordComponent implements OnInit {
-
+  email: string;
+  id : string ;
   registrationForm: FormGroup;
   hasError: boolean;
   passwordValidator: string;
@@ -23,11 +23,11 @@ export class SetPasswordComponent implements OnInit {
   };
   constructor(
     public authService: AuthService,
-    private toaster : NbToastrService,
     public usersService : UsersService,
+    private toaster : NbToastrService,
     private fb: FormBuilder,
     private router: Router,
-    // private toaster: ToastrService,
+    private route : ActivatedRoute,
   )  {
     this.passwordValidator =
     '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z0-9$@$!%*?&].{7,}$';
@@ -37,19 +37,12 @@ export class SetPasswordComponent implements OnInit {
     this.initForm();
   }
   initForm() {
+    this.email = this.route.snapshot.queryParams.username;
+    this.id = this.route.snapshot.queryParams.id;
     this.registrationForm = this.fb.group(
       {
-        Email: [
-          '',
-          Validators.compose([
-            Validators.required,
-            Validators.pattern(
-              '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'
-            ),
-            Validators.minLength(3),
-            Validators.maxLength(320),
-          ]),          
-      ],
+        Id : this.id,
+        Email : this.email,
       Password: [
         '',
         Validators.compose([Validators.pattern(this.passwordValidator)]),
@@ -68,29 +61,36 @@ export class SetPasswordComponent implements OnInit {
   }
 
   submit() {
-    debugger;
     this.hasError = false;
     var user = this.registrationForm.value;
     this.usersService.SetAdminPassword(user).subscribe(res => {
-      if(res.status == 200){
-        this.toaster.primary(res.message , 'Set Password')
-        // this.router.navigate(['/pages/dashboard']);
-      }else{
-        this.toaster.danger(res.message , 'Set Password')
+      if(res.status == true){
+        this.router.navigate(['/login']);
       }
     });
   }
-
-  stopKeys(e: any) {
-    e.preventDefault();
+toggleFieldTextType(isPassword: boolean) {
+  isPassword ? this.passwordViewer.passwordFieldTextType = !this.passwordViewer.passwordFieldTextType
+    : this.passwordViewer.confirmPasswordFieldTextType = !this.passwordViewer.confirmPasswordFieldTextType;
+}
+onPasswordChange() {
+  if (this.registrationForm.controls.Password.value == this.registrationForm.controls.confirmPassword.value) {
+    this.registrationForm.controls.confirmPassword.setErrors(null);
+  } else {
+    this.registrationForm.controls.confirmPassword.setErrors({ mismatch: true });
   }
 }
+stopKeys(e: any) {
+  e.preventDefault();
+}
+
+}
 export const passwordMatchingValidatior: ValidatorFn = (
-  control: AbstractControl
+control: AbstractControl
 ): ValidationErrors | null => {
-  const password = control.get('Password');
-  const confirmPassword = control.get('confirmPassword');
-  return password?.value === confirmPassword?.value
-    ? null
-    : { notmatched: true };
+const password = control.get('Password');
+const confirmPassword = control.get('confirmPassword');
+return password?.value === confirmPassword?.value
+  ? null
+  : { notmatched: true };
 };

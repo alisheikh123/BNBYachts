@@ -5,21 +5,39 @@
           <div class="col-lg-3 col-md-4 py-2">
             <div class="custom-card user-info-wrap">
               <div class="image-with-text">
-                <div class="image-with-text-inner big-image">
-                  <img src="../../../../../assets/images/upload-img.png" alt="" />
-                </div>
-                <p class="medium text-center py-2">Update profile photo</p>
-                <h6 class="bold text-center p-0 pb-3">{{userResponse.name}}</h6>
+                  <div class="image-with-text">
+                      <form [formGroup]="uploadPictureForm">
+                      <div class="avatar-upload-outer edit-avatar-page">
+                          <div class="avatar-upload">
+                            <div class="avatar-preview">
+                              <div id="imagePreview" [ngStyle]="{ 'background-image': 'url(' + assetsUrlProfile+(userResponse?.imagePath!=null?userResponse?.imagePath:USER_DEFAULTS.avatar)+ ')'}">
+                                  <img [src]="imageSrc" class="previewDimention" >
+                              </div>
+                            </div>
+                            <div class="avatar-edit">
+                              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="profile"  (change)="onFileChange($event)"/>
+                              <label for="imageUpload" class="custom-btn blue big-btn"><i class="fa fa-edit"></i></label>
+                            </div>
+                          </div>
+
+                        </div>
+                      </form>
+                    <p class="medium text-center py-2">{{'Updateprofilephoto' | localization}}</p>
+                    <h6 class="bold text-center p-0 pb-3">{{userResponse?.name}}</h6>
+                  </div>
               </div>
+
               <div class="border-top"></div>
               <div class="py-2">
-                <p class="medium text-center">Verification</p>
-                <p class="medium text-center py-2">
-                  <i *ngIf="userResponse.isPhoneConfirmed" class="fa fa-check pe-2"></i>
-                  <i *ngIf="!userResponse.isPhoneConfirmed" class="fa fa-times pe-2"></i>Number Verified
-                </p>
+                  <p class="medium text-center">{{'VerificationStatus' | localization}}</p>
+                  <p class="medium text-center py-2" *ngIf="userResponse?.isPhoneConfirmed==false">
+                      <i class="fa fa-times pe-2"> {{'UnVerified'|localization}}</i><br><br>
+                      <button class="custom-btn blue big-btn" (click)="verifyPhoneNumber()">{{'VerifyPhoneNumber' | localization}}</button>
+                  </p>
+                 <p class="medium text-center py-2" *ngIf="userResponse?.isPhoneConfirmed==true"><i class="fa fa-check pe-2"></i> {{'Verified' | localization}}</p>
+                 <p class="medium text-center py-2" *ngIf="userResponse?.isPhoneConfirmed==true"><i class="pe-2"></i>{{userResponse?.phoneNumber}}</p>
               </div>
-            </div>
+             </div>
           </div>
           <div class="col-lg-9 col-md-8 py-2">
             <div class="user-details-info-wrapper">
@@ -50,7 +68,7 @@
                         control: profileForm.controls['Name']
                       }"></ng-container>
                     </div>
-  
+
                     <div class="custom-input-field">
                       <label>Contact Number</label>
                       <input
@@ -66,7 +84,7 @@
                         control: profileForm.controls['PhoneNumber']
                       }"></ng-container>
                     </div>
-  
+
                     <div class="custom-input-field">
                       <label>About</label>
                       <textarea
@@ -83,7 +101,7 @@
                         control: profileForm.controls['About']
                       }"></ng-container>
                     </div>
-  
+
                     <div class="custom-input-field">
                       <label>Email</label>
                       <input
@@ -95,20 +113,20 @@
                         name="email"
                         formControlName="Email"
                       />
-  
+
                       <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                         validation: 'required',
                         message: 'Email is required',
                         control: profileForm.controls['Email']
                       }"></ng-container>
-      
+
                       <ng-container  [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                         validation: 'pattern',
                         message: 'Invalid Email',
                         control: profileForm.controls['Email']
                       }"></ng-container>
                     </div>
-  
+
                     <div class="py-2">
                       <div class="custom-flex-end">
                         <button class="custom-btn grey" [routerLink]="['/my-profile']">Cancel</button>
@@ -122,7 +140,7 @@
                   </div>
                 </div>
               </form>
-  
+
               <!-- <div class="py-2">
                 <p class="bold pb-2">My Listing</p>
                 <div class="image-wrapper-boat">

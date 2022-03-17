@@ -28,9 +28,17 @@ export interface User{
     RoleId : string[]
 }
 export interface SetPasswordModal{
+    id : string;
     email : string;
     password : string;
     confirmPassword : string;
+}
+export interface AdminProfileModal{
+    id : string;
+    name : string;
+    email :string;
+    about : string;
+    phoneNumber : string;
 }
  export abstract class BoatUserData {
      abstract getBoatUsers(roleName : string): Observable<BoatUser[]>;
@@ -40,5 +48,7 @@ export interface SetPasswordModal{
      abstract SuspendUser(userId : string);
      abstract RegisterAdmin(user : User);
      abstract SetAdminPassword(admin : SetPasswordModal);
+     abstract UpdateAdminProfile(admin : AdminProfileModal);
+     abstract UpdateProfilePicture(file : any);
    }
  

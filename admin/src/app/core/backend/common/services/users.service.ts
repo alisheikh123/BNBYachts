@@ -1,3 +1,4 @@
+import { AdminProfileModal } from './../../../../shared/interfaces/BoatUser';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsersApi } from '../api/users.api';
@@ -18,8 +19,8 @@ export class UsersService extends BoatUserData {
   getUserInfoById(id: string) {
     return this.api.getUserInfoById(id);
   }
-  getReviewByUserId(reviewerId: string): Observable<BookingReview[]> {
-    return this.api.getReviewByUserId(reviewerId);
+  getReviewByUserId(revieweeId: string): Observable<BookingReview[]> {
+    return this.api.getReviewByUserId(revieweeId);
   }
   SuspendUser(userId: string) {
     return this.api.SuspendUser(userId);
@@ -29,5 +30,11 @@ export class UsersService extends BoatUserData {
   }
   SetAdminPassword(admin: SetPasswordModal) {
     return this.api.SetAdminPassword(admin);
+  }
+  UpdateAdminProfile(admin: AdminProfileModal) {
+    return this.api.UpdateAdminProfile(admin);
+  }
+  UpdateProfilePicture(file : any) {
+    return this.api.UpdateProfilePicture(file);
   }
 }

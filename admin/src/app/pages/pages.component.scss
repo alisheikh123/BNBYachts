@@ -4,7 +4,7 @@
   ::ng-deep router-outlet + * {
     display: block;
     animation: fade 1s;
-
+    // color: #004fc4;
     @keyframes fade {
       from {
         opacity: 0;

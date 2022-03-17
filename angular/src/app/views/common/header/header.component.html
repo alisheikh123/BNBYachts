@@ -39,9 +39,9 @@
                                     </span>
                                     Dashboard
                             </a>
-                            <a class="underline-link-blk" (click)="activeTab=HEADER_TABS.ServiceProvider" [ngClass]="{'active':activeTab == HEADER_TABS.ServiceProvider}">
+                            <a  [routerLink]="['/service-provider/services']" class="underline-link-blk" (click)="activeTab=HEADER_TABS.ServiceProvider" [ngClass]="{'active':activeTab == HEADER_TABS.ServiceProvider}">
                                 <span class="logo-wrapper">
-                                    <a class="logo-btn"><img src="../../../../assets/images/provider-icon.svg"
+                                    <a  class="logo-btn"><img src="../../../../assets/images/provider-icon.svg"
                                         alt=""></a>
                                     </span>
                                     Service Provider
@@ -93,15 +93,36 @@
                         </ng-container>
                     </div>
                     <div class="right-content">
-                        <!-- <a [routerLink]="['/my-bookings']" class="custom-btn white grey-btn regular">Host Bookings</a> -->
-                        <a (click)="earn()" class="custom-btn white grey-btn regular"
-                            *ngIf="userDetails?.roles?.length == 1">Earn With Us</a>
-                        <a (click)="switchRole()" class="custom-btn white grey-btn regular"
-                            *ngIf="userDetails?.roles?.length > 1">Switch to {{app.loggedInUserRole == USER_ROLE.host ?
-                            'User' :'Host'}}</a>
+                        <a *ngIf="showEarnWithUs" (click)="earn()" class="custom-btn white grey-btn regular"
+                     >Earn With Us</a>
+                            <div *ngIf="userDetails?.userRoles?.length > 1" class="dropdown custom-dropdown borderless-dropdown">
+                                <button class="dropdown-btn dropdown-toggle blk-clr underline-link-blk" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="logo-wrapper">
+                                        <!-- <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
+                                            alt=""></a> -->
+                                    </span>
+                                   {{'SwitchRole' | localization}} 
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <div *ngFor="let role of userDetails?.userRoles">
+                                        <li><a (click)="switchRole(roles.User)" *ngIf="role?.normalizedName==roles.User && currentRole!= roles.User" class="dropdown-item">{{'SwitchUser' | localization}}</a></li>
+                                    <li><a (click)="switchRole(roles.Host)" *ngIf="role?.normalizedName==roles.Host && currentRole!= roles.Host" class="dropdown-item">{{'SwitchHost' | localization}}</a></li>
+                                    <li><a  (click)="switchRole(roles.Captain)" *ngIf="role?.normalizedName==roles.Captain"  class="dropdown-item" >{{'SwitchCaptain' | localization}}</a></li>
+                                    <li><a (click)="switchRole(roles.Management)" *ngIf="role?.normalizedName==roles.Management" class="dropdown-item">{{'SwitchManagement' | localization}}</a></li>
+                                    <li><a (click)="switchRole(roles.Cleaning)" *ngIf="role?.normalizedName==roles.Cleaning" class="dropdown-item">{{'SwitchCleaning' | localization }}</a></li>
+                                </div>
+                                <li>  <a *ngIf="showServiceProvider && isHost" [routerLink]="['/service-provider']" class="dropdown-item"
+                                    >{{'BecomeServiceProvider'| localization }}</a>
+                                  </li>
+                                  <li>
+                                    <a [routerLink]="['/try-hosting']" *ngIf="showHost"  class="dropdown-item" >{{'BecomeHost'| localization }}</a>
+                                  </li>
+                                </ul>
+                              </div>
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
                                 id="dropdownMenuButton1">
+                                <app-my-profile (profileImage)="updateProfileImage($event)" class="myProfileChild"></app-my-profile>
                                 <img src="{{assetUrlS3 + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
@@ -140,7 +161,7 @@
           <a [ngClass]="{'earn-active': selectedOption.byHost}" (click)="selectedOption.byServiceProvider = false;selectedOption.byHost = !selectedOption.byHost;continueToEarn()" class="custom-card custom-flex-between card-right-img">
               <div class="card-right-img-inside">
                 <h6 class="medium p-0 text-start">Become a Host</h6>
-                <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                <p class="grey small-tetx my-2 line-clamp-1">{{"profileDescription" | localization}}</p>
                 </div>
               <img src="../../../../assets/images/host-img-small.png" alt="">
 
@@ -148,10 +169,10 @@
               <a [ngClass]="{'earn-active': selectedOption.byServiceProvider}" (click)="selectedOption.byHost = false;selectedOption.byServiceProvider = !selectedOption.byServiceProvider;continueToEarn()" class="custom-card custom-flex-between card-right-img mt-3">
                 <div class="card-right-img-inside">
                   <h6 class="medium p-0 text-start">Service Provider</h6>
-                  <p class="grey small-tetx my-2 line-clamp-1">Short description about the host Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                  <p class="grey small-tetx my-2 line-clamp-1">{{"profileDescription" | localization}}</p>
                   </div>
                 <img src="../../../../assets/images/service-provider.png" alt="">
-                </a>                
+                </a>
           </div>
         </div>
       </div>

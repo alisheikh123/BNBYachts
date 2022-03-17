@@ -59,6 +59,30 @@ namespace BnBYachts.Booking.Services
         public async Task<ICollection<BoatelBookingTransferableDto>> GetHostBoatelBookings()
         => await _userListManager.GetHostBoatelBookings(CurrentUser.Id.ToString()).ConfigureAwait(false);
 
-        public async Task<EntityResponseListModel<BookingsLookupDto>> GetMyBookings() => await _userListManager.GetMyBookings(CurrentUser.Id).ConfigureAwait(false);
+        public async Task<EntityResponseListModel<BookingsLookupDto>> GetMyBookings() =>
+            await _userListManager.GetMyBookings(CurrentUser.Id).ConfigureAwait(false);
+
+        public async Task<EntityResponseListModel<BoatelBookingTransferableDto>> GetHostUpcomingBoatelBookings(EntityBookingParamsDto param)
+        {
+            var logInfo = new { userId = param.UserId, RequestId = _unitOfWorkManager.Current.Id };
+            _logger.LogInformation("Get Boatel Reservation Booking of Upcoming {@logInfo}", logInfo);
+            param.UserId = CurrentUser.Id;
+           return await _userListManager.GetHostUpcomingBoatelBookings(param).ConfigureAwait(false);
+        }
+
+        public async Task<EntityResponseListModel<CharterBookingTransferableDto>> GetHostUpcomingCharterBookings(EntityBookingParamsDto param)
+        {
+            var logInfo = new { userId = param.UserId, RequestId = _unitOfWorkManager.Current.Id };
+            _logger.LogInformation("Get Charter Reservation Booking of Upcoming {@logInfo}", logInfo);
+            param.UserId = CurrentUser.Id;
+            return await _userListManager.GetHostUpcomingCharterBookings(param).ConfigureAwait(false);
+        }
+        public async Task<EntityResponseListModel<EventBookingTransferableDto>> GetHostUpcomingEventBookings(EntityBookingParamsDto param)
+        {
+            var logInfo = new { userId = param.UserId, RequestId = _unitOfWorkManager.Current.Id };
+            _logger.LogInformation("Get Event Reservation Booking of Upcoming {@logInfo}", logInfo);
+            param.UserId = CurrentUser.Id;
+            return await _userListManager.GetHostUpcomingEventBookings(param).ConfigureAwait(false);
+        }
     }
 }

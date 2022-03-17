@@ -92,7 +92,7 @@
                                                     <div class="custom-flex-coumn" *ngIf="((this.approvalPolicyString.length<=20));else greaterThanLimitBlock">
                                                         <p>{{this.approvalPolicyString}}</p>
                                                     </div>
-                                                    <ng-template #greaterThanLimitBlock>                                                        
+                                                    <ng-template #greaterThanLimitBlock>
                                                         {{(this.readAll?this.approvalPolicyString:this.approvalPolicyString|slice:0:21)}}
                                                         <button class="custom-btn underline-blue-link no-before-content p-0" (click)="this.readAll = !this.readAll">{{ this.readAll ? 'Read Less' : 'Read All...' }}</button>
                                                       </ng-template>

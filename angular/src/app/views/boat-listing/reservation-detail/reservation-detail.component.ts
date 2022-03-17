@@ -8,6 +8,7 @@ import { BookingService } from 'src/app/core/Booking/booking.service';
 import { ReservationListsService } from 'src/app/core/host/reservation-lists.service';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { utils } from 'src/app/shared/utility/utils';
 import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component';
@@ -66,7 +67,7 @@ export class ReservationDetailComponent implements OnInit {
       this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
-      this.totalDays = Math.ceil((this.checkOutDate - this.checkInDate) / 8.64e7) + 1;
+      this.totalDays = utils.getDaysBetweenTwoDates(this.checkInDate,this.checkOutDate);
       this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
         this.booking.boatDetail = boatdetail;
         this.booking.TotalDays = this.totalDays;
@@ -86,7 +87,8 @@ export class ReservationDetailComponent implements OnInit {
   addReview() {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {
       let review = {
-        revieweeID: this.booking?.boatId,
+        revieweeID : this.booking?.hostId,
+        boatId: this.booking?.boatId,
         bookingId: this.bookingId,
         reviewDescription: res.reviewText,
         ratings: res.ratingStars
@@ -129,7 +131,7 @@ export class ReservationDetailComponent implements OnInit {
       this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
-      this.totalDays = Math.ceil((this.checkOutDate - this.checkInDate) / 8.64e7) + 1;
+      this.totalDays = utils.getDaysBetweenTwoDates(this.checkInDate,this.checkOutDate);
       if (this.bookingStatus != this.BOOKING_STATUS.Cancel) {
 
         this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {

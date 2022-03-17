@@ -1,0 +1,37 @@
+// error page 
+.error-page-wrapper{
+    @include custom-flex-col;
+    align-items: center;
+    height: 100%;
+    .error-page-img{
+      max-width: 150px;
+      max-height: 150px;
+      width: 100%;
+     
+      img{
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .error-page-content{
+      .error-name{
+        font-size: 58px;
+        @include breakpoint(laptop){
+            font-size: 50px;  
+        }
+        @include breakpoint(lg){
+            font-size: 44px;  
+        }
+        @include breakpoint(md){
+            font-size: 40px;  
+        }
+        @include breakpoint(sm){
+            font-size: 36px;  
+        }
+        @include breakpoint(xs){
+            font-size: 30px;  
+        }
+        display: block;
+      }
+    }
+  }

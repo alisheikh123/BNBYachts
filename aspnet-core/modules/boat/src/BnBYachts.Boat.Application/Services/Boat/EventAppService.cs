@@ -22,8 +22,8 @@ namespace BnBYachts.Boat.Services.Boat
 
         public async Task<BoatEventCalendarTransferable> GetBoatBookedDates(int boatId) => await _eventManager.GetBoatBookedDates(boatId).ConfigureAwait(false);
         public async Task<ICollection<BoatLookupTransferable>> GetBoats() => await _eventManager.GetBoats(CurrentUser.Id);
-        public async Task<bool> SaveEvent(EventRequestable boatEvent) => await _eventManager.SaveEvent(boatEvent);
-        public async Task<EntityResponseListModel<EventDTO>> GetEvents(int page, int pageSize) => await _eventManager.GetEvents(CurrentUser.Id,page,pageSize).ConfigureAwait(false);
+        public async Task<EntityResponseModel> SaveEvent(EventRequestable boatEvent) => await _eventManager.SaveEvent(boatEvent);
+        public async Task<EntityResponseListModel<EventDTO>> GetEvents(int pageNo, int pageSize) => await _eventManager.GetEvents(CurrentUser.Id, pageNo, pageSize).ConfigureAwait(false);
 
         public async Task<EntityResponseModel> GetEventById(int eventId)
         {

@@ -7,6 +7,7 @@ import { AppComponent } from 'src/app/app.component';
 import { AllHostBoatsService } from 'src/app/core/host/all-host-boats.service';
 import { OnboardingService } from 'src/app/core/host/onboarding.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { CreatorTypes } from 'src/app/shared/enums/creator-types';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
 import { BoatTypes, FeaturesTypes, OnBoardingTabs } from 'src/app/shared/enums/yacht-search.constant';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
@@ -44,7 +45,7 @@ export class HostOnboardingComponent implements OnInit {
 
   otherGalleryImages: any[] = [];
   USER_ROLES=UserRoles;
-
+  creatorTypes=CreatorTypes;
 
   constructor(
     private fb: FormBuilder,
@@ -219,10 +220,10 @@ export class HostOnboardingComponent implements OnInit {
         if (res.isSuccess == true) {
           //this.router.navigate[];
           if (res.isHostExists == false) {
-            this.onBoardingService.addHostRole().subscribe(res => {
-              if (res == true) {
+            this.onBoardingService.addHostRole().subscribe((resp:any) => {
+              if (resp == true) {
                 this.toastr.success("Host Onboarding Completed!", "Boat");
-                this.router.navigate(['host/host-boat-listing']);
+                this.router.navigate(['/service-provider/service-provider-information/', res.id ,this.creatorTypes.Boatel]);
                 this.app.loggedInUserRole = this.USER_ROLES.host;
                 localStorage.setItem('userRole', this.app.loggedInUserRole);
                 setTimeout(() => {
@@ -233,7 +234,7 @@ export class HostOnboardingComponent implements OnInit {
           }
           else {
             this.toastr.success("Boat added successfully.", "Boat");
-            this.router.navigate(['host/host-boat-listing']);
+            this.router.navigate(['/service-provider/service-provider-information/', res.id ,this.creatorTypes.Boatel]);
           }
 
         }

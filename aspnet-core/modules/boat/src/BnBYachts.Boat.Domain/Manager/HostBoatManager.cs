@@ -10,10 +10,11 @@ using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boat.Helpers;
-using BnBYachts.Boat.Shared.Helper;
 using BnBYachts.Events;
 using Volo.Abp.ObjectMapping;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
 
 namespace BnBYachts.Boat.Manager
@@ -34,13 +35,17 @@ namespace BnBYachts.Boat.Manager
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
 
 
+        private readonly EventBusDispatcher _eventBusDispatcher;
+
+
         public HostBoatManager(IRepository<RuleEntity, int> rulesRepo,
             IRepository<FeatureEntity, int> featuresRepo, IRepository<BoatEntity, int> boatRepository,
             IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository,
             IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep,
             IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatGalleryRepo,
             IRepository<EventEntity, int> eventRepository,
-            IObjectMapper<BoatDomainModule> objectMapper)
+            IObjectMapper<BoatDomainModule> objectMapper,
+            EventBusDispatcher eventBusDispatcher)
         {
 
             _boatRepository = repository;
@@ -53,6 +58,7 @@ namespace BnBYachts.Boat.Manager
             _objectMapper = objectMapper;
             _boatGalleryRepo = boatGalleryRepo;
             _eventRepository = eventRepository;
+            _eventBusDispatcher = eventBusDispatcher;
         }
         public async Task<HostBoatRequestable> Insert(HostBoatRequestable input)
         {
@@ -258,7 +264,7 @@ namespace BnBYachts.Boat.Manager
             var totalBoats = await _boatRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
             //Host Role
             var dataResponse = new BoatAddResponseTransferable();
-            dataResponse.isHostExists = totalBoats.Count == 0 ? false : true;
+            dataResponse.IsHostExists = totalBoats.Count == 0 ? false : true;
             var boat = boatDetails.CreateMapped<HostBoatRequestable, BoatEntity>();
             boat.CreationTime = DateTime.Now;
             boat.LastModifierId = boat.CreatorId = userId;
@@ -269,8 +275,16 @@ namespace BnBYachts.Boat.Manager
             {
                 var boatGallery = gallery.CreateMapped<BoatGalleryRequestable, BoatGalleryEntity>();
                 boatGallery.BoatEntityId = postBoatData.Id;
-                string uploadedFilePath = boatGallery.ImagePath;//FileUploader.UploadFilesLocal(gallery.FileName, gallery.FileData);
-                await FileUploader.UploadFileToAWSAsync(gallery.FileName, gallery.FileData, "boatGallery", "");
+                
+                _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+                {
+                    ChildFolder = "",
+                    File = Convert.FromBase64String(gallery.FileData.Split("base64,")[1]),
+                    FileName = gallery.FileName,
+                    ContentType = gallery.FileType,
+                    SubFolder = "boatGallery"
+                });
+
                 boatGallery.ImagePath = gallery.FileName;
                 await _boatGalleryRepo.InsertAsync(boatGallery).ConfigureAwait(false);
 
@@ -317,7 +331,8 @@ namespace BnBYachts.Boat.Manager
             boatCalendar.BoatEntityId = postBoatData.Id;
             boatCalendar.IsAvailable = true;
             await _boatelCalendarRepo.InsertAsync(boatCalendar, autoSave: true).ConfigureAwait(false);
-            dataResponse.isSuccess = true;
+            dataResponse.IsSuccess = true;
+            dataResponse.Id = postBoatData.Id;
             return dataResponse;
         }
 

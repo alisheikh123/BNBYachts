@@ -19,6 +19,7 @@ import { NotFoundModule } from '../common/not-found-component/not-found.module';
 import { CharterQuoteRequestComponent } from './components/QuoteRequest/charter-quote-request/charter-quote-request.component';
 import { EventQuoteRequestComponent } from './components/QuoteRequest/event-quote-request/event-quote-request.component';
 import { CalendarModule, DateRangePickerModule, DateTimePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { SwitchRoleComponent } from './components/switch-role/switch-role.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CalendarModule, DateRangePickerModule, DateTimePickerModule, TimePicker
     ChatComponent,
     ChatUsersComponent,
     CharterQuoteRequestComponent,
-    EventQuoteRequestComponent
+    EventQuoteRequestComponent,
+    SwitchRoleComponent
   ],
   imports: [
     HomeRoutingModule,

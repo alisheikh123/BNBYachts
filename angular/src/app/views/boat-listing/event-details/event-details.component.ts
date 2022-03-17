@@ -98,6 +98,8 @@ export class EventDetailsComponent implements OnInit {
       if ((this.eventFilterDetails.adults + this.eventFilterDetails.childrens) > 0) {
         let bookingModel = {
           eventId: this.eventId,
+          adults:this.eventFilterDetails.adults,
+          children:this.eventFilterDetails.childrens,
           eventDate: this.eventDetails.startDateTime,
           noOfGuests: this.eventFilterDetails.adults + this.eventFilterDetails.childrens,
           hostId: this.eventDetails.boat.creatorId,

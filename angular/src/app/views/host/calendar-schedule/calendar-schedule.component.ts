@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { debug } from 'console';
 
 
 @Component({
@@ -110,7 +109,6 @@ export class CalendarScheduleComponent implements OnInit {
   bindEvents() {
     let event: any = [];
     this.bookingsCalendar.forEach((element: any) => {
-      console.log(event);
       event.push({
         eventId: element.id,
         serviceType: element.serviceType,

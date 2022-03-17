@@ -31,4 +31,42 @@ export class utils {
         var Days =  EndDate.diff(startDate, 'days');
         return Days < 0 ? 0 : Days+1;
       }
+      static convertToDate(date:Date)
+      {
+          return moment(date).format("DD-MM-YYYY");
+      }
+       static convertToTime(date:Date)
+      {
+          return moment(date).format("HH:mm");
+      }
+      static concatinateDateTime(date:Date,time:Date)
+      {
+          return  moment(date).format("YYYY-MM-DD") + " " + moment(time).format("hh:mm a");
+      }
+    static  isEmptyObject(obj:any) {
+        return (obj && (Object.keys(obj).length === 0));
+
+      }
+      static convertToCalenderDate(date:Date)
+      {
+          return moment(date).format("MM/DD/YYYY");
+      }
+      static convertDateToYearMonthDay(date:Date)
+      {
+          return moment(date).format("YYYY-MM-DD");
+      }
+      static getDaysBetweenTwoDates(date1:Date,date2:Date)
+      {
+        let firstDate = moment(date1).format('YYYY-MM-DD hh:mm:ss a');
+        let secondDate = moment(date2).format('YYYY-MM-DD hh:mm:ss a');
+        return Math.round(moment.duration(moment(secondDate).diff(firstDate)).asDays())
+      }
+      static getRemaingHours(firstDateTime:any,secondDateTime:any)
+      {
+        return Math.abs(firstDateTime - secondDateTime ) / 36e5;
+      }
+      static getTime(dateTime:any)
+      {
+        return moment(dateTime).format("hh:mm a")
+      }
 }
