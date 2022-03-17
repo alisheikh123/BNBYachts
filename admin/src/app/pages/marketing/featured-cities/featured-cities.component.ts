@@ -14,7 +14,7 @@ import { cityPicTransferable } from '../../../shared/interfaces/cityPicTransfera
 })
 export class FeaturedCitiesComponent implements OnInit {
   cityForm: FormGroup;
-  assetsUrlCity = environment.S3BUCKET_URL + '/cities/';
+  assetsUrlCity = environment.S3BUCKET_URL + '/profilePicture/cities/';
   citiesPic : string;
   fileInfo : string ='';
   closeResult: string;
