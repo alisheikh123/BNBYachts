@@ -19,7 +19,7 @@ namespace BnBYachts.Events
         public string Description { get; set; }
         public int GuestCapacity { get; set; }
         public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
+        public DateTime? EndDateTime { get; set; }
         public int AmountPerPerson { get; set; }
         public EventTypes EventType { get; set; }
         public virtual int? BoatId { get; set; }

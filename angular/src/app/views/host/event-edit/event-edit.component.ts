@@ -59,7 +59,6 @@ export class EventEditComponent implements OnInit {
       description: [this.eventRes?.data.description, Validators.required],
       guestCapacity: [this.eventRes?.data.guestCapacity, Validators.required],
       startDateTime: [this.eventRes?.data.startDateTime, Validators.required],
-      endDateTime: [this.eventRes?.data.endDateTime, Validators.required],
       amountPerPerson: [this.eventRes?.data.amountPerPerson, Validators.required],
       eventType: [this.eventRes?.data.eventType, Validators.required],
       isActive:[this.eventRes?.data.isActive]

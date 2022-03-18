@@ -120,13 +120,12 @@ export class EventReservationDetailComponent implements OnInit {
     return false;
     }
   }
-  isEndDateEnded(endDate: string) {
-    let outDate = moment(endDate).format("DD-MM-YYYY");
-    let currentDate = moment().format("DD-MM-YYYY");
-    let outTime = moment(endDate).format("HH:mm");
-    let curretTime = moment().format("HH:mm");
-    if (endDate != undefined && outTime != undefined) {
-      return (outDate == currentDate && moment(outTime).isAfter(curretTime) ? true : false)
+  isEndDateEnded(endDate: Date) {
+    let outDate = utils.convertDateToYearMonthDay(endDate);
+    let currentDate = new Date();
+    let currentDateFormat = utils.convertDateToYearMonthDay(currentDate);
+    if (endDate != undefined && currentDate != undefined) {
+      return (moment(outDate).isAfter(currentDateFormat) ? true : false);
     }
     else {
       return false;

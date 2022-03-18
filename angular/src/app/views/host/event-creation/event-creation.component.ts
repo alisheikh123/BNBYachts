@@ -1,4 +1,3 @@
-import { ThisReceiver, ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { EventService } from 'src/app/core/Event/event.service';
 import { CreatorTypes } from 'src/app/shared/enums/creator-types';
 import { EventTypes } from 'src/app/shared/enums/yacht-search.constant';
-import { EventCreationSuccessModalComponent } from './event-creation-success-modal/event-creation-success-modal.component';
 
 @Component({
   selector: 'app-event-creation',
@@ -17,7 +15,7 @@ import { EventCreationSuccessModalComponent } from './event-creation-success-mod
 export class EventCreationComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private eventService: EventService, private toastr: ToastrService,
-    private modal: NgbModal,private router:Router) { }
+    private modal: NgbModal, private router: Router) { }
 
   eventCreationForm: FormGroup;
   boats: any;
@@ -25,10 +23,10 @@ export class EventCreationComponent implements OnInit {
   submitted: boolean = false;
   currentTab = 1;
   isAgree: boolean = false;
-  boatExistingEventDates :any;
-  creatorTypes=CreatorTypes;
+  boatExistingEventDates: any;
+  creatorTypes = CreatorTypes;
   @ViewChild('createEventSuccessModal', { static: true }) templateRef: any;
-  minDate = new Date(); 
+  minDate = new Date();
 
 
   ngOnInit(): void {
@@ -46,9 +44,8 @@ export class EventCreationComponent implements OnInit {
       eventType: [1, Validators.required],
       guestCapacity: [0, Validators.required],
       startDateTime: [null, Validators.required],
-      endDateTime: [null, Validators.required],
       amountPerPerson: [0, Validators.required],
-      isActive:[true]
+      isActive: [true]
     });
   }
 
@@ -60,7 +57,7 @@ export class EventCreationComponent implements OnInit {
   }
 
   getBoatBookedDates() {
-    this.eventService.getBoatBookedDates(this.form.boatId.value).subscribe((res:any) => {
+    this.eventService.getBoatBookedDates(this.form.boatId.value).subscribe((res: any) => {
       this.boatExistingEventDates = res?.bookedDates;
     })
   }
@@ -70,7 +67,7 @@ export class EventCreationComponent implements OnInit {
   }
 
   removeGuests() {
-    if(this.eventCreationForm.controls.guestCapacity.value !=0 ){
+    if (this.eventCreationForm.controls.guestCapacity.value != 0) {
       this.eventCreationForm.controls.guestCapacity.setValue(this.eventCreationForm.controls.guestCapacity.value - 1);
     }
   }
@@ -86,7 +83,7 @@ export class EventCreationComponent implements OnInit {
       let data = this.eventCreationForm.value;
       this.eventService.saveEvent(data).subscribe((res: any) => {
         if (res.returnStatus) {
-          this.router.navigate(['/service-provider/service-provider-information/', res.data.id ,this.creatorTypes.Event]);
+          this.router.navigate(['/service-provider/service-provider-information/', res.data.id, this.creatorTypes.Event]);
           // let modal = this.modal.open(EventCreationSuccessModalComponent, { centered: true, windowClass: 'custom-modal custom-small-modal' });
           // modal.componentInstance.data = this.eventCreationForm.value;
         }
@@ -95,9 +92,18 @@ export class EventCreationComponent implements OnInit {
   }
 
   onRenderCell(args: any) {
-    let find = this.boatExistingEventDates.findIndex((res:any)=> new Date(res).toLocaleDateString() == new Date(args.date).toLocaleDateString());
+    let find = this.boatExistingEventDates.findIndex((res: any) => new Date(res).toLocaleDateString() == new Date(args.date).toLocaleDateString());
     if (find >= 0) {
       args.isDisabled = true;
     }
+  }
+
+  validateStep1 = (form: FormGroup) => {
+    return form.get('boatId')?.value == null || form.get('title')?.value == '' || form.get('description')?.value == ''
+      || form.get('location')?.value == '' || form.get('guestCapacity')?.value == 0
+  }
+
+  validateStep2 = (form: FormGroup) => {
+    return form.get('amountPerPerson')?.value == null || form.get('amountPerPerson')?.value == 0 || form.get('startDateTime')?.value == null
   }
 }
