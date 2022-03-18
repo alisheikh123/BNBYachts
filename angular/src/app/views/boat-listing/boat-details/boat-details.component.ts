@@ -9,7 +9,9 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { BoatType } from 'src/app/shared/enums/boat-Type';
 import { UserDefaults } from 'src/app/shared/enums/user-roles';
+import { ServiceFee } from 'src/app/shared/interface/Service-fee';
 import { environment } from 'src/environments/environment';
 import { CalendarService } from '../../../core/calendar/calendar.service';
 import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-logged-in.component';
@@ -20,6 +22,8 @@ import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-lo
   styleUrls: ['./boat-details.component.scss']
 })
 export class BoatDetailsComponent implements OnInit {
+  boatType = BoatType;
+  serviceFee : ServiceFee;
   booking = {
     amount :0,
     days:0
@@ -87,6 +91,9 @@ export class BoatDetailsComponent implements OnInit {
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
+      this.yachtSearchService.getServiceFeeByBoatType(this.boatType.Boatel).subscribe((res: any) => {
+        this.serviceFee = res.data;
+      });
       let findCalendar = res?.boatCalendars.find((res: any) => res.isAvailable == true);
       this.boatFilterDetails.checkinDate = new Date(findCalendar.fromDate);
       this.boatFilterDetails.checkoutDate = new Date(findCalendar.toDate);

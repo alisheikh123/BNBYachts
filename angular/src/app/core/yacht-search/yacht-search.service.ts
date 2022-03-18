@@ -53,7 +53,9 @@ export class YachtSearchService {
     return this.http.put(this.apiUrl + "/app/charter/charter",boat).pipe(
       catchError(this.handleError));
   }
-
+  getServiceFeeByBoatType(BoatTypeId : number) {
+    return this.http.get(this.apiUrl + + '/app/setting/getservice-fee-by-boat-type/'+BoatTypeId);    
+  }
   ///Exception handler
   handleError(error: any) {
     let errorMessage = '';
