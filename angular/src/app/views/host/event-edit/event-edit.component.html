@@ -93,16 +93,7 @@
                                 {{'vStartDateRequired' | localization}}
                             </small>
                         </div>
-                        <div class="custom-select-field">
-                            <label>{{'EndDate' | localization}}</label>
-                            <ejs-datetimepicker formControlName="endDateTime" name="endDateTime"
-                                (renderDayCell)='onRenderCell($event)'>
-                            </ejs-datetimepicker>
-                            <small class="text-danger"
-                                *ngIf="((form.endDateTime.touched || submitted) && form.endDateTime.hasError('required'))">
-                                {{'vEndDateRequired' | localization}}
-                            </small>
-                        </div>
+                        
                         <div class="custom-input-field">
                             <label>{{'AmountPerPerson' | localization}}</label>
                             <input type="number" class="custom-input" placeholder="Enter Amount"

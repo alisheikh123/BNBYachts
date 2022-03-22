@@ -31,10 +31,10 @@
             </p>
             <div class="custom-flex mt-4">
                 <button class="custom-btn grey" (click)="changeStatus(item, false, i)">
-                    Reject
+                    {{'Reject' | localization}}
                 </button>
                 <button class="custom-btn blue ms-2" (click)="changeStatus(item, true, i)">
-                    Accept
+                    {{'Accept' | localization}}
                 </button>
             </div>
         </div>
@@ -80,10 +80,10 @@
                 </p>
                 <div class="custom-flex mt-4">
                     <button class="custom-btn grey" (click)="changeStatus(item, false, i)">
-                        Reject
+                        {{'Reject' | localization}}
                     </button>
                     <button class="custom-btn blue ms-2" (click)="changeStatus(item, true, i)">
-                        Accept
+                        {{'Accept' | localization}}
                     </button>
                 </div>
             </div>
@@ -124,15 +124,14 @@
                   align-items-end
                 ">
                     <p class="small-text grey">
-                        {{ item?.eventDetail?.startDateTime | date: "dd MMM/YYYY" }} -
-                        {{ item?.eventDetail?.endDateTime | date: "dd MMM/YYYY" }}
+                        {{ item?.eventDetail?.startDateTime | date: "dd MMM/YYYY" }}
                     </p>
                     <div class="custom-flex mt-4">
                         <button class="custom-btn grey" (click)="changeStatus(item, false, i)">
-                            Reject
+                            {{'Reject' | localization}}
                         </button>
                         <button class="custom-btn blue ms-2" (click)="changeStatus(item, true, i)">
-                            Accept
+                            {{'Accept' | localization}}
                         </button>
                     </div>
                 </div>
