@@ -5,7 +5,8 @@ import { HttpService } from './http.service';
 @Injectable()
 export class ServiceFeeApi {
 
-  USER_API_URL = 'api/app/setting/'
+  USER_API_URL = 'api/app/setting/';
+  NEWS_API_URL = 'api/app/setting/';
   constructor(private api: HttpService) {}
   getServiceFee() {
     return this.api.getBoat(`${this.USER_API_URL}service-fees`);    
