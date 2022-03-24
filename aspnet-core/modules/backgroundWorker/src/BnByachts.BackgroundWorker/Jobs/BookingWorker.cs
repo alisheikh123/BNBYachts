@@ -6,7 +6,7 @@
 
 //namespace BnByachts.BackgroundWorker.Jobs
 //{
-//   public  class BookingWorker: QuartzBackgroundWorkerBase
+//    public class BookingWorker : QuartzBackgroundWorkerBase
 //    {
 //        private readonly IScheduler _scheduler;
 //        private readonly IBookingJobsManager _manager;

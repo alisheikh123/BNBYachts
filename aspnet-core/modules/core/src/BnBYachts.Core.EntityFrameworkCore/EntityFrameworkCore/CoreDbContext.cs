@@ -17,6 +17,7 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using BnBYachts.Core.Data.Model;
 using BnBYachts.Core.Data.Entities;
 using BnBYachts.Core.Data.Entities.ServiceProvider;
+using BnBYachts.Core.Data.Entities.NewsLetters;
 
 namespace BnBYachts.Core.EntityFrameworkCore
 {
@@ -57,7 +58,11 @@ namespace BnBYachts.Core.EntityFrameworkCore
         public DbSet<ServiceProviderEntity> ServiceProviders { get; set; }
         public DbSet<TimeSlotEntity> TimeSlots { get; set; }
         #endregion
+        #region NewsLetter
+        public DbSet<ContactsEntity> Contacts { get; set; }
+        public DbSet<NewsLetterSubscriptionEntity> newsLetterSubscriptions { get; set; }
 
+        #endregion
         // Tenant Management
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }

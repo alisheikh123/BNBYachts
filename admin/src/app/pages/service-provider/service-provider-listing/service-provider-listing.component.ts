@@ -30,19 +30,10 @@ export class ServiceProviderListingComponent implements OnInit {
       custom: [
       { 
         name: 'userDetails', 
-        title: '<i class="nb-compose"></i>' 
+        title: '<i class="nb-compose"></i>'  
       }],
     },
     columns: {
-      userImagePath:{
-        title :'Image',
-        type : 'html',
-        width: '10%',
-        valuePrepareFunction: (userImagePath) => { 
-          this.profile = this.assetsUrlProfile + (userImagePath || this.USER_DEFAULTS.avatar);
-          return `<img src="${this.profile}" alt="Profile" height="25" width="50"/>`;
-        } 
-      },
       userName: {
         title: 'Name',
         type: 'string',
