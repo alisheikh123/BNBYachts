@@ -22,12 +22,12 @@ namespace BnByachts.Simulator
        //     _techverxElasticSearch = techverxElasticSearch;
        // }
 
-        private readonly EventBusDispatcher _eventBusDispatcher;
+        //private readonly EventBusDispatcher _eventBusDispatcher;
 
-        public Notifiy(EventBusDispatcher eventBusDispatcher)
-        {
-            _eventBusDispatcher = eventBusDispatcher;
-        }
+        //public Notifiy(EventBusDispatcher eventBusDispatcher)
+        //{
+        //    _eventBusDispatcher = eventBusDispatcher;
+        //}
 
 
         public void pushEmail()
@@ -53,16 +53,15 @@ namespace BnByachts.Simulator
            //   File = null,
            //   SubFolder = ""
            //});
-           _ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
-           {
-              To = "umar.draz@techverx.com",
+           //_ = _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+           //{
+           //   To = "umar.draz@techverx.com",
               
-           });
+           //});
+
+          var temp= new SignalRClient();
+          temp.SendMessage().GetAwaiter();
         }
     }
-
-   public class temp: EntityDto<int>
-    {
-       public string Name  { get; set; }
-   }
+    
 }

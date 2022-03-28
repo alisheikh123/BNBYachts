@@ -22,9 +22,8 @@ namespace BnBYachts.Socket.Web.Hub
             _userConnectionManager.KeepUserConnection(userId, Context.ConnectionId);
             return Context.ConnectionId;
         }
-
         //AdminPortal Notify
-        public async Task NotifyClient(string receiverId, object content)
+        public async Task NotifyClient(string receiverId, string content)
         {
             var connectionId = _userConnectionManager.GetUserConnections(receiverId).FirstOrDefault();
             await Clients.Client(connectionId ?? "").SendAsync("NotifyClient", content);
