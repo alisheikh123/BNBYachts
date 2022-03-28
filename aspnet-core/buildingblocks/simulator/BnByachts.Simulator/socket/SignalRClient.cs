@@ -22,6 +22,8 @@ namespace BnByachts.Simulator.socket
             };
         }
 
+
+
         
         public async Task SendMessage()
         {

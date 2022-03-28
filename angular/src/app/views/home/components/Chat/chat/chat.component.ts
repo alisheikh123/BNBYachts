@@ -114,6 +114,7 @@ export class ChatComponent implements OnInit {
       .withUrl(this.socketUrl + '?&userId=' + this.chat.senderId)
       .build();
   }
+  
   //To start connection betweent machines...
   private startConnection() {
     this._hubConnection
@@ -123,6 +124,7 @@ export class ChatComponent implements OnInit {
 
         });
       });
+
     /////Calls when message is broadcast to the reciever...
     this._hubConnection.on('sendToUser', (res) => {
       res.sentDate = moment().format("DD-MMM-YYYY");
