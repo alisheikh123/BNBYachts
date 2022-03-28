@@ -61,10 +61,9 @@ namespace BnBYachts.EventBusShared
             EndpointConvention.Map<IUserRolesContract>(new Uri($"{queueHost}/{EventBusQueue.QUserRoleSeeder}"));
             EndpointConvention.Map<IUserContract>(new Uri($"{queueHost}/{EventBusQueue.QUsersSeeder}"));
             EndpointConvention.Map<IEmailContract>(new Uri($"{queueHost}/{EventBusQueue.QEmailNotification}"));
-
             EndpointConvention.Map<IS3FileContract>(new Uri($"{queueHost}/{EventBusQueue.QS3BackgroundWorker}"));
-
             EndpointConvention.Map<IOTPContract>(new Uri($"{queueHost}/{EventBusQueue.QGenerateOTP}"));
+            EndpointConvention.Map<INotificationContract>(new Uri($"{queueHost}/{EventBusQueue.QNotification}"));
         }
     }
 

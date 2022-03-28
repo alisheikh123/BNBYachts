@@ -8,13 +8,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
+using BnBYachts.Notification;
+using BnBYachts.Notification.MongoDB;
 
 namespace BnByachts.NotificationHub
 {
     [DependsOn(
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
-        typeof(AbpAutofacModule)
+        typeof(AbpAutofacModule),
+        typeof(NotificationDomainModule),
+        typeof(NotificationDomainSharedModule),
+        typeof(NotificationMongoDbModule)
     )]
     public class NotificationHubModule : AbpModule
     {
@@ -22,7 +27,6 @@ namespace BnByachts.NotificationHub
         {
             context.Services.Configure<SmtpSettings>(context.Services.GetConfiguration().GetSection("Settings"));
             context.Services.Configure<OTPMessageSetting>(context.Services.GetConfiguration().GetSection("OTPSetting"));
-           
             context.Services.AddMassTransit(mt =>
             {
                 mt.AddConsumer<EmailConsumer>().Endpoint(e =>
@@ -32,6 +36,11 @@ namespace BnByachts.NotificationHub
                 mt.AddConsumer<OTPConsumer>().Endpoint(e =>
                 {
                     e.Name = EventBusQueue.QGenerateOTP;
+                });
+
+                mt.AddConsumer<NotificationConsumer>().Endpoint(e =>
+                {
+                    e.Name = EventBusQueue.QNotification;
                 });
             });
         }

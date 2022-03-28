@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net5.0</TargetFramework>
+	  <TargetFramework>net6.0</TargetFramework>
 	<ApplicationIcon />
 	<OutputType>Exe</OutputType>
 	<StartupObject />
@@ -34,22 +34,20 @@
 		<PackageReference Include="Twilio" Version="5.70.1" />
 		<PackageReference Include="Volo.Abp" Version="4.4.3" />
 		<PackageReference Include="Volo.Abp.Autofac" Version="4.4.3" />
-		<PackageReference Include="Volo.Abp.AutoMapper" Version="4.4.4" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\shared\BnBYachts.Shared\BnBYachts.Shared.csproj" />
 	  <ProjectReference Include="..\..\EventBus\BnBYachts.EventBusShared\BnBYachts.EventBusShared.csproj" />
+	  <ProjectReference Include="..\..\notification\src\BnBYachts.Notification.Domain\BnBYachts.Notification.Domain.csproj" />
+	  <ProjectReference Include="..\..\notification\src\BnBYachts.Notification.MongoDB\BnBYachts.Notification.MongoDB.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Update="appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="signalRClient\" />
 	</ItemGroup>
 
 </Project>

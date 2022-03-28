@@ -19,5 +19,7 @@ namespace BnBYachts.EventBusShared
         public const string QEmailNotification = "q-email-notification";
         public const string QS3BackgroundWorker = "q-s3file-bkworker";
         public const string QGenerateOTP = "q-generate-otp";
+
+        public const string QNotification = "q-notification";
     }
 }
