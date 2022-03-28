@@ -13,11 +13,6 @@ namespace BnBYachts.Notification
     [DependsOn(
         typeof(NotificationDomainSharedModule),
         typeof(AbpAccountApplicationContractsModule),
-        typeof(AbpFeatureManagementApplicationContractsModule),
-        typeof(AbpIdentityApplicationContractsModule),
-        typeof(AbpPermissionManagementApplicationContractsModule),
-        typeof(AbpSettingManagementApplicationContractsModule),
-        typeof(AbpTenantManagementApplicationContractsModule),
         typeof(AbpObjectExtendingModule)
     )]
     public class NotificationApplicationContractsModule : AbpModule
