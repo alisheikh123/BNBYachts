@@ -25,7 +25,6 @@ namespace BnByachts.BackgroundWorker
             using (var serviceScope = application.ServiceProvider.CreateScope())
             {
                 serviceScope.ServiceProvider.GetService<QueueListener>()?.Start().GetAwaiter();
-                serviceScope.ServiceProvider.GetService<MyLogWorker>().StartAsync().GetAwaiter();
             }
             Console.WriteLine("Background Worker is Running");
             Console.WriteLine("Ctrl + C to Quit");
