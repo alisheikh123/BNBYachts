@@ -9,6 +9,7 @@
 	<DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
 
+
   <ItemGroup>
     <EmbeddedResource Include="Templates\EmailTemplates\default.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

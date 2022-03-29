@@ -32,17 +32,18 @@ namespace BnBYachts.Notification.Manager
             return _successResponse(input);
         }
 
-        private static EntityResponseModel _successResponse(object data=null)=> new EntityResponseModel
+        private static EntityResponseModel _successResponse(object data = null) => new EntityResponseModel
         {
             ReturnStatus = true,
             Data = data,
-            ReturnMessage = new List<string>{new string ("200")}
+            ReturnMessage = new List<string> { new string("200") }
         };
 
-        public async Task<PagedList<NotificationDto>> Get(EntityPaginationFilter input)
-        {
-            var response =(await _notificationRepository.GetListAsync()).OrderByDescending(x=>x.Id);
-            throw new NotImplementedException();
-        }
+        public async Task<EntityResponseListModel<NotificationDto>> Get(EntityPaginationFilter input) =>
+             new EntityResponseListModel<NotificationDto>
+             {
+                 Data = _objectMapper.Map<List<NotificationEntity>, List<NotificationDto>>(
+                    await _notificationRepository.GetListAsync())
+             };
     }
 }

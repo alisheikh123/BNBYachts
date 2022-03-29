@@ -9,6 +9,6 @@ namespace BnBYachts.Notification.IManager
     public interface INotificationManager : IDomainService
     {
         Task<EntityResponseModel> Insert(NotificationTransferable input);
-        Task<PagedList<NotificationDto>> Get(EntityPaginationFilter input);
+        Task<EntityResponseListModel<NotificationDto>> Get(EntityPaginationFilter input);
     }
 }
