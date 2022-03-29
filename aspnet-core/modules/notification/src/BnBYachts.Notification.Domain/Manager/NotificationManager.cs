@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BnBYachts.Notification.Entitiy;
 using BnBYachts.Notification.IManager;
+using BnBYachts.Notification.Notification.Requestable;
 using BnBYachts.Notification.Notification.Transferables;
 using BnBYachts.Shared.Model;
 using Volo.Abp.Domain.Repositories;
@@ -36,5 +38,11 @@ namespace BnBYachts.Notification.Manager
             Data = data,
             ReturnMessage = new List<string>{new string ("200")}
         };
+
+        public async Task<PagedList<NotificationDto>> Get(EntityPaginationFilter input)
+        {
+            var response =(await _notificationRepository.GetListAsync()).OrderByDescending(x=>x.Id);
+            throw new NotImplementedException();
+        }
     }
 }

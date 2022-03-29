@@ -24,7 +24,7 @@ namespace BnBYachts.EventBusShared.Contracts
         public NotificationType NotificationType { get; set; }
     }
 
-    public interface NotificationContract:INotificationContract
+    public class NotificationContract:INotificationContract
     {
         public Guid? UserTo { get; set; }
         public Guid? UserFrom { get; set; }

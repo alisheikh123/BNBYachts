@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using BnBYachts.Notification.Entitiy;
+using BnBYachts.Notification.Notification.Transferables;
 
 namespace BnBYachts.Notification
 {
@@ -11,9 +8,7 @@ namespace BnBYachts.Notification
     {
         public NotificationDomainAutoMapperProfile()
         {
-            /* You can configure your AutoMapper mapping configuration here.
-             * Alternatively, you can split your mapping configurations
-             * into multiple profile classes for a better organization. */
+            CreateMap<NotificationTransferable, NotificationEntity>();
         }
     }
 }

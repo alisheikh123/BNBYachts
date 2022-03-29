@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using BnBYachts.Notification.MultiTenancy;
 using Volo.Abp.AuditLogging;
+using Volo.Abp.AutoMapper;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Emailing;
 using Volo.Abp.FeatureManagement;
@@ -19,27 +20,29 @@ namespace BnBYachts.Notification;
 [DependsOn(
     typeof(NotificationDomainSharedModule),
     typeof(AbpAuditLoggingDomainModule),
-    typeof(AbpBackgroundJobsDomainModule),
-    typeof(AbpFeatureManagementDomainModule),
-    typeof(AbpIdentityDomainModule),
-    typeof(AbpPermissionManagementDomainIdentityModule),
-    typeof(AbpIdentityServerDomainModule),
-    typeof(AbpPermissionManagementDomainIdentityServerModule),
-    typeof(AbpSettingManagementDomainModule),
-    typeof(AbpTenantManagementDomainModule),
-    typeof(AbpEmailingModule)
+    //typeof(AbpBackgroundJobsDomainModule),
+    //typeof(AbpFeatureManagementDomainModule),
+    //typeof(AbpIdentityDomainModule),
+    //typeof(AbpPermissionManagementDomainIdentityModule),
+    //typeof(AbpIdentityServerDomainModule),
+    //typeof(AbpPermissionManagementDomainIdentityServerModule),
+    //typeof(AbpSettingManagementDomainModule),
+    //typeof(AbpTenantManagementDomainModule),
+    //typeof(AbpEmailingModule),
+    typeof(AbpAutoMapperModule)
 )]
 public class NotificationDomainModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpMultiTenancyOptions>(options =>
-        {
-            options.IsEnabled = MultiTenancyConsts.IsEnabled;
-        });
+        context.Services.AddAutoMapperObjectMapper<NotificationDomainModule>();
+        //Configure<AbpMultiTenancyOptions>(options =>
+        //{
+        //    options.IsEnabled = MultiTenancyConsts.IsEnabled;
+        //});
 
 #if DEBUG
-        context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
+        ///  context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
 #endif
     }
 }

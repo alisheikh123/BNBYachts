@@ -10,24 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Templates\EmailTemplates\default.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Templates\EmailTemplates\default.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>-->
+  
 	<ItemGroup>
 		<PackageReference Include="MailKit" Version="2.15.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
@@ -44,10 +32,5 @@
 	  <ProjectReference Include="..\..\notification\src\BnBYachts.Notification.MongoDB\BnBYachts.Notification.MongoDB.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Update="appsettings.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
 
 </Project>

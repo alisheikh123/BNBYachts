@@ -1521,3 +1521,280 @@ StackExchange.Redis.RedisConnectionException: It was not possible to connect to 
 2022-03-28 17:53:14.562 +05:00 [INF] Request finished HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 25.0488ms
 2022-03-28 17:53:14.680 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=FvB57iKYZJdWj7h7hmITSg - -
 2022-03-28 17:53:14.683 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-29 15:49:47.414 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-29 15:49:47.767 +05:00 [INF] Loaded ABP modules:
+2022-03-29 15:49:47.767 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-29 15:49:47.767 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-29 15:49:47.767 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-29 15:49:47.767 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-29 15:49:47.767 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-29 15:49:47.767 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-29 15:49:47.767 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-29 15:49:47.767 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-29 15:49:47.767 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-29 15:49:47.767 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-29 15:49:47.767 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-29 15:49:47.767 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-29 15:49:47.767 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-29 15:49:47.767 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-29 15:49:47.767 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-29 15:49:47.767 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-29 15:49:47.767 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-29 15:49:47.767 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-29 15:49:47.767 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-29 15:49:47.767 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-29 15:49:47.767 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-29 15:49:47.767 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-29 15:49:47.767 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-29 15:49:47.767 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-29 15:49:47.768 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-29 15:49:47.768 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-29 15:49:47.768 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-29 15:49:47.768 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-29 15:49:47.768 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-29 15:49:47.768 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-29 15:49:47.768 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-29 15:49:47.768 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-29 15:49:48.240 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-29 15:49:48.263 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-29 15:51:26.695 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-29 15:51:26.851 +05:00 [INF] Loaded ABP modules:
+2022-03-29 15:51:26.851 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-29 15:51:26.851 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-29 15:51:26.851 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-29 15:51:26.851 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-29 15:51:26.851 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-29 15:51:26.851 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-29 15:51:26.851 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-29 15:51:26.851 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-29 15:51:26.851 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-29 15:51:26.851 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-29 15:51:26.851 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-29 15:51:26.851 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-29 15:51:26.851 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-29 15:51:26.851 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-29 15:51:26.851 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-29 15:51:26.851 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-29 15:51:26.851 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-29 15:51:26.852 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-29 15:51:26.852 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-29 15:51:26.852 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-29 15:51:26.852 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-29 15:51:26.852 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-29 15:51:26.852 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-29 15:51:26.852 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-29 15:51:26.852 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-29 15:51:26.852 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-29 15:51:26.852 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-29 15:51:26.852 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-29 15:51:27.060 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-29 15:51:27.074 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-29 15:51:28.834 +05:00 [INF] Initialized all ABP modules.
+2022-03-29 15:51:29.375 +05:00 [INF] Now listening on: https://localhost:5001
+2022-03-29 15:51:29.375 +05:00 [INF] Now listening on: http://localhost:5000
+2022-03-29 15:51:29.386 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-29 15:51:29.386 +05:00 [INF] Hosting environment: Development
+2022-03-29 15:51:29.386 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Socket.Web
+2022-03-29 15:51:30.612 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2022-03-29 15:51:37.261 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification - -
+2022-03-29 15:51:41.784 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-29 15:51:51.073 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 19s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 19s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-29 15:51:55.168 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 23s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 23s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-29 15:52:04.305 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 32s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 32s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-29 15:52:04.437 +05:00 [INF] CORS policy execution failed.
+2022-03-29 15:52:04.437 +05:00 [INF] Request origin null does not have permission to access the resource.
+2022-03-29 15:52:05.592 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-29 15:52:05.592 +05:00 [INF] Executing endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-29 15:52:05.673 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Socket.Web.Controllers.HomeController (BnBYachts.Socket.Web).
+2022-03-29 15:52:06.052 +05:00 [INF] Executing action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) - Validation state: "Valid"
+2022-03-29 15:52:06.063 +05:00 [INF] Executed action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 0.8166ms.
+2022-03-29 15:52:06.075 +05:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2022-03-29 15:52:06.110 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 424.671ms
+2022-03-29 15:52:06.111 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-29 15:52:06.136 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 35526.6301ms
+2022-03-29 15:52:06.720 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/favicon.ico - -
+2022-03-29 15:52:06.740 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/favicon.ico - - - 404 0 - 20.5999ms
+2022-03-29 15:52:34.699 +05:00 [INF] Request starting HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0
+2022-03-29 15:52:34.716 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-29 15:52:34.722 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-29 15:52:34.723 +05:00 [INF] Request finished HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 23.5288ms
+2022-03-29 15:52:35.124 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=ThWzmswuIqKdKLM8PbJbAw - -
+2022-03-29 15:52:35.127 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
