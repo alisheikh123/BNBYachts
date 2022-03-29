@@ -165,7 +165,7 @@ if(this.files!==undefined && this.files?.length > 0)
           if (res.returnStatus) {
 
             this.toastr.success("Management Onboarding Completed!", "Service Provider");
-            this.router.navigate(['service-provider/service-provider-dashboard'])
+            this.router.navigate(['/app/management/management-dashboard'])
           }
          
         },

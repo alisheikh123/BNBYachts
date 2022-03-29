@@ -167,7 +167,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BFA2DF28-195
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.ElasticSearch", "buildingblocks\elasticSearch\src\BnBYachts.ElasticSearch\BnBYachts.ElasticSearch.csproj", "{ECC91552-6E5D-447F-A8A2-38AEB62B090B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BnBYachts.ElasticSearch.Bkworker", "buildingblocks\elasticSearch\src\BnBYachts.ElasticSearch.Bkworker\BnBYachts.ElasticSearch.Bkworker.csproj", "{3C274751-E9C7-4C69-87D8-A60B8359A292}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.ElasticSearch.Bkworker", "buildingblocks\elasticSearch\src\BnBYachts.ElasticSearch.Bkworker\BnBYachts.ElasticSearch.Bkworker.csproj", "{3C274751-E9C7-4C69-87D8-A60B8359A292}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notification", "notification", "{08C1EBA8-A892-4738-A93A-11A025045E3A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.Application", "modules\notification\src\BnBYachts.Notification.Application\BnBYachts.Notification.Application.csproj", "{D11E84D1-1EDA-4505-AF82-916994648BC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.Application.Contracts", "modules\notification\src\BnBYachts.Notification.Application.Contracts\BnBYachts.Notification.Application.Contracts.csproj", "{040D0207-E0E6-4946-A87F-4B605493A7EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.DbMigrator", "modules\notification\src\BnBYachts.Notification.DbMigrator\BnBYachts.Notification.DbMigrator.csproj", "{9E69255A-1D32-424F-9740-857C57F10A35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.Domain", "modules\notification\src\BnBYachts.Notification.Domain\BnBYachts.Notification.Domain.csproj", "{21B4434B-8583-4392-A767-479FCE3EDE50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.Domain.Shared", "modules\notification\src\BnBYachts.Notification.Domain.Shared\BnBYachts.Notification.Domain.Shared.csproj", "{FA1B1A37-A033-478D-B3FF-86112519F337}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.HttpApi", "modules\notification\src\BnBYachts.Notification.HttpApi\BnBYachts.Notification.HttpApi.csproj", "{3194E32C-7C3A-4D62-A739-8BB75DA10639}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.HttpApi.Client", "modules\notification\src\BnBYachts.Notification.HttpApi.Client\BnBYachts.Notification.HttpApi.Client.csproj", "{C7FEA195-71C8-4447-9C5D-D4EF13D1EC5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnBYachts.Notification.MongoDB", "modules\notification\src\BnBYachts.Notification.MongoDB\BnBYachts.Notification.MongoDB.csproj", "{9CC847F8-584B-4AB7-83A7-9859C1E25938}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6537FCBC-5AFE-4F68-9155-079F5506515D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -407,6 +427,38 @@ Global
 		{3C274751-E9C7-4C69-87D8-A60B8359A292}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C274751-E9C7-4C69-87D8-A60B8359A292}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C274751-E9C7-4C69-87D8-A60B8359A292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D11E84D1-1EDA-4505-AF82-916994648BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D11E84D1-1EDA-4505-AF82-916994648BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D11E84D1-1EDA-4505-AF82-916994648BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D11E84D1-1EDA-4505-AF82-916994648BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{040D0207-E0E6-4946-A87F-4B605493A7EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040D0207-E0E6-4946-A87F-4B605493A7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040D0207-E0E6-4946-A87F-4B605493A7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040D0207-E0E6-4946-A87F-4B605493A7EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E69255A-1D32-424F-9740-857C57F10A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E69255A-1D32-424F-9740-857C57F10A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E69255A-1D32-424F-9740-857C57F10A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E69255A-1D32-424F-9740-857C57F10A35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B4434B-8583-4392-A767-479FCE3EDE50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B4434B-8583-4392-A767-479FCE3EDE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B4434B-8583-4392-A767-479FCE3EDE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B4434B-8583-4392-A767-479FCE3EDE50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA1B1A37-A033-478D-B3FF-86112519F337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA1B1A37-A033-478D-B3FF-86112519F337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA1B1A37-A033-478D-B3FF-86112519F337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA1B1A37-A033-478D-B3FF-86112519F337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3194E32C-7C3A-4D62-A739-8BB75DA10639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3194E32C-7C3A-4D62-A739-8BB75DA10639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3194E32C-7C3A-4D62-A739-8BB75DA10639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3194E32C-7C3A-4D62-A739-8BB75DA10639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FEA195-71C8-4447-9C5D-D4EF13D1EC5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FEA195-71C8-4447-9C5D-D4EF13D1EC5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FEA195-71C8-4447-9C5D-D4EF13D1EC5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FEA195-71C8-4447-9C5D-D4EF13D1EC5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC847F8-584B-4AB7-83A7-9859C1E25938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC847F8-584B-4AB7-83A7-9859C1E25938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC847F8-584B-4AB7-83A7-9859C1E25938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC847F8-584B-4AB7-83A7-9859C1E25938}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -489,6 +541,16 @@ Global
 		{BFA2DF28-1952-47D6-8FCC-F298B23B26EB} = {06AA0EAE-2DF4-4503-85D1-61D68A18366F}
 		{ECC91552-6E5D-447F-A8A2-38AEB62B090B} = {BFA2DF28-1952-47D6-8FCC-F298B23B26EB}
 		{3C274751-E9C7-4C69-87D8-A60B8359A292} = {BFA2DF28-1952-47D6-8FCC-F298B23B26EB}
+		{08C1EBA8-A892-4738-A93A-11A025045E3A} = {3F5FB678-3F71-4534-9D1F-47AFD67F9A33}
+		{D11E84D1-1EDA-4505-AF82-916994648BC0} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{040D0207-E0E6-4946-A87F-4B605493A7EB} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{9E69255A-1D32-424F-9740-857C57F10A35} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{21B4434B-8583-4392-A767-479FCE3EDE50} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{FA1B1A37-A033-478D-B3FF-86112519F337} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{3194E32C-7C3A-4D62-A739-8BB75DA10639} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{C7FEA195-71C8-4447-9C5D-D4EF13D1EC5F} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{9CC847F8-584B-4AB7-83A7-9859C1E25938} = {6537FCBC-5AFE-4F68-9155-079F5506515D}
+		{6537FCBC-5AFE-4F68-9155-079F5506515D} = {08C1EBA8-A892-4738-A93A-11A025045E3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

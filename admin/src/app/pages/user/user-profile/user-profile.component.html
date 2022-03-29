@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="account-settings">
+          <div class="user-profile">
+            <div class="user-avatar">
+            <div class="avatar-preview" id="imagePreview" [ngStyle]="{ 'background-image': 'url(' + assetsUrlProfile+(userResponse?.imagePath!=null?userResponse?.imagePath:USER_DEFAULTS.avatar)+ ')'}">
+                <img [src]="adminImage" class="previewDimention" >
+            </div>
+              <div class="avatar-edit">
+                <input type='file' id="imageUpload" name="profile" (change)="onFileChange($event)" hidden />
+                <label for="imageUpload" class="custom-btn blue big-btn"><i class="fa fa-edit"></i></label>
+              </div>
+            </div>
+            <h5 class="user-name">{{userResponse?.name}}</h5>
+            <h6 class="user-email">{{userResponse?.email}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <span class="mb-2 text-primary">Personal Details<button type="button" class="btn btn-primary" (click)="openLg(content)" style="float: right;">Edit Profile</button> </span>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="fullName">User Name</label>
+              <p><b>{{userResponse?.name}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="eMail">Phone Number</label>
+              <p><b>{{userResponse?.phoneNumber}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label>Joining Date</label>
+              <p><b>{{latest_date}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="website">Phone Verified</label>
+              <p><b>{{(userResponse?.isPhoneConfirmed ? 'Yes' : 'No')}}</b></p>
+            </div>
+          </div>
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="about">
+            <label>About</label>
+            <p>{{userResponse?.about}}</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header no-border">
+      <h4 class="bold">Edit Profile</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="userForm" novalidate="novalidate" (ngSubmit)="onSubmit()" >
+        <div class="wrapper bg-white mt-sm-1" >
+          <div class="py-2">
+              <div class="row py-2">
+                  <div class="col-md-12"> <label for="name">Full Name</label> 
+                    <input formControlName="name" name="name" type="text" class="form-control" placeholder="Aaqib Idrees"> </div>
+              </div>
+              <div class="row py-2">
+                  <div class="col-md-6"> <label>Email Address</label>
+                     <input formControlName="email" type="email" class="form-control" placeholder="Enter your Email Address"> </div>
+                  <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Phone Number</label> 
+                    <input formControlName="phoneNumber" name="phoneNumber" type="tel" class="form-control" placeholder="Enter Phone Number"> </div>
+              </div>
+              <div> 
+                <div class="custom-input-field">
+                  <label>About</label>
+                  <textarea type="text" class="form-control" placeholder="Enter Description..." formControlName="about" name="about" rows="5" autocomplete="off" ></textarea>
+              </div>
+              </div>
+              <div class="py-3 pb-4 border-bottom"> <button type="submit" class="btn btn-primary mr-3">Save Changes</button> 
+                <button class="btn border button" type="reset" (click)="modal.dismiss('Cross click')">Cancel</button> </div>
+          </div>
+      </div>
+    </form>
+      </div>
+  </div>
+</ng-template>

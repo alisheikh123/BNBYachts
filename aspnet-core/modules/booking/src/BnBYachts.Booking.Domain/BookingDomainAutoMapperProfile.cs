@@ -55,6 +55,12 @@ namespace BnBYachts.Booking
                   .ForMember(res => res.EndDate, opt => opt.MapFrom(res => res.EventDate))
                   .ForMember(res => res.Name, opt => opt.MapFrom(res => res.UserName + "- Event"))
                   .ForMember(x => x.ServiceType, opt => opt.MapFrom(source => (BookingType.Event)));
+            CreateMap<ContractEntity, CalendarTransferable>()
+                .ForMember(res => res.Id, opt => opt.MapFrom(res => res.Id))
+                .ForMember(res => res.StartDate, opt => opt.MapFrom(res => res.ServiceType == ServiceType.Event ? res.EventDateTime : res.DepartureDate))
+                .ForMember(res => res.EndDate, opt => opt.MapFrom(res => res.ArrivalDate))
+                .ForMember(res => res.ServiceType, opt => opt.MapFrom(res => res.ServiceType))
+                .ReverseMap();
             CreateMap<BoatelBookingEntity, BookingsLookupDto>()
                   .ForMember(x => x.BookingType, opt => opt.MapFrom(source => (BookingType.Boatel)))
                   .ForMember(x => x.BookingTypeId, opt => opt.MapFrom(source => source.BoatId));
@@ -68,7 +74,8 @@ namespace BnBYachts.Booking
                 .ForMember(res => res.DisputeReason, opt => opt.MapFrom(res => res.ReasonId));
             CreateMap<ContractsRequestable, ContractEntity>();
             CreateMap<ContractAttachmentRequestable, ContractTermsEntity>();
-            CreateMap<ContractEntity, ContractsTransferable>();
+            CreateMap<ContractEntity, ContractsTransferable>()
+                .ForMember(x => x.IsContract, opt => opt.MapFrom(source => true));
             CreateMap<ContractTermsEntity, ContractTermsTransferable>();
             CreateMap<ContractEntity, CharterBookingTransferableDto>()
                  .ForMember(x => x.ContractId, opt => opt.MapFrom(source => (source.Id)))
@@ -103,6 +110,9 @@ namespace BnBYachts.Booking
         .ForMember(x => x.BookingId, opt => opt.MapFrom(source => (source.Id)))
             .ForMember(x => x.BookingType, opt => opt.MapFrom(source => (BookingType.Event)));
             CreateMap<BookingDisputeEntity, DisputeTransferable>();
+            CreateMap<EventBookingRequestableDto, EventBookingEntity>().ReverseMap();
+            CreateMap<EventBookingRequestableDto, EventBookingEntity>().ReverseMap();
+            CreateMap<BookingRefundableRequestable, BookingRefundableEntity>().ReverseMap();
         }
     }
 }

@@ -1,144 +1,142 @@
 <div class="reservation-page section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="btn-back">
-          <a class="backLink" (click)="goBack()" >
+  <div class="container">
+    <div class="row">
+      <div class="btn-back">
+        <a class="backLink" (click)="goBack()" >
 
-            <i class="fas fa-chevron-left leftIcon"></i>
-          </a>
+          <i class="fas fa-chevron-left leftIcon"></i>
+        </a>
 
-          <h2 class="bold">{{'EventReservationDetails' | localization}}</h2>
-        </div>
-
+        <h2 class="bold">{{'EventReservationDetails' | localization}}</h2>
       </div>
-      <div class="row">
-        <div class="col-sm-8 py-2">
-          <div>
-            <h5 class="bold pb-1">{{"Description" | localization}}</h5>
-            <p class="small-text medium-container text-left grey">{{eventBooking?.boat?.description }}</p>
-
-          </div>
-          <div class="">
-            <div class="character-info-wrapper  custom-flex">
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">{{'BoatName' | localization}}:</p>
-                <p class="grey">{{eventBooking?.boat?.name }}</p>
-              </div>
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">{{'EventTitle' | localization}}</p>
-                <p class="grey">{{eventBooking?.title}}</p>
-              </div>
-            </div>
-            <div class="character-info-wrapper  custom-flex">
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">{{"NoofGuest" | localization}}</p>
-                <p class="grey"> {{eventBookingDetail?.noOfGuests}}</p>
-              </div>
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">{{"Location" | localization}}</p>
-                <p class="grey">{{eventBooking?.location}}</p>
-              </div>
-
-            </div>
-            <div class="character-info-wrapper  custom-flex">
-                  <div class="custom-flex-start character-info py-2">
-                    <p class="medium description-fotmat">{{'EventType' | localization}}</p>
-                    <p class="grey">{{(eventBooking?.eventType)==filters.EVENT_TYPE?"Adults":"Family"}}</p>
-                  </div>
-                  <div class="custom-flex-start character-info py-2">
-                    <p class="medium description-fotmat">{{'EventFee' | localization}}</p>
-                    <p class="grey">{{eventBooking?.amountPerPerson}}.00 $</p>
-                  </div>
-            </div>
-            <div class="character-info-wrapper  custom-flex">
-              <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">{{"StartTime"| localization}}</p>
-                <p class="grey">{{eventBooking?.startDateTime | date:'hh:mm a'}}</p>
-              </div>
-              <div class="custom-flex-start character-info py-2">
-                <div class="custom-flex-start character-info py-2">
-                  <p class="medium description-fotmat">{{"EndTime"| localization}}</p>
-                  <p class="grey">{{eventBooking?.endDateTime | date:'hh:mm a'}}</p>
-                </div>
-              </div>
-            </div>
-              <div class="character-info-wrapper  custom-flex">
-                <div class="custom-flex-start character-info py-2">
-                  <p class="medium description-fotmat">{{"EventDate"| localization}}</p>
-                  <p class="grey">{{eventBookingDetail?.eventDate | date}}</p>
-                </div>
-                <div class="custom-flex-start character-info py-2">
-                </div>
-              </div>
-
-            <div class="price-detail py-4">
-                <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
-                <div class="custom-flex-between">
-                  <p class="medium">{{eventBooking?.amountPerPerson}} x {{ eventBookingDetail?.noOfGuests}} Person</p>
-                  <p class="medium text-right py-1">{{eventBooking?.amountPerPerson * eventBookingDetail?.noOfGuests}}.00 $</p>
-                </div>
-                <div class="custom-flex-between">
-                  <p class="medium">{{"ServiceFee" | localization}}</p>
-                  <p class="medium text-right py-1">20.00 $</p>
-                </div>
-                <div class="custom-flex-between">
-                  <p class="medium">{{"Tax" | localization}}</p>
-                  <p class="medium text-right py-1">{{eventBooking?.boat?.taxFee}}.00 $</p>
-                </div>
-                <div class="custom-flex-between">
-                  <p class="medium">{{"Total(USD)" | localization}}</p>
-                  <p class="medium text-right py-1">{{(eventBooking?.amountPerPerson * eventBookingDetail?.noOfGuests) + 20 +
-                    eventBooking?.boat?.taxFee}}.00 $</p>
-                </div>
-                <ng-container *ngIf="eventBookingDetail?.bookingStatus===filters.BOOKING_STATUS.Cancel">
-                <div class="custom-flex-between">
-                    <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
-                    <p class="medium text-right py-1">{{bookingCancelDetail?.totalAmount - bookingCancelDetail?.refundAmount}}.00 $</p>
-                </div>
-
-                <div class="custom-flex-between">
-                    <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
-                    <p class="medium text-right py-1" >{{bookingCancelDetail?.refundAmount}}.00 $</p>
-                </div>
-              </ng-container>
-              </div>
-          </div>
-        </div>
-        <div class="col-sm-4 py-2">
-          <div class="character-info-img">
-            <div *ngFor="let imgs of eventBooking?.boat?.boatGalleries | filterBy : 'isCoverPic':true">
-              <img src="{{assetsUrl + imgs?.imagePath}}" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
-          *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected">
-          <div *ngIf="eventBookingDetail?.bookingStatus == filters.BOOKING_STATUS.Cancel">
-
-            </div>
-
-          <div *ngIf="filters.checkedStartDate == filters.today"></div>
-          <div *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
-             <div *ngIf="isEventStarted(eventBooking?.eventStartDateTime)">
-                <div class="center-content">
-                  <button [routerLink]="['/boat-listing/event-reservation-cancellation',eventReservation.eventBookingId,eventReservation.eventId]"
-                    class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
-                  <button [routerLink]="['/boat-listing/modify-reservation',eventBooking?.id]"
-                    class="custom-btn btn-big blue me-sm-3" >{{'ModifyReservation' | localization}}</button>
-                    <a (click)="addReview()"
-                    *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
-                    class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
-                </div>
-            </div>
-          </div>
-           <div *ngIf="isEndDateEnded(eventBooking?.eventEndDateTime)">
-            <a (click)="addReview()"
-            *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
-            class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
-        </div>
-        <app-list-reviews [eventBookingId]=eventReservation.eventBookingId></app-list-reviews>
-      </div>
-
 
     </div>
+    <div class="row">
+      <div class="col-sm-8 py-2">
+        <div>
+          <h5 class="bold pb-1">{{"Description" | localization}}</h5>
+          <p class="small-text medium-container text-left grey">{{eventBooking?.description }}</p>
+
+        </div>
+        <div class="">
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">{{'BoatName' | localization}}:</p>
+              <p class="grey">{{eventBooking?.boat?.name }}</p>
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">{{'EventTitle' | localization}}</p>
+              <p class="grey">{{eventBooking?.title}}</p>
+            </div>
+          </div>
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">{{"NoofGuest" | localization}}</p>
+              <p class="grey"> {{eventBookingDetail?.noOfGuests}}</p>
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">{{"Location" | localization}}</p>
+              <p class="grey">{{eventBooking?.location}}</p>
+            </div>
+
+          </div>
+          <div class="character-info-wrapper  custom-flex">
+                <div class="custom-flex-start character-info py-2">
+                  <p class="medium description-fotmat">{{'EventType' | localization}}</p>
+                  <p class="grey">{{(eventBooking?.eventType)==filters.EVENT_TYPE?"Adults":"Family"}}</p>
+                </div>
+                <div class="custom-flex-start character-info py-2">
+                  <p class="medium description-fotmat">{{'EventFee' | localization}}</p>
+                  <p class="grey">{{eventBooking?.amountPerPerson}}.00 $</p>
+                </div>
+          </div>
+          <div class="character-info-wrapper  custom-flex">
+            <div class="custom-flex-start character-info py-2">
+              <p class="medium description-fotmat">{{"StartTime"| localization}}</p>
+              <p class="grey">{{eventBooking?.startDateTime | date:'hh:mm a'}}</p>
+            </div>
+            <div class="custom-flex-start character-info py-2">
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">{{"EndTime"| localization}}</p>
+                <p class="grey">{{eventBooking?.endDateTime | date:'hh:mm a'}}</p>
+              </div>
+            </div>
+          </div>
+            <div class="character-info-wrapper  custom-flex">
+              <div class="custom-flex-start character-info py-2">
+                <p class="medium description-fotmat">{{"EventDate"| localization}}</p>
+                <p class="grey">{{eventBookingDetail?.eventDate | date}}</p>
+              </div>
+              <div class="custom-flex-start character-info py-2">
+              </div>
+            </div>
+
+          <div class="price-detail py-4">
+              <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
+              <div class="custom-flex-between">
+                <p class="medium">{{eventBooking?.amountPerPerson}} x {{ eventBookingDetail?.noOfGuests}} Person</p>
+                <p class="medium text-right py-1">{{eventBooking?.amountPerPerson * eventBookingDetail?.noOfGuests}}.00 $</p>
+              </div>
+              <div class="custom-flex-between">
+                <p class="medium">{{"ServiceFee" | localization}}</p>
+                <p class="medium text-right py-1">20.00 $</p>
+              </div>
+              <div class="custom-flex-between">
+                <p class="medium">{{"Tax" | localization}}</p>
+                <p class="medium text-right py-1">{{eventBooking?.boat?.taxFee}}.00 $</p>
+              </div>
+              <div class="custom-flex-between">
+                <p class="medium">{{"Total(USD)" | localization}}</p>
+                <p class="medium text-right py-1">{{(eventBooking?.amountPerPerson * eventBookingDetail?.noOfGuests) + 20 +
+                  eventBooking?.boat?.taxFee}}.00 $</p>
+              </div>
+              <ng-container *ngIf="eventBookingDetail?.bookingStatus===filters.BOOKING_STATUS.Cancel">
+              <div class="custom-flex-between">
+                  <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
+                  <p class="medium text-right py-1">{{bookingCancelDetail?.totalAmount - bookingCancelDetail?.refundAmount}}.00 $</p>
+              </div>
+
+              <div class="custom-flex-between">
+                  <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
+                  <p class="medium text-right py-1" >{{bookingCancelDetail?.refundAmount}}.00 $</p>
+              </div>
+            </ng-container>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-4 py-2">
+        <div class="character-info-img">
+          <div *ngFor="let imgs of eventBooking?.boat?.boatGalleries | filterBy : 'isCoverPic':true">
+            <img src="{{assetsUrl + imgs?.imagePath}}" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
+        *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected && eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Pending">
+        <div *ngIf="eventBookingDetail?.bookingStatus == filters.BOOKING_STATUS.Cancel"> </div>
+        <div *ngIf="filters.checkedStartDate == filters.today"></div>
+        <div *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
+           <div *ngIf="isEventStarted(eventBookingDetail?.eventDate,eventBooking?.startDateTime)">
+
+              <div class="center-content">
+                <button [routerLink]="['/boat-listing/event-reservation-cancellation',eventReservation.eventBookingId,eventReservation.eventId]"
+                  class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
+                <!-- <button [routerLink]="['/boat-listing/event-modify-reservation',eventReservation.eventBookingId]"
+                  class="custom-btn btn-big blue me-sm-3" >{{'ModifyReservation' | localization}}</button> -->
+                  <a (click)="addReview()"
+                  *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
+                  class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+              </div>
+          </div>
+        </div>
+         <div *ngIf="isEndDateEnded(eventBooking?.eventEndDateTime)">
+          <a (click)="addReview()"
+          *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
+          class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+      </div>
+      <app-list-reviews [eventBookingId]=eventReservation.eventBookingId></app-list-reviews>
+    </div>
+
+
   </div>
+</div>

@@ -4,7 +4,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { SignupModalComponent } from '../../auth/components/signup-modal/signup-modal.component';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
+import { Roles, UserDefaults, UserRoles } from 'src/app/shared/enums/user-roles';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ import { HubConnection} from '@microsoft/signalr';
 import { ChatService } from 'src/app/core/chat/chat.service';
 import { HeaderTabs } from 'src/app/shared/enums/header-tabs';
 import { CleaningComponent } from '../../cleaning/cleaning/cleaning.component';
+import { Keys } from 'src/app/shared/localstoragekey/LocalKeys.constants';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,12 @@ export class HeaderComponent implements OnInit {
   USER_DEFAULTS = UserDefaults;
   assetsUrl = environment.CORE_API_URL + '/user-profiles/';
   assetUrlS3 = environment.S3BUCKET_URL + '/profilePicture/';
+  roles=Roles;
+  rolesList= []as Array<string>;
+  keys=Keys;
+  onBoardingUrl='/onboarding';
+  hostDashboardUrl='switchapp/1';
+  userDashboardUrl='/switchapp/2';
   @ViewChild('earnwithus', { static: true }) templateRef: any;
   selectedOption = {
     byHost : false,
@@ -47,35 +54,43 @@ export class HeaderComponent implements OnInit {
   getUserDetails() {
     this.authService.getUserInfo().subscribe((res: any) => {
         this.userDetails = res;
-        if (res?.roles?.length > 1) {
-          this.canSwitchAccount = true;
-          this.app.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.user.toLowerCase()).roleId;
-        }
-        else {
-          this.canSwitchAccount = false;
-          this.app.loggedInUserRole = res.roles.find((role: any) => role.roleId == this.USER_ROLE.user.toLowerCase())?.roleId;
-        }
-        if (localStorage.getItem('userRole')) {
-          this.app.loggedInUserRole = localStorage.getItem('userRole');
-        }
-        else {
-          localStorage.setItem('userRole', this.app.loggedInUserRole);
-        }
         this.isLoggedIn = true;
 
     })
   }
+
+tryHosting(){
+  window.location.href = environment.CLIENT_APP_URL + this.onBoardingUrl;
+  this.toastr.success('Try Hosting.', 'Success'); 
+}
   getUnreadChatCount() {
     this.chatService.getUnreadCount().subscribe(res => {
       this.app.unReadChatCount = res;
     })
   }
+  switchRole(role:Roles)
+  {
+    switch (role) {
+      case this.roles.Host:
+        window.location.href= environment.CLIENT_APP_URL + this.hostDashboardUrl;
+        this.toastr.success('Account switched to host.', 'Success');
+        break;
+        case this.roles.User:
+          window.location.href= environment.CLIENT_APP_URL + this.userDashboardUrl;
+          this.toastr.success('Account switched to user.', 'Success'); 
+          break;
+      default: 
+        break;
+    }
+  }
   logout() {
     this.oidcSecurityService.logoff();
     this.authService.authenticated = false;
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userRole');
+    localStorage.removeItem(this.keys.AccessToken);
+    localStorage.removeItem(this.keys.UserId);
+    localStorage.removeItem(this.keys.UserRole);
+    localStorage.clear();
+    sessionStorage.clear();
     this.isLoggedIn = false;
   }
 
@@ -89,20 +104,6 @@ export class HeaderComponent implements OnInit {
     let user = this.oidcSecurityService.getUserData();
   }
 
-  switchRole() {
-    if (this.app.loggedInUserRole == this.USER_ROLE.user) {
-      this.app.loggedInUserRole = this.USER_ROLE.host;
-      this.router.navigate(['host-dashboard']);
-      this.toastr.success('Account switched to host.', 'Success');
-    }
-    else {
-      this.app.loggedInUserRole = this.USER_ROLE.user;
-      this.router.navigate(['']);
-      this.toastr.success('Account switched to user.', 'Success');
-    }
-    localStorage.setItem('userRole', this.app.loggedInUserRole);
-
-  }
   earn() {
     if(this.isLoggedIn){
       this.modal.open(this.templateRef, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'custom-modal custom-small-modal' });

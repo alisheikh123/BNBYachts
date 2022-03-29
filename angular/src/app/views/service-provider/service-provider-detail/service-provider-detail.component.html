@@ -8,14 +8,18 @@
                     <div class="avatar-upload-outer edit-avatar-page">
                         <div class="avatar-upload">
                           <div class="avatar-preview">
-                            <div id="imagePreview"  [ngStyle]="{ 'background-image': 'url(' + (serviceProvider?.userImagePath!=null?profilePictureurl + serviceProvider.userImagePath:userDefaults.avatar)+ ')'}"  >
+                            <div *ngIf="serviceProvider.serviceProviderType==serviceProviderType.captain" id="imagePreview"  [ngStyle]="{ 'background-image': 'url(' + (serviceProvider?.userImagePath!=null?profilePictureurl + serviceProvider.userImagePath:userDefaults.avatar)+ ')'}"  >
+                              
+                            </div>
+                            <div *ngIf="serviceProvider.serviceProviderType!=serviceProviderType.captain" id="imagePreview"  [ngStyle]="{ 'background-image': 'url(' + (serviceProvider?.companyProfilePicture!=null?companyPictureurl + serviceProvider.companyProfilePicture:userDefaults.avatar)+ ')'}"  >
                               
                             </div>
                           </div>
                         </div>
                        
                       </div>
-                  <h6 class="bold text-center p-0 pb-3">{{serviceProvider.userName}}</h6>
+                  <h6 *ngIf="serviceProvider.serviceProviderType==serviceProviderType.captain" class="bold text-center p-0 pb-3">{{serviceProvider.userName}}</h6>
+                  <h6 *ngIf="serviceProvider.serviceProviderType!=serviceProviderType.captain" class="bold text-center p-0 pb-3">{{serviceProvider.companyName}}</h6>
                 </div>
                 <div class="border-top"></div>
                 <div class="py-2">
@@ -29,8 +33,9 @@
                <div class="user-details-info-wrapper">
                    <div class="custom-flex-between align-items-start">
                        <div class="user-details-info-wrapper-inner">
-                           <p class="bold">{{serviceProvider.userName}}</p>
-                           <p class="grey pt-2">Joined 2021</p>
+                           <p *ngIf="serviceProvider.serviceProviderType==serviceProviderType.captain"  class="bold">{{serviceProvider.userName}}</p>
+                           <p *ngIf="serviceProvider.serviceProviderType!=serviceProviderType.captain"  class="bold">{{serviceProvider.companyName}}</p>
+                           <p class="grey pt-2">{{'Join' | localization}} {{serviceProvider.creationTime | yearformat}}</p>
                            <p class="grey py-1">{{serviceProvider.experience}} {{'Experience' | localization}}</p>
                         </div>
                         
@@ -42,7 +47,7 @@
                    <div class="py-2">
                        <p class="medium"><i class="fa fa-map-pin me-3"></i>{{serviceProvider.location}}</p>
                    </div>
-                   <div class="row">
+                   <div *ngIf="serviceProvider.serviceProviderType ==serviceProviderType.captain" class="row">
                        <div class="col-md-4">
                            <p class="bold">{{'Calender' | localization}}</p>
                            <ejs-calendar (renderDayCell)='highlightAvliableDays($event)'  [value]='serviceProvider.fromDate' [min]='serviceProvider.fromDate' [max]='serviceProvider.toDate'></ejs-calendar>
@@ -76,46 +81,7 @@
                   
                     </div>
                </div>
-               <div class="total-reviews section-padding">
-                   <div class="custom-flex-between">
-                <div class=" custom-flex-start small-stars black-stars me-2"><span class="fa fa-star stars-clr me-2"></span> <p class="medium ">9 Reviews</p></div>
-                <button class="custom-btn outline-blue-clr">{{'AddReview' | localization}}</button>
-                </div>
-                <div class="image-with-text pt-5">
-                   <div class="image-with-text-inner">
-                       <img src="../../../../assets/images/user-img.png" alt="">
-                       <div class="user-details">
-                           <p class="medium">Elijah</p>
-                           <p class="small-stars">
-                               <span class="fa fa-star stars-clr "></span>
-                               <span class="fa fa-star stars-clr"></span>
-                               <span class="fa fa-star stars-clr"></span>
-                               <span class="fa fa-star stars-clr"></span>
-                               <span class="fa fa-star stars-clr"></span>
-                           </p>
-                       </div>
-                   </div>
-                   <p class="my-3 line-clamp-1">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elitShort description about the </p>
-                   <p class="text-right grey">12 July 2021, 13:44</p>
-               </div>
-               <div class="image-with-text">
-                   <div class="image-with-text-inner">
-                       <img src="../../../../assets/images/user-img.png" alt="">
-                       <div class="user-details">
-                           <p class="medium">Elijah</p>
-                           <p class="small-stars">
-                               <span class="fa fa-star stars-clr "></span>
-                               <span class="fa fa-star stars-clr"></span>
-                               <span class="fa fa-star stars-clr"></span>
-                               <span class="fa fa-star stars-clr"></span>
-                               <span class="fa fa-star stars-clr"></span>
-                           </p>
-                       </div>
-                   </div>
-                   <p class="my-3 line-clamp-1">Short description about the  host Lorem ipsum dolor sit amet, consectetur adipiscing elitShort description about the </p>
-                   <p class="text-right grey">12 July 2021, 13:44</p>
-               </div>
-              </div>
+               <app-servie-provider-review-list [serviceProviderId]=serviceProvider.id ></app-servie-provider-review-list>
                </div>
               
             </div>

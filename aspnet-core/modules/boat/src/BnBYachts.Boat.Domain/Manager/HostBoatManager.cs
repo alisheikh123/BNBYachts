@@ -10,10 +10,11 @@ using BnBYachts.Boat.Shared.Boat.Interface;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Boat.Shared.Boat.Transferable;
 using BnBYachts.Boat.Helpers;
-using BnBYachts.Boat.Shared.Helper;
 using BnBYachts.Events;
 using Volo.Abp.ObjectMapping;
 using BnBYachts.Boat.Boat.Transferables;
+using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
 
 namespace BnBYachts.Boat.Manager
@@ -34,13 +35,17 @@ namespace BnBYachts.Boat.Manager
         private readonly IObjectMapper<BoatDomainModule> _objectMapper;
 
 
+        private readonly EventBusDispatcher _eventBusDispatcher;
+
+
         public HostBoatManager(IRepository<RuleEntity, int> rulesRepo,
             IRepository<FeatureEntity, int> featuresRepo, IRepository<BoatEntity, int> boatRepository,
             IRepository<CharterEntity, int> charterRepository, IRepository<BoatEntity, int> repository,
             IRepository<BoatFeatureEntity, int> boatelFeatureRepo, IRepository<BoatRuleEntity, int> boatelRulesRep,
             IRepository<BoatCalendarEntity, int> boatelCalendarRepo, IRepository<BoatGalleryEntity, int> boatGalleryRepo,
             IRepository<EventEntity, int> eventRepository,
-            IObjectMapper<BoatDomainModule> objectMapper)
+            IObjectMapper<BoatDomainModule> objectMapper,
+            EventBusDispatcher eventBusDispatcher)
         {
 
             _boatRepository = repository;
@@ -53,6 +58,7 @@ namespace BnBYachts.Boat.Manager
             _objectMapper = objectMapper;
             _boatGalleryRepo = boatGalleryRepo;
             _eventRepository = eventRepository;
+            _eventBusDispatcher = eventBusDispatcher;
         }
         public async Task<HostBoatRequestable> Insert(HostBoatRequestable input)
         {
@@ -197,7 +203,7 @@ namespace BnBYachts.Boat.Manager
                     await _boatRepository.EnsureCollectionLoadedAsync(evnt.Boat, x => x.BoatFeatures).ConfigureAwait(false);
                     if (param.EventDate.HasValue)
                     {
-                        if ((evnt.StartDateTime.Date < param.EventDate.Value.Date && evnt.EndDateTime.Date > param.EventDate.Value) || (evnt.StartDateTime.Date == param.EventDate.Value.Date))
+                        if (evnt.StartDateTime.Date < param.EventDate.Value.Date || (evnt.StartDateTime.Date == param.EventDate.Value.Date))
                         {
                             filterdEvents.Add(evnt);
                         }
@@ -269,8 +275,16 @@ namespace BnBYachts.Boat.Manager
             {
                 var boatGallery = gallery.CreateMapped<BoatGalleryRequestable, BoatGalleryEntity>();
                 boatGallery.BoatEntityId = postBoatData.Id;
-                string uploadedFilePath = boatGallery.ImagePath;//FileUploader.UploadFilesLocal(gallery.FileName, gallery.FileData);
-                await FileUploader.UploadFileToAWSAsync(gallery.FileName, gallery.FileData, "boatGallery", "");
+                
+                _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+                {
+                    ChildFolder = "",
+                    File = Convert.FromBase64String(gallery.FileData.Split("base64,")[1]),
+                    FileName = gallery.FileName,
+                    ContentType = gallery.FileType,
+                    SubFolder = "boatGallery"
+                });
+
                 boatGallery.ImagePath = gallery.FileName;
                 await _boatGalleryRepo.InsertAsync(boatGallery).ConfigureAwait(false);
 

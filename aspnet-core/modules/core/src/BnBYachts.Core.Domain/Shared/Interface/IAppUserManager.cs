@@ -22,6 +22,9 @@ namespace BnBYachts.Core.Shared.Interface
         Task<ResponseDto> AddRoles(RolesTransferable userInput);
         Task<UserReview> IsRoleName(string userId,string userRole , string hostRole);
         Task<EntityResponseModel> AddServiceProviderRole(string userId, string type);
+        Task<bool> UpdateAdminProfile(AdminProfileRequestable userInput);
+        Task<bool> checkAdminRoleName(string userId);
+        Task<bool> RoleVerify(string userId, string []roles);
     }
 
 }

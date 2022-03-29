@@ -29,6 +29,11 @@ const routes: Routes = [{
         .then(m => m.HostModule),
     },
     {
+      path: 'service',
+      loadChildren: () => import('./service-provider/service-provider.module')
+        .then(m => m.ServiceProviderModule),
+    },
+    {
       path: 'dispute',
       loadChildren: () => import('./dispute/dispute.module')
         .then(m => m.DisputeModule),
@@ -37,6 +42,16 @@ const routes: Routes = [{
       path: 'faqs',
       loadChildren: () => import('./faqs/faqs.module')
         .then(m => m.FaqsModule),
+    },
+    {
+      path: 'marketing',
+      loadChildren: () => import('./marketing/marketing.module')
+        .then(m => m.MarketingModule),
+    },
+    {
+      path: 'settings',
+      loadChildren: () => import('./setting-tab/setting-tab.module')
+        .then(m => m.SettingTabModule),
     },
     {
       path: '',

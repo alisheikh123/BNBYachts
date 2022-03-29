@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CreatorTypes } from 'src/app/shared/enums/creator-types';
 import { ServiceProviderType } from 'src/app/shared/enums/service-provider-type';
+import { utils } from 'src/app/shared/utility/utils';
 
 @Component({
   selector: 'app-service-provider-information',
@@ -22,22 +23,20 @@ createdReservationInfo={
     private route: Router,
     private toastr: ToastrService) { }
 
-  ngOnInit(): void {
-    
-    this.activatedRoute.params.subscribe((res : any)  => {
-      if(res && res.length> 0)
-      {
+  ngOnInit(): void { 
+    this.activatedRoute.params.subscribe((res : any)  => {  
+      if(!utils.isEmptyObject(res)){
       this.createdReservationInfo.reservationId= Number(res['id']);
       this.createdReservationInfo.reservationType= Number(res['type']);
-      }
+      }    
     });
   }
 explore(serviceprovidertype:ServiceProviderType){
   this.createdReservationInfo.serviceProviderType= serviceprovidertype;
-  if(this.createdReservationInfo.reservationId==0)
+  if(this.createdReservationInfo.reservationId== undefined || this.createdReservationInfo.reservationId==0)
   {
     this.route.navigate(['service-provider/services/', 
-  this.createdReservationInfo.serviceProviderType ]);
+     this.createdReservationInfo.serviceProviderType ]);
   }
   else
   this.route.navigate(['service-provider/services/', 

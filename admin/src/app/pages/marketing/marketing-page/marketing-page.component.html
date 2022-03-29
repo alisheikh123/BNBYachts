@@ -1,0 +1,136 @@
+<div>
+</div>
+<nb-card>
+    <nb-card-header>
+     <span> Marketing Page </span>
+     <span class="btn-floating"><button type="button" class="btn btn-primary" (click)="openLg(content)">Add Market Page</button></span>
+      </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" (custom)="onCustomAction(contents,contentData,$event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header no-border">
+      <h4 class="bold">Add Market Page</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="marketForm" novalidate="novalidate" (ngSubmit)="onSubmit()">
+        <div class="custom-modal-inner">  
+          <div class="modal-content-inner-text">
+            <div class="form-text-inner">
+                <div>
+                  <div>
+                    <label>Market Type</label>
+                    <select class="form-control" formControlName="marketingTypeId" >
+                    <option [ngValue]="null" selected>Choose Market Type</option>
+                    <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
+                    </select>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Market Type is required',
+                      control: marketForm.controls['marketingTypeId']
+                  }"></ng-container>
+                  </div>
+                </div>
+                <div>
+                  <div class="custom-input-field">
+                    <label>Terms And Conditions</label>
+                    <textarea type="text" class="form-control" placeholder="Enter Terms And Conditions" formControlName="localLaws" name="localLaws" rows="8" autocomplete="off" ></textarea>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'required',
+                      message: 'Terms And Conditions is required',
+                      control: marketForm.controls['localLaws']
+                  }"></ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="marketForm.invalid">Submit</button>
+                <button type="button" class="btn btn-light" (click)="resetForm()" (click)="modal.dismiss('Cross click')">Close</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<ng-template #contents let-c="close" let-d="dismiss">    
+  <div class="modal-header">    
+      <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>    
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">    
+          <span aria-hidden="true">×</span>    
+      </button>    
+  </div>    
+  <div class="modal-body">    
+      <p>Are you sure to delete this Market Page?</p>    
+  </div>    
+  <div class="modal-footer">    
+      <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>    
+      <button type="button" class="btn btn-primary" (click)="c('yes')">Yes</button>    
+  </div>    
+</ng-template>   
+<ng-template #contentData let-modal>
+  <div class="modal-content">
+    <div class="modal-header no-border">
+      <h4 class="bold">Update Market Page</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="marketForm" novalidate="novalidate" (ngSubmit)="onSubmit()">
+        <div class="custom-modal-inner">  
+          <div class="modal-content-inner-text">
+            <div class="form-text-inner">
+              <div>
+                <div>
+                  <label>Market Type</label>
+                  <select class="form-control" formControlName="marketingTypeId" >
+                  <option [ngValue]="null" selected>Choose Market Type</option>
+                  <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
+                  </select>
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'required',
+                    message: 'Market Type is required',
+                    control: marketForm.controls['marketingTypeId']
+                }"></ng-container>
+                </div>
+              </div>
+              <div>
+                <div class="custom-input-field">
+                  <label>Terms And Conditions</label>
+                  <textarea type="text" class="form-control" placeholder="Enter Terms And Conditions" formControlName="localLaws" name="localLaws" rows="8" autocomplete="off" ></textarea>
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'required',
+                    message: 'Terms And Conditions is required',
+                    control: marketForm.controls['localLaws']
+                }"></ng-container>
+                </div>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" [disabled]="marketForm.invalid">Submit</button>
+                <button type="button" class="btn btn-light" (click)="resetForm()"  (click)="modal.dismiss('Cross click')">Close</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

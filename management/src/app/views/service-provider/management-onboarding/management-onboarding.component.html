@@ -181,7 +181,7 @@
                                     <div class="custom-input-field">
                                         <label>{{'IBAN' | localization}}</label>
                                         <input type="text" class="custom-input" formControlName="iban"
-                                        placeholder="EnterIBAN" />
+                                        placeholder="{{'EnterIBAN' | localization}}" />
                                         <small class="text-danger" *ngIf="managementForm.iban.touched && !managementForm.iban.valid">{{'IBANrequired' | localization }}</small>
                                       </div>
                                   </div>
@@ -214,8 +214,7 @@
                                                           <div class="col-sm-6 py-2">
                                                              <div class="no-img-wrapper custompdfbox " >
                                                                 <div class="">
-                                                                    <p class="medium">{{'Support Document' | localization }}</p>
-                                                                    <p class="small-text light grey">{{'Add a Support Document' | localization }}</p>
+                    
                                                                     </div>
                                                                 <div class="upload-btn">                   
                                                                     <div class="avatar-edit">

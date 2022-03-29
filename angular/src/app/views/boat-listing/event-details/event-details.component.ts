@@ -9,7 +9,9 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { BoatType } from 'src/app/shared/enums/boat-Type';
 import { UserDefaults } from 'src/app/shared/enums/user-roles';
+import { ServiceFee } from 'src/app/shared/interface/Service-fee';
 import { environment } from 'src/environments/environment';
 import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-logged-in.component';
 
@@ -26,6 +28,8 @@ export class EventDetailsComponent implements OnInit {
     config.max = 5;
     config.readonly = true;
   }
+  boatType = BoatType;
+  serviceFee : ServiceFee;
   eventId: number;
   eventDetails: any;
   //assetsUrl = environment.BOAT_API_URL + '/boatgallery/';
@@ -65,6 +69,9 @@ export class EventDetailsComponent implements OnInit {
 
   getEventDetailsById() {
     this.yachtSearchService.eventDetailsById(this.eventId).subscribe((res: any) => {
+      this.yachtSearchService.getServiceFeeByBoatType(this.boatType.Event).subscribe((res: any) => {
+        this.serviceFee = res.data;
+      });
       this.eventDetails = res.eventDetails;
       this.eventSchedule = res.eventSchedule;
       this.calculatePricing();
@@ -98,6 +105,8 @@ export class EventDetailsComponent implements OnInit {
       if ((this.eventFilterDetails.adults + this.eventFilterDetails.childrens) > 0) {
         let bookingModel = {
           eventId: this.eventId,
+          adults:this.eventFilterDetails.adults,
+          children:this.eventFilterDetails.childrens,
           eventDate: this.eventDetails.startDateTime,
           noOfGuests: this.eventFilterDetails.adults + this.eventFilterDetails.childrens,
           hostId: this.eventDetails.boat.creatorId,

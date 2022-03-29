@@ -1,14 +1,11 @@
 ﻿using BnBYachts.Core.Data.Model.ForgetPassword;
 using BnBYachts.Core.Dto;
 using BnBYachts.Core.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -32,20 +29,19 @@ namespace BnBYachts.Core.Services
             _config = config;
         }
         [HttpGet]
-        [Route("api/forgot/{Email}")]
         public async Task<bool> ForgotPassword(string Email)
         {
             var rootUrl = _config.GetSection("AppUrl:ClientUrl").Value;
-            ForgetPasswordVerifier forgetPasswordVerifier = new ForgetPasswordVerifier();
+            var forgetPasswordVerifier = new ForgetPasswordVerifier();
             var user = await _userManager.FindByEmailAsync(Email).ConfigureAwait(false);
 
             if (user == null)
                 return false;
             else
             {
-                Guid obj = Guid.NewGuid();
+                var obj = Guid.NewGuid();
                 var uniqueId = obj.ToString();
-                string urlLink = rootUrl+"/auth/reset-password/" + uniqueId;
+                var urlLink = rootUrl+"/auth/reset-password/" + uniqueId;
                 forgetPasswordVerifier.UserId = user.Id.ToString();
                 forgetPasswordVerifier.UniqueId = uniqueId.ToString();
                 await _Repository.InsertAsync(forgetPasswordVerifier);
@@ -79,7 +75,6 @@ namespace BnBYachts.Core.Services
         }
 
         [HttpGet]
-        [Route("api/verifyLink/{uniqueId}")]
         public async Task<string> VerifyLink(string uniqueId)
         {
             var userId = _Repository.Where(x => x.UniqueId == uniqueId).Select(x => x.UserId).FirstOrDefault();
@@ -87,7 +82,6 @@ namespace BnBYachts.Core.Services
 
         }
         [HttpGet]
-        [Route("api/reset/")]
         public async Task<bool> ResetPassword(string userId, string Password)
         {
             var resetpasswordUserInfo = await _userManager.FindByIdAsync(userId);

@@ -35,6 +35,8 @@ namespace BnBYachts.Core.ServiceProvider.Transferable
         public string UserName { get; set; }
         public string UserImagePath { get; set; }
         public string PaymentType { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreationTime { get; set; }
         public ICollection<TimeSlotTransferable> TimeSlots { get; set; }
        
     }

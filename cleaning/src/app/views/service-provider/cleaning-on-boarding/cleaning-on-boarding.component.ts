@@ -158,14 +158,14 @@ if(this.files!==undefined && this.files?.length > 0)
 });
 }
     formData.append('seviceproviderdata', JSON.stringify(data));
-     this._serviceProvider.addServiceProviderRole(this.user_Roles.management).subscribe((res:any)=>{
+     this._serviceProvider.addServiceProviderRole(this.user_Roles.cleaning).subscribe((res:any)=>{
       if(res.returnStatus)
       {
         this._serviceProvider.createServiceProvider(formData).subscribe((res: any) => {
           if (res.returnStatus) {
 
             this.toastr.success("Cleaning Onboarding Completed!", "Service Provider");
-            this.router.navigate(['service-provider/service-provider-dashboard'])
+            this.router.navigate(['app/cleaning/cleaning-dashboard'])
           }
          
         },

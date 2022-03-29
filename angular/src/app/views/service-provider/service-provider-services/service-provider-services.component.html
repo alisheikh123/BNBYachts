@@ -12,8 +12,8 @@
                     <label>{{'ServiceType' | localization}} </label>
                     <select [(ngModel)] = "serviceProviderSearchParam.serviceProviderType">
                         <option [ngValue]="1">{{'Captain' | localization}}</option>
-                        <option [ngValue]="2">{{'Manager' | localization }}</option>
-                        <option [ngValue]="3">{{'Staff' | localization }}</option>
+                        <option [ngValue]="2">{{'ManagementCompany' | localization }}</option>
+                        <option [ngValue]="3">{{'CleaningCompany' | localization }}</option>
                     </select>
                 </div>
             </div>
@@ -48,6 +48,10 @@
         <div class="col-lg-3 col-md-3  py-2"><a   (click)="getServiceProviderDetail()"
             class="custom-btn cstmbtn big-btn grey medium search-btn">{{'Search' | localization}}</a></div>
       </div>
+      <div class="customsg" *ngIf="serviceProviderList.length==0;else serviceProvidersList">
+          {{'NoDataMessage' | localization}}
+      </div>
+      <ng-template #serviceProvidersList >
       <div *ngFor="let item of serviceProviderList">
 
      
@@ -61,7 +65,10 @@
                 <a  class="fav-btn white-clr-font"><i class="fa fa-heart-o"></i></a>
             </div>
               <div class="user-details">
-                  <p class="medium py-1">{{item.userName}}</p>
+                <p *ngIf="item.serviceProviderType==serviceProviderType.management" class="medium py-1">{{'ManagementCompany' | localization }} </p>
+                <p *ngIf="item.serviceProviderType==serviceProviderType.cleaning" class="medium py-1">{{'CleaningCompany' | localization }}  </p>
+                <p *ngIf="item.serviceProviderType !=serviceProviderType.captain" class="medium py-1">{{item.companyName}}</p>
+                  <p *ngIf="item.serviceProviderType==serviceProviderType.captain" class="medium py-1">{{item.userName}}</p>
                   <p class=" py-1">{{item.experience}} Years of Exeprience</p>
                   <div class="small-stars  grey-stars py-1">
                       <span class="fa fa-star stars-clr "></span>
@@ -73,7 +80,7 @@
               </div>
           </div>
           <div class="right-content custom-flex align-items-end">
-              <div class="custom-one-line-calendar me-sm-3">
+              <div *ngIf="item.serviceProviderType==serviceProviderType.captain"  class="custom-one-line-calendar me-sm-3">
                   <p class="medium py-2 pt-0">Availbility</p>
                   <p class="small-text">
                       <span class="pe-2"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
@@ -90,6 +97,7 @@
           </div>
           </div>
         </div>
+    </ng-template>
       </div>
   </div>
   </div>

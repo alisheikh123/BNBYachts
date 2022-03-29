@@ -79,10 +79,6 @@
                             <p class="medium">{{'StartTime' | localization}}</p>
                             <p class="grey text-right py-1">{{eventDetail?.startDateTime | date:'hh:mm a'}}</p>
                           </div>
-                        <div class="custom-flex-start">
-                            <p class="medium">{{'EndTime' | localization}}</p>
-                            <p class="grey text-right py-1">{{eventDetail?.endDateTime | date:'hh:mm a'}}</p>
-                          </div>
 
                         <div class="custom-margin" *ngIf="!isHost">
                             <h5 class="bold mb-1">{{'CancellationPolicy' | localization}}</h5>

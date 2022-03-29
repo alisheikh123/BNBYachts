@@ -50,7 +50,7 @@ export class BookingService {
   /* Ali */
 
   getBoatInfo(boatId: any) {
-    return this.http.get(this.boatApiUrl + '/boat-details/' + boatId).pipe(catchError(this.handleError));
+    return this.http.get(this.boatApiUrl + '/app/host-boat/boat-details-by-id/' + boatId).pipe(catchError(this.handleError));
   }
 
   saveCancellation(model: any) {

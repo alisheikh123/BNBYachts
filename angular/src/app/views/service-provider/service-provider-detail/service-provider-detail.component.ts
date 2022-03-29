@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ChatService } from 'src/app/core/chat/chat.service';
 import { ServiceProviderService } from 'src/app/core/serviceprovider/serviceprovider.service';
+import { ServiceProviderType } from 'src/app/shared/enums/service-provider-type';
 import { UploadDefault } from 'src/app/shared/enums/user-roles';
 import { ServiceProviderDTO } from 'src/app/shared/interface/service-provider/service-providerdto';
 import { environment } from 'src/environments/environment';
@@ -17,7 +18,9 @@ export class ServiceProviderDetailComponent implements OnInit {
 id:number;
 senderId:string;
 profilePictureurl :string = environment.S3BUCKET_URL + '/profilePicture/';
+companyPictureurl :string = environment.S3BUCKET_URL + '/profilePicture/serviceprovider/companyprofile/';
 userDefaults = UploadDefault;
+serviceProviderType= ServiceProviderType;
 serviceProvider:ServiceProviderDTO=<ServiceProviderDTO>{};
   constructor(public activatedRoute: ActivatedRoute,
     private route: Router,

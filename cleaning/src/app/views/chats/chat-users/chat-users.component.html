@@ -1,0 +1,49 @@
+<div class="bg-grey-light border-radius-5 p-2">
+  <div class="image-with-text">
+    <div class="image-with-text-inner small-img">
+      <img src="{{assetUrlS3 + (senderDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
+      <div class="user-details">
+        <!-- <p class="medium">{{userInfo?.name}}</p> -->
+        <p> {{senderDetails?.name}}</p>
+        <p class="small-text grey">{{senderDetails?.about | slice:0:25}} <span *ngIf="senderDetails?.about.length > 25">...</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="search-wrapper custom-input-field">
+  <input type="text" class="custom-input border-radius-5" placeholder="Search" [(ngModel)]="searchText"><i
+    class="fa fa-search"></i>
+</div>
+
+<div class="users-wrap custom-card">
+  <div class="users-wrap-inner custom-flex-start">
+    <div class="dropdown custom-dropdown">
+      <button class="dropdown-btn dropdown-toggle no-border" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{activeChatFilter == chatFilter?.all ? 'All' : activeChatFilter == chatFilter?.archived ? 'Archived':'Blocked'}}
+        <i class="fa fa-angle-down"></i>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><button class="dropdown-item" (click)="filterUsers(chatFilter?.all)">All</button></li>
+        <li><button class="dropdown-item" (click)="filterUsers(chatFilter?.archived)">Archived</button></li>
+        <li><button class="dropdown-item" (click)="filterUsers(chatFilter?.blocked)">Blocked</button></li> 
+      </ul>
+    </div> 
+  </div>
+  <div class="user-providers-list">
+    <a style="cursor: pointer !important;" *ngFor="let item of chatUsers | filter : searchText : 'name'"
+      (click)="getUserChat(item)" [ngClass]="{'active': isActive(item?.userId)}" class="image-with-text">
+      <div class="image-with-text-inner small-img">
+        <img src="{{assetUrlS3 + (item?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
+        <div class="user-details">
+          <p class="medium">{{item?.name}}<span class="pl-3 badge bg-blue" style="float:right;" *ngIf="item?.unReadChatsCount > 0">{{item?.unReadChatsCount}}</span></p>
+          <p class="small-text grey" [innerHtml]="item?.lastMessage | slice : 0:30"></p>
+        </div>
+      </div>
+    </a>
+    <div *ngIf="(chatUsers | filter : searchText : 'name')?.length == 0">
+      <div class="text-center">
+        <p>No users found</p>
+      </div>
+    </div>
+  </div>
+</div>

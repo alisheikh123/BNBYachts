@@ -17,6 +17,11 @@ const routes: Routes = [
      loadChildren: () => import('../service-provider/service-provider.module').then(m => m.ServiceProviderModule)
   },
   {
+    
+    path: "chats", 
+     loadChildren: () => import('../chats/chats.module').then(m => m.ChatsModule)
+  },
+  {
     path: 'help-center',
     loadChildren: () => import('../help-center/help-center.module').then(m => m.HelpCenterModule)
   },
@@ -40,4 +45,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class CaptainRoutingModule { }
+export class ManagementRoutingModule { }

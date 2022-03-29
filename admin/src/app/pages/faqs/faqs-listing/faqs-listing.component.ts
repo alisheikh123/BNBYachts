@@ -77,7 +77,8 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
     },
   }
 };
-  constructor(private fb: FormBuilder, private faqsService: FaqsData ,private activeModal: NgbActiveModal, private modalService : NgbModal, private toaster : NbToastrService) {
+  constructor(private fb: FormBuilder, private faqsService: FaqsData ,private activeModal: NgbActiveModal, 
+    private modalService : NgbModal, private toaster : NbToastrService) {
    
   }
   ngOnDestroy(): void {
@@ -128,12 +129,13 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
     var faqsData = this.faqsForm.value;
     if (faqsData.id > 0) {
       this.faqsService.UpdateFaqs(faqsData).subscribe(response =>{
-      this.toaster.success('Faqs updated successfully', 'Faqs');
+      this.toaster.primary('Faqs updated successfully', 'Faqs');
       this.resetForm();
       this.modalService.dismissAll();
       this.getFaqs();
       });
     }else{
+      faqsData.id = 0;
       this.faqsService.AddFaqs(faqsData).subscribe(response =>{
         this.toaster.primary('Faqs created successfully', 'Faqs');
         this.resetForm();

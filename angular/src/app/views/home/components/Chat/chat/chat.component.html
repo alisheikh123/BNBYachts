@@ -40,7 +40,7 @@
             [ngClass]="{'bg-blue-text reciever-msg':isReciever(message.receiverId,chat.senderId)}">
             <div class="image-with-text-inner small-img">
               <div class="w-100 d-flex align-items-start justify-content-end reciver-msj">
-       
+
               <div class="user-details">
                 <p [innerHtml]="message.message"></p>
                 <small class="chatTime">{{message.sentTime | date:'hh:mm a'}}</small>
@@ -50,11 +50,11 @@
               </div>
             </div>
           </div>
-          </ng-container> 
-  
+          </ng-container>
+
             <p class="text-center bold" *ngIf="chat.blockedUser">You cannot reply to this conversion...</p>
 
-         
+
           </div>
           <div class="message-box px-3" *ngIf="!chat.blockedUser">
             <form>
@@ -102,11 +102,8 @@
         <h4 class="bold text-center">No Chat Aailable</h4>
         <div>
         </div>
-        <div class="bottom-btn vertical-center text-center">
-          <button (click)="findHost()" class="custom-btn blue big-btn mt-3" data-bs-toggle="modal" data-bs-target="#noChatModal" data-bs-dismiss="modal">Find Host</button>
-        </div>
       </div>
     </div>
-   
+
   </div>
 </ng-template>

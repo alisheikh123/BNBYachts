@@ -1,4 +1,7 @@
-﻿using BnBYachts.Boat.Wishlists;
+﻿using BnBYachts.Boat.Boat.FeaturedCity;
+using BnBYachts.Boat.Boat.Marketing;
+using BnBYachts.Boat.Boat.Settings;
+using BnBYachts.Boat.Wishlists;
 using BnBYachts.Boats.Charter;
 using BnBYachts.Events;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +58,9 @@ namespace BnBYachts.Boat.EntityFrameworkCore
         public DbSet<BoatRuleEntity> BoatsRules { get; set; }
         public DbSet<FeatureEntity> Features { get; set; }
         public DbSet<RuleEntity> Rules { get; set; }
+        public DbSet<FeaturedCityEntity> FeaturedCities { get; set; }
+        public DbSet<MarketingPageEntity> MarketingPage { get; set; }
+        public DbSet<SettingEntity> Settings { get; set; }
 
         // charter
 

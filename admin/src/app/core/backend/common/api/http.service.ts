@@ -33,6 +33,9 @@ export class HttpService {
   getBooking(endpoint: string, options?): any {
     return this.http.get(`${this.BOOKING_API_URL}/${endpoint}`, options);
   }
+  postBooking(endpoint: string, data, options?): Observable<any> {
+    return this.http.post(`${this.BOOKING_API_URL}/${endpoint}`, data, options);
+  }
   getBoat(endpoint: string, options?): any {
     return this.http.get(`${this.BOAT_API_URL}/${endpoint}`, options);
   }
@@ -47,5 +50,14 @@ export class HttpService {
   }
   put(endpoint: string, data, options?): Observable<any> {
     return this.http.put(`${this.CORE_API_URL}/${endpoint}`, data, options);
+  }
+  deleteBoat(endpoint: string, options?): Observable<any> {
+    return this.http.delete(`${this.BOAT_API_URL}/${endpoint}`, options);
+  }
+  postBoat(endpoint: string, data, options?): Observable<any> {
+    return this.http.post(`${this.BOAT_API_URL}/${endpoint}`, data, options);
+  }
+  putBoats(endpoint: string, data, options?): Observable<any> {
+    return this.http.put(`${this.BOAT_API_URL}/${endpoint}`, data, options);
   }
 }

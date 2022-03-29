@@ -12,7 +12,7 @@ namespace BnByachts.Simulator.socket
         {
 
             connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:44358/signalr-hubs/Messaging")
+                .WithUrl("https://localhost:5001/signalr-hubs/Notification")
                 .Build();
 
             connection.Closed += async (error) =>
@@ -22,11 +22,13 @@ namespace BnByachts.Simulator.socket
             };
         }
 
+
+
         
         public async Task SendMessage()
         {
             await connection.StartAsync().ConfigureAwait(false);
-            await connection.InvokeAsync("SendMessage", "test1","test2");
+            await connection.InvokeAsync("NotifyClient", "1","test2");
 
         }
     }

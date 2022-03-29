@@ -20,6 +20,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { CarouselModule } from 'primeng/carousel';
 import { RouterModule } from '@angular/router';
+import { ChatsModule } from '../chats/chats.module';
 
 
 
@@ -48,11 +49,10 @@ import { RouterModule } from '@angular/router';
     CalendarModule,
     NgxStripeModule.forRoot(environment.stripeKey),
     NgOtpInputModule,
-    CarouselModule
+    CarouselModule,
+    ChatsModule
 
   ],
-  providers: [ 
-     ServiceProviderService , YachtSearchService, ErrorService
-    ]
+  providers: [ServiceProviderService , YachtSearchService, ErrorService ]
 })
 export class ServiceProviderModule { }

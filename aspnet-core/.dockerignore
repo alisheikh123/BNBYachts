@@ -28,3 +28,5 @@ README.md
 **/appsettings.Staging.json
 **/appsettings.json
 **/appsettings.secrets.json
+
+**/create_quartz.sql

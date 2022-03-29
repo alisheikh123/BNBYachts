@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
 import { IEventReservation } from 'src/app/shared/interface/reservation';
+import { utils } from 'src/app/shared/utility/utils';
 
 @Component({
   selector: 'app-event-reservation-detail',
@@ -106,23 +107,25 @@ export class EventReservationDetailComponent implements OnInit {
   goBack() {
     this.eventReservation.isHost == true ? this.route.navigate(['host/my-bookings']) : this.route.navigate(['boat-listing/all-reservations']);
   }
-  isEventStarted(startDate: string) {
-    let inDate = moment(startDate).format("DD-MM-YYYY");
+  isEventStarted(eventDate:Date,startTime:Date) {
+    let eventDates = utils.convertToDate(eventDate);
     let currentDate = moment().format("DD-MM-YYYY");
-    let inTime = moment(startDate).format("HH:mm");
+    let startTimes = utils.convertToTime(startTime);
     let curretTime = moment().format("HH:mm");
-    if (startDate != undefined && inTime != undefined) {
-      return (inDate == currentDate && inTime > curretTime) ? true :  false;
+    if (eventDates != undefined && startTimes != undefined) {
+      return (eventDates == currentDate && startTimes>curretTime)? true:(moment(eventDate).isAfter(moment()))?true:false;
     }
+    else
+    {
     return false;
+    }
   }
-  isEndDateEnded(endDate: string) {
-    let outDate = moment(endDate).format("DD-MM-YYYY");
-    let currentDate = moment().format("DD-MM-YYYY");
-    let outTime = moment(endDate).format("HH:mm");
-    let curretTime = moment().format("HH:mm");
-    if (endDate != undefined && outTime != undefined) {
-      return (outDate == currentDate && moment(outTime).isAfter(curretTime) ? true : false)
+  isEndDateEnded(endDate: Date) {
+    let outDate = utils.convertDateToYearMonthDay(endDate);
+    let currentDate = new Date();
+    let currentDateFormat = utils.convertDateToYearMonthDay(currentDate);
+    if (endDate != undefined && currentDate != undefined) {
+      return (moment(outDate).isAfter(currentDateFormat) ? true : false);
     }
     else {
       return false;
@@ -130,3 +133,7 @@ export class EventReservationDetailComponent implements OnInit {
   }
 
 }
+function convertToDate(eventDate: Date) {
+  throw new Error('Function not implemented.');
+}
+

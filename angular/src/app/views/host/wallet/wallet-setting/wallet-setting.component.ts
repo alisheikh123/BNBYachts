@@ -107,7 +107,6 @@ export class WalletSettingComponent implements OnInit {
   getAllIncomingTransaction() {
     this.service.getAllTransactions(this.accountDetail[0]?.account).subscribe(res => {
       this.incomingTransactions = res;
-      console.log(res);
     })
   }
 

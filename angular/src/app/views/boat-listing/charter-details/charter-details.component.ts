@@ -7,7 +7,9 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchDataService } from 'src/app/core/yacht-search/yacht-search-data.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { BoatType } from 'src/app/shared/enums/boat-Type';
 import { UserDefaults } from 'src/app/shared/enums/user-roles';
+import { ServiceFee } from 'src/app/shared/interface/Service-fee';
 import { environment } from 'src/environments/environment';
 import { NotLoggedInComponent } from '../../auth/components/not-logged-in/not-logged-in.component';
 
@@ -21,6 +23,8 @@ export class CharterDetailsComponent implements OnInit {
     config.max = 5;
     config.readonly = true;
   }
+  boatType = BoatType;
+  serviceFee : ServiceFee;
   charterId: number;
   charterDetails: any;
   charterSchedule: any;
@@ -55,6 +59,9 @@ export class CharterDetailsComponent implements OnInit {
 
   getCharterDetailsById() {
     this.yachtSearchService.charterDetailsById(this.charterId).subscribe((res: any) => {
+      this.yachtSearchService.getServiceFeeByBoatType(this.boatType.Charter).subscribe((res: any) => {
+        this.serviceFee = res.data;
+      });
       this.charterDetails = res?.charterDetails;
        this.charterDetails.DepartureTime = moment(this.charterDetails?.departureFromDate).format("hh:mm a")
        this.charterDetails.ArrivalTime = moment(this.charterDetails?.departureToDate).format("hh:mm a")
@@ -69,7 +76,6 @@ export class CharterDetailsComponent implements OnInit {
       this.boatHost = res;
     })
   }
-
   featureFilter(isFavroute: boolean, isHealthSafetyFeature: boolean) {
     if (isHealthSafetyFeature == false) {
       return this.charterDetails?.boat.boatFeatures.filter((res: any) => res.offeredFeatures.isGuestFavourite == isFavroute && res.offeredFeatures.isSafetyFeature == false);
@@ -79,11 +85,9 @@ export class CharterDetailsComponent implements OnInit {
     }
 
   }
-
   ruleFilter(isHealthSafetyRule: boolean) {
     return this.charterDetails?.boat.boatRules.filter((res: any) => res.offeredFeatures.isGuestFavourite == isHealthSafetyRule);
   }
-
   reserveCharter() {
     this.isSubmitted = true;
     if(this.authService.authenticated) {
@@ -132,11 +136,9 @@ export class CharterDetailsComponent implements OnInit {
     this.charterFilterDetails.childrens = this.popOverFilterData.childrens;
     this.charterCapcityValidation = ((this.charterFilterDetails.adults + this.charterFilterDetails.childrens>this.charterDetails?.guestCapacity)||(this.charterFilterDetails.adults + this.charterFilterDetails.childrens<1))?"Entered guest capacity is not available":this.popover.close();
   }
-
   showAllFeatures() {
     this.modal.open(this.templateRef, { centered: true, windowClass: 'custom-modal custom-small-modal' });
   }
-
   onChangeDate(isIncrease: boolean) {
     this.dateScheduleIndex = isIncrease ? this.dateScheduleIndex + 1 : this.dateScheduleIndex - 1;
     this.yachtSearchService.charterDetailsById(this.charterSchedule[this.dateScheduleIndex]?.charterId).subscribe((res: any) => {
