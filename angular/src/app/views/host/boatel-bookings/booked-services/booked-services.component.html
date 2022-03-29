@@ -189,10 +189,18 @@
                 </ng-container>
                 <ng-template #charterDetailsViewBtnTemplate>
                     <div class="custom-flex mt-4">
-                        <a [routerLink]="[
-                        '/boat-listing/reservation-cancellation',
-                        item.id,item.contractId
-                      ]" class="custom-btn blue">{{'ModifyReservation' | localization}}</a>&nbsp;&nbsp;
+                        <ng-container *ngIf="item.contractId;else charterModifyBtnTemplate">
+                            <a [routerLink]="[
+                            '/boat-listing/reservation-cancellation',
+                            item.id,item.contractId
+                          ]" class="custom-btn blue">{{'ModifyReservation' | localization}}</a>&nbsp;&nbsp;
+                        </ng-container>
+                        <ng-template #charterModifyBtnTemplate>
+                            <a [routerLink]="[
+                            '/boat-listing/charter-reservation-cancellation',
+                            item.id,item.charterId
+                          ]" class="custom-btn blue">{{'ModifyReservation' | localization}}</a>&nbsp;&nbsp;
+                        </ng-template>
                     </div>
                 </ng-template>
             </div>
@@ -268,7 +276,7 @@
                     <div class="custom-flex mt-4">
                     <ng-container *ngIf="item.contractId;else eventModifyBtnTemplate">
                         <a [routerLink]="[
-                                   '/boat-listing/event-reservation-cancellation',
+                                   '/boat-listing/reservation-cancellation',
                                      item.id,item.contractId
                                     ]" class="custom-btn blue">{{'ModifyReservation' | localization}}</a>&nbsp;&nbsp;
                     

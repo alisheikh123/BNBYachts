@@ -146,7 +146,7 @@ constructor(
     };
     this.service.saveEventBookingCancellation(charterCancellationModel)
       .subscribe((res: any) => {
-        this.service.getRefundable(charterCancellationModel.bookingId,Math.floor(this.eventCancellationReason.refundableAmount)).subscribe((isRefundablePay:any) =>
+        this.service.getRefundable(charterCancellationModel.bookingId,Math.floor(this.eventCancellationReason.refundableAmount), this.isHost, charterCancellationModel.bookingType).subscribe((isRefundablePay:any) =>
         {
 
         });

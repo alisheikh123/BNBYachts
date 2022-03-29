@@ -71,7 +71,7 @@ export class EventBookingPaymentComponent implements OnInit {
       description: this.eventDetails?.boat.name + ' Event  Booking Charges from ' + this.eventFilterDetails.eventDate
     };
     this.paymentService.pay(model).subscribe(res => {
-      if (res) {
+      if (res.returnStatus) {
         this.modal.open(BookingConfirmedModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true,backdrop:'static' })
         this.isBookingConfirmed = true;
         this.isPaymentFailed = false;

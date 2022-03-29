@@ -34,18 +34,17 @@ namespace BnBYachts.Payments.PaymentServices
         }
 
         [HttpPost]
-        public async Task<bool> Pay(BookingPaymentRequestable data)
+        public async Task<EntityResponseModel> Pay(BookingPaymentRequestable data)
         {
             data.UserId = CurrentUser.Id.ToString();
-            var response = await _paymentManager.Pay(data);
-            return response;
+            return await _paymentManager.Pay(data);
         }
 
-        [HttpGet]
-        public async Task<bool> RefundPayment(int bookingId, long refundAmount)
+        [HttpPost]
+        public async Task<EntityResponseModel> RefundPayment(StripePaymentRefundRequestable stripePaymentRefund)
         {
-            var response = await _paymentManager.RefundPayment(bookingId, refundAmount);
-            return response;
+            return await _paymentManager.RefundPayment(stripePaymentRefund);
+            
         }
 
         public async Task CreateConnectAccount(StripeOnboardingRequestable data)

@@ -30,6 +30,7 @@
     <None Remove="Logs\**" />
   </ItemGroup>
 
+
   <ItemGroup>
     <ProjectReference Include="..\..\modules\booking\src\BnBYachts.Booking.Application\BnBYachts.Booking.Application.csproj" />
     <ProjectReference Include="..\..\modules\booking\src\BnBYachts.Booking.EntityFrameworkCore\BnBYachts.Booking.EntityFrameworkCore.csproj" />

@@ -67,7 +67,7 @@ export class ReservationDetailComponent implements OnInit {
       this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
-      this.totalDays = utils.getDaysBetweenTwoDates(this.checkInDate,this.checkOutDate);
+      this.totalDays = utils.differenceDates(this.checkInDate,this.checkOutDate);
       this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {
         this.booking.boatDetail = boatdetail;
         this.booking.TotalDays = this.totalDays;
@@ -131,7 +131,7 @@ export class ReservationDetailComponent implements OnInit {
       this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
-      this.totalDays = utils.getDaysBetweenTwoDates(this.checkInDate,this.checkOutDate);
+      this.totalDays = utils.differenceDates(this.checkInDate,this.checkOutDate);
       if (this.bookingStatus != this.BOOKING_STATUS.Cancel) {
 
         this.service.getBoatInfo(this.booking.boatId).subscribe((boatdetail: any) => {

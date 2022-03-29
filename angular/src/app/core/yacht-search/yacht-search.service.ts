@@ -54,7 +54,7 @@ export class YachtSearchService {
       catchError(this.handleError));
   }
   getServiceFeeByBoatType(BoatTypeId : number) {
-    return this.http.get(this.apiUrl + + '/app/setting/getservice-fee-by-boat-type/'+BoatTypeId);    
+    return this.http.get(this.apiUrl + '/app/setting/getservice-fee-by-boat-type/'+BoatTypeId);    
   }
   ///Exception handler
   handleError(error: any) {
