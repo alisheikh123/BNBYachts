@@ -1,4 +1,5 @@
 ﻿using BnBYachts.Core.Data.Entities.NewsLetters;
+using BnBYachts.Core.NewsLetters.Enum;
 using BnBYachts.Core.NewsLetters.Interface;
 using BnBYachts.Core.NewsLetters.Transferable;
 using BnBYachts.EventBusShared;
@@ -19,12 +20,16 @@ namespace BnBYachts.Core.Managers
     {
         private readonly IRepository<ContactsEntity, long> _repository;
         private readonly IRepository<NewsLetterSubscriptionEntity, long> _newsRepository;
+        private readonly IRepository<ScheduleNewsLetterEntity, long> _scheduleRepository;
+        private readonly IRepository<SubscriberEmailEntity, long> _subscriberRepository;
         private readonly EventBusDispatcher _eventBusDispatcher;
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
-        public NewsLetterManager(IRepository<ContactsEntity, long> repository, IObjectMapper<CoreDomainModule> objectMapper, 
-            IRepository<NewsLetterSubscriptionEntity, long> newsRepository, EventBusDispatcher eventBusDispatcher)
+        public NewsLetterManager(IRepository<ContactsEntity, long> repository, IObjectMapper<CoreDomainModule> objectMapper, IRepository<ScheduleNewsLetterEntity, long> scheduleRepository,
+            IRepository<NewsLetterSubscriptionEntity, long> newsRepository, IRepository<SubscriberEmailEntity, long> subscriberRepository, EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
+            _scheduleRepository = scheduleRepository;
+            _subscriberRepository = subscriberRepository;
             _objectMapper = objectMapper;
             _newsRepository = newsRepository;
             _eventBusDispatcher = eventBusDispatcher;
@@ -76,7 +81,40 @@ namespace BnBYachts.Core.Managers
             var user = await _repository.FindAsync(res => res.EmailAddress == emailAddress).ConfigureAwait(false);
             return user != null ? true : false;
         }
-
+        public async Task<EntityResponseModel> ScheduleNewsLetter(ScheduleTransferable schedule)
+        {
+            var SubscribeEmails = new List<SubscriberEmailEntity>();
+            var NewsLetter = await _newsRepository.SingleOrDefaultAsync(x=>x.Id == schedule.NewsLetterSubscriptionId).ConfigureAwait(false);
+            var response = new EntityResponseModel();
+            var data = _objectMapper.Map<ScheduleTransferable, ScheduleNewsLetterEntity>(schedule);
+            switch (NewsLetter.LetterTypeId)
+            {
+                case LetterType.Daily:
+                    data.ScheduleDate = NewsLetter.CreationTime.AddDays(1);
+                    break;
+                case LetterType.Weekly:
+                    data.ScheduleDate = NewsLetter.CreationTime.AddDays(7);
+                    break;
+                case LetterType.Monthly:
+                    data.ScheduleDate = NewsLetter.CreationTime.AddMonths(1);
+                    break;
+                case LetterType.Yearly:
+                    data.ScheduleDate = NewsLetter.CreationTime.AddYears(1);
+                    break;
+                default:
+                    break;
+            }
+            foreach (var item in schedule.EmailAddress)
+            {
+                var SubscribeEmail = new SubscriberEmailEntity();
+                SubscribeEmail.EmailAddress = item;
+                SubscribeEmail.NewsLetterSubscriptionId = schedule.NewsLetterSubscriptionId;
+                SubscribeEmails.Add(SubscribeEmail);
+            }
+            await _subscriberRepository.InsertManyAsync(SubscribeEmails).ConfigureAwait(false);
+            response.Data = await _scheduleRepository.InsertAsync(data).ConfigureAwait(false);
+            return response;
+        }
         public async Task<EntityResponseModel> UpdateNewsLetter(NewsLetterTransferable newsLetter)
         {
             var response = new EntityResponseModel();
@@ -94,5 +132,26 @@ namespace BnBYachts.Core.Managers
             response.Data = await _newsRepository.InsertAsync(data).ConfigureAwait(false);
             return response;
         }
+        public async Task SendEmailToSubscriberUsers()
+        {
+            var data = await _scheduleRepository.FindAsync(x => x.ScheduleDate.Date >= DateTime.Now.Date && x.StatusTypeId == StatusType.Pending).ConfigureAwait(false);
+            if (data != null)
+            {
+                var subscriber = await _subscriberRepository.GetListAsync(x => x.NewsLetterSubscriptionId == data.NewsLetterSubscriptionId).ConfigureAwait(false);
+                foreach (var item in subscriber)
+                {
+                    await _subscriberRepository.EnsurePropertyLoadedAsync(item, x => x.NewsLetterSubscription).ConfigureAwait(false);
+                    string body = $"<h5>Hello {item.NewsLetterSubscription.Title} </h5> <div> You registered an account on BnByachts, before being able to use your account you need to verify your email address by clicking here: </div><br>Best Regard";
+                    await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
+                    {
+                        To = item.EmailAddress,
+                        Subject = $"Hello {item.NewsLetterSubscription.Title}",
+                        Body = new StringBuilder().Append(body),
+                        IsBodyHtml = true
+                    });
+                }
+            }
+        }
+
     }
 }

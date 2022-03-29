@@ -16,6 +16,7 @@ using BnBYachts.Boat.Boat.Transferables;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
+using BnBYachts.Boat.Charter.Dto;
 
 namespace BnBYachts.Boat.Manager
 {
@@ -276,7 +277,7 @@ namespace BnBYachts.Boat.Manager
                 var boatGallery = gallery.CreateMapped<BoatGalleryRequestable, BoatGalleryEntity>();
                 boatGallery.BoatEntityId = postBoatData.Id;
                 
-                _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
+                 await _eventBusDispatcher.Publish<IS3FileContract>(new S3FileContract
                 {
                     ChildFolder = "",
                     File = Convert.FromBase64String(gallery.FileData.Split("base64,")[1]),
@@ -403,6 +404,41 @@ namespace BnBYachts.Boat.Manager
             foreach (var boat in boats)
                 await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
             return _objectMapper.Map<List<BoatEntity>, List<BoatDTO>>(boats);
+        }
+        public async Task<EntityResponseModel> GetBoatsListByCity(string cityName)
+        {
+            var response = new EntityResponseModel();
+            var boats = await _boatRepository.GetListAsync(x => x.Location.Contains(cityName) && x.IsActive == true).ConfigureAwait(false);
+            foreach (var boat in boats)
+                await _boatRepository.EnsureCollectionLoadedAsync(boat, x => x.BoatGalleries).ConfigureAwait(false);
+            response.Data = _objectMapper.Map<List<BoatEntity>, List<BoatDTO>>(boats);
+            return response;
+        }
+
+        public async Task<EntityResponseModel> GetChartersListByCity(string cityName)
+        {
+            var response = new EntityResponseModel();
+            var charters = await _charterRepository.GetListAsync(x => x.DepartingFrom.Contains(cityName)).ConfigureAwait(false);
+            foreach (var charter in charters)
+            {
+                    await _charterRepository.EnsurePropertyLoadedAsync(charter, x => x.Boat).ConfigureAwait(false);
+                    await _boatRepository.EnsureCollectionLoadedAsync(charter.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+            }
+            response.Data = _objectMapper.Map<List<CharterEntity>, List<CharterDto>>(charters);
+            return response;
+        }
+
+        public async Task<EntityResponseModel> GetEventsListByCity(string cityName)
+        {
+            var response = new EntityResponseModel();
+            var Events = await _eventRepository.GetListAsync(x => x.Location.Contains(cityName)).ConfigureAwait(false);
+            foreach (var eventDetail in Events)
+            {
+                await _eventRepository.EnsurePropertyLoadedAsync(eventDetail, x => x.Boat).ConfigureAwait(false);
+                await _boatRepository.EnsureCollectionLoadedAsync(eventDetail.Boat, x => x.BoatGalleries).ConfigureAwait(false);
+            }
+            response.Data = _objectMapper.Map<List<EventEntity>, List<EventDTO>>(Events);
+            return response;
         }
     }
 }

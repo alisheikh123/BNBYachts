@@ -41,6 +41,7 @@ export class NewsletterSubscriptionComponent implements OnInit {
 ]
   settings = {
     actions: {
+      columnTitle :"Action",
       mode :'external',
       add: false,
       edit:false,
@@ -122,7 +123,6 @@ export class NewsletterSubscriptionComponent implements OnInit {
       description: newsLetterData.description,
       letterImage: newsLetterData.letterImage,
       title: newsLetterData.title,
-      // contactID: newsLetterData.contactID,
      });
      this.fileInfo = newsLetterData.letterImage;
 

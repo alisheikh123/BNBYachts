@@ -103,5 +103,9 @@ namespace BnBYachts.Services.Boat
             return boatStatus;
         }
         public async Task<List<BoatDTO>> GetBoatDetailsByUserId(Guid? userId) => await _hostBoatManager.GetBoatDetailsByUserId(userId);
+        public async Task<EntityResponseModel> GetBoatsListByCity(string cityName) => await _hostBoatManager.GetBoatsListByCity(cityName).ConfigureAwait(false);
+        public async Task<EntityResponseModel> GetChartersListByCity(string cityName) => await _hostBoatManager.GetChartersListByCity(cityName).ConfigureAwait(false);
+        public async Task<EntityResponseModel> GetEventsListByCity(string cityName) => await _hostBoatManager.GetEventsListByCity(cityName).ConfigureAwait(false);
+
     }
 }

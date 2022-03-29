@@ -34,6 +34,7 @@ namespace BnBYachts.Core
                 .ForMember(source => source.PaymentType, destination => destination.MapFrom(source => (source.PaymentOption.HasValue && source.PaymentOption.Value > 0) ? (source.PaymentOption == CaptainPaymentType.PerHour) ? "Per Hour" : "Per Day" : ""));
             CreateMap<ContactsTransferable, ContactsEntity>().ReverseMap();
             CreateMap<NewsLetterTransferable, NewsLetterSubscriptionEntity>().ReverseMap();
+            CreateMap<ScheduleTransferable, ScheduleNewsLetterEntity>();
         }
     }
 }

@@ -23,6 +23,7 @@ export class ServiceProviderListingComponent implements OnInit {
   USER_DEFAULTS  = UserDefaults;
   settings = {
     actions: {
+      columnTitle :"Action",
       add: false,
       edit:false,
       delete: false,

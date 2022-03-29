@@ -17,32 +17,27 @@
           <span aria-hidden="true">x</span>    
       </button>    
   </div>    
-  <div class="modal-body">    
-    <form >
-      <!-- [formGroup]="newsLetterForm" (ngSubmit)="onSubmit()" -->
+  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
       <div class="custom-modal-inner">  
         <div class="modal-content-inner-text">
           <div class="form-text-inner">
             <div>
                 <div>
                   <label>News Letter</label>
-                  <select class="form-control" >
+                  <select class="form-control" formControlName="newsLetterSubscriptionId">
                   <option [ngValue]="null" selected>Choose NewsLetter</option>
                   <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.title}}</option>
                   </select>
                 </div>
               </div>
             </div>
-            <!-- <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" [disabled]="newsLetterForm.invalid">Submit</button>
-              <button type="button" class="btn btn-light" (click)="resetForm()"  (click)="modal.dismiss('Cross click')">Close</button>
-          </div> -->
         </div>
       </div>
-    </form>  
-  </div>    
-  <div class="modal-footer">    
-      <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>    
-      <button type="button" class="btn btn-primary" (click)="c('yes')">Send NewsLetter</button>    
-  </div>    
+    </div>    
+    <div class="modal-footer">    
+      <button type="button" class="btn btn-default" (click)="resetForm()">Cancel</button>    
+      <button type="submit" class="btn btn-primary" [disabled]="scheduleForm.invalid">Send NewsLetter</button>    
+    </div>    
+  </form>  
 </ng-template>   

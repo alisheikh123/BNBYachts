@@ -14,7 +14,5 @@ namespace BnBYachts.Core.Data.Entities.NewsLetters
         public string LetterImage { get; set; }
         public string Description { get; set; }
         public LetterType LetterTypeId { get; set; }
-        public long ContactID { get; set; }
-        public ContactsEntity Contact { get; set; }
     }
 }

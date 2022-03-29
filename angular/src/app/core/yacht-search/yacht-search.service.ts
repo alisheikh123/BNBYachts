@@ -55,11 +55,20 @@ export class YachtSearchService {
       catchError(this.handleError));
   }
   getServiceFeeByBoatType(BoatTypeId : number) {
-    return this.http.get(this.apiUrl + + '/app/setting/getservice-fee-by-boat-type/'+BoatTypeId);    
+    return this.http.get(this.apiUrl + '/app/setting/getservice-fee-by-boat-type/'+BoatTypeId);    
   }
   AddInNewsLetter(subscribe: Contact) {
     return this.http.post(this.apiCoreURL + '/app/news-letter/news-letter', subscribe).pipe(
       catchError(this.handleError));
+  }
+  getBoatListByCity(cityName : string) {
+    return this.http.get(this.apiUrl + '/app/host-boat/boats-list-by-city?cityName='+cityName);    
+  }
+  getChartersListByCity(cityName : string) {
+    return this.http.get(this.apiUrl + '/app/host-boat/charters-list-by-city?cityName='+cityName);    
+  }
+  getEventsListByCity(cityName : string) {
+    return this.http.get(this.apiUrl + '/app/host-boat/events-list-by-city?cityName='+cityName);    
   }
   INewsLetterEmailExist(emailAddress: string) {
     let headers: HttpHeaders = new HttpHeaders();

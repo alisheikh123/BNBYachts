@@ -1,4 +1,4 @@
-import { AddServiceFee, ServiceFee } from './../../../../shared/interfaces/settings';
+import { ScheduleNewsLetter } from './../../../../shared/interfaces/NewsLetter';
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { AddNewsLetter } from '../../../../shared/interfaces/NewsLetter';
@@ -22,5 +22,8 @@ export class NewsLetterApi {
   }
   updateNewsLetter(service : AddNewsLetter){
     return this.api.put(`${this.NEWS_API_URL}news-letter`,service); 
+  }
+  ScheduleNewsLetter(schedule : ScheduleNewsLetter) {
+    return this.api.post(`${this.NEWS_API_URL}schedule-news-letter`,schedule);    
   }
 }

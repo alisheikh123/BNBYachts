@@ -60,7 +60,9 @@ namespace BnBYachts.Core.EntityFrameworkCore
         #endregion
         #region NewsLetter
         public DbSet<ContactsEntity> Contacts { get; set; }
-        public DbSet<NewsLetterSubscriptionEntity> newsLetterSubscriptions { get; set; }
+        public DbSet<NewsLetterSubscriptionEntity> NewsLetterSubscriptions { get; set; }
+        public DbSet<ScheduleNewsLetterEntity> ScheduleNewsLetters { get; set; }
+        public DbSet<SubscriberEmailEntity> SubscriberEmails { get; set; }
 
         #endregion
         // Tenant Management

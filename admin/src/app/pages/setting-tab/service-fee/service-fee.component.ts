@@ -33,6 +33,7 @@ export class ServiceFeeComponent implements OnInit {
 ]
   settings = {
     actions: {
+      columnTitle :"Action",
       mode :'external',
       add: false,
       edit:false,

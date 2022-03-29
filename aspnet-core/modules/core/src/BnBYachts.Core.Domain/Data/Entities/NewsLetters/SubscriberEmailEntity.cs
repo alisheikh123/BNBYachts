@@ -7,8 +7,10 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Core.Data.Entities.NewsLetters
 {
-    public class ContactsEntity : AuditedAggregateRoot<long>
+    public class SubscriberEmailEntity : AuditedAggregateRoot<long>
     {
         public string EmailAddress { get; set; }
+        public long NewsLetterSubscriptionId { get; set; }
+        public NewsLetterSubscriptionEntity NewsLetterSubscription { get; set; }
     }
 }

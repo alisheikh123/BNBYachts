@@ -11,7 +11,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace BnBYachts.Core.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20220321113021_add-newsLetter-Init")]
+    [Migration("20220324120341_add-newsLetter-Init")]
     partial class addnewsLetterInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,9 +124,6 @@ namespace BnBYachts.Core.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasColumnName("ConcurrencyStamp");
 
-                    b.Property<long>("ContactID")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("CreationTime");
@@ -161,9 +158,102 @@ namespace BnBYachts.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContactID");
+                    b.ToTable("NewsLetterSubscriptions");
+                });
 
-                    b.ToTable("newsLetterSubscriptions");
+            modelBuilder.Entity("BnBYachts.Core.Data.Entities.NewsLetters.ScheduleNewsLetterEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<long>("NewsLetterSubscriptionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ScheduleDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StatusTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsLetterSubscriptionId");
+
+                    b.ToTable("ScheduleNewsLetters");
+                });
+
+            modelBuilder.Entity("BnBYachts.Core.Data.Entities.NewsLetters.SubscriberEmailEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<long>("NewsLetterSubscriptionId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsLetterSubscriptionId");
+
+                    b.ToTable("SubscriberEmails");
                 });
 
             modelBuilder.Entity("BnBYachts.Core.Data.Entities.ServiceProvider.ServiceProviderEntity", b =>
@@ -2371,15 +2461,26 @@ namespace BnBYachts.Core.Migrations
                     b.ToTable("AbpTenantConnectionStrings");
                 });
 
-            modelBuilder.Entity("BnBYachts.Core.Data.Entities.NewsLetters.NewsLetterSubscriptionEntity", b =>
+            modelBuilder.Entity("BnBYachts.Core.Data.Entities.NewsLetters.ScheduleNewsLetterEntity", b =>
                 {
-                    b.HasOne("BnBYachts.Core.Data.Entities.NewsLetters.ContactsEntity", "Contact")
-                        .WithMany("NewsletterSubscriptions")
-                        .HasForeignKey("ContactID")
+                    b.HasOne("BnBYachts.Core.Data.Entities.NewsLetters.NewsLetterSubscriptionEntity", "NewsLetterSubscription")
+                        .WithMany()
+                        .HasForeignKey("NewsLetterSubscriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Contact");
+                    b.Navigation("NewsLetterSubscription");
+                });
+
+            modelBuilder.Entity("BnBYachts.Core.Data.Entities.NewsLetters.SubscriberEmailEntity", b =>
+                {
+                    b.HasOne("BnBYachts.Core.Data.Entities.NewsLetters.NewsLetterSubscriptionEntity", "NewsLetterSubscription")
+                        .WithMany()
+                        .HasForeignKey("NewsLetterSubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NewsLetterSubscription");
                 });
 
             modelBuilder.Entity("BnBYachts.Core.Data.Entities.ServiceProvider.TimeSlotEntity", b =>
@@ -2668,11 +2769,6 @@ namespace BnBYachts.Core.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BnBYachts.Core.Data.Entities.NewsLetters.ContactsEntity", b =>
-                {
-                    b.Navigation("NewsletterSubscriptions");
                 });
 
             modelBuilder.Entity("BnBYachts.Core.Data.Entities.ServiceProvider.ServiceProviderEntity", b =>

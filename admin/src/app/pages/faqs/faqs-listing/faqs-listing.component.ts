@@ -37,6 +37,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
 ]
   settings = {
     actions: {
+      columnTitle :"Action",
       mode :'external',
       add: false,
       edit:false,
@@ -62,7 +63,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
       question: {
         title: 'Questions',
         type: 'string',
-        width: '40%',
+        width: '30%',
         valuePrepareFunction: (value) => { 
           return value.substring(0, 49);
         } 

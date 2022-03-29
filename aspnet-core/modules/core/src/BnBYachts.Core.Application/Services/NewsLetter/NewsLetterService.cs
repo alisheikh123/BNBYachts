@@ -33,6 +33,12 @@ namespace BnBYachts.Core.Services.NewsLetter
 
         public async Task<bool> IsEmailExist(string emailAddress) => await _newsLetterManager.IsEmailExist(emailAddress).ConfigureAwait(false);
 
+        public async Task<EntityResponseModel> ScheduleNewsLetter(ScheduleTransferable schedule)
+            => await _newsLetterManager.ScheduleNewsLetter(schedule).ConfigureAwait(false);
+
+        public async Task SendEmailToSubscriberUsers()
+            => await _newsLetterManager.SendEmailToSubscriberUsers().ConfigureAwait(false);
+
         public async Task<EntityResponseModel> UpdateNewsLetter(NewsLetterTransferable newsLetter)
             => await _newsLetterManager.UpdateNewsLetter(newsLetter).ConfigureAwait(false);
     }

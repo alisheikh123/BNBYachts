@@ -1,10 +1,11 @@
 import { NewsLetterApi } from './../api/newsLetter.api';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddNewsLetter, NewsLetter, NewsLetterData, SubscribedUser } from '../../../../shared/interfaces/NewsLetter';
+import { AddNewsLetter, NewsLetter, NewsLetterData, ScheduleNewsLetter, SubscribedUser } from '../../../../shared/interfaces/NewsLetter';
 
 @Injectable()
 export class NewsLetterService extends NewsLetterData {
+
   constructor(private api: NewsLetterApi) {
     super();
   }
@@ -22,5 +23,8 @@ export class NewsLetterService extends NewsLetterData {
   }
   updateNewsLetter(service: AddNewsLetter) {
     return this.api.updateNewsLetter(service);
+  }
+  ScheduleNewsLetter(schedule: ScheduleNewsLetter) {
+    return this.api.ScheduleNewsLetter(schedule);
   }
 }

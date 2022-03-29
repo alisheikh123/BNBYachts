@@ -12,7 +12,6 @@ namespace BnBYachts.Core.NewsLetters.Transferable
         public string LetterImage { get; set; }
         public string Description { get; set; }
         public LetterType LetterTypeId { get; set; }
-        public long? ContactID { get; set; }
         public NewsLetterGalleryRequestable NewsLetterGallery { get; set; }
 
     }

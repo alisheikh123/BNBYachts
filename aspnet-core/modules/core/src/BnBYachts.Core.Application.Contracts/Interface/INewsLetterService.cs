@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
 
 namespace BnBYachts.Core.Interface
 {
-    public interface INewsLetterService
+    public interface INewsLetterService : IApplicationService
     {
         Task<EntityResponseModel> AddNewsLetter(ContactsTransferable contactInput);
         Task<EntityResponseModel> GetSubscribedUsers();
@@ -16,5 +17,7 @@ namespace BnBYachts.Core.Interface
         Task<EntityResponseModel> AddNewsLettersSubscription(NewsLetterTransferable newsLetter);
         Task<EntityResponseModel> UpdateNewsLetter(NewsLetterTransferable newsLetter);
         Task DeleteNewsLetter(long id);
+        Task<EntityResponseModel> ScheduleNewsLetter(ScheduleTransferable schedule);
+        Task SendEmailToSubscriberUsers();
     }
 }
