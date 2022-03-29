@@ -15,11 +15,10 @@ export class ServieProviderReviewListComponent implements OnInit {
     ratingStars: 0,
     reviewText: ''
   };
-  showAddReview:boolean;
-  constructor(  private fb: FormBuilder, private modal: NgbModal) { }
+  showAddReview: boolean;
+  constructor(private fb: FormBuilder, private modal: NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.serviceProviderId);
   }
   addReview() {
     this.modal

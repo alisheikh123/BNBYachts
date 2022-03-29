@@ -6,6 +6,7 @@ import { ServiceProviderService } from 'src/app/core/serviceprovider/serviceprov
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
 import { CreatorTypes } from 'src/app/shared/enums/creator-types';
 import { ServiceProviderType } from 'src/app/shared/enums/service-provider-type';
+import { ServiceProvidSearch } from 'src/app/shared/interface/service-provider/service-provider-search';
 import { ServiceProviderDTO } from 'src/app/shared/interface/service-provider/service-providerdto';
 import { utils } from 'src/app/shared/utility/utils';
 import { environment } from 'src/environments/environment';
@@ -23,19 +24,13 @@ export class ServiceProviderServicesComponent implements OnInit {
   serviceProviderList=[]as Array<ServiceProviderDTO>;
   reservationType= CreatorTypes;
   serviceProviderType= ServiceProviderType;
+  serviceProviderSearchParam:ServiceProvidSearch=<ServiceProvidSearch>{};
   createdReservationInfo={
     reservationId:1,
    reservationType:this.reservationType.Boatel,
    serviceProviderType: this.serviceProviderType.captain,
   
   }
-  serviceProviderSearchParam = {
-    location: '',
-    latitude: 31.4697,
-    longitude: 74.2728,
-    serviceProviderType: this.serviceProviderType.captain,
-    avaliableDate: new  Date(),
-  };
   isSubmitted = false;
   constructor(public activatedRoute: ActivatedRoute,
     private route: Router,
@@ -44,6 +39,7 @@ export class ServiceProviderServicesComponent implements OnInit {
    private serviceproviderService: ServiceProviderService) { }
 
   ngOnInit(): void {
+    this.serviceProviderSearchParam.serviceProviderType=this.serviceProviderType.captain;
     this.activatedRoute.params.subscribe((res : any) => {
       if(!utils.isEmptyObject(res))
       {
@@ -60,6 +56,9 @@ export class ServiceProviderServicesComponent implements OnInit {
      this.createdReservationInfo.reservationType=Number(res['reservationtype']);
      }
      this.setFilterData();
+      }
+      else{
+        this.getServiceProviderDetail();
       }
     });
   }

@@ -186,10 +186,10 @@ export class BookingRequestsComponent implements OnInit {
 
   goToDetail(item: any) {
     if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.event) {
-      this.router.navigate(['/boat-listing/event-reservation-detail', item.eventId])
+      this.router.navigate(['/boat-listing/event-reservation-detail', item.id, item.eventId])
     }
     if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.charter) {
-      this.router.navigate(['/boat-listing/charter-reservation-detail', item.charterId])
+      this.router.navigate(['/boat-listing/charter-reservation-detail', item.charterId, item.id])
     }
     if (this.listingFilter.selectedServiceType == this.bookedServicesTypes.boatel) {
       this.router.navigate(['/boat-listing/reservation-detail', item.id])
