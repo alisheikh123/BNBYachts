@@ -16,7 +16,8 @@ namespace BnByachts.BackgroundWorker
     [DependsOn(
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
-        typeof(AbpAutofacModule)
+        typeof(AbpAutofacModule),
+        typeof(AbpBackgroundJobsQuartzModule)
     )]
     public class BackgroundWorkerModule : AbpModule
     {
@@ -24,6 +25,24 @@ namespace BnByachts.BackgroundWorker
         
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+
+
+             var configuration = context.Services.GetConfiguration();
+
+            PreConfigure<AbpQuartzOptions>(options =>
+            {
+                options.Properties = new NameValueCollection
+                {
+                    ["quartz.jobStore.dataSource"] = "BackgroundJobsDemoApp",
+                    ["quartz.jobStore.type"] = "Quartz.Impl.AdoJobStore.JobStoreTX, Quartz",
+                    ["quartz.jobStore.tablePrefix"] = "QRTZ_",
+                    ["quartz.serializer.type"] = "json",
+                    ["quartz.dataSource.BackgroundJobsDemoApp.connectionString"] = configuration.GetConnectionString("Quartz"),
+                    ["quartz.dataSource.BackgroundJobsDemoApp.provider"] = "SqlServer",
+                    ["quartz.jobStore.driverDelegateType"] = "Quartz.Impl.AdoJobStore.SqlServerDelegate, Quartz",
+                };
+            });
+            //;TrustServerCertificate=True;Encrypt=True;Integrated Security=True;User Instance=False;
             Configure<AWSOptions>(context.Services.GetConfiguration().GetSection("AWSConfiguation"));
 
             context.Services.AddMassTransit(mt =>
