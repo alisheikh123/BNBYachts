@@ -3,10 +3,10 @@ using System;
 
 namespace BnBYachts.EventBusShared.Contracts
 {
-    public interface INotificationContract
+    public interface INotificationContract: IContractable
     {
-        public Guid? UserTo { get; set; }
-        public Guid? UserFrom { get; set; }
+        public string UserTo { get; set; }
+        public string UserFrom { get; set; }
         public int? ChatId { get; set; }
         public int? RequestQuoteId { get; set; }
         public int? PaymentId { get; set; }
@@ -26,8 +26,8 @@ namespace BnBYachts.EventBusShared.Contracts
 
     public class NotificationContract:INotificationContract
     {
-        public Guid? UserTo { get; set; }
-        public Guid? UserFrom { get; set; }
+        public string UserTo { get; set; }
+        public string UserFrom { get; set; }
         public int? ChatId { get; set; }
         public int? RequestQuoteId { get; set; }
         public int? PaymentId { get; set; }

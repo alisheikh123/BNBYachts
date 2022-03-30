@@ -3,9 +3,13 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace BnBYachts.Notification.Entitiy
 {
-    public class NotificationEntity : AuditedAggregateRoot<long>
+    public class NotificationEntity : AuditedAggregateRoot<Guid>
     {
         public NotificationType NotificationType { get; set; }
+        public NotificationEntity()
+        {
+            this.Id = Guid.NewGuid();
+        }
         public Guid? UserTo { get; set; }
         public Guid? UserFrom { get; set; }
         public int? ChatId { get; set; }

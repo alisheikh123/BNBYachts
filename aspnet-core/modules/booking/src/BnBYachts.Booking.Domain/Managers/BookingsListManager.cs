@@ -27,7 +27,7 @@ namespace BnBYachts.Booking.Managers
         private readonly EventBusDispatcher _eventBusDispatcher;
         public BookingsListManager(IRepository<BoatelBookingEntity, int> boatelBookingRepository, IObjectMapper<BookingDomainModule> objectMapper,
             EventBusDispatcher eventBusDispatcher, IRepository<CharterBookingEntity, int> charterBookingRepository,
-            IRepository<ContractEntity, int> contractRepository,IRepository<EventBookingEntity, int> eventsBookingRepository)
+            IRepository<ContractEntity, int> contractRepository, IRepository<EventBookingEntity, int> eventsBookingRepository)
         {
             _boatelBookingRepository = boatelBookingRepository;
             _objectMapper = objectMapper;
@@ -91,7 +91,7 @@ namespace BnBYachts.Booking.Managers
                 && res.BookingStatus == BookingStatus.Approved && res.DepartureDate > DateTime.Today &&
                (!string.IsNullOrEmpty(param.Month) && !string.IsNullOrEmpty(param.Year) ? (res.DepartureDate.Month == int.Parse(param.Month) && res.DepartureDate.Year == int.Parse(param.Year)) : (1 == 1))).ConfigureAwait(false));
                 var contracts = _objectMapper.Map<List<ContractEntity>, List<BookingRequestsRequestableDto>>
-                    (await _contractRepository.GetListAsync(res => res.HostId == param.UserId.ToString() 
+                    (await _contractRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
                     && res.Status == ContractsStatus.Approved && res.ServiceType == ServiceType.Charter).ConfigureAwait(false));
                 allBookings.AddRange(contracts);
                 response.TotalCount = allBookings.Count;
@@ -114,7 +114,7 @@ namespace BnBYachts.Booking.Managers
             if (param.Filter == BookingResponseFilter.All)
             {
                 var allBookings = _objectMapper.Map<List<EventBookingEntity>, List<BookingRequestsRequestableDto>>
-               (await _eventsBookingRepository.GetListAsync(res => res.HostId == param.UserId.ToString()&& 
+               (await _eventsBookingRepository.GetListAsync(res => res.HostId == param.UserId.ToString() &&
                res.BookingStatus == BookingStatus.Approved && (!string.IsNullOrEmpty(param.Month) && !string.IsNullOrEmpty(param.Year) ? (res.EventDate.Month == int.Parse(param.Month) && res.EventDate.Year == int.Parse(param.Year)) : (1 == 1))).ConfigureAwait(false));
                 var contracts = _objectMapper.Map<List<ContractEntity>, List<BookingRequestsRequestableDto>>
                      (await _contractRepository.GetListAsync(res => res.HostId == param.UserId.ToString()
@@ -249,7 +249,7 @@ namespace BnBYachts.Booking.Managers
             return response;
         }
 
-        public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetMyBookings(int boatId,Guid? userId)
+        public async Task<EntityResponseListModel<BookingRequestsRequestableDto>> GetMyBookings(int boatId, Guid? userId)
         {
             var response = new EntityResponseListModel<BookingRequestsRequestableDto>();
             response.Data = _objectMapper.Map<List<BoatelBookingEntity>, List<BookingRequestsRequestableDto>>(
@@ -264,20 +264,71 @@ namespace BnBYachts.Booking.Managers
             {
                 var booking = await _boatelBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
                 userName = booking.UserName;
-                booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
                 booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
+
+                if (isAccpeted == true)
+                {
+                    booking.BookingStatus = BookingStatus.Approved;
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData("Reservation for {Boat_name} for boatel service has been accepted", "Boatel Reservation",
+                  "Host Accept the Request of Booking",
+                  booking.UserId, booking.HostId, (int)NotificationType.ReservationApproved, bookingId,
+                   0, 0, booking.BoatId));
+                }
+                if (isAccpeted == false)
+                {
+                    booking.BookingStatus = BookingStatus.Rejected;
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData("Reservation for {Boat_name} for boatel service has been rejected", "Boatel Reservation",
+                     "Host reject the Request of Booking",
+                     booking.UserId, booking.HostId, (int)NotificationType.ReservationRejected, bookingId,
+                      0, 0, booking.BoatId));
+                }
+
+
             }
             else if (serviceType == (int)BookingTypes.Charter)
             {
                 var booking = await _charterBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
-                booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
                 booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
+                if (isAccpeted == true)
+                {
+                    booking.BookingStatus = BookingStatus.Approved;
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData("Reservation for {Boat_name} for charter service has been accepted", "Charter Reservation",
+                    "Host Accept the Request of Booking",
+                    booking.UserId, booking.HostId, (int)NotificationType.ReservationApproved, bookingId, 0,
+                    booking.CharterId, booking.BoatId.Value, 0));
+                }
+                if (isAccpeted == false)
+                {
+                    booking.BookingStatus = BookingStatus.Rejected;
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData("Reservation for {Boat_name} for charter service has been rejected", "Charter Reservation",
+                   "Host reject the Request of Booking",
+                   booking.UserId, booking.HostId, (int)NotificationType.ReservationRejected, bookingId, 0,
+                   booking.CharterId, booking.BoatId.Value, 0));
+                }
+              
             }
             else
             {
                 var booking = await _eventsBookingRepository.FindAsync(res => res.Id == bookingId).ConfigureAwait(false);
-                booking.BookingStatus = isAccpeted ? BookingStatus.Approved : BookingStatus.Rejected;
                 booking.PaymentStatus = isAccpeted ? PaymentStatus.Approved : PaymentStatus.Refund;
+                if (isAccpeted == true)
+                {
+                    booking.BookingStatus = BookingStatus.Approved;
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData("Reservation for {Boat_name} for event service has been accepted", "Event Reservation",
+                    "Host Accept the Request of Booking",
+                     booking.UserId, booking.HostId, (int)NotificationType.ReservationApproved, bookingId, booking.EventId,
+                     0, booking.BoatId.Value, 0));
+                }
+                if (isAccpeted == false)
+                {
+                    booking.BookingStatus = BookingStatus.Rejected;
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData("Reservation for {Boat_name} for event service has been rejected", "Event Reservation",
+                    "Host reject the Request of Booking",
+                     booking.UserId, booking.HostId, (int)NotificationType.ReservationRejected, bookingId, booking.EventId,
+                     0, booking.BoatId.Value, 0));
+                }
+
+               
             }
 
             #region Send-Email
@@ -290,7 +341,31 @@ namespace BnBYachts.Booking.Managers
                 IsBodyHtml = true
             });
             #endregion
+
+
             return true;
         }
+
+        private static NotificationContract _getNotificationData(string message, string title, string dec, string userto,
+            string userfrom, int notificationType = 0, int bookingId = 0, int eventId = 0, int charterId = 0, int boatId = 0, int boatelId = 0) =>
+        new NotificationContract
+        {
+            EventId = eventId,
+            Message = message,
+            Description = dec,
+            UserTo = userto,
+            UserFrom = userfrom,
+            Title = title,
+            BookingId = bookingId,
+            NotificationType = (NotificationType)notificationType,
+            CharterId = charterId,
+            BoatId = boatId,
+
+
+        };
     }
+
 }
+
+
+

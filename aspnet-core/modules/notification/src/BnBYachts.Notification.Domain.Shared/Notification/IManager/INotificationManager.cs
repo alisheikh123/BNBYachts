@@ -6,7 +6,7 @@ using Volo.Abp.Domain.Services;
 
 namespace BnBYachts.Notification.IManager
 {
-    public interface INotificationManager : IDomainService
+    public interface INotificationManager 
     {
         Task<EntityResponseModel> Insert(NotificationTransferable input);
         Task<EntityResponseListModel<NotificationDto>> Get(EntityPaginationFilter input);
