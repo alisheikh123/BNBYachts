@@ -40,6 +40,11 @@ public class NotificationDomainModule : AbpModule
         //{
         //    options.IsEnabled = MultiTenancyConsts.IsEnabled;
         //});
+        Configure<AbpAutoMapperOptions>(options =>
+        {
+            options.AddMaps<NotificationDomainModule>();
+        });
+
 
 #if DEBUG
         ///  context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());

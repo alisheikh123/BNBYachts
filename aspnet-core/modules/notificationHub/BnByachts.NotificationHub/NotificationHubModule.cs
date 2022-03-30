@@ -27,6 +27,11 @@ namespace BnByachts.NotificationHub
         {
             context.Services.AddAssemblyOf<NotificationHubModule>();
             context.Services.AddAutoMapperObjectMapper<NotificationHubModule>();
+
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<NotificationHubModule>();
+            });
             context.Services.Configure<SmtpSettings>(context.Services.GetConfiguration().GetSection("Settings"));
             context.Services.Configure<OTPMessageSetting>(context.Services.GetConfiguration().GetSection("OTPSetting"));
             context.Services.AddMassTransit(mt =>
