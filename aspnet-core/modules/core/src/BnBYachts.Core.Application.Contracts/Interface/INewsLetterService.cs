@@ -18,6 +18,5 @@ namespace BnBYachts.Core.Interface
         Task<EntityResponseModel> UpdateNewsLetter(NewsLetterTransferable newsLetter);
         Task DeleteNewsLetter(long id);
         Task<EntityResponseModel> ScheduleNewsLetter(ScheduleTransferable schedule);
-        Task SendEmailToSubscriberUsers();
     }
 }

@@ -41,7 +41,7 @@ export class FeaturedCitiesComponent implements OnInit {
     },
     columns: {
       name: {
-        title: 'Name',
+        title: 'Location',
         type: 'string',
         width: '30%',
       },

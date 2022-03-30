@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 using Volo.Abp.ObjectMapping;
+using Volo.Abp.Uow;
 
 namespace BnBYachts.Core.Managers
 {
@@ -132,16 +133,18 @@ namespace BnBYachts.Core.Managers
             response.Data = await _newsRepository.InsertAsync(data).ConfigureAwait(false);
             return response;
         }
+        
+        [UnitOfWork]
         public async Task SendEmailToSubscriberUsers()
         {
-            var data = await _scheduleRepository.FindAsync(x => x.ScheduleDate.Date >= DateTime.Now.Date && x.StatusTypeId == StatusType.Pending).ConfigureAwait(false);
+            var data =  await _scheduleRepository.FirstOrDefaultAsync(x => x.ScheduleDate.Date >= DateTime.Now.Date && x.StatusTypeId == StatusType.Pending).ConfigureAwait(false);
             if (data != null)
             {
                 var subscriber = await _subscriberRepository.GetListAsync(x => x.NewsLetterSubscriptionId == data.NewsLetterSubscriptionId).ConfigureAwait(false);
                 foreach (var item in subscriber)
                 {
                     await _subscriberRepository.EnsurePropertyLoadedAsync(item, x => x.NewsLetterSubscription).ConfigureAwait(false);
-                    string body = $"<h5>Hello {item.NewsLetterSubscription.Title} </h5> <div> You registered an account on BnByachts, before being able to use your account you need to verify your email address by clicking here: </div><br>Best Regard";
+                    string body = $"<h5>Hello {item.EmailAddress} </h5> <div> You registered an account on BnByachts, before being able to use your account you need to verify your email address by clicking here: </div><br>Best Regard";
                     await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
                     {
                         To = item.EmailAddress,
@@ -150,6 +153,8 @@ namespace BnBYachts.Core.Managers
                         IsBodyHtml = true
                     });
                 }
+                data.StatusTypeId = StatusType.Completed;
+                await _scheduleRepository.UpdateAsync(data).ConfigureAwait(false);
             }
         }
 

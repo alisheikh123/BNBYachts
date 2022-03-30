@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.DependencyInjection;
 
 namespace BnBYachts.Core.NewsLetters.Interface
 {
-    public interface INewsLetterManager
+    public interface INewsLetterManager: ITransientDependency
     {
         Task<EntityResponseModel> AddNewsLetter(ContactsTransferable contactInput);
         Task<EntityResponseModel> GetSubscribedUsers();
