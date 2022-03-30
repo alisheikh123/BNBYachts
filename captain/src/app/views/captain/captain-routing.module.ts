@@ -36,6 +36,11 @@ const routes: Routes = [
   {
     path: "update-profile/:id", component: UpdateProfileComponent
   },
+  {
+    path: 'reservations',
+    loadChildren: () => import('../reservations/reservations.module').then(m => m.ReservationsModule)
+
+  },
 ]
   }
 ];

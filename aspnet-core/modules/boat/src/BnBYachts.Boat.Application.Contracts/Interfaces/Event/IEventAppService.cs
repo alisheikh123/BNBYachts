@@ -2,6 +2,7 @@
 using BnBYachts.Boat.Event.Requestable;
 using BnBYachts.Boat.Event.Transferables;
 using BnBYachts.Shared.Model;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
@@ -18,5 +19,8 @@ namespace BnBYachts.Boat.Interfaces.Boat
         Task<bool> UpdateEvent(EventRequestable updatedEvent);
         Task<bool> UpdateHostEventStatus(long eventId);
         Task<bool> updateEventLocation(EventLocationRequestable events);
+        Task<ICollection<BoatLookupTransferable>> GetBoatsByHostId(Guid? userId);
+        Task<EntityResponseListModel<EventDTO>> GetEventsByBoatId(int boatId);
+        Task<ICollection<BoatLookupTransferable>> GetAssignedBoats(List<int> Ids);
     }
 }

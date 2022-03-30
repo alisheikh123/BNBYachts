@@ -92,5 +92,32 @@ namespace BnBYachts.Booking.Managers
                 ReturnStatus = true
             };
         }
+      public async  Task<EntityResponseListModel<ContractsTransferable>> GetContractsServiceProvider(ContractListRequestable data, Guid? userId)
+        {
+            var response = new EntityResponseListModel<ContractsTransferable>();
+            var contracts = _objectMapper.Map<ICollection<ContractEntity>, ICollection<ContractsTransferable>>(
+                await _repo.GetListAsync(res => ( res.CreatorId == userId  && res.ServiceProviderId==data.ServiceProviderId)).ConfigureAwait(false)).ToList();
+            contracts = contracts.WhereIf(data.BoatId > 0, res => res.BoatId == data.BoatId)
+            .WhereIf(data.ServiceType > 0, res => (int)(res.ServiceType) == data.ServiceType)
+                .WhereIf(data.StatusId > 0, res => (int)(res.Status) == data.StatusId)
+                .WhereIf(data.Month > 0 && data.Year > 0 && data.ServiceType == (int)ServiceType.Charter, res => res.DepartureDate.Value.Month == data.Month && res.DepartureDate.Value.Year == data.Year)
+                .ToList();
+            response.Data = await PagedList<ContractsTransferable>.CreateAsync(contracts, data.Page, data.PageSize).ConfigureAwait(false);
+            response.TotalCount = contracts.Count();
+            return response;
+        }
+        public async Task<EntityResponseModel> GetContractsBoats(int serviceProviderId , Guid? userId)
+        {      
+            var result = await _repo.GetListAsync(res => (res.CreatorId == userId && res.ServiceProviderId == serviceProviderId)).ConfigureAwait(false);
+            var data = new ContractBoatTransferable
+            {
+                Ids = (result.Any()) ? result.Select(x => x.BoatId).Distinct().ToList() : null
+            };
+            return new EntityResponseModel
+            {
+                ReturnStatus = true,
+                Data = data
+            };
+        }
     }
 }
