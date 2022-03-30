@@ -9,9 +9,6 @@
 	<DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
 
 
   <ItemGroup>
