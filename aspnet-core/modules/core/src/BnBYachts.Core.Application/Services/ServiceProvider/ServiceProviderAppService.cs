@@ -62,7 +62,6 @@ namespace BnBYachts.Core.Services.ServiceProvider
             request.UserId = CurrentUser.Id.ToString();
             return await _serviceproviderManager.isServiceProviderExist(request).ConfigureAwait(false);
         }
-
         public async Task<EntityResponseModel> AlreadyServiceProvider(ServiceProviderTypeCheckRequestable request)
         {
             request.UserId = CurrentUser.Id.ToString();
@@ -70,5 +69,6 @@ namespace BnBYachts.Core.Services.ServiceProvider
         }
         public async Task<EntityResponseModel> GetServiceProvidersList() => await _serviceproviderManager.GetServiceProvidersList().ConfigureAwait(false);
         public async Task<EntityResponseModel> SuspendServiceProvider(long id) => await _serviceproviderManager.SuspendServiceProvider(id).ConfigureAwait(false);
+        public async Task<EntityResponseModel> GetServiceProviderByUserId() => await _serviceproviderManager.GetServiceProviderByUserId(CurrentUser.Id.ToString()).ConfigureAwait(false);
     }
 }

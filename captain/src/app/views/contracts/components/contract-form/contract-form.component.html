@@ -21,7 +21,7 @@
             <div class="col-sm-6 py-2">
             <div class="custom-select-field">
                 <label>{{'BoatListing' | localization}}</label>
-                <select name="select" id="select" formControlName="boatId"
+                <select  (change)='onOptionsSelected(f.boatId.value)' name="select" id="select" formControlName="boatId"
                     [ngClass]="{  'is-invalid':isSubmitted && f.boatId.errors }">
                     <option [ngValue]="null">{{'Selecttheboat' | localization}}</option>
                     <option [ngValue]="item.id" *ngFor="let item of boats">{{item?.name}}</option>
@@ -33,16 +33,22 @@
             </div>
             </div>
             <div class="col-sm-6 py-2" *ngIf="f.serviceType.value == SERVICE_TYPES.Event">
-                <div class="custom-input-field">
-                    <label>Event Title</label>
-                    <input class="custom-input" formControlName="eventTitle"
-                    [ngClass]="{ 'is-invalid': isSubmitted && f.eventTitle.errors }"
-                    placeholder="Enter Title">
+                <div class="custom-select-field">
+                    <label>{{'EventListing' | localization}}</label>
+                    <select  (change)='onEventSelected(f.eventId.value)'  name="select" id="select" formControlName="eventId"
+                        [ngClass]="{  'is-invalid':isSubmitted && f.eventId.errors }">
+                        <option [ngValue]="null">{{'Selecttheevent' | localization}}</option>
+                        <option [ngValue]="0">{{'Custom Event'}}</option>
+                        <option [ngValue]="item.id" *ngFor="let item of  events">{{item?.title}}</option>
+                    </select>
+                    <small class="text-danger"
+                        *ngIf="((f.eventId.dirty && f.eventId.touched || isSubmitted) && f.eventId.hasError('required'))">
+                        {{'vEventIsRequired'|localization}}
+                    </small>
                 </div>
-                <small class="text-danger"
-                *ngIf="isSubmitted && f.eventTitle.errors?.required">Title is required.</small>
-            </div>
-            <div class="col-sm-6 py-2">
+                </div>
+           
+            <div class="col-sm-6 py-2" *ngIf="f.serviceType.value == SERVICE_TYPES.Event">
                 <div class="counter-input-wrapper pt-0">
                     <label>No Of Guests</label>
                     <div class="number">
@@ -57,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 py-2">
+            <div class="col-sm-12 py-2" *ngIf="f.serviceType.value == SERVICE_TYPES.Event">
                 <div class="custom-input-field">
                     <label>Description</label>
                     <textarea class="custom-input" id="exampleFormControlTextarea1"
@@ -69,7 +75,16 @@
                 required</small>
             </div>
             <ng-container *ngIf="f.serviceType.value == SERVICE_TYPES.Event">
-              
+                <div class="col-sm-6 py-2" *ngIf="f.serviceType.value == SERVICE_TYPES.Event">
+                    <div class="custom-input-field">
+                        <label>Event Title</label>
+                        <input class="custom-input" formControlName="eventTitle"
+                        [ngClass]="{ 'is-invalid': isSubmitted && f.eventTitle.errors }"
+                        placeholder="Enter Title">
+                    </div>
+                    <small class="text-danger"
+                    *ngIf="isSubmitted && f.eventTitle.errors?.required">Title is required.</small>
+                </div>
             <div class="col-sm-6 py-2">
                 <div class="custom-input-field">
                     <label>Event Location</label>
@@ -93,7 +108,23 @@
                 required</small>
             </div>
         </ng-container>
+       
             <ng-container *ngIf="f.serviceType.value == SERVICE_TYPES.Charter">
+                <div class="col-sm-6 py-2">
+                    <div class="custom-select-field">
+                        <label>{{'CharterListing' | localization}}</label>
+                        <select  (change)='onCharterSelected(f.charterId.value)'  name="select" id="select" formControlName="charterId"
+                            [ngClass]="{  'is-invalid':isSubmitted && f.charterId.errors }">
+                            <option [ngValue]="null">{{'Selectthecharter' | localization}}</option>
+                            <option [ngValue]="0">{{'Custom Charter'}}</option>
+                            <option [ngValue]="item.id" *ngFor="let item of  charters">{{item?.description}}</option>
+                        </select>
+                        <small class="text-danger"
+                            *ngIf="((f.charterId.dirty && f.charterId.touched || isSubmitted) && f.charterId.hasError('required'))">
+                            {{'vCharterIsRequired'|localization}}
+                        </small>
+                    </div>
+                    </div>
             <div class="col-sm-6 py-2">
                 <div class="custom-input-field">
                     <label>Departing From</label>
@@ -158,7 +189,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 py-2">
+            <!-- <div class="col-sm-6 py-2">
                 <div class="counter-input-wrapper pt-0">
                     <label>Boat Capacity</label>
                     <div class="number">
@@ -173,7 +204,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
             <div class="col-sm-6 py-2" *ngIf="f.isRoundTrip.value == true">
                 <div class="">
                     <label>Return Date</label>

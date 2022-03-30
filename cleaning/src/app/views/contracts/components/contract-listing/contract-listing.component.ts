@@ -4,8 +4,10 @@ import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ContractsService } from 'src/app/core/contracts/contracts.service';
 import { EventService } from 'src/app/core/Event/event.service';
+import { ServiceProviderService } from 'src/app/core/serviceprovider/serviceprovider.service';
 import { BoatServiceType } from 'src/app/shared/enums/boat-service-type';
 import { ContractStaus } from 'src/app/shared/enums/booking.constants';
+import { ContractsModule } from '../../contracts.module';
 
 @Component({
   selector: 'app-contract-listing',
@@ -15,55 +17,52 @@ import { ContractStaus } from 'src/app/shared/enums/booking.constants';
 export class ContractListingComponent implements OnInit {
 
   contracts: any = [];
-  @Input() isHost:boolean = false;
+  // @Input() isHost:boolean = false;
   recordCount: number;
   CONTRACT_STATUS = ContractStaus;
   SERVICE_TYPES = BoatServiceType;
   boats: any;
   filter = {
     boatId: 0,
-    serviceType: 2,
-    statusId: this.CONTRACT_STATUS.Pending,
+    serviceType: 0,
+    statusId: this.CONTRACT_STATUS.All,
     date: new Date(),
     month: Number(moment().format('MM')),
     year: Number(moment().format('YYYY')),
     page: 1,
     pageSize: 5,
-    isHost:false
+    isHost:false,
+    serviceProviderId:0
   }
   totalRecord: number = 0;
-  constructor(private service: ContractsService, private eventService: EventService,private auth:AuthService) { }
+  constructor(private service: ContractsService, private eventService: EventService,private auth:AuthService,  private _serviceProviderService:ServiceProviderService) { }
 
   ngOnInit(): void {
-    this.filter.isHost = this.isHost;
-    this.init().subscribe((res: any) => {
-      this.boats = res[0];
-      this.contracts = res[1]?.data;
-      this.contracts.forEach((element:any) => {
-        this.auth.getUserInfoById(element.userId).subscribe((res:any)=>{
-          element.userName = res?.name;
-        })
-      });
-      this.totalRecord = res[1]?.totalCount;
-    })
+    this.getServiceProvider();
   }
-  getBoats() {
-    this.eventService.getBoats().subscribe(res => {
+  getBoats(Ids: number[] ) {
+    this.eventService.getAssignedBoats(Ids).subscribe(res => {
       this.boats = res;
+      console.log(this.boats);
     });
   }
-
-  init() {
-    let boats = this.eventService.getBoats();
-    let contracts = this.service.getContracts(this.filter);
-    return forkJoin([boats, contracts]);
+  getServiceProvider()
+  {
+    this._serviceProviderService.getServiceProviderByUserId().subscribe((res:any)=>{
+  if(res){
+   this.filter.serviceProviderId=res.data.id;
+   this.getAssignedBoatIds();
+   this.getContracts();
+  }
+    });
+  
   }
 
   getContracts() {
-    this.service.getContracts(this.filter).subscribe((res: any) => {
+    this.service.getContractsServiceProvider(this.filter).subscribe((res: any) => {
       this.contracts = res?.data;
       this.contracts.forEach((element:any) => {
-        this.auth.getUserInfoById(element.userId).subscribe((res:any)=>{
+        this.auth.getUserInfoById(element.hostId).subscribe((res:any)=>{
           element.userName = res?.name;
         })
       });
@@ -83,6 +82,15 @@ export class ContractListingComponent implements OnInit {
   onChangeServiceType(type: number) {
     this.filter.serviceType = type;
     this.getContracts();
+  }
+  getAssignedBoatIds(){
+    this.service.getAssignedBoatIds(this.filter.serviceProviderId).subscribe((res:any)=>{
+    if(res && res.data)
+    {
+      this.getBoats(res.data.ids);
+     
+    }
+    });
   }
   onChangeBoat(boatId: number) {
     this.filter.boatId = boatId;

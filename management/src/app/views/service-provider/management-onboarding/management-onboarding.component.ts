@@ -147,6 +147,9 @@ return false;
   public restrictNumeric(e: any) {
     utils.restrictNumeric(e);
   }
+  public restrictNegative(e:any){
+    utils.restrictNegative(e);
+   }
   submit(){
     let formData: FormData;
     formData = new FormData();

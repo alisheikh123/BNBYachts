@@ -25,13 +25,15 @@ namespace BnBYachts.Booking.Contracts
         public int? BoatCapacity { get; set; }
 
         public int? QouteAmount { get; set; }
-        public virtual string ServiceProviderId { get; set; }
+        public int? ServiceProviderId { get; set; }
         public virtual string HostId { get; set; }
         public virtual string UserId { get; set; }
         public string UserName { get; set; }
         public ContractsStatus? Status { get; set; } = ContractsStatus.Pending;
         public DateTime CreationTime { get; set; }
         public bool? IsContract { get; set; }
+        public int? NoOfDays { get; set; }
+        public string BoatelLocation { get; set; }
 
         public ICollection<ContractTermsTransferable> ContractTerms{ get; set; }
     }

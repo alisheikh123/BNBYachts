@@ -19,5 +19,6 @@ namespace BnBYachts.Core.ServiceProvider.Interface
         Task<EntityResponseModel> AlreadyServiceProvider(ServiceProviderTypeCheckRequestable request);
         Task<EntityResponseModel> GetServiceProvidersList();
         Task<EntityResponseModel> SuspendServiceProvider(long id);
+        Task<EntityResponseModel> GetServiceProviderByUserId(string userId);
     }
 }

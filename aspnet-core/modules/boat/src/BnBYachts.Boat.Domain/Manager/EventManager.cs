@@ -44,6 +44,16 @@ namespace BnBYachts.Boat.Manager
             var boats = await _boatRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
             return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatLookupTransferable>>(boats);
         }
+        public async Task<ICollection<BoatLookupTransferable>> GetAssignedBoats(List<int> Ids)
+        {
+            var boats = await _boatRepository.GetListAsync(x => Ids.Contains(x.Id)).ConfigureAwait(false);
+            return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatLookupTransferable>>(boats);
+        }
+        public async Task<ICollection<BoatLookupTransferable>> GetBoatsByHostId(Guid? userId)
+        {
+            var boats = await _boatRepository.GetListAsync(res => res.CreatorId == userId).ConfigureAwait(false);
+            return _objectMapper.Map<ICollection<BoatEntity>, ICollection<BoatLookupTransferable>>(boats);
+        }
 
         public async Task<EntityResponseModel> SaveEvent(EventRequestable boatEvent)
         {
@@ -119,7 +129,14 @@ namespace BnBYachts.Boat.Manager
             response.Data = _objectMapper.Map<EventEntity, EventDTO>(targetEvent);
             return response;
         }
+      public async  Task<EntityResponseListModel<EventDTO>> GetEventsByBoatId(int boatId)
+        {
+            var response = new EntityResponseListModel<EventDTO>();
+            var events = await _eventRepository.GetListAsync(res => res.BoatId == boatId).ConfigureAwait(false);
+           response.Data = _objectMapper.Map<List<EventEntity>, List<EventDTO>>(events);
+            return response;
 
+        }
         public async Task<bool> UpdateEvent(EventRequestable updatedEvent, Guid? userId)
         {
             var targetEvent = await _eventRepository.FindAsync(res => res.Id == updatedEvent.Id);

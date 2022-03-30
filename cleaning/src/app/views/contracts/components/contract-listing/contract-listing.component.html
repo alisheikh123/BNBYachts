@@ -4,10 +4,13 @@
             <button class="dropdown-toggle dropdownBTN btn" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <span id="dropdown-align">
-                    {{filter.serviceType == 2 ? 'Charters':'Events'}}
+                    {{filter.serviceType==0? 'All' : filter.serviceType == 2 ? 'Charters':'Events'}}
                 </span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <a class="dropdown-item" (click)="onChangeServiceType(SERVICE_TYPES.All)">{{'All' | localization}}</a>
+                </li>
                 <li>
                     <a class="dropdown-item" (click)="onChangeServiceType(SERVICE_TYPES.Charter)">{{'Charters' | localization}}</a>
                 </li>

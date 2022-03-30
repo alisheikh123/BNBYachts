@@ -17,4 +17,8 @@ export class CharterService {
     return this.http.get(this.apiCharterURl + this.apiCharterPrefix + '/charter-detail-by-id/'+charterId).pipe(
       catchError(this.errorService.handleError));
   }
+  getCharterByBoatId(boatId:number){
+    return this.http.get(this.apiCharterURl + this.apiCharterPrefix + '/charters-by-boat-id/' + boatId).pipe(
+      catchError(this.errorService.handleError));
+  }
 }

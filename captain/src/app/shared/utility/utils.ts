@@ -48,4 +48,11 @@ export class utils {
         input = String.fromCharCode(e.which);
         return !!/[\d\s]/.test(input);
       }
+      static  restrictNegative(e:any){
+        var inputKeyCode = e.keyCode ? e.keyCode : e.which;
+    
+        if (inputKeyCode != null) {
+            if (inputKeyCode == 45) e.preventDefault();
+        }
+      }
 }
