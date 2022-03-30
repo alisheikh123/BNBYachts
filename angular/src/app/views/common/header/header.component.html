@@ -194,27 +194,23 @@
 </ng-template>
 <ng-template #notification>
 
-    <div class="modal-content">
-       <div class="modal-header no-border">
+       <div class="modal-header no-border notif-header-modal">
+        <h6 class="medium text-center mb-3">{{'Notifications' | localization}}</h6>
+        <a type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close" (click)="dismissModal()"></a>
        </div>
-       <div class="modal-body mt-3 mb-3 mr-1"  style="overflow-y: scroll; max-height:85%;">
-             <div class="row col-12 mt-4">
-                 <div class="col-1"></div>
-                 <div class="col-10"><h6 class="medium text-center mb-3">{{'Notification' | localization}}</h6></div>
-                 <div class="col-1"><a type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close" (click)="dismissModal()"></a></div>
-
-             <hr>
-             </div>
+       <div class="modal-body notif-modal-body" >
+           <div class="custom-scrollbar">
              <div *ngFor="let item of messages">
-         <a class="custom-card custom-flex-between card-right-img">
+         <a class="custom-card custom-flex-start card-right-img header-notif-wrap">
             <img src="../../../../assets/images/host-img-small.png" class="notificationIcon" alt="">
-            <div class="card-right-img-inside">
-               <h6 class="medium p-0 text-start">{{item?.title}}</h6><br>
-               <p class="grey small-tetx my-2 line-clamp-1">{{item?.description}}</p>
+            <div class="card-right-img-inside ">
+               <h6 class="medium p-0 text-start">{{item?.title}}</h6>
+               <p class="grey small-text  line-clamp-1">{{item?.description}}</p>
+               <p class="grey small-text text-right">12 July 2021, 13:44</p>
                </div>
            </a>
+           </div>
         </div>
 
        </div>
-     </div>
 </ng-template>
