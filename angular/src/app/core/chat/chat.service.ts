@@ -28,5 +28,6 @@ export class ChatService {
   getUnreadCount(){
     return this.http.get<number>(this.apiURl + '/un-read-chat-counts')
   }
+  
 
 }

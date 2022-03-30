@@ -1,4 +1,6 @@
+import * as signalR from '@microsoft/signalr';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 export class utils {
     static formatDate(date: any) {
         let d = new Date(date),
@@ -68,5 +70,13 @@ export class utils {
       static getTime(dateTime:any)
       {
         return moment(dateTime).format("hh:mm a")
+      }
+      static getSignalRConnection()
+      {
+        const connection = new signalR.HubConnectionBuilder()
+          .configureLogging(signalR.LogLevel.Information)
+          .withUrl(environment.NOTIFICATION_APP_URL + '/signalr-hubs/Notification')
+          .build();
+          return connection;
       }
 }

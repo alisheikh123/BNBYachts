@@ -101,8 +101,9 @@
                                         <!-- <a class="logo-btn"><img src="../../../../assets/images/create-icon.svg"
                                             alt=""></a> -->
                                     </span>
-                                   {{'SwitchRole' | localization}} 
+                                   {{'SwitchRole' | localization}}
                                 </button>
+
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <div *ngFor="let role of userDetails?.userRoles">
                                         <li><a (click)="switchRole(roles.User)" *ngIf="role?.normalizedName==roles.User && currentRole!= roles.User" class="dropdown-item">{{'SwitchUser' | localization}}</a></li>
@@ -118,6 +119,15 @@
                                     <a [routerLink]="['/try-hosting']" *ngIf="showHost"  class="dropdown-item" >{{'BecomeHost'| localization }}</a>
                                   </li>
                                 </ul>
+
+                                        <!-- Notification -->
+                                <a placement="bottom" placement="bottom" ngbTooltip="Notification" (click)="openNotification()">
+                                    <i class="fas fa-bell fa-lg"> </i>
+                                    <span class="badge rounded-pill badge-notification bg-danger">{{notificationCount}}</span>
+
+                                </a>
+
+
                               </div>
                         <div class="dropdown custom-dropdown" ngbDropdown>
                             <button ngbDropdownToggle class="dropdown-btn dropdown-toggle" type="button"
@@ -126,6 +136,7 @@
                                 <img src="{{assetUrlS3 + (userDetails?.imagePath || USER_DEFAULTS.avatar)}}" alt="">
                                 <i class="fa fa-bars"></i>
                             </button>
+
                             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
                                 <li>
                                     <p class="header-content small-text">{{userDetails?.name}}</p>
@@ -144,7 +155,11 @@
                             </ul>
                         </div>
                         <button class="custom-btn btn-mobile"><i class="fa fa-bars"></i></button>
+                        <div class="mt-2">
+
                     </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -176,4 +191,30 @@
           </div>
         </div>
       </div>
+</ng-template>
+<ng-template #notification>
+
+    <div class="modal-content">
+       <div class="modal-header no-border">
+       </div>
+       <div class="modal-body mt-3 mb-3 mr-1"  style="overflow-y: scroll; max-height:85%;">
+             <div class="row col-12 mt-4">
+                 <div class="col-1"></div>
+                 <div class="col-10"><h6 class="medium text-center mb-3">{{'Notification' | localization}}</h6></div>
+                 <div class="col-1"><a type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close" (click)="dismissModal()"></a></div>
+
+             <hr>
+             </div>
+             <div *ngFor="let item of messages">
+         <a class="custom-card custom-flex-between card-right-img">
+            <img src="../../../../assets/images/host-img-small.png" class="notificationIcon" alt="">
+            <div class="card-right-img-inside">
+               <h6 class="medium p-0 text-start">{{item?.title}}</h6><br>
+               <p class="grey small-tetx my-2 line-clamp-1">{{item?.description}}</p>
+               </div>
+           </a>
+        </div>
+
+       </div>
+     </div>
 </ng-template>
