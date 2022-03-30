@@ -27,8 +27,10 @@ namespace BnByachts.NotificationHub
         {
             context.Services.AddAssemblyOf<NotificationHubModule>();
             context.Services.AddAutoMapperObjectMapper<NotificationHubModule>();
+            context.Services.Configure<SignalRSettings>(context.Services.GetConfiguration().GetSection("SignalrURL"));
             context.Services.Configure<SmtpSettings>(context.Services.GetConfiguration().GetSection("Settings"));
             context.Services.Configure<OTPMessageSetting>(context.Services.GetConfiguration().GetSection("OTPSetting"));
+
             context.Services.AddMassTransit(mt =>
             {
                 mt.AddConsumer<EmailConsumer>().Endpoint(e =>

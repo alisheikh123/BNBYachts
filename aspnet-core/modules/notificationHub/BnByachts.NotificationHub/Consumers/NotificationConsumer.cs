@@ -3,7 +3,9 @@ using MassTransit;
 using System.Threading.Tasks;
 using BnBYachts.Notification.IManager;
 using BnBYachts.Notification.Notification.Transferables;
+using BnByachts.NotificationHub.Configuration;
 using BnByachts.NotificationHub.signalRClient;
+using Microsoft.Extensions.Options;
 using Volo.Abp.ObjectMapping;
 
 namespace BnByachts.NotificationHub.Consumers
@@ -13,17 +15,19 @@ namespace BnByachts.NotificationHub.Consumers
 
         private readonly INotificationManager _notificationManager;
         private readonly IObjectMapper<NotificationHubModule> _objectMapper;
-        public NotificationConsumer(INotificationManager notificationManager, 
-            IObjectMapper<NotificationHubModule> objectMapper)
+        private SignalRSettings _signlRSettings { get; }
+        public NotificationConsumer(INotificationManager notificationManager,
+            IObjectMapper<NotificationHubModule> objectMapper, IOptions<SignalRSettings> signlRSettings)
         {
             _notificationManager = notificationManager;
             _objectMapper = objectMapper;
+            _signlRSettings = signlRSettings.Value;
         }
         public async Task Consume(ConsumeContext<INotificationContract> context)
         {
-            await _notificationManager.Insert(_objectMapper.Map<INotificationContract, NotificationTransferable>(context.Message)).ConfigureAwait(false);
-            await new SignalRClient()
-                .SendMessage(context.Message.UserTo.ToString(), 
+            await _notificationManager.Insert(_objectMapper.Map<INotificationContract,NotificationTransferable>(context.Message)).ConfigureAwait(false);
+            await new SignalRClient(_signlRSettings.URL)
+                .SendMessage(context.Message.UserTo.ToString(),
                     context.Message.Message).ConfigureAwait(false);
         }
     }

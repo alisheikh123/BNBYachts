@@ -14,12 +14,14 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using BnBYachts.EventBusShared;
 
 namespace BnBYachts.Notification;
 
 [DependsOn(
     typeof(NotificationDomainSharedModule),
     typeof(AbpAuditLoggingDomainModule),
+    typeof(EventBusSharedModule),
     //typeof(AbpBackgroundJobsDomainModule),
     //typeof(AbpFeatureManagementDomainModule),
     //typeof(AbpIdentityDomainModule),
