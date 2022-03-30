@@ -94,11 +94,14 @@ namespace BnBYachts.Core.Managers
             var _respone = new ResponseDto();
             var user = new IdentityUser(userInput.Id, userInput.Email, userInput.Email)
             {
-                Name = userInput.FirstName + " " + userInput.LastName
+                Name = userInput.FirstName + " " + userInput.LastName,
+                
             };
+
             user.SetProperty(UserConstants.DOB, userInput.DOB);
             user.SetProperty(UserConstants.IsInitialLogin, true);
             user.SetProperty(UserConstants.IsActive, true);
+            user.SetProperty(UserConstants.IsEmailConfirmed, true);
             var result = await _userManager.CreateAsync(user, userInput.Password);
             if (result.Succeeded)
             {
@@ -107,7 +110,12 @@ namespace BnBYachts.Core.Managers
                 {
                     return _respone;
                 }
-                await SendEmailToAskForEmailConfirmationAsync(user);
+
+                if (false)
+                {
+                    await SendEmailToAskForEmailConfirmationAsync(user);
+                }
+
                 _respone.Message = "Account created successfully";
             }
             else

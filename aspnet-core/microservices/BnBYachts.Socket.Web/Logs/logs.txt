@@ -10227,3 +10227,1333 @@ StackExchange.Redis.RedisServerException: ERR Error running script (call to f_39
 2022-03-30 15:37:07.934 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 131.9153ms
 2022-03-30 15:37:07.935 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
 2022-03-30 15:37:07.980 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 14957.2505ms
+2022-03-30 19:03:58.746 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-30 19:03:59.650 +05:00 [DBG] Create send transport: "rabbitmq://localhost:0/q-heartbeat"
+2022-03-30 19:03:59.683 +05:00 [INF] Loaded ABP modules:
+2022-03-30 19:03:59.683 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-30 19:03:59.683 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-30 19:03:59.683 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-30 19:03:59.683 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-30 19:03:59.683 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-30 19:03:59.683 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-30 19:03:59.683 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-30 19:03:59.683 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-30 19:03:59.683 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-30 19:03:59.683 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-30 19:03:59.683 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-30 19:03:59.683 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-30 19:03:59.683 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - BnBYachts.EventBusShared.EventBusSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-30 19:03:59.683 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-30 19:03:59.683 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-30 19:03:59.683 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-30 19:03:59.683 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-30 19:03:59.695 +05:00 [DBG] Connecting: guest@localhost:5672/
+2022-03-30 19:04:00.082 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-30 19:04:00.085 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 51218)
+2022-03-30 19:04:00.172 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-30 19:04:00.186 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2022-03-30 19:04:00.207 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2022-03-30 19:04:00.572 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-1baf-08da125623b9" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:04:01.681 +05:00 [INF] Initialized all ABP modules.
+2022-03-30 19:04:01.889 +05:00 [INF] Now listening on: https://localhost:5001
+2022-03-30 19:04:01.889 +05:00 [INF] Now listening on: http://localhost:5000
+2022-03-30 19:04:01.893 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-30 19:04:01.893 +05:00 [INF] Hosting environment: Development
+2022-03-30 19:04:01.893 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Socket.Web
+2022-03-30 19:04:02.616 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2022-03-30 19:04:13.255 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:04:17.457 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 13s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 13s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:04:26.481 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:04:26.594 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 22s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 22s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:04:35.773 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 32s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 32s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:04:35.890 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:04:35.947 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:04:35.963 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:04:35.963 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 9476.6655ms
+2022-03-30 19:04:36.373 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:04:36.473 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:04:36.475 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 101.3259ms
+2022-03-30 19:04:36.482 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:04:36.488 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:04:37.727 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:04:37.781 +05:00 [INF] Executing endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:04:37.796 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:04:37.796 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 1314.4687ms
+2022-03-30 19:04:38.111 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Socket.Web.Controllers.HomeController (BnBYachts.Socket.Web).
+2022-03-30 19:04:38.342 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=DT42xJ9vRSeuBik6krfMBA - -
+2022-03-30 19:04:38.343 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:04:38.345 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:04:38.711 +05:00 [INF] Executing action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) - Validation state: "Valid"
+2022-03-30 19:04:38.724 +05:00 [INF] Executed action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 0.5546ms.
+2022-03-30 19:04:38.736 +05:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2022-03-30 19:04:38.764 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 639.7487ms
+2022-03-30 19:04:38.764 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:04:38.772 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 36160.7291ms
+2022-03-30 19:04:38.810 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:04:38.818 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:04:38.824 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 2877.6069ms
+2022-03-30 19:04:39.366 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/favicon.ico - -
+2022-03-30 19:04:39.379 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/favicon.ico - - - 404 0 - 13.0046ms
+2022-03-30 19:05:30.602 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-65a4-08da12565998" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:07:00.627 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-4264-08da12568f41" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:07:19.182 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:07:19.187 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=DT42xJ9vRSeuBik6krfMBA - - - 101 - - 160844.9031ms
+2022-03-30 19:07:40.282 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification - -
+2022-03-30 19:07:40.285 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:07:40.287 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:07:40.297 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:07:40.297 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:07:40.299 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:07:40.299 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:07:40.299 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 3.2905ms
+2022-03-30 19:07:40.300 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 3.4755ms
+2022-03-30 19:07:40.307 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:07:40.307 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:07:40.392 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:07:40.392 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:07:40.394 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 87.2603ms
+2022-03-30 19:07:40.412 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:07:40.421 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:07:40.443 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:07:40.443 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:07:40.444 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 44.9263ms
+2022-03-30 19:07:55.281 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=f8u2FmWYD_sqriri8-H2ig - -
+2022-03-30 19:07:55.282 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:07:55.283 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:08:30.638 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-bcf0-08da1256c4e7" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:08:56.379 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:08:56.380 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=f8u2FmWYD_sqriri8-H2ig - - - 101 - - 61098.8709ms
+2022-03-30 19:08:56.381 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:08:56.385 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification - - - 101 - - 76102.4712ms
+2022-03-30 19:08:56.393 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:08:56.394 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.407 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:08:56.436 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:08:56.438 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.439 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:08:56.439 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 2.6415ms
+2022-03-30 19:08:56.439 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.440 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 0.9680ms
+2022-03-30 19:08:56.441 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:08:56.442 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.442 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 0.4149ms
+2022-03-30 19:08:56.443 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:08:56.444 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.444 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:08:56.444 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 0 - - 1.0645ms
+2022-03-30 19:08:56.444 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.446 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:08:56.448 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:08:56.458 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 13.7877ms
+2022-03-30 19:08:56.460 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:08:56.460 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.473 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:08:56.473 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:08:56.476 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 16.0350ms
+2022-03-30 19:08:56.480 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=sBuTWp-nGgqDdJIitMwMyQ - -
+2022-03-30 19:08:56.480 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:08:56.482 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:09:05.748 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:09:05.755 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - - - 101 - - 9361.8714ms
+2022-03-30 19:09:05.761 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:09:05.762 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=sBuTWp-nGgqDdJIitMwMyQ - - - 101 - - 9281.8057ms
+2022-03-30 19:09:06.551 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:09:06.554 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:09:06.556 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:09:06.654 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:09:06.656 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:09:06.658 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:09:06.658 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 4.3362ms
+2022-03-30 19:09:06.659 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:09:06.659 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 3.4111ms
+2022-03-30 19:09:06.665 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:09:06.665 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:09:06.667 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:09:06.669 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:09:06.669 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:09:06.669 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 4.5241ms
+2022-03-30 19:09:06.671 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:09:06.677 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:09:06.677 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:09:06.678 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 11.4342ms
+2022-03-30 19:09:07.590 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=PGFKG8sHptVR49xGkp0Cdg - -
+2022-03-30 19:09:07.591 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:09:07.592 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:13:23.001 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-30 19:13:23.454 +05:00 [DBG] Create send transport: "rabbitmq://localhost:0/q-heartbeat"
+2022-03-30 19:13:23.474 +05:00 [INF] Loaded ABP modules:
+2022-03-30 19:13:23.474 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-30 19:13:23.474 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-30 19:13:23.474 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-30 19:13:23.474 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-30 19:13:23.474 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-30 19:13:23.474 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-30 19:13:23.474 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-30 19:13:23.474 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-30 19:13:23.474 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-30 19:13:23.474 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-30 19:13:23.474 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-30 19:13:23.474 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-30 19:13:23.474 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-30 19:13:23.474 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-30 19:13:23.474 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-30 19:13:23.474 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-30 19:13:23.474 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-30 19:13:23.474 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-30 19:13:23.474 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-30 19:13:23.474 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-30 19:13:23.474 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-30 19:13:23.474 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-30 19:13:23.474 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-30 19:13:23.474 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-30 19:13:23.474 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-30 19:13:23.474 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-30 19:13:23.474 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-30 19:13:23.474 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-30 19:13:23.474 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-30 19:13:23.474 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-30 19:13:23.474 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-30 19:13:23.474 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-30 19:13:23.474 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-30 19:13:23.475 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-30 19:13:23.475 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-30 19:13:23.475 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-30 19:13:23.475 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-30 19:13:23.475 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-30 19:13:23.475 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-30 19:13:23.475 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-30 19:13:23.475 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-30 19:13:23.475 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-30 19:13:23.475 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-30 19:13:23.475 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - BnBYachts.EventBusShared.EventBusSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-30 19:13:23.475 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-30 19:13:23.475 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-30 19:13:23.475 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-30 19:13:23.475 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-30 19:13:23.498 +05:00 [DBG] Connecting: guest@localhost:5672/
+2022-03-30 19:13:23.666 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-30 19:13:23.676 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-30 19:13:23.706 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 55312)
+2022-03-30 19:13:23.807 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2022-03-30 19:13:23.842 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2022-03-30 19:13:24.194 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-4023-08da125773ad" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:13:24.520 +05:00 [INF] Initialized all ABP modules.
+2022-03-30 19:13:24.665 +05:00 [INF] Now listening on: https://localhost:5001
+2022-03-30 19:13:24.666 +05:00 [INF] Now listening on: http://localhost:5000
+2022-03-30 19:13:24.670 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-30 19:13:24.670 +05:00 [INF] Hosting environment: Development
+2022-03-30 19:13:24.670 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Socket.Web
+2022-03-30 19:13:25.674 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2022-03-30 19:13:30.483 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 4s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 4s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:13:34.674 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 8s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 8s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:13:43.864 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 17s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 17s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:13:47.969 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 21s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 21s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:13:48.539 +05:00 [INF] Executing endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:13:48.564 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Socket.Web.Controllers.HomeController (BnBYachts.Socket.Web).
+2022-03-30 19:13:48.796 +05:00 [INF] Executing action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) - Validation state: "Valid"
+2022-03-30 19:13:48.799 +05:00 [INF] Executed action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 0.2573ms.
+2022-03-30 19:13:48.805 +05:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2022-03-30 19:13:48.827 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 253.8341ms
+2022-03-30 19:13:48.828 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:13:48.863 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 23189.9593ms
+2022-03-30 19:14:02.257 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:14:02.273 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:14:02.275 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:14:02.275 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:14:02.277 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:14:02.277 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:14:02.281 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 5.2893ms
+2022-03-30 19:14:02.281 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 5.2848ms
+2022-03-30 19:14:02.297 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:14:02.301 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:14:02.303 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:14:02.303 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:14:02.320 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:14:02.321 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:14:02.322 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 25.4092ms
+2022-03-30 19:14:02.340 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:14:17.451 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:14:26.806 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:14:26.806 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 9355.0961ms
+2022-03-30 19:14:27.660 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:14:27.660 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:14:27.680 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:14:27.696 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:14:27.696 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 36.4915ms
+2022-03-30 19:16:10.505 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-30 19:16:11.090 +05:00 [DBG] Create send transport: "rabbitmq://localhost:0/q-heartbeat"
+2022-03-30 19:16:11.119 +05:00 [INF] Loaded ABP modules:
+2022-03-30 19:16:11.119 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-30 19:16:11.119 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-30 19:16:11.119 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-30 19:16:11.119 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-30 19:16:11.119 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-30 19:16:11.119 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-30 19:16:11.119 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-30 19:16:11.119 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-30 19:16:11.119 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-30 19:16:11.119 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-30 19:16:11.119 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-30 19:16:11.119 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-30 19:16:11.119 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - BnBYachts.EventBusShared.EventBusSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-30 19:16:11.119 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-30 19:16:11.119 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-30 19:16:11.119 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-30 19:16:11.119 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-30 19:16:11.146 +05:00 [DBG] Connecting: guest@localhost:5672/
+2022-03-30 19:16:11.318 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-30 19:16:11.329 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-30 19:16:11.350 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 50461)
+2022-03-30 19:16:11.443 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2022-03-30 19:16:11.474 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2022-03-30 19:16:11.804 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-8e1e-08da1257d798" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:16:12.094 +05:00 [INF] Initialized all ABP modules.
+2022-03-30 19:16:12.230 +05:00 [INF] Now listening on: https://localhost:5001
+2022-03-30 19:16:12.230 +05:00 [INF] Now listening on: http://localhost:5000
+2022-03-30 19:16:12.234 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-30 19:16:12.234 +05:00 [INF] Hosting environment: Development
+2022-03-30 19:16:12.234 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Socket.Web
+2022-03-30 19:16:13.202 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2022-03-30 19:16:23.177 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:16:27.374 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 13s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 13s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:16:36.599 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 22s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 22s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:16:37.513 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:16:37.529 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:16:37.529 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:16:42.777 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 29s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 29s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:16:42.874 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:16:42.874 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:16:42.874 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:16:42.914 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:16:42.914 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:16:42.924 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:16:42.924 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:16:42.945 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 5410.6503ms
+2022-03-30 19:16:42.945 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 5410.6492ms
+2022-03-30 19:16:43.823 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:16:43.823 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:16:43.823 +05:00 [INF] Executing endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:16:43.870 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:16:43.871 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 956.5914ms
+2022-03-30 19:16:43.903 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Socket.Web.Controllers.HomeController (BnBYachts.Socket.Web).
+2022-03-30 19:16:43.933 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=CByCyJ5repWsgG-94Cj0aA - -
+2022-03-30 19:16:43.940 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:16:43.943 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:16:44.147 +05:00 [INF] Executing action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) - Validation state: "Valid"
+2022-03-30 19:16:44.153 +05:00 [INF] Executed action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 0.3025ms.
+2022-03-30 19:16:44.160 +05:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2022-03-30 19:16:44.178 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 266.413ms
+2022-03-30 19:16:44.179 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:16:44.181 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:16:44.186 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 30986.1280ms
+2022-03-30 19:16:44.192 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:16:44.196 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 1282.8670ms
+2022-03-30 19:17:19.585 +05:00 [INF] Request starting HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0
+2022-03-30 19:17:19.587 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:17:19.588 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:17:19.589 +05:00 [INF] Request finished HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 3.2705ms
+2022-03-30 19:17:19.786 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=DGxzZL6tZzoP23BfLwA6TQ - -
+2022-03-30 19:17:19.787 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:17:41.836 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-cf41-08da12580d71" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:17:56.878 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:17:56.883 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=DGxzZL6tZzoP23BfLwA6TQ - - - 101 - - 37097.6946ms
+2022-03-30 19:21:36.329 +05:00 [DBG] Disconnect: guest@localhost:5672/
+2022-03-30 19:21:36.329 +05:00 [DBG] Disconnected: guest@localhost:5672/
+2022-03-30 19:21:36.329 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:21:36.331 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=CByCyJ5repWsgG-94Cj0aA - - - 101 - - 292397.3068ms
+2022-03-30 19:21:36.352 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:21:36.352 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - - - 101 - - 298839.5138ms
+2022-03-30 19:21:36.364 +05:00 [DBG] Closing model: 1 guest@localhost:5672/
+2022-03-30 19:21:36.370 +05:00 [ERR] S-FAULT "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-3b6e-08da1258992f" BnBYachts.EventBusShared.Contracts.IHeartbeatContract rabbitmq://localhost:0/q-heartbeat => The message was not confirmed: End of stream
+2022-03-30 19:21:36.587 +05:00 [ERR] BackgroundService failed
+MassTransit.RabbitMqTransport.MessageNotConfirmedException: rabbitmq://localhost:0/q-heartbeat => The message was not confirmed: End of stream
+   at MassTransit.RabbitMqTransport.Contexts.RabbitMqModelContext.MassTransit.RabbitMqTransport.ModelContext.BasicPublishAsync(String exchange, String routingKey, Boolean mandatory, IBasicProperties basicProperties, Byte[] body, Boolean awaitAck)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass3_0.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Transport.RabbitMqSendTransport.SendPipe`1.Send(ModelContext modelContext)
+   at MassTransit.RabbitMqTransport.Transport.RabbitMqSendTransport.SendPipe`1.Send(ModelContext modelContext)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.EndpointConventionExtensions.Send[T](ISendEndpointProvider provider, T message, CancellationToken cancellationToken)
+   at BnBYachts.EventBusShared.EventBusDispatcher.Send[T](T contract, CancellationToken cancellationToken) in D:\umar draz\umarofficework\BnBYachts\aspnet-core\modules\EventBus\BnBYachts.EventBusShared\EventBusDispatcher.cs:line 19
+   at BnBYachts.EventBusShared.HostedServices.HeartbeatHostedService.ExecuteAsync(CancellationToken stoppingToken) in D:\umar draz\umarofficework\BnBYachts\aspnet-core\modules\EventBus\BnBYachts.EventBusShared\HostedServices\HeartbeatHostedService.cs:line 23
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2022-03-30 19:21:36.587 +05:00 [FTL] The HostOptions.BackgroundServiceExceptionBehavior is configured to StopHost. A BackgroundService has thrown an unhandled exception, and the IHost instance is stopping. To avoid this behavior, configure this to Ignore; however the BackgroundService will not be restarted.
+MassTransit.RabbitMqTransport.MessageNotConfirmedException: rabbitmq://localhost:0/q-heartbeat => The message was not confirmed: End of stream
+   at MassTransit.RabbitMqTransport.Contexts.RabbitMqModelContext.MassTransit.RabbitMqTransport.ModelContext.BasicPublishAsync(String exchange, String routingKey, Boolean mandatory, IBasicProperties basicProperties, Byte[] body, Boolean awaitAck)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass3_0.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Transport.RabbitMqSendTransport.SendPipe`1.Send(ModelContext modelContext)
+   at MassTransit.RabbitMqTransport.Transport.RabbitMqSendTransport.SendPipe`1.Send(ModelContext modelContext)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.EndpointConventionExtensions.Send[T](ISendEndpointProvider provider, T message, CancellationToken cancellationToken)
+   at BnBYachts.EventBusShared.EventBusDispatcher.Send[T](T contract, CancellationToken cancellationToken) in D:\umar draz\umarofficework\BnBYachts\aspnet-core\modules\EventBus\BnBYachts.EventBusShared\EventBusDispatcher.cs:line 19
+   at BnBYachts.EventBusShared.HostedServices.HeartbeatHostedService.ExecuteAsync(CancellationToken stoppingToken) in D:\umar draz\umarofficework\BnBYachts\aspnet-core\modules\EventBus\BnBYachts.EventBusShared\HostedServices\HeartbeatHostedService.cs:line 23
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2022-03-30 19:21:36.604 +05:00 [DBG] Stopped background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-30 19:21:36.604 +05:00 [DBG] Stopped background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-30 19:21:36.604 +05:00 [INF] Application is shutting down...
+2022-03-30 19:29:27.080 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-30 19:29:27.619 +05:00 [DBG] Create send transport: "rabbitmq://localhost:0/q-heartbeat"
+2022-03-30 19:29:27.645 +05:00 [INF] Loaded ABP modules:
+2022-03-30 19:29:27.645 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-30 19:29:27.645 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-30 19:29:27.645 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-30 19:29:27.645 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-30 19:29:27.645 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-30 19:29:27.645 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-30 19:29:27.645 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-30 19:29:27.645 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-30 19:29:27.645 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-30 19:29:27.645 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-30 19:29:27.645 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-30 19:29:27.645 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-30 19:29:27.645 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - BnBYachts.EventBusShared.EventBusSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-30 19:29:27.645 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-30 19:29:27.645 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-30 19:29:27.645 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-30 19:29:27.646 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-30 19:29:27.646 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-30 19:29:27.646 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-30 19:29:27.646 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-30 19:29:27.646 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-30 19:29:27.646 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-30 19:29:27.646 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-30 19:29:27.646 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-30 19:29:27.682 +05:00 [DBG] Connecting: guest@localhost:5672/
+2022-03-30 19:29:27.862 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-30 19:29:27.874 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-30 19:29:27.903 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 51962)
+2022-03-30 19:29:28.023 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2022-03-30 19:29:28.058 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2022-03-30 19:29:28.481 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-21dd-08da1259b26b" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:29:28.767 +05:00 [INF] Initialized all ABP modules.
+2022-03-30 19:29:28.922 +05:00 [INF] Now listening on: https://localhost:5001
+2022-03-30 19:29:28.922 +05:00 [INF] Now listening on: http://localhost:5000
+2022-03-30 19:29:28.926 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-30 19:29:28.926 +05:00 [INF] Hosting environment: Development
+2022-03-30 19:29:28.926 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Socket.Web
+2022-03-30 19:29:29.927 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2022-03-30 19:29:35.630 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:29:35.651 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:29:35.651 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:29:40.393 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:29:49.699 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 18s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 18s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:29:58.904 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 28s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 28s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:30:08.081 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 37s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 37s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:30:08.164 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:30:08.164 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:30:08.164 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:30:08.212 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:30:08.212 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:30:08.219 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:30:08.225 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:30:08.234 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 32574.6405ms
+2022-03-30 19:30:08.234 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 32574.6783ms
+2022-03-30 19:30:09.048 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:30:09.048 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:30:09.050 +05:00 [INF] Executing endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:30:09.070 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:30:09.071 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 858.8024ms
+2022-03-30 19:30:09.275 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=EPimnZNYK-P0MJylXxKIRg - -
+2022-03-30 19:30:09.275 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:30:09.312 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:30:09.323 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Socket.Web.Controllers.HomeController (BnBYachts.Socket.Web).
+2022-03-30 19:30:09.549 +05:00 [INF] Executing action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) - Validation state: "Valid"
+2022-03-30 19:30:09.556 +05:00 [INF] Executed action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 0.5061ms.
+2022-03-30 19:30:09.564 +05:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2022-03-30 19:30:09.583 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 249.0143ms
+2022-03-30 19:30:09.584 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:30:09.590 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 39666.0570ms
+2022-03-30 19:30:09.605 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:30:09.614 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:30:09.619 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 1407.0807ms
+2022-03-30 19:30:34.184 +05:00 [INF] Request starting HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0
+2022-03-30 19:30:34.187 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:30:34.188 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:30:34.188 +05:00 [INF] Request finished HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 4.3487ms
+2022-03-30 19:30:34.287 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=lfdEww-EHNca6XV5_CanaA - -
+2022-03-30 19:30:34.293 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:30:58.504 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-ade1-08da1259e84b" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:31:04.882 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:31:04.887 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=lfdEww-EHNca6XV5_CanaA - - - 101 - - 30599.9248ms
+2022-03-30 19:32:28.319 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:32:28.319 +05:00 [INF] Executed endpoint '/signalr-hubs/notification'
+2022-03-30 19:32:28.319 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=EPimnZNYK-P0MJylXxKIRg - - - 101 - - 139044.0677ms
+2022-03-30 19:32:28.319 +05:00 [INF] Request finished HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - - - 101 - - 172688.6640ms
+2022-03-30 19:32:28.529 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-9058-08da125a1df4" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:32:28.999 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:32:29.000 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:32:29.002 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:32:29.028 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:32:29.030 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:32:29.031 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 2.0965ms
+2022-03-30 19:32:29.038 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:32:29.039 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:32:29.039 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:32:29.039 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:32:29.039 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 0.5269ms
+2022-03-30 19:32:29.042 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:32:29.042 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:32:29.042 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:32:29.042 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:32:29.044 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:32:29.044 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 5.5560ms
+2022-03-30 19:32:29.045 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:32:29.045 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 3.3580ms
+2022-03-30 19:32:29.743 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=YkhQc7kSuhkE0Hibp8t-9g - -
+2022-03-30 19:32:29.744 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:32:29.749 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:34:10.334 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-30 19:34:11.337 +05:00 [DBG] Create send transport: "rabbitmq://localhost:0/q-heartbeat"
+2022-03-30 19:34:11.392 +05:00 [INF] Loaded ABP modules:
+2022-03-30 19:34:11.392 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-30 19:34:11.392 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-30 19:34:11.392 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-30 19:34:11.392 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-30 19:34:11.392 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-30 19:34:11.392 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-30 19:34:11.392 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-30 19:34:11.392 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-30 19:34:11.392 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-30 19:34:11.392 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-30 19:34:11.392 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-30 19:34:11.392 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-30 19:34:11.392 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-30 19:34:11.392 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-30 19:34:11.392 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-30 19:34:11.392 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-30 19:34:11.392 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-30 19:34:11.393 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-30 19:34:11.393 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-30 19:34:11.393 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-30 19:34:11.393 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-30 19:34:11.393 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-30 19:34:11.393 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-30 19:34:11.393 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-30 19:34:11.393 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-30 19:34:11.393 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-30 19:34:11.393 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-30 19:34:11.393 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-30 19:34:11.393 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-30 19:34:11.393 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-30 19:34:11.393 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-30 19:34:11.393 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-30 19:34:11.393 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-30 19:34:11.393 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-30 19:34:11.393 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-30 19:34:11.393 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-30 19:34:11.393 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-30 19:34:11.393 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-30 19:34:11.393 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-30 19:34:11.393 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-30 19:34:11.393 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-30 19:34:11.393 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-30 19:34:11.393 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-30 19:34:11.393 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-30 19:34:11.393 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-30 19:34:11.393 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-30 19:34:11.393 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-30 19:34:11.394 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-30 19:34:11.394 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-30 19:34:11.394 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-30 19:34:11.394 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-30 19:34:11.394 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-30 19:34:11.394 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-30 19:34:11.394 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-30 19:34:11.394 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - BnBYachts.EventBusShared.EventBusSharedModule
+2022-03-30 19:34:11.394 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-30 19:34:11.394 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-30 19:34:11.394 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-30 19:34:11.394 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-30 19:34:11.394 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-30 19:34:11.394 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-30 19:34:11.403 +05:00 [DBG] Connecting: guest@localhost:5672/
+2022-03-30 19:34:11.394 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-30 19:34:11.404 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-30 19:34:11.404 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-30 19:34:11.404 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-30 19:34:11.404 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-30 19:34:11.404 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-30 19:34:11.404 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-30 19:34:11.404 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-30 19:34:11.404 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-30 19:34:11.404 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-30 19:34:11.404 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-30 19:34:11.404 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-30 19:34:11.789 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-30 19:34:11.795 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 58663)
+2022-03-30 19:34:11.927 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-30 19:34:12.003 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2022-03-30 19:34:12.049 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2022-03-30 19:34:12.543 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-1703-08da125a5bac" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:34:13.049 +05:00 [INF] Initialized all ABP modules.
+2022-03-30 19:34:13.271 +05:00 [INF] Now listening on: https://localhost:5001
+2022-03-30 19:34:13.271 +05:00 [INF] Now listening on: http://localhost:5000
+2022-03-30 19:34:13.287 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-30 19:34:13.287 +05:00 [INF] Hosting environment: Development
+2022-03-30 19:34:13.287 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Socket.Web
+2022-03-30 19:34:14.622 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2022-03-30 19:34:25.300 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 9s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:34:34.291 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:34:34.316 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:34:34.316 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:34:34.669 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 19s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 19s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:34:43.908 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 28s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 28s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:34:49.408 +05:00 [INF] Request starting HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0
+2022-03-30 19:34:53.050 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 37s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 37s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:34:53.131 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:34:53.131 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:34:53.131 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:34:53.169 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:34:53.169 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:34:53.176 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:34:53.181 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:34:53.203 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 18881.6325ms
+2022-03-30 19:34:53.203 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 18881.6381ms
+2022-03-30 19:34:53.951 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:34:53.952 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:34:53.952 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:34:53.955 +05:00 [INF] Executing endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:34:54.038 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:34:54.043 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:34:54.043 +05:00 [INF] Request finished HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 4634.9960ms
+2022-03-30 19:34:54.044 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 875.3580ms
+2022-03-30 19:34:54.123 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=A5P9a_J2WUb0s8sRmFRykw - -
+2022-03-30 19:34:54.124 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:34:54.126 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:34:54.160 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Socket.Web.Controllers.HomeController (BnBYachts.Socket.Web).
+2022-03-30 19:34:54.458 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=EV68rN92j6cMU91d3njTmw - -
+2022-03-30 19:34:54.459 +05:00 [INF] Executing action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) - Validation state: "Valid"
+2022-03-30 19:34:54.463 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:34:54.476 +05:00 [INF] Executed action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 0.8036ms.
+2022-03-30 19:34:54.496 +05:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2022-03-30 19:34:54.531 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 358.5553ms
+2022-03-30 19:34:54.532 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:34:54.542 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 39922.7753ms
+2022-03-30 19:34:54.561 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:34:54.570 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:34:54.577 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 1408.5685ms
+2022-03-30 19:37:28.686 +05:00 [INF] User profile is available. Using 'C:\Users\udraz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-03-30 19:37:29.501 +05:00 [DBG] Create send transport: "rabbitmq://localhost:0/q-heartbeat"
+2022-03-30 19:37:29.529 +05:00 [INF] Loaded ABP modules:
+2022-03-30 19:37:29.529 +05:00 [INF] - BnBYachts.Socket.Web.SocketWebModule
+2022-03-30 19:37:29.529 +05:00 [INF]   - BnBYachts.Notification.NotificationHttpApiModule
+2022-03-30 19:37:29.529 +05:00 [INF]     - BnBYachts.Notification.NotificationApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]       - BnBYachts.Notification.NotificationDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.Users.AbpUsersDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.Validation.AbpValidationModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Localization.AbpLocalizationModule
+2022-03-30 19:37:29.529 +05:00 [INF]                 - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2022-03-30 19:37:29.529 +05:00 [INF]                 - Volo.Abp.Settings.AbpSettingsModule
+2022-03-30 19:37:29.529 +05:00 [INF]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2022-03-30 19:37:29.529 +05:00 [INF]                   - Volo.Abp.Security.AbpSecurityModule
+2022-03-30 19:37:29.529 +05:00 [INF]                   - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2022-03-30 19:37:29.529 +05:00 [INF]                     - Volo.Abp.Data.AbpDataModule
+2022-03-30 19:37:29.529 +05:00 [INF]                       - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2022-03-30 19:37:29.529 +05:00 [INF]                       - Volo.Abp.Uow.AbpUnitOfWorkModule
+2022-03-30 19:37:29.529 +05:00 [INF]                       - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.Features.AbpFeaturesModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.EventBus.AbpEventBusModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Json.AbpJsonModule
+2022-03-30 19:37:29.529 +05:00 [INF]                 - Volo.Abp.Timing.AbpTimingModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Guids.AbpGuidsModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2022-03-30 19:37:29.529 +05:00 [INF]                 - Volo.Abp.Threading.AbpThreadingModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]     - Volo.Abp.Account.AbpAccountHttpApiModule
+2022-03-30 19:37:29.529 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2022-03-30 19:37:29.529 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.Auditing.AbpAuditingModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.Http.AbpHttpModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Minify.AbpMinifyModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.UI.AbpUiModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.Application.AbpDddApplicationModule
+2022-03-30 19:37:29.529 +05:00 [INF]             - Volo.Abp.Domain.AbpDddDomainModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2022-03-30 19:37:29.529 +05:00 [INF]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2022-03-30 19:37:29.529 +05:00 [INF]     - Volo.Abp.PermissionManagement.HttpApi.AbpPermissionManagementHttpApiModule
+2022-03-30 19:37:29.529 +05:00 [INF]     - Volo.Abp.TenantManagement.AbpTenantManagementHttpApiModule
+2022-03-30 19:37:29.529 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementHttpApiModule
+2022-03-30 19:37:29.529 +05:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]           - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]     - Volo.Abp.SettingManagement.AbpSettingManagementHttpApiModule
+2022-03-30 19:37:29.529 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementApplicationContractsModule
+2022-03-30 19:37:29.529 +05:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2022-03-30 19:37:29.529 +05:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2022-03-30 19:37:29.529 +05:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2022-03-30 19:37:29.529 +05:00 [INF]   - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2022-03-30 19:37:29.529 +05:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2022-03-30 19:37:29.529 +05:00 [INF]     - Volo.Abp.Caching.AbpCachingModule
+2022-03-30 19:37:29.529 +05:00 [INF]       - Volo.Abp.Serialization.AbpSerializationModule
+2022-03-30 19:37:29.530 +05:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2022-03-30 19:37:29.530 +05:00 [INF]   - Volo.Abp.Swashbuckle.AbpSwashbuckleModule
+2022-03-30 19:37:29.530 +05:00 [INF]   - Volo.Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule
+2022-03-30 19:37:29.530 +05:00 [INF]   - Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.AbpAspNetCoreMvcUiMultiTenancyModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2022-03-30 19:37:29.530 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2022-03-30 19:37:29.530 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2022-03-30 19:37:29.530 +05:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2022-03-30 19:37:29.530 +05:00 [INF]   - BnBYachts.Notification.NotificationApplicationModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - BnBYachts.Notification.NotificationDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - BnBYachts.EventBusShared.EventBusSharedModule
+2022-03-30 19:37:29.530 +05:00 [INF]   - BnBYachts.Notification.MongoDB.NotificationMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.PermissionManagement.MongoDB.AbpPermissionManagementMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.MongoDB.AbpMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.SettingManagement.MongoDB.AbpSettingManagementMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.Identity.MongoDB.AbpIdentityMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.Users.MongoDB.AbpUsersMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.IdentityServer.MongoDB.AbpIdentityServerMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.IdentityServer.AbpIdentityServerDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]         - Volo.Abp.IdentityServer.AbpIdentityServerDomainSharedModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.BackgroundJobs.MongoDB.AbpBackgroundJobsMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2022-03-30 19:37:29.530 +05:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2022-03-30 19:37:29.530 +05:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.AuditLogging.MongoDB.AbpAuditLoggingMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.TenantManagement.MongoDB.AbpTenantManagementMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2022-03-30 19:37:29.530 +05:00 [INF]     - Volo.Abp.FeatureManagement.MongoDB.AbpFeatureManagementMongoDbModule
+2022-03-30 19:37:29.530 +05:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2022-03-30 19:37:29.572 +05:00 [DBG] Connecting: guest@localhost:5672/
+2022-03-30 19:37:29.735 +05:00 [DBG] Started background worker: Volo.Abp.IdentityServer.Tokens.TokenCleanupBackgroundWorker
+2022-03-30 19:37:29.745 +05:00 [DBG] Started background worker: Volo.Abp.BackgroundJobs.BackgroundJobWorker
+2022-03-30 19:37:29.770 +05:00 [DBG] Connected: guest@localhost:5672/ (address: amqp://localhost:5672, local: 58513)
+2022-03-30 19:37:29.883 +05:00 [DBG] Created model: 1 guest@localhost:5672/
+2022-03-30 19:37:29.912 +05:00 [DBG] Declare exchange: name: q-heartbeat, type: fanout, durable
+2022-03-30 19:37:30.236 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-3d62-08da125ad19a" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:37:30.517 +05:00 [INF] Initialized all ABP modules.
+2022-03-30 19:37:30.656 +05:00 [INF] Now listening on: https://localhost:5001
+2022-03-30 19:37:30.656 +05:00 [INF] Now listening on: http://localhost:5000
+2022-03-30 19:37:30.659 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-03-30 19:37:30.659 +05:00 [INF] Hosting environment: Development
+2022-03-30 19:37:30.659 +05:00 [INF] Content root path: D:\umar draz\umarofficework\BnBYachts\aspnet-core\microservices\BnBYachts.Socket.Web
+2022-03-30 19:37:31.506 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2022-03-30 19:37:36.650 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 4s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 4s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:37:45.939 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 13s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 13s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:37:55.091 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 22s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 22s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAndRefreshAsync(String key, Boolean getData, CancellationToken token)
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.GetAsync(String key, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.GetAsync(TCacheKey key, Nullable`1 hideErrors, Boolean considerUow, CancellationToken token)
+2022-03-30 19:38:04.306 +05:00 [WRN] It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 32s ago, v: 2.2.4.27433
+StackExchange.Redis.RedisConnectionException: It was not possible to connect to the redis server(s). UnableToConnect on 127.0.0.1:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 32s ago, v: 2.2.4.27433
+   at StackExchange.Redis.ConnectionMultiplexer.ConnectImplAsync(ConfigurationOptions configuration, TextWriter log) in /_/src/StackExchange.Redis/ConnectionMultiplexer.cs:line 861
+   at Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache.ConnectAsync(CancellationToken token)
+   at Volo.Abp.Caching.StackExchangeRedis.AbpRedisCache.SetManyAsync(IEnumerable`1 items, DistributedCacheEntryOptions options, CancellationToken token)
+   at Volo.Abp.Caching.DistributedCache`2.<>c__DisplayClass54_0.<<SetManyAsync>g__SetRealCache|0>d.MoveNext()
+2022-03-30 19:38:04.815 +05:00 [INF] Executing endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:38:04.845 +05:00 [INF] Route matched with {action = "Index", controller = "Home", area = "", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller BnBYachts.Socket.Web.Controllers.HomeController (BnBYachts.Socket.Web).
+2022-03-30 19:38:05.079 +05:00 [INF] Executing action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) - Validation state: "Valid"
+2022-03-30 19:38:05.085 +05:00 [INF] Executed action method BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web), returned result Microsoft.AspNetCore.Mvc.JsonResult in 0.3423ms.
+2022-03-30 19:38:05.092 +05:00 [INF] Executing JsonResult, writing value of type 'System.String'.
+2022-03-30 19:38:05.106 +05:00 [INF] Executed action BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web) in 256.8554ms
+2022-03-30 19:38:05.106 +05:00 [INF] Executed endpoint 'BnBYachts.Socket.Web.Controllers.HomeController.Index (BnBYachts.Socket.Web)'
+2022-03-30 19:38:05.126 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - application/json;+charset=utf-8 33622.4947ms
+2022-03-30 19:38:33.805 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?&userId=1 - -
+2022-03-30 19:38:33.837 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:38:33.838 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - -
+2022-03-30 19:38:33.841 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:38:33.841 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:38:33.841 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:38:33.845 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:38:33.848 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/api/app/in-app-notification/notification-count - - - 204 - - 10.0537ms
+2022-03-30 19:38:33.848 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - - - 204 - - 10.0759ms
+2022-03-30 19:38:33.860 +05:00 [INF] Request starting HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2022-03-30 19:38:33.862 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:38:33.881 +05:00 [INF] Request starting HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - -
+2022-03-30 19:38:33.888 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:38:33.900 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:38:33.908 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:38:33.909 +05:00 [INF] Request finished HTTP/2 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0 - 200 316 application/json 49.2838ms
+2022-03-30 19:38:34.194 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=RiVSXFi3tKO0B-fmMQoJbQ - -
+2022-03-30 19:38:34.197 +05:00 [INF] CORS policy execution successful.
+2022-03-30 19:38:34.200 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:38:34.942 +05:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateAudience(IEnumerable`1 audiences, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateAudience(IEnumerable`1 audiences, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-03-30 19:38:34.949 +05:00 [INF] Bearer was not authenticated. Failure message: IDX10214: Audience validation failed. Audiences: 'System.String'. Did not match: validationParameters.ValidAudience: 'System.String' or validationParameters.ValidAudiences: 'System.String'.
+2022-03-30 19:38:34.954 +05:00 [INF] Request finished HTTP/2 GET https://localhost:5001/api/app/in-app-notification/notification-count - - - 404 0 - 1072.4734ms
+2022-03-30 19:39:00.254 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-0087-08da125b0771" BnBYachts.EventBusShared.Contracts.IHeartbeatContract
+2022-03-30 19:39:18.965 +05:00 [INF] Request starting HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0
+2022-03-30 19:39:18.968 +05:00 [INF] Executing endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:39:18.969 +05:00 [INF] Executed endpoint '/signalr-hubs/notification/negotiate'
+2022-03-30 19:39:18.969 +05:00 [INF] Request finished HTTP/1.1 POST https://localhost:5001/signalr-hubs/Notification/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 3.6292ms
+2022-03-30 19:39:19.049 +05:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/signalr-hubs/Notification?id=SELIsLyyuDup_BnDP4APcA - -
+2022-03-30 19:39:19.052 +05:00 [INF] Executing endpoint '/signalr-hubs/notification'
+2022-03-30 19:40:30.269 +05:00 [DBG] SEND "rabbitmq://localhost:0/q-heartbeat" "83800000-6a91-f8b4-3fcf-08da125b3d18" BnBYachts.EventBusShared.Contracts.IHeartbeatContract

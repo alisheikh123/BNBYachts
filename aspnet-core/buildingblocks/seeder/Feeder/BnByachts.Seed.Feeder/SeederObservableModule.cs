@@ -43,6 +43,7 @@ namespace BnByachts.SeedObservable
                 {
                     e.Name = EventBusQueue.QRoleSeeder;
                 });
+
                 mt.AddConsumer<UsersConsumer>().Endpoint(e =>
                 {
                     e.Name = EventBusQueue.QUsersSeeder;
