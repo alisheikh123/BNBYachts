@@ -5,7 +5,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace BnBYachts.Notification.Notification.IManager
 {
-    public interface IUserConnectionManager : ISingletonDependency
+    public interface IUserConnectionManager : ITransientDependency
     {
         void KeepUserConnection(string userId, string connectionId);
         void RemoveUserConnection(string connectionId);
