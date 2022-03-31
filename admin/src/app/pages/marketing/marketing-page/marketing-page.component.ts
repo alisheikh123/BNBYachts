@@ -21,31 +21,32 @@ export class MarketingPageComponent implements OnInit {
   faqsData : AddMarket;
   reasons = [{
     id: this.MarketingType.Boatel,
-    name: "Boatel Local Laws",
+    name: "Boatel term and conditions",
   },
   {
     id: this.MarketingType.Charter,
-    name: "Charter Local Laws",
+    name: "Charter term and conditions",
   },
   {
     id: this.MarketingType.Event,
-    name: "Event Local Laws",
+    name: "Event term and conditions",
   },
   {
     id: this.MarketingType.Captain,
-    name: "Captain Terms"
+    name: "Captain term and conditions"
   },
   {
     id: this.MarketingType.Management,
-    name: "Management Terms"
+    name: "Management term and conditions"
   },
   {
     id: this.MarketingType.Cleaning,
-    name: "Cleaning Terms"
+    name: "Cleaning term and conditions"
   }
 ]
   settings = {
     actions: {
+      columnTitle :"Action",
       mode :'external',
       add: false,
       edit:false,
@@ -66,7 +67,7 @@ export class MarketingPageComponent implements OnInit {
       marketingType: {
         title: 'Type',
         type: 'string',
-        width: '20%',
+        width: '40%',
       },
       localLaws: {
         title: 'Terms And Conditions',
@@ -104,17 +105,17 @@ export class MarketingPageComponent implements OnInit {
       this.source = res; 
       this.source.forEach(element => {
         if (element.marketingTypeId == this.MarketingType.Boatel) {
-          element.marketingType = "Boatel Local Laws";
+          element.marketingType = "Boatel term and conditions";
         }else if (element.marketingTypeId == this.MarketingType.Charter) {
-          element.marketingType = "Charter Local Laws";
+          element.marketingType = "Charter term and conditions";
         }else if (element.marketingTypeId == this.MarketingType.Event) {
-          element.marketingType = "Event Local Laws";
+          element.marketingType = "Event term and conditions";
         }else if (element.marketingTypeId == this.MarketingType.Captain) {
-          element.marketingType = "Captain Terms";
+          element.marketingType = "Captain term and conditions";
         }else if (element.marketingTypeId == this.MarketingType.Management) {
-          element.marketingType = "Management Terms"
+          element.marketingType = "Management term and conditions"
         }else if (element.marketingTypeId == this.MarketingType.Cleaning) {
-          element.marketingType = "Cleaning Terms"
+          element.marketingType = "Cleaning term and conditions"
         }
       });
     });    

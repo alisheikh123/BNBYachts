@@ -23,6 +23,7 @@ export class FeaturedCitiesComponent implements OnInit {
   addCity:AddCity;
   settings = {
     actions: {
+      columnTitle :"Action",
       add: false,
       edit:false,
       delete: false,
@@ -39,24 +40,15 @@ export class FeaturedCitiesComponent implements OnInit {
     ],
     },
     columns: {
-      imagePath: {
-        title: 'Image',
-        type: 'html',
-        width: '10%',
-        valuePrepareFunction: (imagePath) => { 
-          this.citiesPic = this.assetsUrlCity + imagePath;
-          return `<img src="${this.citiesPic}" alt="City" height="25" width="50"/>`;
-        } 
-      },
       name: {
-        title: 'Name',
+        title: 'Location',
         type: 'string',
-        width: '25%',
+        width: '30%',
       },
       description: {
         title: 'Description',
         type: 'string',
-        width: '55%',
+        width: '60%',
         valuePrepareFunction: (value) => { 
            return value.substring(0, 49)+'...';
         } 

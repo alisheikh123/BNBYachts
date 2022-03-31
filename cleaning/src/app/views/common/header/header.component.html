@@ -33,7 +33,7 @@
                                     </span>
                                     {{'Calendar' | localization}}
                             </a>
-                            <a  class="underline-link-blk" (click)="activeTab=HEADER_TABS.Reservation" [ngClass]="{'active':activeTab == HEADER_TABS.Reservation}">
+                            <a [routerLink]="['/app/reservations']"  class="underline-link-blk" (click)="activeTab=HEADER_TABS.Reservation" [ngClass]="{'active':activeTab == HEADER_TABS.Reservation}">
                                 <span class="logo-wrapper">
                                     <a class="logo-btn"><img src="../../../../assets/images/reservation-icon.svg"
                                         alt=""></a>

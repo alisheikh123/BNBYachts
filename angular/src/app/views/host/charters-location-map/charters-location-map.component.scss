@@ -1,0 +1,27 @@
+#backBtn
+{
+    border: 1px solid #004FC4;
+}
+#left-icon
+{
+    color:#004FC4;
+}
+.margin-Nav{
+    margin-bottom: 20px;
+}
+#map {
+    position: relative;
+    width: 70%;
+    height: 350px;
+    background-color: #CCC;
+    margin: 1% 0 0 15%;
+    }
+    ::ng-deep {
+        google-map{
+            .map-container {
+                height: 500px !important;
+                width: 100% !important;
+                }
+        }
+} 
+   

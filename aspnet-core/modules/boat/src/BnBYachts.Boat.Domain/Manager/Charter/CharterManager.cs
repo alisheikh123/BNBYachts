@@ -55,6 +55,14 @@ namespace BnBYachts.Boat.Manager.Charter
             response.Data = await PagedList<CharterDto>.CreateAsync(hostCharterList, pageNo, pageSize);
             return response;
         }
+        public async  Task<EntityResponseListModel<CharterDto>> GetChartersByBoatId(int boatId)
+        {
+            var response = new EntityResponseListModel<CharterDto>();
+            var charters = await _charterRepository.GetListAsync(res => res.BoatId == boatId).ConfigureAwait(false);
+            response.Data = _objectMapper.Map<List<CharterEntity>, List<CharterDto>>(charters);
+            return response;
+
+        }
 
         public async Task<CharterDto> InsertCharter(CharterDto charterForm)
         {

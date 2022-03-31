@@ -1,0 +1,43 @@
+<nb-card>
+    <nb-card-header>
+     <span>Subscribed User</span>
+     <span class="btn-floating"><button *ngIf="selectedRows?.length > 0" type="button" (click)="openLg(content)" class="btn btn-primary btn-sm" >Send NewsLetter</button></span>
+      </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" (userRowSelect)="onUserRowSelect($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+
+<ng-template #content let-c="close" let-d="dismiss">    
+  <div class="modal-header">    
+      <h4 class="modal-title" id="modal-basic-title">News Letter</h4>    
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">    
+          <span aria-hidden="true">x</span>    
+      </button>    
+  </div>    
+  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+      <div class="custom-modal-inner">  
+        <div class="modal-content-inner-text">
+          <div class="form-text-inner">
+            <div>
+                <div>
+                  <label>News Letter</label>
+                  <select class="form-control" formControlName="newsLetterSubscriptionId">
+                  <option [ngValue]="null" selected>Choose NewsLetter</option>
+                  <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.title}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>    
+    <div class="modal-footer">    
+      <button type="button" class="btn btn-default" (click)="resetForm()">Cancel</button>    
+      <button type="submit" class="btn btn-primary" [disabled]="scheduleForm.invalid">Send NewsLetter</button>    
+    </div>    
+  </form>  
+</ng-template>   

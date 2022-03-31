@@ -32,5 +32,8 @@ namespace BnBYachts.Boat.Shared.Boat.Interface
         Task<EntityResponseListModel<BoatDTO>> GetHostBoats(Guid? userId,int pageNo,int pageSize);
         Task<ICollection<FeatureEntity>> GetDefaultFeatures();
         Task<List<BoatDTO>> GetBoatDetailsByUserId(Guid? userId);
+        Task<EntityResponseModel> GetBoatsListByCity(string cityName);
+        Task<EntityResponseModel> GetChartersListByCity(string cityName);
+        Task<EntityResponseModel> GetEventsListByCity(string cityName);
     }
 }

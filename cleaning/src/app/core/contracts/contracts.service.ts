@@ -20,8 +20,18 @@ export class ContractsService {
       '&PageSize=' + filter.pageSize+'&isHost='+filter.isHost).pipe(
         catchError(this.errorService.handleError));
   }
+  getContractsServiceProvider(filter: any) {
+    return this.http.get(this.apiUrl + 'contracts-service-provider?BoatId=' + filter?.boatId + '&StatusId=' + filter.statusId
+      + '&ServiceType=' + filter.serviceType + '&Month=' + filter.month + '&Year=' + filter.year + '&PageNo=' + filter?.pageNo +
+      '&PageSize=' + filter.pageSize +'&ServiceProviderId=' + filter.serviceProviderId ).pipe(
+        catchError(this.errorService.handleError));
+  }
   getContractById(contractId:number) {
     return this.http.get(this.apiUrl + 'contract-by-id/'+contractId).pipe(
+        catchError(this.errorService.handleError));
+  }
+  getAssignedBoatIds(serviceProviderId:number) {
+    return this.http.get(this.apiUrl + 'contracts-boats/'+serviceProviderId).pipe(
         catchError(this.errorService.handleError));
   }
   reject(contractId:number,reason:string) {

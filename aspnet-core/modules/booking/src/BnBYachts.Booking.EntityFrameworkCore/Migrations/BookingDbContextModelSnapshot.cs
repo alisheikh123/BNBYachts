@@ -18,7 +18,7 @@ namespace BnBYachts.Booking.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BnBYachts.Booking.BoatelBookingEntity", b =>
@@ -492,6 +492,12 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<int>("BoatId")
                         .HasColumnType("int");
 
+                    b.Property<string>("BoatelLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CharterId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -521,6 +527,9 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<DateTime>("EventDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
                     b.Property<string>("EventLocation")
                         .HasColumnType("nvarchar(max)");
 
@@ -534,6 +543,9 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<string>("HostId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsCustomType")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsRoundTrip")
                         .HasColumnType("bit");
 
@@ -544,6 +556,9 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<Guid?>("LastModifierId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
+
+                    b.Property<int?>("NoOfDays")
+                        .HasColumnType("int");
 
                     b.Property<int>("NoOfGuests")
                         .HasColumnType("int");
@@ -557,8 +572,8 @@ namespace BnBYachts.Booking.Migrations
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ServiceProviderId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ServiceProviderId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ServiceType")
                         .HasColumnType("int");

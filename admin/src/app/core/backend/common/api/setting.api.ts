@@ -5,7 +5,8 @@ import { HttpService } from './http.service';
 @Injectable()
 export class ServiceFeeApi {
 
-  USER_API_URL = 'api/app/setting/'
+  USER_API_URL = 'api/app/setting/';
+  NEWS_API_URL = 'api/app/setting/';
   constructor(private api: HttpService) {}
   getServiceFee() {
     return this.api.getBoat(`${this.USER_API_URL}service-fees`);    
@@ -21,5 +22,17 @@ export class ServiceFeeApi {
   }
   getServiceFeeByBoatType(BoatTypeId : number) {
     return this.api.getBoat(`${this.USER_API_URL}getservice-fee-by-boat-type/${BoatTypeId}`);    
+  }
+  getNewsLetters() {
+    return this.api.get(`${this.NEWS_API_URL}service-fees`);    
+  }
+  deleteNewsLetter(id : number){
+    return this.api.delete(`${this.NEWS_API_URL}${id}/servicesfee`); 
+  }
+  AddNewsLetter(service : AddServiceFee) {
+    return this.api.post(`${this.NEWS_API_URL}service-fee`,service);    
+  }
+  updateNewsLetter(service : AddServiceFee){
+    return this.api.put(`${this.NEWS_API_URL}services-fee`,service); 
   }
 }

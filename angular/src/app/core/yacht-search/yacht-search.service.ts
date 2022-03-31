@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Contact } from 'src/app/shared/interface/NewsLetter';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -55,6 +56,24 @@ export class YachtSearchService {
   }
   getServiceFeeByBoatType(BoatTypeId : number) {
     return this.http.get(this.apiUrl + '/app/setting/getservice-fee-by-boat-type/'+BoatTypeId);    
+  }
+  AddInNewsLetter(subscribe: Contact) {
+    return this.http.post(this.apiCoreURL + '/app/news-letter/news-letter', subscribe).pipe(
+      catchError(this.handleError));
+  }
+  getBoatListByCity(cityName : string) {
+    return this.http.get(this.apiUrl + '/app/host-boat/boats-list-by-city?cityName='+cityName);    
+  }
+  getChartersListByCity(cityName : string) {
+    return this.http.get(this.apiUrl + '/app/host-boat/charters-list-by-city?cityName='+cityName);    
+  }
+  getEventsListByCity(cityName : string) {
+    return this.http.get(this.apiUrl + '/app/host-boat/events-list-by-city?cityName='+cityName);    
+  }
+  INewsLetterEmailExist(emailAddress: string) {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('X-Skip-Loader-Interceptor', 'true');
+    return this.http.post<boolean>(this.apiCoreURL + "/app/news-letter/is-email-exist?emailAddress="+emailAddress,null,{headers:headers});
   }
   ///Exception handler
   handleError(error: any) {

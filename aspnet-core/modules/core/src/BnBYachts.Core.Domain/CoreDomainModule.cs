@@ -13,7 +13,7 @@ using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.AutoMapper;
-
+using Volo.Abp.BackgroundWorkers;
 namespace BnBYachts.Core
 {
     [DependsOn(

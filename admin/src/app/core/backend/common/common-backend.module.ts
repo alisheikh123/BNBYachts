@@ -1,3 +1,4 @@
+import { NewsLetterApi } from './api/newsLetter.api';
 import { ServiceFeeApi } from './api/setting.api';
 import { ServiceFeeService } from './services/setting.service';
 import { ServiceProviderApi } from './api/service-provider.api';
@@ -62,8 +63,12 @@ import { FaqsData } from '../../../shared/interfaces/Faqs';
 import { MarketData } from '../../../shared/interfaces/Market';
 import { ServiceProviderData } from '../../../shared/interfaces/ServiceProviderData';
 import { ServiceFeeData } from '../../../shared/interfaces/settings';
+import { NewsLetterData } from '../../../shared/interfaces/NewsLetter';
+import { NewsLetterService } from './services/newsLetter.service';
 
-const API = [UsersApi,DisputesApi,BoatsApi, FaqsApi, MarketApi,ServiceProviderApi, ServiceFeeApi,HttpService];
+const API = [UsersApi,DisputesApi,BoatsApi, FaqsApi, 
+  MarketApi,ServiceProviderApi, ServiceFeeApi, NewsLetterApi,
+  HttpService];
 
 const SERVICES = [
   { provide: DisputesData, useClass: DisputeService },
@@ -74,6 +79,8 @@ const SERVICES = [
   { provide : MarketData, useClass : MarketService},
   { provide : ServiceProviderData, useClass : ServiceProviderService},
   { provide : ServiceFeeData, useClass : ServiceFeeService},
+  { provide : NewsLetterData, useClass : NewsLetterService},
+
 
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
