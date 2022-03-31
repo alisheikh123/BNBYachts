@@ -273,6 +273,7 @@ export class HeaderComponent implements OnInit {
   openNotification() {
     this.getNotificationMessage();
     this.modal.open(this.notificationRef, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'custom-modal custom-small-modal' });
+    this.notificationCount = 0;
   }
   dismissModal() {
     this.modal.dismissAll();
