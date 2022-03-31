@@ -18,8 +18,8 @@ namespace BnBYachts.Socket.Web.Hub
         public string GetConnectionId()
         {
             var httpContext = this.Context.GetHttpContext();
-            var userId = httpContext?.Request.Query["userId"];
-            if (!string.IsNullOrEmpty(userId?.ToString()))
+            var userId = "1";//httpContext?.Request.Query["userId"];
+            if (!string.IsNullOrEmpty(userId))
             {
                 _userConnectionManager.KeepUserConnection(userId, Context.ConnectionId);
             }

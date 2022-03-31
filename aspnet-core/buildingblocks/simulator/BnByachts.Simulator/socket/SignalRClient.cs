@@ -12,7 +12,7 @@ namespace BnByachts.Simulator.socket
         {
 
             connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:5001/signalr-hubs/Notification")
+                .WithUrl("http://notification.bnb.techverxapps.com/signalr-hubs/Notification")
                 .Build();
 
             connection.Closed += async (error) =>
