@@ -10,6 +10,7 @@ namespace BnBYachts.Socket.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication<SocketWebModule>();
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

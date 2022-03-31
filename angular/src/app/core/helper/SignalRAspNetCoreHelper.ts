@@ -28,7 +28,7 @@ export class SignalRAspNetCoreHelper {
 
     private createConnection() {
         this._hubConnection = new HubConnectionBuilder()
-            .withUrl(environment.NOTIFICATION_APP_URL + "/signalr-hubs/Notification")
+            .withUrl(environment.NOTIFICATION_APP_URL + "signalr-hubs/Notification")
             .build();
     }
 
