@@ -83,7 +83,7 @@ namespace BnBYachts.Payments.Managers
             return true;
         }
 
-        public async Task<bool> Pay(BookingPaymentRequestable data)
+        public async Task<EntityResponseModel> Pay(BookingPaymentRequestable data)
         {
             var user = await _userCardRepository.FindAsync(res => res.UserId == data.UserId).ConfigureAwait(false);
 
@@ -135,7 +135,7 @@ namespace BnBYachts.Payments.Managers
             };
             var service = new PaymentIntentService();
 
-            var response = service.Create(options);
+            var response = await service.CreateAsync(options);
             if (response.Status == PaymentConstants.StatusSucceed)
             {
                 var pm = new PaymentDetailsEntity
@@ -149,26 +149,43 @@ namespace BnBYachts.Payments.Managers
                     Status = PaymentStatus.Escrow
                 };
                 await _userPaymentDetailsRepository.InsertAsync(pm);
-                return true;
+                return new EntityResponseModel
+                {
+                    ReturnStatus = true
+                };
             }
-            return false;
+            return new EntityResponseModel
+            {
+                ReturnStatus = false
+            };
         }
 
-        public async Task<bool> RefundPayment(int bookingId, long refundAmount)
+        public async Task<EntityResponseModel> RefundPayment(StripePaymentRefundRequestable stripePaymentRefund)
         {
-            var paymentDetails = await _userPaymentDetailsRepository.FindAsync(res => res.BookingId == bookingId).ConfigureAwait(false);
+            var paymentDetails = await _userPaymentDetailsRepository.FindAsync(res => res.BookingId == stripePaymentRefund.BookingId && (int)res.BookingType == stripePaymentRefund.BookingType).ConfigureAwait(false);
+            var options = createRefundOptions(stripePaymentRefund, paymentDetails);
+            var response = await createRefundService(options);
 
-            var options = new RefundCreateOptions
+            return new EntityResponseModel
             {
+                Data = response.Status == PaymentConstants.StatusSucceed ? true : false
+            };
+
+        }
+        private RefundCreateOptions createRefundOptions(StripePaymentRefundRequestable stripePaymentRefund,PaymentDetailsEntity paymentDetails)
+        {
+            return new RefundCreateOptions
+            {
+                Amount = stripePaymentRefund.IsHost ? null : stripePaymentRefund.RefundAmount,
                 PaymentIntent = paymentDetails.PaymentId,
-                Amount = refundAmount,
                 Reason = PaymentConstants.RefundReason,
             };
+        }
+
+        private async Task<Refund> createRefundService(RefundCreateOptions options)
+        {
             var service = new RefundService();
-            var response = service.Create(options);
-
-            return (response.Status == PaymentConstants.StatusSucceed) ? true : false;
-
+            return await service.CreateAsync(options);
         }
         public async Task CreateAccount(StripeOnboardingRequestable data,string userId)
         {
@@ -297,9 +314,12 @@ namespace BnBYachts.Payments.Managers
                 {
                     Limit = 3,
                 };
-                var servicee = new ExternalAccountService();
-                var bankAccounts = servicee.List(account.AccountId, options);
-                return bankAccounts.StripeResponse.Content;
+
+                var requestOptions = new RequestOptions();
+                requestOptions.StripeAccount = "acct_1JjjR4IQmeuKTcwE";
+                var service = new BalanceService();
+                Balance balance = await service.GetAsync(requestOptions);
+                return "";
             }
             return null;
         }
@@ -315,7 +335,7 @@ namespace BnBYachts.Payments.Managers
                     TransferGroup = transferGroup,
                 };
                 var tService = new TransferService();
-                var transfer = tService.Create(tOptions);
+                var transfer = await tService.CreateAsync(tOptions);
 
                 var options = new PayoutCreateOptions
                 {
@@ -365,7 +385,7 @@ namespace BnBYachts.Payments.Managers
             var customer = await _userCardRepository.GetAsync(res => res.UserId == userId).ConfigureAwait(false);
             var options = new ChargeListOptions { Customer = customer.CustomerId };
             var service = new ChargeService();
-            var charges = service.List(
+            var charges = await service.ListAsync(
               options);
             return JsonConvert.SerializeObject(charges.Data);
         }

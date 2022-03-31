@@ -9,6 +9,8 @@ import { BoatServiceType } from 'src/app/shared/enums/boat-service-type';
 import { PaymentsService } from 'src/app/core/Payment/payments.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookingConfirmedModalComponent } from '../charter-booking-payment/booking-confirmed-modal/booking-confirmed-modal.component';
+import { BoatType } from 'src/app/shared/enums/boat-Type';
+import { ServiceFee } from 'src/app/shared/interface/Service-fee';
 
 
 @Component({
@@ -25,8 +27,8 @@ export class ContractPaymentComponent implements OnInit {
   isBookingConfirmed: boolean = false;
   isPaymentFailed: boolean = false;
   @ViewChild(UserPaymentMethodsComponent) paymentMethodsComponent: UserPaymentMethodsComponent;
-
-  
+  boatType = BoatType;
+  serviceFee : ServiceFee;
   constructor(private activatedRoute:ActivatedRoute,private service:ContractsService,
     private boatService:YachtSearchService,private _location: Location,private cdr:ChangeDetectorRef,private paymentService:PaymentsService,private modal: NgbModal) { }
 
@@ -35,6 +37,7 @@ export class ContractPaymentComponent implements OnInit {
       this.contractId = Number(res['contractId']);
     });
     this.loadContractDetails();
+    this.getServiceFeeByBoatType();
   }
 
   loadContractDetails(){
@@ -55,13 +58,13 @@ export class ContractPaymentComponent implements OnInit {
       paymentId: this.paymentMethodsComponent.paymentMethodId,
       bookingId: this.contractId,
       isContract:true,
-      amount: this.contract.qouteAmount + 20,
+      amount: this.contract.qouteAmount + this.contract.boat.taxFee + Number(this.serviceFee?.serviceFee),
       IsSaveNewPaymentMethod: this.paymentMethodsComponent.isSaveNewPayment,
       token: token,
       description: this.contract?.boat.name + ' Contract Charges added'
     };
     this.paymentService.pay(model).subscribe(res => {
-      if (res) {
+      if (res.returnStatus) {
         this.service.accept(this.contractId).subscribe(res=>{
           this.isBookingConfirmed = true;
           this.isPaymentFailed = false;
@@ -84,5 +87,13 @@ export class ContractPaymentComponent implements OnInit {
   ngAfterViewInit() {
     this.disablePayment();
     this.cdr.detectChanges();
+  }
+  getServiceFeeByBoatType() {
+    this.boatService.getServiceFeeByBoatType(this.contract?.serviceType == this.SERVICE_TYPES.Charter ? this.boatType.Charter : this.boatType.Event).subscribe((res: any) => {
+      this.serviceFee = res.data;
+    });
+  }
+  getBasicTotal():number{
+    return this.contract?.qouteAmount + this.contract?.boat.taxFee + Number(this.serviceFee?.serviceFee);
   }
 }

@@ -7,11 +7,11 @@
                     <a (click)="goBack()"> <span class="material-icons arrow_back_ios">
                             arrow_back_ios
                         </span></a>
-                    <h2 class="bold">Contract Form</h2>
+                    <h2 class="bold">{{'ContractForm' | localization}}</h2>
                 </div>
                 <div class="col-sm-8 py-2">
                     <div>
-                        <h5 class="bold pt-3 pb-1">Description</h5>
+                        <h5 class="bold pt-3 pb-1">{{'Description' | localization}}</h5>
                         <div *ngIf="((contract?.description.length<=100));else greaterThanLimitBlock">
                             <p class="small-text medium-container text-left grey"> {{ contract?.description }} </p>
                         </div>
@@ -25,11 +25,11 @@
                     <div>
                         <div class="character-info-wrapper  custom-flex">
                             <div class="custom-flex-start character-info py-2">
-                                <p class="medium description-fotmat">Boat:</p>
+                                <p class="medium description-fotmat">{{'Boat' | localization}}</p>
                                 <p class="grey">{{contract?.boat?.name}}</p>
                             </div>
                             <div class="custom-flex-start character-info py-2">
-                                <p class="medium description-fotmat">Guests:</p>
+                                <p class="medium description-fotmat">{{'Guests' | localization}}</p>
                                 <p class="grey">{{contract?.noOfGuests}}</p>
                             </div>
                         </div>
@@ -39,17 +39,17 @@
 
                             <div class="character-info-wrapper  custom-flex">
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Departing from:</p>
+                                    <p class="medium description-fotmat">{{'DepartingFrom' | localization}}</p>
                                     <p class="grey">{{contract?.departureFrom}}</p>
                                 </div>
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Destination:</p>
+                                    <p class="medium description-fotmat">{{'Destination' | localization}}</p>
                                     <p class="grey">{{contract?.destination}}</p>
                                 </div>
                             </div>
                             <div class="character-info-wrapper  custom-flex">
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Boat Capacity:</p>
+                                    <p class="medium description-fotmat">{{'BoatCapacity' | localization}}</p>
                                     <p class="grey">{{contract?.boatCapacity}}</p>
                                 </div>
                                 <div class="custom-flex-start character-info py-2">
@@ -59,17 +59,17 @@
                             </div>
                             <div class="character-info-wrapper  custom-flex">
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Departure:</p>
+                                    <p class="medium description-fotmat">{{'Departure' | localization}}</p>
                                     <p class="grey">{{contract?.departureDate | date:'dd MMM YYYY hh:mm a'}}</p>
                                 </div>
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Arrival:</p>
+                                    <p class="medium description-fotmat">{{'Arrival' | localization}}</p>
                                     <p class="grey">{{contract?.arrivalDate | date:'dd MMM YYYY hh:mm a'}}</p>
                                 </div>
                             </div>
                             <div class="character-info-wrapper  custom-flex">
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Return Trip:</p>
+                                    <p class="medium description-fotmat">{{'ReturnTrip' | localization}}</p>
                                     <p class="grey">{{contract?.isRoundTrip ? 'Yes':'No'}}</p>
                                 </div>
                                 <div class="custom-flex-start character-info py-2">
@@ -79,7 +79,7 @@
                             </div>
                             <div class="character-info-wrapper  custom-flex" *ngIf="contract?.isRoundTrip">
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Return Details:</p>
+                                    <p class="medium description-fotmat">{{'ReturnDetails' | localization}}</p>
                                     <p></p>
                                 </div>
                                 <div class="custom-flex-start character-info py-2">
@@ -91,32 +91,36 @@
                         <ng-container *ngIf="contract?.serviceType == SERVICE_TYPES.Event">
                             <div class="character-info-wrapper  custom-flex">
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Event Location:</p>
+                                    <p class="medium description-fotmat">{{'EventLocation' | localization}}</p>
                                     <p class="grey">{{contract?.eventLocation}}</p>
                                 </div>
                                 <div class="custom-flex-start character-info py-2">
-                                    <p class="medium description-fotmat">Event Date:</p>
+                                    <p class="medium description-fotmat">{{'EventDate' | localization}}</p>
                                     <p class="grey">{{contract?.eventDateTime | date:'dd MMM YYYY hh:mm a'}}</p>
                                 </div>
                             </div>
                         </ng-container>
                         <div class="price-detail py-4">
-                            <h5 class="bold pt-3 pb-1">Price Details</h5>
+                            <h5 class="bold pt-3 pb-1">{{'PriceDetails' | localization}}</h5>
                             <div class="custom-flex-between">
-                                <p class="medium">Quote Amount</p>
+                                <p class="medium">{{'QuoteAmount' | localization}}</p>
                                 <p class="medium text-right py-1">{{contract?.qouteAmount}} $</p>
                             </div>
                             <div class="custom-flex-between">
-                                <p class="medium">Service Fee</p>
-                                <p class="medium text-right py-1">20$</p>
+                                <p class="medium">{{'ServiceFee' | localization}}</p>
+                                <p class="medium text-right py-1">{{serviceFee?.serviceFee}}$</p>
                             </div>
                             <div class="custom-flex-between">
-                                <p class="medium">Total(USD)</p>
-                                <p class="medium text-right py-1">{{contract?.qouteAmount + 20}} $</p>
+                                <p class="medium">{{'TaxFee' | localization}}</p>
+                                <p class=" medium text-right py-1">{{contract?.boat?.taxFee}}.00 $</p>
+                            </div>
+                            <div class="custom-flex-between">
+                                <p class="medium">{{'Total(USD)' | localization}}</p>
+                                <p class="medium text-right py-1">{{getBasicTotal()}} $</p>
                             </div>
                         </div>
                         <div *ngIf="contract?.terminationClause != null">
-                            <h5 class="bold pt-3 pb-1">Termination Clause</h5>
+                            <h5 class="bold pt-3 pb-1">{{'TerminationClause' | localization}}</h5>
                             <div>
                                 <p class="small-text medium-container text-left grey"> {{contract?.terminationClause}} </p>
                             </div>
@@ -130,14 +134,14 @@
                     </div>
                 </div>
                 <div class="col-sm-12 pt-2" *ngIf="contract?.contractTerms?.length >0">
-                    <h5>Contract Attachments</h5>
+                    <h5>{{'ContractAttachments' | localization}}</h5>
                     <hr />
                     <div class="custom-table ">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Action</th>
+                                    <th>{{'Name' | localization}}</th>
+                                    <th>{{'Action' | localization}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -153,7 +157,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12 pt-3">
-                    <h5 class="bold">Terms and Conditions</h5>
+                    <h5 class="bold">{{'Termsconditions' | localization}}</h5>
                     <p class="small-text secondary-black-clr py-2">Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Suspendisse mollis velit eget dapibus convallis. Donec non massa vitae metus consequat
                         ultrices nec sed nulla. Nullam volutpat vitae lectus sed pretium. Integer rutrum libero eget

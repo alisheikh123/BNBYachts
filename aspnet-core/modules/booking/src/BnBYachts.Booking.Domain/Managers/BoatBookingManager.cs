@@ -136,7 +136,6 @@ namespace BnBYachts.Booking.Managers
             if (data != null)
             {
                 BookingCancelEntity model = new BookingCancelEntity();
-                var BookingDetail = await _boatelBookingRepository.GetAsync(data.BookingId);
                 string from = "ali.raza@techverx.com";
                 string to = "alisheikh14125@gmail.com";
                 var admin = new MailAddress(from, "BNBYechet");
@@ -165,14 +164,12 @@ namespace BnBYachts.Booking.Managers
                 }
 
                 model.BookingId = data.BookingId;
-                BookingDetail.BookingStatus = data.BookingStatus;
                 model.BookingType = data.BookingType;
                 model.isNotificationSent = data.isNotificationSent;
                 model.Reason = data.Reason;
                 model.UserId = data.UserId;
                 model.RefundAmount = data.RefundAmount;
                 model.TotalAmount = data.TotalAmount;
-                BookingDetail.BookingStatus = BookingStatus.Cancel;
                 await _boatelCanceRepository.InsertAsync(model);
                 return true;
             }

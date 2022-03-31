@@ -38,3 +38,10 @@ export enum ServiceType {
     Active = 2,
     Rejected = 3,
   }
+  export enum PaymentStatus{
+    Pending = 0,
+        Approved = 1,
+        Rejected = 2,
+        Transfered = 3,
+            Refund =4
+  }

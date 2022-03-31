@@ -397,5 +397,23 @@
 "charterFee":"/ Charter Fee"
 "Reject":"Reject",
 "Accept":"Accept",
-"ViewReservation":"View Reservation"
+"ViewReservation":"View Reservation",
+"ContractBooking":"Contract Booking",
+"EventTime":"Event Time:",
+"QuoteAmount":"Quote Amount",
+"ContractForm":"Contract Form",
+"Boat":"Boat:",
+"Departure":"Departure:",
+"Arrival":"Arrival:",
+"ReturnTrip":"Return Trip:",
+"TerminationClause":"Termination Clause",
+"ContractAttachments":"Contract Attachments",
+"Name":"Name",
+"QouteAmount":"Qoute Amount",
+"Bookings":"Bookings",
+"Faqs":"FAQs",
+"ContactUs":"Contact Us",
+"FindUs":"Find Us",
+"Dispute":"Dispute",
+"HelpCenter":"Help Center"
 }

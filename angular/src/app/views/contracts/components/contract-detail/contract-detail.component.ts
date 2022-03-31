@@ -11,6 +11,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RejectionModalComponent } from 'src/app/views/host/boatel-bookings/booking-requests/rejection-modal/rejection-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { ContractStaus } from 'src/app/shared/enums/booking.constants';
+import { BoatType } from 'src/app/shared/enums/boat-Type';
+import { ServiceFee } from 'src/app/shared/interface/Service-fee';
 
 @Component({
   selector: 'app-contract-detail',
@@ -27,6 +29,8 @@ export class ContractDetailComponent implements OnInit {
   userId :string;
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   attachmentsUrl = environment.S3BUCKET_URL + '/ContractsAttachments/';
+  boatType = BoatType;
+  serviceFee : ServiceFee;
   constructor(private activatedRoute: ActivatedRoute, private service: ContractsService,
          private boatService: YachtSearchService, private _location: Location
      ,private modal:NgbModal,private toastr:ToastrService,private router:Router) {
@@ -36,6 +40,7 @@ export class ContractDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContractDetailt();
+    this.getServiceFeeByBoatType();
   }
 
   getContractDetailt() {
@@ -68,6 +73,14 @@ export class ContractDetailComponent implements OnInit {
         this.toastr.success('Contract rejected successfully','Contract');
       })
     })
+  }
+  getServiceFeeByBoatType() {
+    this.boatService.getServiceFeeByBoatType(this.boatType.Charter).subscribe((res: any) => {
+      this.serviceFee = res.data;
+    });
+  }
+  getBasicTotal():number{
+    return this.contract?.qouteAmount + this.contract?.boat.taxFee + Number(this.serviceFee?.serviceFee);
   }
   confirm(){
     this.router.navigate(['/payments/contract-payments', this.contractId]);

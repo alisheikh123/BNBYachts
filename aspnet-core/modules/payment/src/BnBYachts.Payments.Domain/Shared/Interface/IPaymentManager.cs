@@ -14,8 +14,8 @@ namespace BnBYachts.Payments.Shared.Interface
     {
         Task<List<UserPaymentMethodTransferable>> GetCustomersCard(Guid? userId);
         Task<bool> CreateCustomer(StripeCustomerRequestable data);
-        Task<bool> Pay(BookingPaymentRequestable data);
-        Task<bool> RefundPayment(int bookingId, long refundAmount);
+        Task<EntityResponseModel> Pay(BookingPaymentRequestable data);
+        Task<EntityResponseModel> RefundPayment(StripePaymentRefundRequestable stripePaymentRefund);
         Task CreateAccount(StripeOnboardingRequestable data,string userId);
         Task<EntityResponseModel> CalculateFunds(List<BookingsRequestable> data);
         Task<string> GetAccountDetails(string userId);
