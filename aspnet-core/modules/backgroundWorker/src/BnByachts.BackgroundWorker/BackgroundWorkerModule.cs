@@ -6,11 +6,13 @@ using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using System;
+using Microsoft.Extensions.Configuration;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.BackgroundJobs.Quartz;
 using Volo.Abp.BackgroundWorkers.Quartz;
 using Volo.Abp.Modularity;
+using Volo.Abp.Quartz;
 
 namespace BnByachts.BackgroundWorker
 {
