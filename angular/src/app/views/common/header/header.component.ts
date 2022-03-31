@@ -70,6 +70,7 @@ export class HeaderComponent implements OnInit {
     private chatService: ChatService,
     private notificationService: NotificationService) {
       this.notificationService.notificationGenerated$.subscribe(()=>{
+
             this.notificationCount++;
       });
      }
@@ -77,7 +78,8 @@ export class HeaderComponent implements OnInit {
   HEADER_TABS = HeaderTabs;
 
   ngOnInit(): void {
-    setInterval(()=> { this.notificationService.addNotification('data') }, 5000);
+    
+
     
     this.oidcSecurityService
       .checkAuth()
