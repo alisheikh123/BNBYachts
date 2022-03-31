@@ -35,7 +35,6 @@ export class SignalRAspNetCoreHelper {
         this._hubConnection = new signalR.HubConnectionBuilder()
             .configureLogging(LogLevel.Debug)
             .withUrl(environment.NOTIFICATION_APP_URL+"/signalr-hubs/Notification?&userId="+localStorage.getItem('userId')?.toString(), {
-                skipNegotiation: true,
                 transport: HttpTransportType.WebSockets,
             })
             .build();
@@ -46,7 +45,6 @@ export class SignalRAspNetCoreHelper {
         this._hubConnection = new signalR.HubConnectionBuilder()
         .configureLogging(LogLevel.Debug)
         .withUrl(environment.NOTIFICATION_APP_URL+"/signalr-hubs/Notification", {
-            skipNegotiation: true,
             transport: HttpTransportType.WebSockets,
         })
         .build();

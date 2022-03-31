@@ -24,7 +24,7 @@ this.notificationGenerated.next(obj);
   }
 
   getNotificationMessage() {
-    debugger;
+    
     return this.http.get(environment.NOTIFICATION_APP_URL +'/api/app/in-app-notification').pipe(
       catchError(this.errorService.handleError));
   }

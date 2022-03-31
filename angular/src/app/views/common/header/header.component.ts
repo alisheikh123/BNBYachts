@@ -136,7 +136,7 @@ export class HeaderComponent implements OnInit {
     })
   }
   connectionSignalR() {
-    // debugger;
+    //  
     // let connection = utils.getSignalRConnection();
     // connection.start().then(function () {
     //   console.log('SignalR Connected!');
@@ -153,7 +153,7 @@ export class HeaderComponent implements OnInit {
   }
   getNotificationMessage() {
     this.notificationService.getNotificationMessage().subscribe((res:any) => {
-      debugger;
+       
         this.messages = res?.data;
         console.log(this.messages);
         console.log(res);
