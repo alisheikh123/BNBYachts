@@ -5,6 +5,7 @@ using BnBYachts.Core.NewsLetters.Transferable;
 using BnBYachts.EventBusShared;
 using BnBYachts.EventBusShared.Contracts;
 using BnBYachts.Shared.Model;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,9 @@ namespace BnBYachts.Core.Managers
         private readonly IRepository<ScheduleNewsLetterEntity, long> _scheduleRepository;
         private readonly IRepository<SubscriberEmailEntity, long> _subscriberRepository;
         private readonly EventBusDispatcher _eventBusDispatcher;
+        private readonly IConfiguration _config;
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
-        public NewsLetterManager(IRepository<ContactsEntity, long> repository, IObjectMapper<CoreDomainModule> objectMapper, IRepository<ScheduleNewsLetterEntity, long> scheduleRepository,
+        public NewsLetterManager(IRepository<ContactsEntity, long> repository, IConfiguration config, IObjectMapper<CoreDomainModule> objectMapper, IRepository<ScheduleNewsLetterEntity, long> scheduleRepository,
             IRepository<NewsLetterSubscriptionEntity, long> newsRepository, IRepository<SubscriberEmailEntity, long> subscriberRepository, EventBusDispatcher eventBusDispatcher)
         {
             _repository = repository;
@@ -34,6 +36,7 @@ namespace BnBYachts.Core.Managers
             _objectMapper = objectMapper;
             _newsRepository = newsRepository;
             _eventBusDispatcher = eventBusDispatcher;
+            _config = config;
         }
         public async Task<EntityResponseModel> AddNewsLetter(ContactsTransferable contactInput)
         {
@@ -137,6 +140,8 @@ namespace BnBYachts.Core.Managers
         [UnitOfWork]
         public async Task SendEmailToSubscriberUsers()
         {
+            var rootUrl = _config.GetSection("App:ClientUrl").Value;
+            var ImagePath = _config.GetSection("AWSS3BucketAddress:S3Bucket").Value;
             var data =  await _scheduleRepository.FirstOrDefaultAsync(x => x.ScheduleDate.Date >= DateTime.Now.Date && x.StatusTypeId == StatusType.Pending).ConfigureAwait(false);
             if (data != null)
             {
@@ -144,7 +149,10 @@ namespace BnBYachts.Core.Managers
                 foreach (var item in subscriber)
                 {
                     await _subscriberRepository.EnsurePropertyLoadedAsync(item, x => x.NewsLetterSubscription).ConfigureAwait(false);
-                    string body = $"<h5>Hello {item.EmailAddress} </h5> <div> You registered an account on BnByachts, before being able to use your account you need to verify your email address by clicking here: </div><br>Best Regard";
+                    string body = $"<div><h1 style='margin: 0; color: #555555; direction: ltr; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;'><span class='tinyMce-placeholder'>BNBYachts</span></h1></div> </br> " +
+                        $"<div align='center' style='line - height:10px'><img src='{ImagePath+item.NewsLetterSubscription.LetterImage}' alt = 'News Letter' style='display: block; height: auto; border: 0; width: 463px; max - width: 100 %;'/></div> </br>" +
+                        $"<div align ='center' style='color:#000000;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;'><p style='margin: 0;'>{item.NewsLetterSubscription.Description}</p></div> </br>" +
+                        $"<div align ='center'><div style ='text-decoration:none;display:inline-block;color:#ffffff;background-color:#3AAEE0;border-radius:4px;width:auto;border-top:1px solid #3AAEE0;border-right:1px solid #3AAEE0;border-bottom:1px solid #3AAEE0;border-left:1px solid #3AAEE0;padding-top:5px;padding-bottom:5px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;'><span style ='padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;' ><span style ='font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;'><a href={rootUrl}> Go To Website</a></span></span></div></div>";
                     await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
                     {
                         To = item.EmailAddress,
@@ -153,7 +161,7 @@ namespace BnBYachts.Core.Managers
                         IsBodyHtml = true
                     });
                 }
-                data.StatusTypeId = StatusType.Completed;
+                data.StatusTypeId = StatusType.Completed;  
                 await _scheduleRepository.UpdateAsync(data).ConfigureAwait(false);
             }
         }

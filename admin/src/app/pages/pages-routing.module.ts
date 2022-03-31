@@ -49,6 +49,11 @@ const routes: Routes = [{
         .then(m => m.MarketingModule),
     },
     {
+      path: 'permision',
+      loadChildren: () => import('./roles-permission/roles-permission.module')
+        .then(m => m.RolesPermissionModule),
+    },
+    {
       path: 'settings',
       loadChildren: () => import('./setting-tab/setting-tab.module')
         .then(m => m.SettingTabModule),

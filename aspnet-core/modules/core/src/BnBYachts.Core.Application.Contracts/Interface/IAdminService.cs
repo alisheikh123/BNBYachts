@@ -16,5 +16,6 @@ namespace BnBYachts.Core.Interface
         Task<AdminResponseDto> SuspendUser(Guid id);
         Task<AdminResponseDto> AdminRegister(AdminRegisterTransferable userInput);
         Task<AdminResponseDto> SetAdminPassword(SetPasswordRequestable userInput);
+        Task<EntityResponseModel> GetRolesList();
     }
 }

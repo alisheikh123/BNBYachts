@@ -35,21 +35,21 @@ export class ServiceProviderListingComponent implements OnInit {
       }],
     },
     columns: {
-      userName: {
-        title: 'Name',
-        type: 'string',
-      },
-      companyName: {
-        title: 'Company',
-        type: 'string',
-      },
       serviceProviderName: {
         title: 'Type',
         type: 'string',
       },
-      fee: {
-        title: 'Fee',
-        type: 'boolean',
+      userName: {
+        title: 'Name',
+        type: 'string',
+      },
+      email: {
+        title: 'Email',
+        type: 'string',
+      },
+      phoneNumber: {
+        title: 'Phone',
+        type: 'string',
       },
      isActive: {
         title: 'Status',

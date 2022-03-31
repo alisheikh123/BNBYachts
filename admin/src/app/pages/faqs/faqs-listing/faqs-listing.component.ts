@@ -4,6 +4,7 @@ import { Faqs, FaqsData, AddFaqs } from './../../../shared/interfaces/Faqs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QuestionCategory } from '../../../shared/enums/QuestionsCategory';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
 
 @Component({
   selector: 'ngx-faqs-listing',
@@ -43,16 +44,34 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
       edit:false,
       delete: false,
       position: 'right',
-      custom: [
-      { 
-        name: 'onEditAction', 
-        title: '<i class="nb-edit" title="onEditAction"></i>',
-      },
-      { 
-        name: 'deleteFaqs', 
-        title: '<i class="nb-trash" title="deleteFaqs"></i>'
-      }
-    ],
+      custom : [{
+        type:'html',
+        title:'<div class="btn-group"><button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button><div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a></div></div>',
+      // renderComponent: ActionListComponent,
+      // valuePrepareFunction:(cell,row)=>{
+      //   debugger;
+      // return '<a title="See Detail Product "href="Your api key or something/${row.Id}"> <i class="ion-edit"></i></a>'
+      // }
+    }],
+    //   custom: [
+    //     {
+    //       type: 'custom',
+    //       // title : ''
+    //       // title : '<div class="btn-group"><button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button><div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a></div></div>',
+    //     renderComponent: ActionListComponent,
+    //     valuePrepareFunction: (value, row, cell) => {
+    //         return row;
+    //     },
+    //     }
+    //   // { 
+    //   //   name: 'onEditAction', 
+    //   //   title: '<i class="nb-edit" title="onEditAction"></i>',
+    //   // },
+    //   // { 
+    //   //   name: 'deleteFaqs', 
+    //   //   title: '<i class="nb-trash" title="deleteFaqs"></i>'
+    //   // }
+    // ],
     },
     columns: {
       questionCategory: {

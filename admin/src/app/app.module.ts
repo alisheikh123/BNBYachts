@@ -28,7 +28,8 @@ import { CommonModule } from '@angular/common';
 import { AuthAppModule } from './pages/auth/auth.module';
 import { SetPasswordComponent } from './pages/auth/set-password/set-password.component';
 import { UnauthorizePageComponent } from './pages/miscellaneous/unauthorize-page/unauthorize-page.component';
-import { CookieService } from 'ngx-cookie-service';
+import { PermissionDirective } from '@abp/ng.core';
+import { DropdownListModule } from 'ngx-dropdown-list';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CookieService } from 'ngx-cookie-service';
     ThemeModule,
     AuthAppModule,
     AppRoutingModule,
+    DropdownListModule,
     AuthModule.forRoot({
       config: {
         authority: environment.Identity.authority,

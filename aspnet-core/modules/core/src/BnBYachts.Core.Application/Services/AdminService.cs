@@ -1,11 +1,13 @@
 ﻿using BnBYachts.Core.Admin.Interface;
 using BnBYachts.Core.Admin.Transferable;
 using BnBYachts.Core.Interface;
+using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
+using Volo.Abp.PermissionManagement;
 
 namespace BnBYachts.Core.Services
 {
@@ -13,6 +15,7 @@ namespace BnBYachts.Core.Services
     public class AdminService : ApplicationService , IAdminService
     {
         private readonly IAdminManager _adminManager;
+        private readonly IPermissionManager _permissionManager;
         public AdminService(IAdminManager adminManager)
         {
             _adminManager = adminManager;
@@ -26,5 +29,11 @@ namespace BnBYachts.Core.Services
 
         public async Task<AdminResponseDto> SetAdminPassword(SetPasswordRequestable userInput) =>
             await _adminManager.SetAdminPassword(userInput);
+
+        public async Task<EntityResponseModel> GetRolesList()
+        {
+            //_permissionManager.Se
+            return await _adminManager.GetRolesList().ConfigureAwait(false); 
+        }
     }
 }

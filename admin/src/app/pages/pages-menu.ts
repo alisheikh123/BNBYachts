@@ -76,6 +76,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    title: 'Roles Permission',
+    icon: { icon: 'cog', pack: 'fa' },
+    children: [
+      {
+        title: 'Roles',
+        link: '/pages/permision/roles',
+      },
+    ]
+  },
+  {
     title: 'Settings',
     icon: { icon: 'cog', pack: 'fa' },
     children: [
