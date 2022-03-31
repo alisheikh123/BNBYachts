@@ -6,9 +6,12 @@ import { ToastrService } from 'ngx-toastr';
 import { BookingListingService } from 'src/app/core/Booking/booking-listing.service';
 import { BookingService } from 'src/app/core/Booking/booking.service';
 import { YachtSearchService } from 'src/app/core/yacht-search/yacht-search.service';
+import { BoatType } from 'src/app/shared/enums/boat-Type';
 import { BookingStatus } from 'src/app/shared/enums/booking.constants';
 import { UserRoles } from 'src/app/shared/enums/user-roles';
+import { CharterBookingRequestable } from 'src/app/shared/interface/charter';
 import { ICharterReservation } from 'src/app/shared/interface/reservation';
+import { ServiceFee } from 'src/app/shared/interface/Service-fee';
 import { environment } from 'src/environments/environment';
 import { AddReviewModalComponent } from '../../common/add-review-modal/add-review-modal.component';
 import { ListReviewsComponent } from '../../common/list-reviews/list-reviews.component';
@@ -39,6 +42,9 @@ export class CharterReservationDetailComponent implements OnInit {
   assetsUrl = environment.S3BUCKET_URL + '/boatGallery/';
   isUserHost: boolean;
   @ViewChild(ListReviewsComponent) listReviewComponent: ListReviewsComponent;
+  bookingDetail: CharterBookingRequestable= new CharterBookingRequestable();
+  boatType = BoatType;
+  serviceFee : ServiceFee;
   constructor(private service: BookingService
     , private boatService: YachtSearchService,
     public activatedRoute: ActivatedRoute,
@@ -58,7 +64,7 @@ export class CharterReservationDetailComponent implements OnInit {
       ? (this.charterReservation.isHost = true)
       : (this.charterReservation.isHost = false);
     this.isUserHost = localStorage.getItem('userRole') == this.filters.USER_ROLES.host ? (this.charterReservation.isHost = true) : (this.charterReservation.isHost = false);
-
+this.getServiceFeeByBoatType();
     this.boatService.charterDetailsById(this.charterReservation.bookingId).subscribe((res: any) => {
       this.charterBooking = res?.charterDetails;
       this.checkedDepartureFromDate = moment(this.charterBooking?.departureFromDate).format("YYYY-MM-DD hh:mm:ss a");
@@ -66,14 +72,37 @@ export class CharterReservationDetailComponent implements OnInit {
       let departingToDate = moment(this.charterBooking?.departureToDate).format('YYYY-MM-DD hh:mm:ss a');
       this.charterBooking.totalDays = Math.round(moment.duration(moment(departingToDate).diff(departingFromDate)).asDays());
     });
-    this.charterBookingService.getCharterBookingDetailById(this.charterReservation.charterId).subscribe((bookingDetail: any) => {
+    this.charterBookingService.getCharterBookingDetailById(this.charterReservation.charterId).subscribe((bookingDetail: CharterBookingRequestable) => {
       this.charterBookingStatus = bookingDetail?.bookingStatus;
-    });
+      this.bookingDetail = bookingDetail;
+    }); 
     this.service.getBookingCancellationDetail(this.charterReservation.charterId).subscribe((eventBookingCancelDetail: any) => {
       this.charterBookingCancelDetail = eventBookingCancelDetail.data;
     });
 
     this.isReviewPosted();
+  }
+  getServiceFeeByBoatType() {
+    this.boatService.getServiceFeeByBoatType(this.boatType.Charter).subscribe((res: any) => {
+      this.serviceFee = res.data;
+    });
+  }
+  getTotalGuests(): number {
+    return this.bookingDetail?.noOfAdults + this.bookingDetail?.noOfChildrens;
+  }
+  basicCharges(): number {
+    return this.charterBooking?.charterFee * this.getTotalGuests();
+  }
+  getTotal(): number {
+    return this.charterBooking?.charterFee * this.bookingDetail?.noOfAdults + this.bookingDetail?.noOfChildrens + Number(this.serviceFee?.serviceFee) +
+    this.charterBooking?.boat?.taxFee;
+  }
+  getBasicTotal():number{
+    return this.charterBooking?.charterFee + Number(this.serviceFee?.serviceFee) +
+    this.charterBooking?.boat?.taxFee;
+  }
+  deductedAmount(charterBooking:any){
+    charterBooking?.totalAmount - charterBooking?.refundAmount
   }
   addReview() {
     this.modal.open(AddReviewModalComponent, { windowClass: 'custom-modal custom-small-modal', centered: true }).componentInstance.onSave.subscribe((res: any) => {

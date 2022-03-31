@@ -40,6 +40,7 @@ export class DisputeListingComponent implements OnInit {
 ]
   settings = {
     actions: {
+      columnTitle :"Action",
       add: false,
       edit:false,
       delete: false,

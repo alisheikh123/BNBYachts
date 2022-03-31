@@ -17,12 +17,12 @@
                     <div class="price-detail py-4" *ngIf="charterBookingDetail?.isFullBoatCharges==false">
                         <h5 class="bold pt-3 pb-1">{{'RefundDetailtxt' | localization}}</h5>
                         <div class="custom-flex-between">
-                            <p>{{charterBookingDetail?.charterFee}} x {{ charterBookingDetail?.TotalDays}} Night</p>
-                            <p class=" text-right py-1">{{charterBookingDetail?.charterFee * charterBookingDetail?.TotalDays }}.00 $</p>
+                            <p>{{charterBookingDetail?.charterFee}} x {{ getTotalGuests()}}</p>
+                            <p class=" text-right py-1">{{basicCharges()}}.00 $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p>{{'ServiceFee'| localization}}</p>
-                            <p class=" text-right py-1">20 $</p>
+                            <p class=" text-right py-1">{{serviceFee?.serviceFee}} $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p>{{'TaxFee' | localization}}</p>
@@ -30,8 +30,7 @@
                         </div>
                         <div class="custom-flex-between">
                             <p>{{'Total(USD)' | localization}}</p>
-                            <p class=" text-right py-1">{{(charterBookingDetail?.charterFee * charterBookingDetail?.TotalDays) + 20 +
-                                charterBookingDetail?.boatDetail?.taxFee}}.00 $</p>
+                            <p class=" text-right py-1">{{getTotal()}}.00 $</p>
                         </div>
                         <div class="border-top my-3"></div>
                         <div class="custom-flex-between">
@@ -51,7 +50,7 @@
                         </div>
                         <div class="custom-flex-between">
                             <p>{{'ServiceFee'| localization}}</p>
-                            <p class=" text-right py-1">20 $</p>
+                            <p class=" text-right py-1">{{serviceFee?.serviceFee}} $</p>
                         </div>
                         <div class="custom-flex-between">
                             <p>{{'TaxFee' | localization}}</p>
@@ -59,8 +58,7 @@
                         </div>
                         <div class="custom-flex-between">
                             <p>{{'Total(USD)' | localization}}</p>
-                            <p class=" text-right py-1">{{(charterBookingDetail?.charterFee) + 20 +
-                                charterBookingDetail?.boatDetail?.taxFee}}.00 $</p>
+                            <p class=" text-right py-1">{{getFullBoatTotalCharges()}}.00 $</p>
                         </div>
                         <div class="border-top my-3"></div>
                         <div class="custom-flex-between">
@@ -98,7 +96,7 @@
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium">{{'NoofGuest' | localization}}</p>
-                            <p class="grey text-right py-1">{{charterBookingDetail?.bookingDetail?.noOfAdults + charterBookingDetail?.bookingDetail?.noOfChildrens}}</p>
+                            <p class="grey text-right py-1">{{getTotalGuests()}}</p>
                         </div>
                         <div class="custom-flex-start">
                             <p class="medium"> {{'DepartureFrom' | localization}}</p>
@@ -147,7 +145,7 @@
             <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="charterBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected && charterBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
                 <div class="center-content">
                     <button class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">{{'changeMind' | localization}}</button>&nbsp;&nbsp;
-                    <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(policyModal,charterBookingDetail)">{{'ConfirmCancellation'| localization}}</a>
+                    <a class="custom-btn btn-big blue disabled" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(policyModal,charterBookingDetail)">{{'ConfirmCancellation'| localization}}</a>
                     <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,charterBookingDetail)">{{'ConfirmCancellation' | localization}}</a>
                     <a (click)="addReview(charterBookingDetail?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">
                         {{'AddReview' | localization}}</a>

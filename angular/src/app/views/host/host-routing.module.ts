@@ -1,3 +1,5 @@
+import { ChartersLocationMapComponent } from './charters-location-map/charters-location-map.component';
+import { EventsLocationMapComponent } from './events-location-map/events-location-map.component';
 import { EventLocationSettingComponent } from './event-location-setting/event-location-setting.component';
 import { CharterLocationSettingComponent } from './charter-location-setting/charter-location-setting.component';
 import { CharterEditComponent } from './charter-edit/charter-edit.component';
@@ -13,6 +15,7 @@ import { EventCreationComponent } from './event-creation/event-creation.componen
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { CalendarScheduleComponent } from './calendar-schedule/calendar-schedule.component';
 import { HostReservationCancellationComponent } from './host-reservation-cancellation/host-reservation-cancellation.component';
+import { BoatsLocationMapComponent } from './boats-location-map/boats-location-map.component';
 
 const routes: Routes = [
   {
@@ -54,11 +57,21 @@ const routes: Routes = [
     path: "event-location/:id", component: EventLocationSettingComponent
   },
   {
+    path: "boats-map/:city", component: BoatsLocationMapComponent
+  },
+  {
+    path: "events-map/:city", component: EventsLocationMapComponent
+  },
+  {
+    path: "charters-map/:city", component: ChartersLocationMapComponent
+  },
+  {
     path: "calendar", component:CalendarScheduleComponent
   },
   {
     path: "host-reservation-cancellation/:id", component:HostReservationCancellationComponent
-  },{
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule)
   }

@@ -4,7 +4,7 @@
             <a (click)="goBack()" class="backLink">
                 <i class="fas fa-chevron-left leftIcon"></i>
             </a>
-            <h2 class="bold">Contract Booking</h2>
+            <h2 class="bold">{{'ContractBooking' | localization}}</h2>
         </div>
         <div class="row m-0">
             <div class="col-md-5 payment-method-left-box py-2">
@@ -17,19 +17,8 @@
                 <div>
 
                     <button [disabled]="disablePayment()" (click)="confirmBooking()"
-                        class="custom-btn blue d-block custom-margin">Confirm and
-                        Pay</button>
+                        class="custom-btn blue d-block custom-margin">{{'PayConfirmation' | localization}}</button>
                 </div>
-                <!-- <div>
-                    <h6 class="medium-bold mb-3">Cancellation Policy</h6>
-                    <div *ngIf="this.cancellationPolicyString.length<=20; else GreaterThanLimitBlock">
-                        <p>{{this.cancellationPolicyString}}</p>
-                    </div>
-                    <ng-template #GreaterThanLimitBlock>
-                        {{this.readAll?(this.cancellationPolicyString):(this.cancellationPolicyString|slice:0:21)}}
-                        <button class="underline-blue-link py-2 no-underline" (click)="this.readAll=!this.readAll">{{this.readAll?'Read Less':'Read More...'}}</button>
-                    </ng-template>
-                </div> -->
             </div>
             <div class="col-md-7 py-2">
                 <div class="payment-main-wrap">
@@ -54,13 +43,13 @@
                                             </div>
                                             <div class="custom-flex-start flex-mobile-column w-100">
                                                 <div class="custom-flex-start  w-100 p-1">
-                                                    <p class="medium px-2 w-50">Event Date:</p>
+                                                    <p class="medium px-2 w-50">{{'EventDate' | localization}}</p>
                                                     <p class=" w-50">{{contract?.eventDateTime | date}}</p>
                                                 </div>
                                             </div>
                                             <div class="custom-flex-start flex-mobile-column w-100">
                                                 <div class="custom-flex-start  w-100 p-1">
-                                                    <p class="medium px-2 w-50">Event Time</p>
+                                                    <p class="medium px-2 w-50">{{'EventTime' | localization}}</p>
                                                     <p class=" w-50">{{contract?.eventDateTime | date:'hh mm a'}}</p>
                                                 </div>
                                             </div>
@@ -68,42 +57,32 @@
                                         <ng-container *ngIf="contract?.serviceType == SERVICE_TYPES.Charter">
                                             <div class="custom-flex-start flex-mobile-column w-100">
                                                 <div class="custom-flex-start  w-100 p-1">
-                                                    <p class="medium px-2 w-50">Departure From:</p>
+                                                    <p class="medium px-2 w-50">{{'DepartingFrom' | localization}}</p>
                                                     <p class=" w-50">{{contract?.departureFrom}}</p>
                                                 </div>
                                             </div>
                                             <div class="custom-flex-start flex-mobile-column w-100">
                                                 <div class="custom-flex-start  w-100 p-1">
-                                                    <p class="medium px-2 w-50">Destination:</p>
+                                                    <p class="medium px-2 w-50">{{'Destination' | localization}}</p>
                                                     <p class=" w-50">{{contract?.destination}}</p>
                                                 </div>
                                             </div>
                                             <div class="custom-flex-start  w-100 p-1">
-                                                <p class="medium px-2 w-50">Departure Date:</p>
-                                                <p class=" w-50">{{contract?.departureDate | date}}</p>
+                                                <p class="medium px-2 w-50">{{'Destination' | localization}}</p>
+                                                <p class=" w-50">{{contract?.DepartureDate | date}}</p>
                                             </div>
                                             <div class="custom-flex-start  w-100 p-1">
-                                                <p class="medium px-2 w-50">Arrival Date:</p>
+                                                <p class="medium px-2 w-50">{{'ArrivalDate' | localization}}</p>
                                                 <p class=" w-50">{{contract?.arrivalDate | date}}</p>
                                             </div>
-                                            <!-- <div class="custom-flex-start  w-100 p-1">
-                                            <p class="medium px-2 w-50">Departure Time:</p>
-                                            <p class=" w-50">{{contract?.DepartureTime}}</p>
-                                        </div> -->
-                                            <!-- <div class="custom-flex-start  w-100 p-1">
-                                            <p class="medium px-2 w-50">Arrival Time:</p>
-                                            <p class=" w-50">{{contract?.ArrivalTime}}</p>
-                                        </div> -->
+                                           
                                             <ng-container *ngIf="contract?.isRoundTrip">
-                                                <h6 class="py-4 px-2 pb-2 medium">Return Details</h6>
+                                                <h6 class="py-4 px-2 pb-2 medium">{{'ReturnDetails' | localization}}</h6>
                                                 <div class="custom-flex-start  w-100 p-1">
-                                                    <p class="medium px-2 w-50">Return Date:</p>
+                                                    <p class="medium px-2 w-50">{{'ReturnDate' | localization}}</p>
                                                     <p class=" w-50">{{contract?.returnDate | date}}</p>
                                                 </div>
-                                                <!-- <div class="custom-flex-start  w-100 p-1">
-                                            <p class="medium px-2 w-50">Return Time:</p>
-                                            <p class=" w-50">{{contract?.ReturnTime }}</p>
-                                        </div> -->
+                                               
                                             </ng-container>
                                         </ng-container>
                                     </div>
@@ -111,18 +90,22 @@
                             </div>
                         </div>
                         <div class="row custom-margin">
-                            <h6 class="medium py-md-3">Price Details</h6>
+                            <h6 class="medium py-md-3">{{'PriceDetails' | localization}}</h6>
                             <div class="custom-flex-between">
-                                <p>Quote Amount</p>
+                                <p>{{'QuoteAmount' | localization}}</p>
                                 <p>${{contract?.qouteAmount }}.00</p>
                             </div>
                             <div class="custom-flex-between">
-                                <p>Service Fee</p>
-                                <p>$20.00</p>
+                                <p>{{'ServiceFee' | localization}}</p>
+                                <p>${{serviceFee?.serviceFee}}.00</p>
                             </div>
                             <div class="custom-flex-between">
-                                <p>Total(USD)</p>
-                                <p>$ {{contract?.qouteAmount + 20}}.00</p>
+                                <p>{{'TaxFee' | localization}}</p>
+                                <p>${{contract?.boat.taxFee}}.00</p>
+                            </div>
+                            <div class="custom-flex-between">
+                                <p>{{'Total(USD)' | localization}}</p>
+                                <p>$ {{getBasicTotal()}}.00</p>
                             </div>
                         </div>
                     </div>

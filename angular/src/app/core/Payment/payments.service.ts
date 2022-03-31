@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { EntityResponseModel } from 'src/app/shared/interface/entityResponseModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,8 +22,8 @@ export class PaymentsService {
       catchError(this.handleError));
   }
 
-  pay(data: any) {
-    return this.http.post(this.paymentsApiUrl + '/api/app/stripe-account/pay', data).pipe(catchError(this.handleError));
+  pay(data: any):Observable<EntityResponseModel> {
+    return this.http.post<EntityResponseModel>(this.paymentsApiUrl + '/api/app/stripe-account/pay', data).pipe(catchError(this.handleError));
   }
   handleError(error: any) {
     let errorMessage = '';

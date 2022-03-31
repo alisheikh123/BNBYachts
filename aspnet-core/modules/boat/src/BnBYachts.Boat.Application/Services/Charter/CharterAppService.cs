@@ -47,5 +47,9 @@ namespace BnBYachts.Services.Charter
         {
             return await _charterManager.GetCharterDetailById(charterId);
         }
+
+        public async Task<EntityResponseListModel<CharterDto>> GetChartersByBoatId(int boatId)=>
+            await _charterManager.GetChartersByBoatId(boatId).ConfigureAwait(false);
+       
     }
 }

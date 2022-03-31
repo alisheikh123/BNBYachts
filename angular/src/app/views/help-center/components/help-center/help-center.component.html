@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="btn-back align-items-start">
                     <div class="">
-                        <h2 class="bold">Help Center</h2>
+                        <h2 class="bold">{{'HelpCenter'| localization}}</h2>
                         <p class="col-5">{{'ContactUsForm' | localization}}</p>
                     </div>
                 </div>
@@ -18,21 +18,21 @@
                 <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.AskUs}"
                     (click)="currentTab = 1" type="button">
                     <i class="fa fa-question" aria-hidden="true"></i>
-                    Ask Us</button>
+                    {{'Faqs'| localization}}</button>
                 <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.ContactUs}"
                     (click)="currentTab = 2" type="button">
                     <i class="fa fa-phone" aria-hidden="true"></i>
-                    Contact Us
+                    {{'ContactUs'| localization}}
                 </button>
                 <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.FindUs}"
                     (click)="currentTab = 3" type="button">
                     <i class="fa fa-search" aria-hidden="true"></i>
-                    Find Us
+                    {{'FindUs'| localization}}
                 </button>
                 <button class="underline-link-blk small-text custom-icon" [ngClass]="{'active': currentTab == navTabs.Dispute}"
                     (click)="currentTab = 4" type="button">
                     <i class="fa fa-user-times" aria-hidden="true"></i>
-                    Dispute
+                    {{'Dispute'| localization}}
                 </button>
             </div>
             <div class="tab-content" id="v-pills-tabContent">

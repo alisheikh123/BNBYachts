@@ -44,6 +44,7 @@
 </div>
 <div class="exlusive-offer section-padding">
     <div class="bg-image-wrap white-text no-hover section-padding">
+    <form class="form" [formGroup]="newsLetterForm" novalidate="novalidate" (ngSubmit)="submit()">
         <div class="custom-flex-start h-100">
             <h2 class="bold">Get Exclusive Offers</h2>
             <p class="medium-container">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -51,12 +52,38 @@
                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                 ullamco
                 laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <form class="w-100">
                 <div class="custom-input-field field-bg-white">
-                    <input class="custom-input" placeholder="Hamza">
+                    <input class="custom-input" formControlName="emailAddress" name="emailAddress" placeholder="Enter Email">
                 </div>
-            </form>
-            <a href="javascript:void(0)" class="custom-btn white-blue">Subscribe</a>
-        </div>
+                <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'required',
+                    message: 'Email is required',
+                    control: newsLetterForm.controls['emailAddress']
+                  }"></ng-container>
+
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                    validation: 'pattern',
+                    message: 'Invalid Email',
+                    control: newsLetterForm.controls['emailAddress']
+                  }"></ng-container>
+                  <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                              validation: 'emailTaken',
+                                              message: 'Email Already Exists',
+                                              control: newsLetterForm.controls['emailAddress']
+                                            }"></ng-container>
+                <button type="submit" class="custom-btn white-blue">Subscribe</button>
+            </div>
+    </form>
     </div>
 </div>
+
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          {{ message }}
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>

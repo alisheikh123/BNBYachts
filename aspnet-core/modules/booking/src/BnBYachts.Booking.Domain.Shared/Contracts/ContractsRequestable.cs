@@ -25,11 +25,16 @@ namespace BnBYachts.Booking.Contracts
         public int BoatId { get; set; }
 
         public int? QouteAmount { get; set; }
-        public virtual string ServiceProviderId { get; set; }
+        public int? ServiceProviderId { get; set; }
         public virtual string HostId { get; set; }
         public virtual string UserId { get; set; }
         public string UserName { get; set; }
+        public int? NoOfDays { get; set; }
+        public string BoatelLocation { get; set; }
         public ContractsStatus? Status { get; set; } = ContractsStatus.Pending;
+        public int? EventId { get; set; }
+        public int? CharterId { get; set; }
+        public bool IsCustomType { get; set; }
     }
     public class ContractAttachmentRequestable
     {

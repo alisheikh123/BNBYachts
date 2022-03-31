@@ -1,0 +1,71 @@
+<div class="main-wrapper">
+    <div class="reservation-page section-padding">
+        <div class="container">
+            <div class="margin-Nav">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" routerLink="/host/boats-map/{{cityName}}" role="tab" aria-controls="nav-home" aria-selected="false">Boatel</a>
+                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" routerLink="/host/charters-map/{{cityName}}" role="tab" aria-controls="nav-profile" aria-selected="false">Charters</a>
+                      <a class="nav-item nav-link active" id="nav-contact-tab" data-toggle="tab" routerLink="/host/events-map/{{cityName}}" role="tab" aria-controls="nav-contact" aria-selected="true">Events</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="btn-back">
+                <a (click)="goBack()" id="backBtn">
+                  <i class="fas fa-chevron-left" id="left-icon"></i>
+                </a>
+                <h2 class="bold">{{'EventLocation' | localization }}</h2>
+              </div>
+            <div>
+                <div>
+                    <div class="iframe-wrapper">
+                        <google-map id="mapStyle" [options]="mapOptions" *ngFor="let cent of center" [center]="cent" [zoom]="zoom" >
+                            <map-marker #markerr="mapMarker" *ngFor="let location of markLocation"  [position]="location?.position"
+                              [label]="location?.label" [title]="location?.title" [options]="location?.options"
+                              (mapClick)="openInfoWindow(markerr, location)">
+                            </map-marker>
+                            <map-info-window>
+                                <div class="boatel-search-card">
+                                  <div class="row m-0">
+                                    <div class="col-sm-5 pr-0">
+                                      <div class="boatel-search-card-img" *ngFor="
+                                          let gallery of mapInfoDetails?.boat?.boatGalleries
+                                            | filterBy: 'isCoverPic':true
+                                        ">
+                                        <img src="{{ assetsUrl + gallery?.imagePath }}" />
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                      <div class="boatel-search-card-content">
+                                        <div class="boatel-search-card-content-title">
+                                          <a [routerLink]="['/boat-listing/boatel-details', mapInfoDetails?.id]" class="underline-black-link p-0">
+                                              {{ mapInfoDetails?.title }}</a>
+                                        </div>
+                                        <p class="grey">
+                                          {{'Guests'|localization}} - {{ mapInfoDetails?.guestCapacity }} <br/>
+                                          {{'StartDate'|localization}} - {{ mapInfoDetails?.startDateTime | date }} <br/>
+                                          {{'EndDate'|localization}} - {{ mapInfoDetails?.endDateTime | date }}
+                                        </p>
+                                        <div class="boatel-search-card-content-title">
+                                          <p class="grey">{{ mapInfoDetails?.location }}</p>
+                                        </div>
+                                        <!-- <div class="custom-flex-between">
+                                          <ngb-rating [rate]="0"></ngb-rating>
+                                        </div> -->
+                                        <div class="pt-2 boatel-search-card-content-title">
+                                          <p class="bold-span-text">
+                                            <span>$ {{ mapInfoDetails?.amountPerPerson }}</span> {{'perPerson'|localization}}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </map-info-window>
+                        </google-map>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

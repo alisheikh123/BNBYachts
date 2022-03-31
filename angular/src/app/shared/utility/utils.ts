@@ -79,4 +79,16 @@ export class utils {
           .build();
           return connection;
       }
+      static formatDateTime(date:any) {
+       return moment(date).format('YYYY-MM-DD hh:mm:ss a');
+      }
+      static getremaingHours(date:string){
+       return moment.duration(moment(date).diff(moment())).asHours()
+      }
+      static differenceDateTime(firstDate:any,secondDate:any){
+        var startDate = moment(firstDate, 'DD-MM-YYYY hh:mm:ss a');
+        var EndDate = moment(secondDate, 'DD-MM-YYYY hh:mm:ss a');
+        var Days =  EndDate.diff(startDate, 'days');
+        return Days < 0 ? 0 : Days + 1;
+      }
 }

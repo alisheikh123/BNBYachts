@@ -30,6 +30,7 @@
     <None Remove="Logs\**" />
   </ItemGroup>
 
+
   <ItemGroup>
     <Content Remove="appsettings.json" />
   </ItemGroup>

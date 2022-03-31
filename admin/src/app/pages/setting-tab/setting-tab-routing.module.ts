@@ -2,6 +2,8 @@ import { SettingTabComponent } from './setting-tab.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ServiceFeeComponent } from './service-fee/service-fee.component';
+import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
+import { SubscribeUsersComponent } from './subscribe-users/subscribe-users.component';
 
 const routes: Routes = [
   {
@@ -12,6 +14,14 @@ const routes: Routes = [
         path: 'servicesFee',
         component: ServiceFeeComponent,
       },
+      {
+        path: 'newsletter',
+        component: NewsletterSubscriptionComponent,
+      },
+      {
+        path : 'subscribeusers',
+        component : SubscribeUsersComponent
+      }
     ]
   }
 ];
@@ -23,5 +33,7 @@ const routes: Routes = [
 export class SettingTabRoutingModule { }
 export const routedComponents = [
   SettingTabComponent,
-  ServiceFeeComponent
+  ServiceFeeComponent,
+  NewsletterSubscriptionComponent,
+  SubscribeUsersComponent
 ];

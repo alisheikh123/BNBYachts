@@ -22,7 +22,7 @@ namespace BnBYachts.Booking.Services
         public async Task<EntityResponseModel> AddContract(IFormCollection data, IFormFileCollection files)
         {
             var contractForm = JsonConvert.DeserializeObject<ContractsRequestable>(data["contractForm"]);
-            contractForm.HostId = CurrentUser.Id.ToString();
+            if (string.IsNullOrEmpty(contractForm.HostId)) { contractForm.HostId = CurrentUser.Id.ToString(); } ;
             var attachmentsData = JsonConvert.DeserializeObject<List<ContractAttachmentRequestable>>(data["attachments"]); ;
             var response = await _manager.AddContract(contractForm, attachmentsData).ConfigureAwait(false);
             if (response.ReturnStatus == true)
@@ -60,5 +60,9 @@ namespace BnBYachts.Booking.Services
             }
             return response;
         }
+      public async   Task<EntityResponseListModel<ContractsTransferable>> GetContractsServiceProvider(ContractListRequestable data)
+          => await _manager.GetContractsServiceProvider(data, CurrentUser.Id).ConfigureAwait(false);
+      public async Task<EntityResponseModel> GetContractsBoats(int serviceProviderId)
+         => await _manager.GetContractsBoats(serviceProviderId, CurrentUser.Id).ConfigureAwait(false);
     }
 }

@@ -1,0 +1,176 @@
+<nb-card>
+    <nb-card-header>
+     <span> News Letter</span>
+     <span class="btn-floating"><button type="button" (click)="openLg(content)" class="btn btn-primary" >Add News Letter</button></span>
+      </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" (custom)="onCustomAction(contents,contentDa,$event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<ng-template #content let-modal>
+    <div class="modal-content">
+      <div class="modal-header no-border">
+        <h4 class="bold">Add News Letter</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newsLetterForm" novalidate="novalidate" (ngSubmit)="onSubmit()" >
+          <div class="custom-modal-inner">  
+            <div class="modal-content-inner-text">
+              <div class="form-text-inner">
+                <div>
+                    <div>
+                      <label>Letter Type</label>
+                      <select class="form-control" formControlName="letterTypeId" >
+                      <option [ngValue]="null" selected>Choose Sending Type</option>
+                      <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
+                      </select>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Letter Type is required',
+                        control: newsLetterForm.controls['letterTypeId']
+                    }"></ng-container>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="md-3">
+                      <label>Title</label>
+                      <input type="text" class="form-control" formControlName="title" name="title" placeholder="Enter Title">
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Title is required',
+                        control: newsLetterForm.controls['title']
+                    }"></ng-container>
+                    </div>
+                  </div>
+                  <div>
+                    <label>Upload Image</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" formControlName="letterImage" name="letterImage" (change)="onFileChange($event)" >
+                        <label class="custom-file-label" for="file">{{ fileInfo || "Choose file..."}}</label>
+                      </div>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'News Letter Image is required',
+                        control: newsLetterForm.controls['letterImage']
+                    }"></ng-container>
+                  </div>
+                  <div> 
+                    <div class="custom-input-field">
+                      <label>Description</label>
+                      <textarea type="text" class="form-control" placeholder="Enter Description..." formControlName="description" name="description" rows="5" autocomplete="off" ></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" [disabled]="newsLetterForm.invalid">Submit</button>
+                  <button type="button" class="btn btn-light" (click)="resetForm()" (click)="modal.dismiss('Cross click')">Close</button>
+              </div>
+            </div>
+          </div>
+          </div>
+        </form>
+        </div>
+    </div>
+  </ng-template>
+  <ng-template #contents let-c="close" let-d="dismiss">    
+    <div class="modal-header">    
+        <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>    
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">    
+            <span aria-hidden="true">x</span>    
+        </button>    
+    </div>    
+    <div class="modal-body">    
+        <p>Are you sure to delete this?</p>    
+    </div>    
+    <div class="modal-footer">    
+        <button type="button" class="btn btn-default" (click)="d('Cross click')">Cancel</button>    
+        <button type="button" class="btn btn-primary" (click)="c('yes')">Yes</button>    
+    </div>    
+  </ng-template>   
+
+  <ng-template #contentDa let-modal>
+    <div class="modal-content">
+      <div class="modal-header no-border">
+        <h4 class="bold">Update News Letter</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newsLetterForm" (ngSubmit)="onSubmit()">
+          <div class="custom-modal-inner">  
+            <div class="modal-content-inner-text">
+              <div class="form-text-inner">
+                <div>
+                    <div>
+                      <label>Letter Type</label>
+                      <select class="form-control" formControlName="letterTypeId" >
+                      <option [ngValue]="null" selected>Choose Sending Type</option>
+                      <option [ngValue]="item.id" *ngFor="let item of reasons">{{item.name}}</option>
+                      </select>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Letter Type is required',
+                        control: newsLetterForm.controls['letterTypeId']
+                    }"></ng-container>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="custom-input-field">
+                      <label>City</label>
+                      <input type="text" class="form-control" formControlName="title" name="title" placeholder="Enter Title" required>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Title is required',
+                        control: newsLetterForm.controls['title']
+                    }"></ng-container>
+                    </div>
+                  </div>
+                  <div>
+                    <label>Upload Image</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" #choosefile id="letterImage" name="letterImage" (change)="onFileChange($event)" required>
+                        <label class="custom-file-label">{{ fileInfo || "Choose file..."}}</label>
+                      </div>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'News Letter Image is required',
+                        control: newsLetterForm.controls['imagePath']
+                    }"></ng-container>
+                  </div>
+                  <div>
+                    <div class="custom-input-field">
+                      <label>Description</label>
+                      <textarea type="text" class="form-control" placeholder="Enter Description..." formControlName="description" name="description"  rows="5" autocomplete="off" ></textarea>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Description is required',
+                        control: newsLetterForm.controls['description']
+                    }"></ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" [disabled]="newsLetterForm.invalid">Submit</button>
+                  <button type="button" class="btn btn-light" (click)="resetForm()"  (click)="modal.dismiss('Cross click')">Close</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control?.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          {{ message }}
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>

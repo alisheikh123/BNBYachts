@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { BoatService } from 'src/app/core/Boat/boat.service';
 import { Component, OnInit } from '@angular/core';
 import { FeaturedCities } from 'src/app/shared/interface/featuredCities';
@@ -12,7 +13,7 @@ export class FeaturedCitiesComponent implements OnInit {
   featuredCities : FeaturedCities[];
   assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/cities/';
 
-  constructor(private boatService : BoatService) { }
+  constructor(private boatService : BoatService, private router : Router) { }
 
   ngOnInit(): void {
     this.getFeaturedCities();
@@ -21,5 +22,8 @@ export class FeaturedCitiesComponent implements OnInit {
     this.boatService.getFeaturedCities().subscribe((res : any)=>{
       this.featuredCities = res;
     })
+  }
+  GoToFeatureCityMap(){
+    this.router.navigate(['host'])
   }
 }

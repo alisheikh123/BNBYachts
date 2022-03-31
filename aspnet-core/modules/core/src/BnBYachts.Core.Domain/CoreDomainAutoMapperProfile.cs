@@ -10,6 +10,8 @@ using BnBYachts.Core.Data.Entities.ServiceProvider;
 using BnBYachts.Core.ServiceProvider.Transferable;
 using BnBYachts.Core.Enum;
 using BnBYachts.Core.Shared.Transferable;
+using BnBYachts.Core.Data.Entities.NewsLetters;
+using BnBYachts.Core.NewsLetters.Transferable;
 
 namespace BnBYachts.Core
 {
@@ -30,6 +32,9 @@ namespace BnBYachts.Core
             CreateMap<TimeSlotEntity, TimeSlotTransferable>();
             CreateMap<ServiceProviderEntity, ServiceProviderTransferable>()
                 .ForMember(source => source.PaymentType, destination => destination.MapFrom(source => (source.PaymentOption.HasValue && source.PaymentOption.Value > 0) ? (source.PaymentOption == CaptainPaymentType.PerHour) ? "Per Hour" : "Per Day" : ""));
+            CreateMap<ContactsTransferable, ContactsEntity>().ReverseMap();
+            CreateMap<NewsLetterTransferable, NewsLetterSubscriptionEntity>().ReverseMap();
+            CreateMap<ScheduleTransferable, ScheduleNewsLetterEntity>();
         }
     }
 }

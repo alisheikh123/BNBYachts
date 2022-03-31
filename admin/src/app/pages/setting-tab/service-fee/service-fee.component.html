@@ -41,7 +41,9 @@
                 <div>
                   <div class="custom-input-field">
                     <label>Service Fee</label>
-                    <input type="text" class="form-control" placeholder="Enter Service Fee" formControlName="serviceFee" name="serviceFee" autocomplete="off" >
+                    <input type="text" class="form-control" placeholder="Enter Service Fee" min="0" oninput="this.value = 
+                    !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                    formControlName="serviceFee" name="serviceFee" autocomplete="off" >
                     <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                       validation: 'required',
                       message: 'Service Fee is required',
@@ -105,7 +107,9 @@
               <div>
                 <div class="custom-input-field">
                   <label>service Fee</label>
-                  <input type="text" class="form-control" placeholder="Service Fee" formControlName="serviceFee" name="serviceFee" autocomplete="off" >
+                  <input type="text" class="form-control" placeholder="Service Fee" min="0" oninput="this.value = 
+                  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                   formControlName="serviceFee" name="serviceFee" autocomplete="off" >
                   <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                     validation: 'required',
                     message: 'service Fee is required',

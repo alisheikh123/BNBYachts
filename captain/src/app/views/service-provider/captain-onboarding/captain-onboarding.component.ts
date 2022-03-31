@@ -96,6 +96,9 @@ captainOnBoardingForm: FormGroup;
   public restrictNumeric(e: any) {
     utils.restrictNumeric(e);
   }
+  public restrictNegative(e:any){
+   utils.restrictNegative(e);
+  }
   get captionForm() {
     return this.captainOnBoardingForm.controls;
   }
