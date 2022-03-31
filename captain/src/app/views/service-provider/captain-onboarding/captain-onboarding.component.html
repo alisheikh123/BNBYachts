@@ -42,11 +42,11 @@
                                     </div>  
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>{{'Bio' | localization }}</label>
-                                            <textarea (keypress)="restrictNegative($event)" rows="5" type="text" class="custom-input" formControlName="bio" placeholder="{{'EnterBio' | localization }}" > </textarea>
-                                            <small class="text-danger" *ngIf="captainForm.bio.touched && !captainForm.bio.valid">{{ 'Biorequired' | localization }}</small>
+                                            <label>{{'Description' | localization }}</label>
+                                            <textarea (keypress)="restrictNegative($event)" rows="4" type="text" class="custom-input" formControlName="description" placeholder="{{'EnterDescription'  | localization }}}}" > </textarea>
+                                            <small class="text-danger" *ngIf="captainForm.description.touched && !captainForm.description.valid">{{'vDescriptionRequired' | localization }}</small>
                                           </div>
-                                      </div>
+                                      </div> 
                                       <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
                                             <label>{{'Experience' | localization }}</label>

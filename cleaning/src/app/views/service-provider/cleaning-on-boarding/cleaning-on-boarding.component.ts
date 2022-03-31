@@ -43,7 +43,7 @@ export class CleaningOnBoardingComponent implements OnInit {
       location: [null, Validators.required],
       latitude: [],
       longitude: [],
-      bio: ['', Validators.required],
+      bio: [''],
       companyName: ['', Validators.required],
       experience: [null , Validators.required],
       description: ['', Validators.required],
@@ -67,7 +67,7 @@ export class CleaningOnBoardingComponent implements OnInit {
   }
   registerStepValidation(){
     if(this.managementForm.location.value == null ||
-    this.managementForm.bio.value =='' 
+    this.managementForm.description.value =='' 
     || this.managementForm.companyName.value == ''
     ||
     this.managementForm.experience.value <=0 ){

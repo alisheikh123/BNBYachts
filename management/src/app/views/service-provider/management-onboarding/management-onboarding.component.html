@@ -17,14 +17,12 @@
                       <button type="button" class="underline-link-blk small-text" [ngClass]="{'active': currentTab == ONBOARDING_TABS.Registeration}"><span class="active">1</span>{{'Registeration' | localization }}</button>
                       <button type="button" class="underline-link-blk small-text" [ngClass]="{'active': currentTab == ONBOARDING_TABS.CompanyProfile}">
                           <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.CompanyProfile}">2</span>{{'CompanyProfilePicture' | localization }}</button>
-                          <button type="button" class="underline-link-blk small-text" [ngClass]="{'active': currentTab == ONBOARDING_TABS.CompanyProfile}">
-                            <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.Description}">3</span>{{'Description' | localization }}</button>
                       <button type="button" class="underline-link-blk small-text"  [ngClass]="{'active': currentTab == ONBOARDING_TABS.BankInfo}">
-                          <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.BankInfo}">4</span>{{'BankInfo' | localization }}</button>
+                          <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.BankInfo}">3</span>{{'BankInfo' | localization }}</button>
                       <button type="button" class="underline-link-blk small-text"  [ngClass]="{'active': currentTab == ONBOARDING_TABS.SupportiveDoc}">
-                          <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.SupportiveDoc}">5</span>{{'SupportiveDoc' | localization }}</button>
+                          <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.SupportiveDoc}">4</span>{{'SupportiveDoc' | localization }}</button>
                           <button type="button" class="underline-link-blk small-text" [ngClass]="{'active': currentTab == ONBOARDING_TABS.Terms}" >
-                            <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.Terms}">6</span>{{'Termsconditions' | localization }}</button>
+                            <span [ngClass]="{'active': currentTab > ONBOARDING_TABS.Terms}">5</span>{{'Termsconditions' | localization }}</button>
                     </div>
                     <div class="tab-content" id="v-pills-tabContent">
                         <form [formGroup]="managementOnBoardingForm">
@@ -110,30 +108,6 @@
                                             <button class="custom-btn blue" id="save-bt"
                                             
                                           [disabled]="!companyProfileStepValidation()"     (click)="incrementTab()">{{'Continue' | localization }}</button>
-      
-                                        </div>
-                                    </div>
-                                    
-                            </div>
-                            </div>
-                            <div class="tab-pane" 
-                            [ngClass]="{'active': currentTab == ONBOARDING_TABS.Description}"
-                            *ngIf="currentTab == ONBOARDING_TABS.Description" >
-                            <div class="row">  
-                                <div class="col-md-6 py-2">
-                                    <div class="custom-input-field">
-                                        <label>{{'Description' | localization }}</label>
-                                        <textarea (keypress)="restrictNegative($event)" rows="4" type="text" class="custom-input" formControlName="description" placeholder="{{'Enter the Description'  | localization }}}}" > </textarea>
-                                        <small class="text-danger" *ngIf="managementForm.description.touched && !managementForm.description.valid">{{'Descriptionrequired' | localization }}</small>
-                                      </div>
-                                  </div>                          
-                                    <div class="col-sm-12 py-2">
-                                        <div class="custom-flex-end" >
-                                            <button class="custom-btn outline-blue-clr me-4"
-                                            (click)="decrementTab()">{{'Previous' | localization }}</button>
-                                            <button class="custom-btn blue" id="save-bt"
-                                            
-                                            [disabled]="!descriptionStepValidation()"    (click)="incrementTab()">{{'Continue' | localization }}</button>
       
                                         </div>
                                     </div>
