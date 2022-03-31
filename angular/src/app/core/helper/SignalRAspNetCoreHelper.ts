@@ -36,7 +36,9 @@ export class SignalRAspNetCoreHelper {
         this._hubConnection
             .start()
             .then(() => {
+               
                 this._hubConnection.invoke('GetConnectionId').then((connectionId) => {
+                    console.log(connectionId)
                 });
             })
             .catch((err) => console.log("Error while establishing a connection :( "));;

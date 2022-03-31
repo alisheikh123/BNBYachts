@@ -19,7 +19,10 @@ namespace BnBYachts.Socket.Web.Hub
         {
             var httpContext = this.Context.GetHttpContext();
             var userId = httpContext?.Request.Query["userId"];
-            _userConnectionManager.KeepUserConnection(userId, Context.ConnectionId);
+            if (!string.IsNullOrEmpty(userId?.ToString()))
+            {
+                _userConnectionManager.KeepUserConnection(userId, Context.ConnectionId);
+            }
             return Context.ConnectionId;
         }
         //AdminPortal Notify
