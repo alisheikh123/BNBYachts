@@ -331,9 +331,9 @@
  "LocationError": "Please enter the location",
  "ManagementOnBoarding":"Management On Boarding",
  "CompanyProfilePicture":"Company Profile Picture",
- "CompanyName":"Company Name",
- "EnterCompanyName": "Enter the Company Name",
- "CompanyNamerequired.":"Company Name is required.",
+ "CompanyName":"Name/Company Name",
+ "EnterCompanyName": "Enter the Name",
+ "CompanyNamerequired.":"Name is required.",
  "ProfilePicture":"Profile Picture",
  "AddProfilePhoto":"Add a Profile Photo",
  "UploadImage" : "Upload Image",
@@ -367,5 +367,6 @@
  "vCharterIsRequired":"Charter is required",
  "EventListing" :"Event Listing",
  "Selecttheevent":"Select the event",
- "vEventIsRequired":"Event is required"
+ "vEventIsRequired":"Event is required",
+ "EnterDescription":"Enter the Description"
 }
