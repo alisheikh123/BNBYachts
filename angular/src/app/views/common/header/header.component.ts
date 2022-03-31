@@ -136,20 +136,20 @@ export class HeaderComponent implements OnInit {
     })
   }
   connectionSignalR() {
-    debugger;
-    let connection = utils.getSignalRConnection();
-    connection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err: any) {
-      return console.error(err.toString());
-    });
-    connection.invoke("NotifyClient","test1",{"test1":"test"});
+    // debugger;
+    // let connection = utils.getSignalRConnection();
+    // connection.start().then(function () {
+    //   console.log('SignalR Connected!');
+    // }).catch(function (err: any) {
+    //   return console.error(err.toString());
+    // });
+    // connection.invoke("NotifyClient","test1",{"test1":"test"});
   }
   NotificationCount() {
-    this.notificationService.getNotificationCount().subscribe((res: any) => {
-      this.notificationCount = res;
-    }
-    );
+    // this.notificationService.getNotificationCount().subscribe((res: any) => {
+    //   this.notificationCount = res;
+    // }
+    // );
   }
   getNotificationMessage() {
     this.notificationService.getNotificationMessage().subscribe((res:any) => {

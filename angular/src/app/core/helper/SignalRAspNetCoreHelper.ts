@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { time } from 'console';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from '../host/notification.service';
+import * as signalR from '@microsoft/signalr';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class SignalRAspNetCoreHelper {
         private notificationService: NotificationService) {
 
     }
-    private _hubConnection!: HubConnection;
+    private _hubConnection!: signalR.HubConnection;
     initSignalR(callback?: () => void): void {
         this.createConnection();
     }
@@ -29,13 +30,29 @@ export class SignalRAspNetCoreHelper {
     }
     private createConnection() {
 
-        this._hubConnection = new HubConnectionBuilder()
+        if(localStorage.getItem('userId')?.toString()!==undefined)
+        {
+        this._hubConnection = new signalR.HubConnectionBuilder()
             .configureLogging(LogLevel.Debug)
             .withUrl(environment.NOTIFICATION_APP_URL+"/signalr-hubs/Notification?&userId="+localStorage.getItem('userId')?.toString(), {
                 skipNegotiation: true,
                 transport: HttpTransportType.WebSockets,
             })
             .build();
+        }
+        else{
+
+        
+        this._hubConnection = new signalR.HubConnectionBuilder()
+        .configureLogging(LogLevel.Debug)
+        .withUrl(environment.NOTIFICATION_APP_URL+"/signalr-hubs/Notification", {
+            skipNegotiation: true,
+            transport: HttpTransportType.WebSockets,
+        })
+        .build();
+    }
+
+     console.log("Connection 1");
 
         this._hubConnection
             .start()
@@ -47,6 +64,6 @@ export class SignalRAspNetCoreHelper {
                   this.notificationService.addNotification("1");
                 });
             })
-            .catch((err) => console.log("Error while establishing a connection :( "));
+            .catch((err) => console.log("Error while establishing a connection :(   ud "));
     }
 }
