@@ -33,16 +33,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Remove="appsettings.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="appsettings.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\..\modules\notification\src\BnBYachts.Notification.Application\BnBYachts.Notification.Application.csproj" />
 	  <ProjectReference Include="..\..\modules\notification\src\BnBYachts.Notification.MongoDB\BnBYachts.Notification.MongoDB.csproj" />
 	  <ProjectReference Include="..\..\modules\notification\src\BnBYachts.Notification.HttpApi\BnBYachts.Notification.HttpApi.csproj" />
