@@ -66,35 +66,35 @@ services:
 
 
 
-  bnb_socket_api:
-    container_name: bnb_socket_api
-    build:
-      context: .
-      dockerfile: Socket.Dockerfile
-    environment:
-      "ASPNETCORE_ENVIRONMENT": "Production"
-      "ConnectionStrings:Default": ${BNB_BOAT_API_CONNECTION_STRING}
-      "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
-      "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
-      "AuthServer:RequireHttpsMetadata": ${BNB_Boat_AUTHSERVER_REQUIREHTTPSMETADATA}
-      "AuthServer:SwaggerClientId": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTID}
-      "AuthServer:SwaggerClientSecret": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTSECRET}
-      "RabbitMq:Host": ${BNB_MQ_HOST}
-      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
-      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
-      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
-      "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
-      "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
-    ports:
-      - "21021:80"
-    volumes:
-      - ./tmp-build/BNB/BNBBoat-Webhost/logs:/app/Logs
-      - ./tmp-build/BNB/BNBBoat-Webhost/.aspnet/https:/root/.aspnet/https:ro
-      - ./tmp-build/BNB/BNBBoat-Webhost/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
-    links:
-      - rabbitmq:rabbitmq
-    depends_on:
-      - rabbitmq    
+  # bnb_socket_api:
+  #   container_name: bnb_socket_api
+  #   build:
+  #     context: .
+  #     dockerfile: Socket.Dockerfile
+  #   environment:
+  #     "ASPNETCORE_ENVIRONMENT": "Production"
+  #     "ConnectionStrings:Default": ${BNB_BOAT_API_CONNECTION_STRING}
+  #     "App:CorsOrigins": ${BNB_APP_CORES_ORIGINS}
+  #     "AuthServer:Authority": ${BNB_AUTHSERVER_AUTHORITY}
+  #     "AuthServer:RequireHttpsMetadata": ${BNB_Boat_AUTHSERVER_REQUIREHTTPSMETADATA}
+  #     "AuthServer:SwaggerClientId": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTID}
+  #     "AuthServer:SwaggerClientSecret": ${BNB_Boat_AUTHSERVER_SWAGGERCLIENTSECRET}
+  #     "RabbitMq:Host": ${BNB_MQ_HOST}
+  #     "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+  #     "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+  #     "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+  #     "StringEncryption:DefaultPassPhrase": ${BNB_STRINGENCRYPTION_DEFAULTPASSPHRASE}
+  #     "Stripe:ApiKey": ${BNB_STRIPE_APIKEY}
+  #   ports:
+  #     - "21021:80"
+  #   volumes:
+  #     - ./tmp-build/BNB/BNBBoat-Webhost/logs:/app/Logs
+  #     - ./tmp-build/BNB/BNBBoat-Webhost/.aspnet/https:/root/.aspnet/https:ro
+  #     - ./tmp-build/BNB/BNBBoat-Webhost/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+  #   links:
+  #     - rabbitmq:rabbitmq
+  #   depends_on:
+  #     - rabbitmq    
 
   # bnb_chat:
   #   container_name: bnb_chat

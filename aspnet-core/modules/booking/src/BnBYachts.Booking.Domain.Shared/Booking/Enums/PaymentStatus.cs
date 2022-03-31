@@ -10,6 +10,6 @@ namespace BnBYachts.Booking
         Approved = 1,
         Rejected = 2,
         Transfered = 3,
-            Refund =4
+        Refund = 4
     }
 }

@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { StripePaymentRefundRequestable } from 'src/app/shared/interface/refund';
+import { EntityResponseModel } from 'src/app/shared/interface/entityResponseModel';
 
 @Injectable()
 export class BookingService {
@@ -12,6 +14,7 @@ export class BookingService {
   bookingCancellation:string = '/api/app/boat-booking/booking-cancellation-detail/';
   boatApiUrl: string = environment.BOAT_API_URL+'/api';
   paymentApiUrl: string = environment.PAYMENTS_API_URL;
+  headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient,private errorService: ErrorService) { }
 
   boatelBooking(model: any) {
@@ -47,15 +50,23 @@ export class BookingService {
 
   saveCancellation(model: any) {
     const data = JSON.stringify(model);
-    const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<boolean>(this.bookingApiUrl + '/api/app/boat-booking/booking-cancel', data, {
-      headers: headerOptions
+      headers: this.headerOptions
     }).pipe(
       catchError(this.errorService.handleError));
   }
 
-  getRefundable(bookingId: number, refundAmount: number) {
-    return this.http.get(this.paymentApiUrl + '/api/refund/' + bookingId + '/' + refundAmount).pipe(
+  getRefundable(bookingId: number, refundAmount: number, isHost: boolean, bookingType :number):Observable<EntityResponseModel> {
+    let stripePaymentRefund: StripePaymentRefundRequestable = {
+      bookingId: bookingId,
+      refundAmount: refundAmount,
+      isHost: isHost,
+      bookingType: bookingType
+    }
+    
+    return this.http.post<EntityResponseModel>(this.paymentApiUrl + '/api/app/stripe-account/refund-payment',stripePaymentRefund, {
+      headers: this.headerOptions
+    }).pipe(
       catchError(this.errorService.handleError));
   }
 

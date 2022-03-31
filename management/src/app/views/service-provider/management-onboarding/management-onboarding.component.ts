@@ -43,7 +43,7 @@ files= []as Array<FileModel>;
       location: [null, Validators.required],
       latitude: [],
       longitude: [],
-      bio: ['', Validators.required],
+      bio: [''],
       companyName: ['', Validators.required],
       experience: [null , Validators.required],
       description: ['', Validators.required],
@@ -67,7 +67,7 @@ files= []as Array<FileModel>;
   }
   registerStepValidation(){
     if(this.managementForm.location.value == null ||
-    this.managementForm.bio.value =='' 
+    this.managementForm.description.value =='' 
     || this.managementForm.companyName.value == ''
     ||
     this.managementForm.experience.value <=0 ){
@@ -147,6 +147,9 @@ return false;
   public restrictNumeric(e: any) {
     utils.restrictNumeric(e);
   }
+  public restrictNegative(e:any){
+    utils.restrictNegative(e);
+   }
   submit(){
     let formData: FormData;
     formData = new FormData();

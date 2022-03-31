@@ -41,18 +41,16 @@ export enum CaptainBoardingTabs {
 export enum ManagementBoardingTabs {
   Registeration = 1,
   CompanyProfile = 2,
-  Description = 3,
-  BankInfo = 4,
-  SupportiveDoc = 5,
-  Terms = 6
+  BankInfo = 3,
+  SupportiveDoc = 4,
+  Terms = 5
 }
 export enum CleaningBoardingTabs {
   Registeration = 1,
   CompanyProfile = 2,
-  Description = 3,
-  BankInfo = 4,
-  SupportiveDoc = 5,
-  Terms = 6
+  BankInfo = 3,
+  SupportiveDoc = 4,
+  Terms = 5
 }
 export enum FeaturesTypes {
   OtherFeature = 1,

@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ErrorService } from '../Error/error.service';
+import { Observable } from 'rxjs';
+import { CharterBookingRequestable } from 'src/app/shared/interface/charter';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +33,8 @@ export class BookingListingService {
   getHostBookings() {
     return this.http.get(this.bookingApiUrl + '/host-boatel-bookings').pipe(catchError(this.errorService.handleError));
   }
-  getCharterBookingDetailById(charterBookingId: number) {
-    return this.http.get(this.charterBookingApiUrl+'/charter-booking-detail-by-id/' + charterBookingId).pipe(catchError(this.errorService.handleError));
+  getCharterBookingDetailById(charterBookingId: number):Observable<CharterBookingRequestable> {
+    return this.http.get<CharterBookingRequestable>(this.charterBookingApiUrl+'/charter-booking-detail-by-id/' + charterBookingId).pipe(catchError(this.errorService.handleError));
   }
   getHostUpcomingBoatelBooking(param:any)
   {

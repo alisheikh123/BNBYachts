@@ -1,4 +1,5 @@
-﻿using BnBYachts.Payments.MultiTenancy;
+﻿using BnBYachts.EventBusShared;
+using BnBYachts.Payments.MultiTenancy;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
@@ -7,7 +8,8 @@ namespace BnBYachts.Payments
 {
     [DependsOn(
         typeof(PaymentsDomainSharedModule),
-        typeof(AbpAuditLoggingDomainModule)
+        typeof(AbpAuditLoggingDomainModule),
+        typeof(EventBusSharedModule)
     )]
     public class PaymentsDomainModule : AbpModule
     {

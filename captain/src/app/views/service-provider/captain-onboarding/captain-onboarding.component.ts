@@ -47,7 +47,7 @@ captainOnBoardingForm: FormGroup;
       location: [null, Validators.required],
       latitude: [],
       longitude: [],
-      bio: ['', Validators.required],
+      description: ['', Validators.required],
       experience: [null , Validators.required],
       fee: [null, Validators.required],
       paymentOption: ['1'],
@@ -96,12 +96,15 @@ captainOnBoardingForm: FormGroup;
   public restrictNumeric(e: any) {
     utils.restrictNumeric(e);
   }
+  public restrictNegative(e:any){
+   utils.restrictNegative(e);
+  }
   get captionForm() {
     return this.captainOnBoardingForm.controls;
   }
   registerStepValidation(){
     if( this.captainForm.location.value == null ||
-    this.captainForm.bio.value =='' ||
+    this.captainForm.description.value =='' ||
     this.captainForm.experience.value <=0 ){
       return false;
     }

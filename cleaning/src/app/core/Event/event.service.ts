@@ -16,9 +16,16 @@ export class EventService {
     return this.http.get(this.boatApiUrl + '/api/app/event/boats').pipe(
       catchError(this.errorService.handleError));
   }
-
+  getBoatsByHostId(userId : string) {
+    return this.http.get(this.boatApiUrl + '/api/app/event/boats-by-host-id/'+ userId).pipe(
+      catchError(this.errorService.handleError));
+  }
   getBoatBookedDates(boatId: number) {
     return this.http.get(this.boatApiUrl + '/api/app/event/boat-booked-dates/' + boatId).pipe(
+      catchError(this.errorService.handleError));
+  }
+  getEventByBoatId(boatId: number) {
+    return this.http.get(this.boatApiUrl + '/api/app/event/events-by-boat-id/' + boatId).pipe(
       catchError(this.errorService.handleError));
   }
 
@@ -28,7 +35,7 @@ export class EventService {
   }
 
   getEventById(eventId: number) {
-    return this.http.get(this.boatApiUrl + '/api/app/event/event-by-id/' + eventId).pipe(
+    return this.http.get(this.boatApiUrl + '/api/app/event/event-by-id' + eventId).pipe(
       catchError(this.errorService.handleError)
       );
   }
@@ -38,5 +45,12 @@ export class EventService {
       catchError(this.errorService.handleError)
     );
   }
-
+  getAssignedBoats(ids: number[]) {
+  let url:string='/api/app/event/assigned-boats?Ids='+0;
+    ids.forEach(item => {
+       url  += '&Ids=' + item;
+    });
+    return this.http.get(this.boatApiUrl + url).pipe(
+      catchError(this.errorService.handleError));
+  }
 }

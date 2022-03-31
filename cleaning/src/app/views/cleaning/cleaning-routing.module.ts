@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MyProfileComponent } from '../common/user-profile/my-profile/my-profile.component';
 import { UpdateProfileComponent } from '../common/user-profile/update-profile/update-profile.component';
+
 import { CleaningComponent } from './cleaning/cleaning.component';
+
 
 const routes: Routes = [
   {
@@ -28,6 +30,11 @@ const routes: Routes = [
   {
     path: 'contracts',
     loadChildren: () => import('../contracts/contracts.module').then(m => m.ContractsModule)
+
+  },
+  {
+    path: 'reservations',
+    loadChildren: () => import('../reservations/reservations.module').then(m => m.ReservationsModule)
 
   },
   {
