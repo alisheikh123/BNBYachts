@@ -84,6 +84,19 @@ namespace BnBYachts.Core.Managers
             _logger.LogInformation("Service Provider Details Fetched Successfully");
             return response;
         }
+        public async Task<EntityResponseModel> GetServiceProviderByUserId(string userId)
+        {
+            var response = new EntityResponseModel();
+            var res = await _servicerepository.GetAsync(x => x.UserId ==  userId).ConfigureAwait(false);
+            await _servicerepository.EnsureCollectionLoadedAsync(res, x => x.TimeSlots).ConfigureAwait(false);
+            var result = _objectMapper.Map<ServiceProviderEntity, ServiceProviderTransferable>(res);
+            var userInfo = await _appUserManager.GetUserDetailsById(result.UserId).ConfigureAwait(false);
+            result.UserName = userInfo.Name;
+            result.UserImagePath = userInfo.ImagePath;
+            response.Data = result;
+            _logger.LogInformation("Service Provider Details Fetched Successfully");
+            return response;
+        }
         public async Task<bool> isServiceProviderExist(ServiceProviderTypeCheckRequestable request )
         {
             if (request == null) return false;

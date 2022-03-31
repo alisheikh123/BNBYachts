@@ -20,6 +20,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AspNetCore.SignalR;
 using Volo.Abp.Autofac;
+using Volo.Abp.AutoMapper;
 using Volo.Abp.Caching;
 using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.Localization;
@@ -33,6 +34,7 @@ namespace BnBYachts.Socket.Web
     [DependsOn(
         typeof(NotificationHttpApiModule),
         typeof(AbpAutofacModule),
+        typeof(AbpAutoMapperModule),
         typeof(AbpCachingStackExchangeRedisModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule),

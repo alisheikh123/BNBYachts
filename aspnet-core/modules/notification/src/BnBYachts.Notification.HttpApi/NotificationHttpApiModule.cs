@@ -29,13 +29,13 @@ public class NotificationHttpApiModule : AbpModule
 
     private void ConfigureLocalization()
     {
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Get<NotificationResource>()
-                .AddBaseTypes(
-                    typeof(AbpUiResource)
-                );
-        });
+        //Configure<AbpLocalizationOptions>(options =>
+        //{
+        //    //options.Resources
+        //    //    .Get<NotificationResource>()
+        //    //    .AddBaseTypes(
+        //    //        typeof(AbpUiResource)
+        //    //    );
+        //});
     }
 }

@@ -107,7 +107,7 @@
             <div class="col-sm-12 custom-margin text-center mobile-padding-btns" *ngIf="eventDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected && eventDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
                 <div class="center-content">
                     <button class="custom-btn btn-big  outline-blue-clr me-sm-3" (click)="goBack()">{{'changeMind' | localization}}</button>&nbsp;&nbsp;
-                    <a class="custom-btn btn-big blue" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(policyModal,eventDetail)">{{'ConfirmCancellation'| localization}}</a>
+                    <a class="custom-btn btn-big blue disabled" style="cursor: pointer;"  *ngIf='!isHost' (click)="openModal(policyModal,eventDetail)">{{'ConfirmCancellation'| localization}}</a>
                     <a class="custom-btn btn-big  blue" style="cursor: pointer;" *ngIf='isHost' (click)="openModal(hosttemplate,eventDetail)">{{'ConfirmCancellation' | localization}}</a>
                     <a (click)="addReview(eventDetail?.boatDetail.id)" *ngIf='isHost && !isPosted && isBookingPassed()' style="cursor: pointer;margin-left: 1%;" class="custom-btn btn-big blue">
                         {{'AddReview' | localization}}</a>

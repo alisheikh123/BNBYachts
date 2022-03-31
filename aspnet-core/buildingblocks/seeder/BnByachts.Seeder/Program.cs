@@ -26,15 +26,15 @@ namespace BnByachts.Simulator
             application.Initialize();
             using (var serviceScope = application.ServiceProvider.CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<RolesSeederService>()?.MigrateAsync().GetAwaiter();
+               // serviceScope.ServiceProvider.GetService<RolesSeederService>()?.MigrateAsync().GetAwaiter();
 
                 serviceScope.ServiceProvider.GetService<UserSeederService>()?.MigrateAsync().GetAwaiter();
 
-                serviceScope.ServiceProvider.GetService<BoatSeederService>()?.MigrateAsync().GetAwaiter();
+                //serviceScope.ServiceProvider.GetService<BoatSeederService>()?.MigrateAsync().GetAwaiter();
 
-                serviceScope.ServiceProvider.GetService<FeatureSeederService>()?.MigrateAsync().GetAwaiter();
+                //serviceScope.ServiceProvider.GetService<FeatureSeederService>()?.MigrateAsync().GetAwaiter();
 
-                serviceScope.ServiceProvider.GetService<RulesSeederService>()?.MigrateAsync().GetAwaiter();
+                //serviceScope.ServiceProvider.GetService<RulesSeederService>()?.MigrateAsync().GetAwaiter();
 
             }
             Console.WriteLine("Seeder is active");

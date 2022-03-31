@@ -32,6 +32,7 @@ import {CarouselModule} from 'primeng/carousel';
 import { OnBoardingVerifyOtpComponent } from './views/common/on-boarding-verify-otp/on-boarding-verify-otp.component';
 import { OnBoardingSuccessfullyVerifiedComponent } from './views/common/on-boarding-successfully-verified/on-boarding-successfully-verified.component';
 import { OnboardingWelcomeComponent } from './views/common/onboarding-welcome/onboarding-welcome.component';
+import { SignalRAspNetCoreHelper } from './core/helper/SignalRAspNetCoreHelper';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { OnboardingWelcomeComponent } from './views/common/onboarding-welcome/on
     },
     LoaderService,
     BookingService,
+    SignalRAspNetCoreHelper,
     ChatService,
     {provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter},
     TranslateService,

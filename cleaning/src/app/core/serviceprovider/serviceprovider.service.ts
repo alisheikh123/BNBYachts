@@ -30,6 +30,11 @@ export class ServiceProviderService {
     return this.http.get(this.coreApiUrl + '/app/service-provider/service-provider-by-id/'+id).pipe(
       catchError(this.error_service.handleError));
   }
+  getServiceProviderByUserId()
+  {
+    return this.http.get(this.coreApiUrl + '/app/service-provider/service-provider-by-user-id').pipe(
+      catchError(this.error_service.handleError));
+  }
   isServiceProviderExist(serviceprovidertype: any)
   {
     return this.http.post(this.coreApiUrl + '/app/service-provider/is-service-provider-exist',serviceprovidertype ).pipe(

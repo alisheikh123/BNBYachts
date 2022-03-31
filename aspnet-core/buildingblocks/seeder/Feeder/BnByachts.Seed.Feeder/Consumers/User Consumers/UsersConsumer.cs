@@ -20,18 +20,16 @@ namespace BnByachts.SeedObservable.Consumers
         }
         public async Task Consume(ConsumeContext<IUserContract> context)
         {
-           await  _appUserManager.RegisterUser(new UserRegisterTransferable
-            {
-                Id=context.Message.Id,
-                Password = context.Message.PasswordHash,
-                DOB = context.Message.DOB,
-                Email = context.Message.Email,
-                FirstName = context.Message.Name,
-                UserName = context.Message.UserName,
-                RoleId = context.Message.RoleName
-           }).ConfigureAwait(false);
-
-            
+                await _appUserManager.RegisterUser(new UserRegisterTransferable
+                {
+                    Id = context.Message.Id,
+                    Password = context.Message.PasswordHash,
+                    DOB = context.Message.DOB,
+                    Email = context.Message.Email,
+                    FirstName = context.Message.Name,
+                    UserName = context.Message.UserName,
+                    RoleId = context.Message.RoleName
+                }).ConfigureAwait(false);
         }
     }
 }

@@ -24,7 +24,6 @@
 		<PackageReference Include="Volo.Abp.Swashbuckle" Version="5.1.4" />
 		<PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="4.4.4" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<Compile Remove="Logs\**" />
 		<Content Remove="Logs\**" />

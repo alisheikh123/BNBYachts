@@ -1,0 +1,33 @@
+<div class="main-wrapper">
+    <div class="reservation-page section-padding">
+      <div class="container">
+        <div class="">
+          <h2 class="bold">Reservation</h2>
+          <div class="custom-tabs-wrapper custom-margin">
+            <div class="nav nav-pills custom-tabs-btns" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <button class="underline-link-blk active" id="v-pills-profile-tab" data-bs-toggle="pill"
+              (click)="currentTab = 1;"
+                data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
+                aria-selected="false">
+                {{"BookedServices"|localization}}
+              </button>
+              <button class="underline-link-blk" id="v-pills-settings-tab" data-bs-toggle="pill"
+              (click)="currentTab = 2;"
+                data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings"
+                aria-selected="false">
+                {{"Contracts"|localization}}
+              </button>
+            </div>
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane" [ngClass]="{'active': currentTab == 1}" *ngIf="currentTab == 1" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <!-- <app-booking-requests></app-booking-requests> -->
+              </div>
+              <div class="tab-pane"  [ngClass]="{'active': currentTab == 2}" id="v-pills-settings" role="tabpanel" *ngIf="currentTab == 2" aria-labelledby="v-pills-settings-tab">
+                <app-contract-listing></app-contract-listing>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

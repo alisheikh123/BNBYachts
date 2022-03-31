@@ -47,7 +47,7 @@
                 <p class="grey"> {{charterBooking?.guestCapacity}}</p>
               </div>
               <div class="custom-flex-start character-info py-2">
-                <p class="medium description-fotmat">Departure From :</p>
+                <p class="medium description-fotmat">{{'DepartingFrom' | localization}}:</p>
                 <p class="grey">{{charterBooking?.departingFrom}}</p>
               </div>
 
@@ -91,7 +91,7 @@
 
               <div class="custom-flex-between">
                 <p class="medium">{{"ServiceFee" | localization}}</p>
-                <p class="medium text-right py-1">20.00 $</p>
+                <p class="medium text-right py-1">{{serviceFee?.serviceFee}}.00 $</p>
               </div>
               <div class="custom-flex-between">
                 <p class="medium">{{"Tax" | localization}}</p>
@@ -99,14 +99,13 @@
               </div>
               <div class="custom-flex-between">
                 <p class="medium">{{"Total(USD)" | localization}}</p>
-                <p class="medium text-right py-1">{{(charterBooking?.charterFee) + 20 +
-                  charterBooking?.boat?.taxFee}}.00 $</p>
+                <p class="medium text-right py-1">{{getBasicTotal()}}.00 $</p>
               </div>
 
               <ng-container *ngIf="charterBookingStatus===filters.BOOKING_STATUS.Cancel">
                 <div *ngFor="let item of charterBookingCancelDetail">
                       <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
-                      <p class="medium text-right py-1">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+                      <p class="medium text-right py-1">{{deductedAmount(item)}}.00 $</p>
                       <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
                       <p class="medium text-right py-1" >{{item?.refundAmount}}.00 $</p>
                 </div>
@@ -116,12 +115,12 @@
                 <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
 
                 <div class="custom-flex-between">
-                  <p class="medium">{{charterBooking?.charterFee}} x {{ charterBooking?.totalDays}} Night</p>
-                  <p class="medium text-right py-1">{{charterBooking?.charterFee * charterBooking?.totalDays }}.00 $</p>
+                  <p class="medium">{{charterBooking?.charterFee}} x {{ getTotalGuests()}} {{"Guests" | localization}}</p>
+                  <p class="medium text-right py-1">{{ basicCharges() }}.00 $</p>
                 </div>
                 <div class="custom-flex-between">
                   <p class="medium">{{"ServiceFee" | localization}}</p>
-                  <p class="medium text-right py-1">20.00 $</p>
+                  <p class="medium text-right py-1">{{serviceFee?.serviceFee}}.00 $</p>
                 </div>
                 <div class="custom-flex-between">
                   <p class="medium">{{"Tax" | localization}}</p>
@@ -129,13 +128,12 @@
                 </div>
                 <div class="custom-flex-between">
                   <p class="medium">{{"Total(USD)" | localization}}</p>
-                  <p class="medium text-right py-1">{{(charterBooking?.charterFee * charterBooking?.totalDays) + 20 +
-                    charterBooking?.boat?.taxFee}}.00 $</p>
+                  <p class="medium text-right py-1">{{getTotal()}}.00 $</p>
                 </div>
                 <ng-container *ngIf="charterBookingStatus===filters.BOOKING_STATUS.Cancel">
                   <div *ngFor="let item of charterBookingCancelDetail">
                         <p class="medium">{{"DeductedAmount(USD)" | localization}}</p>
-                        <p class="medium text-right">{{item?.totalAmount - item?.refundAmount}}.00 $</p>
+                        <p class="medium text-right">{{deductedAmount(item)}}.00 $</p>
                         <p class="medium">{{"RefundableAmount(USD)" | localization}}</p>
                         <p class="medium text-right" >{{item?.refundAmount}}.00 $</p>
                   </div>

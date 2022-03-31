@@ -1,4 +1,6 @@
+import * as signalR from '@microsoft/signalr';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 export class utils {
     static formatDate(date: any) {
         let d = new Date(date),
@@ -68,5 +70,25 @@ export class utils {
       static getTime(dateTime:any)
       {
         return moment(dateTime).format("hh:mm a")
+      }
+      static getSignalRConnection()
+      {
+        const connection = new signalR.HubConnectionBuilder()
+          .configureLogging(signalR.LogLevel.Information)
+          .withUrl(environment.NOTIFICATION_APP_URL + '/signalr-hubs/Notification')
+          .build();
+          return connection;
+      }
+      static formatDateTime(date:any) {
+       return moment(date).format('YYYY-MM-DD hh:mm:ss a');
+      }
+      static getremaingHours(date:string){
+       return moment.duration(moment(date).diff(moment())).asHours()
+      }
+      static differenceDateTime(firstDate:any,secondDate:any){
+        var startDate = moment(firstDate, 'DD-MM-YYYY hh:mm:ss a');
+        var EndDate = moment(secondDate, 'DD-MM-YYYY hh:mm:ss a');
+        var Days =  EndDate.diff(startDate, 'days');
+        return Days < 0 ? 0 : Days + 1;
       }
 }

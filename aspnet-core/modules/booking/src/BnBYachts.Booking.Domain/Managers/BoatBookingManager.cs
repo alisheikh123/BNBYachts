@@ -136,7 +136,6 @@ namespace BnBYachts.Booking.Managers
             if (data != null)
             {
                 BookingCancelEntity model = new BookingCancelEntity();
-                var BookingDetail = await _boatelBookingRepository.GetAsync(data.BookingId);
                 string from = "ali.raza@techverx.com";
                 string to = "alisheikh14125@gmail.com";
                 var admin = new MailAddress(from, "BNBYechet");
@@ -165,15 +164,18 @@ namespace BnBYachts.Booking.Managers
                 }
 
                 model.BookingId = data.BookingId;
-                BookingDetail.BookingStatus = data.BookingStatus;
                 model.BookingType = data.BookingType;
                 model.isNotificationSent = data.isNotificationSent;
                 model.Reason = data.Reason;
                 model.UserId = data.UserId;
                 model.RefundAmount = data.RefundAmount;
                 model.TotalAmount = data.TotalAmount;
-                BookingDetail.BookingStatus = BookingStatus.Cancel;
                 await _boatelCanceRepository.InsertAsync(model);
+                await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData(
+                    "Reservation for Boatel {Boat_name} has been cancelled", "Cancel Boatel Reservation",
+                  "",
+                  model.UserId, "", (int)NotificationType.ReservationCancellation, model.BookingId,
+                   0, 0, 0));
                 return true;
             }
             return false;
@@ -187,6 +189,24 @@ namespace BnBYachts.Booking.Managers
                 Data = response
             };
         }
+
+        private static NotificationContract _getNotificationData(string message, string title, string dec, string userto,
+         string userfrom, int notificationType = 0, int bookingId = 0, int eventId = 0, int charterId = 0, int boatId = 0, int boatelId = 0) =>
+     new NotificationContract
+     {
+         EventId = eventId,
+         Message = message,
+         Description = dec,
+         UserTo = userto,
+         UserFrom = userfrom,
+         Title = title,
+         BookingId = bookingId,
+         NotificationType = (NotificationType)notificationType,
+         CharterId = charterId,
+         BoatId = boatId,
+
+
+     };
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using BnBYachts.Booking.Contracts;
 using BnBYachts.Shared.Model;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Threading.Tasks;
 
 namespace BnBYachts.Booking.Interface
@@ -13,6 +14,8 @@ namespace BnBYachts.Booking.Interface
         Task<EntityResponseModel> RejectContract(int contractId,string reason);
         Task<EntityResponseModel> AcceptContract(int contractId);
         Task<EntityResponseModel> EditContract(IFormCollection data, IFormFileCollection files);
+        Task<EntityResponseListModel<ContractsTransferable>> GetContractsServiceProvider(ContractListRequestable data);
+        Task<EntityResponseModel> GetContractsBoats(int serviceProviderId);
 
     }
 }

@@ -33,7 +33,7 @@
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
                                             <label>{{'Address' | localization }}</label>
-                                            <input class="custom-input" formControlName="location"
+                                            <input (keypress)="restrictNegative($event)" class="custom-input" formControlName="location"
                                                 placeholder="{{'EnterEAddress' | localization }}" 
                                                 ngx-google-places-autocomplete
                                                 (onAddressChange)="handleAddressChange($event)"/>
@@ -42,15 +42,15 @@
                                     </div>  
                                     <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
-                                            <label>{{'Bio' | localization }}</label>
-                                            <textarea rows="5" type="text" class="custom-input" formControlName="bio" placeholder="{{'EnterBio' | localization }}" > </textarea>
-                                            <small class="text-danger" *ngIf="captainForm.bio.touched && !captainForm.bio.valid">{{ 'Biorequired' | localization }}</small>
+                                            <label>{{'Description' | localization }}</label>
+                                            <textarea (keypress)="restrictNegative($event)" rows="4" type="text" class="custom-input" formControlName="description" placeholder="{{'EnterDescription'  | localization }}}}" > </textarea>
+                                            <small class="text-danger" *ngIf="captainForm.description.touched && !captainForm.description.valid">{{'vDescriptionRequired' | localization }}</small>
                                           </div>
-                                      </div>
+                                      </div> 
                                       <div class="col-md-6 py-2">
                                         <div class="custom-input-field">
                                             <label>{{'Experience' | localization }}</label>
-                                            <input (keypress)="restrictNumeric($event)" type="number" class="custom-input" formControlName="experience" placeholder="{{'EnterExperience' | localization }}" /> 
+                                            <input (keypress)="restrictNegative($event)" type="number" class="custom-input" formControlName="experience" placeholder="{{'EnterExperience' | localization }}" /> 
                                             <small class="text-danger" *ngIf="captainForm.experience.touched && !captainForm.experience.valid">{{'Experiencerequired.'| localization }}</small>
                                           </div>
                                       </div>
@@ -72,7 +72,7 @@
                                 <div class="col-md-6 py-2">
                                     <div class="custom-input-field">
                                         <label>{{'CaptainFee' | localization }}</label>
-                                        <input (keypress)="restrictNumeric($event)" type="number" class="custom-input" formControlName="fee" placeholder="{{'EnterAmount' | localization }}" /> 
+                                        <input (keypress)="restrictNegative($event)" type="number" class="custom-input" formControlName="fee" placeholder="{{'EnterAmount' | localization }}" /> 
                                         <small class="text-danger" *ngIf="captainForm.fee.touched && !captainForm.fee.valid">{{'Amountrequired'| localization }}</small>
                                       </div>
                                     </div>
@@ -80,7 +80,7 @@
                                         <div class="custom-input-field">
                                             <div class="d-inline custmradio">
                                             <div class="form-check form-check-inline">
-                                                <input formControlName="paymentOption" class="form-check-input" form type="radio"  value="1">
+                                                <input  formControlName="paymentOption" class="form-check-input" form type="radio"  value="1">
                                                 <label class="form-check-label" for="inlineRadio1">{{'PerHour'| localization }}</label>
                                               </div>
                                               <div class="form-check form-check-inline">
@@ -133,7 +133,7 @@
                                 <div class="col-md-6 py-2">
                                     <div class="custom-input-field">
                                         <label>{{'AccountName' | localization }}</label>
-                                        <input type="text" class="custom-input" formControlName="accountName"
+                                        <input (keypress)="restrictNegative($event)" type="text" class="custom-input" formControlName="accountName"
                                         placeholder="{{'EnterAccountName'| localization }}" />
                                         <small class="text-danger" *ngIf="captainForm.accountName.touched && !captainForm.accountName.valid">{{'AccountNamerequired'| localization }} </small>
                                       </div>
@@ -141,7 +141,7 @@
                                   <div class="col-md-6 py-2">
                                     <div class="custom-input-field">
                                         <label>{{'BankName' | localization }}</label>
-                                        <input type="text" class="custom-input" formControlName="bankName"
+                                        <input (keypress)="restrictNegative($event)" type="text" class="custom-input" formControlName="bankName"
                                         placeholder="{{'EnterBankName' | localization }}" />
                                         <small class="text-danger" *ngIf="captainForm.bankName.touched && !captainForm.bankName.valid">{{'BankNamerequired' | localization }}</small>
                                       </div>
@@ -149,7 +149,7 @@
                                   <div class="col-md-6 py-2">
                                     <div class="custom-input-field">
                                         <label>{{'ZipCode' | localization }}</label>
-                                        <input type="text" class="custom-input" formControlName="zipCode"
+                                        <input (keypress)="restrictNegative($event)" type="text" class="custom-input" formControlName="zipCode"
                                         placeholder="{{'EnterZipCode' | localization }}" />
                                         <small class="text-danger" *ngIf="captainForm.zipCode.touched && !captainForm.zipCode.valid">{{'ZipCoderequired' | localization }}</small>
                                       </div>
@@ -157,7 +157,7 @@
                                   <div class="col-md-6 py-2">
                                     <div class="custom-input-field">
                                         <label>{{'SWIFT' | localization }}</label>
-                                        <input type="text" class="custom-input" formControlName="swift"
+                                        <input (keypress)="restrictNegative($event)" type="text" class="custom-input" formControlName="swift"
                                         placeholder="{{'EnterSWIFT' | localization }}" />
                                         <small class="text-danger" *ngIf="captainForm.swift.touched && !captainForm.swift.valid">{{'SWIFTrequired'| localization }}</small>
                                       </div>
@@ -165,7 +165,7 @@
                                   <div class="col-md-6 py-2">
                                     <div class="custom-input-field">
                                         <label>{{'IBAN' | localization }}</label>
-                                        <input type="text" class="custom-input" formControlName="iban"
+                                        <input (keypress)="restrictNegative($event)" type="text" class="custom-input" formControlName="iban"
                                         placeholder="{{'EnterIBAN' | localization }}" />
                                         <small class="text-danger" *ngIf="captainForm.iban.touched && !captainForm.iban.valid">{{'IBANrequired' | localization }}</small>
                                       </div>
