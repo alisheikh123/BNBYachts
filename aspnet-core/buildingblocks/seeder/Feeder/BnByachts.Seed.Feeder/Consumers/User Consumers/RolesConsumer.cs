@@ -19,16 +19,24 @@ namespace BnByachts.SeedObservable.Consumers
         }
         public async Task Consume(ConsumeContext<IRolesContract> context)
         {
-            await _appUserManager.AddRoles(new RolesTransferable
+            try
             {
-                Id = context.Message.Id,
-                Name= context.Message.Name,
-                NormalizedName = context.Message.NormalizedName,
-                IsStatic = context.Message.IsStatic,
-                IsDefault = context.Message.IsDefault,
-                IsPublic = context.Message.IsPublic
+                await _appUserManager.AddRoles(new RolesTransferable
+                {
+                    Id = context.Message.Id,
+                    Name = context.Message.Name,
+                    NormalizedName = context.Message.NormalizedName,
+                    IsStatic = context.Message.IsStatic,
+                    IsDefault = context.Message.IsDefault,
+                    IsPublic = context.Message.IsPublic
 
-            }).ConfigureAwait(false);
+                }).ConfigureAwait(false);
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -1,30 +1,11 @@
-﻿using BnBYachts.Notification.Localization;
-using Volo.Abp.AuditLogging;
-using Volo.Abp.BackgroundJobs;
-using Volo.Abp.FeatureManagement;
-using Volo.Abp.Identity;
-using Volo.Abp.IdentityServer;
-using Volo.Abp.Localization;
-using Volo.Abp.Localization.ExceptionHandling;
+﻿using Volo.Abp.AuditLogging;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.SettingManagement;
-using Volo.Abp.TenantManagement;
-using Volo.Abp.Validation.Localization;
-using Volo.Abp.VirtualFileSystem;
 
 namespace BnBYachts.Notification
 {
 
     [DependsOn(
-        typeof(AbpAuditLoggingDomainSharedModule),
-        typeof(AbpBackgroundJobsDomainSharedModule),
-        typeof(AbpFeatureManagementDomainSharedModule),
-        typeof(AbpIdentityDomainSharedModule),
-        typeof(AbpIdentityServerDomainSharedModule),
-        typeof(AbpPermissionManagementDomainSharedModule),
-        typeof(AbpSettingManagementDomainSharedModule),
-        typeof(AbpTenantManagementDomainSharedModule)
+        typeof(AbpAuditLoggingDomainSharedModule)
     )]
     public class NotificationDomainSharedModule : AbpModule
     {
@@ -36,25 +17,25 @@ namespace BnBYachts.Notification
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.AddEmbedded<NotificationDomainSharedModule>();
-            });
+            //Configure<AbpVirtualFileSystemOptions>(options =>
+            //{
+            //    options.FileSets.AddEmbedded<NotificationDomainSharedModule>();
+            //});
 
-            Configure<AbpLocalizationOptions>(options =>
-            {
-                options.Resources
-                    .Add<NotificationResource>("en")
-                    .AddBaseTypes(typeof(AbpValidationResource))
-                    .AddVirtualJson("/Localization/Notification");
+            //Configure<AbpLocalizationOptions>(options =>
+            //{
+            //    options.Resources
+            //        .Add<NotificationResource>("en")
+            //        .AddBaseTypes(typeof(AbpValidationResource))
+            //        .AddVirtualJson("/Localization/Notification");
 
-                options.DefaultResourceType = typeof(NotificationResource);
-            });
+            //    options.DefaultResourceType = typeof(NotificationResource);
+            //});
 
-            Configure<AbpExceptionLocalizationOptions>(options =>
-            {
-                options.MapCodeNamespace("Notification", typeof(NotificationResource));
-            });
+            //Configure<AbpExceptionLocalizationOptions>(options =>
+            //{
+            //    options.MapCodeNamespace("Notification", typeof(NotificationResource));
+            //});
         }
     }
 }

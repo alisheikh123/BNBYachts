@@ -1,4 +1,6 @@
-﻿using BnBYachts.Payments.Enum;
+﻿using BnBYachts.EventBusShared;
+using BnBYachts.EventBusShared.Contracts;
+using BnBYachts.Payments.Enum;
 using BnBYachts.Payments.Payments;
 using BnBYachts.Payments.Requestables;
 using BnBYachts.Payments.Shared.Interface;
@@ -24,8 +26,14 @@ namespace BnBYachts.Payments.Managers
         private readonly IRepository<PaymentDetailsEntity, int> _userPaymentDetailsRepository;
         private readonly IRepository<UserBankDetailsEntity, int> _userBankRepository;
         private readonly IConfiguration _config;
-
-        public PaymentManager(IRepository<UserCardInfoEntity, int> userCardRepository, IRepository<PaymentDetailsEntity, int> userPaymentDetailsRepository, IRepository<UserBankDetailsEntity, int> userBankRepository, IConfiguration config)
+        private readonly EventBusDispatcher _eventBusDispatcher;
+        public PaymentManager(IRepository<UserCardInfoEntity, 
+            int> userCardRepository, 
+            IRepository<PaymentDetailsEntity,
+                int> userPaymentDetailsRepository, 
+            IRepository<UserBankDetailsEntity, int> userBankRepository,
+            IConfiguration config,
+            EventBusDispatcher eventBusDispatcher)
         {
             //var configurationBuilder = new ConfigurationBuilder()
             //             .SetBasePath(Directory.GetCurrentDirectory())
@@ -36,6 +44,7 @@ namespace BnBYachts.Payments.Managers
             _userPaymentDetailsRepository = userPaymentDetailsRepository;
             _userBankRepository = userBankRepository;
             _config = config;
+            _eventBusDispatcher = eventBusDispatcher;
             StripeConfiguration.ApiKey = _config.GetSection("Stripe")["ApiKey"];
         }
 
@@ -149,6 +158,35 @@ namespace BnBYachts.Payments.Managers
                     Status = PaymentStatus.Escrow
                 };
                 await _userPaymentDetailsRepository.InsertAsync(pm);
+                if (data.BookingType == Enum.BookingType.Boatel)
+                {
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData(
+                               "Payment has been made for {boatName} reservation",
+                               "Boatel Reservation Payment", "",
+                               "", data.UserId,
+                               (int)NotificationType.PaymentOnHold,
+                               data.BookingId.Value));
+                }
+                if (data.BookingType == Enum.BookingType.Charter)
+                {
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData(
+                               "Payment Has been Received made {boatName} reservation",
+                               "Charter Reservation Payment", "",
+                               "", data.UserId,
+                               (int)NotificationType.PaymentOnHold,
+                               data.BookingId.Value));
+                }
+                if (data.BookingType == Enum.BookingType.Event)
+                {
+                    await _eventBusDispatcher.Publish<INotificationContract>(_getNotificationData(
+                               "Payment Has been made From {boatName} reservation",
+                               "Event Reservation Payment", "",
+                               "", data.UserId,
+                               (int)NotificationType.PaymentOnHold,
+                               data.BookingId.Value));
+                }
+                await _userPaymentDetailsRepository.InsertAsync(pm);
+                
                 return new EntityResponseModel
                 {
                     ReturnStatus = true
@@ -389,5 +427,21 @@ namespace BnBYachts.Payments.Managers
               options);
             return JsonConvert.SerializeObject(charges.Data);
         }
+
+        private static NotificationContract _getNotificationData(string message, string title, string dec, string userto,
+         string userfrom, int notificationType = 0, int bookingId = 0) =>
+     new NotificationContract
+     {
+         Message = message,
+         Description = dec,
+         UserTo = userto,
+         UserFrom = userfrom,
+         Title = title,
+         BookingId = bookingId,
+         NotificationType = (NotificationType)notificationType,
+
+
+
+     };
     }
 }

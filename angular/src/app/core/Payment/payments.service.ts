@@ -25,15 +25,11 @@ export class PaymentsService {
   pay(data: any):Observable<EntityResponseModel> {
     return this.http.post<EntityResponseModel>(this.paymentsApiUrl + '/api/app/stripe-account/pay', data).pipe(catchError(this.handleError));
   }
-
-  ///Exception handler
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Get client-side error
       errorMessage = error.error.message;
     } else {
-      // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     return throwError(errorMessage);
