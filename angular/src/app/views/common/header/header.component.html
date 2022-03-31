@@ -123,7 +123,7 @@
                                         <!-- Notification -->
                                 <a placement="bottom" placement="bottom" ngbTooltip="Notification" (click)="openNotification()">
                                     <i class="fas fa-bell fa-lg"> </i>
-                                    <span class="badge rounded-pill badge-notification bg-danger">{{notificationCount}}</span>
+                                    <span class="badge rounded-pill badge-notification bg-danger">{{(notificationCount==0)?"":notificationCount}}</span>
 
                                 </a>
 

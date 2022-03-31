@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
   isHost: boolean;
 
 
-  notificationCount: number;
+  notificationCount: number = 0;
   messages: any;
   errorMessage = '';
 
@@ -59,6 +59,7 @@ export class HeaderComponent implements OnInit {
     byHost: false,
     byServiceProvider: false
   };
+  
   @ViewChild(ChatComponent) chatComponent: ChatComponent;
   constructor(public router: Router,
     public app: AppComponent,
@@ -67,11 +68,17 @@ export class HeaderComponent implements OnInit {
     private oidcSecurityService: OidcSecurityService,
     private authService: AuthService,
     private chatService: ChatService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService) {
+      this.notificationService.notificationGenerated$.subscribe(()=>{
+            this.notificationCount++;
+      });
+     }
   activeTab: number = 0;
   HEADER_TABS = HeaderTabs;
 
   ngOnInit(): void {
+    setInterval(()=> { this.notificationService.addNotification('data') }, 5000);
+    
     this.oidcSecurityService
       .checkAuth()
       .subscribe((res: any) => {

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorService } from 'src/app/core/Error/error.service';
 import { environment } from 'src/environments/environment';
@@ -11,7 +11,12 @@ import { environment } from 'src/environments/environment';
 export class NotificationService {
 
   private notificationsUrl = environment.NOTIFICATION_APP_URL +'/api/app/in-app-notification';
+private notificationGenerated = new Subject<any>();
 
+notificationGenerated$ = this.notificationGenerated.asObservable();
+addNotification(obj:any){
+this.notificationGenerated.next(obj);
+}
   constructor(private http: HttpClient,private errorService: ErrorService) { }
 
   getNotificationCount(){
