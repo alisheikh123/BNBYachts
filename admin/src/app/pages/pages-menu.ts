@@ -82,6 +82,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Services Fee',
         link: '/pages/settings/servicesFee',
+      }, 
+      {
+        title: 'News Letter',
+        link: '/pages/settings/newsletter',
+      },
+      {
+        title: 'Subscribe User',
+        link: '/pages/settings/subscribeusers',
       }
     ]
   },

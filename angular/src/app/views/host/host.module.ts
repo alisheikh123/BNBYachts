@@ -41,6 +41,9 @@ import { ContractsService } from 'src/app/core/contracts/contracts.service';
 import { HostContractListingComponent } from './boatel-bookings/host-contract-listing/host-contract-listing.component';
 import { ContractsModule } from '../contracts/contracts.module';
 import { WalletModule } from './wallet/wallet.module';
+import { BoatsLocationMapComponent } from './boats-location-map/boats-location-map.component';
+import { ChartersLocationMapComponent } from './charters-location-map/charters-location-map.component';
+import { EventsLocationMapComponent } from './events-location-map/events-location-map.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -72,7 +75,10 @@ CharterLocationSettingComponent,
 EventLocationSettingComponent,
 CalendarScheduleComponent,
 HostReservationCancellationComponent,
-HostContractListingComponent
+HostContractListingComponent,
+BoatsLocationMapComponent,
+ChartersLocationMapComponent,
+EventsLocationMapComponent
   ],
   imports: [
     HostRoutingModule,

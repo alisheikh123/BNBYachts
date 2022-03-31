@@ -16,6 +16,7 @@ export class HostListingComponent implements OnInit {
   source: BoatUser[];
   settings = {
     actions: {
+      columnTitle :"Action",
       add: false,
       edit:false,
       delete: false,
