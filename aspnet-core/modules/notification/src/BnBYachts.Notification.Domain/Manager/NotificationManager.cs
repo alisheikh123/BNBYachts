@@ -30,6 +30,7 @@ namespace BnBYachts.Notification.Manager
         public async Task<EntityResponseModel> Insert(NotificationTransferable input)
         {
             //use auto map
+
                 NotificationEntity n = new NotificationEntity();
                 n.NotificationType = input.NotificationType;
                 n.UserTo = input.UserTo;
