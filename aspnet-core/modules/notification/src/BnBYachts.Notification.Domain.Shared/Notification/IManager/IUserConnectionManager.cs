@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
 namespace BnBYachts.Notification.Notification.IManager
 {
     public interface IUserConnectionManager : ITransientDependency
     {
-        void KeepUserConnection(string userId, string connectionId);
-        void RemoveUserConnection(string connectionId);
-        List<string> GetUserConnections(string userId);
+        Task KeepUserConnection(string userId, string connectionId);
+        Task RemoveUserConnection(string connectionId);
+        Task<Tuple<string,string>> GetUserConnections(string userId);
     }
 }
