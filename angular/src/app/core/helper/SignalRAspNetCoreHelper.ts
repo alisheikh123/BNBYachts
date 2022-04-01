@@ -1,4 +1,4 @@
-import { HubConnection, HubConnectionBuilder} from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
@@ -28,15 +28,19 @@ export class SignalRAspNetCoreHelper {
 
     private createConnection() {
         this._hubConnection = new HubConnectionBuilder()
-            .withUrl(environment.NOTIFICATION_APP_URL + "signalr-hubs/Notification")
+            .withUrl(environment.NOTIFICATION_APP_URL + "signalr-hubs/Notification?&userId="+this.getUserId())
             .build();
+    }
+
+    private getUserId() {
+        return localStorage.getItem('userId')?.toString() || "";
     }
 
     private startConnection() {
         this._hubConnection
             .start()
             .then(() => {
-               
+
                 this._hubConnection.invoke('GetConnectionId').then((connectionId) => {
                     console.log(connectionId)
                 });
