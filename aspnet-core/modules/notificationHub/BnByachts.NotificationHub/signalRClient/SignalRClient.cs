@@ -7,7 +7,7 @@ namespace BnByachts.NotificationHub.signalRClient
     public class SignalRClient
     {
        private readonly HubConnection _connection;
-        public SignalRClient(string url= "")
+        public SignalRClient(string url="http://notification.bnb.techverxapps.com/signalr-hubs/Notification")
         {
             //
 
