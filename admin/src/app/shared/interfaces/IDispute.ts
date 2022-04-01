@@ -4,7 +4,7 @@ export interface IDispute{
     id : number;
     bookingId : number
     disputeReason : string
-    bookingType : string
+    bookingType : number
     reason : string
     statusName : string
     status : number

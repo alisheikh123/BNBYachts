@@ -14,6 +14,8 @@ namespace BnBYachts.Core.ServiceProvider.Transferable
         public string UserId { get; set; }
         public string CompanyName { get; set; }
         public string CompanyProfilePicture { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
         public double Latitude { get; set; }

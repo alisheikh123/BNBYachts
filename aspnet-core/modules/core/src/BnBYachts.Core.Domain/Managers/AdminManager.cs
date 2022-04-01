@@ -25,12 +25,13 @@ namespace BnBYachts.Core.Managers
     {
         private readonly IdentityUserManager _userManager;
         private readonly IRepository<IdentityUser, Guid> _repository;
+        private readonly IRepository<IdentityRole, Guid> _roleRepository;
         private readonly IConfiguration _config;
         private readonly IObjectMapper<CoreDomainModule> _objectMapper;
         private readonly EventBusDispatcher _eventBusDispatcher;
 
 
-        public AdminManager(IdentityUserManager userManager, IObjectMapper<CoreDomainModule> objectMapper,
+        public AdminManager(IdentityUserManager userManager, IObjectMapper<CoreDomainModule> objectMapper, IRepository<IdentityRole, Guid> roleRepository,
             IRepository<IdentityUser, Guid> repository, IConfiguration config, EventBusDispatcher eventBusDispatcher)
         {
             _userManager = userManager;
@@ -38,6 +39,7 @@ namespace BnBYachts.Core.Managers
             _repository = repository;
             _config = config;
             _eventBusDispatcher = eventBusDispatcher;
+            _roleRepository = roleRepository;
         }
         public async Task<List<BoatUserTransferable>> GetBoatOwersAndUsers(string roleName)
         {
@@ -151,5 +153,8 @@ namespace BnBYachts.Core.Managers
             }
             return response;
         }
+
+        public async Task<EntityResponseModel> GetRolesList()
+          => new EntityResponseModel { Data = _objectMapper.Map<List<IdentityRole>, List<RolesTransferable>>(await _roleRepository.GetListAsync().ConfigureAwait(false)) };
     }
 }

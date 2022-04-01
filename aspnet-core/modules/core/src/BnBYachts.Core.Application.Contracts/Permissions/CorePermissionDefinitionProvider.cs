@@ -10,7 +10,9 @@ namespace BnBYachts.Core.Permissions
         {
             var myGroup = context.AddGroup(CorePermissions.GroupName);
             //Define your own permissions here. Example:
-            //myGroup.AddPermission(CorePermissions.MyPermission1, L("Permission:MyPermission1"));
+            var newsLetterPermission = myGroup.AddPermission(CorePermissions.CoreNewsLetterPermissions.Default, L("Permission:Core"));
+            newsLetterPermission.AddChild(CorePermissions.CoreNewsLetterPermissions.View, L("Permission:NewsLetter.View"));
+            newsLetterPermission.AddChild(CorePermissions.CoreNewsLetterPermissions.Create, L("Permission:NewsLetter.Create"));
         }
 
         private static LocalizableString L(string name)

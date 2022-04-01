@@ -32,29 +32,38 @@ export class UserListingComponent implements OnInit {
       name: {
         title: 'Name',
         type: 'string',
+        width:'20%'
       },
       email: {
         title: 'Email',
         type: 'string',
+        width:'25%'
+      },
+      emailConfirmed: {
+        title: 'Email Verified',
+        type: 'boolean',
+        width:'15%',
+        valuePrepareFunction: (emailConfirmed) => {
+          return emailConfirmed ? 'Yes' : 'No';
+      },
       },
       phoneNumber: {
         title: 'Phone',
         type: 'string',
+        width:'10%'
       },
       phoneNumberConfirmed: {
         title: 'Phone Verified',
         type: 'boolean',
+        width:'15%',
+        valuePrepareFunction: (phoneNumberConfirmed) => {
+          return phoneNumberConfirmed ? 'Yes' : 'No';
       },
-      creationTime: {
-        title: 'Joining Date',
-        type: 'Date',
-        valuePrepareFunction: (created) => {
-          return this.datePipe.transform(new Date(created), 'MM/dd/yyyy');
       },
-    },
      isActive: {
         title: 'Status',
         type: 'custom',
+        width:'10%',
         filter: false,
         renderComponent: StatusComponent,
         valuePrepareFunction: (value, row, cell) => {
