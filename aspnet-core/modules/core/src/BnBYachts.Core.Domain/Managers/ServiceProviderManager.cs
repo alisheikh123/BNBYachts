@@ -77,6 +77,8 @@ namespace BnBYachts.Core.Managers
             var result = _objectMapper.Map<ServiceProviderEntity, ServiceProviderTransferable>(res);
                 var userInfo = await _appUserManager.GetUserDetailsById(result.UserId).ConfigureAwait(false);
                 result.UserName = userInfo.Name;
+                result.Email = userInfo.Email;
+                result.PhoneNumber = userInfo.PhoneNumber;
                 result.UserImagePath = userInfo.ImagePath;
             response.Data = result;
             _logger.LogInformation("Service Provider Details Fetched Successfully");
@@ -118,6 +120,8 @@ namespace BnBYachts.Core.Managers
             {
                 var userInfo = await _appUserManager.GetUserDetailsById(item.UserId).ConfigureAwait(false);
                 item.UserName = userInfo.Name;
+                item.Email = userInfo.Email;
+                item.PhoneNumber = userInfo.PhoneNumber;
                 item.UserImagePath = userInfo.ImagePath;
             }
             response.Data = result;

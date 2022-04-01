@@ -84,5 +84,14 @@ export class AuthService {
   checkAdminRole(userId : string) {
     return this.http.get(this.apiCoreURl + "/api/app/user/check-admin-role-name/"+userId);
   }
+  boatDetailsById(id: any) {
+    return this.http.get(this.apiCoreURl + '/app/host-boat/boat-details-by-id/' + id);
+  }
+  charterDetailsById(id: number) {
+    return this.http.get(this.apiCoreURl + '/app/host-boat/charter-details-by-id/' + id);
+  }
+  eventDetailsById(id: number) {
+    return this.http.get(this.apiCoreURl + '/app/host-boat/event-details-by-id/' + id);
+  }
 }
 

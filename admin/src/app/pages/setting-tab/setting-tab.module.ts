@@ -14,13 +14,13 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbCardModule,
     NgbModule,
     SettingTabRoutingModule,
-    Ng2SmartTableModule,
+    Ng2SmartTableModule 
   ],
   declarations: [
-    ...routedComponents,
+    ...routedComponents
   ],
   providers: [
-    NgbModal
+    NgbModal,
   ]
 })
 export class SettingTabModule { }

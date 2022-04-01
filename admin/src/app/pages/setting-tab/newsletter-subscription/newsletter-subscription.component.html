@@ -1,7 +1,8 @@
 <nb-card>
     <nb-card-header>
      <span> News Letter</span>
-     <span class="btn-floating"><button type="button" (click)="openLg(content)" class="btn btn-primary" >Add News Letter</button></span>
+     <!-- *abpPermission="'Core.NewsLetter.Create'" -->
+     <span  class="btn-floating"><button type="button" (click)="openLg(content)" class="btn btn-primary" >Add News Letter</button></span>
       </nb-card-header>
     <nb-card-body>
       <ng2-smart-table class="order-table" [settings]="settings" [source]="source" (custom)="onCustomAction(contents,contentDa,$event)">
@@ -96,9 +97,9 @@
     <div class="modal-content">
       <div class="modal-header no-border">
         <h4 class="bold">Update News Letter</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="newsLetterForm" (ngSubmit)="onSubmit()">
@@ -160,7 +161,7 @@
               </div>
             </div>
           </div>
-        </form>
+        </form> 
       </div>
     </div>
   </ng-template>
