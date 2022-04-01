@@ -1,9 +1,10 @@
 import { AddMarket, MarketData, Markets } from './../../../shared/interfaces/Market';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MarketingType } from '../../../shared/enums/MarketingType';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
 
 @Component({
   selector: 'ngx-marketing-page',
@@ -17,6 +18,8 @@ export class MarketingPageComponent implements OnInit {
   closeResult: string;  
   MarketingType = MarketingType;
   modalRef : any;
+  @ViewChild('contents') delete : ElementRef;
+  @ViewChild('contentData') edit : ElementRef;
   source: Markets[];
   faqsData : AddMarket;
   reasons = [{
@@ -45,24 +48,7 @@ export class MarketingPageComponent implements OnInit {
   }
 ]
   settings = {
-    actions: {
-      columnTitle :"Action",
-      mode :'external',
-      add: false,
-      edit:false,
-      delete: false,
-      position: 'right',
-      custom: [
-      { 
-        name: 'onEditAction', 
-        title: '<i class="nb-edit" title="onEditAction"></i>',
-      },
-      { 
-        name: 'deleteMarketPage', 
-        title: '<i class="nb-trash" title="deleteMarketPage"></i>'
-      }
-    ],
-    },
+    actions: false,
     columns: {
       marketingType: {
         title: 'Type',
@@ -77,6 +63,24 @@ export class MarketingPageComponent implements OnInit {
         return value.substring(0, 60)+'...';
         } 
     },
+    operation:{
+      title:"",
+      type: 'custom',
+      filter : false,
+      renderComponent: ActionListComponent,
+      onComponentInitFunction:(instance) => {
+      instance.actionEmitter.subscribe(row => {
+        instance.dataEmitter.subscribe(data => {
+          if (row == 'onEditAction') {
+            this.onEditAction(this.edit,data);
+          }
+          if (row == 'onDeleteAction') {
+            this.onDeleteAction(this.delete,data.id);
+          }
+        }) 
+      });
+     }
+   }
   }
 };
   constructor(private fb: FormBuilder, private marketService: MarketData ,private activeModal: NgbActiveModal, private modalService : NgbModal, private toaster : NbToastrService) {
@@ -148,16 +152,6 @@ export class MarketingPageComponent implements OnInit {
     }
     this.cleanup = true;
   }
-  onCustomAction(contents, contentData,event){
-    switch (event.action) {
-      case 'onEditAction':
-        this.onEditAction(contentData, event.data);
-        break;
-     case 'deleteMarketPage':
-       this.deleteMarketPage(contents,event.data.id);
-    }
-   
-  }
 
   private getDismissReason(reason: any): string {  
     if (reason === ModalDismissReasons.ESC) {  
@@ -168,7 +162,7 @@ export class MarketingPageComponent implements OnInit {
       return `with: ${reason}`;  
     }  
   }  
-  deleteMarketPage(contents,id) {
+  onDeleteAction(contents,id) {
     if (id > 0) {
       this.modalService.open(contents, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
         this.closeResult = `Closed with: ${result}`;  

@@ -1,11 +1,12 @@
 import { City, MarketData, AddCity } from './../../../shared/interfaces/Market';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NbToastrService } from '@nebular/theme';
 import { environment } from '../../../../environments/environment';
 import { DatePipe } from '@angular/common';
 import { cityPicTransferable } from '../../../shared/interfaces/cityPicTransferable';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
 
 @Component({
   selector: 'ngx-featured-cities',
@@ -18,27 +19,13 @@ export class FeaturedCitiesComponent implements OnInit {
   citiesPic : string;
   fileInfo : string ='';
   closeResult: string;
+  @ViewChild('contents') delete : ElementRef;
+  @ViewChild('contentData') edit : ElementRef;
   featureCityPic : cityPicTransferable;
   source: City[];
   addCity:AddCity;
   settings = {
-    actions: {
-      columnTitle :"Action",
-      add: false,
-      edit:false,
-      delete: false,
-      position: 'right',
-      custom: [
-      { 
-        name: 'onEditAction', 
-        title: '<i class="nb-edit" title="onEditAction"></i>',
-      },
-      { 
-        name: 'deleteCity', 
-        title: '<i class="nb-trash" title="deleteCity"></i>'
-      }
-    ],
-    },
+    actions: false,
     columns: {
       name: {
         title: 'Location',
@@ -53,6 +40,24 @@ export class FeaturedCitiesComponent implements OnInit {
            return value.substring(0, 49)+'...';
         } 
       },
+      operation:{
+        title:"",
+        type: 'custom',
+        filter : false,
+        renderComponent: ActionListComponent,
+        onComponentInitFunction:(instance) => {
+        instance.actionEmitter.subscribe(row => {
+          instance.dataEmitter.subscribe(data => {
+            if (row == 'onEditAction') {
+              this.onEditAction(this.edit,data);
+            }
+            if (row == 'onDeleteAction') {
+              this.onDeleteAction(this.delete,data.id);
+            }
+          }) 
+        });
+       }
+     }
   }
 };
   constructor(private fb: FormBuilder,private datePipe : DatePipe ,private marketService: MarketData , private modalService : NgbModal, private toaster : NbToastrService) { }
@@ -109,17 +114,6 @@ export class FeaturedCitiesComponent implements OnInit {
       });
     }
   }
-  onCustomAction(contents,contentDa, event){
-    switch (event.action) {
-      case 'onEditAction':
-        this.onEditAction(contentDa, event.data);
-        break;
-     case 'deleteCity':
-       this.deleteCity(contents,event.data.id);
-    }
-   
-  }
-
   private getDismissReason(reason: any): string {  
     if (reason === ModalDismissReasons.ESC) {  
       return 'by pressing ESC';  
@@ -129,7 +123,7 @@ export class FeaturedCitiesComponent implements OnInit {
       return `with: ${reason}`;  
     }  
   }  
-  deleteCity(contents,cityId) {
+  onDeleteAction(contents,cityId) {
     if (cityId > 0) {
       this.modalService.open(contents, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
         this.closeResult = `Closed with: ${result}`;  

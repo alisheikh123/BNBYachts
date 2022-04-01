@@ -1,7 +1,8 @@
+import { id } from '@swimlane/ngx-charts';
 import { NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Faqs, FaqsData, AddFaqs } from './../../../shared/interfaces/Faqs';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { QuestionCategory } from '../../../shared/enums/QuestionsCategory';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
@@ -12,11 +13,15 @@ import { ActionListComponent } from '../../../shared/common/action-list/action-l
   styleUrls: ['./faqs-listing.component.scss']
 })
 export class FaqsListingComponent implements OnInit, OnDestroy {
+  viewShow : boolean;
+  @Output() newItemEvent = new EventEmitter<boolean>();
   faqsForm: FormGroup;
   cleanup : boolean;
   closeResult: string;  
   QuestionCategories = QuestionCategory;
   modalRef : any;
+  @ViewChild('contents') delete : ElementRef;
+  @ViewChild('contentData') edit : ElementRef;
   source: Faqs[];
   faqsData : AddFaqs;
   reasons = [{
@@ -37,42 +42,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
   }
 ]
   settings = {
-    actions: {
-      columnTitle :"Action",
-      mode :'external',
-      add: false,
-      edit:false,
-      delete: false,
-      position: 'right',
-      custom : [{
-        type:'html',
-        title:'<div class="btn-group"><button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button><div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a></div></div>',
-      // renderComponent: ActionListComponent,
-      // valuePrepareFunction:(cell,row)=>{
-      //   debugger;
-      // return '<a title="See Detail Product "href="Your api key or something/${row.Id}"> <i class="ion-edit"></i></a>'
-      // }
-    }],
-    //   custom: [
-    //     {
-    //       type: 'custom',
-    //       // title : ''
-    //       // title : '<div class="btn-group"><button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button><div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a></div></div>',
-    //     renderComponent: ActionListComponent,
-    //     valuePrepareFunction: (value, row, cell) => {
-    //         return row;
-    //     },
-    //     }
-    //   // { 
-    //   //   name: 'onEditAction', 
-    //   //   title: '<i class="nb-edit" title="onEditAction"></i>',
-    //   // },
-    //   // { 
-    //   //   name: 'deleteFaqs', 
-    //   //   title: '<i class="nb-trash" title="deleteFaqs"></i>'
-    //   // }
-    // ],
-    },
+    actions : false,
     columns: {
       questionCategory: {
         title: 'Category',
@@ -95,6 +65,24 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
         return value.substring(0, 49)+'...';
         } 
     },
+    operation:{
+      title:"",
+      type: 'custom',
+      filter : false,
+      renderComponent: ActionListComponent,  
+      onComponentInitFunction:(instance) => {
+      instance.actionEmitter.subscribe(row => {
+        instance.dataEmitter.subscribe(data => {
+          if (row == 'onEditAction') {
+            this.onEditAction(this.edit,data);
+          }
+          if (row == 'onDeleteAction') {
+            this.onDeleteAction(this.delete,data.id);
+          }
+        }) 
+      });
+     }
+   }
   }
 };
   constructor(private fb: FormBuilder, private faqsService: FaqsData ,private activeModal: NgbActiveModal, 
@@ -105,6 +93,8 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
     this.cleanup == false;
   }
   ngOnInit() {
+    this.viewShow = true;
+    this.newItemEvent.emit(this.viewShow);
     this.faqsForm = this.fb.group({
       id :[0],
       categoryId: [null, Validators.required],
@@ -148,7 +138,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
   onSubmit() {
     var faqsData = this.faqsForm.value;
     if (faqsData.id > 0) {
-      this.faqsService.UpdateFaqs(faqsData).subscribe(response =>{
+      this.faqsService.UpdateFaqs(faqsData).subscribe(response =>{ 
       this.toaster.primary('Faqs updated successfully', 'Faqs');
       this.resetForm();
       this.modalService.dismissAll();
@@ -165,17 +155,6 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
     }
     this.cleanup = true;
   }
-  onCustomAction(contents, contentData,event){
-    switch (event.action) {
-      case 'onEditAction':
-        this.onEditAction(contentData, event.data);
-        break;
-     case 'deleteFaqs':
-       this.deleteFaqs(contents,event.data.id);
-    }
-   
-  }
-
   private getDismissReason(reason: any): string {  
     if (reason === ModalDismissReasons.ESC) {  
       return 'by pressing ESC';  
@@ -185,7 +164,7 @@ export class FaqsListingComponent implements OnInit, OnDestroy {
       return `with: ${reason}`;  
     }  
   }  
-  deleteFaqs(contents,id) {
+  onDeleteAction(contents,id) {
     if (id > 0) {
       this.modalService.open(contents, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
         this.closeResult = `Closed with: ${result}`;  

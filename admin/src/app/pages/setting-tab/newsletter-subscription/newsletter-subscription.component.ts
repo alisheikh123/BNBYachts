@@ -1,11 +1,12 @@
 import { NewsLetterTransferable } from './../../../shared/interfaces/NewsLetterTransferable';
 import { AddNewsLetter, NewsLetter, NewsLetterData } from './../../../shared/interfaces/NewsLetter';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LetterType } from '../../../shared/enums/LetterType';
 import { NbToastrService } from '@nebular/theme';
 import { environment } from '../../../../environments/environment';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
 
 @Component({
   selector: 'ngx-newsletter-subscription',
@@ -17,6 +18,8 @@ export class NewsletterSubscriptionComponent implements OnInit {
   cleanup : boolean;
   closeResult: string;
   fileInfo : string;
+  @ViewChild('contents') delete : ElementRef;
+  @ViewChild('contentData') edit : ElementRef;
   letterType = LetterType;
   newsLetterPic : NewsLetterTransferable;
   source: NewsLetter[];
@@ -40,24 +43,7 @@ export class NewsletterSubscriptionComponent implements OnInit {
   },
 ]
   settings = {
-    actions: {
-      columnTitle :"Action",
-      mode :'external',
-      add: false,
-      edit:false,
-      delete: false,
-      position: 'right',
-      custom: [
-      { 
-        name: 'onEditAction', 
-        title: '<i class="nb-edit" title="onEditAction"></i>',
-      },
-      { 
-        name: 'deleteNewsLetter', 
-        title: '<i class="nb-trash" title="deleteNewsLetter"></i>'
-      }
-    ],
-    },
+    actions: false,
     columns: {
       title: {
         title: 'Title',
@@ -75,6 +61,24 @@ export class NewsletterSubscriptionComponent implements OnInit {
            return value.substring(0, 49)+'...';
         } 
       },
+      operation:{
+        title:"",
+        type: 'custom',
+        filter : false,
+        renderComponent: ActionListComponent,
+        onComponentInitFunction:(instance) => {
+        instance.actionEmitter.subscribe(row => {
+          instance.dataEmitter.subscribe(data => {
+            if (row == 'onEditAction') {
+              this.onEditAction(this.edit,data);
+            }
+            if (row == 'onDeleteAction') {
+              this.onDeleteAction(this.delete,data.id);
+            }
+          }) 
+        });
+       }
+     }
   }
 };
   constructor(private fb: FormBuilder, private newsLetterService: NewsLetterData,
@@ -151,16 +155,6 @@ export class NewsletterSubscriptionComponent implements OnInit {
     }
     this.cleanup = true;
   }
-  onCustomAction(contents, contentData,event){
-    switch (event.action) {
-      case 'onEditAction':
-        this.onEditAction(contentData, event.data);
-        break;
-     case 'deleteNewsLetter':
-       this.deleteNewsLetter(contents,event.data.id);
-    }
-   
-  }
 
   private getDismissReason(reason: any): string {  
     if (reason === ModalDismissReasons.ESC) {  
@@ -171,7 +165,7 @@ export class NewsletterSubscriptionComponent implements OnInit {
       return `with: ${reason}`;  
     }  
   }  
-  deleteNewsLetter(contents,id) {
+  onDeleteAction(contents,id) {
     if (id > 0) {
       this.modalService.open(contents, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
         this.closeResult = `Closed with: ${result}`;  

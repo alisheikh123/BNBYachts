@@ -1,11 +1,12 @@
 import { DisputeStatus } from './../../../shared/interfaces/disputeStatus';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChangeStatus, DisputesData, IDispute } from '../../../shared/interfaces/IDispute';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NbToastrService } from '@nebular/theme';
+import { ActionComponent } from '../../../shared/common/action/action.component';
 
 @Component({
   selector: 'app-dispute-listing',
@@ -16,6 +17,7 @@ import { NbToastrService } from '@nebular/theme';
 export class DisputeListingComponent implements OnInit {
   statusForm : FormGroup;
   public source : IDispute[];
+  @ViewChild('content') update : ElementRef;
   disputeStatus = DisputeStatus;
   reasons = [{
     id: this.disputeStatus.Pending,
@@ -39,22 +41,7 @@ export class DisputeListingComponent implements OnInit {
   },
 ]
   settings = {
-    actions: {
-      columnTitle :"Action",
-      add: false,
-      edit:false,
-      delete: false,
-      custom: [{
-        name: 'Detail',
-        title: '<small class="fa fa-address-book"></small>' 
-      },
-      {
-        name: 'UpdateStatus',
-        title: '<small class="fa fa-edit"></small>'
-       }
-      ],
-      position: 'right'
-    },
+    actions: false,
     columns: {
       bookingType: {
         title: 'Booking Type',
@@ -75,6 +62,24 @@ export class DisputeListingComponent implements OnInit {
           return this.datePipe.transform(new Date(creationTime), 'MM/dd/yyyy');
         }
       },
+      operation:{
+        title:"",
+        type: 'custom',
+        filter : false,
+        renderComponent: ActionComponent,
+        onComponentInitFunction:(instance) => {
+        instance.actionEmitter.subscribe(row => {
+          instance.dataEmitter.subscribe(data => {
+            if (row == 'onViewAction') {
+              this.onCustomAction(data.id);
+            }
+            if (row == 'onEditAction') {
+              this.openUpdateStatusPage(this.update, data);
+            }
+          }) 
+        });
+       }
+     }
     },
   };
   constructor(private fb: FormBuilder, private modalService : NgbModal,private userService: DisputesData, 
@@ -120,18 +125,7 @@ export class DisputeListingComponent implements OnInit {
       }
     })
   }
-
-  onCustomAction(event, content){
-    switch (event.action) {
-      case 'Detail':
-        this.onDetailPage(event.data.id);
-        break;
-     case 'UpdateStatus':
-       this.openUpdateStatusPage(content,event.data);
-    }
-   
-  }
-  onDetailPage(id : number){
+  onCustomAction(id : number){
     this.router.navigate([`pages/dispute/dispute/${id}`]);
   }
   openUpdateStatusPage(content, dispute : ChangeStatus){

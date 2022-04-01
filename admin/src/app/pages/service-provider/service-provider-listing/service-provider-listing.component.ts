@@ -8,6 +8,8 @@ import { ServiceProviderData } from '../../../shared/interfaces/ServiceProviderD
 import { ServiceProviderType } from '../../../shared/enums/serviceProviderType';
 import { environment } from '../../../../environments/environment';
 import { UserDefaults } from '../../../shared/enums/userRoles';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
+import { SignleActionComponent } from '../../../shared/common/signle-action/signle-action.component';
 
 @Component({
   selector: 'ngx-service-provider-listing',
@@ -22,18 +24,7 @@ export class ServiceProviderListingComponent implements OnInit {
   assetsUrlProfile = environment.S3BUCKET_URL + '/profilePicture/';
   USER_DEFAULTS  = UserDefaults;
   settings = {
-    actions: {
-      columnTitle :"Action",
-      add: false,
-      edit:false,
-      delete: false,
-      position: 'right',
-      custom: [
-      { 
-        name: 'userDetails', 
-        title: '<i class="nb-compose"></i>'  
-      }],
-    },
+    actions: false,
     columns: {
       serviceProviderName: {
         title: 'Type',
@@ -60,6 +51,21 @@ export class ServiceProviderListingComponent implements OnInit {
             return row;
         },
       },
+      operation:{
+        title:"",
+        type: 'custom',
+        filter : false,
+        renderComponent: SignleActionComponent,
+        onComponentInitFunction:(instance) => {
+        instance.actionEmitter.subscribe(row => {
+          instance.dataEmitter.subscribe(data => {
+            if (row == 'onViewAction') {
+              this.onCustomAction(data.id);
+            }
+          }) 
+        });
+       }
+     }
   }
 };
   constructor(private serviceProviderService: ServiceProviderData , private datePipe : DatePipe, private router : Router, private dialogService : NbDialogService) {
@@ -82,7 +88,7 @@ export class ServiceProviderListingComponent implements OnInit {
       })
     });    
   }
-  onCustomAction(event){
-    this.router.navigate([`pages/service/service/${event.data.id}`]);
+  onCustomAction(id){
+    this.router.navigate([`pages/service/service/${id}`]);
   }
 }

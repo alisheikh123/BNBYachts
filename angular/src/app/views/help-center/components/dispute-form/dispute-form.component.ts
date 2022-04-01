@@ -44,6 +44,7 @@ export class DisputeFormComponent implements OnInit {
   ngOnInit(): void {
     this.disputeForm = this.fb.group({
       bookingId: [null, Validators.required],
+      bookingType : [null, Validators.required],
       reasonId: [null, Validators.required],
       reason: [null, Validators.required],
       status : 0
@@ -82,6 +83,7 @@ export class DisputeFormComponent implements OnInit {
     this.isSubmitted = true;
     if (this.disputeForm.valid) {
       let data = this.disputeForm.value;
+      data.bookingType = 1;
       this.service.addDispute(data).subscribe(res => {
         this.isSubmitted = false;
         this.disputeForm.reset();

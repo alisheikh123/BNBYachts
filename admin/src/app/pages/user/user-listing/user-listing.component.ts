@@ -5,6 +5,8 @@ import { UserRoles } from '../../../shared/enums/userRoles';
 import { BoatUser, BoatUserData } from '../../../shared/interfaces/BoatUser';
 import { NbDialogService } from '@nebular/theme';
 import { StatusComponent } from '../status/status.component';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
+import { SignleActionComponent } from '../../../shared/common/signle-action/signle-action.component';
 
 @Component({
   selector: 'app-user-listing',
@@ -16,18 +18,7 @@ export class UserListingComponent implements OnInit {
   Roles = UserRoles;
   source: BoatUser[];
   settings = {
-    actions: {
-      columnTitle :"Action",
-      add: false,
-      edit:false,
-      delete: false,
-      position: 'right',
-      custom: [
-      { 
-        name: 'userDetails', 
-        title: '<i class="nb-compose"></i>' 
-      }],
-    },
+    actions: false,
     columns: {
       name: {
         title: 'Name',
@@ -63,13 +54,29 @@ export class UserListingComponent implements OnInit {
      isActive: {
         title: 'Status',
         type: 'custom',
-        width:'10%',
+        width:'18%',
         filter: false,
         renderComponent: StatusComponent,
         valuePrepareFunction: (value, row, cell) => {
             return row;
         },
       },
+      operation:{
+        title:"",
+        type: 'custom',
+        width : "2%",
+        filter : false,
+        renderComponent: SignleActionComponent,
+        onComponentInitFunction:(instance) => {
+        instance.actionEmitter.subscribe(row => {
+          instance.dataEmitter.subscribe(data => {
+            if (row == 'onViewAction') {
+              this.onCustomAction(data.id);
+            }
+          }) 
+        });
+       }
+     }
   }
 };
   constructor(private userService: BoatUserData , private datePipe : DatePipe, private router : Router, private dialogService : NbDialogService) {
@@ -83,7 +90,7 @@ export class UserListingComponent implements OnInit {
       this.source = res;
     });    
   }
-  onCustomAction(event){
-    this.router.navigate([`pages/user/users/${event.data.id}`]);
+  onCustomAction(id){
+    this.router.navigate([`pages/user/users/${id}`]);
   }
 }
