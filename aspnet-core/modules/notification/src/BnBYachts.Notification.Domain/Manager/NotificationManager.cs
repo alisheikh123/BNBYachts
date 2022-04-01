@@ -31,24 +31,24 @@ namespace BnBYachts.Notification.Manager
         {
             //use auto map
 
-                NotificationEntity n = new NotificationEntity();
-                n.NotificationType = input.NotificationType;
-                n.UserTo = input.UserTo;
-                n.UserFrom = input.UserFrom;
-                n.ChatId = input.ChatId;
-                n.RequestQuoteId = input.RequestQuoteId;
-                n.PaymentId = input.PaymentId;
-                n.EventId = input.EventId;
-                n.RoleName = input.RoleName;
-                n.BookingId = input.BookingId;
-                n.DisputeId = input.DisputeId;
-                n.ContractId = input.ContractId;
-                n.CharterId = input.CharterId;
-                n.Description = input.Description;
-                n.IsSeen = input.IsSeen;
-                n.BoatId = input.BoatId;
-                n.Title = input.Title;
-                await _notificationRepository.InsertAsync(n).ConfigureAwait(false);
+            NotificationEntity n = new NotificationEntity();
+            n.NotificationType = input.NotificationType;
+            n.UserTo = input.UserTo;
+            n.UserFrom = input.UserFrom;
+            n.ChatId = input.ChatId;
+            n.RequestQuoteId = input.RequestQuoteId;
+            n.PaymentId = input.PaymentId;
+            n.EventId = input.EventId;
+            n.RoleName = input.RoleName;
+            n.BookingId = input.BookingId;
+            n.DisputeId = input.DisputeId;
+            n.ContractId = input.ContractId;
+            n.CharterId = input.CharterId;
+            n.Description = input.Description;
+            n.IsSeen = input.IsSeen;
+            n.BoatId = input.BoatId;
+            n.Title = input.Title;
+            await _notificationRepository.InsertAsync(n).ConfigureAwait(false);
             return _successResponse(input);
         }
 
@@ -59,8 +59,9 @@ namespace BnBYachts.Notification.Manager
             ReturnMessage = new List<string> { new string("200") }
         };
 
-        public async Task<EntityResponseListModel<NotificationDto>> Get(EntityPaginationFilter input) => new EntityResponseListModel<NotificationDto> {
-            Data = _objectMapper.Map<List<NotificationEntity>, List<NotificationDto>>(await _notificationRepository.GetListAsync().ConfigureAwait(false))
-            };
+        public async Task<EntityResponseListModel<NotificationDto>> Get(EntityPaginationFilter input) => new EntityResponseListModel<NotificationDto>
+        {
+            Data = _objectMapper.Map<List<NotificationEntity>, List<NotificationDto>>(await _notificationRepository.GetListAsync(x => x.UserTo.Equals(input.UserId)).ConfigureAwait(false))
+        };
     }
 }

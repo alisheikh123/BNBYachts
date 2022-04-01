@@ -9,6 +9,7 @@ namespace BnBYachts.Shared.Model
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public string UserId { get; set; }
         public EntityPaginationFilter()
         {
             this.PageNumber = 1;

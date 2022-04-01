@@ -12,6 +12,6 @@ namespace BnBYachts.Notification.Interface
     public interface IAppNotificationService: IApplicationService
     {
         Task<EntityResponseModel> Insert(NotificationTransferable input);
-        Task<EntityResponseListModel<NotificationDto>> Get();
+        Task<EntityResponseListModel<NotificationDto>> Get(string userId);
     }
 }

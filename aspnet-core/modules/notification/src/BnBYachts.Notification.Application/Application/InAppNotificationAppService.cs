@@ -19,7 +19,10 @@ namespace BnBYachts.Notification
         public async Task<EntityResponseModel> Insert(NotificationTransferable input) =>
              await _notificationManager.Insert(input).ConfigureAwait(false);
 
-        public async Task<EntityResponseListModel<NotificationDto>> Get() =>
-            await _notificationManager.Get(null).ConfigureAwait(false);
+        public async Task<EntityResponseListModel<NotificationDto>> Get(string userId) =>
+            await _notificationManager.Get(new EntityPaginationFilter
+            {
+                UserId = userId
+            }).ConfigureAwait(false);
     }
 }
