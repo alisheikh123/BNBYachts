@@ -28,7 +28,7 @@ namespace BnByachts.Simulator.socket
         public async Task SendMessage()
         {
             await connection.StartAsync().ConfigureAwait(false);
-            await connection.InvokeAsync("NotifyClient", "1","Payment has been recived");
+            await connection.InvokeAsync("NotifyClient", "cd7d68fb-f11d-a1a7-1ee2-3a011cc4ec72", "Payment has been recived");
 
         }
     }
