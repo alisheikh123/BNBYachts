@@ -25,8 +25,8 @@ namespace BnByachts.NotificationHub.Consumers
         }
         public async Task Consume(ConsumeContext<INotificationContract> context)
         {
-            await _notificationManager.Insert(_objectMapper.Map<INotificationContract,NotificationTransferable>(context.Message)).ConfigureAwait(false);
-            await new SignalRClient()
+            await _notificationManager.Insert(_objectMapper.Map<INotificationContract, NotificationTransferable>(context.Message)).ConfigureAwait(false);
+            await new SignalRClient(_signlRSettings.URL ?? "http://notification.bnb.techverxapps.com/signalr-hubs/Notification")
                 .SendMessage(context.Message.UserTo.ToString(),
                     context.Message.Message).ConfigureAwait(false);
         }
