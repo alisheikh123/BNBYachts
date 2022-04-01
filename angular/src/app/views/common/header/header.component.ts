@@ -136,29 +136,21 @@ export class HeaderComponent implements OnInit {
     })
   }
   connectionSignalR() {
-    //  
-    // let connection = utils.getSignalRConnection();
-    // connection.start().then(function () {
-    //   console.log('SignalR Connected!');
-    // }).catch(function (err: any) {
-    //   return console.error(err.toString());
-    // });
-    // connection.invoke("NotifyClient","test1",{"test1":"test"});
+   
   }
   NotificationCount() {
-    // this.notificationService.getNotificationCount().subscribe((res: any) => {
-    //   this.notificationCount = res;
-    // }
-    // );
+  
   }
   getNotificationMessage() {
-    this.notificationService.getNotificationMessage().subscribe((res:any) => {
-       
+    this.notificationService.getNotificationMessage(this.getUserId()).subscribe((res:any) => {
         this.messages = res?.data;
         console.log(this.messages);
         console.log(res);
     });
   }
+  private getUserId() {
+    return localStorage.getItem('userId')?.toString() || "";
+}
   signUp() {
     let modalRef = this.modal.open(SignupModalComponent, { windowClass: 'custom-modal custom-large-modal', centered: true });
   }
