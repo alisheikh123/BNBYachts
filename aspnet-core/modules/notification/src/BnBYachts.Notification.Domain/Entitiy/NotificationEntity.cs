@@ -10,8 +10,8 @@ namespace BnBYachts.Notification.Entitiy
         {
             this.Id = Guid.NewGuid();
         }
-        public Guid? UserTo { get; set; }
-        public Guid? UserFrom { get; set; }
+        public string UserTo { get; set; }
+        public string UserFrom { get; set; }
         public int? ChatId { get; set; }
         public int? RequestQuoteId { get; set; }
         public int? PaymentId { get; set; }
