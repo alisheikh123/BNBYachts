@@ -14,6 +14,46 @@ services:
       - 5672:5672
       - 15672:15672
 
+
+
+  bnb_bkworker_engine:
+    container_name: bnb_bkworker_engine
+    build:
+      context: .
+      dockerfile: BKW.Dockerfile
+    environment:
+      "ASPNETCORE_ENVIRONMENT": "Production"
+      "ConnectionStrings:Quartz": ${BNB_QUARTZ_CONNECTION_STRING}
+      "ConnectionStrings:Default": ${BNB_CORE_API_CONNECTION_STRING}
+      "RabbitMq:Host": ${BNB_MQ_HOST}
+      "RabbitMq:UserName": ${BNB_MQ_USER_NAME}
+      "RabbitMq:Password": ${BNB_MQ_PASSWORD}
+      "RabbitMq:VirtualHost": ${BNB_MQ_VIRTUAL_HOST}
+      "Settings:Host": ${BNB_SETTINGS_HOST}
+      "Settings:Port": ${BNB_SETTINGS_PORT}
+      "Settings:UserName": ${BNB_SETTINGS_USERNAME}
+      "Settings:Password": ${BNB_SETTINGS_PASSWORD}
+      "Settings:SenderName": ${BNB_SETTINGS_SENDERNAME}
+      "Settings:SenderEmail": ${BNB_SETTINGS_SENDEREMAIL}
+      "Settings:Server": ${BNB_SETTINGS_SERVER}
+      "AWSConfiguation:AWSBucketRegion": ${BNB_AWS_BUCKETREGION}
+      "AWSConfiguation:AWSSecretKey": ${BNB_AWS_SECRET}
+      "AWSConfiguation:AWSAccessKey": ${BNB_AWS_ACCESSKEY}
+      "AWSConfiguation:AWSBucketName": ${BNB_AWS_BUCKETNAME}
+      "AWSConfiguation:AWSDefaultFolder": ${BNB_AWS_DEFAULTFOLDER}
+      "AWSS3BucketAddress:S3Bucket": ${BNB_AWSBKADDRESS}
+      "App:CorsOrigins": ${BNB_APP_BK_CORES_ORIGINS}
+      "App:ClientUrl": ${BNB_BKCLINETURL}
+      "App:AdminUrl": ${BNB_BKADMIURL}
+    volumes:
+      - ./tmp-build/BNB/Bnbbkworker-engine/logs:/app/Logs
+      - ./tmp-build/BNB/Bnbbkworker-engine/.aspnet/https:/root/.aspnet/https:ro
+      - ./tmp-build/BNB/Bnbbkworker-engine/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro   
+    links:
+      - rabbitmq:rabbitmq  
+    depends_on:
+      - rabbitmq      
+
   # bnb_client_portal:
   #   container_name: bnb_admin_portal
   #   build:

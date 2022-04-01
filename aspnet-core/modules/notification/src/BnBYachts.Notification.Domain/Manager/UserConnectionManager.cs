@@ -22,7 +22,7 @@ namespace BnBYachts.Notification.Manager
         public async Task<Tuple<string, string>> GetUserConnections(string userId)
         {
             var response = await _notifcationRepository.
-                FirstOrDefaultAsync(x => x.UserId.
+                LastOrDefaultAsync(x => x.UserId.
                     Equals(userId.ToLower())).ConfigureAwait(false);
             return new Tuple<string, string>(response.ConnectionId, response.UserId);
         }
