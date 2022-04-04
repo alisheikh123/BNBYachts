@@ -27,8 +27,11 @@ namespace BnBYachts.Socket.Web.Hub
         //AdminPortal Notify
         public async Task NotifyClient(string receiverId, string content)
         {
-            var (connectionId, userId) = await _userConnectionManager.GetUserConnections(receiverId).ConfigureAwait(false);
-            await Clients.Client(connectionId ?? "").SendAsync("NotifyClient", content).ConfigureAwait(false);
+            async void Action(string connectionId)
+            {
+                await Clients.Client(connectionId ?? "").SendAsync("NotifyClient", content).ConfigureAwait(false);
+            }
+            (await _userConnectionManager.GetUserConnections(receiverId).ConfigureAwait(false)).ForEach(Action);
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)

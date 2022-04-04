@@ -19,17 +19,15 @@ namespace BnBYachts.Notification.Manager
             _notifcationRepository = notifcationRepository;
         }
 
-        public async Task<Tuple<string, string>> GetUserConnections(string userId)
+        public async Task<List<string>> GetUserConnections(string userId)
         {
-            var response = (await _notifcationRepository.GetListAsync
-                (x => x.UserId.
-                    Equals(userId.ToLower())).ConfigureAwait(false)).OrderBy(x => x.CreationTime).LastOrDefault();
-            return new Tuple<string, string>(response?.ConnectionId, response?.UserId);
+            return (await _notifcationRepository.GetListAsync
+                (x => x.UserId.Equals(userId.ToLower())).ConfigureAwait(false)).Select(x => x.ConnectionId).ToList();
         }
 
         public async Task KeepUserConnection(string userId, string connectionId)
         {
-            await RemoveUserConnection(userId).ConfigureAwait(false);
+            //  await RemoveUserConnection(userId).ConfigureAwait(false);
             await _notifcationRepository.InsertAsync(new NotificationConnectionEntity
             {
                 UserId = userId.ToLower(),
