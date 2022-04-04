@@ -56,6 +56,7 @@ namespace BnByachts.Simulator
             _ = _eventBusDispatcher.Publish<INotificationContract>(new NotificationContract
             {
                 Message = "Umar Test",
+                //cd7d68fb-f11d-a1a7-1ee2-3a011cc4ec72
                 UserTo = "cd7d68fb-f11d-a1a7-1ee2-3a011cc4ec72",
                 Title = "test umar",
                 Description = "no ",
