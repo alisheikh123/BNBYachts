@@ -29,6 +29,7 @@ namespace BnBYachts.Socket.Web.Hub
         {
             async void Action(string connectionId)
             {
+                Console.WriteLine($"notify connection ID {connectionId}");
                 await Clients.Client(connectionId ?? "").SendAsync("NotifyClient", content).ConfigureAwait(false);
             }
             (await _userConnectionManager.GetUserConnections(receiverId).ConfigureAwait(false)).ForEach(Action);
