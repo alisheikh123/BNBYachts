@@ -36,9 +36,9 @@ namespace BnBYachts.Notification.Manager
             }).ConfigureAwait(false);
         }
 
-        public async Task RemoveUserConnection(string userId)
+        public async Task RemoveUserConnection(string connectionId)
         {
-            await _notifcationRepository.DeleteManyAsync(await _notifcationRepository.GetListAsync(x => x.UserId.Equals(userId)).
+            await _notifcationRepository.DeleteManyAsync(await _notifcationRepository.GetListAsync(x => x.ConnectionId.Equals(connectionId)).
                 ConfigureAwait(false)).ConfigureAwait(false);
         }
     }

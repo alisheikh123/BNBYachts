@@ -57,7 +57,7 @@ namespace BnByachts.Simulator
             {
                 Message = "Umar Test",
                 //cd7d68fb-f11d-a1a7-1ee2-3a011cc4ec72
-                UserTo = "cd7d68fb-f11d-a1a7-1ee2-3a011cc4ec72",
+                UserTo = "9ff8e9ba-dce5-7bb8-4ef4-3a02f800efa8",
                 Title = "test umar",
                 Description = "no ",
                 NotificationType = (NotificationType)1,

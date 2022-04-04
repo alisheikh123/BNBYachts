@@ -10,6 +10,6 @@ namespace BnBYachts.Notification.Notification.IManager
     {
         Task KeepUserConnection(string userId, string connectionId);
         Task RemoveUserConnection(string connectionId);
-        Task<List<string>> GetUserConnections(string userId);
+        Task<List<string>> GetUserConnections(string connectionId);
     }
 }

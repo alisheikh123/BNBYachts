@@ -15,7 +15,9 @@ export class SignalRAspNetCoreHelper {
     }
     private _hubConnection!: HubConnection;
     initSignalR(): void {
-        this.startSignalRListener()
+        if (this.getUserId() !== "") {
+            this.startSignalRListener()
+        }
     }
 
     private startSignalRListener() {
@@ -63,6 +65,4 @@ export class SignalRAspNetCoreHelper {
         })
 
     }
-
-
 }
