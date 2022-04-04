@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
 import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
 import { BoatType } from '../../../shared/enums/BoatType';
 import { AddServiceFee, ServiceFee, ServiceFeeData } from '../../../shared/interfaces/settings';
 
@@ -16,6 +17,8 @@ export class ServiceFeeComponent implements OnInit {
   closeResult: string;  
   boatType = BoatType;
   modalRef : any;
+  @ViewChild('contents') delete : ElementRef;
+  @ViewChild('contentData') edit : ElementRef;
   source: ServiceFee[];
   feeData : AddServiceFee;
   reasons = [{
@@ -32,24 +35,7 @@ export class ServiceFeeComponent implements OnInit {
   },
 ]
   settings = {
-    actions: {
-      columnTitle :"Action",
-      mode :'external',
-      add: false,
-      edit:false,
-      delete: false,
-      position: 'right',
-      custom: [
-      { 
-        name: 'onEditAction', 
-        title: '<i class="nb-edit" title="onEditAction"></i>',
-      },
-      { 
-        name: 'deleteServiceFee', 
-        title: '<i class="nb-trash" title="deleteServiceFee"></i>'
-      }
-    ],
-    },
+    actions: false,
     columns: {
       boatType: {
         title: 'Boat Type',
@@ -61,6 +47,24 @@ export class ServiceFeeComponent implements OnInit {
         type: 'string',
         width: '40%',
     },
+    operation:{
+      title:"",
+      type: 'custom',
+      filter : false,
+      renderComponent: ActionListComponent,
+      onComponentInitFunction:(instance) => {
+      instance.actionEmitter.subscribe(row => {
+        instance.dataEmitter.subscribe(data => {
+          if (row == 'onEditAction') {
+            this.onEditAction(this.edit,data);
+          }
+          if (row == 'onDeleteAction') {
+            this.onDeleteAction(this.delete,data.id);
+          }
+        }) 
+      });
+     }
+   }
   }
 };
   constructor(private fb: FormBuilder, private serviceFeeService: ServiceFeeData , private modalService : NgbModal, private toaster : NbToastrService) {
@@ -126,16 +130,6 @@ export class ServiceFeeComponent implements OnInit {
     }
     this.cleanup = true;
   }
-  onCustomAction(contents, contentData,event){
-    switch (event.action) {
-      case 'onEditAction':
-        this.onEditAction(contentData, event.data);
-        break;
-     case 'deleteServiceFee':
-       this.deleteServiceFee(contents,event.data.id);
-    }
-   
-  }
 
   private getDismissReason(reason: any): string {  
     if (reason === ModalDismissReasons.ESC) {  
@@ -146,7 +140,7 @@ export class ServiceFeeComponent implements OnInit {
       return `with: ${reason}`;  
     }  
   }  
-  deleteServiceFee(contents,id) {
+  onDeleteAction(contents,id) {
     if (id > 0) {
       this.modalService.open(contents, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {  
         this.closeResult = `Closed with: ${result}`;  

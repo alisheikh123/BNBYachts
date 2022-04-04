@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserRoles } from '../../../shared/enums/userRoles';
 import { BoatUser, BoatUserData } from '../../../shared/interfaces/BoatUser';
 import { StatusComponent } from '../../user/status/status.component';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
+import { SignleActionComponent } from '../../../shared/common/signle-action/signle-action.component';
 
 @Component({
   selector: 'app-host-listing',
@@ -15,17 +17,7 @@ export class HostListingComponent implements OnInit {
   Roles = UserRoles;
   source: BoatUser[];
   settings = {
-    actions: {
-      columnTitle :"Action",
-      add: false,
-      edit:false,
-      delete: false,
-      custom: [{ 
-        name: 'userDetails', 
-        title: '<i class="nb-compose"></i>'  }
-      ],
-      position: 'right'
-    },
+    actions: false,
     columns: {
       name: {
         title: 'Name',
@@ -68,6 +60,21 @@ export class HostListingComponent implements OnInit {
             return row;
         },
       },
+      operation:{
+        title:"",
+        type: 'custom',
+        filter : false,
+        renderComponent: SignleActionComponent,
+        onComponentInitFunction:(instance) => {
+        instance.actionEmitter.subscribe(row => {
+          instance.dataEmitter.subscribe(data => {
+            if (row == 'onViewAction') {
+              this.onCustomAction(data.id);
+            }
+          }) 
+        });
+       }
+     }
     },
   };
   constructor(private userService: BoatUserData, private datePipe : DatePipe, private router : Router) {
@@ -81,7 +88,7 @@ export class HostListingComponent implements OnInit {
       this.source = res;
     });    
   }
-  onCustomAction(event){
-    this.router.navigate([`pages/host/host/${event.data.id}`]);
+  onCustomAction(id){
+    this.router.navigate([`pages/host/host/${id}`]);
   }
 }

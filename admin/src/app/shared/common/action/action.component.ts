@@ -1,18 +1,19 @@
+import { FaqsListingComponent } from './../../../pages/faqs/faqs-listing/faqs-listing.component';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
-  selector: 'ngx-action-list',
+  selector: 'ngx-action',
   template:  `<div ngbDropdown class="d-inline-block" container="body">
   <button class="btn btn-default" id="dropdownBasic2" ngbDropdownToggle ><i class="fas fa-ellipsis-v"></i></button>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+    <button ngbDropdownItem (click)="onAction($event)" value="onViewAction">View</button>
     <button ngbDropdownItem (click)="onAction($event)" value="onEditAction">Edit</button>
-    <button ngbDropdownItem (click)="onAction($event)" value="onDeleteAction">Delete</button>
   </div>
 </div>`,
-styleUrls : ['./action-list.component.scss'],
+styleUrls : ['./action.component.scss'],
 
 })
-export class ActionListComponent implements OnInit {
+export class ActionComponent implements OnInit {
   value : string;
   @Input() rowData: any;
 

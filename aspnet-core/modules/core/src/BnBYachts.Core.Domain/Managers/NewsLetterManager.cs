@@ -133,7 +133,7 @@ namespace BnBYachts.Core.Managers
                 SubFolder = "NewsLetter"
             }).ConfigureAwait(false);
             data.LetterImage = newsLetter.NewsLetterGallery.FileName;
-            response.Data = await _newsRepository.InsertAsync(data).ConfigureAwait(false);
+            response.Data = await _newsRepository.UpdateAsync(data).ConfigureAwait(false);
             return response;
         }
         
@@ -150,9 +150,9 @@ namespace BnBYachts.Core.Managers
                 {
                     await _subscriberRepository.EnsurePropertyLoadedAsync(item, x => x.NewsLetterSubscription).ConfigureAwait(false);
                     string body = $"<div><h1 style='margin: 0; color: #555555; direction: ltr; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 24px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;'><span class='tinyMce-placeholder'>BNBYachts</span></h1></div> </br> " +
-                        $"<div align='center' style='line - height:10px'><img src='{ImagePath+item.NewsLetterSubscription.LetterImage}' alt = 'News Letter' style='display: block; height: auto; border: 0; width: 463px; max - width: 100 %;'/></div> </br>" +
-                        $"<div align ='center' style='color:#000000;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;'><p style='margin: 0;'>{item.NewsLetterSubscription.Description}</p></div> </br>" +
-                        $"<div align ='center'><div style ='text-decoration:none;display:inline-block;color:#ffffff;background-color:#3AAEE0;border-radius:4px;width:auto;border-top:1px solid #3AAEE0;border-right:1px solid #3AAEE0;border-bottom:1px solid #3AAEE0;border-left:1px solid #3AAEE0;padding-top:5px;padding-bottom:5px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;'><span style ='padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;' ><span style ='font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;'><a href={rootUrl}> Go To Website</a></span></span></div></div>";
+                        $"<div align='center' style='line - height:10px'><img src='{ImagePath}{item.NewsLetterSubscription.LetterImage}' alt = 'News Letter' style='display: block; height: auto; border: 0; width: 463px; max - width: 100 %;'/></div> </br>" +
+                        $"<div align='center' style='color:#000000;direction:ltr;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;'><p style='margin: 0;'>{item.NewsLetterSubscription.Description}</p></div> </br>" +
+                        $"<div align='center'><div style ='text-decoration:none;display:inline-block;color:#ffffff;background-color:#3AAEE0;border-radius:4px;width:auto;border-top:1px solid #3AAEE0;border-right:1px solid #3AAEE0;border-bottom:1px solid #3AAEE0;border-left:1px solid #3AAEE0;padding-top:5px;padding-bottom:5px;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;'><span style ='padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;' ><span style ='font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;'><a href={rootUrl}> Go To Website</a></span></span></div></div>";
                     await _eventBusDispatcher.Publish<IEmailContract>(new EmailContract
                     {
                         To = item.EmailAddress,

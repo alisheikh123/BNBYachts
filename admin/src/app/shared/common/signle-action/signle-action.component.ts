@@ -1,18 +1,17 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
-  selector: 'ngx-action-list',
+  selector: 'ngx-signle-action',
   template:  `<div ngbDropdown class="d-inline-block" container="body">
   <button class="btn btn-default" id="dropdownBasic2" ngbDropdownToggle ><i class="fas fa-ellipsis-v"></i></button>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-    <button ngbDropdownItem (click)="onAction($event)" value="onEditAction">Edit</button>
-    <button ngbDropdownItem (click)="onAction($event)" value="onDeleteAction">Delete</button>
+    <button ngbDropdownItem (click)="onAction($event)" value="onViewAction">View</button>
   </div>
 </div>`,
-styleUrls : ['./action-list.component.scss'],
+styleUrls : ['./signle-action.component.scss'],
 
 })
-export class ActionListComponent implements OnInit {
+export class SignleActionComponent implements OnInit {
   value : string;
   @Input() rowData: any;
 
@@ -28,3 +27,4 @@ export class ActionListComponent implements OnInit {
     this.dataEmitter.emit(this.rowData);
   }
 }
+

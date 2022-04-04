@@ -1,3 +1,4 @@
+import { ActionListComponent } from './../../shared/common/action-list/action-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FaqsRoutingModule, routedComponents } from './faqs-routing.module';
 import { NgModule } from '@angular/core';
@@ -23,7 +24,7 @@ import { DropdownListModule } from 'ngx-dropdown-list';
     FaqsRoutingModule
   ],
   declarations: [
-    ...routedComponents,
+    ...routedComponents
     ],
   providers:[NgbActiveModal]
 })
