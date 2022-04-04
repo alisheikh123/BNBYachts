@@ -15,10 +15,14 @@ export class SignalRAspNetCoreHelper {
     }
     private _hubConnection!: HubConnection;
     initSignalR(): void {
-        this.createConnection();
-        this.startConnection();
+        this.startSignalRListener()
     }
 
+    private startSignalRListener() {
+        this.createConnection();
+        this.startConnection();
+
+    }
     private showMessage(message: any) {
         this.toastr.success(message, "Notification Recived", {
             timeOut: 3000,
@@ -28,7 +32,8 @@ export class SignalRAspNetCoreHelper {
 
     private createConnection() {
         this._hubConnection = new HubConnectionBuilder()
-            .withUrl(environment.NOTIFICATION_APP_URL + "signalr-hubs/Notification?&userId="+this.getUserId())
+            .withUrl(environment.NOTIFICATION_APP_URL + "signalr-hubs/Notification?&userId=" + this.getUserId())
+            .withAutomaticReconnect()
             .build();
     }
 
@@ -45,7 +50,11 @@ export class SignalRAspNetCoreHelper {
                     console.log(connectionId)
                 });
             })
-            .catch((err) => console.log("Error while establishing a connection :( "));;
+            .catch((err) => {
+                console.log(err)
+                console.log('Error while establishing connection... Retrying...');
+                setTimeout(() => this.startSignalRListener(), 3000);
+            });;
 
         /////Calls when message is broadcast to the reciever...
         this._hubConnection.on('NotifyClient', (message) => { // Register for incoming messages
