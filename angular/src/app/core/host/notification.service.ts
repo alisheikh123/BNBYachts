@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NotificationService {
 
-  private notificationsUrl = environment.NOTIFICATION_APP_URL +'/api/app/in-app-notification';
+  private notificationsUrl = environment.NOTIFICATION_APP_URL +'api/app/in-app-notification';
 private notificationGenerated = new Subject<any>();
 
 notificationGenerated$ = this.notificationGenerated.asObservable();
@@ -20,11 +20,11 @@ this.notificationGenerated.next(obj);
   constructor(private http: HttpClient,private errorService: ErrorService) { }
 
   getNotificationCount(){
-    return this.http.get(this.notificationsUrl + '/notification-count').pipe(catchError(this.errorService.handleError));
+    return this.http.get(this.notificationsUrl + 'notification-count').pipe(catchError(this.errorService.handleError));
   }
 
-  getNotificationMessage() {
-    return this.http.get(environment.NOTIFICATION_APP_URL +'/api/app/in-app-notification').pipe(
+  getNotificationMessage(userId:string) {
+    return this.http.get(environment.NOTIFICATION_APP_URL +'api/app/in-app-notification?userId='+userId).pipe(
       catchError(this.errorService.handleError));
   }
 

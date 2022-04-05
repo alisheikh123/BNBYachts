@@ -4,7 +4,7 @@
      <span class="btn-floating"><button type="button" class="btn btn-primary" (click)="openLg(content)">Add City</button></span>
       </nb-card-header>
     <nb-card-body>
-      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" (custom)="onCustomAction(contents,contentDa,$event)">
+      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" >
       </ng2-smart-table>
     </nb-card-body>
 </nb-card>
@@ -78,7 +78,7 @@
     </div>    
   </ng-template>   
 
-  <ng-template #contentDa let-modal>
+  <ng-template #contentData let-modal>
     <div class="modal-content">
       <div class="modal-header no-border">
         <h4 class="bold">Update City</h4>

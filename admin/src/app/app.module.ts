@@ -1,3 +1,5 @@
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ActionListComponent } from './shared/common/action-list/action-list.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { HomeDashboardModule } from './pages/home-dashboard/home-dashboard.module';
 import { RoutesGuard } from './routes.guard';
@@ -28,11 +30,14 @@ import { CommonModule } from '@angular/common';
 import { AuthAppModule } from './pages/auth/auth.module';
 import { SetPasswordComponent } from './pages/auth/set-password/set-password.component';
 import { UnauthorizePageComponent } from './pages/miscellaneous/unauthorize-page/unauthorize-page.component';
-import { CookieService } from 'ngx-cookie-service';
+import { DropdownListModule } from 'ngx-dropdown-list';
+import { SignleActionComponent } from './shared/common/signle-action/signle-action.component';
+import { ActionComponent } from './shared/common/action/action.component';
 
 @NgModule({
   declarations: [
-    AppComponent , LoginComponent , SetPasswordComponent
+    AppComponent , LoginComponent , SetPasswordComponent 
+    , ActionListComponent , SignleActionComponent, ActionComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +50,8 @@ import { CookieService } from 'ngx-cookie-service';
     ThemeModule,
     AuthAppModule,
     AppRoutingModule,
+    DropdownListModule,
+    Ng2SmartTableModule,
     AuthModule.forRoot({
       config: {
         authority: environment.Identity.authority,

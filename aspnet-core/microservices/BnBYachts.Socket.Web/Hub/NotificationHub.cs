@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using BnBYachts.Notification.Notification.IManager;
 using Microsoft.AspNetCore.SignalR;
@@ -15,25 +14,31 @@ namespace BnBYachts.Socket.Web.Hub
             _userConnectionManager = userConnectionManager;
         }
 
-        public string GetConnectionId()
+        public async Task<string> GetConnectionId()
         {
             var httpContext = this.Context.GetHttpContext();
-            var userId = httpContext?.Request.Query["userId"];
-            _userConnectionManager.KeepUserConnection(userId, Context.ConnectionId);
+            var userId = httpContext?.Request.Query["userId"].ToString();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                await _userConnectionManager.KeepUserConnection(userId, Context.ConnectionId).ConfigureAwait(false);
+            }
             return Context.ConnectionId;
         }
         //AdminPortal Notify
         public async Task NotifyClient(string receiverId, string content)
         {
-            var connectionId = _userConnectionManager.GetUserConnections(receiverId).FirstOrDefault();
-            await Clients.Client(connectionId ?? "").SendAsync("NotifyClient", content);
+            async void Action(string connectionId)
+            {
+                Console.WriteLine($"notify connection ID {connectionId}");
+                await Clients.Client(connectionId ?? "").SendAsync("NotifyClient", content).ConfigureAwait(false);
+            }
+            (await _userConnectionManager.GetUserConnections(receiverId).ConfigureAwait(false)).ForEach(Action);
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             var connectionId = Context.ConnectionId;
-            _userConnectionManager.RemoveUserConnection(connectionId);
-            await Task.FromResult(0);
+            await _userConnectionManager.RemoveUserConnection(connectionId).ConfigureAwait(false);
         }
     }
 }

@@ -36,6 +36,7 @@ export class YachtServicesComponent implements OnInit {
   }
   public isEmailExistsValidator(): ValidatorFn {
     return (group: AbstractControl): ValidationErrors | null => {
+       
       const emailAddress = group;
       if (emailAddress.value && emailAddress.valid) {
         this.yachtSearchService.INewsLetterEmailExist(emailAddress.value).subscribe((res: any) => {
@@ -57,6 +58,7 @@ export class YachtServicesComponent implements OnInit {
   }
 
   submit() {
+     
     var user = this.newsLetterForm.value;
     this.yachtSearchService.AddInNewsLetter(user).subscribe((response: any) => {
       if (response.returnStatus == true) {

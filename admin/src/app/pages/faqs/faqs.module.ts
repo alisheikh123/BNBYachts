@@ -1,3 +1,4 @@
+import { ActionListComponent } from './../../shared/common/action-list/action-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FaqsRoutingModule, routedComponents } from './faqs-routing.module';
 import { NgModule } from '@angular/core';
@@ -5,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DropdownListModule } from 'ngx-dropdown-list';
 
 
 @NgModule({
@@ -22,7 +24,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     FaqsRoutingModule
   ],
   declarations: [
-    ...routedComponents,
+    ...routedComponents
     ],
   providers:[NgbActiveModal]
 })

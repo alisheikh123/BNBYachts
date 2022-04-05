@@ -18,6 +18,7 @@ import { HeaderTabs } from 'src/app/shared/enums/header-tabs';
 import { OnBoardingModalComponent } from '../on-boarding-modal/on-boarding-modal.component';
 import { Keys } from 'src/app/shared/localstoragekey/LocalKeys.constants';
 import { NotificationService } from 'src/app/core/host/notification.service';
+import { SignalRAspNetCoreHelper } from 'src/app/core/helper/SignalRAspNetCoreHelper';
 
 
 @Component({
@@ -65,14 +66,16 @@ export class HeaderComponent implements OnInit {
     public app: AppComponent,
     private toastr: ToastrService,
     private modal: NgbModal,
+    private signalRHelper: SignalRAspNetCoreHelper,
     private oidcSecurityService: OidcSecurityService,
     private authService: AuthService,
     private chatService: ChatService,
     private notificationService: NotificationService) {
-      this.notificationService.notificationGenerated$.subscribe(()=>{
-            this.notificationCount++;
-      });
-     }
+    this.notificationService.notificationGenerated$.subscribe(() => {
+
+      this.notificationCount++;
+    });
+  }
   activeTab: number = 0;
   HEADER_TABS = HeaderTabs;
 
@@ -94,6 +97,7 @@ export class HeaderComponent implements OnInit {
           this.authService.authenticated = true;
           this.getUserDetails();
           this.getUnreadChatCount();
+          this.signalRHelper.initSignalR();
         }
       });
     this.NotificationCount();
@@ -135,26 +139,20 @@ export class HeaderComponent implements OnInit {
     })
   }
   connectionSignalR() {
-    let connection = utils.getSignalRConnection();
-    connection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err: any) {
-      return console.error(err.toString());
-    });
-    connection.invoke("NotifyClient","test1",{"test1":"test"});
+
   }
   NotificationCount() {
-    this.notificationService.getNotificationCount().subscribe((res: any) => {
-      this.notificationCount = res;
-    }
-    );
+
   }
   getNotificationMessage() {
-    this.notificationService.getNotificationMessage().subscribe((res:any) => {
-        this.messages = res?.data;
-        console.log(this.messages);
-        console.log(res);
+    this.notificationService.getNotificationMessage(this.getUserId()).subscribe((res: any) => {
+      this.messages = res?.data;
+      console.log(this.messages);
+      console.log(res);
     });
+  }
+  private getUserId() {
+    return localStorage.getItem('userId')?.toString() || "";
   }
   signUp() {
     let modalRef = this.modal.open(SignupModalComponent, { windowClass: 'custom-modal custom-large-modal', centered: true });

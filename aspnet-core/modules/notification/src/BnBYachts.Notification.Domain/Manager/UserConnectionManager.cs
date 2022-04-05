@@ -1,53 +1,45 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using BnBYachts.Notification.Entitiy;
 using BnBYachts.Notification.Notification.IManager;
+using Volo.Abp.Domain.Repositories;
 
 namespace BnBYachts.Notification.Manager
 {
     public class UserConnectionManager : IUserConnectionManager
     {
-        private static readonly Dictionary<string, List<string>> UserConnectionMap = new Dictionary<string, List<string>>();
-        private static readonly string UserConnectionMapLocker = string.Empty;
-        public void KeepUserConnection(string userId, string connectionId)
+        private readonly IRepository<NotificationConnectionEntity, Guid> _notifcationRepository;
+
+
+        public UserConnectionManager(IRepository<NotificationConnectionEntity, Guid> notifcationRepository)
         {
-            RemoveUserConnection(connectionId);
-            lock (UserConnectionMapLocker)
-            {
-                var uniqueKeys = userId.ToString();
-                if (!UserConnectionMap.ContainsKey(uniqueKeys))
-                {
-                    UserConnectionMap[uniqueKeys] = new List<string>();
-                }
-                UserConnectionMap[uniqueKeys].Add(connectionId);
-            }
+            _notifcationRepository = notifcationRepository;
         }
 
-        public void RemoveUserConnection(string connectionId)
+        public async Task<List<string>> GetUserConnections(string userId)
         {
-            lock (UserConnectionMapLocker)
-            {
-                foreach (var userId in UserConnectionMap.Keys.Where(userId => UserConnectionMap.ContainsKey(userId)).Where(userId => UserConnectionMap[userId].Contains(connectionId)))
-                {
-                    UserConnectionMap[userId].Remove(connectionId);
-                    break;
-                }
-            }
+            return (await _notifcationRepository.GetListAsync
+                (x => x.UserId.Equals(userId.ToLower())).ConfigureAwait(false)).Select(x => x.ConnectionId).ToList();
         }
-        public List<string> GetUserConnections(string userId)
+
+        public async Task KeepUserConnection(string userId, string connectionId)
         {
-
-            var conn = new List<string>();
-            lock (UserConnectionMapLocker)
+            //  await RemoveUserConnection(userId).ConfigureAwait(false);
+            await _notifcationRepository.InsertAsync(new NotificationConnectionEntity
             {
-                var uniqueKeys = userId.ToString().ToLower();
+                UserId = userId.ToLower(),
+                ConnectionId = connectionId
 
-                if (UserConnectionMap.ContainsKey(uniqueKeys))
-                {
-                    conn = UserConnectionMap[uniqueKeys];
-                }
-            }
-            return conn;//
+            }).ConfigureAwait(false);
+        }
+
+        public async Task RemoveUserConnection(string connectionId)
+        {
+            await _notifcationRepository.DeleteManyAsync(await _notifcationRepository.GetListAsync(x => x.ConnectionId.Equals(connectionId)).
+                ConfigureAwait(false)).ConfigureAwait(false);
         }
     }
 }

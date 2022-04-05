@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserRoles } from '../../../shared/enums/userRoles';
 import { BoatUser, BoatUserData } from '../../../shared/interfaces/BoatUser';
 import { StatusComponent } from '../../user/status/status.component';
+import { ActionListComponent } from '../../../shared/common/action-list/action-list.component';
+import { SignleActionComponent } from '../../../shared/common/signle-action/signle-action.component';
 
 @Component({
   selector: 'app-host-listing',
@@ -15,50 +17,64 @@ export class HostListingComponent implements OnInit {
   Roles = UserRoles;
   source: BoatUser[];
   settings = {
-    actions: {
-      columnTitle :"Action",
-      add: false,
-      edit:false,
-      delete: false,
-      custom: [{ 
-        name: 'userDetails', 
-        title: '<i class="nb-compose"></i>'  }
-      ],
-      position: 'right'
-    },
+    actions: false,
     columns: {
       name: {
         title: 'Name',
         type: 'string',
+        width:'20%'
       },
       email: {
         title: 'Email',
         type: 'string',
+        width:'25%'
+      },
+      emailConfirmed: {
+        title: 'Email Verified',
+        type: 'boolean',
+        width:'15%',
+        valuePrepareFunction: (emailConfirmed) => {
+          return emailConfirmed ? 'Yes' : 'No';
+      },
       },
       phoneNumber: {
         title: 'Phone',
         type: 'string',
+        width:'10%'
       },
       phoneNumberConfirmed: {
         title: 'Phone Verified',
         type: 'boolean',
-      },
-      creationTime: {
-        title: 'Joining Date',
-        type: 'Date',
-        valuePrepareFunction: (creationTime) => {
-          return this.datePipe.transform(new Date(creationTime), 'MM/dd/yyyy');
+        width:'15%',
+        valuePrepareFunction: (phoneNumberConfirmed) => {
+          return phoneNumberConfirmed ? 'Yes' : 'No';
       },
       },
       isActive: {
         title: 'Status',
         type: 'custom',
+        width:'10%',
         filter: false,
         renderComponent: StatusComponent,
         valuePrepareFunction: (value, row, cell) => {
             return row;
         },
       },
+      operation:{
+        title:"",
+        type: 'custom',
+        filter : false,
+        renderComponent: SignleActionComponent,
+        onComponentInitFunction:(instance) => {
+        instance.actionEmitter.subscribe(row => {
+          instance.dataEmitter.subscribe(data => {
+            if (row == 'onViewAction') {
+              this.onCustomAction(data.id);
+            }
+          }) 
+        });
+       }
+     }
     },
   };
   constructor(private userService: BoatUserData, private datePipe : DatePipe, private router : Router) {
@@ -72,7 +88,7 @@ export class HostListingComponent implements OnInit {
       this.source = res;
     });    
   }
-  onCustomAction(event){
-    this.router.navigate([`pages/host/host/${event.data.id}`]);
+  onCustomAction(id){
+    this.router.navigate([`pages/host/host/${id}`]);
   }
 }

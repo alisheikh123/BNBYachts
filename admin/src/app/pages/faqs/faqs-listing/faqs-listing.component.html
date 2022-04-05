@@ -6,11 +6,10 @@
      <span class="btn-floating"><button type="button" class="btn btn-primary" (click)="openLg(content)">Add Faqs</button></span>
       </nb-card-header>
     <nb-card-body>
-      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" (custom)="onCustomAction(contents,contentData,$event)">
+      <ng2-smart-table class="order-table" [settings]="settings" [source]="source" >
       </ng2-smart-table>
     </nb-card-body>
 </nb-card>
-
 <ng-template #content let-modal>
   <div class="modal-content">
     <div class="modal-header no-border">

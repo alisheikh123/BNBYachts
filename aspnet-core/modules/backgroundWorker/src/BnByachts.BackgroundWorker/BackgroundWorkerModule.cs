@@ -6,11 +6,13 @@ using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using System;
+using BnBYachts.Core;
+using Microsoft.Extensions.Configuration;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.BackgroundJobs.Quartz;
 using Volo.Abp.BackgroundWorkers.Quartz;
 using Volo.Abp.Modularity;
+using Volo.Abp.Quartz;
 
 namespace BnByachts.BackgroundWorker
 {
@@ -18,14 +20,14 @@ namespace BnByachts.BackgroundWorker
         typeof(EventBusSharedModule),
         typeof(AbpAutoMapperModule),
         typeof(AbpAutofacModule),
+        typeof(CoreDomainModule),
         typeof(CoreEntityFrameworkCoreModule),
-        typeof(AbpBackgroundWorkersQuartzModule),
-        typeof(AbpBackgroundJobsQuartzModule)
+        typeof(AbpBackgroundWorkersQuartzModule)
     )]
     public class BackgroundWorkerModule : AbpModule
     {
 
-        
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AWSOptions>(context.Services.GetConfiguration().GetSection("AWSConfiguation"));

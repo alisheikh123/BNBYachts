@@ -36,7 +36,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { TinyMCEComponent } from './components/tiny-mce/tiny-mce.component';
-
 const NB_MODULES = [
   NbLayoutModule,
   NbMenuModule,
@@ -71,7 +70,7 @@ const PIPES = [
 @NgModule({
   imports: [CommonModule, ...NB_MODULES],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES, ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {

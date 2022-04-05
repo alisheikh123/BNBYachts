@@ -6,8 +6,8 @@ namespace BnByachts.NotificationHub.signalRClient
 {
     public class SignalRClient
     {
-       private readonly HubConnection _connection;
-        public SignalRClient(string url="")
+        private readonly HubConnection _connection;
+        public SignalRClient(string url = "http://notification.bnb.techverxapps.com/signalr-hubs/Notification")
         {
             //
 
@@ -23,6 +23,7 @@ namespace BnByachts.NotificationHub.signalRClient
 
         public async Task SendMessage(string userId, string message)
         {
+            Console.WriteLine($"notify client {userId}");
             await _connection.StartAsync().ConfigureAwait(false);
             await _connection.InvokeAsync("NotifyClient", userId, message);
         }

@@ -24,22 +24,11 @@
 		<PackageReference Include="Volo.Abp.Swashbuckle" Version="5.1.4" />
 		<PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="4.4.4" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<Compile Remove="Logs\**" />
 		<Content Remove="Logs\**" />
 		<EmbeddedResource Remove="Logs\**" />
 		<None Remove="Logs\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Remove="appsettings.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="appsettings.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>

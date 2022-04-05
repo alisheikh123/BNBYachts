@@ -1,11 +1,10 @@
 ﻿using BnBYachts.Core.Interface;
 using BnBYachts.Core.NewsLetters.Interface;
 using BnBYachts.Core.NewsLetters.Transferable;
+using BnBYachts.Core.Permissions;
 using BnBYachts.Shared.Model;
-using System;
+using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
@@ -20,7 +19,7 @@ namespace BnBYachts.Core.Services.NewsLetter
         }
         public async Task<EntityResponseModel> AddNewsLetter(ContactsTransferable contactInput)
             => await _newsLetterManager.AddNewsLetter(contactInput).ConfigureAwait(false);
-
+        [Authorize("Core.NewsLetter.Create")]
         public async Task<EntityResponseModel> AddNewsLettersSubscription(NewsLetterTransferable newsLetter)
             => await _newsLetterManager.AddNewsLettersSubscription(newsLetter).ConfigureAwait(false);
 

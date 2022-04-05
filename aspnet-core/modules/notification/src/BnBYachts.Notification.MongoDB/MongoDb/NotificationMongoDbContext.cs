@@ -9,6 +9,8 @@ namespace BnBYachts.Notification.MongoDB;
 public class NotificationMongoDbContext : AbpMongoDbContext
 {
     public IMongoCollection<NotificationEntity> NotificationEntity => Collection<NotificationEntity>();
+    public IMongoCollection<NotificationConnectionEntity> NotificationConnectionEntity => Collection<NotificationConnectionEntity>();
+
     protected override void CreateModel(IMongoModelBuilder modelBuilder)
     {
         base.CreateModel(modelBuilder);
@@ -16,6 +18,10 @@ public class NotificationMongoDbContext : AbpMongoDbContext
         modelBuilder.Entity<NotificationEntity>(b =>
         {
             b.CollectionName = "NotificationEntity";
+        });
+        modelBuilder.Entity<NotificationConnectionEntity>(b =>
+        {
+            b.CollectionName = "NotificationConnectionEntity";
         });
     }
 }
