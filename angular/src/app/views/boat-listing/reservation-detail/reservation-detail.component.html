@@ -126,16 +126,12 @@
         <div *ngIf="checkedCheckinDate == today"></div>
         <div *ngIf="booking?.bookingStatus != BOOKING_STATUS.Cancel">
           <div *ngIf="isCheckinStarted(checkedCheckinDate,booking?.boatDetail?.checkinTime)">
-            <!-- <div *ngIf="checkedCheckinDate > today"> -->
+            <div *ngIf="checkedCheckinDate > today">
               <div class="center-content">
                 <button [routerLink]="['/boat-listing/reservation-cancellation',booking?.id]"
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
-                <button [routerLink]="['/boat-listing/modify-reservation',booking?.id]"
-                *ngIf="!isUserHost"
+                <button [routerLink]="['/boat-listing/modify-reservation',booking?.id]" *ngIf="!isUserHost"
                   class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</button>
-                <button (click)="addReview()"
-                *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
-                class="custom-btn btn-big blue">{{'AddReview' | localization}}</button>
                 <button class="custom-btn grey" (click)="changeStatus(false)" *ngIf="booking?.bookingStatus == BOOKING_STATUS.Pending && isUserHost">
                   Reject
               </button>
@@ -143,12 +139,15 @@
                   Accept
               </button>
               </div>
-            <!-- </div> -->
+            </div>
           </div>
         </div>
-         <!-- <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking?.boatDetail?.checkoutTime)"> -->
+         <div *ngIf="isCheckoutTimeEnd(booking.checkinDate,booking?.checkoutTime)">
+
+          <button (click)="addReview()" *ngIf='!isPosted && isBookingPassed() && booking?.bookingStatus == BOOKING_STATUS.Approved'
+          class="custom-btn btn-big blue">{{'AddReview' | localization}}</button>
       </div>
-      <!-- </div> -->
+      </div>
       <app-list-reviews [bookingId]=bookingId></app-list-reviews>
     </div>
   </div>

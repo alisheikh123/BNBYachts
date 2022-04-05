@@ -87,7 +87,7 @@ export class BoatDetailsComponent implements OnInit {
     const d = new Date(date.year, date.month - 1, date.day);
     return this.myBookings.length > 0;
   }
-  
+
   getBoatDetailsById() {
     this.yachtSearchService.boatDetailsById(this.boatId).subscribe((res: any) => {
       this.boatDetails = res;
@@ -98,8 +98,8 @@ export class BoatDetailsComponent implements OnInit {
       this.boatFilterDetails.checkinDate = new Date(findCalendar.fromDate);
       this.boatFilterDetails.checkoutDate = new Date(findCalendar.toDate);
       this.boatFilterDetails.checkoutDate = new Date(findCalendar.toDate);
-      this.boatFilterDetails.checkinTime = moment(this.boatDetails?.checkinTime).format("h:mm a");
-      this.boatFilterDetails.checkoutTime = moment(this.boatDetails?.checkoutTime).format("h:mm a");
+      this.boatFilterDetails.checkinTime = moment(this.boatDetails?.checkinTime).format("hh:mm a");
+      this.boatFilterDetails.checkoutTime = moment(this.boatDetails?.checkoutTime).format("hh:mm a");
       this.minDate = { year: new Date(findCalendar.fromDate).getFullYear(), month: new Date(findCalendar.fromDate).getMonth() + 1, day: new Date(findCalendar.fromDate).getDate() };
       this.maxDate = { year: new Date(findCalendar.toDate).getFullYear(), month: new Date(findCalendar.toDate).getMonth() + 1, day: new Date(findCalendar.toDate).getDate() };
       this.getHostDetails(this.boatDetails?.creatorId);

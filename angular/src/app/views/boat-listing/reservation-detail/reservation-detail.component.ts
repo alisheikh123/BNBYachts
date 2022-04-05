@@ -64,7 +64,7 @@ export class ReservationDetailComponent implements OnInit {
     this.bookingListService.getBookingDetailbyId(this.bookingId).subscribe((res: any) => {
       this.booking = res;
       this.currentDate = new Date();
-      this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
+      this.checkedCheckinDate = utils.convertToDate(this.booking?.checkinDate);
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
       this.totalDays = utils.differenceDates(this.checkInDate,this.checkOutDate);
@@ -109,6 +109,7 @@ export class ReservationDetailComponent implements OnInit {
     });
   }
   isBookingPassed(): boolean {
+    debugger;
     let parsedDate = Date.parse(this.boatDetail?.checkoutTime);
     let today = Date.parse(new Date().toISOString());
     return (today > parsedDate) ? true : false;
@@ -128,7 +129,7 @@ export class ReservationDetailComponent implements OnInit {
       this.bookingStatus = res?.bookingStatus;
       this.booking = res;
       this.currentDate = new Date();
-      this.checkedCheckinDate = new Date(this.booking?.checkinDate).toLocaleDateString();
+      this.checkedCheckinDate = utils.convertToDate(this.booking?.checkinDate);
       this.checkInDate = new Date(this.booking?.checkinDate);
       this.checkOutDate = new Date(this.booking?.checkoutDate);
       this.totalDays = utils.differenceDates(this.checkInDate,this.checkOutDate);
@@ -176,13 +177,13 @@ export class ReservationDetailComponent implements OnInit {
     if (checkinDate != undefined && checkinTime != undefined) {return (inDate == currentDate && inTime > curretTime)?true:(moment(checkinDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;}
     else{return false;}
   }
-  isCheckoutTimeEnd(checkoutDate:Date,checkoutTime:Date){
+  isCheckoutTimeEnd(checkoutDate:Date,checkoutTime:string){
     let outDate = moment(checkoutDate).format("DD-MM-YYYY");
     let currentDate = moment().format("DD-MM-YYYY");
-    let outTime = moment(checkoutTime).format("HH:mm");
-    let curretTime = moment().format("HH:mm");
+    let currenDateYearMonthDay = moment().format("YYYY-MM-DD");
+    let curretTime = moment().format("hh:mm a");
     if (checkoutDate != undefined && checkoutTime != undefined) {
-     return  (outDate == currentDate && curretTime > outTime) ?true:(moment(checkoutDate).isAfter(moment().format("YYYY-MM-DD")))?true:false;
+     return (moment(currenDateYearMonthDay).isAfter(checkoutDate))?true: (outDate == currentDate && curretTime > checkoutTime) ? true:false;
     }
     else{
       return false;

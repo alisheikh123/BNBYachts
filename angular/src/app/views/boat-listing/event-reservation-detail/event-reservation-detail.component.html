@@ -112,26 +112,23 @@
         </div>
       </div>
       <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
-        *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected && eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Pending">
+        *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected">
         <div *ngIf="eventBookingDetail?.bookingStatus == filters.BOOKING_STATUS.Cancel"> </div>
         <div *ngIf="filters.checkedStartDate == filters.today"></div>
         <div *ngIf="eventBookingDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
            <div *ngIf="isEventStarted(eventBookingDetail?.eventDate,eventBooking?.startDateTime)">
-
               <div class="center-content">
                 <button [routerLink]="['/boat-listing/event-reservation-cancellation',eventReservation.eventBookingId,eventReservation.eventId]"
                   class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</button>
                 <!-- <button [routerLink]="['/boat-listing/event-modify-reservation',eventReservation.eventBookingId]"
                   class="custom-btn btn-big blue me-sm-3" >{{'ModifyReservation' | localization}}</button> -->
-                  <a (click)="addReview()"
-                  *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
-                  class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+
               </div>
           </div>
         </div>
-         <div *ngIf="isEndDateEnded(eventBooking?.eventEndDateTime)">
+         <div *ngIf="isEndDateEnded(eventBookingDetail.eventDate)">
           <a (click)="addReview()"
-          *ngIf='!eventReservation?.isPosted && isBookingPassed() && eventBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
+          *ngIf='eventBookingDetail?.bookingStatus == filters.BOOKING_STATUS.Approved'
           class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
       </div>
       <app-list-reviews [eventBookingId]=eventReservation.eventBookingId></app-list-reviews>

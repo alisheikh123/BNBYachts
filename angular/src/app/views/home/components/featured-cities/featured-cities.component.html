@@ -4,7 +4,7 @@
         <p >{{'FeaturedCities' | localization}}</p>
     </div>
     <div class="row" *ngIf="featuredCities != null  && featuredCities!=undefined">
-        <div class="col-sm-4 col-xs-12 py-2" *ngFor="let city of featuredCities">
+        <div class="col-sm-4 col-xs-12 py-2 text-center" *ngFor="let city of featuredCities">
             <a routerLink="/host/boats-map/{{city.name}}" class="big-img-link"><img src="{{assetsUrlProfile + city.imagePath}}"
                     alt=""><span class="underline-link-blk">{{city.name}}</span> </a>
         </div>

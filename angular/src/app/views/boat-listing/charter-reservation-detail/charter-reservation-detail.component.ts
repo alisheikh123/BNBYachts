@@ -75,7 +75,8 @@ this.getServiceFeeByBoatType();
     this.charterBookingService.getCharterBookingDetailById(this.charterReservation.charterId).subscribe((bookingDetail: CharterBookingRequestable) => {
       this.charterBookingStatus = bookingDetail?.bookingStatus;
       this.bookingDetail = bookingDetail;
-    }); 
+      console.log(this.bookingDetail);
+    });
     this.service.getBookingCancellationDetail(this.charterReservation.charterId).subscribe((eventBookingCancelDetail: any) => {
       this.charterBookingCancelDetail = eventBookingCancelDetail.data;
     });
@@ -129,8 +130,9 @@ this.getServiceFeeByBoatType();
     });
   }
   isBookingPassed(): boolean {
-    let parsedDate = moment(this.charterBooking?.departureToDate).millisecond();
-    let today = moment().millisecond();
+    let arrivalTime = moment(this.charterBooking.departureToDate).format("HH:mm a");
+    let parsedDate = Date.parse(arrivalTime);
+    let today = Date.parse(new Date().toISOString());
     return (today > parsedDate) ? true : false;
   }
 
@@ -150,13 +152,14 @@ this.getServiceFeeByBoatType();
 
 
   }
-  isDeparturetoTimeEnd(departureToDate: Date) {
-    let arrivalDate = moment(departureToDate).format("DD-MM-YYYY");
-    let arrivalTime = moment(departureToDate).format("HH:mm");
+  isDeparturetoTimeEnd(arrivalDateTime: Date) {
+    // get date and Time of arrival date
+    let arrivalDate = moment(arrivalDateTime).format("DD-MM-YYYY");
+    let arrivalTime = moment(arrivalDateTime).format("HH:mm a");
     let currentDate = moment().format("DD-MM-YYYY");
-    let curretTime = moment().format("HH:mm");
-    if (departureToDate != undefined && arrivalTime != undefined)
-      return (arrivalDate == currentDate && curretTime > arrivalTime) ? true : moment(departureToDate).isAfter(moment().format("YYYY-MM-DD")) ? true : false;
+    let curretTime = moment().format("HH:mm a");
+    if (arrivalDateTime != undefined && arrivalTime != undefined)
+      return moment(currentDate).isAfter(arrivalDate) ? true:(arrivalDate == currentDate && curretTime > arrivalTime) ? true : false;
     else
       return false;
   }

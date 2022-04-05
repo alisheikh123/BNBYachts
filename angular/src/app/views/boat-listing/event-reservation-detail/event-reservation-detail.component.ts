@@ -122,10 +122,9 @@ export class EventReservationDetailComponent implements OnInit {
   }
   isEndDateEnded(endDate: Date) {
     let outDate = utils.convertDateToYearMonthDay(endDate);
-    let currentDate = new Date();
-    let currentDateFormat = utils.convertDateToYearMonthDay(currentDate);
+    let currentDate =  moment().format("YYYY-MM-DD");
     if (endDate != undefined && currentDate != undefined) {
-      return (moment(outDate).isAfter(currentDateFormat) ? true : false);
+      return (moment(currentDate).isAfter(outDate) ? true : false);
     }
     else {
       return false;

@@ -42,7 +42,7 @@ export class ContractFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.getBoats();
     this.buildFormConfiguration();
     this.getServiceProvider();
@@ -107,7 +107,7 @@ if(res){
   }
   onCharterSelected(charterId : number)
   {
-     
+
    if(charterId==0){
    this.f.isCustomType.setValue(true);
    this.f.departureDate.reset();
@@ -124,11 +124,11 @@ if(res){
   this.f.arrivalDate.setValue(selectedCharter.departureToDate);
  }
    }
-  
+
   }
   onEventSelected(eventId : number)
   {
-     
+
    if(eventId==0){
    this.f.isCustomType.setValue(true);
    this.f.eventTitle.reset();
@@ -148,7 +148,7 @@ if(res){
    this.f.description.setValue(selectedEvent.description);
  }
    }
-  
+
   }
   getCharterByBoatId(boatId : number){
 this._charterService.getCharterByBoatId(boatId).subscribe((res:any)=>{
@@ -242,7 +242,7 @@ if(res){
       default:
         break;
     }
-    
+
   }
 valueupdater(){
   this.f.departureDate.updateValueAndValidity();
@@ -257,13 +257,12 @@ valueupdater(){
 }
   submit() {
     this.isSubmitted = true;
-    debugger;
     if (this.contractForm.valid) {
       const formData = new FormData();
      if( this.contractForm.controls.isCustomType) {
        this.contractForm.controls.charterId.setValue(null);
        this.contractForm.controls.eventId.setValue(null);
-     } 
+     }
       formData.append('contractForm', JSON.stringify(this.contractForm.value));
       formData.append('attachments', JSON.stringify(this.termsAttachments));
       this.termsAttachments.forEach((f) => formData.append('files', f.file));

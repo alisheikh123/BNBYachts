@@ -82,6 +82,9 @@
                 <p class="grey">{{charterBooking?.charterFee}}.00 $</p>
               </div>
             </div>
+
+
+
             <div class="price-detail py-4" *ngIf="charterBooking?.isFullBoatCharges==true">
               <h5 class="bold pt-3 pb-1">{{"PriceDetails" | localization}}</h5>
               <div class="custom-flex-between">
@@ -150,30 +153,32 @@
         </div>
 
         <div class="col-sm-12 custom-margin text-center mobile-padding-btns"
-          *ngIf="charterBookingStatus != filters.BOOKING_STATUS.Rejected">
-          <div *ngIf="charterBookingStatus == filters.BOOKING_STATUS.Cancel"></div>
+          *ngIf="bookingDetail?.bookingStatus != filters.BOOKING_STATUS.Rejected">
+          <div *ngIf="bookingDetail?.bookingStatus == filters.BOOKING_STATUS.Cancel"></div>
           <div *ngIf="checkedDepartureFromDate == filters.today"></div>
-          <div *ngIf="charterBookingStatus != filters.BOOKING_STATUS.Cancel">
+          <div *ngIf="bookingDetail?.bookingStatus != filters.BOOKING_STATUS.Cancel">
             <div *ngIf="isDepartureFromStarted(charterBooking?.departureFromDate)">
                 <div class="center-content">
                   <a [routerLink]="['/boat-listing/charter-reservation-cancellation',charterReservation.charterId,charterReservation.bookingId]"
                     class="custom-btn btn-big outline-blue-clr me-sm-3 pe-2">{{'CancelReservation' | localization}}</a>
                   <!-- <a *ngIf="!isUserHost && !charterBooking?.isFullBoatCharges==true" [routerLink]="['/boat-listing/charter-modification-reservation',charterBooking?.id]"
                     class="custom-btn btn-big blue me-sm-3">{{'ModifyReservation' | localization}}</a> -->
-                    <a (click)="addReview()"
+                    <!-- <a (click)="addReview()"
                     *ngIf='!charterReservation?.isPosted && isBookingPassed() && charterBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
-                    class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+                    class="custom-btn btn-big blue">{{'AddReview' | localization}}</a> -->
                 </div>
             </div>
           </div>
-           <div *ngIf="isDeparturetoTimeEnd(charterBooking?.departureToDate)">
-            <a (click)="addReview()"
-            *ngIf='!charterReservation?.isPosted && isBookingPassed() && charterBooking?.bookingStatus == filters.BOOKING_STATUS.Approved'
-            class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
-        </div>
 
+
+        <div *ngIf="isDeparturetoTimeEnd(charterBooking.departureToDate)">
+          <a (click)="addReview()"
+           *ngIf='bookingDetail?.bookingStatus == filters.BOOKING_STATUS.Approved'
+          class="custom-btn btn-big blue">{{'AddReview' | localization}}</a>
+      </div>
+    </div>
 
         <app-list-reviews [charterBookingId]=charterReservation.charterId></app-list-reviews>
-      </div>
+
     </div>
   </div>

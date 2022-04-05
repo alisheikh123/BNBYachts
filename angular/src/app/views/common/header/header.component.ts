@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
     byHost: false,
     byServiceProvider: false
   };
-  
+
   @ViewChild(ChatComponent) chatComponent: ChatComponent;
   constructor(public router: Router,
     public app: AppComponent,
@@ -70,7 +70,6 @@ export class HeaderComponent implements OnInit {
     private chatService: ChatService,
     private notificationService: NotificationService) {
       this.notificationService.notificationGenerated$.subscribe(()=>{
-
             this.notificationCount++;
       });
      }
@@ -78,9 +77,9 @@ export class HeaderComponent implements OnInit {
   HEADER_TABS = HeaderTabs;
 
   ngOnInit(): void {
-    
 
-    
+
+
     this.oidcSecurityService
       .checkAuth()
       .subscribe((res: any) => {
@@ -136,7 +135,6 @@ export class HeaderComponent implements OnInit {
     })
   }
   connectionSignalR() {
-    debugger;
     let connection = utils.getSignalRConnection();
     connection.start().then(function () {
       console.log('SignalR Connected!');
@@ -153,7 +151,6 @@ export class HeaderComponent implements OnInit {
   }
   getNotificationMessage() {
     this.notificationService.getNotificationMessage().subscribe((res:any) => {
-      debugger;
         this.messages = res?.data;
         console.log(this.messages);
         console.log(res);
